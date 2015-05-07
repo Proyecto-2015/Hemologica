@@ -27,14 +27,14 @@ import ca.uhn.hl7v2.parser.PipeParser;
 
 public interface ICreateMessageUtils{
 	
-	public ADT_A01 create_ADT_A01();
-	public ADT_A04 create_ADT_A04();
-	public ADT_A08 create_ADT_A08();
-	public ADT_A31 create_ADT_A31();
-	public ADT_A40 create_ADT_A40();
-	public QBP_Q22 create_QBP_Q22();
-	public QBP_Q23 create_QBP_Q23();
-	public QCN_J01 create_QCN_J01();
+	public ADT_A01 create_ADT_A01(); /* PIX */
+	public ADT_A04 create_ADT_A04(); /* PIX */
+	public ADT_A08 create_ADT_A08(); /* PIX */
+	public ADT_A31 create_ADT_A31(); /* PIX */
+	public ADT_A40 create_ADT_A40(); /* PIX */
+	public QBP_Q22 create_QBP_Q22(); /* PDQ */
+	public QBP_Q23 create_QBP_Q23(); /* PIX */
+	public QCN_J01 create_QCN_J01(); /* PDQ */
 	
 
 }
