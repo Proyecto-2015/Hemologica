@@ -17,9 +17,22 @@
 			<id>openmrs-repo</id>
 			<url>http://mavenrepo.openmrs.org/nexus/</url>
 		</repository>
+		<repository>
+			<id>openempi-repo</id>
+ 			<url>http://sysnetintrepo.com/repository/</url>
+		</repository>
+		
 	</repositories>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>org.openhie.openempi</groupId>
+			<artifactId>openempi-openpixpdq-adapter</artifactId>
+			<version>2.2.0</version>
+		</dependency>
+
+
 		<!-- This is the core HAPI library -->
 		<dependency>
 			<groupId>ca.uhn.hapi</groupId>
