@@ -1,5 +1,7 @@
 package hemologica.pixpdq.utils;
 
+import org.openmrs.Patient;
+
 import hemologica.pixpdq.message.QBP_Q22;
 import hemologica.pixpdq.message.QBP_Q23;
 import ca.uhn.hl7v2.model.v231.message.ADT_A04;
@@ -8,6 +10,8 @@ import ca.uhn.hl7v2.model.v231.message.ADT_A31;
 import ca.uhn.hl7v2.model.v231.message.ADT_A40;
 import ca.uhn.hl7v2.model.v26.message.ADT_A01;
 import ca.uhn.hl7v2.model.v26.message.QCN_J01;
+
+
 
 public class CreateMessageUtilsImpl implements ICreateMessageUtils {
 
