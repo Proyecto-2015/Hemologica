@@ -15,7 +15,7 @@ public final class Main {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss", Locale.ENGLISH);
 		
 		try {
-			System.out.println("hollaaaa");
+			
 			QBP_Q21 query = new QBP_Q21();
 			MSH mshSegment = query.getMSH();
 			
