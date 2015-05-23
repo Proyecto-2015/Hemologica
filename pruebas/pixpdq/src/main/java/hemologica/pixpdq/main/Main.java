@@ -16,8 +16,6 @@ public final class Main {
 		
 		try {
 			
-			System.out.println("Otra vez");
-			
 			QBP_Q21 query = new QBP_Q21();
 			MSH mshSegment = query.getMSH();
 			
