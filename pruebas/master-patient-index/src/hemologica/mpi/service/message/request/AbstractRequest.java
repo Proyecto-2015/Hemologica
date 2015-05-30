@@ -1,8 +1,8 @@
 package hemologica.mpi.service.message.request;
 
-import java.io.Serializable;
-
 import hemologica.mpi.service.data.AbstractMessage;
+
+import java.io.Serializable;
 
 public abstract class AbstractRequest extends AbstractMessage implements Serializable{
 

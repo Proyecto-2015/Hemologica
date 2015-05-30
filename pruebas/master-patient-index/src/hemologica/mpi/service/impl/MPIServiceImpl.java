@@ -1,9 +1,5 @@
 package hemologica.mpi.service.impl;
 
-import java.io.Serializable;
-
-import javax.jws.WebService;
-
 import hemologica.mpi.service.IMPIService;
 import hemologica.mpi.service.message.request.AddPatientRequest;
 import hemologica.mpi.service.message.request.DeletePatientRequest;
@@ -14,6 +10,10 @@ import hemologica.mpi.service.message.response.DeletePatientResponse;
 import hemologica.mpi.service.message.response.EditPatientResponse;
 import hemologica.mpi.service.message.response.FindPatientResponse;
 import hemologica.mpi.service.message.response.QueryPatientResponse;
+
+import java.io.Serializable;
+
+import javax.jws.WebService;
 
 @WebService(
 		endpointInterface="hemologica.mpi.service.IMPIService",

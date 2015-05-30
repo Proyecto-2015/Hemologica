@@ -1,6 +1,7 @@
 package hemologica.mpi.service.message.request;
 
 import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name="addPatientRequest")
