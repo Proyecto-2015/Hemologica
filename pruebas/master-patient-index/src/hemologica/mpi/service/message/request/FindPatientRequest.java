@@ -1,5 +1,7 @@
 package hemologica.mpi.service.message.request;
 
-public class FindPatientRequest extends AbstractRequest{
+import java.io.Serializable;
+
+public class FindPatientRequest extends AbstractRequest implements Serializable{
 
 }

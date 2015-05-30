@@ -1,5 +1,7 @@
 package hemologica.mpi.service.message.request;
 
-public class EditPatientRequest extends AbstractRequest{
+import java.io.Serializable;
+
+public class EditPatientRequest extends AbstractRequest implements Serializable{
 
 }

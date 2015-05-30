@@ -1,5 +1,12 @@
 package hemologica.mpi.service.message.request;
 
-public class DeletePatientRequest extends AbstractRequest{
+import java.io.Serializable;
+
+public class DeletePatientRequest extends AbstractRequest implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 }

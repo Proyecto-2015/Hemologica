@@ -1,5 +1,9 @@
 package hemologica.mpi.service.impl;
 
+import java.io.Serializable;
+
+import javax.jws.WebService;
+
 import hemologica.mpi.service.IMPIService;
 import hemologica.mpi.service.message.request.AddPatientRequest;
 import hemologica.mpi.service.message.request.DeletePatientRequest;
@@ -11,7 +15,19 @@ import hemologica.mpi.service.message.response.EditPatientResponse;
 import hemologica.mpi.service.message.response.FindPatientResponse;
 import hemologica.mpi.service.message.response.QueryPatientResponse;
 
-public class MPIServiceImpl implements IMPIService{
+@WebService(
+		endpointInterface="hemologica.mpi.service.IMPIService",
+		serviceName="MPIService",
+		name="MPI",
+		portName="MPIPort",
+		targetNamespace="http://www.hemologica.org/mpi/MPIService"	
+)
+public class MPIServiceImpl implements IMPIService, Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	public FindPatientResponse findPatient(FindPatientRequest req) {

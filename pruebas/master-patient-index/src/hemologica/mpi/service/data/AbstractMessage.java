@@ -1,12 +1,13 @@
 package hemologica.mpi.service.data;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 
 @XmlRootElement
-public abstract class AbstractMessage {
+public abstract class AbstractMessage implements Serializable{
 
 	private HashMap<String, String> attributes;
 

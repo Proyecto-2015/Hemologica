@@ -1,5 +1,7 @@
 package hemologica.mpi.service.message.response;
 
-public class DeletePatientResponse extends AbstractResponse{
+import java.io.Serializable;
+
+public class DeletePatientResponse extends AbstractResponse implements Serializable{
 
 }
