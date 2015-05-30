@@ -1,8 +1,6 @@
 package hemologica.pixpdq.adapter;
 
 import java.util.Set;
-import org.openempi.ics.pids.IdentityService;
-
 import org.openhealthtools.openexchange.datamodel.Identifier;
 import org.openhealthtools.openexchange.datamodel.MessageHeader;
 import org.openhealthtools.openpixpdq.api.IPdSupplierAdapter;
