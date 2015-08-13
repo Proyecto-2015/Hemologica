@@ -1,0 +1,11 @@
+/home/bruno/NetBeansProjects/Hemologica-Service/Hemologica-Service-ejb/src/main/java/org/hemologica/ejb/exceptions/AbstractException.java
+/home/bruno/NetBeansProjects/Hemologica-Service/Hemologica-Service-ejb/src/main/java/org/hemologica/ejb/beans/PersonaBeanLocal.java
+/home/bruno/NetBeansProjects/Hemologica-Service/Hemologica-Service-ejb/src/main/java/org/hemologica/entities/Person.java
+/home/bruno/NetBeansProjects/Hemologica-Service/Hemologica-Service-ejb/src/main/java/org/hemologica/ejb/beans/impl/PersonaBean.java
+/home/bruno/NetBeansProjects/Hemologica-Service/Hemologica-Service-ejb/src/main/java/org/hemologica/dao/AbstractDAO.java
+/home/bruno/NetBeansProjects/Hemologica-Service/Hemologica-Service-ejb/src/main/java/org/hemologica/datatypes/PersonSearchResult.java
+/home/bruno/NetBeansProjects/Hemologica-Service/Hemologica-Service-ejb/src/main/java/org/hemologica/datatypes/PersonSearchFilter.java
+/home/bruno/NetBeansProjects/Hemologica-Service/Hemologica-Service-ejb/src/main/java/org/hemologica/ejb/exceptions/TechnicalException.java
+/home/bruno/NetBeansProjects/Hemologica-Service/Hemologica-Service-ejb/src/main/java/org/hemologica/datatypes/PersonSearchResultItem.java
+/home/bruno/NetBeansProjects/Hemologica-Service/Hemologica-Service-ejb/src/main/java/org/hemologica/dao/impl/PersonaDAO.java
+/home/bruno/NetBeansProjects/Hemologica-Service/Hemologica-Service-ejb/src/main/java/org/hemologica/ejb/exceptions/BusinessException.java
