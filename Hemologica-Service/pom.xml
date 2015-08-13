@@ -10,5 +10,6 @@
     <module>Hemologica-Service-ejb</module>
     <module>Hemologica-Service-ear</module>
     <module>Hemologica-Service-web</module>
+    <module>Hemologica-Service-dao</module>
   </modules>
 </project>
