@@ -12,4 +12,6 @@
     <module>Hemologica-Service-web</module>
     <module>Hemologica-Service-dao</module>
   </modules>
+  
+<!--   Prueba commit desde eclipse -->
 </project>
