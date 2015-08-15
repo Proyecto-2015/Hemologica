@@ -37,15 +37,15 @@ public class UserRoleService implements Serializable {
     @Basic(optional = false)
     @Column(name = "user_role_service_id")
 	private Integer userRoleServiceId;
-	@JoinColumn(name = "users_user_id", referencedColumnName = "user_id")
+	@JoinColumn(name = "user", referencedColumnName = "user_id")
     @ManyToOne(optional = false)
-	private User usersUserId;
-	@JoinColumn(name = "services_service_id", referencedColumnName = "service_id")
+	private User user;
+	@JoinColumn(name = "service", referencedColumnName = "service_id")
     @ManyToOne(optional = false)
-	private Service servicesServiceId;
-	@JoinColumn(name = "roles_role_id", referencedColumnName = "role_id")
+	private Service service;
+	@JoinColumn(name = "role", referencedColumnName = "role_id")
     @ManyToOne(optional = false)
-	private Role rolesRoleId;
+	private Role role;
 
 	public UserRoleService() {
 	}
@@ -62,28 +62,28 @@ public class UserRoleService implements Serializable {
 		this.userRoleServiceId = userRoleServiceId;
 	}
 
-	public User getUsersUserId() {
-		return usersUserId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUsersUserId(User usersUserId) {
-		this.usersUserId = usersUserId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
-	public Service getServicesServiceId() {
-		return servicesServiceId;
+	public Service getService() {
+		return service;
 	}
 
-	public void setServicesServiceId(Service servicesServiceId) {
-		this.servicesServiceId = servicesServiceId;
+	public void setService(Service service) {
+		this.service = service;
 	}
 
-	public Role getRolesRoleId() {
-		return rolesRoleId;
+	public Role getRole() {
+		return role;
 	}
 
-	public void setRolesRoleId(Role rolesRoleId) {
-		this.rolesRoleId = rolesRoleId;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
 	@Override

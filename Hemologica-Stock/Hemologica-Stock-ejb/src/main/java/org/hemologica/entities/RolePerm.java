@@ -37,12 +37,12 @@ public class RolePerm implements Serializable {
     @Basic(optional = false)
     @Column(name = "role_perm_id")
 	private Integer rolePermId;
-	@JoinColumn(name = "roles_role_id", referencedColumnName = "role_id")
+	@JoinColumn(name = "role", referencedColumnName = "role_id")
     @ManyToOne(optional = false)
-	private Role rolesRoleId;
-	@JoinColumn(name = "perms_perm_id", referencedColumnName = "perm_id")
+	private Role role;
+	@JoinColumn(name = "perm", referencedColumnName = "perm_id")
     @ManyToOne(optional = false)
-	private Perm permsPermId;
+	private Perm perm;
 
 	public RolePerm() {
 	}
@@ -59,20 +59,20 @@ public class RolePerm implements Serializable {
 		this.rolePermId = rolePermId;
 	}
 
-	public Role getRolesRoleId() {
-		return rolesRoleId;
+	public Role getRole() {
+		return role;
 	}
 
-	public void setRolesRoleId(Role rolesRoleId) {
-		this.rolesRoleId = rolesRoleId;
+	public void setRole(Role role) {
+		this.role = role;
 	}
 
-	public Perm getPermsPermId() {
-		return permsPermId;
+	public Perm getPerm() {
+		return perm;
 	}
 
-	public void setPermsPermId(Perm permsPermId) {
-		this.permsPermId = permsPermId;
+	public void setPerm(Perm perm) {
+		this.perm = perm;
 	}
 
 	@Override

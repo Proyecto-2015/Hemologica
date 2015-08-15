@@ -8,7 +8,9 @@ package org.hemologica.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,12 +20,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -46,6 +50,10 @@ public class Input implements Serializable {
     @Column(name = "input_id")
 	private Integer inputId;
 	@Size(max = 45)
+	@Basic(optional = false)
+    @Column(name = "input_service_id")
+	private String inputServiceId;
+	@Size(max = 45)
     @Column(name = "input_description")
 	private String inputDescription;
 	@Basic(optional = false)
@@ -58,15 +66,17 @@ public class Input implements Serializable {
     @Column(name = "input_time_reg")
     @Temporal(TemporalType.TIMESTAMP)
 	private Date inputTimeReg;
-	@JoinColumn(name = "unit_unit_id", referencedColumnName = "unit_id")
+	@JoinColumn(name = "input_unit", referencedColumnName = "unit_id")
     @ManyToOne(optional = false)
-	private Unit unitUnitId;
-	@JoinColumn(name = "services_service_id", referencedColumnName = "service_id")
+	private Unit inputUnit;
+	@JoinColumn(name = "input_service", referencedColumnName = "service_id")
     @ManyToOne(optional = false)
-	private Service servicesServiceId;
-	@JoinColumn(name = "input_type_input_type_id", referencedColumnName = "input_type_id")
+	private Service inputService;
+	@JoinColumn(name = "input_type", referencedColumnName = "input_type_id")
     @ManyToOne(optional = false)
-	private InputType inputTypeInputTypeId;
+	private InputType inputType;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "outputInput")
+	private List<Output> outputList;
 
 	public Input() {
 	}
@@ -113,28 +123,37 @@ public class Input implements Serializable {
 		this.inputTimeReg = inputTimeReg;
 	}
 
-	public Unit getUnitUnitId() {
-		return unitUnitId;
+	public Unit getInputUnit() {
+		return inputUnit;
 	}
 
-	public void setUnitUnitId(Unit unitUnitId) {
-		this.unitUnitId = unitUnitId;
+	public void setInputUnit(Unit inputUnit) {
+		this.inputUnit = inputUnit;
 	}
 
-	public Service getServicesServiceId() {
-		return servicesServiceId;
+	public Service getInputService() {
+		return inputService;
 	}
 
-	public void setServicesServiceId(Service servicesServiceId) {
-		this.servicesServiceId = servicesServiceId;
+	public void setInputService(Service inputService) {
+		this.inputService = inputService;
 	}
 
-	public InputType getInputTypeInputTypeId() {
-		return inputTypeInputTypeId;
+	public InputType getInputType() {
+		return inputType;
 	}
 
-	public void setInputTypeInputTypeId(InputType inputTypeInputTypeId) {
-		this.inputTypeInputTypeId = inputTypeInputTypeId;
+	public void setInputType(InputType inputType) {
+		this.inputType = inputType;
+	}
+
+	@XmlTransient
+	public List<Output> getOutputList() {
+		return outputList;
+	}
+
+	public void setOutputList(List<Output> outputList) {
+		this.outputList = outputList;
 	}
 
 	@Override
@@ -160,6 +179,20 @@ public class Input implements Serializable {
 	@Override
 	public String toString() {
 		return "org.hemologica.entities.Input[ inputId=" + inputId + " ]";
+	}
+
+	/**
+	 * @return the inputServiceId
+	 */
+	public String getInputServiceId() {
+		return inputServiceId;
+	}
+
+	/**
+	 * @param inputServiceId the inputServiceId to set
+	 */
+	public void setInputServiceId(String inputServiceId) {
+		this.inputServiceId = inputServiceId;
 	}
 	
 }

@@ -47,7 +47,7 @@ public class Perm implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "perm_code")
 	private String permCode;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "permsPermId")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "perm")
 	private List<RolePerm> rolePermList;
 
 	public Perm() {

@@ -51,7 +51,7 @@ public class InputType implements Serializable {
 	@Size(max = 45)
     @Column(name = "input_type_description")
 	private String inputTypeDescription;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "inputTypeInputTypeId")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "inputType")
 	private List<Input> inputList;
 
 	public InputType() {

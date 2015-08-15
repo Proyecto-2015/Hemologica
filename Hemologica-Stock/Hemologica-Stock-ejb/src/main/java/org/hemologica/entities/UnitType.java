@@ -55,7 +55,7 @@ public class UnitType implements Serializable {
 	@Size(max = 45)
     @Column(name = "unit_type_code")
 	private String unitTypeCode;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "unitTypeId")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "unitType")
 	private List<Unit> unitList;
 
 	public UnitType() {

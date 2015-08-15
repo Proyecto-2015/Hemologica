@@ -47,7 +47,7 @@ public class User implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "user_code")
 	private String userCode;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "usersUserId")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	private List<UserRoleService> userRoleServiceList;
 
 	public User() {

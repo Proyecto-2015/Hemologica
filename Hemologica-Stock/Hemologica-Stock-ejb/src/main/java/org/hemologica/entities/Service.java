@@ -47,9 +47,9 @@ public class Service implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "service_oid")
 	private String serviceOid;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "servicesServiceId")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "service")
 	private List<UserRoleService> userRoleServiceList;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "servicesServiceId")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "inputService")
 	private List<Input> inputList;
 
 	public Service() {

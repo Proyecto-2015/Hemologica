@@ -55,11 +55,16 @@ public class Unit implements Serializable {
     @Size(min = 1, max = 45)
     @Column(name = "unit_service_donation_code")
 	private String unitServiceDonationCode;
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "unitUnitId")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "inputUnit")
 	private List<Input> inputList;
-	@JoinColumn(name = "unit_type_id", referencedColumnName = "unit_type_id")
+	@JoinColumn(name = "unit_type", referencedColumnName = "unit_type_id")
     @ManyToOne(optional = false)
-	private UnitType unitTypeId;
+	private UnitType unitType;
+	@Basic(optional = false)
+    @NotNull
+    @Size(min = 1, max = 45)
+    @Column(name = "unit_volume")
+	private String unitVolume;
 
 	public Unit() {
 	}
@@ -107,12 +112,12 @@ public class Unit implements Serializable {
 		this.inputList = inputList;
 	}
 
-	public UnitType getUnitTypeId() {
-		return unitTypeId;
+	public UnitType getUnitType() {
+		return unitType;
 	}
 
-	public void setUnitTypeId(UnitType unitTypeId) {
-		this.unitTypeId = unitTypeId;
+	public void setUnitType(UnitType unitType) {
+		this.unitType = unitType;
 	}
 
 	@Override
@@ -138,6 +143,20 @@ public class Unit implements Serializable {
 	@Override
 	public String toString() {
 		return "org.hemologica.entities.Unit[ unitId=" + unitId + " ]";
+	}
+
+	/**
+	 * @return the unitVolume
+	 */
+	public String getUnitVolume() {
+		return unitVolume;
+	}
+
+	/**
+	 * @param unitVolume the unitVolume to set
+	 */
+	public void setUnitVolume(String unitVolume) {
+		this.unitVolume = unitVolume;
 	}
 	
 }
