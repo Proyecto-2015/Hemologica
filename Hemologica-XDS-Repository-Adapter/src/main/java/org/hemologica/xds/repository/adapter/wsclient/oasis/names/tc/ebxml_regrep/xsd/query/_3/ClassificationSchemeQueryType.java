@@ -1,5 +1,5 @@
 
-package oasis.names.tc.ebxml_regrep.xsd.query._3;
+package org.hemologica.xds.repository.adapter.wsclient.oasis.names.tc.ebxml_regrep.xsd.query._3;
 
 import java.util.ArrayList;
 import java.util.List;

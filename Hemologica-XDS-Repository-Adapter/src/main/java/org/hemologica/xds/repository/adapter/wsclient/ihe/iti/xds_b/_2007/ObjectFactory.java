@@ -1,5 +1,5 @@
 
-package ihe.iti.xds_b._2007;
+package org.hemologica.xds.repository.adapter.wsclient.ihe.iti.xds_b._2007;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;

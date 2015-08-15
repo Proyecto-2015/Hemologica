@@ -1,5 +1,5 @@
 
-package oasis.names.tc.ebxml_regrep.xsd.rim._3;
+package org.hemologica.xds.repository.adapter.wsclient.oasis.names.tc.ebxml_regrep.xsd.rim._3;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
