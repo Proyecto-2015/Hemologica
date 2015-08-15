@@ -2,7 +2,20 @@
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
   <persistence-unit name="org.hemologica_Hemologica-Stock-ejb_ejb_1.0-SNAPSHOTPU" transaction-type="JTA">
     <jta-data-source>java:/jboss/datasources/hemologicaStockDS</jta-data-source>
+    <class>org.hemologica.entities.Input</class>
+    <class>org.hemologica.entities.InputType</class>
+    <class>org.hemologica.entities.OutputType</class>
+    <class>org.hemologica.entities.Perm</class>
+    <class>org.hemologica.entities.Role</class>
+    <class>org.hemologica.entities.RolePerm</class>
+    <class>org.hemologica.entities.Service</class>
+    <class>org.hemologica.entities.Unit</class>
+    <class>org.hemologica.entities.UnitType</class>
+    <class>org.hemologica.entities.User</class>
+    <class>org.hemologica.entities.UserRoleService</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <properties/>
+    <properties>
+      <property name="javax.persistence.schema-generation.database.action" value="none"/>
+    </properties>
   </persistence-unit>
 </persistence>
