@@ -1,9 +1,5 @@
 package org.hemologica.xds.repository.adapter.wsclient.ihe.iti.xds_b._2007;
 
-import ihe.iti.xds_b._2007.ObjectFactory;
-import ihe.iti.xds_b._2007.ProvideAndRegisterDocumentSetRequestType;
-import ihe.iti.xds_b._2007.RetrieveDocumentSetRequestType;
-import ihe.iti.xds_b._2007.RetrieveDocumentSetResponseType;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
@@ -19,14 +15,14 @@ import javax.xml.ws.Action;
  * 
  */
 @WebService(targetNamespace = "urn:ihe:iti:xds-b:2007", name = "DocumentRepository_PortType")
-@XmlSeeAlso({ObjectFactory.class, oasis.names.tc.ebxml_regrep.xsd.rs._3.ObjectFactory.class, oasis.names.tc.ebxml_regrep.xsd.rim._3.ObjectFactory.class, oasis.names.tc.ebxml_regrep.xsd.lcm._3.ObjectFactory.class, oasis.names.tc.ebxml_regrep.xsd.query._3.ObjectFactory.class})
+@XmlSeeAlso({ObjectFactory.class, org.hemologica.xds.repository.adapter.wsclient.oasis.names.tc.ebxml_regrep.xsd.rs._3.ObjectFactory.class, org.hemologica.xds.repository.adapter.wsclient.oasis.names.tc.ebxml_regrep.xsd.rim._3.ObjectFactory.class, org.hemologica.xds.repository.adapter.wsclient.oasis.names.tc.ebxml_regrep.xsd.lcm._3.ObjectFactory.class, org.hemologica.xds.repository.adapter.wsclient.oasis.names.tc.ebxml_regrep.xsd.query._3.ObjectFactory.class})
 @SOAPBinding(use = SOAPBinding.Use.ENCODED, parameterStyle = SOAPBinding.ParameterStyle.BARE)
 public interface DocumentRepositoryPortType {
 
     @WebMethod(operationName = "DocumentRepository_ProvideAndRegisterDocumentSet-b", action = "urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-b")
     @Action(input = "urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-b", output = "urn:ihe:iti:2007:ProvideAndRegisterDocumentSet-bResponse")
     @WebResult(name = "RegistryResponse", targetNamespace = "urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0", partName = "body")
-    public oasis.names.tc.ebxml_regrep.xsd.rs._3.RegistryResponseType documentRepositoryProvideAndRegisterDocumentSetB(
+    public org.hemologica.xds.repository.adapter.wsclient.oasis.names.tc.ebxml_regrep.xsd.rs._3.RegistryResponseType documentRepositoryProvideAndRegisterDocumentSetB(
         @WebParam(partName = "body", name = "ProvideAndRegisterDocumentSetRequest", targetNamespace = "urn:ihe:iti:xds-b:2007")
         ProvideAndRegisterDocumentSetRequestType body
     );

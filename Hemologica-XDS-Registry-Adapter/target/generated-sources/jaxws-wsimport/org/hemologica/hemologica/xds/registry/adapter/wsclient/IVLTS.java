@@ -55,9 +55,9 @@ public class IVLTS
 
     @XmlElementRefs({
         @XmlElementRef(name = "width", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "center", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
         @XmlElementRef(name = "high", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "low", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "center", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false)
+        @XmlElementRef(name = "low", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false)
     })
     protected List<JAXBElement<? extends QTY>> rest;
 
@@ -66,11 +66,11 @@ public class IVLTS
      * 
      * <p>
      * Ha obtenido esta propiedad que permite capturar todo por el siguiente motivo: 
-     * El nombre de campo "High" se está utilizando en dos partes diferentes de un esquema. Consulte: 
-     * línea 1757 de file:/home/bruno/NetBeansProjects/Hemologica-XDS-Registry-Adapter/src/schema/HL7V3/NE2008/coreschemas/datatypes-base.xsd
-     * línea 1748 de file:/home/bruno/NetBeansProjects/Hemologica-XDS-Registry-Adapter/src/schema/HL7V3/NE2008/coreschemas/datatypes-base.xsd
+     * El nombre de campo "High" se est\u00e1 utilizando en dos partes diferentes de un esquema. Consulte: 
+     * l\u00ednea 1757 de file:/Users/paularoche/Documents/workspaces/proyecto/Hemologica/Hemologica-XDS-Registry-Adapter/src/schema/HL7V3/NE2008/coreschemas/datatypes-base.xsd
+     * l\u00ednea 1748 de file:/Users/paularoche/Documents/workspaces/proyecto/Hemologica/Hemologica-XDS-Registry-Adapter/src/schema/HL7V3/NE2008/coreschemas/datatypes-base.xsd
      * <p>
-     * Para deshacerse de esta propiedad, aplique una personalización de propiedad a una
+     * Para deshacerse de esta propiedad, aplique una personalizaci\u00f3n de propiedad a una
      * de las dos declaraciones siguientes para cambiarles de nombre: 
      * Gets the value of the rest property.
      * 
@@ -89,10 +89,10 @@ public class IVLTS
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
+     * {@link JAXBElement }{@code <}{@link PQ }{@code >}
      * {@link JAXBElement }{@code <}{@link IVXBTS }{@code >}
      * {@link JAXBElement }{@code <}{@link IVXBTS }{@code >}
      * {@link JAXBElement }{@code <}{@link TS }{@code >}
-     * {@link JAXBElement }{@code <}{@link PQ }{@code >}
      * 
      * 
      */

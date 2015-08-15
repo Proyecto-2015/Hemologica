@@ -1,8 +1,9 @@
 
-package ihe.iti.xds_b._2007;
+package org.hemologica.xds.repository.adapter.wsclient.ihe.iti.xds_b._2007;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -10,7 +11,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
-import oasis.names.tc.ebxml_regrep.xsd.lcm._3.SubmitObjectsRequest;
+
+import org.hemologica.xds.repository.adapter.wsclient.oasis.names.tc.ebxml_regrep.xsd.lcm._3.SubmitObjectsRequest;
 
 
 /**

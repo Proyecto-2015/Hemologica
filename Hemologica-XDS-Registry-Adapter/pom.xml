@@ -11,38 +11,38 @@
                 <groupId>org.jvnet.jax-ws-commons</groupId>
                 <artifactId>jaxws-maven-plugin</artifactId>
                 <version>2.3</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>wsimport</goal>
-                        </goals>
-                        <configuration>
-                            <wsdlFiles>
-                                <wsdlFile>XDS.b_DocumentRegistry.wsdl</wsdlFile>
-                            </wsdlFiles>
-                            <packageName>org.hemologica.hemologica.xds.registry.adapter.wsclient</packageName>
-                            <wsdlLocation>file:/home/bruno/Escritorio/proyecto/XDS.b_DocumentRegistry.wsdl</wsdlLocation>
-                            <staleFile>${project.build.directory}/jaxws/stale/XDS.b_DocumentRegistry.stale</staleFile>
-                        </configuration>
-                        <id>wsimport-generate-XDS.b_DocumentRegistry</id>
-                        <phase>generate-sources</phase>
-                    </execution>
-                    <execution>
-                        <goals>
-                            <goal>wsimport</goal>
-                        </goals>
-                        <configuration>
-                            <wsdlFiles>
-                                <wsdlFile>XDS.b_DocumentRegistry.wsdl</wsdlFile>
-                            </wsdlFiles>
-                            <packageName>org.hemologica.hemologica.xds.registry.adapter.wsclient</packageName>
-                            <wsdlLocation>file:/home/bruno/Escritorio/proyecto/IHE/ftp.ihe.net/TF_Implementation_Material/ITI/wsdl/XDS.b_DocumentRegistry.wsdl</wsdlLocation>
-                            <staleFile>${project.build.directory}/jaxws/stale/XDS.b_DocumentRegistry_1.stale</staleFile>
-                        </configuration>
-                        <id>wsimport-generate-XDS.b_DocumentRegistry_1</id>
-                        <phase>generate-sources</phase>
-                    </execution>
-                </executions>
+<!--                 <executions> -->
+<!--                     <execution> -->
+<!--                         <goals> -->
+<!--                             <goal>wsimport</goal> -->
+<!--                         </goals> -->
+<!--                         <configuration> -->
+<!--                             <wsdlFiles> -->
+<!--                                 <wsdlFile>XDS.b_DocumentRegistry.wsdl</wsdlFile> -->
+<!--                             </wsdlFiles> -->
+<!--                             <packageName>org.hemologica.hemologica.xds.registry.adapter.wsclient</packageName> -->
+<!--                             <wsdlLocation>file:/home/bruno/Escritorio/proyecto/XDS.b_DocumentRegistry.wsdl</wsdlLocation> -->
+<!--                             <staleFile>${project.build.directory}/jaxws/stale/XDS.b_DocumentRegistry.stale</staleFile> -->
+<!--                         </configuration> -->
+<!--                         <id>wsimport-generate-XDS.b_DocumentRegistry</id> -->
+<!--                         <phase>generate-sources</phase> -->
+<!--                     </execution> -->
+<!--                     <execution> -->
+<!--                         <goals> -->
+<!--                             <goal>wsimport</goal> -->
+<!--                         </goals> -->
+<!--                         <configuration> -->
+<!--                             <wsdlFiles> -->
+<!--                                 <wsdlFile>XDS.b_DocumentRegistry.wsdl</wsdlFile> -->
+<!--                             </wsdlFiles> -->
+<!--                             <packageName>org.hemologica.hemologica.xds.registry.adapter.wsclient</packageName> -->
+<!--                             <wsdlLocation>file:/home/bruno/Escritorio/proyecto/IHE/ftp.ihe.net/TF_Implementation_Material/ITI/wsdl/XDS.b_DocumentRegistry.wsdl</wsdlLocation> -->
+<!--                             <staleFile>${project.build.directory}/jaxws/stale/XDS.b_DocumentRegistry_1.stale</staleFile> -->
+<!--                         </configuration> -->
+<!--                         <id>wsimport-generate-XDS.b_DocumentRegistry_1</id> -->
+<!--                         <phase>generate-sources</phase> -->
+<!--                     </execution> -->
+<!--                 </executions> -->
                 <dependencies>
                     <dependency>
                         <groupId>javax.xml</groupId>

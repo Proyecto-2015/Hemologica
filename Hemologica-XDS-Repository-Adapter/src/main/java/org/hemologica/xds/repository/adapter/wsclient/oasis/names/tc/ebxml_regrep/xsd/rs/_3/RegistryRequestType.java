@@ -1,5 +1,5 @@
 
-package oasis.names.tc.ebxml_regrep.xsd.rs._3;
+package org.hemologica.xds.repository.adapter.wsclient.oasis.names.tc.ebxml_regrep.xsd.rs._3;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -8,16 +8,17 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
-import oasis.names.tc.ebxml_regrep.xsd.lcm._3.AcceptObjectsRequest;
-import oasis.names.tc.ebxml_regrep.xsd.lcm._3.ApproveObjectsRequest;
-import oasis.names.tc.ebxml_regrep.xsd.lcm._3.DeprecateObjectsRequest;
-import oasis.names.tc.ebxml_regrep.xsd.lcm._3.RelocateObjectsRequest;
-import oasis.names.tc.ebxml_regrep.xsd.lcm._3.RemoveObjectsRequest;
-import oasis.names.tc.ebxml_regrep.xsd.lcm._3.SubmitObjectsRequest;
-import oasis.names.tc.ebxml_regrep.xsd.lcm._3.UndeprecateObjectsRequest;
-import oasis.names.tc.ebxml_regrep.xsd.lcm._3.UpdateObjectsRequest;
-import oasis.names.tc.ebxml_regrep.xsd.query._3.AdhocQueryRequest;
-import oasis.names.tc.ebxml_regrep.xsd.rim._3.SlotListType;
+
+import org.hemologica.xds.repository.adapter.wsclient.oasis.names.tc.ebxml_regrep.xsd.lcm._3.AcceptObjectsRequest;
+import org.hemologica.xds.repository.adapter.wsclient.oasis.names.tc.ebxml_regrep.xsd.lcm._3.ApproveObjectsRequest;
+import org.hemologica.xds.repository.adapter.wsclient.oasis.names.tc.ebxml_regrep.xsd.lcm._3.DeprecateObjectsRequest;
+import org.hemologica.xds.repository.adapter.wsclient.oasis.names.tc.ebxml_regrep.xsd.lcm._3.RelocateObjectsRequest;
+import org.hemologica.xds.repository.adapter.wsclient.oasis.names.tc.ebxml_regrep.xsd.lcm._3.RemoveObjectsRequest;
+import org.hemologica.xds.repository.adapter.wsclient.oasis.names.tc.ebxml_regrep.xsd.lcm._3.SubmitObjectsRequest;
+import org.hemologica.xds.repository.adapter.wsclient.oasis.names.tc.ebxml_regrep.xsd.lcm._3.UndeprecateObjectsRequest;
+import org.hemologica.xds.repository.adapter.wsclient.oasis.names.tc.ebxml_regrep.xsd.lcm._3.UpdateObjectsRequest;
+import org.hemologica.xds.repository.adapter.wsclient.oasis.names.tc.ebxml_regrep.xsd.query._3.AdhocQueryRequest;
+import org.hemologica.xds.repository.adapter.wsclient.oasis.names.tc.ebxml_regrep.xsd.rim._3.SlotListType;
 
 
 /**

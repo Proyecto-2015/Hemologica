@@ -55,9 +55,9 @@ public class IVLREAL
 
     @XmlElementRefs({
         @XmlElementRef(name = "center", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "width", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
         @XmlElementRef(name = "low", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "high", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false)
+        @XmlElementRef(name = "high", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
+        @XmlElementRef(name = "width", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false)
     })
     protected List<JAXBElement<? extends REAL>> rest;
 
@@ -66,11 +66,11 @@ public class IVLREAL
      * 
      * <p>
      * Ha obtenido esta propiedad que permite capturar todo por el siguiente motivo: 
-     * El nombre de campo "High" se está utilizando en dos partes diferentes de un esquema. Consulte: 
-     * línea 900 de file:/home/bruno/NetBeansProjects/Hemologica-XDS-Registry-Adapter/src/schema/HL7V3/NE2008/coreschemas/datatypes.xsd
-     * línea 891 de file:/home/bruno/NetBeansProjects/Hemologica-XDS-Registry-Adapter/src/schema/HL7V3/NE2008/coreschemas/datatypes.xsd
+     * El nombre de campo "High" se est\u00e1 utilizando en dos partes diferentes de un esquema. Consulte: 
+     * l\u00ednea 900 de file:/Users/paularoche/Documents/workspaces/proyecto/Hemologica/Hemologica-XDS-Registry-Adapter/src/schema/HL7V3/NE2008/coreschemas/datatypes.xsd
+     * l\u00ednea 891 de file:/Users/paularoche/Documents/workspaces/proyecto/Hemologica/Hemologica-XDS-Registry-Adapter/src/schema/HL7V3/NE2008/coreschemas/datatypes.xsd
      * <p>
-     * Para deshacerse de esta propiedad, aplique una personalización de propiedad a una
+     * Para deshacerse de esta propiedad, aplique una personalizaci\u00f3n de propiedad a una
      * de las dos declaraciones siguientes para cambiarles de nombre: 
      * Gets the value of the rest property.
      * 
