@@ -8,7 +8,7 @@
         <dependent-module archiveName="Hemologica-Service-dao-1.0-SNAPSHOT.jar" deploy-path="/lib" handle="module:/resource/Hemologica-Service-dao/Hemologica-Service-dao">
             <dependency-type>uses</dependency-type>
         </dependent-module>
-        <dependent-module archiveName="Hemologica-Service-web-1.0-SNAPSHOT.war" deploy-path="/" handle="module:/classpath/var/M2_REPO/org/hemologica/Hemologica-Service-web/1.0-SNAPSHOT/Hemologica-Service-web-1.0-SNAPSHOT.war">
+        <dependent-module archiveName="Hemologica-Service-web-1.0-SNAPSHOT.war" deploy-path="/" handle="module:/resource/Hemologica-Service-web/Hemologica-Service-web">
             <dependency-type>uses</dependency-type>
         </dependent-module>
     </wb-module>
