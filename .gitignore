@@ -14,5 +14,15 @@
 
 # Maven
 log/
-target/
+/target
 bin/
+
+# Otros
+*~
+*.lock
+*.DS_Store
+*.swp
+*.out
+org.maven.ide.eclipse.prefs
+.idea/
+*.class
