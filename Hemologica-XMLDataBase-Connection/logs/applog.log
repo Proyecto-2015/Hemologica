@@ -1,0 +1,63 @@
+2015-08-30 18:20:09 ERROR XbaseConnection:90 - Error al intentar eliminar el elemnto a la base de datos.
+java.io.IOException: Stopped at ., 1/11:
+[bxerr:BXDB0002] Database 'null' was not found.
+	at org.hemologica.xmldatabase.connection.impl.BaseXClient$Query.exec(BaseXClient.java:399)
+	at org.hemologica.xmldatabase.connection.impl.BaseXClient$Query.execute(BaseXClient.java:359)
+	at org.hemologica.xmldatabase.connection.impl.XbaseConnection.removeElement(XbaseConnection.java:87)
+	at org.hemologica.xmldatabase.connection.Main.main(Main.java:59)
+2015-08-30 19:26:14 ERROR XbaseConnection:164 - Error al intentar recuperarlos elementos en la base de datos.
+java.io.IOException: Stopped at ., 1/26:
+[XPST0003] Unexpected end of query: '\/ClinicalDocum...'.
+	at org.hemologica.xmldatabase.connection.impl.BaseXClient$Query.exec(BaseXClient.java:399)
+	at org.hemologica.xmldatabase.connection.impl.BaseXClient$Query.execute(BaseXClient.java:359)
+	at org.hemologica.xmldatabase.connection.impl.XbaseConnection.getElementPatientId(XbaseConnection.java:156)
+	at org.hemologica.xmldatabase.connection.Main.main(Main.java:18)
+2015-08-30 19:27:42 ERROR XbaseConnection:164 - Error al intentar recuperarlos elementos en la base de datos.
+java.io.IOException: Stopped at ., 1/26:
+[XPST0003] Unexpected end of query: '\ClinicalDocume...'.
+	at org.hemologica.xmldatabase.connection.impl.BaseXClient$Query.exec(BaseXClient.java:399)
+	at org.hemologica.xmldatabase.connection.impl.BaseXClient$Query.execute(BaseXClient.java:359)
+	at org.hemologica.xmldatabase.connection.impl.XbaseConnection.getElementPatientId(XbaseConnection.java:156)
+	at org.hemologica.xmldatabase.connection.Main.main(Main.java:18)
+2015-08-30 19:48:51 ERROR XbaseConnection:166 - Error al intentar recuperarlos elementos en la base de datos.
+java.io.IOException: Stopped at ., 1/36:
+[XPST0003] Expecting ')', found '.'.
+	at org.hemologica.xmldatabase.connection.impl.BaseXClient$Query.exec(BaseXClient.java:399)
+	at org.hemologica.xmldatabase.connection.impl.BaseXClient$Query.execute(BaseXClient.java:359)
+	at org.hemologica.xmldatabase.connection.impl.XbaseConnection.getElementPatientId(XbaseConnection.java:158)
+	at org.hemologica.xmldatabase.connection.Main.main(Main.java:18)
+2015-08-30 20:02:16 ERROR XbaseConnection:166 - Error al intentar recuperarlos elementos en la base de datos.
+java.io.IOException: Stopped at ., 1/14:
+[XPST0017] db:open-pre(database,pre): 1 argument supplied.
+	at org.hemologica.xmldatabase.connection.impl.BaseXClient$Query.exec(BaseXClient.java:399)
+	at org.hemologica.xmldatabase.connection.impl.BaseXClient$Query.execute(BaseXClient.java:359)
+	at org.hemologica.xmldatabase.connection.impl.XbaseConnection.getElementPatientId(XbaseConnection.java:158)
+	at org.hemologica.xmldatabase.connection.Main.main(Main.java:18)
+2015-08-30 20:18:44 ERROR XbaseConnection:172 - Error al intentar recuperarlos elementos en la base de datos.
+java.io.IOException: Stopped at ., 1/41:
+[XPST0003] Incomplete FLWOR expression: expecting 'return'.
+	at org.hemologica.xmldatabase.connection.impl.BaseXClient$Query.exec(BaseXClient.java:399)
+	at org.hemologica.xmldatabase.connection.impl.BaseXClient$Query.execute(BaseXClient.java:359)
+	at org.hemologica.xmldatabase.connection.impl.XbaseConnection.getElementPatientId(XbaseConnection.java:164)
+	at org.hemologica.xmldatabase.connection.Main.main(Main.java:18)
+2015-08-30 20:31:57 ERROR XbaseConnection:173 - Error al intentar recuperarlos elementos en la base de datos.
+java.io.IOException: Stopped at ., 1/49:
+[XPDY0002] root(): no context value bound.
+	at org.hemologica.xmldatabase.connection.impl.BaseXClient$Query.exec(BaseXClient.java:399)
+	at org.hemologica.xmldatabase.connection.impl.BaseXClient$Query.execute(BaseXClient.java:359)
+	at org.hemologica.xmldatabase.connection.impl.XbaseConnection.getElementPatientId(XbaseConnection.java:165)
+	at org.hemologica.xmldatabase.connection.Main.main(Main.java:18)
+2015-08-30 20:41:55 ERROR XbaseConnection:174 - Error al intentar recuperarlos elementos en la base de datos.
+java.io.IOException: Stopped at ., 1/182:
+[XPST0003] Expecting ']', found 'r'.
+	at org.hemologica.xmldatabase.connection.impl.BaseXClient$Query.exec(BaseXClient.java:399)
+	at org.hemologica.xmldatabase.connection.impl.BaseXClient$Query.execute(BaseXClient.java:359)
+	at org.hemologica.xmldatabase.connection.impl.XbaseConnection.getElementPatientId(XbaseConnection.java:166)
+	at org.hemologica.xmldatabase.connection.Main.main(Main.java:18)
+2015-08-30 20:42:17 ERROR XbaseConnection:174 - Error al intentar recuperarlos elementos en la base de datos.
+java.io.IOException: Stopped at ., 1/150:
+[XPST0003] Expecting closing bracket for function 'matches'.
+	at org.hemologica.xmldatabase.connection.impl.BaseXClient$Query.exec(BaseXClient.java:399)
+	at org.hemologica.xmldatabase.connection.impl.BaseXClient$Query.execute(BaseXClient.java:359)
+	at org.hemologica.xmldatabase.connection.impl.XbaseConnection.getElementPatientId(XbaseConnection.java:166)
+	at org.hemologica.xmldatabase.connection.Main.main(Main.java:18)
