@@ -16,7 +16,9 @@ public class Main {
 					
 					
 					for(String cda : xbase.getElementPatientId("")){
+						
 						System.out.println(cda);
+						
 					}
 					
 					//xbase.addElement("/Users/paularoche/Documents/Proyecto/xml-database/1.xml");
