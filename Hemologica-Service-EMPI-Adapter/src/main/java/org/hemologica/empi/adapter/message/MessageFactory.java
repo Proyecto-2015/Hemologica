@@ -82,15 +82,27 @@ public class MessageFactory implements Serializable {
 
 			// PID
 			PID pid = msg.getPID();
-			pid.getPatientName(0).getGivenName().setValue(values.get("name"));
-			pid.getPatientName(0).getMiddleInitialOrName().setValue(values.get("secondName"));
-			pid.getPatientName(0).getFamilyLastName().getFamilyName().setValue(values.get("surname"));
-			pid.getPatientName(0).getFamilyLastName().getFn1_FamilyName().setValue(values.get("secondSurname"));
 			pid.getPatientIdentifierList(0).getID().setValue(values.get("patientIdentifier"));
-			pid.getPatientAddress(0).getCountry().setValue(values.get("addressCountry"));
-			pid.getPatientAddress(0).getStateOrProvince().setValue(values.get("addressStateOrProvince"));
-			pid.getPatientAddress(0).getCity().setValue(values.get("addressCity"));
-			pid.getPatientAddress(0).getZipOrPostalCode().setValue(values.get("addressZipPostalCode"));
+			pid.getPatientName(0).getGivenName().setValue(values.get("name"));
+			if(values.containsKey("secondName")){
+				pid.getPatientName(0).getMiddleInitialOrName().setValue(values.get("secondName"));
+			}
+			pid.getPatientName(0).getFamilyLastName().getFamilyName().setValue(values.get("surname"));
+			if(values.containsKey("secondSurname")){
+				pid.getPatientName(0).getFamilyLastName().getFn1_FamilyName().setValue(values.get("secondSurname"));
+			}
+			if(values.containsKey("addressCountry")){
+				pid.getPatientAddress(0).getCountry().setValue(values.get("addressCountry"));
+			}
+			if(values.containsKey("addressStateOrProvince")){
+				pid.getPatientAddress(0).getStateOrProvince().setValue(values.get("addressStateOrProvince"));
+			}
+			if(values.containsKey("addressCity")){
+				pid.getPatientAddress(0).getCity().setValue(values.get("addressCity"));
+			}
+			if(values.containsKey("addressZipPostalCode")){
+				pid.getPatientAddress(0).getZipOrPostalCode().setValue(values.get("addressZipPostalCode"));
+			}
 			pid.getPatientAddress(0).getStreetAddress().setValue(values.get("addressStreet"));
 			// pid.getPatientAddress(0).getOtherGeographicDesignation().setValue(values.get("addressGeographic"));
 			pid.getSex().setValue(values.get("sex"));
