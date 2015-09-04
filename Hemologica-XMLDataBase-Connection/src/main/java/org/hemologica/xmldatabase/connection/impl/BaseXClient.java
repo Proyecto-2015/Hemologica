@@ -326,7 +326,7 @@ public final class BaseXClient {
       if(cache == null) {
         out.write(4);
         send(id);
-        cache = new ArrayList<>();
+        cache = new ArrayList<byte[]>();
         final ByteArrayOutputStream os = new ByteArrayOutputStream();
         while(in.read() > 0) {
           receive(in, os);
