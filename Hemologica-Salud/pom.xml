@@ -1,9 +1,15 @@
+<<<<<<< HEAD
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+=======
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+>>>>>>> a48305f36e426aefbdca97822b7a9d4be6ac5134
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.hemologica</groupId>
 	<artifactId>Hemologica-Salud</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
+<<<<<<< HEAD
   
   
   
@@ -19,4 +25,17 @@
 	     </plugin>
 	   </plugins>
 	 </build>
+=======
+
+	<dependencies>
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>7.0</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+
+>>>>>>> a48305f36e426aefbdca97822b7a9d4be6ac5134
 </project>
