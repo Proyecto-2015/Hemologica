@@ -59,7 +59,7 @@ public class XbaseConnection implements IXMLDataBase{
 	@Override
 	public void addElement(String path) throws XMLDataBaseException {
 		
-		String input = "db:add(\"" + dataBase + "\",\" " + path +"\")";
+		String input = "db:add('" + dataBase + "','" + path +"')";
 		try {
 
 			BaseXClient.Query query = session.query(input);
@@ -80,7 +80,7 @@ public class XbaseConnection implements IXMLDataBase{
 	@Override
 	public void removeElement(String name) throws XMLDataBaseException {
 		
-		String input = "db:delete(\"" + dataBase + "\",\"" + name +"\")";
+		String input = "db:delete('" + dataBase + "','" + name +"')";
 		try {
 
 			BaseXClient.Query query = session.query(input);
@@ -102,7 +102,7 @@ public class XbaseConnection implements IXMLDataBase{
 	@Override
 	public void updateElement(String nameOldElement, String pathNewElement) throws XMLDataBaseException {
 		
-		String input = "db:replace(\"" + dataBase + "\",\"" + nameOldElement +"\",\" "+pathNewElement+"\")";
+		String input = "db:replace(\"" + dataBase + "\",'" + nameOldElement +"',' "+pathNewElement+"')";
 		try {
 
 			BaseXClient.Query query = session.query(input);
@@ -124,7 +124,7 @@ public class XbaseConnection implements IXMLDataBase{
 	@Override
 	public String getElement(String name) throws XMLDataBaseException {
 		
-		String input = "db:open(\"" + dataBase + "\",\"" + name +"\")";
+		String input = "db:open('" + dataBase + "','" + name +"')";
 		try {
 
 			BaseXClient.Query query = session.query(input);
@@ -146,19 +146,11 @@ public class XbaseConnection implements IXMLDataBase{
 	public List<String> getElementPatientId(String patientId)
 			throws XMLDataBaseException {
 	
-		//ClinicalDocument//recordTarget//id[descendant-or-self::node()/@root = "2.16.840.1.113883.1.3"]
-		
-		
-		
 		ArrayList<String> cdasList = new ArrayList<String>();
-		//String input = "db:open(\"" + dataBase + "\")\\ClinicalDocument/recordTarget/patientRole";
-		//String input = "(db:open(\"xmlHemologica\",\"cda1-Paula.xml\"))/descendant::ClinicalDocument/descendant::recordTarget/descendant::family";
 		
-		String input = "for $doc in collection('xmlHemologica') "
-				+ "where matches($doc/ClinicalDocument/recordTarget/patientRole/patient/id/@root,'2.16.858.1.858.68909.46714299')"
-			//	+ " where $doc//ClinicalDocument//recordTarget//patientRole//patient//id[descendant-or-self::node()/@root = '2.16.858.1.858.68909.46714299']"
-				+ "return $doc";
-			//+ "return $doc/ClinicalDocument/recordTarget/patientRole/patient/id/@root "; 
+		String input = "for $doc in collection('" + dataBase + "') "
+					+ "where  $doc//ClinicalDocument//recordTarget//patientRole//patient//id[descendant-or-self::node()/@root ='2.16.858.1.858.68909."+ patientId +"'] "
+					+ "return $doc";
 			
 		BaseXClient.Query query;
 		try {
