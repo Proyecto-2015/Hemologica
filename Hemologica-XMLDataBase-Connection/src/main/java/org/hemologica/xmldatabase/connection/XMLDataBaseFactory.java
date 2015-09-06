@@ -1,7 +1,7 @@
 package org.hemologica.xmldatabase.connection;
 
 import org.apache.log4j.Logger;
-import org.hemologica.xmldatabase.connection.impl.XbaseConnection;
+import org.hemologica.xmldatabase.connection.impl.BaseXConnection;
 import org.hemologica.xmldatabase.exceptions.XMLDataBaseException;
 
 /**
@@ -24,7 +24,7 @@ public class XMLDataBaseFactory {
 		try {
 			
 			if (iXmlDataBase == null)
-				iXmlDataBase = new XbaseConnection();
+				iXmlDataBase = new BaseXConnection();
 			
 		} catch (XMLDataBaseException e) {
 			logger.error("Error al crear  la coneccion con la base de datos", e);
