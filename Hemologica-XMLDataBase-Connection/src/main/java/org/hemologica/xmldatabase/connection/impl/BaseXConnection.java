@@ -14,21 +14,21 @@ import org.hemologica.xmldatabase.exceptions.XMLDataBaseException;
 /**
  * @author Paula Roche
  */
-public class XbaseConnection implements IXMLDataBase{
+public class BaseXConnection implements IXMLDataBase{
 	
 	private BaseXClient session;
-	private Logger logger = Logger.getLogger(XbaseConnection.class);
+	private Logger logger = Logger.getLogger(BaseXConnection.class);
 	private String dataBase;
 	
 	
-	public XbaseConnection() throws XMLDataBaseException {
+	public BaseXConnection() throws XMLDataBaseException {
 		
 		
 		Properties prop = new Properties();
 
 	    try {
 	    	
-			prop.load(XbaseConnection.class.getClassLoader().getResourceAsStream("db.properties"));
+			prop.load(BaseXConnection.class.getClassLoader().getResourceAsStream("db.properties"));
 			
 		} catch (IOException e) {
 			
