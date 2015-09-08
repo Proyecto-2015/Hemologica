@@ -2,25 +2,19 @@ package org.hemologica.empi.adapter.message;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.lang.reflect.Constructor;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
 import ca.uhn.hl7v2.model.v231.message.ADT_A04;
 import ca.uhn.hl7v2.HL7Exception;
-import ca.uhn.hl7v2.Location;
 import ca.uhn.hl7v2.model.DataTypeException;
-import ca.uhn.hl7v2.model.Varies;
 import ca.uhn.hl7v2.model.v231.message.ADT_A01;
 import ca.uhn.hl7v2.model.v231.message.ADT_A08;
-import ca.uhn.hl7v2.model.v231.message.ADT_A40;
 import ca.uhn.hl7v2.model.v231.segment.MSH;
 import ca.uhn.hl7v2.model.v231.segment.PID;
 import ca.uhn.hl7v2.model.v231.message.ADT_A05;
 import ca.uhn.hl7v2.model.v26.message.QBP_Q21;
 import ca.uhn.hl7v2.util.Terser;
-
 
 /**
  * 
@@ -61,13 +55,13 @@ public class MessageFactory implements Serializable {
 	 * 
 	 */
 	private Map<String, String> context = new HashMap<String, String>();
-//	context.put("sendingApplication", "HEMOLOGICA_SEND");
-//	context.put("sendingFacility", "HEMOLOGICA");
-//	context.put("receivingApplication", "EMPI_RECEIVE");
-//	context.put("receivingFacility", "EMPI");
-//	context.put("aa_namespace", "HEMOLOGICA");
-//	context.put("aa_universal_id", "2.16.858.0.0.1.10.2.3.1.1.1");
-//	context.put("aa_universal_id_type", "OID");
+	// context.put("sendingApplication", "HEMOLOGICA_SEND");
+	// context.put("sendingFacility", "HEMOLOGICA");
+	// context.put("receivingApplication", "EMPI_RECEIVE");
+	// context.put("receivingFacility", "EMPI");
+	// context.put("aa_namespace", "HEMOLOGICA");
+	// context.put("aa_universal_id", "2.16.858.0.0.1.10.2.3.1.1.1");
+	// context.put("aa_universal_id_type", "OID");
 
 	/**
 	 * 
@@ -76,7 +70,7 @@ public class MessageFactory implements Serializable {
 	public MessageFactory(Map<String, String> context) {
 		// the context contains fixed values like MSH parameters
 		this.context.putAll(context);
-		
+
 	}
 
 	public ADT_A01 create_ADT_A01(Map<String, String> values) throws MessageFactoryException {
@@ -134,7 +128,7 @@ public class MessageFactory implements Serializable {
 			msg.initQuickstart("ADT", "A08", context.get("processingId"));
 			MSH msh = msg.getMSH();
 			msh = this.processMSH(msh);
-			
+
 			// PID
 			PID pid = msg.getPID();
 			pid = this.processPID(values, pid);
@@ -171,42 +165,6 @@ public class MessageFactory implements Serializable {
 		return msg;
 	}
 
-//	public ADT_A40 create_ADT_A40(Map<String, String> values) throws MessageFactoryException {
-//		ADT_A40 msg = new ADT_A40();
-//		try {
-//			// MSH
-//			msg.initQuickstart("ADT", "A04", context.get("processingId"));
-//			this.processMSH(msg.getMSH());
-//
-//			// PID
-//			PID pid = msg.getPID();
-//			pid.getPatientName(0).getGivenName().setValue(values.get("name"));
-//			pid.getPatientName(0).getMiddleInitialOrName().setValue(values.get("secondName"));
-//			pid.getPatientName(0).getFamilyLastName().getFamilyName().setValue(values.get("surname"));
-//			pid.getPatientName(0).getFamilyLastName().getFn1_FamilyName().setValue(values.get("secondSurname"));
-//			pid.getPatientIdentifierList(0).getID().setValue(values.get("patientIdentifier"));
-//			pid.getPatientAddress(0).getCountry().setValue(values.get("addressCountry"));
-//			pid.getPatientAddress(0).getStateOrProvince().setValue(values.get("addressStateOrProvince"));
-//			pid.getPatientAddress(0).getCity().setValue(values.get("addressCity"));
-//			pid.getPatientAddress(0).getZipOrPostalCode().setValue(values.get("addressZipPostalCode"));
-//			pid.getPatientAddress(0).getStreetAddress().setValue(values.get("addressStreet"));
-//			// pid.getPatientAddress(0).getOtherGeographicDesignation().setValue(values.get("addressGeographic"));
-//			pid.getSex().setValue(values.get("sex"));
-//			pid.getPhoneNumberHome(0).getAnyText().setValue(values.get("phone"));
-//			pid.getDateTimeOfBirth().getTimeOfAnEvent().setValue(values.get("birthday"));
-//			pid.getBirthPlace().setValue(values.get("birthdayPlace"));
-//
-//		} catch (DataTypeException e) {
-//			throw new MessageFactoryException(e);
-//		} catch (HL7Exception e) {
-//			throw new MessageFactoryException(e);
-//		} catch (IOException e) {
-//			throw new MessageFactoryException(e);
-//		}
-//		return msg;
-//	}
-	
-	
 	public QBP_Q21 create_QBP_Q21(Map<String, String> values) throws MessageFactoryException {
 		QBP_Q21 msg = new QBP_Q21();
 		try {
@@ -220,7 +178,7 @@ public class MessageFactory implements Serializable {
 
 			// QPD
 			Terser terser = new Terser(msg);
-			for(String key : values.keySet()){
+			for (String key : values.keySet()) {
 				terser.set(key, values.get(key));
 			}
 
@@ -242,56 +200,60 @@ public class MessageFactory implements Serializable {
 		msh.getMsh13_SequenceNumber().setValue("123");
 		return msh;
 	}
-	
-	private PID processPID(Map<String,String> values, PID pid) throws DataTypeException{
-		
-		//obligatory information
+
+	private PID processPID(Map<String, String> values, PID pid) throws DataTypeException {
+
+		// obligatory information
 		pid.getPatientIdentifierList(0).getID().setValue(values.get("patientIdentifier"));
-//		pid.getPatientIdentifierList(0).getIdentifierTypeCode().setValue(context.get("identifierTypeCode"));
-		pid.getPatientIdentifierList(0).getAssigningAuthority().getHd1_NamespaceID().setValue(context.get("aa_namespace"));
-		pid.getPatientIdentifierList(0).getAssigningAuthority().getHd2_UniversalID().setValue(context.get("aa_universal_id"));;
-		pid.getPatientIdentifierList(0).getAssigningAuthority().getHd3_UniversalIDType().setValue(context.get("aa_universal_id_type"));
+		// pid.getPatientIdentifierList(0).getIdentifierTypeCode().setValue(context.get("identifierTypeCode"));
+		pid.getPatientIdentifierList(0).getAssigningAuthority().getHd1_NamespaceID()
+				.setValue(context.get("aa_namespace"));
+		pid.getPatientIdentifierList(0).getAssigningAuthority().getHd2_UniversalID()
+				.setValue(context.get("aa_universal_id"));
+		;
+		pid.getPatientIdentifierList(0).getAssigningAuthority().getHd3_UniversalIDType()
+				.setValue(context.get("aa_universal_id_type"));
 		pid.getPatientName(0).getGivenName().setValue(values.get("name"));
 		pid.getPatientName(0).getFamilyLastName().getFamilyName().setValue(values.get("surname"));
-		
-		//optional information
-		if(values.containsKey("secondName")){
+
+		// optional information
+		if (values.containsKey("secondName")) {
 			pid.getPatientName(0).getMiddleInitialOrName().setValue(values.get("secondName"));
 		}
-		if(values.containsKey("secondSurname")){
+		if (values.containsKey("secondSurname")) {
 			pid.getPatientName(0).getFamilyLastName().getFn1_FamilyName().setValue(values.get("secondSurname"));
 		}
-		if(values.containsKey("addressCountry")){
+		if (values.containsKey("addressCountry")) {
 			pid.getPatientAddress(0).getCountry().setValue(values.get("addressCountry"));
 		}
-		if(values.containsKey("addressStateOrProvince")){
+		if (values.containsKey("addressStateOrProvince")) {
 			pid.getPatientAddress(0).getStateOrProvince().setValue(values.get("addressStateOrProvince"));
 		}
-		if(values.containsKey("addressCity")){
+		if (values.containsKey("addressCity")) {
 			pid.getPatientAddress(0).getCity().setValue(values.get("addressCity"));
 		}
-		if(values.containsKey("addressZipPostalCode")){
+		if (values.containsKey("addressZipPostalCode")) {
 			pid.getPatientAddress(0).getZipOrPostalCode().setValue(values.get("addressZipPostalCode"));
 		}
-		if(values.containsKey("addressStreet")){
-				pid.getPatientAddress(0).getStreetAddress().setValue(values.get("addressStreet"));
+		if (values.containsKey("addressStreet")) {
+			pid.getPatientAddress(0).getStreetAddress().setValue(values.get("addressStreet"));
 		}
-		if(values.containsKey("addressGeographic")){
+		if (values.containsKey("addressGeographic")) {
 			pid.getPatientAddress(0).getOtherGeographicDesignation().setValue(values.get("addressGeographic"));
 		}
-		if(values.containsKey("sex")){
+		if (values.containsKey("sex")) {
 			pid.getSex().setValue(values.get("sex"));
 		}
-		if(values.containsKey("phone")){
+		if (values.containsKey("phone")) {
 			pid.getPhoneNumberHome(0).getAnyText().setValue(values.get("phone"));
 		}
-		if(values.containsKey("birthday")){
+		if (values.containsKey("birthday")) {
 			pid.getDateTimeOfBirth().getTimeOfAnEvent().setValue(values.get("birthday"));
 		}
-		if(values.containsKey("birthdayPlace")){
+		if (values.containsKey("birthdayPlace")) {
 			pid.getBirthPlace().setValue(values.get("birthdayPlace"));
 		}
-		
+
 		return pid;
 	}
 
