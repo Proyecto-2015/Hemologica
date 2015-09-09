@@ -45,7 +45,7 @@ public class OpenEMPIAdapter implements PIXAdapter, PDQAdapter {
 
 		try {
 
-			Message message = messageFactory.create_ADT_A01(request.getValues());
+			Message message = messageFactory.create_ADT_A04(request.getValues());
 			String msgReq = parser.encode(message);
 			connection.connect();
 			String msgResp = connection.sendMessage(msgReq, true);
@@ -74,7 +74,7 @@ public class OpenEMPIAdapter implements PIXAdapter, PDQAdapter {
 
 		try {
 
-			Message message = messageFactory.create_ADT_A01(request.getValues());
+			Message message = messageFactory.create_ADT_A08(request.getValues());
 			String msgReq = parser.encode(message);
 			connection.connect();
 			String msgResp = connection.sendMessage(msgReq, true);
@@ -105,7 +105,7 @@ public class OpenEMPIAdapter implements PIXAdapter, PDQAdapter {
 
 		try {
 
-			Message message = messageFactory.create_ADT_A01(request.getValues());
+			Message message = messageFactory.create_ADT_A40(request.getValues());
 			String msgReq = parser.encode(message);
 			connection.connect();
 			String msgResp = connection.sendMessage(msgReq, true);
@@ -133,7 +133,7 @@ public class OpenEMPIAdapter implements PIXAdapter, PDQAdapter {
 	public PIXQueryPatientResponse query(PIXQueryPatientRequest request) throws PIXAdapterException {
 		try {
 
-			Message message = messageFactory.create_ADT_A01(request.getValues());
+			Message message = messageFactory.create_QBP_Q21(request.getValues());
 			String msgReq = parser.encode(message);
 			connection.connect();
 			String msgResp = connection.sendMessage(msgReq, true);

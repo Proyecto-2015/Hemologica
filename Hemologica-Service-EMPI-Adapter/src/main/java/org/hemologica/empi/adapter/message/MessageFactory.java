@@ -8,12 +8,20 @@ import java.util.Map;
 import ca.uhn.hl7v2.model.v231.message.ADT_A04;
 import ca.uhn.hl7v2.HL7Exception;
 import ca.uhn.hl7v2.model.DataTypeException;
+import ca.uhn.hl7v2.model.GenericComposite;
+import ca.uhn.hl7v2.model.GenericPrimitive;
+import ca.uhn.hl7v2.model.Type;
+import ca.uhn.hl7v2.model.Varies;
 import ca.uhn.hl7v2.model.v231.message.ADT_A01;
 import ca.uhn.hl7v2.model.v231.message.ADT_A08;
+import ca.uhn.hl7v2.model.v231.message.ADT_A18;
+import ca.uhn.hl7v2.model.v231.message.ADT_A40;
 import ca.uhn.hl7v2.model.v231.segment.MSH;
 import ca.uhn.hl7v2.model.v231.segment.PID;
 import ca.uhn.hl7v2.model.v231.message.ADT_A05;
-import ca.uhn.hl7v2.model.v26.message.QBP_Q21;
+import ca.uhn.hl7v2.model.v25.message.QBP_Q21;
+import ca.uhn.hl7v2.model.v25.segment.QPD;
+import ca.uhn.hl7v2.parser.PipeParser;
 import ca.uhn.hl7v2.util.Terser;
 
 /**
@@ -49,7 +57,19 @@ public class MessageFactory implements Serializable {
 	public static String ADT_A08 = "ADT_AO8";
 	public static String ADT_A40 = "ADT_A40";
 	public static String QBP_Q23 = "QBP_Q23";
-
+	
+	private static String QBP_Q23_MSG_STRING = "MSH|^~\\&|NIST_SENDER^^|NIST^^|NIST_RECEIVER^^|NIST^^|20101101161157||QBP^Q23^QBP_Q21|NIST-101101161157166|P|2.5\r\nQPD|IHE PIX Query||HEMO-111^^^HEMOLOGICA\r\nRCP|I";
+	private static QBP_Q21 QBP_Q23_MSG;
+	static{
+		PipeParser parser = new PipeParser();
+		try {
+			QBP_Q23_MSG = (QBP_Q21) parser.parse(QBP_Q23_MSG_STRING);
+		} catch (HL7Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 	/**
 	 * Fixed values
 	 * 
@@ -164,23 +184,41 @@ public class MessageFactory implements Serializable {
 		}
 		return msg;
 	}
-
-	public QBP_Q21 create_QBP_Q21(Map<String, String> values) throws MessageFactoryException {
-		QBP_Q21 msg = new QBP_Q21();
+	
+	public ADT_A18 create_ADT_A18(Map<String, String> values) throws MessageFactoryException {
+		ADT_A18 msg = new ADT_A18();
 		try {
 			// MSH
-			msg.initQuickstart("QBP", "Q23", context.get("processingId"));
-			msg.getMSH().getMsh3_SendingApplication().getNamespaceID().setValue(context.get("sendingApplication"));
-			msg.getMSH().getMsh4_SendingFacility().getNamespaceID().setValue(context.get("sendingFacility"));
-			msg.getMSH().getMsh5_ReceivingApplication().getNamespaceID().setValue(context.get("receivingApplication"));
-			msg.getMSH().getMsh6_ReceivingFacility().getNamespaceID().setValue(context.get("receivingFacility"));
-			msg.getMSH().getMsh13_SequenceNumber().setValue("123");
+			msg.initQuickstart("ADT", "A18", context.get("processingId"));
+			MSH msh = msg.getMSH();
+			msh = this.processMSH(msh);
 
-			// QPD
-			Terser terser = new Terser(msg);
-			for (String key : values.keySet()) {
-				terser.set(key, values.get(key));
-			}
+			// PID
+			PID pid = msg.getPID();
+			pid = this.processPID(values, pid);
+
+		} catch (DataTypeException e) {
+			throw new MessageFactoryException(e);
+		} catch (HL7Exception e) {
+			throw new MessageFactoryException(e);
+		} catch (IOException e) {
+			throw new MessageFactoryException(e);
+		}
+		return msg;
+	}
+	
+	
+	public ADT_A40 create_ADT_A40(Map<String, String> values) throws MessageFactoryException {
+		ADT_A40 msg = new ADT_A40();
+		try {
+			// MSH
+			msg.initQuickstart("ADT", "A18", context.get("processingId"));
+			MSH msh = msg.getMSH();
+			msh = this.processMSH(msh);
+
+			// PID
+			PID pid = msg.getPIDPD1MRGPV1().getPID();
+			pid = this.processPID(values, pid);
 
 		} catch (DataTypeException e) {
 			throw new MessageFactoryException(e);
@@ -192,6 +230,53 @@ public class MessageFactory implements Serializable {
 		return msg;
 	}
 
+	public QBP_Q21 create_QBP_Q21(Map<String, String> values) throws MessageFactoryException {
+		
+		
+		try {
+			
+			PipeParser parser = new PipeParser();
+			QBP_Q21 msg = (QBP_Q21) parser.parse(QBP_Q23_MSG_STRING);
+			
+			// MSH
+			msg.initQuickstart("QBP", "Q23", context.get("processingId"));
+			ca.uhn.hl7v2.model.v25.segment.MSH msh = msg.getMSH();
+			msh = processMSH(msh);
+			
+			// QPD
+			QPD qpd = msg.getQPD();
+			Varies varies = qpd.getQpd3_UserParametersInsuccessivefields();
+			GenericComposite elem = (GenericComposite) varies.getData();
+			Type[] items = elem.getComponents();
+			Varies identifierVaries = (Varies) items[0];
+			Varies domainVaries = (Varies) items[3];
+			GenericPrimitive identifierData = (GenericPrimitive) identifierVaries.getData();
+			identifierData.setValue(values.get("identifier"));
+			GenericPrimitive domainData = (GenericPrimitive) domainVaries.getData();
+			domainData.setValue(values.get("domain"));
+			
+			return msg;
+			
+
+		} catch (DataTypeException e) {
+			throw new MessageFactoryException(e);
+		} catch (HL7Exception e) {
+			throw new MessageFactoryException(e);
+		} catch (IOException e) {
+			throw new MessageFactoryException(e);
+		}
+		
+	}
+
+	private ca.uhn.hl7v2.model.v25.segment.MSH processMSH(ca.uhn.hl7v2.model.v25.segment.MSH msh) throws DataTypeException {
+		msh.getMsh3_SendingApplication().getNamespaceID().setValue(context.get("sendingApplication"));
+		msh.getMsh4_SendingFacility().getNamespaceID().setValue(context.get("sendingFacility"));
+		msh.getMsh5_ReceivingApplication().getNamespaceID().setValue(context.get("receivingApplication"));
+		msh.getMsh6_ReceivingFacility().getNamespaceID().setValue(context.get("receivingFacility"));
+		msh.getMsh13_SequenceNumber().setValue("123");
+		return msh;
+	}
+	
 	private MSH processMSH(MSH msh) throws DataTypeException {
 		msh.getMsh3_SendingApplication().getNamespaceID().setValue(context.get("sendingApplication"));
 		msh.getMsh4_SendingFacility().getNamespaceID().setValue(context.get("sendingFacility"));
@@ -257,4 +342,28 @@ public class MessageFactory implements Serializable {
 		return pid;
 	}
 
+	public QPD getQPDFromTemplate(Map<String, String> values) throws HL7Exception{
+		
+		PipeParser parser = new PipeParser();
+		QBP_Q21 msg = (QBP_Q21) parser.parse(QBP_Q23_MSG_STRING);
+		QPD qpd = msg.getQPD();
+		qpd = this.processQPD(qpd, values);
+		return qpd;
+		
+	}
+	
+	public QPD processQPD(QPD qpd, Map<String,String> values) throws DataTypeException{
+		
+		Varies varies = qpd.getQpd3_UserParametersInsuccessivefields();
+		GenericComposite elem = (GenericComposite) varies.getData();
+		Type[] items = elem.getComponents();
+		Varies identifierVaries = (Varies) items[0];
+		Varies domainVaries = (Varies) items[3];
+		GenericPrimitive identifierData = (GenericPrimitive) identifierVaries.getData();
+		identifierData.setValue(values.get("identifier"));
+		GenericPrimitive domainData = (GenericPrimitive) domainVaries.getData();
+		domainData.setValue(values.get("domain"));
+		return qpd;
+	}
+	
 }

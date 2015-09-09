@@ -31,35 +31,35 @@ public class MessageFactoryTest {
 	@Test
 	public void testCreate_ADT_A01() {
 		
-		HashMap<String, String> values = new HashMap<String, String>();
-		values.put("patientIdentifier", "HEMO-111");
-		values.put("name", "Bruno");
-		values.put("surname", "Strasser");
-		MessageFactory factory = new MessageFactory(context);
-		try {
-			
-			ADT_A01 adt_A01 = factory.create_ADT_A01(values);
-			PipeParser pipeParser = new PipeParser();
-			DefaultXMLParser xmlParser = new DefaultXMLParser();
-			String pipeMsg = pipeParser.encode(adt_A01);
-			String xmlMsg = xmlParser.encode(adt_A01);
-			
-			System.out.println("########################### ADT_A01 PIPE ###########################");
-			System.out.println("PIPE_MSG:");
-			System.out.println(pipeMsg);
-			System.out.println("########################### ADT_A01 XML ############################");
-			System.out.println("XML_MSG:");
-			System.out.println(xmlMsg);
-			System.out.println("####################################################################");
-			
-			
-		} catch (MessageFactoryException e) {
-			e.printStackTrace();
-			fail("Exception: "+ e.getMessage());
-		} catch (HL7Exception e) {
-			e.printStackTrace();
-			fail("Exception: "+ e.getMessage());
-		}
+//		HashMap<String, String> values = new HashMap<String, String>();
+//		values.put("patientIdentifier", "HEMO-111");
+//		values.put("name", "Bruno");
+//		values.put("surname", "Strasser");
+//		MessageFactory factory = new MessageFactory(context);
+//		try {
+//			
+//			ADT_A01 adt_A01 = factory.create_ADT_A01(values);
+//			PipeParser pipeParser = new PipeParser();
+//			DefaultXMLParser xmlParser = new DefaultXMLParser();
+//			String pipeMsg = pipeParser.encode(adt_A01);
+//			String xmlMsg = xmlParser.encode(adt_A01);
+//			
+//			System.out.println("########################### ADT_A01 PIPE ###########################");
+//			System.out.println("PIPE_MSG:");
+//			System.out.println(pipeMsg);
+//			System.out.println("########################### ADT_A01 XML ############################");
+//			System.out.println("XML_MSG:");
+//			System.out.println(xmlMsg);
+//			System.out.println("####################################################################");
+//			
+//			
+//		} catch (MessageFactoryException e) {
+//			e.printStackTrace();
+//			fail("Exception: "+ e.getMessage());
+//		} catch (HL7Exception e) {
+//			e.printStackTrace();
+//			fail("Exception: "+ e.getMessage());
+//		}
 		
 		
 	}
@@ -67,105 +67,105 @@ public class MessageFactoryTest {
 	@Test
 	public void testCreate_ADT_A04() {
 
-		HashMap<String, String> values = new HashMap<String, String>();
-		values.put("patientIdentifier", "HEMO-111");
-		values.put("name", "Bruno");
-		values.put("surname", "Strasser");
-		MessageFactory factory = new MessageFactory(context);
-		try {
-			
-			ADT_A04 adt_A04 = factory.create_ADT_A04(values);
-			PipeParser pipeParser = new PipeParser();
-			DefaultXMLParser xmlParser = new DefaultXMLParser();
-			String pipeMsg = pipeParser.encode(adt_A04);
-			String xmlMsg = xmlParser.encode(adt_A04);
-			
-			System.out.println("########################### ADT_A04 PIPE ###########################");
-			System.out.println("PIPE_MSG:");
-			System.out.println(pipeMsg);
-			System.out.println("########################### ADT_A04 XML ############################");
-			System.out.println("XML_MSG:");
-			System.out.println(xmlMsg);
-			System.out.println("####################################################################");
-			
-			
-		} catch (MessageFactoryException e) {
-			e.printStackTrace();
-			fail("Exception: "+ e.getMessage());
-		} catch (HL7Exception e) {
-			e.printStackTrace();
-			fail("Exception: "+ e.getMessage());
-		}
+//		HashMap<String, String> values = new HashMap<String, String>();
+//		values.put("patientIdentifier", "HEMO-111");
+//		values.put("name", "Bruno");
+//		values.put("surname", "Strasser");
+//		MessageFactory factory = new MessageFactory(context);
+//		try {
+//			
+//			ADT_A04 adt_A04 = factory.create_ADT_A04(values);
+//			PipeParser pipeParser = new PipeParser();
+//			DefaultXMLParser xmlParser = new DefaultXMLParser();
+//			String pipeMsg = pipeParser.encode(adt_A04);
+//			String xmlMsg = xmlParser.encode(adt_A04);
+//			
+//			System.out.println("########################### ADT_A04 PIPE ###########################");
+//			System.out.println("PIPE_MSG:");
+//			System.out.println(pipeMsg);
+//			System.out.println("########################### ADT_A04 XML ############################");
+//			System.out.println("XML_MSG:");
+//			System.out.println(xmlMsg);
+//			System.out.println("####################################################################");
+//			
+//			
+//		} catch (MessageFactoryException e) {
+//			e.printStackTrace();
+//			fail("Exception: "+ e.getMessage());
+//		} catch (HL7Exception e) {
+//			e.printStackTrace();
+//			fail("Exception: "+ e.getMessage());
+//		}
 		
 	}
 
 	@Test
 	public void testCreate_ADT_A05() {
 
-		HashMap<String, String> values = new HashMap<String, String>();
-		values.put("patientIdentifier", "HEMO-111");
-		values.put("name", "Bruno");
-		values.put("surname", "Strasser");
-		MessageFactory factory = new MessageFactory(context);
-		try {
-			
-			ADT_A05 adt_A05 = factory.create_ADT_A05(values);
-			PipeParser pipeParser = new PipeParser();
-			DefaultXMLParser xmlParser = new DefaultXMLParser();
-			String pipeMsg = pipeParser.encode(adt_A05);
-			String xmlMsg = xmlParser.encode(adt_A05);
-			
-			System.out.println("########################### ADT_A05 PIPE ###########################");
-			System.out.println("PIPE_MSG:");
-			System.out.println(pipeMsg);
-			System.out.println("########################### ADT_A05 XML ############################");
-			System.out.println("XML_MSG:");
-			System.out.println(xmlMsg);
-			System.out.println("####################################################################");
-			
-			
-		} catch (MessageFactoryException e) {
-			e.printStackTrace();
-			fail("Exception: "+ e.getMessage());
-		} catch (HL7Exception e) {
-			e.printStackTrace();
-			fail("Exception: "+ e.getMessage());
-		}
+//		HashMap<String, String> values = new HashMap<String, String>();
+//		values.put("patientIdentifier", "HEMO-111");
+//		values.put("name", "Bruno");
+//		values.put("surname", "Strasser");
+//		MessageFactory factory = new MessageFactory(context);
+//		try {
+//			
+//			ADT_A05 adt_A05 = factory.create_ADT_A05(values);
+//			PipeParser pipeParser = new PipeParser();
+//			DefaultXMLParser xmlParser = new DefaultXMLParser();
+//			String pipeMsg = pipeParser.encode(adt_A05);
+//			String xmlMsg = xmlParser.encode(adt_A05);
+//			
+//			System.out.println("########################### ADT_A05 PIPE ###########################");
+//			System.out.println("PIPE_MSG:");
+//			System.out.println(pipeMsg);
+//			System.out.println("########################### ADT_A05 XML ############################");
+//			System.out.println("XML_MSG:");
+//			System.out.println(xmlMsg);
+//			System.out.println("####################################################################");
+//			
+//			
+//		} catch (MessageFactoryException e) {
+//			e.printStackTrace();
+//			fail("Exception: "+ e.getMessage());
+//		} catch (HL7Exception e) {
+//			e.printStackTrace();
+//			fail("Exception: "+ e.getMessage());
+//		}
 		
 	}
 
 	@Test
 	public void testCreate_ADT_A08() {
 
-		HashMap<String, String> values = new HashMap<String, String>();
-		values.put("patientIdentifier", "HEMO-111");
-		values.put("name", "Bruno");
-		values.put("surname", "Strasser");
-		MessageFactory factory = new MessageFactory(context);
-		try {
-			
-			ADT_A08 adt_A08 = factory.create_ADT_A08(values);
-			PipeParser pipeParser = new PipeParser();
-			DefaultXMLParser xmlParser = new DefaultXMLParser();
-			String pipeMsg = pipeParser.encode(adt_A08);
-			String xmlMsg = xmlParser.encode(adt_A08);
-			
-			System.out.println("########################### ADT_A08 PIPE ###########################");
-			System.out.println("PIPE_MSG:");
-			System.out.println(pipeMsg);
-			System.out.println("########################### ADT_A08 XML ############################");
-			System.out.println("XML_MSG:");
-			System.out.println(xmlMsg);
-			System.out.println("####################################################################");
-			
-			
-		} catch (MessageFactoryException e) {
-			e.printStackTrace();
-			fail("Exception: "+ e.getMessage());
-		} catch (HL7Exception e) {
-			e.printStackTrace();
-			fail("Exception: "+ e.getMessage());
-		}
+//		HashMap<String, String> values = new HashMap<String, String>();
+//		values.put("patientIdentifier", "HEMO-111");
+//		values.put("name", "Bruno");
+//		values.put("surname", "Strasser");
+//		MessageFactory factory = new MessageFactory(context);
+//		try {
+//			
+//			ADT_A08 adt_A08 = factory.create_ADT_A08(values);
+//			PipeParser pipeParser = new PipeParser();
+//			DefaultXMLParser xmlParser = new DefaultXMLParser();
+//			String pipeMsg = pipeParser.encode(adt_A08);
+//			String xmlMsg = xmlParser.encode(adt_A08);
+//			
+//			System.out.println("########################### ADT_A08 PIPE ###########################");
+//			System.out.println("PIPE_MSG:");
+//			System.out.println(pipeMsg);
+//			System.out.println("########################### ADT_A08 XML ############################");
+//			System.out.println("XML_MSG:");
+//			System.out.println(xmlMsg);
+//			System.out.println("####################################################################");
+//			
+//			
+//		} catch (MessageFactoryException e) {
+//			e.printStackTrace();
+//			fail("Exception: "+ e.getMessage());
+//		} catch (HL7Exception e) {
+//			e.printStackTrace();
+//			fail("Exception: "+ e.getMessage());
+//		}
 		
 	}
 
