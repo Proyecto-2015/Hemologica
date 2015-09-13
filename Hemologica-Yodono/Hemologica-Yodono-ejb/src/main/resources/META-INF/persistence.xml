@@ -25,10 +25,10 @@
          data source, this example data source is just for development and testing! -->
       <!-- The datasource is deployed as <EAR>/META-INF/Hemologica-Yodono-ds.xml, you
          can find it in the source at ear/src/main/application/META-INF/Hemologica-Yodono-ds.xml -->
-       <jta-data-source>java:/jboss/datasources/hemologicaStockDS</jta-data-source>
+       <jta-data-source>java:/jboss/datasources/Hemologica-YodonoDS</jta-data-source>
       <properties>
          <!-- Properties for Hibernate -->
-         <property name="hibernate.hbm2ddl.auto" value="create-drop" />
+         <property name="hibernate.hbm2ddl.auto" value="none" />
          <property name="hibernate.show_sql" value="false" />
       </properties>
    </persistence-unit>
