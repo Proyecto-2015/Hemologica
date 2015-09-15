@@ -16,5 +16,6 @@
 			<base-name>org.hemolgica.yodono.messages</base-name>
 			<var>messages</var>
 	   </resource-bundle>
+	   
      </application>
 </faces-config>
