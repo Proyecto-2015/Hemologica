@@ -68,3 +68,8 @@ h6 .h6 {
 .container>* {
 	
 }
+
+.navbar-inverse{
+	background-color: #912b2b; 
+	border-color: #912b2b;
+}
