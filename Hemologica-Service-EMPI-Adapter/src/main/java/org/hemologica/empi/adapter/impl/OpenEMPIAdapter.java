@@ -53,7 +53,6 @@ public class OpenEMPIAdapter implements PIXAdapter, PDQAdapter {
 			values.put("request", msgReq);
 			values.put("response", msgResp);
 			CreatePatientResponse resp = new CreatePatientResponse(values);
-//			resp.setResponse(message);
 			return resp;
 
 		} catch (MessageFactoryException e) {
@@ -83,7 +82,6 @@ public class OpenEMPIAdapter implements PIXAdapter, PDQAdapter {
 			values.put("request", msgReq);
 			values.put("response", msgResp);
 			UpdatePatientResponse resp = new UpdatePatientResponse(values);
-//			resp.setResponse(message);
 			return resp;
 
 		} catch (MessageFactoryException e) {
@@ -114,7 +112,6 @@ public class OpenEMPIAdapter implements PIXAdapter, PDQAdapter {
 			values.put("request", msgReq);
 			values.put("response", msgResp);
 			MergePatientResponse resp = new MergePatientResponse(values);
-//			resp.setResponse(message);
 			return resp;
 
 		} catch (MessageFactoryException e) {
@@ -128,11 +125,14 @@ public class OpenEMPIAdapter implements PIXAdapter, PDQAdapter {
 		} catch (Exception e) {
 			throw new PIXAdapterException(e);
 		}
+		
 	}
 
 	public PIXQueryPatientResponse query(PIXQueryPatientRequest request) throws PIXAdapterException {
 		try {
 
+			String identifier = request.getValues().get("identifier");
+			String domain = request.getValues().get("domain");
 			Message message = messageFactory.create_QBP_Q21(request.getValues());
 			String msgReq = parser.encode(message);
 			connection.connect();
@@ -141,8 +141,15 @@ public class OpenEMPIAdapter implements PIXAdapter, PDQAdapter {
 			Map<String,String> values = new HashMap<String, String>();
 			values.put("request", msgReq);
 			values.put("response", msgResp);
+			/**
+			 * Agrego el identificador por el cual consulto
+			 */
+			values.put("identifier", identifier);
+			values.put("domain", domain);
 			PIXQueryPatientResponse resp = new PIXQueryPatientResponse(values);
-//			resp.setResponse(message);
+			Message messageResp = parser.parse(msgResp);
+			resp.load(messageResp);
+			
 			return resp;
 
 		} catch (MessageFactoryException e) {

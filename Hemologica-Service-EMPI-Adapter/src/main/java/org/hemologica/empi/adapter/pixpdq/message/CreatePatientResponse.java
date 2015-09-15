@@ -10,7 +10,6 @@ public class CreatePatientResponse extends AbstractResponse implements Serializa
 	 */
 	private static final long serialVersionUID = -5748181619748028527L;
 	
-	
 	public CreatePatientResponse(Map<String, String> values) {
 		super(values);
 	}

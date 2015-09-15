@@ -12,7 +12,21 @@ public class AbstractResponse extends AbstractMessage implements Serializable{
 	 */
 	private static final long serialVersionUID = 5050271261015557556L;
 	
+	private Boolean success;
+	
+	public Boolean getSuccess() {
+		return success;
+	}
+
+	public void setSuccess(Boolean success) {
+		this.success = success;
+	}
+
 	private Message response;
+	
+	public void load(Message msg){
+		this.response = msg;
+	}
 	
 	public AbstractResponse(Map<String, String> values) {
 		super(values);

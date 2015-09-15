@@ -25,9 +25,9 @@ public class OpenEMPIAdapterTest {
 //		fail("Not yet implemented");
 //	}
 
-	@Test
-	public void testCreate() {
-
+//	@Test
+//	public void testCreate() {
+//
 //		Map<String, String > context = new HashMap<String, String>();
 //		context.put("sendingApplication", "HEMOLOGICA_SEND");
 //		context.put("sendingFacility", "HEMOLOGICA");
@@ -55,8 +55,8 @@ public class OpenEMPIAdapterTest {
 //			e.printStackTrace();
 //			fail(e.getMessage());
 //		}
-		
-	}
+//		
+//	}
 
 	@Test
 	public void testUpdate() {
@@ -99,32 +99,34 @@ public class OpenEMPIAdapterTest {
 	@Test
 	public void testQuery() {
 		
-//		Map<String, String > context = new HashMap<String, String>();
-//		context.put("sendingApplication", "HEMOLOGICA_SEND");
-//		context.put("sendingFacility", "HEMOLOGICA");
-//		context.put("receivingApplication", "EMPI_RECEIVE");
-//		context.put("receivingFacility", "EMPI");
-//		context.put("aa_namespace", "HEMOLOGICA");
-//		context.put("aa_universal_id", "2.16.858.0.0.1.10.2.3.1.1.1");
-//		context.put("aa_universal_id_type", "OID");
-//		IConnection connection = new MLLPConnection("localhost", 3600);
-//		OpenEMPIAdapter adapter = new OpenEMPIAdapter(connection, context, new PipeParser());
-//		
-//		Map<String,String> values = new HashMap<String, String>();
+		Map<String, String > context = new HashMap<String, String>();
+		context.put("sendingApplication", "HEMOLOGICA_SEND");
+		context.put("sendingFacility", "HEMOLOGICA");
+		context.put("receivingApplication", "EMPI_RECEIVE");
+		context.put("receivingFacility", "EMPI");
+		context.put("aa_namespace", "HEMOLOGICA");
+		context.put("aa_universal_id", "2.16.858.0.0.1.10.2.3.1.1.1");
+		context.put("aa_universal_id_type", "OID");
+		IConnection connection = new MLLPConnection("localhost", 3600);
+		OpenEMPIAdapter adapter = new OpenEMPIAdapter(connection, context, new PipeParser());
+		
+		Map<String,String> values = new HashMap<String, String>();
 //		values.put("identifier", "HEMO-111");
-//		values.put("domain", "HEMOLOGICA");
-//		
-//		PIXQueryPatientRequest request = new PIXQueryPatientRequest(values);
-//		try {
-//			
-//			PIXQueryPatientResponse response = adapter.query(request);
-//			values = response.getValues();
-//			String msg = values.get("response");
-//			
-//		} catch (PIXAdapterException e) {
-//			e.printStackTrace();
-//			fail(e.getMessage());
-//		}
+		values.put("identifier", "5be6b0e0-5298-11e5-832d-c0d962d9bfb4");
+//		ECID
+		values.put("domain", "ECID");
+		
+		PIXQueryPatientRequest request = new PIXQueryPatientRequest(values);
+		try {
+			
+			PIXQueryPatientResponse response = adapter.query(request);
+			values = response.getValues();
+			String msg = values.get("response");
+			
+		} catch (PIXAdapterException e) {
+			e.printStackTrace();
+			fail(e.getMessage());
+		}
 	
 	}
 
