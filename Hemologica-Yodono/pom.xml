@@ -24,14 +24,6 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <url>http://wildfly.org</url>
-    <licenses>
-        <license>
-            <name>Apache License, Version 2.0</name>
-            <distribution>repo</distribution>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
-        </license>
-    </licenses>
     <modules>
         <module>Hemologica-Yodono-ejb</module>
         <module>Hemologica-Yodono-web</module>
@@ -86,30 +78,6 @@
                 <version>${project.version}</version>
                 <type>war</type>
                 <scope>compile</scope>
-            </dependency>
-
-            <!-- JBoss distributes a complete set of Java EE 7 APIs including
-                a Bill of Materials (BOM). A BOM specifies the versions of a "stack" (or 
-                a collection) of artifacts. We use this here so that we always get the correct 
-                versions of artifacts. Here we use the jboss-javaee-7.0-with-tools stack
-                (you can read this as the JBoss stack of the Java EE 7 APIs, with some extras
-                tools for your project, such as Arquillian for testing) and the jboss-javaee-7.0-with-hibernate
-                stack you can read this as the JBoss stack of the Java EE 7 APIs, with extras
-                from the Hibernate family of projects) -->
-            <dependency>
-                <groupId>org.wildfly.bom</groupId>
-                <artifactId>jboss-javaee-7.0-with-tools</artifactId>
-                <version>${version.jboss.bom}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>org.wildfly.bom</groupId>
-                <artifactId>jboss-javaee-7.0-with-hibernate</artifactId>
-                <version>${version.jboss.bom}</version>
-                <type>pom</type>
-                <scope>import</scope>
             </dependency>
 
         </dependencies>
