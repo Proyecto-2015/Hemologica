@@ -69,6 +69,28 @@ h6 .h6 {
 	
 }
 
+#centerList{
+	
+	margin: auto !important;
+	list-style:none ;
+}
+
+#centerList li {
+	float:left;
+}
+
+#centerList a {
+	
+	display:block;
+	text-align:center;
+	text-decoration:none; 
+}
+.navbar-brand{
+	
+	margin-left: auto !important;
+	margin-right: auto !important;
+}
+
 .navbar-inverse{
 	background-color: #912b2b; 
 	border-color: #912b2b;
