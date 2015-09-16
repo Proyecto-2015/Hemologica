@@ -15,7 +15,7 @@ public class Main {
 					IXMLDataBase xbase = XMLDataBaseFactory.getIXMLDataBase();
 					
 					
-					for(String cda : xbase.getElementPatientId("")){
+					for(String cda : xbase.getElementPatientId("46714299")){
 						
 						System.out.println(cda);
 						

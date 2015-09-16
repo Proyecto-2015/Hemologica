@@ -5,9 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-
 import org.apache.log4j.Logger;
-import org.basex.core.Context;
 import org.hemologica.xmldatabase.connection.IXMLDataBase;
 import org.hemologica.xmldatabase.exceptions.XMLDataBaseException;
 
@@ -33,7 +31,6 @@ public class BaseXConnection implements IXMLDataBase{
 		} catch (IOException e) {
 			
 			logger.error("Error al leer el archivo db.properties", e);
-			// TODO excepciones
 			throw new XMLDataBaseException();
 		}
 		

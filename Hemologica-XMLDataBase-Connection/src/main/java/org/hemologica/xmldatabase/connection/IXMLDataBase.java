@@ -72,4 +72,5 @@ public interface IXMLDataBase {
 	 * @throws XMLDataBaseException
 	 */
 	public List<String> getElementPatientId(String patientId) throws XMLDataBaseException;
+	
 }
