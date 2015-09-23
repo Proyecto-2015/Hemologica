@@ -22,4 +22,56 @@
     xsi:schemaLocation="
         http://xmlns.jcp.org/xml/ns/javaee
         http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+        
+        
+        
+    <application>
+     	   <locale-config>
+     	   		<default-locale>es</default-locale>
+     	   		<supported-locale>en</supported-locale>
+     	   		<supported-locale>fr</supported-locale>
+     	   		<supported-locale>br</supported-locale>
+     	   </locale-config>
+	   <resource-bundle>
+			<base-name>org.hemolgica.yodono.messages</base-name>
+			<var>messages</var>
+	   </resource-bundle>
+	   
+     </application>
+        
+	<managed-bean>
+		<managed-bean-name>applicationBB</managed-bean-name>
+		<managed-bean-class>org.hemologica.salud.beans.ApplicationBB</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>sessionBB</managed-bean-name>
+		<managed-bean-class>org.hemologica.salud.beans.SessionBB</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>applicationBB</property-name>
+			<property-class>org.hemologica.salud.beans.ApplicationBB</property-class>
+			<value>#{applicationBB}</value>
+		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>donationBB</managed-bean-name>
+		<managed-bean-class>org.hemologica.salud.beans.DonationBB</managed-bean-class>
+		<managed-bean-scope>view</managed-bean-scope>
+		<managed-property>
+			<property-name>sessionBB</property-name>
+			<property-class>org.hemologica.salud.beans.SessionBB</property-class>
+			<value>#{sessionBB}</value>
+		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>transfusionBB</managed-bean-name>
+		<managed-bean-class>org.hemologica.salud.beans.TransfusionBB</managed-bean-class>
+		<managed-bean-scope>view</managed-bean-scope>
+		<managed-property>
+			<property-name>sessionBB</property-name>
+			<property-class>org.hemologica.salud.beans.SessionBB</property-class>
+			<value>#{sessionBB}</value>
+		</managed-property>
+	</managed-bean>
 </faces-config>
