@@ -13,6 +13,17 @@ public class SessionBB implements Serializable {
 	private ApplicationBB applicationBB;
 
 	
+	
+	public String redirectTo(String go){
+		System.out.println("REDIRECT TO: "+ go);
+		return go;
+	}
+	
+	
+	
+	
+	
+	
 	public ApplicationBB getApplicationBB() {
 		return applicationBB;
 	}
