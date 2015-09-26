@@ -1,4 +1,4 @@
-package org.hemologica.salud.beans;
+package org.hemologica.salud.web.beans;
 
 import java.io.Serializable;
 import java.util.Date;

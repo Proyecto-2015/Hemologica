@@ -1,4 +1,4 @@
-package org.hemologica.salud.utils;
+package org.hemologica.salud.web.utils;
 
 import java.io.IOException;
 import java.io.Serializable;
