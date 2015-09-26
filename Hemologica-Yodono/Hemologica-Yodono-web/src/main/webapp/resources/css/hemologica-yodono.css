@@ -75,6 +75,48 @@ h6 .h6 {
 	margin-right: auto !important;
 }
 
+.header{
+	width: 100%;
+	float: right;
+	
+}
+
+.idiomas{
+	
+	border-bottom: 1px solid #e3e3e3;
+    width: 100%;
+	float: right;
+	font-size: x-small;
+
+}
+
+.idiomas li{
+	
+	margin: 0px !important;
+	padding: 0px !important;
+}
+
+.idiomas li + li{
+	border-left: 1px solid #e3e3e3;
+    padding-left: 10px !important;
+    margin-left: 10px !important;
+}
+.idiomas ul{
+	
+	margin: 6px !important;
+
+}
+
+.titulo{
+	
+	padding-left: 0 !important;
+}
+
+.img{
+	vertical-align: middle;
+	padding-right: 0 !important;
+}
+
 .navbar-inverse{
 	background-color: #912b2b; 
 	border-color: #912b2b;
