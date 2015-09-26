@@ -107,16 +107,14 @@ h6 .h6 {
 
 }
 
-
-
-.center-title{
+.titulo{
 	
-/* 	top: 50%; */
-/* 	bottom: 50%; */
-/* 	margin-top: auto;  */
-/* 	margin-bottom: auto;  */
-/* 	display: block; */
-/* 	height: 100%;	 */
+	padding-left: 0 !important;
+}
+
+.img{
+	vertical-align: middle;
+	padding-right: 0 !important;
 }
 
 .navbar-inverse{

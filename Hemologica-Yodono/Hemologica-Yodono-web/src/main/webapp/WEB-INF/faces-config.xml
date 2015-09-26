@@ -29,6 +29,10 @@
 			<from-outcome>logout</from-outcome>
 			<to-view-id>/pages/myDonations.xhtml</to-view-id>
 	   </navigation-case>
+	   <navigation-case>
+			<from-outcome>logout</from-outcome>
+			<to-view-id>/pages/Indicadores.xhtml</to-view-id>
+	   </navigation-case>
 	</navigation-rule>
   
      
