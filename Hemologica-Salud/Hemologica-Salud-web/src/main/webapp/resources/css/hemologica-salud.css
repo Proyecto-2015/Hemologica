@@ -79,3 +79,29 @@ h6 .h6 {
 	background-color: #912b2b; 
 	border-color: #912b2b;
 }
+
+.idiomas{
+	
+	border-bottom: 1px solid #e3e3e3;
+    width: 100%;
+	float: right;
+	font-size: x-small;
+
+}
+
+.idiomas li{
+	
+	margin: 0px !important;
+	padding: 0px !important;
+}
+
+.idiomas li + li{
+	border-left: 1px solid #e3e3e3;
+    padding-left: 10px !important;
+    margin-left: 10px !important;
+}
+.idiomas ul{
+	
+	margin: 6px !important;
+
+}

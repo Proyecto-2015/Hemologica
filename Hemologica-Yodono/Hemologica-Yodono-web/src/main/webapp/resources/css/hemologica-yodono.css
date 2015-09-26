@@ -74,6 +74,13 @@ h6 .h6 {
 	margin-left: auto !important;
 	margin-right: auto !important;
 }
+
+.header{
+	width: 100%;
+	float: right;
+	
+}
+
 .idiomas{
 	
 	border-bottom: 1px solid #e3e3e3;
@@ -98,6 +105,18 @@ h6 .h6 {
 	
 	margin: 6px !important;
 
+}
+
+
+
+.center-title{
+	
+/* 	top: 50%; */
+/* 	bottom: 50%; */
+/* 	margin-top: auto;  */
+/* 	margin-bottom: auto;  */
+/* 	display: block; */
+/* 	height: 100%;	 */
 }
 
 .navbar-inverse{
