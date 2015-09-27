@@ -10,10 +10,15 @@
 		<param-name>javax.faces.PROJECT_STAGE</param-name>
 		<param-value>Development</param-value>
 	</context-param>
-	
+
 	<context-param>
 		<param-name>primefaces.THEME</param-name>
 		<param-value>bootstrap</param-value>
+	</context-param>
+
+	<context-param>
+		<param-name>facelets.SKIP_COMMENTS</param-name>
+		<param-value>true</param-value>
 	</context-param>
 
 
@@ -29,30 +34,35 @@
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
-	
-	
+
+
 	<mime-mapping>
-        <extension>woff</extension>
-        <mime-type>application/x-font-woff</mime-type>
-    </mime-mapping>
-    
-    <mime-mapping>
-        <extension>woff2</extension>
-        <mime-type>application/x-font-woff2</mime-type>
-    </mime-mapping>
-    
-    <mime-mapping>
-        <extension>eot</extension>
-        <mime-type>application/x-font-eot</mime-type>
-    </mime-mapping>
-    
-    <mime-mapping>
-        <extension>svg</extension>
-        <mime-type>application/x-font-svg</mime-type>
-    </mime-mapping>
+		<extension>woff</extension>
+		<mime-type>application/x-font-woff</mime-type>
+	</mime-mapping>
+
 	<mime-mapping>
-        <extension>ttf</extension>
-        <mime-type>application/x-font-ttf</mime-type>
-    </mime-mapping>
+		<extension>woff2</extension>
+		<mime-type>application/x-font-woff2</mime-type>
+	</mime-mapping>
+
+	<mime-mapping>
+		<extension>eot</extension>
+		<mime-type>application/x-font-eot</mime-type>
+	</mime-mapping>
+
+	<mime-mapping>
+		<extension>svg</extension>
+		<mime-type>application/x-font-svg</mime-type>
+	</mime-mapping>
+	<mime-mapping>
+		<extension>ttf</extension>
+		<mime-type>application/x-font-ttf</mime-type>
+	</mime-mapping>
+
+	<mime-mapping>
+		<extension>map</extension>
+		<mime-type>application/json</mime-type>
+	</mime-mapping>
 
 </web-app>

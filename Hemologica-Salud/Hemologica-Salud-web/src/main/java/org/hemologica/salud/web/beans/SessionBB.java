@@ -2,6 +2,8 @@ package org.hemologica.salud.web.beans;
 
 import java.io.Serializable;
 
+import org.hemologica.salud.web.utils.JSFUtils;
+
 public class SessionBB implements Serializable {
 
 	/**
@@ -15,8 +17,10 @@ public class SessionBB implements Serializable {
 	
 	
 	public String redirectTo(String go){
+		
 		System.out.println("REDIRECT TO: "+ go);
 		return go;
+		
 	}
 	
 	

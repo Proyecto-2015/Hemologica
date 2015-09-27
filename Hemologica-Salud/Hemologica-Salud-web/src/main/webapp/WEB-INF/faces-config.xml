@@ -57,6 +57,7 @@
 			<property-class>org.hemologica.salud.web.beans.SessionBB</property-class>
 			<value>#{sessionBB}</value>
 		</managed-property>
+		
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>transfusionBB</managed-bean-name>
