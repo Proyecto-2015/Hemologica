@@ -4,6 +4,8 @@
 .settings/
 /MANIFEST.MF
 
+.metadata/
+
 # Intellij
 .idea/
 *.iml

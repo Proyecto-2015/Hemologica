@@ -17,20 +17,21 @@
 	
 		style="background-color: #FFFFF; max-width: 100%">
 		<div class="row">
-				<!-- Idiomas -->
-			<div class="idiomas">
-				<ul class="list-inline pull-right">
-					<li>
-						<a>Ingles</a>
-					</li>
-					<li>
-						<a>Aleman</a>
-					</li>
-					<li>
-						<a>Español</a>
-					</li>
-				</ul>
-			</div>
+		
+			<h:form>
+				<div class="idiomas">
+					<ul class="list-inline pull-right">
+						<c:forEach items="#{language.languagesInMap}" var="languageItem">
+		    				<li>
+								<h:commandLink value="#{messages[languageItem.value]}" action="#{language.languagesLocaleCodeChanged}" >
+									<f:param name="action" value="#{languageItem.key}" />
+								</h:commandLink>
+					        </li>
+						</c:forEach>			
+		
+					</ul>
+				</div>
+			</h:form>
 			
 			<div class="container-fluid">
 			<div class="row">
@@ -48,9 +49,12 @@
 				    </div>
 				     <div class="col-xs-3 col-lg-1 col-height vcenter titulo pull-right div-user" >
 				     	
-				     	<img src="resources/img/user-icon.png" class="img-responsive center-block userImage"/>
+						<h:graphicImage class="img-responsive center-block userImage" library="img"
+					     		name="user-icon.png"/>
 
-				       <span class="text-login  center-block" style="vertical-align: middle"> Iniciar Sesion</span>
+				       <span class="text-login  center-block" style="vertical-align: middle">
+				       		<h:outputText value="#{messages.label_sign_in}"/>
+				       	</span>
 				    </div>
 				 </div>
 			</div>

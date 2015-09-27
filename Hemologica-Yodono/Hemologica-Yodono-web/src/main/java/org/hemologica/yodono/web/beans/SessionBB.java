@@ -2,8 +2,6 @@ package org.hemologica.yodono.web.beans;
 
 import java.io.Serializable;
 
-import org.hemologica.yodono.web.utils.JSFUtils;
-
 public class SessionBB implements Serializable {
 
 	/**

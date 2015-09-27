@@ -13,85 +13,88 @@
 
 <!-- #EA1C24 -->
 <!-- #912b2b -->
-	<div class="page-header"
 	
-		style="background-color: #FFFFF; max-width: 100%">
-		<div class="idiomas">
-			<ul class="list-inline pull-right">
-				<li>
-					<a>Ingles</a>
-				</li>
-				<li>
-					<a>Aleman</a>
-				</li>
-				<li>
-					<a>Español</a>
-				</li>
-			</ul>
-		</div>
+		<div class="page-header"
+			style="background-color: #FFFFF; max-width: 100%">
+			<h:form>
+				<div class="idiomas">
+					<ul class="list-inline pull-right">
+						<c:forEach items="#{language.languagesInMap}" var="languageItem">
+		    				<li>
+								<h:commandLink value="#{messages[languageItem.value]}" action="#{language.languagesLocaleCodeChanged}" >
+									<f:param name="action" value="#{languageItem.key}" />
+								</h:commandLink>
+					        </li>
+						</c:forEach>			
 		
-		<div class="container-fluid">
-			<div class="row">
-				 <div class="row-height" > 
-				    <div class="col-xs-1 col-lg-1 vcenter img pull-left">
-				        <h:graphicImage id="logo-img" library="img"
-							name="hemologica-logo-6.png" alt="logo" />
-							
-				    </div>
-				    <div class="col-xs-5 col-lg-9 col-height vcenter titulo pull-left">
-				    	
-				       	<h1 style=" margin-left: 0px">
-							<strong style="color: #912b2b;">Yo Dono</strong>
-						</h1>
-				    </div>
-				     <div class="col-xs-3 col-lg-1 col-height vcenter titulo pull-right div-user" >
-				     	
-				     	<img src="resources/img/user-icon.png" class="img-responsive center-block userImage"/>
-
-				       <span class="text-login  center-block" style="vertical-align: middle"> Iniciar Sesion</span>
-				    </div>
-				 </div>
+					</ul>
+				</div>
+			</h:form>
+			
+			<div class="container-fluid">
+				<div class="row">
+					 <div class="row-height" > 
+					    <div class="col-xs-1 col-lg-1 vcenter img pull-left">
+					        <h:graphicImage id="logo-img" library="img"
+								name="hemologica-logo-6.png" alt="logo" />
+								
+					    </div>
+					    <div class="col-xs-5 col-lg-9 col-height vcenter titulo pull-left">
+					    	
+					       	<h1 style=" margin-left: 0px">
+								<strong style="color: #912b2b;"><h:outputText value="#{messages.title_home}"/></strong>
+							</h1>
+					    </div>
+					     <div class="col-xs-3 col-lg-1 col-height vcenter titulo pull-right div-user" >
+					     	<h:graphicImage class="img-responsive center-block userImage" library="img"
+					     		name="user-icon.png"/>
+					       <span class="text-login  center-block" style="vertical-align: middle">
+					       		<h:outputText value="#{messages.label_sign_in}"/>
+					       	</span>
+					    </div>
+					 </div>
+				</div>
 			</div>
 		</div>
-	</div>
-
-
-	<nav class="navbar navbar-inverse navbar-static-top">
-	<div class="container-fluid" id="div-menu">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed"
-				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-				aria-expanded="false">
-				<span class="sr-only">Toggle navigation</span> <span
-					class="icon-bar"></span> <span class="icon-bar"></span> <span
-					class="icon-bar"></span>
-			</button>
-			
+	
+	
+		<nav class="navbar navbar-inverse navbar-static-top">
+		<div class="container-fluid" id="div-menu">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+					aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				
+			</div>
+	
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse"
+				id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav" >
+	
+					<li><a href="#">¿Puedo donar?</a></li>
+					<li><a href="#">¿Dónde donar?</a></li>
+					<li><a href="#">Preparacion para donar</a></li>
+					<li class="active"><a href="#">Mis Donaciones<span
+							class="sr-only">(current)</span></a></li>
+					<li><a href="#">Mis Transfusiones</a></li>
+				</ul>
+			</div>
+			<!-- /.navbar-collapse -->
 		</div>
+		<!-- /.container-fluid --> </nav>
+	
+	<!-- 	<div class="container-fluid"> -->
+	<!-- 		<ol class="breadcrumb"> -->
+	<!-- 			<li><a href="#">Donaciones</a></li> -->
+	<!--		<li><a href="#">Búsqueda</a></li> --> 
+	<!-- 		</ol> -->
+	<!-- 	</div> -->
 
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse"
-			id="bs-example-navbar-collapse-1">
-			<ul class="nav navbar-nav" >
-
-				<li><a href="#">¿Puedo donar?</a></li>
-				<li><a href="#">¿Dónde donar?</a></li>
-				<li><a href="#">Preparacion para donar</a></li>
-				<li class="active"><a href="#">Mis Donaciones<span
-						class="sr-only">(current)</span></a></li>
-				<li><a href="#">Mis Transfusiones</a></li>
-			</ul>
-		</div>
-		<!-- /.navbar-collapse -->
-	</div>
-	<!-- /.container-fluid --> </nav>
-
-<!-- 	<div class="container-fluid"> -->
-<!-- 		<ol class="breadcrumb"> -->
-<!-- 			<li><a href="#">Donaciones</a></li> -->
-<!--		<li><a href="#">Búsqueda</a></li> --> 
-<!-- 		</ol> -->
-<!-- 	</div> -->
 </ui:composition>
 
