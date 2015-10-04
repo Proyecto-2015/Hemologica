@@ -1,0 +1,20 @@
+@CHARSET "UTF-8";
+
+@media(max-width: 480px) {
+  h1 {
+    font-size: 20pt;
+  }
+  
+  img{
+  	height: 60px;
+  }
+  
+  .userImage{
+  	
+  	background-size: 30px 30px;
+	height: 40px;
+	width: 40px;
+  
+  }
+
+}
