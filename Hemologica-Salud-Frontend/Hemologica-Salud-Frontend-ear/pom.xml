@@ -47,11 +47,6 @@
             <artifactId>Hemologica-Salud-Frontend-web</artifactId>
             <type>war</type>
         </dependency>
-        <dependency>
-            <groupId>org.hemologica</groupId>
-            <artifactId>Hemologica-Salud-Frontend-ejb</artifactId>
-            <type>ejb</type>
-        </dependency>
     </dependencies>
 
     <build>

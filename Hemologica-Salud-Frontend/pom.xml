@@ -33,7 +33,6 @@
         </license>
     </licenses>
     <modules>
-        <module>Hemologica-Salud-Frontend-ejb</module>
         <module>Hemologica-Salud-Frontend-web</module>
         <module>Hemologica-Salud-Frontend-ear</module>
     </modules>

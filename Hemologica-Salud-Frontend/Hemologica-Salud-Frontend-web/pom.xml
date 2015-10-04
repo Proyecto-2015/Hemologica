@@ -35,14 +35,6 @@
 
 	<dependencies>
 
-		<!-- Dependency on the EJB module so we can use it's services if needed -->
-		<dependency>
-			<groupId>org.hemologica</groupId>
-			<artifactId>Hemologica-Salud-Frontend-ejb</artifactId>
-			<type>ejb</type>
-			<scope>provided</scope>
-		</dependency>
-
 		<!-- Import the JAX-RS API, we use provided scope as the API is included 
 			in JBoss WildFly -->
 		<dependency>
