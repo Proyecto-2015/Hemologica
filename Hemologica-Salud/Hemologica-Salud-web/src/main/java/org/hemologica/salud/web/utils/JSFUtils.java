@@ -88,10 +88,6 @@ public class JSFUtils implements Serializable{
 		FacesContext.getCurrentInstance().addMessage(client, new FacesMessage(FacesMessage.SEVERITY_FATAL, msg, detail));
 	}
 	
-	
-	
-	
-	
 	public static Map<String, Object> getSessionMap(){
 		return FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 	}

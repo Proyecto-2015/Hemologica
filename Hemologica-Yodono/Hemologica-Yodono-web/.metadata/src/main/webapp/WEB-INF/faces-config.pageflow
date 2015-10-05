@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf14429677390161" configfile="/Hemologica-Yodono-web/src/main/webapp/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="370" id="pf14430413595720" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf14430413595731 pf14430413595732" path="*"/>
+  <nodes xsi:type="pageflow:PFPage" name="*" x="122" y="562" id="pf14430413595720" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf14430413595731 pf14430413595732 pf14433665681110" path="*"/>
   <nodes xsi:type="pageflow:PFPage" name="template/index.xhtml" x="338" y="178" id="pf14430413595733" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf14430413595731" path="/template/index.xhtml"/>
   <nodes xsi:type="pageflow:PFPage" name="pages/myDonations.xhtml" x="338" y="562" id="pf14430413595734" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" inlinks="pf14430413595732" path="/pages/myDonations.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/Indicadores.xhtml" x="338" y="946" id="pf14433665681111" referenceLink="//@navigationRule.0/@navigationCase.2/@toViewId|" inlinks="pf14433665681110" path="/pages/Indicadores.xhtml"/>
   <links id="pf14430413595731" target="pf14430413595733" source="pf14430413595720" outcome="logout"/>
   <links id="pf14430413595732" target="pf14430413595734" source="pf14430413595720" outcome="logout"/>
+  <links id="pf14433665681110" target="pf14433665681111" source="pf14430413595720" outcome="logout"/>
 </pageflow:Pageflow>
