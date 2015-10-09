@@ -170,8 +170,60 @@ h6 .h6 {
 }
 
 .form-inline > *{
-	margin-left: 20px;
+/* 	margin-left: 20px; */
 }
 .form-inline .control-label{
-	margin-right: 10px;
+/* 	margin-right: 10px; */
+}
+
+.form-control{
+	width: auto;
+}
+
+.search-bar > *{
+	margin: 0px;
+/* 	border : 0px !important; */
+/* 	border-radius: 0 !important; */
+	margin-left: 0px;
+	margin-right: 0px;
+	padding: 0px;
+/* 	height: 32px; */
+}
+
+.search-btn{
+    width: 57px !important;
+    background-color: #4285F4 !important;
+    background-image: none !important;
+    
+}
+
+.search-btn:hover{
+    background-color: #4474C4 !important;
+    background-image: none !important;
+    
+}
+
+.search-btn-adv{
+    width: 20px !important;
+    background-color: white !important;
+    background-image: none !important;
+}
+
+.search-bar-input{
+/* 	max-width: 500px; */
+ 	width: 40% !important;
+}
+
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover{
+	background-color: none;
+/* 	color: red !important; */
+}
+
+.search-btn > .ui-state-hover .ui-icon, .search-btn > .ui-state-focus .ui-icon{
+	background-image: url("../javax.faces.resource/images/ui-icons_ffffff_256x240.png.xhtml?ln=primefaces-bootstrap") !important; 
+}
+
+
+.search-btn > .ui-icon{
+	background-image: url("../javax.faces.resource/images/ui-icons_ffffff_256x240.png.xhtml?ln=primefaces-bootstrap") !important;
 }

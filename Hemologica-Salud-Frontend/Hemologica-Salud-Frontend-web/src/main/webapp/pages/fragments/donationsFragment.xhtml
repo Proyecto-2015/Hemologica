@@ -20,44 +20,74 @@
 
 		<h:form>
 
-			<h:panelGroup id="panel_search_inputs" layout="block" styleClass="row">
+			<h:panelGroup id="panel_search_inputs2" layout="block"
+				styleClass="row">
+				<h:panelGroup layout="block" styleClass="form-inline search-bar">
+					<p:outputLabel class="sr-only" for="donations_input_search_person2"
+									value="#{messages.donations_input_search_person_placeholder}"/>
+					<p:inputText id="donations_input_search_person2"
+						styleClass="form-control col-xs-6 col-sm-6 col-md-6 col-lg-6"
+						placeholder="#{messages.donations_input_search_person_placeholder}"
+						value="#{donationBB.searchPerson}" />
+					<p:commandButton id="panel_search_inputs_advanced" 
+									styleClass="form-control search-btn-adv col-xs-2 col-sm-3 col-md-4 col-lg-4" 
+									icon="ui-icon-triangle-1-s" 
+									title="#{messages.generic_search}" />
+					<p:commandButton icon="ui-icon-search" 
+									 styleClass="form-control search-btn col-xs-2 col-sm-3 col-md-3 col-lg-1" 
+									 title="#{messages.generic_search}" 
+									 action="#{donationBB.search()}" 
+									 process="panel_search_inputs" 
+									 update="@form"/>
+				</h:panelGroup>
+			</h:panelGroup>
 
-				<h:panelGroup layout="block" styleClass="form-inline">
+			<p:overlayPanel for="panel_search_inputs_advanced" hideEffect="fade">
+				<h:panelGroup id="panel_search_inputs" layout="block"
+					styleClass="row">
 
-					<h:panelGroup styleClass="form-group" layout="block">
-						<h:outputLabel for="donations_input_search_person"
-							styleClass="control-label"
-							value="#{messages.donations_input_search_person}" />
-						<p:inputText id="donations_input_search_person"
-							styleClass="form-control"
-							placeholder="#{messages.donations_input_search_person_placeholder}"
-							value="#{donationBB.searchPerson}" />
+					<h:panelGroup layout="block" styleClass="form-inline">
+
+						<h:panelGroup styleClass="form-group " layout="block">
+							<h:outputLabel for="donations_input_search_person"
+								styleClass="control-label"
+								value="#{messages.donations_input_search_person}" />
+							<p:inputText id="donations_input_search_person"
+								styleClass="form-control"
+								placeholder="#{messages.donations_input_search_person_placeholder}"
+								value="#{donationBB.searchPerson}" />
+						</h:panelGroup>
+
+						<h:panelGroup styleClass="form-group" layout="block">
+							<h:outputLabel for="donations_input_search_date_from"
+								styleClass="control-label"
+								value="#{messages.donations_input_search_date_from}" />
+							<p:calendar id="donations_input_search_date_from"
+								value="#{donationBB.searchDateFrom}" />
+						</h:panelGroup>
+
+						<h:panelGroup styleClass="form-group" layout="block">
+							<h:outputLabel for="donations_input_search_date_to"
+								styleClass="control-label"
+								value="#{messages.donations_input_search_date_to}" />
+							<p:calendar id="donations_input_search_date_to"
+								value="#{donationBB.searchDateTo}" />
+						</h:panelGroup>
+
+						<p:commandButton icon="ui-icon-search"
+							value="#{messages.generic_search}"
+							action="#{donationBB.search()}" process="panel_search_inputs"
+							update="@form" />
+						<p:commandLink value="#{messages.generic_search_clear}"
+							action="#{donationBB.searchClear()}" process="@this"
+							update="@form" />
+
 					</h:panelGroup>
 
-					<h:panelGroup styleClass="form-group" layout="block">
-						<h:outputLabel for="donations_input_search_date_from"
-							styleClass="control-label"
-							value="#{messages.donations_input_search_date_from}" />
-						<p:calendar id="donations_input_search_date_from"
-							value="#{donationBB.searchDateFrom}" />
-					</h:panelGroup>
-
-					<h:panelGroup styleClass="form-group" layout="block">
-						<h:outputLabel for="donations_input_search_date_to"
-							styleClass="control-label"
-							value="#{messages.donations_input_search_date_to}" />
-						<p:calendar id="donations_input_search_date_to"
-							value="#{donationBB.searchDateTo}" />
-					</h:panelGroup>
-
-					<p:commandButton icon="ui-icon-search"
-						value="#{messages.generic_search}" action="#{donationBB.search()}" process="panel_search_inputs" update="@form" />
-					<p:commandLink value="#{messages.generic_search_clear}" 
-					action="#{donationBB.searchClear()}" process="@this" update="@form"/>
 
 				</h:panelGroup>
 
-			</h:panelGroup>
+			</p:overlayPanel>
 
 			<h:panelGroup layout="block" styleClass="row"
 				rendered="#{donationBB.renderResult}">
@@ -67,33 +97,38 @@
 					emptyMessage="#{messages.donations_result_empty_message}"
 					sortMode="multiple">
 
-					<p:column filterBy="#{donation.donationId}" headerText="#{messages.donations_result_table_header_id}"
+					<p:column filterBy="#{donation.donationId}"
+						headerText="#{messages.donations_result_table_header_id}"
 						filterMatchMode="contains" sortBy="#{donation.donationId}">
 						<h:outputText value="#{donation.donationId}" />
 					</p:column>
-					
-					<p:column filterBy="#{donation.personDocument}" headerText="#{messages.donations_result_table_header_document}"
+
+					<p:column filterBy="#{donation.personDocument}"
+						headerText="#{messages.donations_result_table_header_document}"
 						filterMatchMode="contains" sortBy="#{donation.personDocument}">
 						<h:outputText value="#{donation.personDocument}" />
 					</p:column>
-					
-					<p:column filterBy="#{donation.personCompleteName}" headerText="#{messages.donations_result_table_header_name}"
+
+					<p:column filterBy="#{donation.personCompleteName}"
+						headerText="#{messages.donations_result_table_header_name}"
 						filterMatchMode="contains" sortBy="#{donation.personCompleteName}">
 						<h:outputText value="#{donation.personCompleteName}" />
 					</p:column>
-					
-					<p:column filterBy="#{donation.donationDate}" headerText="#{messages.donations_result_table_header_date}"
+
+					<p:column filterBy="#{donation.donationDate}"
+						headerText="#{messages.donations_result_table_header_date}"
 						filterMatchMode="contains" sortBy="#{donation.donationDate}">
-						<h:outputText value="#{donation.donationDate}" >
-							<f:convertDateTime pattern="dd-MM-yyyy, hh:mm"/>
+						<h:outputText value="#{donation.donationDate}">
+							<f:convertDateTime pattern="dd-MM-yyyy, hh:mm" />
 						</h:outputText>
 					</p:column>
-					
-					<p:column filterBy="#{donation.donationState}" headerText="#{messages.donations_result_table_header_state}"
+
+					<p:column filterBy="#{donation.donationState}"
+						headerText="#{messages.donations_result_table_header_state}"
 						filterMatchMode="contains" selectRow="#{donation.donationState}">
 						<h:outputText value="#{donation.donationState}" />
 					</p:column>
-					
+
 				</p:dataTable>
 
 			</h:panelGroup>
