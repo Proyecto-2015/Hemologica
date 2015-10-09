@@ -1,0 +1,2 @@
+//com.springsource.sts.config.flow.coordinates\:http\://www.springframework.org/schema/integration\:/Hemologica-Service/src/main/resources/META-INF/spring/integration/spring-integration-context.xml=<?xml version\="1.0" encoding\="UTF-8"?>\n<graph>\n<element clazz\="InboundChannelAdapterModelElement" type\="inbound-channel-adapter">\n<structure end\="1430" endstart\="1396" start\="1265" startend\="1356"/>\n<bounds height\="118" width\="120" x\="19" y\="17"/>\n</element>\n</graph>
+eclipse.preferences.version=1

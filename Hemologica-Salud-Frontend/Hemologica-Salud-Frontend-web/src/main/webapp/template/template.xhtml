@@ -14,11 +14,17 @@
 <h:head>
 
 
-	<title><ui:insert name="title"></ui:insert></ui:insert></title>
+	<title><ui:insert name="title"></ui:insert></title>
 
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta http-equiv="X-UA-Conpatible" content="IE=edge" />
+
+
+
+
+</h:head>
+<h:body>
 
 
 	<f:facet name="last">
@@ -26,22 +32,21 @@
 		<h:outputStylesheet library="bootstrap/css" name="bootstrap.css.map" />
 		<h:outputStylesheet library="bootstrap/css" name="bootstrap-theme.css" />
 		<h:outputStylesheet library="bootstrap/css" name="bootstrap.css.map" />
-		
-		
+
+
 		<h:outputStylesheet library="css" name="hemologica-timeline.css" />
 		<h:outputStylesheet library="css" name="hemologica-salud.css" />
 		<h:outputStylesheet library="css" name="hemologica-salud-media.css" />
+		<h:outputStylesheet library="css" name="hemologica-salud-boostrap.css" />
+		<h:outputStylesheet library="css" name="hemologica-salud-primefaces.css" />
 		<link rel="shortcut icon" href="#{resource['img/favicon.ico']}" />
-		
+
 		<!-- 		<h:outputStylesheet library="material/css" name="material.min.css" /> -->
 		<!-- 		<h:outputScript library="jquery" name="jquery-2.1.4.js" /> -->
-		
+
 		<!-- 		<h:outputScript library="primefaces" name="jquery/jquery.js" /> -->
 
 	</f:facet>
-
-</h:head>
-<h:body>
 
 	<div id="header">
 		<ui:insert name="header">
