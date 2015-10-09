@@ -42,8 +42,21 @@
 			<version>7.0</version>
 			<scope>provided</scope>
 		</dependency>
-
-
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.4</version>
+		</dependency>
+		<dependency>
+		  <groupId>org.hemologica</groupId>
+		  <artifactId>Hemologica-DataTypes</artifactId>
+		  <version>1.0</version>
+		</dependency>
 	</dependencies>
 
 	<build>

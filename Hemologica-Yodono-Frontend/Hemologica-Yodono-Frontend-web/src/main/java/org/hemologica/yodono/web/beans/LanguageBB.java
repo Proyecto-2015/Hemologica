@@ -1,11 +1,15 @@
 package org.hemologica.yodono.web.beans;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
 import javax.faces.context.FacesContext;
+
+import org.hemologica.yodono.factories.RestFactory;
+import org.hemologica.yodono.web.rest.utils.RestServicesUtilsImpl;
 
 public class LanguageBB implements Serializable{
 	
@@ -34,6 +38,14 @@ public class LanguageBB implements Serializable{
 		String language = params.get("action");
 		
 		FacesContext.getCurrentInstance().getViewRoot().setLocale(new Locale(language));
+		
+		try {
+			RestFactory.getServicesClient().login("paula", "1234");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	
 	}
 
 }

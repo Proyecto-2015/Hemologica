@@ -11,7 +11,14 @@
 
 	<artifactId>Hemologica-Yodono-Backend-web</artifactId>
 	<packaging>war</packaging>
-
+	
+	<repositories>
+		<repository>
+			<id>JBoss repository</id>
+			<url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+		</repository>
+	</repositories>
+	
 	<dependencies>
 
 		<dependency>
@@ -42,8 +49,23 @@
 			<version>7.0</version>
 			<scope>provided</scope>
 		</dependency>
-
-
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jaxrs</artifactId>
+			<version>2.2.1.GA</version>
+		</dependency>
+	
+		<dependency>
+			<groupId>org.jboss.resteasy</groupId>
+			<artifactId>resteasy-jackson-provider</artifactId>
+			<version>2.2.1.GA</version>
+		</dependency>
+		<dependency>
+		  <groupId>org.hemologica</groupId>
+		  <artifactId>Hemologica-DataTypes</artifactId>
+		  <version>1.0</version>
+		</dependency>
+		
 	</dependencies>
 
 	<build>
