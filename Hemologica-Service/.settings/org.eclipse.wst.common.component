@@ -13,6 +13,9 @@
         <dependent-module archiveName="Hemologica-XDS-Registry-Adapter-1.0-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Hemologica-XDS-Registry-Adapter/Hemologica-XDS-Registry-Adapter">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="Hemologica-DAO-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Hemologica-DAO/Hemologica-DAO">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="java-output-path" value="target/classes"/>
         <property name="context-root" value="Hemologica-Service"/>
     </wb-module>
