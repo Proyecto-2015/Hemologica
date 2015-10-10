@@ -1,25 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:int="http://www.springframework.org/schema/integration"
 	xmlns:int-amqp="http://www.springframework.org/schema/integration/amqp"
 	xmlns:int-jms="http://www.springframework.org/schema/integration/jms"
 	xsi:schemaLocation="http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-4.2.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/integration/jms http://www.springframework.org/schema/integration/jms/spring-integration-jms-4.2.xsd
+		http://www.springframework.org/schema/integration/jms http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd
 		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
 		http://www.springframework.org/schema/integration/twitter http://www.springframework.org/schema/integration/twitter/spring-integration-twitter.xsd">
 
 	<context:component-scan base-package="org.hemologica.services" />
-	
-	
-	
-	
-	
-	
-	<int-jms:inbound-channel-adapter id="jmsIn" destination="inQueue" channel="exampleChannel">
-    	<int:poller fixed-rate="30000"/>
-	</int-jms:inbound-channel-adapter>
+
+
+	<import resource="../beans.xml" />
+
+	<int:annotation-config />
+
+	<int:channel id="inbound" />
+
+
+	<int-jms:message-driven-channel-adapter
+		id="jmsIn" channel="inbound" container="messageListenerContainer" />
+		
+		
+	<int:service-activator  input-channel="inbound"
+                            output-channel="outbound" 
+                            ref="messageHandler"
+                            method="onMessage" 
+                            requires-reply="true"></int:service-activator>
+
+	<int-jms:outbound-channel-adapter id="jmsOut"
+		channel="outbound" connection-factory="connectionFactory" destination="receiveQueue"
+		delivery-persistent="true" />
+
+	<int:channel id="outbound" />
+
+
 </beans>
