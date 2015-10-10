@@ -1,4 +1,4 @@
-package org.hemologica.salud.model;
+package org.hemologica.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -13,19 +13,17 @@ import java.util.List;
 @Table(name="role")
 @NamedQuery(name="Role.findAll", query="SELECT r FROM Role r")
 public class Role implements Serializable {
-
-	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 5325052909041844780L;
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
+	@Column(unique=true, nullable=false)
+	private int id;
 
+	@Column(length=45)
 	private String code;
 
+	@Column(length=45)
 	private String description;
 
 	//bi-directional many-to-one association to RolePermission
@@ -39,11 +37,11 @@ public class Role implements Serializable {
 	public Role() {
 	}
 
-	public Integer getId() {
+	public int getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

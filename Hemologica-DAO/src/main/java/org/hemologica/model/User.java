@@ -1,4 +1,4 @@
-package org.hemologica.salud.model;
+package org.hemologica.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -13,18 +13,19 @@ import java.util.List;
 @Table(name="users")
 @NamedQuery(name="User.findAll", query="SELECT u FROM User u")
 public class User implements Serializable {
-	
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 8158360227900035958L;
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer id;
+	@Column(unique=true, nullable=false)
+	private int id;
 
+	@Column(length=45)
 	private String code;
+
+	//bi-directional many-to-one association to Person
+	@OneToMany(mappedBy="user")
+	private List<Person> persons;
 
 	//bi-directional many-to-one association to UsersRoleService
 	@OneToMany(mappedBy="user")
@@ -33,11 +34,11 @@ public class User implements Serializable {
 	public User() {
 	}
 
-	public Integer getId() {
+	public int getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
@@ -47,6 +48,28 @@ public class User implements Serializable {
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public List<Person> getPersons() {
+		return this.persons;
+	}
+
+	public void setPersons(List<Person> persons) {
+		this.persons = persons;
+	}
+
+	public Person addPerson(Person person) {
+		getPersons().add(person);
+		person.setUser(this);
+
+		return person;
+	}
+
+	public Person removePerson(Person person) {
+		getPersons().remove(person);
+		person.setUser(null);
+
+		return person;
 	}
 
 	public List<UsersRoleService> getUsersRoleServices() {
