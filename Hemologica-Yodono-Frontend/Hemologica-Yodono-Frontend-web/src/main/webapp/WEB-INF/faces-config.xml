@@ -27,6 +27,11 @@
      	<managed-bean-class>org.hemologica.yodono.web.beans.LanguageBB</managed-bean-class>
      	<managed-bean-scope>session</managed-bean-scope>
      </managed-bean>
+     <managed-bean>
+     	<managed-bean-name>sessionBB</managed-bean-name>
+     	<managed-bean-class>org.hemologica.yodono.web.beans.SessionBB</managed-bean-class>
+     	<managed-bean-scope>session</managed-bean-scope>
+     </managed-bean>
      
 	<navigation-rule>
 	   <from-view-id>*</from-view-id>
@@ -42,6 +47,46 @@
 			<from-outcome>logout</from-outcome>
 			<to-view-id>/pages/Indicadores.xhtml</to-view-id>
 	   </navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>requirements</from-outcome>
+			<to-view-id>/pages/requirements.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>bloodBanks</from-outcome>
+			<to-view-id>/pages/bloodBanks.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>preparation</from-outcome>
+			<to-view-id>/pages/preparation.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>myDonations</from-outcome>
+			<to-view-id>/pages/myDonations.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>myTransfusions</from-outcome>
+			<to-view-id>/pages/myTransfusions.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
 	</navigation-rule>
   
      
