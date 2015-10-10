@@ -32,10 +32,9 @@
                             requires-reply="true"></int:service-activator>
 
 	<int-jms:outbound-channel-adapter id="jmsOut"
-		channel="outbound" connection-factory="connectionFactory" destination="receiveQueue"
+		channel="outbound" connection-factory="connectionFactory" destination="sendQueue"
 		delivery-persistent="true" />
 
 	<int:channel id="outbound" />
-
 
 </beans>

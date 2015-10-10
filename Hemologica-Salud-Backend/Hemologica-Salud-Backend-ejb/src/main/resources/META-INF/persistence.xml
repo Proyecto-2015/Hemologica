@@ -26,12 +26,29 @@
       <!-- The datasource is deployed as <EAR>/META-INF/Hemologica-Salud-ds.xml, you
          can find it in the source at ear/src/main/application/META-INF/Hemologica-Salud-ds.xml -->
       <jta-data-source>java:jboss/datasources/Hemologica-SaludDS</jta-data-source>
-      <class>org.hemologica.salud.model.Permission</class>
-      <class>org.hemologica.salud.model.Role</class>
-      <class>org.hemologica.salud.model.RolePermission</class>
-      <class>org.hemologica.salud.model.Service</class>
-      <class>org.hemologica.salud.model.User</class>
-      <class>org.hemologica.salud.model.UsersRoleService</class>
+      <class>org.hemologica.model.Advertisment</class>
+      <class>org.hemologica.model.AdvertismentsContent</class>
+      <class>org.hemologica.model.Center</class>
+      <class>org.hemologica.model.Concept</class>
+      <class>org.hemologica.model.ConceptsDisplay</class>
+      <class>org.hemologica.model.CountriesCode</class>
+      <class>org.hemologica.model.DocumentsTypesCode</class>
+      <class>org.hemologica.model.Identification</class>
+      <class>org.hemologica.model.IdentificationsHistory</class>
+      <class>org.hemologica.model.Institution</class>
+      <class>org.hemologica.model.Movement</class>
+      <class>org.hemologica.model.MovementsType</class>
+      <class>org.hemologica.model.Notification</class>
+      <class>org.hemologica.model.NotificationsPerson</class>
+      <class>org.hemologica.model.Permission</class>
+      <class>org.hemologica.model.Person</class>
+      <class>org.hemologica.model.PersonsRecord</class>
+      <class>org.hemologica.model.Role</class>
+      <class>org.hemologica.model.RolePermission</class>
+      <class>org.hemologica.model.Service</class>
+      <class>org.hemologica.model.Unit</class>
+      <class>org.hemologica.model.User</class>
+      <class>org.hemologica.model.UsersRoleService</class>
       <properties>
          <!-- Properties for Hibernate -->
          <property name="hibernate.hbm2ddl.auto" value="none" />

@@ -1,7 +1,6 @@
 package org.hemologica.empi.adapter.impl;
 
 import java.io.IOException;
-import java.io.PipedInputStream;
 import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,11 +10,14 @@ import org.hemologica.empi.adapter.message.MessageFactory;
 import org.hemologica.empi.adapter.message.MessageFactoryException;
 import org.hemologica.empi.adapter.pixpdq.PDQAdapter;
 import org.hemologica.empi.adapter.pixpdq.PIXAdapter;
+import org.hemologica.empi.adapter.pixpdq.exception.PDQAdapterException;
 import org.hemologica.empi.adapter.pixpdq.exception.PIXAdapterException;
 import org.hemologica.empi.adapter.pixpdq.message.CreatePatientRequest;
 import org.hemologica.empi.adapter.pixpdq.message.CreatePatientResponse;
 import org.hemologica.empi.adapter.pixpdq.message.MergePatientRequest;
 import org.hemologica.empi.adapter.pixpdq.message.MergePatientResponse;
+import org.hemologica.empi.adapter.pixpdq.message.PDQQueryPatientRequest;
+import org.hemologica.empi.adapter.pixpdq.message.PDQQueryPatientResponse;
 import org.hemologica.empi.adapter.pixpdq.message.PIXQueryPatientRequest;
 import org.hemologica.empi.adapter.pixpdq.message.PIXQueryPatientResponse;
 import org.hemologica.empi.adapter.pixpdq.message.UpdatePatientRequest;
@@ -169,4 +171,9 @@ public class OpenEMPIAdapter implements PIXAdapter, PDQAdapter {
 	 * PDQ Adapter methods
 	 */
 
+	public PDQQueryPatientResponse query(PDQQueryPatientRequest request) throws PDQAdapterException{
+		//TO-DO
+		return null;
+	}
+	
 }
