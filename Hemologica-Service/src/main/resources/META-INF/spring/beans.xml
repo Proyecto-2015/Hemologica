@@ -7,8 +7,32 @@
 
 	<bean id="connectionFactory" name="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
 		<property name="brokerURL" value="tcp://localhost:61616" />
-		<property name="userName" value="bruno" />
-		<property name="password" value="bruno" />
 	</bean>
+	
+	<bean id="receiveQueue" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg index="0">
+            <value>SendReceiveQueue</value>
+        </constructor-arg> 
+    </bean>
+    
+    <bean id="sendQueue" class="org.apache.activemq.command.ActiveMQQueue">
+        <constructor-arg index="0">
+            <value>SendQueue</value>
+        </constructor-arg> 
+    </bean>
+	
+	<bean id="messageListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="destination" ref="receiveQueue"/>
+        <property name="sessionTransacted" value="true"/>
+        <property name="maxConcurrentConsumers" value="1"/>
+        <property name="concurrentConsumers" value="1"/>
+        <property name="receiveTimeout" value="5000"/>
+        <property name="recoveryInterval" value="60000"/>
+        <property name="autoStartup" value="true"/>         
+    </bean>
+    
+     <bean id="messageHandler" class="org.hemologica.services.handler.MessageHandler"/>
+    
 
 </beans>
