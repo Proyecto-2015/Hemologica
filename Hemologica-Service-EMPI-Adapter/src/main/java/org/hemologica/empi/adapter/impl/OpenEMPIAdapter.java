@@ -5,11 +5,10 @@ import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.hemologica.empi.adapter.IEMPIAdapter;
 import org.hemologica.empi.adapter.connection.IConnection;
 import org.hemologica.empi.adapter.message.MessageFactory;
 import org.hemologica.empi.adapter.message.MessageFactoryException;
-import org.hemologica.empi.adapter.pixpdq.PDQAdapter;
-import org.hemologica.empi.adapter.pixpdq.PIXAdapter;
 import org.hemologica.empi.adapter.pixpdq.exception.PDQAdapterException;
 import org.hemologica.empi.adapter.pixpdq.exception.PIXAdapterException;
 import org.hemologica.empi.adapter.pixpdq.message.CreatePatientRequest;
@@ -27,14 +26,16 @@ import ca.uhn.hl7v2.HL7Exception;
 import ca.uhn.hl7v2.model.Message;
 import ca.uhn.hl7v2.parser.Parser;
 
-public class OpenEMPIAdapter implements PIXAdapter, PDQAdapter {
+public class OpenEMPIAdapter implements IEMPIAdapter {
 
-	private IConnection connection;
+	private IConnection pixConnection;
+	private IConnection pdqConnection;
 	private MessageFactory messageFactory;
 	private Parser parser;
 
-	public OpenEMPIAdapter(IConnection connection, Map<String, String> context, Parser parser) {
-		this.connection = connection;
+	public OpenEMPIAdapter(IConnection pixConnection, IConnection pdqConnection, Map<String, String> context, Parser parser) {
+		this.pixConnection = pixConnection;
+		this.pdqConnection = pdqConnection;
 		this.messageFactory = new MessageFactory(context);
 		this.parser = parser;
 
@@ -49,8 +50,8 @@ public class OpenEMPIAdapter implements PIXAdapter, PDQAdapter {
 
 			Message message = messageFactory.create_ADT_A04(request.getValues());
 			String msgReq = parser.encode(message);
-			connection.connect();
-			String msgResp = connection.sendMessage(msgReq, true);
+			pixConnection.connect();
+			String msgResp = pixConnection.sendMessage(msgReq, true);
 			Map<String,String> values = new HashMap<String, String>();
 			values.put("request", msgReq);
 			values.put("response", msgResp);
@@ -77,8 +78,8 @@ public class OpenEMPIAdapter implements PIXAdapter, PDQAdapter {
 
 			Message message = messageFactory.create_ADT_A08(request.getValues());
 			String msgReq = parser.encode(message);
-			connection.connect();
-			String msgResp = connection.sendMessage(msgReq, true);
+			pixConnection.connect();
+			String msgResp = pixConnection.sendMessage(msgReq, true);
 			message = parser.parse(msgResp);
 			Map<String,String> values = new HashMap<String, String>();
 			values.put("request", msgReq);
@@ -107,8 +108,8 @@ public class OpenEMPIAdapter implements PIXAdapter, PDQAdapter {
 
 			Message message = messageFactory.create_ADT_A40(request.getValues());
 			String msgReq = parser.encode(message);
-			connection.connect();
-			String msgResp = connection.sendMessage(msgReq, true);
+			pixConnection.connect();
+			String msgResp = pixConnection.sendMessage(msgReq, true);
 			message = parser.parse(msgResp);
 			Map<String,String> values = new HashMap<String, String>();
 			values.put("request", msgReq);
@@ -137,8 +138,8 @@ public class OpenEMPIAdapter implements PIXAdapter, PDQAdapter {
 			String domain = request.getValues().get("domain");
 			Message message = messageFactory.create_QBP_Q21(request.getValues());
 			String msgReq = parser.encode(message);
-			connection.connect();
-			String msgResp = connection.sendMessage(msgReq, true);
+			pixConnection.connect();
+			String msgResp = pixConnection.sendMessage(msgReq, true);
 			message = parser.parse(msgResp);
 			Map<String,String> values = new HashMap<String, String>();
 			values.put("request", msgReq);
@@ -172,8 +173,35 @@ public class OpenEMPIAdapter implements PIXAdapter, PDQAdapter {
 	 */
 
 	public PDQQueryPatientResponse query(PDQQueryPatientRequest request) throws PDQAdapterException{
-		//TO-DO
-		return null;
+		
+		try {
+
+			Message message = messageFactory.create_QBP_Q22(request.getValues());
+			String msgReq = parser.encode(message);
+			pdqConnection.connect();
+			String msgResp = pdqConnection.sendMessage(msgReq, true);
+			message = parser.parse(msgResp);
+			Map<String,String> values = new HashMap<String, String>();
+			values.put("request", msgReq);
+			values.put("response", msgResp);
+			
+			PDQQueryPatientResponse resp = new PDQQueryPatientResponse(values);
+			Message messageResp = parser.parse(msgResp);
+			resp.load(messageResp);
+			
+			return resp;
+
+		} catch (MessageFactoryException e) {
+			throw new PDQAdapterException(e);
+		} catch (UnknownHostException e) {
+			throw new PDQAdapterException(e);
+		} catch (IOException e) {
+			throw new PDQAdapterException(e);
+		} catch (HL7Exception e) {
+			throw new PDQAdapterException(e);
+		} catch (Exception e) {
+			throw new PDQAdapterException(e);
+		}
 	}
 	
 }
