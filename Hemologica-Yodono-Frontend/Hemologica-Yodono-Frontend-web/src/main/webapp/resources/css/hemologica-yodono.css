@@ -169,6 +169,19 @@ h6 .h6 {
   height: 100%;
 }
 
+icon-list{
+	
+	background-image: url("#{resource['img/bed.png']}");
+	background-size: 25px 25px !important;
+	background-repeat: no-repeat;
+	background-position: right;
+	display: inline-block;
+	width: 25px !important;
+	height: 25px !important;
+	float: right;
+	margin-left: 5px;
+}
+
 
 
 

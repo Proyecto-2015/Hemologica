@@ -72,19 +72,19 @@
 				
 			</div>
 	
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse"
-				id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav" >
-	
-					<li><a href="#">¿Puedo donar?</a></li>
-					<li><a href="#">¿Dónde donar?</a></li>
-					<li><a href="#">Preparacion para donar</a></li>
-					<li class="active"><a href="#">Mis Donaciones<span
-							class="sr-only">(current)</span></a></li>
-					<li><a href="#">Mis Transfusiones</a></li>
-				</ul>
-			</div>
+			<h:form>
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse"
+					id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav" >
+						<li><h:commandLink action="#{sessionBB.redirectTo('requirements')}" value="#{messages.menu_item_puedo_donar}"/></li>
+						<li><h:commandLink action="#{sessionBB.redirectTo('bloodBanks')}" value="#{messages.menu_item_donde_donar}"/></li>
+						<li><h:commandLink action="#{sessionBB.redirectTo('preparation')}" value="#{messages.menu_item_preparacion}"/></li>
+						<li><h:commandLink action="#{sessionBB.redirectTo('myDonations')}" value="#{messages.menu_item_mis_donaciones}"/></li>
+						<li><h:commandLink action="#{sessionBB.redirectTo('myTransfusions')}" value="#{messages.menu_item_mis_transfusiones}"/></li>
+					</ul>
+				</div>
+			</h:form>
 			<!-- /.navbar-collapse -->
 		</div>
 		<!-- /.container-fluid --> </nav>

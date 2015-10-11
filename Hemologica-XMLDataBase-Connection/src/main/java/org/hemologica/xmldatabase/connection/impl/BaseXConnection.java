@@ -46,14 +46,12 @@ public class BaseXConnection implements IXMLDataBase{
 			
 		}
 	}
-
-	@Override
+	
 	public void addElement(File element) {
 		// TODO Auto-generated method stub
 		
 	}
-
-	@Override
+	
 	public void addElement(String path) throws XMLDataBaseException {
 		
 		String input = "db:add('" + dataBase + "','" + path +"')";
@@ -68,13 +66,11 @@ public class BaseXConnection implements IXMLDataBase{
 		}
 	}
 
-	@Override
 	public void removeElement(File element) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void removeElement(String name) throws XMLDataBaseException {
 		
 		String input = "db:delete('" + dataBase + "','" + name +"')";
@@ -90,13 +86,11 @@ public class BaseXConnection implements IXMLDataBase{
 		
 	}
 
-	@Override
 	public void updateElement(String nameOldElement, File newElement) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public void updateElement(String nameOldElement, String pathNewElement) throws XMLDataBaseException {
 		
 		String input = "db:replace(\"" + dataBase + "\",'" + nameOldElement +"',' "+pathNewElement+"')";
@@ -112,13 +106,11 @@ public class BaseXConnection implements IXMLDataBase{
 		
 	}
 
-	@Override
 	public void getElement(File element) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
 	public String getElement(String name) throws XMLDataBaseException {
 		
 		String input = "db:open('" + dataBase + "','" + name +"')";
@@ -139,7 +131,6 @@ public class BaseXConnection implements IXMLDataBase{
 		return null;
 	}
 
-	@Override
 	public List<String> getElementPatientId(String patientId)
 			throws XMLDataBaseException {
 	
