@@ -61,18 +61,7 @@ public class MessageFactory implements Serializable {
 	
 	private static String QBP_Q23_MSG_STRING = "MSH|^~\\&|NIST_SENDER^^|NIST^^|NIST_RECEIVER^^|NIST^^|20101101161157||QBP^Q23^QBP_Q21|NIST-101101161157166|P|2.5\r\nQPD|IHE PIX Query||HEMO-111^^^HEMOLOGICA\r\nRCP|I";
 	private static String QBP_Q22_MSG_STRING = "MSH|^~\\&|NIST_SENDER^^|NIST^^|NIST_RECEIVER^^|NIST^^|20101101161157||QBP^Q22|NIST-101101161157166|P|2.5\r\nQPD|IHE PDQ Query||HEMO-111^^^HEMOLOGICA\r\nRCP|I";
-	private static QBP_Q21 QBP_Q23_MSG;
-	private static QBP_Q21 QBP_Q22_MSG;
-	static{
-		PipeParser parser = new PipeParser();
-		try {
-			QBP_Q23_MSG = (QBP_Q21) parser.parse(QBP_Q23_MSG_STRING);
-			QBP_Q22_MSG = (QBP_Q21) parser.parse(QBP_Q22_MSG_STRING);
-		} catch (HL7Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
+
 	
 	/**
 	 * Fixed values
@@ -285,18 +274,43 @@ public class MessageFactory implements Serializable {
 			ca.uhn.hl7v2.model.v25.segment.MSH msh = msg.getMSH();
 			msh = processMSH(msh);
 			
-			// QPD
-			QPD qpd = msg.getQPD();
-			Varies varies = qpd.getQpd3_UserParametersInsuccessivefields();
-			GenericComposite elem = (GenericComposite) varies.getData();
-			Type[] items = elem.getComponents();
-			Varies identifierVaries = (Varies) items[0];
-			Varies domainVaries = (Varies) items[3];
-			GenericPrimitive identifierData = (GenericPrimitive) identifierVaries.getData();
-			identifierData.setValue(values.get("identifier"));
-			GenericPrimitive domainData = (GenericPrimitive) domainVaries.getData();
-			domainData.setValue(values.get("domain"));
+			Terser terser = new Terser(msg);
+			terser.set("/QPD-3(0)-1", "@PID.5.1.1");
+			terser.set("/QPD-3(0)-2", values.get("surname"));
+			terser.set("/QPD-3(1)-1", "@PID.5.2.1");
+			terser.set("/QPD-3(1)-2", values.get("name"));
 			
+			
+			if(values.containsKey("secondSurname")){ 
+				terser.set("/QPD-3(2)-1", "@PID.5.1.2");
+				terser.set("/QPD-3(2)-2", values.get("secondSurname"));
+			}
+			
+			if(values.containsKey("secondName")){ 
+				terser.set("/QPD-3(3)-1", "@PID.5.2.2");
+				terser.set("/QPD-3(3)-2", values.get("secondName"));
+			}
+			if(values.containsKey("birthday")){ 
+				terser.set("/QPD-3(4)-1", "@PID.7");
+				terser.set("/QPD-3(4)-2", values.get("birthday"));
+			}
+			if(values.containsKey("birthdayPlace")){ 
+				terser.set("/QPD-3(5)-1", "@PID.23");
+				terser.set("/QPD-3(5)-2", values.get("birthdayPlace"));
+			}
+			if(values.containsKey("sex")){ 
+				terser.set("/QPD-3(6)-1", "@PID.8");
+				terser.set("/QPD-3(6)-2", values.get("sex"));
+			}
+			if(values.containsKey("addressStreet")){ 
+				terser.set("/QPD-3(7)-1", "@PID.11");
+				terser.set("/QPD-3(7)-2", values.get("addressStreet"));
+			}
+			if(values.containsKey("phone")){ 
+				terser.set("/QPD-3(8)-1", "@PID.13");
+				terser.set("/QPD-3(8)-2", values.get("phone"));
+			}
+
 			return msg;
 			
 
@@ -342,6 +356,7 @@ public class MessageFactory implements Serializable {
 		;
 		pid.getPatientIdentifierList(0).getAssigningAuthority().getHd3_UniversalIDType()
 				.setValue(context.get("aa_universal_id_type"));
+		
 		pid.getPatientName(0).getGivenName().setValue(values.get("name"));
 		pid.getPatientName(0).getFamilyLastName().getFamilyName().setValue(values.get("surname"));
 

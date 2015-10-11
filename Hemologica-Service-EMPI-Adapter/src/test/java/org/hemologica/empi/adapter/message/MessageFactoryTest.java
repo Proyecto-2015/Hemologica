@@ -7,6 +7,7 @@ import java.util.HashMap;
 import org.junit.Test;
 import ca.uhn.hl7v2.HL7Exception;
 import ca.uhn.hl7v2.model.v231.message.*;
+import ca.uhn.hl7v2.model.v25.message.QBP_Q21;
 import ca.uhn.hl7v2.parser.DefaultXMLParser;
 import ca.uhn.hl7v2.parser.PipeParser;
 
@@ -171,7 +172,48 @@ public class MessageFactoryTest {
 
 	@Test
 	public void testCreate_QBP_Q21() {
-//		fail("Not yet implemented");
+
+		
+		HashMap<String, String> values = new HashMap<String, String>();
+		values.put("name", "PAULA");
+		values.put("secondName", "MARIA");
+		values.put("surname", "ROCHE");
+		values.put("secondSurname", "PEREZ");
+//		values.put("surname", "ROCHE");
+//		values.put("surname", "ROCHE");
+//		values.put("surname", "ROCHE");
+//		values.put("surname", "ROCHE");
+//		values.put("surname", "ROCHE");
+//		values.put("surname", "ROCHE");
+//		values.put("surname", "ROCHE");
+		
+		
+		MessageFactory factory = new MessageFactory(context);
+		try {
+			
+			QBP_Q21 qbp_Q21 = factory.create_QBP_Q22(values);
+			PipeParser pipeParser = new PipeParser();
+			DefaultXMLParser xmlParser = new DefaultXMLParser();
+			String pipeMsg = pipeParser.encode(qbp_Q21);
+			String xmlMsg = xmlParser.encode(qbp_Q21);
+			
+			System.out.println("########################### QBP_Q22 PIPE ###########################");
+			System.out.println("PIPE_MSG:");
+			System.out.println(pipeMsg);
+			System.out.println("########################### QBP_Q22 XML ############################");
+			System.out.println("XML_MSG:");
+			System.out.println(xmlMsg);
+			System.out.println("####################################################################");
+			
+			
+		} catch (MessageFactoryException e) {
+			e.printStackTrace();
+			fail("Exception: "+ e.getMessage());
+		} catch (HL7Exception e) {
+			e.printStackTrace();
+			fail("Exception: "+ e.getMessage());
+		}
+		
 	}
 
 }

@@ -1,5 +1,8 @@
 package org.hemologica.empi.adapter;
 
-public interface IEMPIAdapter {
+import org.hemologica.empi.adapter.pixpdq.PDQAdapter;
+import org.hemologica.empi.adapter.pixpdq.PIXAdapter;
+
+public interface IEMPIAdapter extends PDQAdapter, PIXAdapter{
 
 }
