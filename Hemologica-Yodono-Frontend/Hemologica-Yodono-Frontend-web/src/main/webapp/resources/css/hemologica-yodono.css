@@ -203,6 +203,12 @@ h6 .h6 {
 .icon-balance{
 	background-image: url("#{resource['img/balance.png']}");
 }
+.icon-card{
+	background-image: url("#{resource['img/card.png']}");
+}
+.icon-coffee{
+	background-image: url("#{resource['img/coffee.png']}");
+}
 
 .center{ 
 	display:table; 

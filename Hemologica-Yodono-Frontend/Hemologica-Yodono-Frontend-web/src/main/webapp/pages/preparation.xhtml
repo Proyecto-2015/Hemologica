@@ -18,29 +18,47 @@
 		</ol>
 	</div>
    
-    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Task', 'Hours per Day'],
-          ['18 a 24 años',     110],
-          ['25 a 34 años',      96],
-          ['35 a 54 años',  123],
-          ['55 a 65 años', 57],
-        ]);
-
-        var options = {
-          title: 'Donaciones por edad',
-          pieHole: 0.4,
-        };
-
-        var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
-        chart.draw(data, options);
-      }
-    </script>
-    <div id="donutchart" style="width: 900px; height: 500px;"></div>
+    <h:form>
+		<div>
+			
+		   <ul class="center ul-padding">
+		   		<li class="text-li">
+		   			<h3 style=" margin-bottom: 35px;">
+		   				<h:outputText value="#{messages.preparation_title}"/>
+		   			</h3>
+		   		</li>
+		   
+				<li class="text-li">
+					<div class="icon-list icon-bed pull-left"></div>
+					 <p class="lead margin-left" >
+					 	<h:outputText value="#{messages.preparation_1}"/>
+					 </p>
+				</li>
+				
+				<li class="text-li">
+					<div class="icon-list icon-coffee pull-left"></div>
+					 <p class="lead margin-left" >
+					 	<h:outputText value="#{messages.preparation_2}"/>
+					 </p>
+				</li>
+				
+				<li class="text-li">
+					<div class="icon-list icon-coffee pull-left"></div>
+					 <p class="lead margin-left" >
+					 	<h:outputText value="#{messages.preparation_3}"/>
+					 </p>
+				</li>
+				
+				<li class="text-li">
+					<div class="icon-list icon-card pull-left"></div>
+					 <p class="lead margin-left" >
+					 	<h:outputText value="#{messages.preparation_4}"/>
+					 </p>
+				</li>
+						
+			</ul>
+		</div>
+	</h:form>
  </ui:define>
 	
 </ui:composition>
