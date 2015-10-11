@@ -32,6 +32,11 @@
      	<managed-bean-class>org.hemologica.yodono.web.beans.SessionBB</managed-bean-class>
      	<managed-bean-scope>session</managed-bean-scope>
      </managed-bean>
+     <managed-bean>
+     	<managed-bean-name>donationsBB</managed-bean-name>
+     	<managed-bean-class>org.hemologica.yodono.web.beans.DonationsBB</managed-bean-class>
+     	<managed-bean-scope>view</managed-bean-scope>
+     </managed-bean>
      
 	<navigation-rule>
 	   <from-view-id>*</from-view-id>

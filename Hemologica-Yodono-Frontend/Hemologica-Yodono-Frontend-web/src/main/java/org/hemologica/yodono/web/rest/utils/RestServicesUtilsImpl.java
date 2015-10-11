@@ -78,7 +78,7 @@ public class RestServicesUtilsImpl implements IRestServicesUtils {
 		/**
 		 * status code 0 = success
 		 */
-		if(r.getStatusLine().getStatusCode() == 0){
+		if(r.getStatusLine().getStatusCode() == 200){
 		
 			BufferedReader br = new BufferedReader(new InputStreamReader(r.getEntity().getContent()));
 			StringBuilder sb = new StringBuilder();

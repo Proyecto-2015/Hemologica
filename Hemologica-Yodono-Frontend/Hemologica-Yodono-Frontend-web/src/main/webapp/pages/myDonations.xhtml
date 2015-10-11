@@ -11,100 +11,153 @@
 
 <ui:composition template="/template/template.xhtml">
 	
-<!-- 	<ui:define name="header"> -->
-<!-- 	    <ui:include src="/template/headerYoDono.xhtml" /> -->
-<!-- 	</ui:define> -->
 	
 	<ui:define name="content">
 		 <div class="container-fluid">
 			<ol class="breadcrumb">
 				<li><a href="#"><h:outputText value="#{messages.menu_item_mis_donaciones}"/></a></li> 
 			</ol>
-		</div>
+		 </div>
 		
 		<div class="container">
 			<div class="page-header">
-				<h1 id="timeline">Mis Donaciones</h1>
+				<h1 id="timeline"><h:outputText value="#{messages.menu_item_mis_donaciones}"/></h1>
 			</div>
 			<ul class="timeline">
-
-				<li class="timeline-inverted">
-					<div class="timeline-badge success rojo">
-						<!-- <i class="glyphicon glyphicon-credit-card"></i> -->
-					</div>
-
-
-					<div class="timeline-panel">
-						<div class="timeline-heading">
-							<div id="container">
-								<h4 class="timeline-title">24/07/2015</h4>
-								<div class="facebook"></div>
-								<div class="twitter"></div>
-
-
+			
+				<c:forEach items="#{donationsBB.myDonations}" var="donationItem">
+    									<li class="timeline-inverted">
+						<div class="timeline-badge success rojo">
+							<i class="glyphicon glyphicon-credit-card"></i>
+						</div>
+						<div class="timeline-panel">
+							<div class="timeline-heading">
+								<div id="container">
+									<h4 class="timeline-title" ><h:outputText value="#{donationItem.date}"/></h4>
+									<div class="facebook"></div>
+									<div class="twitter"></div>
+	
+	
+								</div>
+								<p>
+									<small class="text-muted"><i
+										class="glyphicon glyphicon-time"></i> hace 2 meses</small>
+								</p>
 							</div>
-							<p>
-								<small class="text-muted"><i
-									class="glyphicon glyphicon-time"></i> hace 2 meses</small>
-							</p>
-						</div>
-						<div class="timeline-body">
-							<p>Institución: Hospital de Clínicas</p>
-							<p>Banco de sangre: Banco X</p>
-							<p>Tipo de Donación: Donante Voluntario</p>
-						</div>
-					</div>
-				</li>
-
-				<li class="timeline-inverted">
-					<div class="timeline-badge success rojo">
-						<!-- <i class="glyphicon glyphicon-credit-card"></i> -->
-					</div>
-					<div class="timeline-panel">
-						<div class="timeline-heading">
-							<div id="container">
-								<h4 class="timeline-title">12/01/2015</h4>
-								<div class="facebook"></div>
-								<div class="twitter"></div>
+							<div class="timeline-body">
+								<p><h:outputText value="#{donationItem.institution}"/></p>
+								<p><h:outputText value="#{donationItem.bank}"/></p>
+								<p><h:outputText value="#{donationItem.donorType}"/></p>
 							</div>
+						</div>
+					</li>
+				</c:forEach>
+			
+			
+<!-- 				<ui:repeat items="#{donationsBB.myDonations}" var="donationItem"> -->
+<!-- 					<li class="timeline-inverted"> -->
+<!-- 						<div class="timeline-badge success rojo"> -->
+<!-- 							<i class="glyphicon glyphicon-credit-card"></i> -->
+<!-- 						</div> -->
+<!-- 						<div class="timeline-panel"> -->
+<!-- 							<div class="timeline-heading"> -->
+<!-- 								<div id="container"> -->
+<!-- 									<h4 class="timeline-title" ><h:outputText value="#{donationItem.date}"/></h4> -->
+<!-- 									<div class="facebook"></div> -->
+<!-- 									<div class="twitter"></div> -->
+	
+	
+<!-- 								</div> -->
+<!-- 								<p> -->
+<!-- 									<small class="text-muted"><i -->
+<!-- 										class="glyphicon glyphicon-time"></i> hace 2 meses</small> -->
+<!-- 								</p> -->
+<!-- 							</div> -->
+<!-- 							<div class="timeline-body"> -->
+<!-- 								<p><h:outputText value="#{donationItem.institution}"/></p> -->
+<!-- 								<p><h:outputText value="#{donationItem.bank}"/></p> -->
+<!-- 								<p><h:outputText value="#{donationItem.donorType}"/></p> -->
+<!-- 							</div> -->
+<!-- 						</div> -->
+<!-- 					</li> -->
+<!-- 				</ui:repeat> -->
+				
+<!-- 				<li class="timeline-inverted"> -->
+<!-- 					<div class="timeline-badge success rojo"> -->
+<!-- 						<i class="glyphicon glyphicon-credit-card"></i> -->
+<!-- 					</div> -->
 
-							<p>
-								<small class="text-muted"><i
-									class="glyphicon glyphicon-time"></i> hace 9 meses</small>
-							</p>
-						</div>
-						<div class="timeline-body">
-							<p>Institución: Hospital de Clínicas</p>
-							<p>Banco de sangre: Banco X</p>
-							<p>Tipo de Donación: Donante Voluntario</p>
-						</div>
-					</div>
-				</li>
 
-				<li class="timeline-inverted">
-					<div class="timeline-badge warning gris">
-						<!-- <i class="glyphicon glyphicon-credit-card"></i> -->
-					</div>
-					<div class="timeline-panel">
-						<div class="timeline-heading">
-							<h4 class="timeline-title">12/09/2014</h4>
-							<p>
-								<small class="text-muted"><i
-									class="glyphicon glyphicon-time"></i> hace 1 año</small>
-							</p>
-						</div>
-						<div class="timeline-body">
-							<p>Institucion: Hospital de Clinicas</p>
-							<p>Banco de sangre: Banco X</p>
-							<p>Tipo de Donacion: Donante Voluntario</p>
-							<p>Motivo Rechazo: Bajo Peso</p>
-						</div>
-					</div>
-				</li>
+<!-- 					<div class="timeline-panel"> -->
+<!-- 						<div class="timeline-heading"> -->
+<!-- 							<div id="container"> -->
+<!-- 								<h4 class="timeline-title">24/07/2015</h4> -->
+<!-- 								<div class="facebook"></div> -->
+<!-- 								<div class="twitter"></div> -->
+
+
+<!-- 							</div> -->
+<!-- 							<p> -->
+<!-- 								<small class="text-muted"><i -->
+<!-- 									class="glyphicon glyphicon-time"></i> hace 2 meses</small> -->
+<!-- 							</p> -->
+<!-- 						</div> -->
+<!-- 						<div class="timeline-body"> -->
+<!-- 							<p>Institución: Hospital de Clínicas</p> -->
+<!-- 							<p>Banco de sangre: Banco X</p> -->
+<!-- 							<p>Tipo de Donación: Donante Voluntario</p> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</li> -->
+
+<!-- 				<li class="timeline-inverted"> -->
+<!-- 					<div class="timeline-badge success rojo"> -->
+<!-- 						<i class="glyphicon glyphicon-credit-card"></i> -->
+<!-- 					</div> -->
+<!-- 					<div class="timeline-panel"> -->
+<!-- 						<div class="timeline-heading"> -->
+<!-- 							<div id="container"> -->
+<!-- 								<h4 class="timeline-title">12/01/2015</h4> -->
+<!-- 								<div class="facebook"></div> -->
+<!-- 								<div class="twitter"></div> -->
+<!-- 							</div> -->
+
+<!-- 							<p> -->
+<!-- 								<small class="text-muted"><i -->
+<!-- 									class="glyphicon glyphicon-time"></i> hace 9 meses</small> -->
+<!-- 							</p> -->
+<!-- 						</div> -->
+<!-- 						<div class="timeline-body"> -->
+<!-- 							<p>Institución: Hospital de Clínicas</p> -->
+<!-- 							<p>Banco de sangre: Banco X</p> -->
+<!-- 							<p>Tipo de Donación: Donante Voluntario</p> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</li> -->
+
+<!-- 				<li class="timeline-inverted"> -->
+<!-- 					<div class="timeline-badge warning gris"> -->
+<!-- 						<i class="glyphicon glyphicon-credit-card"></i> -->
+<!-- 					</div> -->
+<!-- 					<div class="timeline-panel"> -->
+<!-- 						<div class="timeline-heading"> -->
+<!-- 							<h4 class="timeline-title">12/09/2014</h4> -->
+<!-- 							<p> -->
+<!-- 								<small class="text-muted"><i -->
+<!-- 									class="glyphicon glyphicon-time"></i> hace 1 año</small> -->
+<!-- 							</p> -->
+<!-- 						</div> -->
+<!-- 						<div class="timeline-body"> -->
+<!-- 							<p>Institucion: Hospital de Clinicas</p> -->
+<!-- 							<p>Banco de sangre: Banco X</p> -->
+<!-- 							<p>Tipo de Donacion: Donante Voluntario</p> -->
+<!-- 							<p>Motivo Rechazo: Bajo Peso</p> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+<!-- 				</li> -->
 			</ul>
 		</div>
-		<script
-			src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+		
 	</ui:define>
 
 </ui:composition>
