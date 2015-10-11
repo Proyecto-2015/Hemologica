@@ -19,6 +19,7 @@ log/
 /target
 bin/
 Hemologica-Yodono-Backend/Hemologica-Yodono-Backend-web/target
+Hemologica-Stock/Hemologica-Stock-ejb/bin/target
 
 # Otros
 *~

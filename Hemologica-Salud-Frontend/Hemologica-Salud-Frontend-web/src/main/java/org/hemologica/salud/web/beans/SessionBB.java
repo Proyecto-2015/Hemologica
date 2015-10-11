@@ -23,11 +23,6 @@ public class SessionBB implements Serializable {
 		
 	}
 	
-	
-	
-	
-	
-	
 	public ApplicationBB getApplicationBB() {
 		return applicationBB;
 	}
