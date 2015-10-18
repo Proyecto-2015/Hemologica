@@ -1,13 +1,12 @@
 package org.hemologica.datatypes;
 
-public class DataDonacion {
+public class DataTransfusion {
 	
 	private String name;
 	private String date;
 	private String bank;
 	private String institution;
-	private String donorType;
-	private boolean approved; 
+	private String product;
 	
 	public String getName() {
 		return name;
@@ -33,17 +32,12 @@ public class DataDonacion {
 	public void setInstitution(String institution) {
 		this.institution = institution;
 	}
-	public String getDonorType() {
-		return donorType;
+	public String getProduct() {
+		return product;
 	}
-	public void setDonorType(String donorType) {
-		this.donorType = donorType;
+	public void setProduct(String product) {
+		this.product = product;
 	}
-	public boolean isApproved() {
-		return approved;
-	}
-	public void setApproved(boolean approved) {
-		this.approved = approved;
-	}
+	
 	
 }

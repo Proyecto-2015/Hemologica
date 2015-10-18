@@ -41,16 +41,39 @@
 					    </div>
 					    <div class="col-xs-5 col-lg-9 col-height vcenter titulo pull-left">
 					    	
-					       	<h1 style=" margin-left: 0px">
+					       	<h1 id="title" style=" margin-left: 0px">
 								<strong style="color: #912b2b;"><h:outputText value="#{messages.title_home}"/></strong>
 							</h1>
 					    </div>
-					     <div class="col-xs-3 col-lg-1 col-height vcenter titulo pull-right div-user" >
-					     	<h:graphicImage class="img-responsive center-block userImage" library="img"
-					     		name="user-icon.png"/>
-					       <span class="text-login  center-block" style="vertical-align: middle">
-					       		<h:outputText value="#{messages.label_sign_in}"/>
-					       	</span>
+					    
+					    
+					     <div class="col-xs-3 col-lg-1 col-height vcenter titulo pull-right div-user dropdown" >
+							<h:form>
+					     
+						     	<h:graphicImage class="img-responsive center-block userImage" library="img"
+						     		name="user-icon.png" id="imageMy"/>
+						     	
+						     	<p:contextMenu for="imageMy" id="context" event="click">   
+						     		<p:menuitem>	
+						     			<div class="col-md-12">
+											<div class="bottom text-center">
+												<h:commandLink action="#{sessionBB.redirectTo('myProfile')}" value="#{messages.label_my_profile}"/>
+											</div>
+			                                
+										</div>
+										
+						     		</p:menuitem>
+						     		<p:menuitem>
+						     			<div class="bottom text-center">
+						     				<h:commandLink  value="#{messages.label_sign_out}"/>
+											
+										</div>
+						     		</p:menuitem>                
+								</p:contextMenu>				     		
+						       <span class="text-login  center-block" style="vertical-align: middle">
+						       		<h:outputText value="#{messages.label_sign_in}"/>
+						       	</span>
+						     </h:form>
 					    </div>
 					 </div>
 				</div>
@@ -88,13 +111,6 @@
 			<!-- /.navbar-collapse -->
 		</div>
 		<!-- /.container-fluid --> </nav>
-	
-	<!-- 	<div class="container-fluid"> -->
-	<!-- 		<ol class="breadcrumb"> -->
-	<!-- 			<li><a href="#">Donaciones</a></li> -->
-	<!--		<li><a href="#">Búsqueda</a></li> --> 
-	<!-- 		</ol> -->
-	<!-- 	</div> -->
 
 </ui:composition>
 

@@ -37,6 +37,11 @@
      	<managed-bean-class>org.hemologica.yodono.web.beans.DonationsBB</managed-bean-class>
      	<managed-bean-scope>view</managed-bean-scope>
      </managed-bean>
+     <managed-bean>
+     	<managed-bean-name>transfusionBB</managed-bean-name>
+     	<managed-bean-class>org.hemologica.yodono.web.beans.TransfusionBB</managed-bean-class>
+     	<managed-bean-scope>view</managed-bean-scope>
+     </managed-bean>
      
 	<navigation-rule>
 	   <from-view-id>*</from-view-id>
@@ -93,6 +98,13 @@
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
-  
+  	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>myProfile</from-outcome>
+			<to-view-id>/pages/userinfo.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
      
 </faces-config>

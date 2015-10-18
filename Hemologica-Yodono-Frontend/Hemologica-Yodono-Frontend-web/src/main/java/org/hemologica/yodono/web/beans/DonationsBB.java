@@ -33,4 +33,10 @@ public class DonationsBB implements Serializable{
 		this.myDonations = myDonations;
 	}
 	
+	public String getStringDifferencedDate(String donationDate){
+		
+		logger.info(donationDate);
+		return "hace 2 meses";
+	}
+	
 }

@@ -9,7 +9,9 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.hemologica.constants.ConstansJson;
 import org.hemologica.datatypes.DataDonacion;
+import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.LoginData;
+import org.hemologica.yodono.constants.ConstantsRest;
 import org.hemologica.yodono.factories.RestFactory;
 
 import com.google.gson.Gson;
@@ -19,7 +21,7 @@ import com.google.gson.reflect.TypeToken;
 public class ServicesClientImpl implements IServicesClient {
 
 	private Logger logger = Logger.getLogger(ServicesClientImpl.class);
-	private String url = "http://localhost:8080/Hemologica-Yodono-Backend-web/services/";
+	private String url = ConstantsRest.PATH_SERVICES;
 	
 	@Override
 	public int login(String user, String password) throws IOException {
@@ -47,7 +49,7 @@ public class ServicesClientImpl implements IServicesClient {
 	@Override
 	public List<DataDonacion> getMyDonations(String user) throws IOException {
 		
-		String urlDonations = url + "donations";
+		String urlDonations = url + ConstantsRest.PATH_DONATIONS;
 		
 		HashMap<String , String> hash = new HashMap<String, String>();
 		hash.put(ConstansJson.JSON_USER, "hola");
@@ -63,6 +65,27 @@ public class ServicesClientImpl implements IServicesClient {
 		List<DataDonacion> donaciones = new Gson().fromJson(donacionesString, listType);
 		
 		return donaciones;
+	}
+
+	@Override
+	public List<DataTransfusion> getMyTransfusions(String user) throws IOException {
+		
+		String urlTransfusions = url + ConstantsRest.PATH_TRANSFUTIONS;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		hash.put(ConstansJson.JSON_USER, "hola");
+		
+		String transfusionesString = "";
+		try {
+			transfusionesString = RestFactory.getRestServicesUtils().get(urlTransfusions, hash);
+		} catch (URISyntaxException e) {
+			logger.error("Error al llamar al servicio", e);
+		}
+		
+		Type listType = new TypeToken<List<DataTransfusion>>(){}.getType();
+		List<DataTransfusion> transfusions = new Gson().fromJson(transfusionesString, listType);
+		
+		return transfusions;
 	}
 
 }

@@ -1,6 +1,7 @@
 @CHARSET "UTF-8";
 
 @media(max-width: 480px) {
+ 
   h1 {
     font-size: 20pt;
   }
@@ -16,5 +17,44 @@
 	width: 40px;
   
   }
+  
+  .timeline > li > .timeline-badge {
+
+	/*   Posicion de la imagen */
+	  left: 0%;
+ 
+}
+	.timeline > li > .timeline-panel {
+/* 	Tamaño contenedores */
+	  width: 85%;
+	}
+
+.timeline:before {
+	/*   Posicion de la linea */
+	  left: 0%; 
+}
+
+/* Cuando la pantalla es chica ponemos todos invertidos */
+.timeline > li.timeline-no-inverted > .timeline-panel {
+  	float: right;
+}
+.timeline > li.timeline-no-inverted > .timeline-panel:before {
+  border-left-width: 0;
+  border-right-width: 15px;
+  left: -15px;
+  right: auto;
+}
+.timeline > li.timeline-no-inverted > .timeline-panel:after {
+  border-left-width: 0;
+  border-right-width: 14px;
+  left: -14px;
+  right: auto;
+}
+
+.form-user{ 
+	width:90%;
+}
 
 }
+
+
