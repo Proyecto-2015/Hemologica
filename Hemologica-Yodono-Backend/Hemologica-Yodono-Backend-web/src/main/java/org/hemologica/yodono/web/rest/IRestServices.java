@@ -11,6 +11,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 import org.hemologica.datatypes.DataDonacion;
 import org.hemologica.datatypes.DataTransfusion;
+import org.hemologica.datatypes.DataUser;
 import org.hemologica.datatypes.LoginData;
 
 
@@ -37,4 +38,9 @@ public interface IRestServices {
 	@Path("/transfusions")
 	@Produces("application/json")
 	public List<DataTransfusion> getTransfusions(@QueryParam("user") String user);
+	
+	@GET
+	@Path("/users")
+	@Produces("application/json")
+	public DataUser getUser(@QueryParam("user") String user);
 }

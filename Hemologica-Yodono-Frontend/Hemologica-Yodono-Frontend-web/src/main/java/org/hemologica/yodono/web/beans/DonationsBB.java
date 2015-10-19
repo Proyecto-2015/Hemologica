@@ -18,8 +18,8 @@ public class DonationsBB implements Serializable{
 	public List<DataDonacion> getMyDonations() {
 		
 		try {
-			
-			myDonations = RestFactory.getServicesClient().getMyDonations("");
+			if(myDonations == null)
+				myDonations = RestFactory.getServicesClient().getMyDonations("");
 			
 		} catch (IOException e) {
 			

@@ -1,10 +1,15 @@
 package org.hemologica.yodono.web.rest;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import javax.ws.rs.core.Response;
+
+import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonacion;
+import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
+import org.hemologica.datatypes.DataUser;
 import org.hemologica.datatypes.LoginData;
 
 
@@ -95,6 +100,41 @@ public class RestServicesImpl implements IRestServices {
 		transfusions.add(t2);
 		
 		return transfusions;
+	}
+
+	@Override
+	public DataUser getUser(String user) {
+		
+		DataUser dataUser = new DataUser();
+		dataUser.setFirstName("Paula");
+		dataUser.setSecondName("segundo");
+		dataUser.setFirstLastName("Roche");
+		dataUser.setSecondLastName("De Polsi");
+		dataUser.setDocumentType("CI");
+		dataUser.setDocumentNumber("46714299");
+		dataUser.setTelephone("099876678");
+		
+		Calendar c = Calendar.getInstance();
+		c.set(1989, 9, 14);
+		dataUser.setBirthdayDate("14/10/1989");
+		
+		DataState state = new DataState();
+		state.setId(1);
+		state.setName("Montevideo state");
+		dataUser.setState(state);
+		
+		DataCity city = new DataCity();
+		city.setId(1);
+		city.setName("Montevideo city");
+		
+		dataUser.setCity(city);
+		dataUser.setAddress("Rivera 2711");
+		dataUser.setEmail("pula14@gmail.com");
+		
+		dataUser.setAllowNotificationAbleToDonate(true);
+		dataUser.setAllowNotificationNeedDonor(false);
+		
+		return dataUser;
 	}
 
 }

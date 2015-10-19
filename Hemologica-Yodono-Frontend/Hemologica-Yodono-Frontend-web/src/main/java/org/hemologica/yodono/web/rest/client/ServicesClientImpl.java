@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
 import org.hemologica.constants.ConstansJson;
 import org.hemologica.datatypes.DataDonacion;
 import org.hemologica.datatypes.DataTransfusion;
+import org.hemologica.datatypes.DataUser;
 import org.hemologica.datatypes.LoginData;
 import org.hemologica.yodono.constants.ConstantsRest;
 import org.hemologica.yodono.factories.RestFactory;
@@ -86,6 +87,26 @@ public class ServicesClientImpl implements IServicesClient {
 		List<DataTransfusion> transfusions = new Gson().fromJson(transfusionesString, listType);
 		
 		return transfusions;
+	}
+
+	@Override
+	public DataUser getDataUser(String user) throws IOException {
+		
+		String urlUsers = url + ConstantsRest.PATH_USERS;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		hash.put(ConstansJson.JSON_USER, "hola");
+		
+		String userString = "";
+		try {
+			userString = RestFactory.getRestServicesUtils().get(urlUsers, hash);
+		} catch (URISyntaxException e) {
+			logger.error("Error al llamar al servicio", e);
+		}
+		
+		DataUser dataUser = new Gson().fromJson(userString, DataUser.class);
+		
+		return dataUser;
 	}
 
 }

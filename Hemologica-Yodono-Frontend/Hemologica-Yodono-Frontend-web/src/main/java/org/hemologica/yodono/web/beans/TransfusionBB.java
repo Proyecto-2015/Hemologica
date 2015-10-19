@@ -18,8 +18,8 @@ public class TransfusionBB  implements Serializable{
 	public List<DataTransfusion> getMyTransfusions() {
 		
 		try {
-			
-			myTransfusions = RestFactory.getServicesClient().getMyTransfusions("");
+			if(myTransfusions == null)
+				myTransfusions = RestFactory.getServicesClient().getMyTransfusions("");
 			
 		} catch (IOException e) {
 			

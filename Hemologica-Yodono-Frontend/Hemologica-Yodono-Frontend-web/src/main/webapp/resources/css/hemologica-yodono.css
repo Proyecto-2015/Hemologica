@@ -182,6 +182,15 @@ h6 .h6 {
 	margin-right: 15px;
 }
 
+.cursor-pointer{
+	cursor:pointer;
+}
+
+.icon-edit{
+	
+	background-image: url("#{resource['img/edit-icon.png']}");
+}
+
 .icon-bed{
 	background-image: url("#{resource['img/bed.png']}");
 }
@@ -243,6 +252,19 @@ h6 .h6 {
     position: relative;
     
 	
+}
+
+.bank-info{
+	
+	border: black;
+	padding: 15px;
+	
+}
+
+#map-banks{
+	width:600px;
+	height:400px;
+
 }
 
 
