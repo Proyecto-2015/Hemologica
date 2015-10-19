@@ -5,6 +5,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.annotation.PostConstruct;
+
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.yodono.factories.RestFactory;
 
@@ -15,10 +18,10 @@ public class TransfusionBB  implements Serializable{
 	private static final Logger logger = Logger.getLogger(TransfusionBB.class.getName()); 
 	private List<DataTransfusion> myTransfusions;
 	
-	public List<DataTransfusion> getMyTransfusions() {
+	@PostConstruct
+	public void init(){
 		
 		try {
-			if(myTransfusions == null)
 				myTransfusions = RestFactory.getServicesClient().getMyTransfusions("");
 			
 		} catch (IOException e) {
@@ -26,6 +29,9 @@ public class TransfusionBB  implements Serializable{
 			logger.log(Level.SEVERE, "Error al llamar al servicio web", e);
 		}
 		
+	}
+	
+	public List<DataTransfusion> getMyTransfusions() {
 		return myTransfusions;
 	}
 

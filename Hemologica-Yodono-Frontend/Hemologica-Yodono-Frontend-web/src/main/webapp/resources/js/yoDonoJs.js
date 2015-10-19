@@ -52,25 +52,3 @@ function enablesInputs(){
 	document.getElementById("userForm:allowNotificationAbleToDonate").disabled=false;
 
 }
-var map;
-var panorama;
-jQuery(function($) {
-    $(document).ready(function() {
-        var latlng = new google.maps.LatLng(49.241943,-122.889318);
-        var myOptions = {
-            zoom: 18,
-            center: latlng,
-            panControl: true,
-            zoomControl: true,
-            zoomControlOptions: {
-                                  style: google.maps.ZoomControlStyle.SMALL
-                                },
-            mapTypeControl: false,
-            scaleControl: false,
-            streetViewControl: false,
-            overviewMapControl: true,
-            mapTypeId: google.maps.MapTypeId.ROADMAP,
-           };
-        map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-        });
-});

@@ -5,6 +5,9 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.annotation.PostConstruct;
+
 import org.hemologica.datatypes.DataDonacion;
 import org.hemologica.yodono.factories.RestFactory;
 
@@ -14,18 +17,20 @@ public class DonationsBB implements Serializable{
 	
 	private static final Logger logger = Logger.getLogger(DonationsBB.class.getName()); 
 	private List<DataDonacion> myDonations;
-
-	public List<DataDonacion> getMyDonations() {
+	
+	@PostConstruct
+	public void init(){
 		
 		try {
-			if(myDonations == null)
 				myDonations = RestFactory.getServicesClient().getMyDonations("");
 			
 		} catch (IOException e) {
 			
 			logger.log(Level.SEVERE, "Error al llamar al servicio web", e);
 		}
-		
+	}
+	
+	public List<DataDonacion> getMyDonations() {
 		return myDonations;
 	}
 

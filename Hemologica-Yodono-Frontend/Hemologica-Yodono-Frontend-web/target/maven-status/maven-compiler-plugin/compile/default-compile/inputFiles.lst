@@ -1,0 +1,12 @@
+/Users/paularoche/Documents/Git/Hemologica/Hemologica-Yodono-Frontend/Hemologica-Yodono-Frontend-web/src/main/java/org/hemologica/yodono/constants/ConstantsRest.java
+/Users/paularoche/Documents/Git/Hemologica/Hemologica-Yodono-Frontend/Hemologica-Yodono-Frontend-web/src/main/java/org/hemologica/yodono/web/rest/utils/IRestServicesUtils.java
+/Users/paularoche/Documents/Git/Hemologica/Hemologica-Yodono-Frontend/Hemologica-Yodono-Frontend-web/src/main/java/org/hemologica/yodono/web/beans/TransfusionBB.java
+/Users/paularoche/Documents/Git/Hemologica/Hemologica-Yodono-Frontend/Hemologica-Yodono-Frontend-web/src/main/java/org/hemologica/yodono/web/rest/client/IServicesClient.java
+/Users/paularoche/Documents/Git/Hemologica/Hemologica-Yodono-Frontend/Hemologica-Yodono-Frontend-web/src/main/java/org/hemologica/yodono/web/rest/utils/RestServicesUtilsImpl.java
+/Users/paularoche/Documents/Git/Hemologica/Hemologica-Yodono-Frontend/Hemologica-Yodono-Frontend-web/src/main/java/org/hemologica/yodono/web/beans/ApplicationBB.java
+/Users/paularoche/Documents/Git/Hemologica/Hemologica-Yodono-Frontend/Hemologica-Yodono-Frontend-web/src/main/java/org/hemologica/yodono/web/beans/DonationsBB.java
+/Users/paularoche/Documents/Git/Hemologica/Hemologica-Yodono-Frontend/Hemologica-Yodono-Frontend-web/src/main/java/org/hemologica/yodono/web/beans/LanguageBB.java
+/Users/paularoche/Documents/Git/Hemologica/Hemologica-Yodono-Frontend/Hemologica-Yodono-Frontend-web/src/main/java/org/hemologica/yodono/web/beans/SessionBB.java
+/Users/paularoche/Documents/Git/Hemologica/Hemologica-Yodono-Frontend/Hemologica-Yodono-Frontend-web/src/main/java/org/hemologica/yodono/web/rest/client/ServicesClientImpl.java
+/Users/paularoche/Documents/Git/Hemologica/Hemologica-Yodono-Frontend/Hemologica-Yodono-Frontend-web/src/main/java/org/hemologica/yodono/factories/RestFactory.java
+/Users/paularoche/Documents/Git/Hemologica/Hemologica-Yodono-Frontend/Hemologica-Yodono-Frontend-web/src/main/java/org/hemologica/yodono/web/utils/JSFUtils.java

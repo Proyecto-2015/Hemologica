@@ -7,13 +7,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javax.faces.event.ActionEvent;
-
+import javax.annotation.PostConstruct;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataUser;
@@ -30,19 +27,22 @@ public class UserBB implements Serializable{
 	private List<DataCity> cities;
 	private DataCity city;
 	
-	public DataUser getDataUser() {
+	@PostConstruct
+	public void init(){
 		
 		try {
-			if(dataUser == null){
-				dataUser = RestFactory.getServicesClient().getDataUser("");
-				state = dataUser.getState();
-				city = dataUser.getCity();
-			}
+			
+			dataUser = RestFactory.getServicesClient().getDataUser("");
+			state = dataUser.getState();
+			city = dataUser.getCity();
 			
 		} catch (IOException e) {
 			
 			logger.log(Level.SEVERE, "Error al llamar al servicio web", e);
 		}
+	}
+	
+	public DataUser getDataUser() {
 		
 		return dataUser;
 	}
@@ -51,9 +51,16 @@ public class UserBB implements Serializable{
 		this.dataUser = dataUser;
 	}
 	
+	public void setBirthdayDate(Date date){
+		
+		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+		String dateString = format.format(date);
+		this.dataUser.setBirthdayDate(dateString);
+		
+	}
+	
 	public Date getBirthdayDate(){
 		
-		getDataUser();
 		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		Date date = null;
 		try {
@@ -174,7 +181,7 @@ public class UserBB implements Serializable{
 		
 		cities = getCities();
 	}
-	public void submit(ActionEvent actionEvent) {
+	public void submit() {
 		
 		logger.info("holaaaaa");
 	}

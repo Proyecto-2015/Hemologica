@@ -70,7 +70,7 @@
 <!--                 <p:calendar id="donations_input_search_date_from" -->
 <!-- 								value="MM/dd/yyyy" pattern="MM/dd/yyyy" /> -->
 						
-					<p:calendar id="birthday_date" pattern="MM/dd/yyyy" mode="popup" value="#{userBB.birthdayDate}"/>
+					<p:calendar id="birthday_date" pattern="dd/MM/yyyy" mode="popup" value="#{userBB.birthdayDate}"/>
 					
 <!-- 					<div class="icon-list icon-edit pull-right cursor-pointer" onclick="enablesInputs()"/> -->
 <!-- 					<button class="icon-list icon-edit pull-right" onclick="enablesInputs()"/> -->
@@ -170,8 +170,8 @@
 <!--                 </h:commandButton> -->
                 
                 <p:commandButton class="btn btn-primary btn-lg center btnSave" value="#{messages.label_save}"
-                		actionListener="#{userBB.submit}" ajax="true">
-<!-- 				    <f:ajax event="click" listener="#{userBB.submit()}" render="output" /> -->
+                		action="#{userBB.submit()}" update="@form" process="@form">
+				    <f:ajax event="click" execute="@form" listener="#{userBB.submit()}" render="@form" />
 				</p:commandButton>
                 
 <!--                 <p:commandButton value="#{messages.label_save}" id="ajax" update="#{userBB.submit}" actionListener="#{userBB.submit}" -->
