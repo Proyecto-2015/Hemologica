@@ -33,7 +33,8 @@ public class DataCityConverter implements Converter {
 		
 		if(citiesList != null){
 			for(DataCity city : citiesList){
-				if(city.getCode().equals(value)){
+				
+				if(city.getCode() != null && city.getCode().equals(value)){
 					return city;
 				}
 			}
