@@ -3,6 +3,7 @@ package org.hemologica.datatypes;
 public class DataState {
 	
 	private int id;
+	private String code;
 	private String name;
 	
 	public int getId() {
@@ -18,12 +19,18 @@ public class DataState {
 		this.name = name;
 	}
 	
+	public String getCode() {
+		return code;
+	}
+	public void setCode(String code) {
+		this.code = code;
+	}
 	@Override
 	public boolean equals(Object obj) {
 		
 		if(obj instanceof DataState){
 			
-			return((DataState)obj).getId()== this.id;
+			return((DataState)obj).getCode().equals(this.getCode());
 			
 		}
 		return super.equals(obj);
