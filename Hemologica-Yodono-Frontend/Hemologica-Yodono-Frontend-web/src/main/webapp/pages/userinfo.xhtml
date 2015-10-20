@@ -70,7 +70,7 @@
 <!--                 <p:calendar id="donations_input_search_date_from" -->
 <!-- 								value="MM/dd/yyyy" pattern="MM/dd/yyyy" /> -->
 						
-					<p:calendar id="birthday_date" pattern="dd/MM/yyyy" mode="popup" value="#{userBB.birthdayDate}"/>
+					<p:calendar id="birthday_date" pattern="MM/dd/yyyy" mode="popup" value="#{userBB.birthdayDate}"/>
 					
 <!-- 					<div class="icon-list icon-edit pull-right cursor-pointer" onclick="enablesInputs()"/> -->
 <!-- 					<button class="icon-list icon-edit pull-right" onclick="enablesInputs()"/> -->
@@ -109,8 +109,8 @@
               <div class="col-md-9 col-lg-5">
 <!--                 <input id="city" name="name" type="text" placeholder="#{messages.form_user_city}" class="form-control" -->
 <!--                 	 value="#{userBB.dataUser.city}"/> -->
-                	 <h:selectOneMenu class="form-control" id="cities" value="#{userBB.city}" style="height: 34px;">
-					    <f:selectItems value="#{userBB.cities}" var="city" itemValue="#{city}" itemLabel="#{city.name}" />
+                	 <h:selectOneMenu class="form-control" id="cities" value="#{userBB.city}" style="height: 34px;" converter="dataCityConverter">
+					    <f:selectItems value="#{userBB.cities}" var="city" itemValue="#{city.code}" itemLabel="#{city.name}" />
 					</h:selectOneMenu>
                 	 	 
                 	 	 
@@ -169,10 +169,16 @@
 <!--                 	<h:outputText value="#{messages.label_save}"/> -->
 <!--                 </h:commandButton> -->
                 
-                <p:commandButton class="btn btn-primary btn-lg center btnSave" value="#{messages.label_save}"
-                		action="#{userBB.submit()}" update="@form" process="@form">
-				    <f:ajax event="click" execute="@form" listener="#{userBB.submit()}" render="@form" />
-				</p:commandButton>
+<!--                 <h:commandButton class="btn btn-primary btn-lg center btnSave" value="#{messages.label_save}"> -->
+<!-- 				    <f:ajax event="click" listener="#{userBB.submit()}" render="@form" execute="@form"/> -->
+<!-- 				</h:commandButton> -->
+				
+				<p:commandButton class="btn btn-primary btn-lg center btnSave" value="#{messages.label_save}" 
+									action="#{userBB.submit()}"
+									process="@form" update="@form"/>
+				
+				
+				<p:messages/>
                 
 <!--                 <p:commandButton value="#{messages.label_save}" id="ajax" update="#{userBB.submit}" actionListener="#{userBB.submit}" -->
 <!--                  styleClass="btn btn-primary btn-lg center btnSave" /> -->

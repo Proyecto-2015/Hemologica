@@ -7,10 +7,11 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
 	xmlns:pe="http://primefaces.org/ui/extensions">
 
 <ui:composition template="/template/template.xhtml">
-	 
+	
   <ui:define name="content">
    	<div class="container-fluid">
 		<ol class="breadcrumb">
@@ -19,107 +20,168 @@
 
 	<div class="row">
       <div class="col-md-6 col-md-offset-3">
-<!--         <div class="well well-sm"> -->
         
-	<h:form class="form-horizontal">
+	<h:form class="form-horizontal" id="userForm">
 		<fieldset>
             <!-- Name input-->
             <div class="form-group">
               <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.form_user_first_name}"/></label>
               <div class="col-md-9">
-                <label class="label-form-user control-label">Nombre</label>
+                <label class="label-form-user control-label"><h:outputText value="#{userBB.dataUser.firstName}"/></label>
               </div>
             </div>
             
             <div class="form-group">
               <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.form_user_second_name}"/></label>
               <div class="col-md-9">
-                <label class="label-form-user control-label">Nombre</label>
+                <label class="label-form-user control-label"><h:outputText value="#{userBB.dataUser.secondName}"/></label>
               </div>
             </div>
             
 			<div class="form-group">
               <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.form_user_first_last_name}"/></label>
               <div class="col-md-9">
-                <label class="label-form-user control-label">Nombre</label>
+                <label class="label-form-user control-label"><h:outputText value="#{userBB.dataUser.firstLastName}"/></label>
               </div>
             </div>
 			<div class="form-group">
               <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.form_user_second_last_name}"/></label>
               <div class="col-md-9">
-                <label class="label-form-user control-label">Nombre</label>
+                <label class="label-form-user control-label"><h:outputText value="#{userBB.dataUser.secondLastName}"/></label>
               </div>
-            </div>
-            
+            </div>  
             <div class="form-group">
               <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.form_user_document_type}"/></label>
               <div class="col-md-9">
-                <label class="label-form-user control-label">Nombre</label>
+                <label class="label-form-user control-label"><h:outputText value="#{userBB.dataUser.documentType}"/></label>
               </div>
             </div>
-            
             <div class="form-group">
               <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.form_user_document_number}"/></label>
               <div class="col-md-9">
-                <label class="label-form-user control-label">Nombre</label>
+                <label class="label-form-user control-label"><h:outputText value="#{userBB.dataUser.documentNumber}"/></label>
               </div>
             </div>
             <div class="form-group">
               <label class="col-md-3 control-label" for="donations_input_search_date_from"><h:outputText value="#{messages.form_user_birthday_date}"/></label>
                        
-              <div class="col-md-9 col-lg-5">
+				<div class="col-md-9 col-lg-5">
 <!--            <input id="birthday_date" for="donations_input_search_date_from" name="name" type="text" placeholder="#{messages.form_user_birthday_date}" class="form-control"/> -->
-                <p:calendar id="donations_input_search_date_from"
-								value="#{donationBB.searchDateFrom}" />
-              </div>
+<!--                 <p:calendar id="donations_input_search_date_from" -->
+<!-- 								value="MM/dd/yyyy" pattern="MM/dd/yyyy" /> -->
+						
+					<p:calendar id="birthday_date" pattern="MM/dd/yyyy" mode="popup" value="#{userBB.birthdayDate}"/>
+					
+<!-- 					<div class="icon-list icon-edit pull-right cursor-pointer" onclick="enablesInputs()"/> -->
+<!-- 					<button class="icon-list icon-edit pull-right" onclick="enablesInputs()"/> -->
+					
+				</div>
             </div>
             <div class="form-group">
-              <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.form_user_department}"/></label>
+              <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.form_user_state}"/></label>
               <div class="col-md-9 col-lg-5">
-                <input id="department" name="name" type="text" placeholder="#{messages.form_user_department}" class="form-control"/>
+              	
+              	<h:selectOneMenu class="form-control" value="#{userBB.states}" style="height: 34px;" >
+				    <f:selectItems value="#{userBB.states}" var="state" itemValue="state" itemLabel="#{state.name}" />
+				    <f:ajax listener="#{userBB.changeState}" render="states" />
+				</h:selectOneMenu>
+              
+              
+              
+<!--               	 <select class="form-control" id="state"> -->
+<!--               	 	<option>aaa</option> -->
+<!--               	 	<option>bbb</option> -->
+              	 
+<!--               	 	<c:forEach items="#{userBB.states}" var="stateItem"> -->
+<!--                     	<c:if test="#{stateItem.key==userBB.dataUser.state}"> -->
+<!-- 						    <option  value="#{stateItem.key}" selected="selected"><h:outputText value="#{stateItem.value}"/></option> -->
+<!-- 						</c:if> -->
+<!-- 						<c:if test="#{stateItem.key!=userBB.dataUser.state}"> -->
+<!-- 						   <option  value="#{stateItem.key}"><h:outputText value="#{stateItem.value}"/></option> -->
+<!-- 						</c:if> -->
+<!--                     </c:forEach> -->
+<!--                  </select> -->
+<!--                  <p:ajax update="state"  listener="#{userBB.citiesState(state.value)}" /> -->
               </div>
             </div>
             <div class="form-group">
               <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.form_user_city}"/></label>
               <div class="col-md-9 col-lg-5">
-                <input id="city" name="name" type="text" placeholder="#{messages.form_user_city}" class="form-control"/>
+<!--                 <input id="city" name="name" type="text" placeholder="#{messages.form_user_city}" class="form-control" -->
+<!--                 	 value="#{userBB.dataUser.city}"/> -->
+                	 <h:selectOneMenu class="form-control" id="cities" value="#{userBB.city}" style="height: 34px;" converter="dataCityConverter">
+					    <f:selectItems value="#{userBB.cities}" var="city" itemValue="#{city.code}" itemLabel="#{city.name}" />
+					</h:selectOneMenu>
+                	 	 
+                	 	 
+<!--                  <select class="form-control" id="city"> -->
+<!--               	 	<c:forEach items="#{userBB.citiesState(state.value)}" var="cityItem"> -->
+<!--                     	<c:if test="#{cityItem.key==userBB.dataUser.city}"> -->
+<!-- 						    <option  value="#{cityItem.key}" selected="selected"><h:outputText value="#{cityItem.value}"/></option> -->
+<!-- 						</c:if> -->
+<!-- 						<c:if test="#{cityItem.key!=userBB.dataUser.city}"> -->
+<!-- 						   <option  value="#{cityItem.key}"><h:outputText value="#{cityItem.value}"/></option> -->
+<!-- 						</c:if> -->
+<!--                     </c:forEach> -->
+<!--                  </select> -->
               </div>
             </div>
             <div class="form-group">
               <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.form_user_address}"/></label>
               <div class="col-md-9 col-lg-5">
-                <input id="address" name="name" type="text" placeholder="#{messages.form_user_address}" class="form-control"/>
+                <input id="address" name="name" type="text" placeholder="#{messages.form_user_address}" class="form-control"
+                	value="#{userBB.dataUser.address}"/>
               </div>
             </div>
        		<div class="form-group">
               <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.form_user_telephone}"/></label>
               <div class="col-md-9 col-lg-5">
-                <input id="telephone" name="name" type="text" placeholder="#{messages.form_user_telephone}" class="form-control"/>
+                <input id="telephone" name="name" type="text" placeholder="#{messages.form_user_telephone}" class="form-control"
+                	value="#{userBB.dataUser.telephone}" />
               </div>
             </div>     
             <div class="form-group">
               <label class="col-md-3 control-label" for="email"><h:outputText value="#{messages.form_user_email}"/></label>
               <div class="col-md-9 col-lg-5">
-                <input id="email" name="name" type="text" placeholder="#{messages.form_user_email}" class="form-control"/>
+                <input id="email" name="name" type="text" placeholder="#{messages.form_user_email}" class="form-control"
+                	value="#{userBB.dataUser.email}" />
               </div>
             </div>  
             <div class="checkbox center">
 				<label>
-				  <input type="checkbox" value=""/>
-				  <h:outputText value="#{messages.form_user_allow_notification_1}"/>
+					<h:selectBooleanCheckbox id="allowNotificationNeedDonor" widgetVar="allowNotificationNeedDonor" value="#{userBB.dataUser.allowNotificationNeedDonor}"/>
+					<h:outputText value="#{messages.form_user_allow_notification_need_donor}"/>
 				</label>
 			</div>
 			<div class="checkbox center">
 				<label>
-				  <input type="checkbox" value=""/>
-				  <h:outputText value="#{messages.form_user_allow_notification_2}"/>
+					<h:selectBooleanCheckbox id="allowNotificationAbleToDonate" widgetVar="allowNotificationAbleToDonate" value="#{userBB.dataUser.allowNotificationAbleToDonate}" />
+					<h:outputText value="#{messages.form_user_allow_notification_able_to_donate}"/>
 				</label>
 			</div>
     
             <!-- Form actions -->
+            
             <div class="form-group">
-              <div class="col-md-12 text-right">
-                <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+              <div class="col-md-12 text-right" style="margin-top: 15px;">
+<!--                 <button type="submit" class="btn btn-primary btn-lg center btnSave" ><h:outputText value="#{messages.label_save}"/></button> -->
+<!--                 <h:commandButton  class="btn btn-primary btn-lg center btnSave" value="Submit" type="submit" action="#{userBB.submit}"> -->
+<!--                 	<h:outputText value="#{messages.label_save}"/> -->
+<!--                 </h:commandButton> -->
+                
+<!--                 <h:commandButton class="btn btn-primary btn-lg center btnSave" value="#{messages.label_save}"> -->
+<!-- 				    <f:ajax event="click" listener="#{userBB.submit()}" render="@form" execute="@form"/> -->
+<!-- 				</h:commandButton> -->
+				
+				<p:commandButton class="btn btn-primary btn-lg center btnSave" value="#{messages.label_save}" 
+									action="#{userBB.submit()}"
+									process="@form" update="@form"/>
+				
+				
+				<p:messages/>
+                
+<!--                 <p:commandButton value="#{messages.label_save}" id="ajax" update="#{userBB.submit}" actionListener="#{userBB.submit}" -->
+<!--                  styleClass="btn btn-primary btn-lg center btnSave" /> -->
               </div>
             </div>
           </fieldset>

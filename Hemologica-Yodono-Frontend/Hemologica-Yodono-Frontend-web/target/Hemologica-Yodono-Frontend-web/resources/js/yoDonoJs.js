@@ -37,11 +37,18 @@ function getStringDifDates(date) {
 	
 }
 
-function holamundo(){
+function enablesInputs(){
 	
-	console.log("hola mundoooooo");
-	var hola = "hola mundoooooo";
+//	PF("birthday_date").disabled=true;
 	
-	return "hola mundoooooo";
+	document.getElementById("userForm:birthday_date").disabled=false;
 	
+	document.getElementById("state").disabled=false;
+	document.getElementById("city").disabled=false;
+	document.getElementById("address").disabled=false;
+	document.getElementById("telephone").disabled=false;
+	document.getElementById("email").disabled=false;
+	document.getElementById("userForm:allowNotificationNeedDonor").disabled=false;
+	document.getElementById("userForm:allowNotificationAbleToDonate").disabled=false;
+
 }

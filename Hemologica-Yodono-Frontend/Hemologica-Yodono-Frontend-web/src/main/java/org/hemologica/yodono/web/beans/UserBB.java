@@ -15,6 +15,7 @@ import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataUser;
 import org.hemologica.yodono.factories.RestFactory;
+import org.hemologica.yodono.web.utils.JSFUtils;
 
 public class UserBB implements Serializable{
 	
@@ -41,6 +42,16 @@ public class UserBB implements Serializable{
 			logger.log(Level.SEVERE, "Error al llamar al servicio web", e);
 		}
 	}
+	
+	public void changeState(){
+		cities = getCities();
+	}
+	
+	public void submit() {
+		logger.info("holaaaaa");
+		JSFUtils.addGlobalInfoMessage("HOLAAAAA");
+	}
+	
 	
 	public DataUser getDataUser() {
 		
@@ -177,14 +188,7 @@ public class UserBB implements Serializable{
 		this.cities = cities;
 	}
 	
-	public void changeState(){
-		
-		cities = getCities();
-	}
-	public void submit() {
-		
-		logger.info("holaaaaa");
-	}
+	
 	
 	
 }
