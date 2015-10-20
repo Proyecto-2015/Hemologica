@@ -95,6 +95,7 @@ public class MessageFactory implements Serializable {
 			msg.initQuickstart("ADT", "A01", context.get("processingId"));
 			MSH msh = msg.getMSH();
 			msh = this.processMSH(msh);
+			
 
 			// PID
 			PID pid = msg.getPID();

@@ -1,4 +1,4 @@
-package org.hemologica.yodono.web.converters;
+package org.hemologica.yodono.web.beans;
 
 import java.io.IOException;
 import java.util.List;
@@ -30,9 +30,12 @@ public class DataCityConverter implements Converter {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		for(DataCity city : citiesList){
-			if(city.getCode().equals(value)){
-				return city;
+		
+		if(citiesList != null){
+			for(DataCity city : citiesList){
+				if(city.getCode().equals(value)){
+					return city;
+				}
 			}
 		}
 		return null;

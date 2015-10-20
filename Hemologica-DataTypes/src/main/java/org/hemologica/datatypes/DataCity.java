@@ -27,10 +27,11 @@ public class DataCity {
 	@Override
 	public boolean equals(Object obj) {
 		
-		if(obj instanceof DataCity){
-			
-			return((DataCity)obj).getCode().equals(this.getCode());
-			
+		if(obj != null && obj instanceof DataCity){
+			if(((DataCity)obj).getCode() == null){
+				return false;
+			}
+			return ((DataCity)obj).getCode().equals(this.getCode());
 		}
 		return super.equals(obj);
 	}
