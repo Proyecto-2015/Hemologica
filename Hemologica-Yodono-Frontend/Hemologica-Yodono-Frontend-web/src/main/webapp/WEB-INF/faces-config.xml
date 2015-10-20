@@ -22,6 +22,11 @@
 	   
      </application>
      
+     <converter>
+		<converter-id>dataCityConverter</converter-id>
+     	<converter-class>org.hemologica.yodono.web.converters.DataCityConverter</converter-class>
+     </converter>
+     
      <managed-bean>
      	<managed-bean-name>language</managed-bean-name>
      	<managed-bean-class>org.hemologica.yodono.web.beans.LanguageBB</managed-bean-class>
