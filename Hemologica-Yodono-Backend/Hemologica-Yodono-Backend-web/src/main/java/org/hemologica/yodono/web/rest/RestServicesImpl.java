@@ -39,7 +39,7 @@ public class RestServicesImpl implements IRestServices {
 		
 		DataDonacion d = new DataDonacion();
 		d.setApproved(true);
-		d.setBank("Banco X");
+		d.setBank("Banco de Sangre X");
 		d.setInstitution("Hospital de clinicas");
 		d.setName("Pedro");
 		d.setDonorType("Voluntario");
@@ -48,7 +48,7 @@ public class RestServicesImpl implements IRestServices {
 		
 		DataDonacion d3 = new DataDonacion();
 		d3.setApproved(true);
-		d3.setBank("Banco X");
+		d3.setBank("Banco de Sangre X");
 		d3.setInstitution("Hospital de clinicas");
 		d3.setName("Pedro");
 		d3.setDonorType("Voluntario");
@@ -144,13 +144,13 @@ public class RestServicesImpl implements IRestServices {
 		List<DataBank> banks = new ArrayList<>();
 		DataBank db1 = new DataBank();
 		db1.setCode("1");
-		db1.setName("Banco 1");
+		db1.setName("Banco de Sangre 1");
 		db1.setInstitution("Institucion 1");
-		db1.setAddress("Direccion 1");
-		db1.setEmail("email 1");
-		db1.setHour("hora 1");
-		db1.setInformation("informacion 1");
-		db1.setTelephone("telefono 1");
+		db1.setAddress("Av Italia 345");
+		db1.setEmail("infobanco1@hc.com");
+		db1.setHour("Lunes a Viernes de 8 - 18 hs ");
+		db1.setInformation("Se dan 40 numeros a partir de las 8 am.");
+		db1.setTelephone("12345678");
 		db1.setLatitude(-34.898930);
 		db1.setLongitude(-56.165753);
 		banks.add(db1);
@@ -158,13 +158,13 @@ public class RestServicesImpl implements IRestServices {
 		  
 		DataBank db2 = new DataBank();
 		db2.setCode("2");
-		db2.setName("Banco 2");
+		db2.setName("Banco de Sangre 2");
 		db2.setInstitution("Institucion 2");
-		db2.setAddress("Direccion 2");
-		db2.setEmail("email 2");
-		db2.setHour("hora 2");
-		db2.setInformation("informacion 2");
-		db2.setTelephone("telefono 2");
+		db2.setAddress("Rivera 567");
+		db2.setEmail("infobanco2@hc.com");
+		db2.setHour("Lunes a viernes de 8 - 20 hs y Sabados 8 - 12 ");
+		db2.setInformation("Pedir hora por telefono");
+		db2.setTelephone("098765432");
 		db2.setLatitude(-34.871729);
 		db2.setLongitude(-56.188868);
 		  
