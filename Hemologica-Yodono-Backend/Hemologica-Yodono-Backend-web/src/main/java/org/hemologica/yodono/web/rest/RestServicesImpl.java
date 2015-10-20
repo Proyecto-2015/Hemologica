@@ -148,7 +148,7 @@ public class RestServicesImpl implements IRestServices {
 		db1.setInstitution("Institucion 1");
 		db1.setAddress("Av Italia 345");
 		db1.setEmail("infobanco1@hc.com");
-		db1.setHour("Lunes a Viernes de 8 - 18 hs ");
+		db1.setHour("Lunes a viernes de 8 - 18 hs ");
 		db1.setInformation("Se dan 40 numeros a partir de las 8 am.");
 		db1.setTelephone("12345678");
 		db1.setLatitude(-34.898930);
@@ -167,8 +167,22 @@ public class RestServicesImpl implements IRestServices {
 		db2.setTelephone("098765432");
 		db2.setLatitude(-34.871729);
 		db2.setLongitude(-56.188868);
-		  
+		
 		banks.add(db2);
+		
+		DataBank db3 = new DataBank();
+		db3.setCode("3");
+		db3.setName("Banco de Sangre 3");
+		db3.setInstitution("Institucion 3");
+		db3.setAddress("Melilla 7356");
+		db3.setEmail("infobanco3@hc.com");
+		db3.setHour("Lunes a jueves de 8 - 20 hs y Sabados 8 - 12 ");
+		db3.setInformation("Pedir hora por la pagina web bancoDesangre3.org.uy");
+		db3.setTelephone("098765432");
+		db3.setLatitude(-34.758027);
+		db3.setLongitude( -56.272928);
+		  
+		banks.add(db3);
 		return banks;
 	}
 

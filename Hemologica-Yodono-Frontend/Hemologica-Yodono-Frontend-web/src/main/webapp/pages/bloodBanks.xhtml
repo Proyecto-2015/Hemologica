@@ -28,51 +28,45 @@
     	</p:gmap>
     </div>
     
-   	 <div class="col-xs-12 col-md-12 col-lg-5 bank-info pull-right">
+   	 <div class="col-xs-12 col-md-12 col-lg-6 bank-info pull-right">
       
-        <div class="well well-sm">
           <form class="form-horizontal" action="" method="post">
           <fieldset>
           
-          	<div class="form-group">
-              <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.label_blood_bank}"/></label>
-              <div class="col-md-9">
-                <p:outputLabel class="control-label" id="nameBank" value="#{banksBB.bank.name}"></p:outputLabel>
-              </div>
-            </div>
+  			<legend><p:outputLabel id ="nameBank" class="control-label" value="#{banksBB.bank.name}"/></legend>
             <div class="form-group">
-              <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.label_institution}"/></label>
+              <label class="col-md-3 control-label label-form-bank" for="name"><h:outputText value="#{messages.label_institution}:"/></label>
               <div class="col-md-9">
                 <p:outputLabel class="control-label" id="institution" value="#{banksBB.bank.institution}"></p:outputLabel>
               </div>
             </div>
     		<div class="form-group">
-              <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.form_user_address}"/></label>
+              <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.form_user_address}:"/></label>
               <div class="col-md-9">
                 <p:outputLabel class="control-label" id="address" value="#{banksBB.bank.address}"></p:outputLabel>
               </div>
             </div>
             <div class="form-group">
-              <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.label_hour}"/></label>
+              <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.label_hour}:"/></label>
               <div class="col-md-9">
                 <p:outputLabel class="control-label" id="hour" value="#{banksBB.bank.hour}"></p:outputLabel>
               </div>
             </div>
             <div class="form-group">
-              <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.form_user_telephone}"/></label>
+              <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.form_user_telephone}:"/></label>
               <div class="col-md-9">
                 <p:outputLabel class="control-label" id="telephone" value="#{banksBB.bank.telephone}"></p:outputLabel>
               </div>
             </div>
             
             <div class="form-group">
-              <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.form_user_email}"/></label>
+              <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.form_user_email}:"/></label>
               <div class="col-md-9">
                 <p:outputLabel class="control-label" id="email" value="#{banksBB.bank.email}"></p:outputLabel>
               </div>
             </div>
             <div class="form-group">
-              <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.label_information}"/></label>
+              <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.label_information}:"/></label>
               <div class="col-md-9">
                 <p:outputLabel class="control-label" id="information" value="#{banksBB.bank.information}"></p:outputLabel>
               </div>
@@ -81,7 +75,7 @@
           </fieldset>
           </form>
         </div>
-      </div>
+    
 
     
    
