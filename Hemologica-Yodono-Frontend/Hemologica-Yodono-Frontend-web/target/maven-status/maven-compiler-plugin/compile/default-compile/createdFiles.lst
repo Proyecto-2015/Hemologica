@@ -7,7 +7,6 @@ org/hemologica/yodono/web/beans/BanksBB.class
 org/hemologica/yodono/web/utils/JSFUtils.class
 org/hemologica/yodono/web/beans/LanguageBB.class
 org/hemologica/yodono/web/rest/client/ServicesClientImpl$6.class
-org/hemologica/yodono/web/converters/DataCityConverter.class
 org/hemologica/yodono/web/rest/client/ServicesClientImpl$2.class
 org/hemologica/yodono/web/beans/UserBB.class
 org/hemologica/yodono/web/rest/client/ServicesClientImpl$4.class

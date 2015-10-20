@@ -24,7 +24,7 @@
      
      <converter>
 		<converter-id>dataCityConverter</converter-id>
-     	<converter-class>org.hemologica.yodono.web.converters.DataCityConverter</converter-class>
+		<converter-class>org.hemologica.yodono.web.beans.DataCityConverter</converter-class>
      </converter>
      
      <managed-bean>
