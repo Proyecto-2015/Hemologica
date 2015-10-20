@@ -64,10 +64,12 @@ public class RestServicesUtilsImpl implements IRestServicesUtils {
 		 */
 		URIBuilder builder = new URIBuilder();
 		builder.setPath(url);
-		for(String key : parameters.keySet()){
-			
-			builder.setParameter(key, parameters.get(key));
-			
+		if(parameters != null){
+			for(String key : parameters.keySet()){
+				
+				builder.setParameter(key, parameters.get(key));
+				
+			}
 		}
 		
 		URI uri = builder.build();

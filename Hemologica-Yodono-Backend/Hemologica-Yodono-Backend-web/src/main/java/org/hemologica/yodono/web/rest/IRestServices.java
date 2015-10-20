@@ -9,7 +9,11 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
+
+import org.hemologica.datatypes.DataBank;
+import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonacion;
+import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataUser;
 import org.hemologica.datatypes.LoginData;
@@ -43,4 +47,24 @@ public interface IRestServices {
 	@Path("/users")
 	@Produces("application/json")
 	public DataUser getUser(@QueryParam("user") String user);
+	
+	@GET
+	@Path("/banks")
+	@Produces("application/json")
+	public List<DataBank> getBanks();
+	
+	@GET
+	@Path("/states")
+	@Produces("application/json")
+	public List<DataState> getStates();
+	
+	@GET
+	@Path("/cities")
+	@Produces("application/json")
+	public List<DataCity> getCities();
+	
+	@GET
+	@Path("/cities")
+	@Produces("application/json")
+	public List<DataCity> getCities(@QueryParam("user") String stateCode);
 }

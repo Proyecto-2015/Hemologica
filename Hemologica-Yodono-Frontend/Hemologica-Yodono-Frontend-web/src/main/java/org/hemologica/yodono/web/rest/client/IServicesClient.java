@@ -1,9 +1,14 @@
 package org.hemologica.yodono.web.rest.client;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 
+import org.apache.http.client.ClientProtocolException;
+import org.hemologica.datatypes.DataBank;
+import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonacion;
+import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataUser;
 
@@ -40,5 +45,38 @@ public interface IServicesClient {
 	 * @return
 	 */
 	public DataUser getDataUser(String string) throws IOException;
+
+	/**
+	 * Devuelve la informacion todos los bancos de sangre. 
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 * @throws URISyntaxException 
+	 */
+	public List<DataBank> getBanks() throws ClientProtocolException, IOException, URISyntaxException;
 	
+	/**
+	 * Devuelve la informacion todos las ciudades.
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataCity> getCities() throws ClientProtocolException, IOException;
+	
+	/**
+	 * Devuelve la informacion de todas las ciudades para un departamento dado.
+	 * @param statesCode
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataCity> getCities(String statesCode) throws ClientProtocolException, IOException;
+	
+	/**
+	 * Devuelve la informacion todos los departamentos.
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataState> getStates() throws ClientProtocolException, IOException;
 }

@@ -1,14 +1,19 @@
 package org.hemologica.yodono.web.beans;
 
+import java.io.IOException;
 import java.io.Serializable;
-import java.util.HashMap;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 
+import org.apache.http.client.ClientProtocolException;
 import org.hemologica.datatypes.DataBank;
+import org.hemologica.yodono.factories.RestFactory;
 import org.primefaces.event.map.OverlaySelectEvent;
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
@@ -21,47 +26,38 @@ public class BanksBB implements Serializable{
 	private static final Logger logger = Logger.getLogger(BanksBB.class.getName()); 
 	private MapModel simpleModel;
 	private DataBank bank;
-	private HashMap<String, DataBank> banks = new HashMap<>();
+	private List<DataBank> banks;
 	  
     private Marker marker;
     
     @PostConstruct
     public void init() {
-        simpleModel = new DefaultMapModel();
-          
-        //Shared coordinates
-        LatLng coord1 = new LatLng(-34.898930, -56.165753);
-        LatLng coord2 = new LatLng(-34.871729, -56.188868);
-          
-        //Basic marker
-        simpleModel.addOverlay(new Marker(coord1, "id1"));
-        simpleModel.addOverlay(new Marker(coord2, "id2"));
         
-        DataBank db1 = new DataBank();
-        db1.setName("Banco 1");
-        db1.setInstitution("Institucion 1");
-        db1.setAddress("Direccion 1");
-        db1.setEmail("email 1");
-        db1.setHour("hora 1");
-        db1.setInformation("informacion 1");
-        db1.setTelephone("telefono 1");
-        banks.put("id1", db1);
-        
-        
-        DataBank db2 = new DataBank();
-        db2.setName("Banco 2");
-        db2.setInstitution("Institucion 2");
-        db2.setAddress("Direccion 2");
-        db2.setEmail("email 2");
-        db2.setHour("hora 2");
-        db2.setInformation("informacion 2");
-        db2.setTelephone("telefono 2");
-        
-        banks.put("id2", db2);
-        
-        
-        
-        
+    	simpleModel = new DefaultMapModel();
+        	
+		try {
+			
+			banks = RestFactory.getServicesClient().getBanks();
+			
+		} catch (ClientProtocolException e) {
+			
+			logger.log(Level.SEVERE, "Error al llamar al servicio web ClientProtocolException", e);
+			
+		} catch (IOException e) {
+			
+			logger.log(Level.SEVERE, "Error al llamar al servicio web IOException", e);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.log(Level.SEVERE, "Error al llamar al servicio web URISyntaxException", e);
+			
+		}
+			
+		for(DataBank dataBank : banks){
+			
+			LatLng coord1 = new LatLng(dataBank.getLatitude(), dataBank.getLongitude());
+			simpleModel.addOverlay(new Marker(coord1, dataBank.getCode()));
+		}       
     }
       
     public MapModel getSimpleModel() {
@@ -74,9 +70,10 @@ public class BanksBB implements Serializable{
         
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Marker Selected", marker.getTitle()));
         
-        bank = banks.get(marker.getTitle());
-        
-        logger.info("seleccioneeee");
+        for(DataBank bankItem : banks){
+        	if(bankItem.getCode().equals(marker.getTitle()))
+        		bank = bankItem;
+        }
     }
       
     public Marker getMarker() {

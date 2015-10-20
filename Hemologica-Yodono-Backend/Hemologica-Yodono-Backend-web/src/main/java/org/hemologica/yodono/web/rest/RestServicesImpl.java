@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 import javax.ws.rs.core.Response;
 
+import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonacion;
 import org.hemologica.datatypes.DataState;
@@ -135,6 +136,174 @@ public class RestServicesImpl implements IRestServices {
 		dataUser.setAllowNotificationNeedDonor(false);
 		
 		return dataUser;
+	}
+
+	@Override
+	public List<DataBank> getBanks() {
+		
+		List<DataBank> banks = new ArrayList<>();
+		DataBank db1 = new DataBank();
+		db1.setCode("1");
+		db1.setName("Banco 1");
+		db1.setInstitution("Institucion 1");
+		db1.setAddress("Direccion 1");
+		db1.setEmail("email 1");
+		db1.setHour("hora 1");
+		db1.setInformation("informacion 1");
+		db1.setTelephone("telefono 1");
+		db1.setLatitude(-34.898930);
+		db1.setLongitude(-56.165753);
+		banks.add(db1);
+		  
+		  
+		DataBank db2 = new DataBank();
+		db2.setCode("2");
+		db2.setName("Banco 2");
+		db2.setInstitution("Institucion 2");
+		db2.setAddress("Direccion 2");
+		db2.setEmail("email 2");
+		db2.setHour("hora 2");
+		db2.setInformation("informacion 2");
+		db2.setTelephone("telefono 2");
+		db2.setLatitude(-34.871729);
+		db2.setLongitude(-56.188868);
+		  
+		banks.add(db2);
+		return banks;
+	}
+
+	@Override
+	public List<DataState> getStates() {
+		
+		List<DataState> cities = new ArrayList<DataState>();
+		
+		DataState dataCity = new DataState();
+		dataCity.setCode("0");
+		dataCity.setName("Montevideo 111");
+		cities.add(dataCity);
+		
+		DataState dataCity2 = new DataState();
+		dataCity2.setCode("2");
+		dataCity2.setName("Montevideo 122");
+		cities.add(dataCity2);
+		
+		DataState dataCity3 = new DataState();
+		dataCity3.setCode("3");
+		dataCity3.setName("Montevideo 133");
+		cities.add(dataCity3);
+		
+		return cities;
+	}
+
+	@Override
+	public List<DataCity> getCities() {
+		List<DataCity> cities = new ArrayList<DataCity>();
+		
+		
+		DataCity dataCity = new DataCity();
+		dataCity.setId(1);
+		dataCity.setName("Montevideo 1");
+		cities.add(dataCity);
+		
+		DataCity dataCity2 = new DataCity();
+		dataCity2.setId(2);
+		dataCity2.setName("Montevideo 2");
+		cities.add(dataCity2);
+		
+		DataCity dataCity3 = new DataCity();
+		dataCity3.setId(3);
+		dataCity3.setName("Montevideo 3");
+		cities.add(dataCity3);
+	
+	
+		DataCity dataCity4 = new DataCity();
+		dataCity4.setId(1);
+		dataCity4.setName("Montevideo 12");
+		cities.add(dataCity4);
+		
+		DataCity dataCity5 = new DataCity();
+		dataCity5.setId(2);
+		dataCity5.setName("Montevideo 22");
+		cities.add(dataCity5);
+		
+		DataCity dataCity6 = new DataCity();
+		dataCity6.setId(3);
+		dataCity6.setName("Montevideo 32");
+		cities.add(dataCity6);
+	
+	
+		DataCity dataCity7 = new DataCity();
+		dataCity7.setId(1);
+		dataCity7.setName("Montevideo 13");
+		cities.add(dataCity7);
+		
+		DataCity dataCity8 = new DataCity();
+		dataCity8.setId(2);
+		dataCity8.setName("Montevideo 23");
+		cities.add(dataCity8);
+		
+		DataCity dataCity9 = new DataCity();
+		dataCity9.setId(3);
+		dataCity9.setName("Montevideo 33");
+		cities.add(dataCity9);
+	
+		return cities;
+	}
+
+	@Override
+	public List<DataCity> getCities(String stateCode) {
+		List<DataCity> cities = new ArrayList<DataCity>();
+	
+		if(stateCode.equals("0")){
+			DataCity dataCity = new DataCity();
+			dataCity.setId(1);
+			dataCity.setName("Montevideo 1");
+			cities.add(dataCity);
+			
+			DataCity dataCity2 = new DataCity();
+			dataCity2.setId(2);
+			dataCity2.setName("Montevideo 2");
+			cities.add(dataCity2);
+			
+			DataCity dataCity3 = new DataCity();
+			dataCity3.setId(3);
+			dataCity3.setName("Montevideo 3");
+			cities.add(dataCity3);
+		}
+		if(stateCode.equals("1")){
+			DataCity dataCity = new DataCity();
+			dataCity.setId(1);
+			dataCity.setName("Montevideo 12");
+			cities.add(dataCity);
+			
+			DataCity dataCity2 = new DataCity();
+			dataCity2.setId(2);
+			dataCity2.setName("Montevideo 22");
+			cities.add(dataCity2);
+			
+			DataCity dataCity3 = new DataCity();
+			dataCity3.setId(3);
+			dataCity3.setName("Montevideo 32");
+			cities.add(dataCity3);
+		}
+		if(stateCode.equals("2")){
+			DataCity dataCity = new DataCity();
+			dataCity.setId(1);
+			dataCity.setName("Montevideo 13");
+			cities.add(dataCity);
+			
+			DataCity dataCity2 = new DataCity();
+			dataCity2.setId(2);
+			dataCity2.setName("Montevideo 23");
+			cities.add(dataCity2);
+			
+			DataCity dataCity3 = new DataCity();
+			dataCity3.setId(3);
+			dataCity3.setName("Montevideo 33");
+			cities.add(dataCity3);
+		}
+		
+		return cities;
 	}
 
 }
