@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<ui:composition template="/template/template.xhtml">
+	<ui:define name="content">
+		<div class="container-fluid">
+			<ol class="breadcrumb">
+				<li><a href="#"><h:outputText value="#{messages.menu_item_mis_transfusiones}"/></a></li> 
+			</ol>
+		</div>
+		<div class="container">
+			<div class="page-header">
+				<h1 id="timeline"><h:outputText value="#{messages.menu_item_mis_transfusiones}"/></h1>
+			</div>
+			<ul class="timeline">
+				<c:forEach items="#{transfusionBB.myTransfusions}" var="transfusionItem" varStatus="counter">	
+					<c:choose>
+				        <c:when test="${counter.count mod 2 == 0}">
+				        	<ui:param name="inverted" value="timeline-inverted" />
+				        </c:when>
+				        <c:otherwise>
+				            <ui:param name="inverted" value="timeline-no-inverted" />
+				        </c:otherwise>
+			    	</c:choose>
+    				
+    				<li class="#{inverted}">						
+
+						<div class="timeline-badge primary info"/>
+						<div class="timeline-panel">
+							<div class="timeline-heading">
+								<div id="container">
+									<h4 class="timeline-title" ><h:outputText value="#{transfusionItem.date}"/></h4>
+
+								</div>
+								<p>
+									<small class="text-muted" ><i
+										class="glyphicon glyphicon-time"></i>
+										hace 2 meses	
+										
+									</small>
+								</p>
+							</div>
+							<div class="timeline-body">
+								<p><h:outputText value="#{transfusionItem.institution}"/></p>
+								<p><h:outputText value="#{transfusionItem.bank}"/></p>
+								<p><h:outputText value="#{transfusionItem.product}"/></p>
+							</div>
+						</div>
+					</li>
+					
+				</c:forEach>
+			</ul>
+		</div>
+	</ui:define>
+
+</ui:composition>
+</html>
