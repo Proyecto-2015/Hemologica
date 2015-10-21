@@ -107,6 +107,11 @@
 			<version>1.0.8</version>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.hemologica</groupId>
+			<artifactId>Hemologica-DataTypes</artifactId>
+			<version>1.0</version>
+		</dependency>
 
 	</dependencies>
 

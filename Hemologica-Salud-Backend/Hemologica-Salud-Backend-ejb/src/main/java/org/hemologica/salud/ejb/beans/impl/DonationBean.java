@@ -6,9 +6,10 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+
+import org.hemologica.datatypes.DonationResult;
+import org.hemologica.datatypes.DonationSearch;
 import org.hemologica.salud.ejb.beans.DonationBeanLocal;
-import org.hemologica.salud.ejb.datatypes.DonationResult;
-import org.hemologica.salud.ejb.datatypes.DonationSearch;
 import org.hemologica.salud.ejb.exceptions.BusinessException;
 
 
