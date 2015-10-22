@@ -39,40 +39,38 @@ public class RestServicesImpl implements IRestServices {
 		
 		DataDonacion d = new DataDonacion();
 		d.setApproved(true);
-		d.setBank("Banco de Sangre X");
+		d.setBank("Banco de Sangre 1");
 		d.setInstitution("Hospital de clinicas");
 		d.setName("Pedro");
 		d.setDonorType("Voluntario");
-		d.setDate("10/02/2015");
+		d.setDate("10/10/2015");
 		donaciones.add(d);
 		
 		DataDonacion d3 = new DataDonacion();
 		d3.setApproved(true);
-		d3.setBank("Banco de Sangre X");
-		d3.setInstitution("Hospital de clinicas");
+		d3.setBank("Banco de Sangre 2");
+		d3.setInstitution("Hospital Britanico");
 		d3.setName("Pedro");
 		d3.setDonorType("Voluntario");
-		d3.setDate("10/02/2015");
+		d3.setDate("28/02/2015");
 		donaciones.add(d3);
 		
 		DataDonacion d2 = new DataDonacion();
 		d2.setApproved(false);
-		d2.setBank("Banco X2");
-		d2.setInstitution("Hospital de clinicas2");
+		d2.setBank("Banco de Sangre 2");
+		d2.setInstitution("Hospital Pereira Rossell");
 		d2.setName("Pedro2");
-		d2.setDonorType("Voluntario2");
-		d2.setDate("10/02/2014");
+		d2.setDonorType("Reposición");
+		d2.setDate("17/02/2014");
 		donaciones.add(d2);
-		
-		
 		
 		DataDonacion d4 = new DataDonacion();
 		d4.setApproved(false);
-		d4.setBank("Banco X2");
-		d4.setInstitution("Hospital de clinicas2");
-		d4.setName("Pedro2");
-		d4.setDonorType("Voluntario2");
-		d4.setDate("10/02/2014");
+		d4.setBank("Banco de Sangre 2");
+		d4.setInstitution("Hospital de clinicas");
+		d4.setName("Pedro");
+		d4.setDonorType("Voluntario");
+		d4.setDate("10/07/2013");
 		donaciones.add(d4);
 		
 		return donaciones;

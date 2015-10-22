@@ -27,7 +27,7 @@ public class LanguageBB implements Serializable{
 	public void setLanguages(Map<String, String> languages) {
 		LanguageBB.languages = languages;
 	}
-	
+
 	public void languagesLocaleCodeChanged(){
 		
 		Map<String,String> params =  FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
