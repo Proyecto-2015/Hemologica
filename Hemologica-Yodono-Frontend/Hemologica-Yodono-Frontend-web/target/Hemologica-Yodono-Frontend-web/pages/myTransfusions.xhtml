@@ -20,44 +20,32 @@
 			<div class="page-header">
 				<h1 id="timeline"><h:outputText value="#{messages.menu_item_mis_transfusiones}"/></h1>
 			</div>
-			<ul class="timeline">
-				<c:forEach items="#{transfusionBB.myTransfusions}" var="transfusionItem" varStatus="counter">	
-					<c:choose>
-				        <c:when test="${counter.count mod 2 == 0}">
-				        	<ui:param name="inverted" value="timeline-inverted" />
-				        </c:when>
-				        <c:otherwise>
-				            <ui:param name="inverted" value="timeline-no-inverted" />
-				        </c:otherwise>
-			    	</c:choose>
-    				
-    				<li class="#{inverted}">						
-
-						<div class="timeline-badge primary info"/>
-						<div class="timeline-panel">
-							<div class="timeline-heading">
-								<div id="container">
-									<h4 class="timeline-title" ><h:outputText value="#{transfusionItem.date}"/></h4>
-
-								</div>
-								<p>
-									<small class="text-muted" ><i
-										class="glyphicon glyphicon-time"></i>
-										hace 2 meses	
-										
-									</small>
-								</p>
-							</div>
-							<div class="timeline-body">
-								<p><h:outputText value="#{transfusionItem.institution}"/></p>
-								<p><h:outputText value="#{transfusionItem.bank}"/></p>
-								<p><h:outputText value="#{transfusionItem.product}"/></p>
-							</div>
-						</div>
-					</li>
-					
-				</c:forEach>
-			</ul>
+			 <div id="no-more-tables">
+            <table class="col-md-12 table-bordered table-striped table-condensed cf">
+        		<thead class="cf">
+        			<tr>
+        				<th><h:outputText value="#{messages.label_date}"/></th>
+        				<th><h:outputText value="#{messages.label_blood_bank}"/></th>
+        				<th><h:outputText value="#{messages.label_institution}"/></th>
+        				<th><h:outputText value="#{messages.label_product}"/></th>
+        				
+        				
+        			</tr>
+        		</thead>
+        		<tbody>
+        			<c:forEach items="#{transfusionBB.myTransfusions}" var="transfusionItem" varStatus="counter">
+	        			<tr>
+	        				<td data-title="Fecha"><h:outputText value="#{transfusionItem.date}"/></td>
+	        				<td data-title="Banco de Sangre"><h:outputText value="#{transfusionItem.bank}"/></td>
+	        				<td data-title="Institución"><h:outputText value="#{transfusionItem.institution}"/></td>
+	        				<td data-title="Producto" ><h:outputText value="#{transfusionItem.product}"/></td>
+	        				
+	        			</tr>
+	        		</c:forEach>
+        		
+        		</tbody>
+        	</table>
+        </div>
 		</div>
 	</ui:define>
 
