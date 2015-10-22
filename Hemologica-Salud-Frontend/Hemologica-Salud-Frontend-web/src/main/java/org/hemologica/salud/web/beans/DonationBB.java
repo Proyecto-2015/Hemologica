@@ -1,15 +1,16 @@
 package org.hemologica.salud.web.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 
-//import org.hemologica.salud.ejb.beans.DonationBeanLocal;
-//import org.hemologica.salud.ejb.datatypes.DonationResult;
-//import org.hemologica.salud.ejb.datatypes.DonationSearch;
-//import org.hemologica.salud.ejb.exceptions.BusinessException;
+import org.hemologica.datatypes.DonationResult;
+
 
 public class DonationBB implements Serializable {
 
@@ -18,6 +19,8 @@ public class DonationBB implements Serializable {
 	 */
 	private static final long serialVersionUID = 4834951080949861155L;
 
+	private static final Logger logger = Logger.getLogger(DonationBB.class.getName());
+	
 	private SessionBB sessionBB;
 
 	// search inputs
@@ -29,9 +32,8 @@ public class DonationBB implements Serializable {
 
 	private Boolean renderResult;
 
-//	private List<DonationResult> resultDonations;
+	private List<DonationResult> resultDonations;
 
-//	private DonationBeanLocal donationBean;
 
 	@PostConstruct
 	public void init() {
@@ -43,19 +45,12 @@ public class DonationBB implements Serializable {
 	}
 
 	public void search() {
-//		try {
-//
-//			DonationSearch param = new DonationSearch();
-//			param.setPerson(searchPerson);
-//			param.setFrom(searchDateFrom);
-//			param.setTo(searchDateTo);
-//			resultDonations = donationBean.search(param);
-//			renderResult = true;
-//			
-//		} catch (BusinessException e) {
-//			e.printStackTrace();
-//		}
-
+		logger.info("DonationBB > do search");
+		this.renderResult = true;
+		this.resultDonations = new ArrayList<DonationResult>();
+		for(int i=0; i < 10; ++i){
+			this.resultDonations.add(new DonationResult(""+ i, "1234567-"+i, "Nombre Apellido", new Date(), "Montevideo"));
+		}
 	}
 
 	public void searchClear() {
@@ -124,12 +119,12 @@ public class DonationBB implements Serializable {
 		this.renderResult = renderResult;
 	}
 
-//	public List<DonationResult> getResultDonations() {
-//		return resultDonations;
-//	}
-//
-//	public void setResultDonations(List<DonationResult> resultDonations) {
-//		this.resultDonations = resultDonations;
-//	}
+	public List<DonationResult> getResultDonations() {
+		return resultDonations;
+	}
+
+	public void setResultDonations(List<DonationResult> resultDonations) {
+		this.resultDonations = resultDonations;
+	}
 
 }
