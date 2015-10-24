@@ -66,5 +66,5 @@ public interface IRestServices {
 	@GET
 	@Path("/cities")
 	@Produces("application/json")
-	public List<DataCity> getCities(@QueryParam("user") String stateCode);
+	public List<DataCity> getCities(@QueryParam("state") String stateCode);
 }

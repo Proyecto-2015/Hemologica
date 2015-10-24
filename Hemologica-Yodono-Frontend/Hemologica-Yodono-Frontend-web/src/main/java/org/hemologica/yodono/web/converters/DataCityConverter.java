@@ -1,4 +1,4 @@
-package org.hemologica.yodono.web.beans;
+package org.hemologica.yodono.web.converters;
 
 import java.io.IOException;
 import java.util.List;
@@ -45,7 +45,8 @@ public class DataCityConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if(value instanceof DataCity){
-			return ((DataCity)value).getCode();
+			
+			return ((DataCity)value).getName();
 		}
 		return null;
 	}

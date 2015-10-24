@@ -64,64 +64,37 @@
               <label class="col-md-3 control-label" for="donations_input_search_date_from"><h:outputText value="#{messages.form_user_birthday_date}"/></label>
                        
 				<div class="col-md-9 col-lg-5">
-<!--            <input id="birthday_date" for="donations_input_search_date_from" name="name" type="text" placeholder="#{messages.form_user_birthday_date}" class="form-control"/> -->
-<!--                 <p:calendar id="donations_input_search_date_from" -->
-<!-- 								value="MM/dd/yyyy" pattern="MM/dd/yyyy" /> -->
-						
-					<p:calendar id="birthday_date" pattern="MM/dd/yyyy" mode="popup" value="#{userBB.birthdayDate}"/>
-					
-<!-- 					<div class="icon-list icon-edit pull-right cursor-pointer" onclick="enablesInputs()"/> -->
-<!-- 					<button class="icon-list icon-edit pull-right" onclick="enablesInputs()"/> -->
-					
+				    <p:calendar id="birthday_date" pattern="dd/MM/yyyy" mode="popup" value="#{userBB.getBirthdayDate()}"/>	
 				</div>
             </div>
             <div class="form-group">
               <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.form_user_state}"/></label>
               <div class="col-md-9 col-lg-5">
               	
-              	<h:selectOneMenu class="form-control" value="#{userBB.states}" style="height: 34px;" >
-				    <f:selectItems value="#{userBB.states}" var="state" itemValue="state" itemLabel="#{state.name}" />
-				    <f:ajax listener="#{userBB.changeState}" render="states" />
+              	<h:selectOneMenu class="form-control" value="#{userBB.state}" style="height: 34px;"  >
+              		<f:selectItems value="#{userBB.states}" var="state" itemValue="state" itemLabel="#{state.name}"/>
+<!-- 				    <f:selectItems value="#{userBB.states}" var="state" itemValue="state" itemLabel="#{state.name}" /> -->
+<!-- 				    <f:ajax listener="#{userBB.changeState}" update="cities" /> -->
+				    <p:ajax update="cities"  />
 				</h:selectOneMenu>
               
-              
-              
-<!--               	 <select class="form-control" id="state"> -->
-<!--               	 	<option>aaa</option> -->
-<!--               	 	<option>bbb</option> -->
-              	 
-<!--               	 	<c:forEach items="#{userBB.states}" var="stateItem"> -->
-<!--                     	<c:if test="#{stateItem.key==userBB.dataUser.state}"> -->
-<!-- 						    <option  value="#{stateItem.key}" selected="selected"><h:outputText value="#{stateItem.value}"/></option> -->
-<!-- 						</c:if> -->
-<!-- 						<c:if test="#{stateItem.key!=userBB.dataUser.state}"> -->
-<!-- 						   <option  value="#{stateItem.key}"><h:outputText value="#{stateItem.value}"/></option> -->
-<!-- 						</c:if> -->
-<!--                     </c:forEach> -->
-<!--                  </select> -->
-<!--                  <p:ajax update="state"  listener="#{userBB.citiesState(state.value)}" /> -->
               </div>
             </div>
             <div class="form-group">
               <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.form_user_city}"/></label>
               <div class="col-md-9 col-lg-5">
 <!--                 <input id="city" name="name" type="text" placeholder="#{messages.form_user_city}" class="form-control" -->
-<!--                 	 value="#{userBB.dataUser.city}"/> -->
-                	 <h:selectOneMenu class="form-control" id="cities" value="#{userBB.city}" style="height: 34px;" converter="dataCityConverter">
-					    <f:selectItems value="#{userBB.cities}" var="city" itemValue="#{city.code}" itemLabel="#{city.name}" />
-					</h:selectOneMenu>
-                	 	 
-                	 	 
-<!--                  <select class="form-control" id="city"> -->
-<!--               	 	<c:forEach items="#{userBB.citiesState(state.value)}" var="cityItem"> -->
-<!--                     	<c:if test="#{cityItem.key==userBB.dataUser.city}"> -->
-<!-- 						    <option  value="#{cityItem.key}" selected="selected"><h:outputText value="#{cityItem.value}"/></option> -->
-<!-- 						</c:if> -->
-<!-- 						<c:if test="#{cityItem.key!=userBB.dataUser.city}"> -->
-<!-- 						   <option  value="#{cityItem.key}"><h:outputText value="#{cityItem.value}"/></option> -->
-<!-- 						</c:if> -->
-<!--                     </c:forEach> -->
-<!--                  </select> -->
+<!--                 	 value="#{userBB.dataUser.city}"/>  converter="dataStateConverter" -->
+
+					<h:selectOneMenu class="form-control" id="cities" value="#{userBB.city}" style="height: 34px;" >
+				        <f:selectItems value="#{userBB.getCitiesState(userBB.state.code)}" var="city" itemValue="citu" itemLabel="#{city.name}"/>
+				    </h:selectOneMenu>
+
+
+<!--                 	 <p:selectOneMenu class="form-control" id="cities" value="#{userBB.city}" style="height: 34px;" converter="dataCityConverter"> -->
+<!-- 					    <f:selectItems value="#{userBB.getCitiesState(userBB.state.code)}" converter="dataCityConverter" /> -->
+<!-- 					</p:selectOneMenu> -->
+                	 	
               </div>
             </div>
             <div class="form-group">
@@ -183,6 +156,8 @@
               </div>
             </div>
           </fieldset>
+          
+          <p:messages />
 	</h:form>
 	</div>
 	</div>

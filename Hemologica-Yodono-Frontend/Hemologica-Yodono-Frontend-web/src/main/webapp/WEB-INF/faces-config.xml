@@ -23,10 +23,15 @@
      </application>
      
      <converter>
+    	 <display-name>dataCityConverter</display-name>
 		<converter-id>dataCityConverter</converter-id>
-		<converter-class>org.hemologica.yodono.web.beans.DataCityConverter</converter-class>
+		<converter-class>org.hemologica.yodono.web.converters.DataCityConverter</converter-class>
      </converter>
-     
+     <converter>
+    	 <display-name>dataStateConverter</display-name>
+		<converter-id>dataStateConverter</converter-id>
+		<converter-class>org.hemologica.yodono.web.converters.DataStateConverter</converter-class>
+     </converter> 
      <managed-bean>
      	<managed-bean-name>language</managed-bean-name>
      	<managed-bean-class>org.hemologica.yodono.web.beans.LanguageBB</managed-bean-class>

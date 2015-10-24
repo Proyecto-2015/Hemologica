@@ -5,7 +5,6 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -27,6 +26,7 @@ public class UserBB implements Serializable{
 	private DataState state;
 	private List<DataCity> cities;
 	private DataCity city;
+	private Date birthdayDate;
 	
 	@PostConstruct
 	public void init(){
@@ -34,6 +34,7 @@ public class UserBB implements Serializable{
 		try {
 			
 			dataUser = RestFactory.getServicesClient().getDataUser("");
+			states = RestFactory.getServicesClient().getStates();
 			state = dataUser.getState();
 			city = dataUser.getCity();
 			
@@ -73,95 +74,41 @@ public class UserBB implements Serializable{
 	public Date getBirthdayDate(){
 		
 		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-		Date date = null;
 		try {
 			
-			date = format.parse(dataUser.getBirthdayDate());
+			birthdayDate = format.parse(dataUser.getBirthdayDate());
 			
 		} catch (ParseException e) {
 			
 			logger.log(Level.SEVERE, "Error al parsear la fecha", e);
 			
 		}
-		return date;
+		return birthdayDate;
 	}
 
 	public List<DataState> getStates() {
 		
-		List<DataState> cities = new ArrayList<DataState>();
-		
-		DataState dataCity = new DataState();
-		dataCity.setId(1);
-		dataCity.setName("Montevideo 111");
-		cities.add(dataCity);
-		
-		DataState dataCity2 = new DataState();
-		dataCity2.setId(2);
-		dataCity2.setName("Montevideo 122");
-		cities.add(dataCity2);
-		
-		DataState dataCity3 = new DataState();
-		dataCity3.setId(3);
-		dataCity3.setName("Montevideo 133");
-		cities.add(dataCity3);
-		
-		return cities;
+		return states;
+	
 	}
 
 	public List<DataCity> getCities() {
 		
-		List<DataCity> cities = new ArrayList<DataCity>();
-		getDataUser();
-		if(state.getId() == 0){
-			DataCity dataCity = new DataCity();
-			dataCity.setId(1);
-			dataCity.setName("Montevideo 1");
-			cities.add(dataCity);
-			
-			DataCity dataCity2 = new DataCity();
-			dataCity2.setId(2);
-			dataCity2.setName("Montevideo 2");
-			cities.add(dataCity2);
-			
-			DataCity dataCity3 = new DataCity();
-			dataCity3.setId(3);
-			dataCity3.setName("Montevideo 3");
-			cities.add(dataCity3);
-		}
-		if(state.getId() == 1){
-			DataCity dataCity = new DataCity();
-			dataCity.setId(1);
-			dataCity.setName("Montevideo 12");
-			cities.add(dataCity);
-			
-			DataCity dataCity2 = new DataCity();
-			dataCity2.setId(2);
-			dataCity2.setName("Montevideo 22");
-			cities.add(dataCity2);
-			
-			DataCity dataCity3 = new DataCity();
-			dataCity3.setId(3);
-			dataCity3.setName("Montevideo 32");
-			cities.add(dataCity3);
-		}
-		if(state.getId() == 2){
-			DataCity dataCity = new DataCity();
-			dataCity.setId(1);
-			dataCity.setName("Montevideo 13");
-			cities.add(dataCity);
-			
-			DataCity dataCity2 = new DataCity();
-			dataCity2.setId(2);
-			dataCity2.setName("Montevideo 23");
-			cities.add(dataCity2);
-			
-			DataCity dataCity3 = new DataCity();
-			dataCity3.setId(3);
-			dataCity3.setName("Montevideo 33");
-			cities.add(dataCity3);
-		}
-		
 		return cities;
+	}
+	
+	public List<DataCity> getCitiesState(String stateCode){
+		
+		try {
+			
+			return RestFactory.getServicesClient().getCities(stateCode);
+			
+		} catch (IOException e) {
+			
+			logger.log(Level.SEVERE, "Error obtener las cidades del departamento: " + stateCode, e);
+			
+		}
+		return null;
 	}
 
 	public DataState getState() {

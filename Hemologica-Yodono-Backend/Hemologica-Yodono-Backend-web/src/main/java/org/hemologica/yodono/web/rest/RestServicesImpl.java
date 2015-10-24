@@ -118,12 +118,12 @@ public class RestServicesImpl implements IRestServices {
 		dataUser.setBirthdayDate("14/10/1989");
 		
 		DataState state = new DataState();
-		state.setId(1);
+		state.setCode("0");
 		state.setName("Montevideo state");
 		dataUser.setState(state);
 		
 		DataCity city = new DataCity();
-		city.setId(1);
+		city.setCode("1");
 		city.setName("Montevideo city");
 		
 		dataUser.setCity(city);
@@ -191,17 +191,17 @@ public class RestServicesImpl implements IRestServices {
 		
 		DataState dataCity = new DataState();
 		dataCity.setCode("0");
-		dataCity.setName("Montevideo 111");
+		dataCity.setName("Montevideo");
 		cities.add(dataCity);
 		
 		DataState dataCity2 = new DataState();
 		dataCity2.setCode("2");
-		dataCity2.setName("Montevideo 122");
+		dataCity2.setName("Canelones");
 		cities.add(dataCity2);
 		
 		DataState dataCity3 = new DataState();
 		dataCity3.setCode("3");
-		dataCity3.setName("Montevideo 133");
+		dataCity3.setName("Maldonado");
 		cities.add(dataCity3);
 		
 		return cities;
@@ -211,61 +211,41 @@ public class RestServicesImpl implements IRestServices {
 	public List<DataCity> getCities() {
 		List<DataCity> cities = new ArrayList<DataCity>();
 		
-		
 		DataCity dataCity = new DataCity();
-		dataCity.setId(1);
 		dataCity.setCode("1");
-		dataCity.setName("Montevideo 1");
+		dataCity.setName("Montevideo");
 		cities.add(dataCity);
-		
+	
 		DataCity dataCity2 = new DataCity();
-		dataCity2.setId(2);
-		dataCity.setCode("2");
-		dataCity2.setName("Montevideo 2");
+		dataCity2.setCode("12");
+		dataCity2.setName("Las piedras");
 		cities.add(dataCity2);
 		
 		DataCity dataCity3 = new DataCity();
-		dataCity3.setId(3);
-		dataCity.setCode("3");
-		dataCity3.setName("Montevideo 3");
+		dataCity3.setCode("22");
+		dataCity3.setName("Solymar");
 		cities.add(dataCity3);
-	
-		DataCity dataCity4 = new DataCity();
-		dataCity4.setId(4);
-		dataCity.setCode("4");
-		dataCity4.setName("Montevideo 12");
-		cities.add(dataCity4);
 		
+		DataCity dataCity4 = new DataCity();
+		dataCity4.setCode("32");
+		dataCity4.setName("El pinar");
+		cities.add(dataCity4);
+	
+	
 		DataCity dataCity5 = new DataCity();
-		dataCity5.setId(2);
-		dataCity.setCode("5");
-		dataCity5.setName("Montevideo 22");
+		dataCity5.setCode("13");
+		dataCity5.setName("Punta del Este");
 		cities.add(dataCity5);
 		
 		DataCity dataCity6 = new DataCity();
-		dataCity6.setId(3);
-		dataCity.setCode("6");
-		dataCity6.setName("Montevideo 32");
+		dataCity6.setCode("23");
+		dataCity6.setName("Piriapolis");
 		cities.add(dataCity6);
-	
-	
+		
 		DataCity dataCity7 = new DataCity();
-		dataCity7.setId(1);
-		dataCity.setCode("7");
-		dataCity7.setName("Montevideo 13");
+		dataCity7.setCode("33");
+		dataCity7.setName("San Francisco");
 		cities.add(dataCity7);
-		
-		DataCity dataCity8 = new DataCity();
-		dataCity8.setId(2);
-		dataCity.setCode("8");
-		dataCity8.setName("Montevideo 23");
-		cities.add(dataCity8);
-		
-		DataCity dataCity9 = new DataCity();
-		dataCity9.setId(3);
-		dataCity.setCode("9");
-		dataCity9.setName("Montevideo 33");
-		cities.add(dataCity9);
 	
 		return cities;
 	}
@@ -281,59 +261,52 @@ public class RestServicesImpl implements IRestServices {
 	
 		if(stateCode.equals("0")){
 			DataCity dataCity = new DataCity();
-			dataCity.setId(1);
 			dataCity.setCode("1");
-			dataCity.setName("Montevideo 1");
+			dataCity.setName("Montevideo");
 			cities.add(dataCity);
 			
-			DataCity dataCity2 = new DataCity();
-			dataCity2.setId(2);
-			dataCity.setCode("2");
-			dataCity2.setName("Montevideo 2");
-			cities.add(dataCity2);
-			
-			DataCity dataCity3 = new DataCity();
-			dataCity3.setId(3);
-			dataCity.setCode("3");
-			dataCity3.setName("Montevideo 3");
-			cities.add(dataCity3);
+//			DataCity dataCity2 = new DataCity();
+//			dataCity2.setId(2);
+//			dataCity.setCode("2");
+//			dataCity2.setName("Montevideo 2");
+//			cities.add(dataCity2);
+//			
+//			DataCity dataCity3 = new DataCity();
+//			dataCity3.setId(3);
+//			dataCity.setCode("3");
+//			dataCity3.setName("Montevideo 3");
+//			cities.add(dataCity3);
 		}
 		if(stateCode.equals("1")){
 			DataCity dataCity = new DataCity();
-			dataCity.setId(1);
 			dataCity.setCode("12");
-			dataCity.setName("Montevideo 12");
+			dataCity.setName("Las piedras");
 			cities.add(dataCity);
 			
 			DataCity dataCity2 = new DataCity();
-			dataCity2.setId(2);
 			dataCity.setCode("22");
-			dataCity2.setName("Montevideo 22");
+			dataCity2.setName("Solymar");
 			cities.add(dataCity2);
 			
 			DataCity dataCity3 = new DataCity();
-			dataCity3.setId(3);
 			dataCity.setCode("32");
-			dataCity3.setName("Montevideo 32");
+			dataCity3.setName("El pinar");
 			cities.add(dataCity3);
 		}
 		if(stateCode.equals("2")){
 			DataCity dataCity = new DataCity();
-			dataCity.setId(1);
 			dataCity.setCode("13");
-			dataCity.setName("Montevideo 13");
+			dataCity.setName("Punta del Este");
 			cities.add(dataCity);
 			
 			DataCity dataCity2 = new DataCity();
-			dataCity2.setId(2);
 			dataCity.setCode("23");
-			dataCity2.setName("Montevideo 23");
+			dataCity2.setName("Piriapolis");
 			cities.add(dataCity2);
 			
 			DataCity dataCity3 = new DataCity();
-			dataCity3.setId(3);
 			dataCity.setCode("33");
-			dataCity3.setName("Montevideo 33");
+			dataCity3.setName("San Francisco");
 			cities.add(dataCity3);
 		}
 		
