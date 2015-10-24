@@ -3,10 +3,8 @@ package org.hemologica.yodono.web.rest.client;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.net.URISyntaxException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import org.apache.http.client.ClientProtocolException;
 import org.apache.log4j.Logger;
 import org.hemologica.constants.ConstansJson;

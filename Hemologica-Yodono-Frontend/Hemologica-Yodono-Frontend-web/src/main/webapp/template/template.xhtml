@@ -19,7 +19,11 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta http-equiv="X-UA-Conpatible" content="IE=edge" />
+</h:head>
 
+
+
+<h:body>
 	<f:facet name="last">
 		<h:outputStylesheet library="bootstrap/css" name="bootstrap.css" />
 		<h:outputStylesheet library="bootstrap/css" name="bootstrap-theme.css" />
@@ -36,9 +40,7 @@
 
 	</f:facet>
 
-</h:head>
-<h:body>
-
+	<f:view locale="#{language.locale}"/>
 	<div id="header">
 		<ui:insert name="header">
 			<ui:include src="header.xhtml" />
