@@ -14,6 +14,7 @@
 
 	<dependencies>
 
+<<<<<<< HEAD
 		<!-- <dependency> -->
 		<!-- <groupId>net.bootsfaces</groupId> -->
 		<!-- <artifactId>bootsfaces</artifactId> -->
@@ -44,6 +45,8 @@
 		</dependency>
 
 
+=======
+>>>>>>> 8c5d1ee22192161ff1d429c65c427b7386580c1e
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
