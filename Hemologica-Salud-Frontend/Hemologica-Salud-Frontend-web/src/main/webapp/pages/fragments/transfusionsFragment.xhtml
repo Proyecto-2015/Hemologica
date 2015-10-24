@@ -30,70 +30,23 @@
 					<p:inputText id="transfusions_input_search_person2"
 						styleClass="form-control col-xs-6 col-sm-6 col-md-6 col-lg-6"
 						placeholder="#{messages.transfusions_input_search_person_placeholder}"
-						value="#{transfusionBB.searchPerson}" />
+						value="#{searchTransfusionBB.searchPerson}" />
 					<!-- 					<p:commandButton id="panel_search_inputs_advanced"  -->
 					<!-- 									styleClass="form-control search-btn-adv col-xs-2 col-sm-3 col-md-4 col-lg-4"  -->
 					<!-- 									icon="ui-icon-triangle-1-s"  -->
 					<!-- 									title="#{messages.generic_search}" /> -->
 					<p:commandButton icon="ui-icon-search"
 						styleClass="form-control search-btn col-xs-2 col-sm-3 col-md-3 col-lg-1"
-						title="#{messages.generic_search}" action="#{transfusionBB.search()}"
+						title="#{messages.generic_search}" action="#{searchTransfusionBB.search()}"
 						process="panel_search_inputs2" update="@form" />
 
 				</h:panelGroup>
 			</h:panelGroup>
 
-			<!-- 			<p:overlayPanel for="panel_search_inputs_advanced" hideEffect="fade"> -->
-			<!-- 				<h:panelGroup id="panel_search_inputs" layout="block" -->
-			<!-- 					styleClass="row"> -->
-
-			<!-- 					<h:panelGroup layout="block" styleClass="form-inline"> -->
-
-			<!-- 						<h:panelGroup styleClass="form-group " layout="block"> -->
-			<!-- 							<h:outputLabel for="transfusions_input_search_person" -->
-			<!-- 								styleClass="control-label" -->
-			<!-- 								value="#{messages.transfusions_input_search_person}" /> -->
-			<!-- 							<p:inputText id="transfusions_input_search_person" -->
-			<!-- 								styleClass="form-control" -->
-			<!-- 								placeholder="#{messages.transfusions_input_search_person_placeholder}" -->
-			<!-- 								value="#{transfusionBB.searchPerson}" /> -->
-			<!-- 						</h:panelGroup> -->
-
-			<!-- 						<h:panelGroup styleClass="form-group" layout="block"> -->
-			<!-- 							<h:outputLabel for="transfusions_input_search_date_from" -->
-			<!-- 								styleClass="control-label" -->
-			<!-- 								value="#{messages.transfusions_input_search_date_from}" /> -->
-			<!-- 							<p:calendar id="transfusions_input_search_date_from" -->
-			<!-- 								value="#{transfusionBB.searchDateFrom}" /> -->
-			<!-- 						</h:panelGroup> -->
-
-			<!-- 						<h:panelGroup styleClass="form-group" layout="block"> -->
-			<!-- 							<h:outputLabel for="transfusions_input_search_date_to" -->
-			<!-- 								styleClass="control-label" -->
-			<!-- 								value="#{messages.transfusions_input_search_date_to}" /> -->
-			<!-- 							<p:calendar id="transfusions_input_search_date_to" -->
-			<!-- 								value="#{transfusionBB.searchDateTo}" /> -->
-			<!-- 						</h:panelGroup> -->
-
-			<!-- 						<p:commandButton icon="ui-icon-search" -->
-			<!-- 							value="#{messages.generic_search}" -->
-			<!-- 							action="#{transfusionBB.search()}" process="panel_search_inputs" -->
-			<!-- 							update="@form" /> -->
-			<!-- 						<p:commandLink value="#{messages.generic_search_clear}" -->
-			<!-- 							action="#{transfusionBB.searchClear()}" process="@this" -->
-			<!-- 							update="@form" /> -->
-
-			<!-- 					</h:panelGroup> -->
-
-
-			<!-- 				</h:panelGroup> -->
-
-			<!-- 			</p:overlayPanel> -->
-
 			<h:panelGroup layout="block" styleClass="row"
-				rendered="#{transfusionBB.renderResult}">
+				rendered="#{searchTransfusionBB.renderResult}">
 
-				<p:dataTable value="#{transfusionBB.resultTransfusions}" var="transfusion"
+				<p:dataTable value="#{searchTransfusionBB.resultTransfusions}" var="transfusion"
 					reflow="true"
 					emptyMessage="#{messages.transfusions_result_empty_message}"
 					sortMode="multiple">

@@ -30,70 +30,23 @@
 					<p:inputText id="donations_input_search_person2"
 						styleClass="form-control col-xs-6 col-sm-6 col-md-6 col-lg-6"
 						placeholder="#{messages.donations_input_search_person_placeholder}"
-						value="#{donationBB.searchPerson}" />
+						value="#{searchDonationBB.searchPerson}" />
 					<!-- 					<p:commandButton id="panel_search_inputs_advanced"  -->
 					<!-- 									styleClass="form-control search-btn-adv col-xs-2 col-sm-3 col-md-4 col-lg-4"  -->
 					<!-- 									icon="ui-icon-triangle-1-s"  -->
 					<!-- 									title="#{messages.generic_search}" /> -->
 					<p:commandButton icon="ui-icon-search"
 						styleClass="form-control search-btn col-xs-2 col-sm-3 col-md-3 col-lg-1"
-						title="#{messages.generic_search}" action="#{donationBB.search()}"
+						title="#{messages.generic_search}" action="#{searchDonationBB.search()}"
 						process="panel_search_inputs2" update="@form" />
 
 				</h:panelGroup>
 			</h:panelGroup>
 
-			<!-- 			<p:overlayPanel for="panel_search_inputs_advanced" hideEffect="fade"> -->
-			<!-- 				<h:panelGroup id="panel_search_inputs" layout="block" -->
-			<!-- 					styleClass="row"> -->
-
-			<!-- 					<h:panelGroup layout="block" styleClass="form-inline"> -->
-
-			<!-- 						<h:panelGroup styleClass="form-group " layout="block"> -->
-			<!-- 							<h:outputLabel for="donations_input_search_person" -->
-			<!-- 								styleClass="control-label" -->
-			<!-- 								value="#{messages.donations_input_search_person}" /> -->
-			<!-- 							<p:inputText id="donations_input_search_person" -->
-			<!-- 								styleClass="form-control" -->
-			<!-- 								placeholder="#{messages.donations_input_search_person_placeholder}" -->
-			<!-- 								value="#{donationBB.searchPerson}" /> -->
-			<!-- 						</h:panelGroup> -->
-
-			<!-- 						<h:panelGroup styleClass="form-group" layout="block"> -->
-			<!-- 							<h:outputLabel for="donations_input_search_date_from" -->
-			<!-- 								styleClass="control-label" -->
-			<!-- 								value="#{messages.donations_input_search_date_from}" /> -->
-			<!-- 							<p:calendar id="donations_input_search_date_from" -->
-			<!-- 								value="#{donationBB.searchDateFrom}" /> -->
-			<!-- 						</h:panelGroup> -->
-
-			<!-- 						<h:panelGroup styleClass="form-group" layout="block"> -->
-			<!-- 							<h:outputLabel for="donations_input_search_date_to" -->
-			<!-- 								styleClass="control-label" -->
-			<!-- 								value="#{messages.donations_input_search_date_to}" /> -->
-			<!-- 							<p:calendar id="donations_input_search_date_to" -->
-			<!-- 								value="#{donationBB.searchDateTo}" /> -->
-			<!-- 						</h:panelGroup> -->
-
-			<!-- 						<p:commandButton icon="ui-icon-search" -->
-			<!-- 							value="#{messages.generic_search}" -->
-			<!-- 							action="#{donationBB.search()}" process="panel_search_inputs" -->
-			<!-- 							update="@form" /> -->
-			<!-- 						<p:commandLink value="#{messages.generic_search_clear}" -->
-			<!-- 							action="#{donationBB.searchClear()}" process="@this" -->
-			<!-- 							update="@form" /> -->
-
-			<!-- 					</h:panelGroup> -->
-
-
-			<!-- 				</h:panelGroup> -->
-
-			<!-- 			</p:overlayPanel> -->
-
 			<h:panelGroup layout="block" styleClass="row"
-				rendered="#{donationBB.renderResult}">
+				rendered="#{searchDonationBB.renderResult}">
 
-				<p:dataTable value="#{donationBB.resultDonations}" var="donation"
+				<p:dataTable value="#{searchDonationBB.resultDonations}" var="donation"
 					reflow="true"
 					emptyMessage="#{messages.donations_result_empty_message}"
 					sortMode="multiple">
