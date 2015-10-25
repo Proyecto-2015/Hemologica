@@ -32,7 +32,16 @@
 	</application>
 
 
-
+	<converter>
+		<display-name>dataCityConverter</display-name>
+		<converter-id>dataCityConverter</converter-id>
+		<converter-class>org.hemologica.salud.web.converters.DataCityConverter</converter-class>
+	</converter>
+	<converter>
+		<display-name>dataStateConverter</display-name>
+		<converter-id>dataStateConverter</converter-id>
+		<converter-class>org.hemologica.salud.web.converters.DataStateConverter</converter-class>
+	</converter>
 	<managed-bean>
 		<managed-bean-name>applicationBB</managed-bean-name>
 		<managed-bean-class>org.hemologica.salud.web.beans.ApplicationBB</managed-bean-class>
@@ -49,19 +58,8 @@
 		</managed-property>
 	</managed-bean>
 	<managed-bean>
-		<managed-bean-name>donationBB</managed-bean-name>
-		<managed-bean-class>org.hemologica.salud.web.beans.DonationBB</managed-bean-class>
-		<managed-bean-scope>view</managed-bean-scope>
-		<managed-property>
-			<property-name>sessionBB</property-name>
-			<property-class>org.hemologica.salud.web.beans.SessionBB</property-class>
-			<value>#{sessionBB}</value>
-		</managed-property>
-		
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>transfusionBB</managed-bean-name>
-		<managed-bean-class>org.hemologica.salud.web.beans.TransfusionBB</managed-bean-class>
+		<managed-bean-name>searchDonationBB</managed-bean-name>
+		<managed-bean-class>org.hemologica.salud.web.beans.SearchDonationBB</managed-bean-class>
 		<managed-bean-scope>view</managed-bean-scope>
 		<managed-property>
 			<property-name>sessionBB</property-name>
@@ -69,12 +67,32 @@
 			<value>#{sessionBB}</value>
 		</managed-property>
 	</managed-bean>
-	
 	<managed-bean>
-     	<managed-bean-name>language</managed-bean-name>
-     	<managed-bean-class>org.hemologica.salud.web.beans.LanguageBB</managed-bean-class>
-     	<managed-bean-scope>session</managed-bean-scope>
-    </managed-bean>
+		<managed-bean-name>searchTransfusionBB</managed-bean-name>
+		<managed-bean-class>org.hemologica.salud.web.beans.SearchTransfusionBB</managed-bean-class>
+		<managed-bean-scope>view</managed-bean-scope>
+		<managed-property>
+			<property-name>sessionBB</property-name>
+			<property-class>org.hemologica.salud.web.beans.SessionBB</property-class>
+			<value>#{sessionBB}</value>
+		</managed-property>
+	</managed-bean>
+
+	<managed-bean>
+		<managed-bean-name>language</managed-bean-name>
+		<managed-bean-class>org.hemologica.salud.web.beans.LanguageBB</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>personBB</managed-bean-name>
+		<managed-bean-class>org.hemologica.salud.web.beans.PersonBB</managed-bean-class>
+		<managed-bean-scope>view</managed-bean-scope>
+		<managed-property>
+			<property-name>sessionBB</property-name>
+			<property-class>org.hemologica.salud.web.beans.SessionBB</property-class>
+			<value></value>
+		</managed-property>
+	</managed-bean>
 
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
@@ -112,6 +130,14 @@
 		<navigation-case>
 			<from-outcome>stock</from-outcome>
 			<to-view-id>/pages/stock.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>person</from-outcome>
+			<to-view-id>/pages/person.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>

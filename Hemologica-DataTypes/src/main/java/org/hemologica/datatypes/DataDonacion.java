@@ -1,6 +1,14 @@
 package org.hemologica.datatypes;
 
-public class DataDonacion {
+import java.io.Serializable;
+import java.util.List;
+
+public class DataDonacion implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4260250837335930498L;
 	
 	private String name;
 	private String date;
@@ -8,6 +16,10 @@ public class DataDonacion {
 	private String institution;
 	private String donorType;
 	private boolean approved; 
+	
+	
+	private List<DataLaboratoryResult> labResults;
+	
 	
 	public String getName() {
 		return name;
@@ -44,6 +56,12 @@ public class DataDonacion {
 	}
 	public void setApproved(boolean approved) {
 		this.approved = approved;
+	}
+	public List<DataLaboratoryResult> getLabResults() {
+		return labResults;
+	}
+	public void setLabResults(List<DataLaboratoryResult> labResults) {
+		this.labResults = labResults;
 	}
 	
 }
