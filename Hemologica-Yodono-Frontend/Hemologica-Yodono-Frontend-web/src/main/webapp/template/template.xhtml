@@ -19,6 +19,13 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta http-equiv="X-UA-Conpatible" content="IE=edge" />
+	
+	<h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
+	
+	<h:outputScript library="bootstrap/js" name="bootstrap.js" />
+	<h:outputScript library="bootstrap/js" name="bootstrap.min.js" />
+		
+	<link rel="shortcut icon" href="#{resource['img/favicon.ico']}" />
 </h:head>
 
 
@@ -27,16 +34,19 @@
 	<f:facet name="last">
 		<h:outputStylesheet library="bootstrap/css" name="bootstrap.css" />
 		<h:outputStylesheet library="bootstrap/css" name="bootstrap-theme.css" />
+		
+		<h:outputStylesheet library="bootstrap/css" name="bootstrap-theme.min.css" />
+		<h:outputStylesheet library="bootstrap/css" name="bootstrap.min.css" />
 		<h:outputStylesheet library="css" name="hemologica-timeline.css" />
-
+		
 		<h:outputScript library="jquery" name="jquery-2.1.4.js" />
-		<h:outputScript library="bootstrap/js" name="bootstrap.js" />
+		<h:outputScript library="jquery" name="jquery-2.1.4.min.js" />
 		<h:outputScript library="js" name="yoDonoJs.js" target="head" />
 		
 		<h:outputStylesheet library="css" name="hemologica-yodono.css" />
 		<h:outputStylesheet library="css" name="buttonLogin.css" />
 		<h:outputStylesheet library="css" name="hemologica-yodono-media.css" />
-		<link rel="shortcut icon" href="#{resource['img/favicon.ico']}" />
+		
 
 	</f:facet>
 

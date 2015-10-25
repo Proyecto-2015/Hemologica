@@ -7,14 +7,21 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.faces.application.Application;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
+import org.apache.http.client.ClientProtocolException;
 import org.hemologica.datatypes.DataCity;
+import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataUser;
 import org.hemologica.yodono.factories.RestFactory;
-import org.hemologica.yodono.web.utils.JSFUtils;
+import org.primefaces.model.UploadedFile;
 
 public class UserBB implements Serializable{
 	
@@ -27,6 +34,11 @@ public class UserBB implements Serializable{
 	private List<DataCity> cities;
 	private DataCity city;
 	private Date birthdayDate;
+	private UploadedFile uploadedPicture;
+	
+	@ManagedProperty("#{messages}")
+	private ResourceBundle bundle;
+	private String languageVarName = "messages";
 	
 	@PostConstruct
 	public void init(){
@@ -44,16 +56,6 @@ public class UserBB implements Serializable{
 		}
 	}
 	
-	public void changeState(){
-		cities = getCities();
-	}
-	
-	public void submit() {
-		logger.info("holaaaaa");
-		JSFUtils.addGlobalInfoMessage("HOLAAAAA");
-	}
-	
-	
 	public DataUser getDataUser() {
 		
 		return dataUser;
@@ -67,6 +69,7 @@ public class UserBB implements Serializable{
 		
 		DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
 		String dateString = format.format(date);
+		birthdayDate = date;
 		this.dataUser.setBirthdayDate(dateString);
 		
 	}
@@ -91,26 +94,20 @@ public class UserBB implements Serializable{
 		return states;
 	
 	}
+	
+	public void setStates(List<DataState> states) {
+		this.states = states;
+	}
 
 	public List<DataCity> getCities() {
 		
 		return cities;
 	}
-	
-	public List<DataCity> getCitiesState(String stateCode){
-		
-		try {
-			
-			return RestFactory.getServicesClient().getCities(stateCode);
-			
-		} catch (IOException e) {
-			
-			logger.log(Level.SEVERE, "Error obtener las cidades del departamento: " + stateCode, e);
-			
-		}
-		return null;
-	}
 
+	public void setCities(List<DataCity> cities) {
+		this.cities = cities;
+	}
+	
 	public DataState getState() {
 		return state;
 	}
@@ -126,16 +123,67 @@ public class UserBB implements Serializable{
 	public void setCity(DataCity city) {
 		this.city = city;
 	}
-
-	public void setStates(List<DataState> states) {
-		this.states = states;
+	
+	public UploadedFile getUploadedPicture() {
+		return uploadedPicture;
 	}
 
-	public void setCities(List<DataCity> cities) {
-		this.cities = cities;
+	public void setUploadedPicture(UploadedFile uploadedPicture) {
+		this.uploadedPicture = uploadedPicture;
+	}
+
+	public List<DataCity> getCitiesState(String stateCode){
+		
+		try {
+			
+			return RestFactory.getServicesClient().getCities(stateCode);
+			
+		} catch (IOException e) {
+			
+			logger.log(Level.SEVERE, "Error obtener las cidades del departamento: " + stateCode, e);
+			
+		}
+		return null;
 	}
 	
+	public void submit() {
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		Application app = context.getApplication();
+		bundle = app.getResourceBundle(context, languageVarName);
+		
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, null, bundle.getString("message_save_error"));
+		
+		try {
+			
+			DataResponse response = RestFactory.getServicesClient().updateUserData(this.dataUser);
+			
+			if(response != null && response.getCode() == 0){
+				
+				msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, bundle.getString("message_save_success"));
 	
+			}else if(response != null && response.getCode() != 0){
+				
+				logger.log(Level.SEVERE, "no se puso gurdar la informacion del usuario: " + response.getErrorMessage());
+				
+			}else{
+				
+				logger.log(Level.SEVERE, "Error al llamar al servicio web, response es null");
+				
+			}
+		
+		} catch (ClientProtocolException e) {
+			
+			logger.log(Level.SEVERE, "Error al llamar al servicio web ClientProtocolException", e);
+			
+		} catch (IOException e) {
+			
+			logger.log(Level.SEVERE, "Error al llamar al servicio web IOException", e);
+		}
+		
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+	}
+		
 	
 	
 }

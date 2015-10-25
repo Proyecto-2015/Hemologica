@@ -11,6 +11,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
@@ -36,9 +37,9 @@ public class RestServicesUtilsImpl implements IRestServicesUtils {
 		HttpResponse r = client.execute(post);
 		
 		/**
-		 * status code 0 = success
+		 * status code 200 = success
 		 */
-		if(r.getStatusLine().getStatusCode() == 0){
+		if(r.getStatusLine().getStatusCode() == 200){
 		
 			BufferedReader br = new BufferedReader(new InputStreamReader(r.getEntity().getContent()));
 			StringBuilder sb = new StringBuilder();
@@ -78,7 +79,44 @@ public class RestServicesUtilsImpl implements IRestServicesUtils {
 		HttpResponse r = client.execute(httpget);
 		
 		/**
-		 * status code 0 = success
+		 * status code 200 = success
+		 */
+		if(r.getStatusLine().getStatusCode() == 200){
+		
+			BufferedReader br = new BufferedReader(new InputStreamReader(r.getEntity().getContent()));
+			StringBuilder sb = new StringBuilder();
+			String s;
+
+			while ((s = br.readLine()) != null) {
+				sb.append(s);
+			}
+			return sb.toString();
+		}else{
+			return null;
+			
+		}
+	}
+
+	
+	@Override
+	public String put(String url, Object o) throws IOException {
+		
+		HttpClient client = HttpClientBuilder.create().build();
+    	HttpPut post = new HttpPut(url);
+    	
+    	Gson gson = new Gson();
+    	
+		/**
+		 * Se pasa siempre un objto en formato JSON en el contenido del mensaje
+		 */
+		StringEntity entity = new StringEntity(gson.toJson(o));
+		entity.setContentType("application/json");
+		post.setEntity(entity);
+		
+		HttpResponse r = client.execute(post);
+		
+		/**
+		 * status code 200 = success
 		 */
 		if(r.getStatusLine().getStatusCode() == 200){
 		

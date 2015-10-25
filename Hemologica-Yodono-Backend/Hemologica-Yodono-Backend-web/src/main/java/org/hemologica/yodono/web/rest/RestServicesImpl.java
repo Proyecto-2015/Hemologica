@@ -3,11 +3,12 @@ package org.hemologica.yodono.web.rest;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.ws.rs.core.Response;
-
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonacion;
+import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataUser;
@@ -16,6 +17,7 @@ import org.hemologica.datatypes.LoginData;
 
 public class RestServicesImpl implements IRestServices {
 	
+	private static final Logger logger = Logger.getLogger(RestServicesImpl.class.getName()); 
 	
 	@Override
 	public Response login(LoginData datos) {
@@ -117,16 +119,12 @@ public class RestServicesImpl implements IRestServices {
 		c.set(1989, 9, 14);
 		dataUser.setBirthdayDate("14/10/1989");
 		
-		DataState state = new DataState();
-		state.setCode("0");
-		state.setName("Montevideo state");
+		DataState state = getStates().get(0);
 		dataUser.setState(state);
 		
-		DataCity city = new DataCity();
-		city.setCode("1");
-		city.setName("Montevideo city");
-		
+		DataCity city = getCities().get(0);
 		dataUser.setCity(city);
+		
 		dataUser.setAddress("Rivera 2711");
 		dataUser.setEmail("pula14@gmail.com");
 		
@@ -195,12 +193,12 @@ public class RestServicesImpl implements IRestServices {
 		cities.add(dataCity);
 		
 		DataState dataCity2 = new DataState();
-		dataCity2.setCode("2");
+		dataCity2.setCode("1");
 		dataCity2.setName("Canelones");
 		cities.add(dataCity2);
 		
 		DataState dataCity3 = new DataState();
-		dataCity3.setCode("3");
+		dataCity3.setCode("2");
 		dataCity3.setName("Maldonado");
 		cities.add(dataCity3);
 		
@@ -311,6 +309,18 @@ public class RestServicesImpl implements IRestServices {
 		}
 		
 		return cities;
+	}
+
+	@Override
+	public DataResponse updateUser(DataUser dataUser) {
+		
+		logger.info(dataUser.getAddress());
+		logger.info(dataUser.getBirthdayDate());
+		
+		DataResponse dataResponse = new DataResponse();
+		dataResponse.setCode(0);
+		
+		return dataResponse;
 	}
 
 }

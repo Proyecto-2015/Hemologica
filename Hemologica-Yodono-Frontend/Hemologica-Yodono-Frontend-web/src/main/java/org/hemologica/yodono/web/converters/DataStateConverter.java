@@ -42,7 +42,7 @@ public class DataStateConverter implements Converter {
 		
 		if(value instanceof DataState){
 			
-			return ((DataState)value).getName();
+			return ((DataState)value).getCode();
 		}
 		return null;
 	}

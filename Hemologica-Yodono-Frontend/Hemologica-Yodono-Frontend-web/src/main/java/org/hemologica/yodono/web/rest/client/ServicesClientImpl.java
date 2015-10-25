@@ -11,6 +11,7 @@ import org.hemologica.constants.ConstansJson;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonacion;
+import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataUser;
@@ -161,7 +162,7 @@ public class ServicesClientImpl implements IServicesClient {
 	@Override
 	public List<DataCity> getCities(String statesCode) throws ClientProtocolException, IOException {
 		
-		String urlCities = url + ConstantsRest.PATH_CITIES;
+		String urlCities = url + ConstantsRest.PATH_CITIES_STATE;
 		
 		HashMap<String , String> hash = new HashMap<String, String>();
 		hash.put(ConstansJson.JSON_STATE, statesCode);
@@ -205,6 +206,20 @@ public class ServicesClientImpl implements IServicesClient {
 		List<DataState> cities = new Gson().fromJson(statesString, listType);
 		
 		return cities;
+	}
+
+	@Override
+	public DataResponse updateUserData(DataUser dataUser) throws ClientProtocolException, IOException {
+		
+		String urlUsers = url + ConstantsRest.PATH_USERS;
+		
+		String responseString = "";
+		responseString = RestFactory.getRestServicesUtils().put(urlUsers, dataUser);
+		
+		DataResponse response = new Gson().fromJson(responseString, DataResponse.class);
+		
+		return response;
+		
 	}
 
 }
