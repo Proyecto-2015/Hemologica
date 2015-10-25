@@ -28,14 +28,52 @@
 			<base-name>org.hemologica.salud.messages</base-name>
 			<var>messages</var>
 		</resource-bundle>
-
 	</application>
-
-
+	
+	<converter>
+		<display-name>dataDonationBloodABOTypeConverter</display-name>
+		<converter-id>dataDonationBloodABOTypeConverter</converter-id>
+		<converter-class>org.hemologica.salud.web.converters.DataBloodABOTypeConverter</converter-class>
+	</converter>
+	<converter>
+		<display-name>dataBloodDTypeConverter</display-name>
+		<converter-id>dataBloodDTypeConverter</converter-id>
+		<converter-class>org.hemologica.salud.web.converters.DataBloodDTypeConverter</converter-class>
+	</converter>
+	<converter>
+		<display-name>dataDonationDonorTypeConverter</display-name>
+		<converter-id>dataDonationDonorTypeConverter</converter-id>
+		<converter-class>org.hemologica.salud.web.converters.DataDonationDonorTypeConverter</converter-class>
+	</converter>
+	<converter>
+		<display-name>dataDonationFailCauseConverter</display-name>
+		<converter-id>dataDonationFailCauseConverter</converter-id>
+		<converter-class>org.hemologica.salud.web.converters.DataDonationFailCauseConverter</converter-class>
+	</converter>
+	<converter>
+		<display-name>dataDonationFailConverter</display-name>
+		<converter-id>dataDonationFailConverter</converter-id>
+		<converter-class>org.hemologica.salud.web.converters.DataDonationFailConverter</converter-class>
+	</converter>
+	<converter>
+		<display-name>dataDonationStateConverter</display-name>
+		<converter-id>dataDonationStateConverter</converter-id>
+		<converter-class>org.hemologica.salud.web.converters.DataDonationStateConverter</converter-class>
+	</converter>
+	<converter>
+		<display-name>dataDocumentTypeConverter</display-name>
+		<converter-id>dataDocumentTypeConverter</converter-id>
+		<converter-class>org.hemologica.salud.web.converters.DataDocumentTypeConverter</converter-class>
+	</converter>
 	<converter>
 		<display-name>dataCityConverter</display-name>
 		<converter-id>dataCityConverter</converter-id>
 		<converter-class>org.hemologica.salud.web.converters.DataCityConverter</converter-class>
+	</converter>
+	<converter>
+		<display-name>dataCountryConverter</display-name>
+		<converter-id>dataCountryConverter</converter-id>
+		<converter-class>org.hemologica.salud.web.converters.DataCountryConverter</converter-class>
 	</converter>
 	<converter>
 		<display-name>dataStateConverter</display-name>
@@ -92,6 +130,11 @@
 			<property-class>org.hemologica.salud.web.beans.SessionBB</property-class>
 			<value></value>
 		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>donationBB</managed-bean-name>
+		<managed-bean-class>org.hemologica.salud.web.beans.DonationBB</managed-bean-class>
+		<managed-bean-scope>view</managed-bean-scope>
 	</managed-bean>
 
 	<navigation-rule>

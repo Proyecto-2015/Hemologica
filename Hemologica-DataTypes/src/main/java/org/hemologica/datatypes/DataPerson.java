@@ -14,6 +14,7 @@ public class DataPerson implements Serializable{
 	private String secondName;
 	private String firstLastName;
 	private String secondLastName;
+	private String documentCountry;
 	private String documentType;
 	private String documentNumber;
 	private String birthdayDate;
@@ -23,7 +24,12 @@ public class DataPerson implements Serializable{
 	private String telephone;
 	private String email;
 	
-	
+	public String getDocumentCountry() {
+		return documentCountry;
+	}
+	public void setDocumentCountry(String documentCountry) {
+		this.documentCountry = documentCountry;
+	}
 	public String getFirstName() {
 		return firstName;
 	}

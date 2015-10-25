@@ -4,7 +4,11 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.annotation.PostConstruct;
+
 import org.hemologica.datatypes.DataCity;
+import org.hemologica.datatypes.DataCountry;
+import org.hemologica.datatypes.DataDocumentType;
 import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataState;
 
@@ -27,11 +31,32 @@ public class PersonBB implements Serializable {
 	private DataState state;
 	private List<DataCity> cities;
 	private DataCity city;
+	private List<DataCountry> countries;
+	private DataCountry country;
+	private List<DataDocumentType> documentTypes;
+	private DataDocumentType documentType;
 	
+	@PostConstruct
+	public void init(){
+		dataPerson = new DataPerson();
+		/**
+		 *	TO-DO
+		 *	inicializar las codigueras 
+		 */
+	}
 	
 	
 	public void submit(){
 		logger.info("PersonBB: call submit()");
+	}
+	
+	
+	public List<DataDocumentType> getDocumentTypes() {
+		return documentTypes;
+	}
+
+	public void setDocumentTypes(List<DataDocumentType> documentTypes) {
+		this.documentTypes = documentTypes;
 	}
 
 	public List<DataState> getStates() {
@@ -83,6 +108,34 @@ public class PersonBB implements Serializable {
 
 	public void setSessionBB(SessionBB sessionBB) {
 		this.sessionBB = sessionBB;
+	}
+
+	public List<DataCountry> getCountries() {
+		return countries;
+	}
+
+	public void setCountries(List<DataCountry> countries) {
+		this.countries = countries;
+	}
+
+
+	public DataCountry getCountry() {
+		return country;
+	}
+
+
+	public void setCountry(DataCountry country) {
+		this.country = country;
+	}
+
+
+	public DataDocumentType getDocumentType() {
+		return documentType;
+	}
+
+
+	public void setDocumentType(DataDocumentType documentType) {
+		this.documentType = documentType;
 	}
 	
 	

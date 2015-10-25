@@ -24,156 +24,162 @@
 
 					<h:form class="form-horizontal" id="userForm">
 						<fieldset>
-							<!-- Name input-->
+
 							<div class="form-group">
-								<label class="col-md-3 control-label" for="name"><h:outputText
-										value="#{messages.form_user_first_name}" /></label>
-								<div class="col-md-9">
-									<label class="label-form-user control-label"><h:outputText
-											value="#{personBB.dataPerson.firstName}" /></label>
+								<label class="col-md-3 control-label" for="donation_date"><h:outputText
+										value="#{messages.donation_date}" /></label>
+								<div class="col-md-9 col-lg-5">
+									<p:calendar id="donation_date" class="form-control"
+										pattern="MM/dd/yyyy" mode="popup"
+										value="#{donationBB.dataDonacion.date}" />
 								</div>
 							</div>
 
 							<div class="form-group">
-								<label class="col-md-3 control-label" for="name"><h:outputText
-										value="#{messages.form_user_second_name}" /></label>
+								<label class="col-md-3 control-label" for="donation_state"><h:outputText
+										value="#{messages.donation_state}" /></label>
 								<div class="col-md-9">
-									<label class="label-form-user control-label"><h:outputText
-											value="#{personBB.dataPerson.secondName}" /></label>
+									<h:selectOneMenu id="donation_state" class="form-control"
+										value="#{donationBB.dataDonacion.state}" style="height: 34px;"
+										converter="dataDonationStateConverter">
+										<f:selectItems value="#{donationBB.donationStates}"
+											var="state" itemValue="#{state.code}"
+											itemLabel="#{state.displayName}" />
+									</h:selectOneMenu>
 								</div>
 							</div>
 
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="name"><h:outputText
-										value="#{messages.form_user_first_last_name}" /></label>
-								<div class="col-md-9">
-									<label class="label-form-user control-label"><h:outputText
-											value="#{personBB.dataPerson.firstLastName}" /></label>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="name"><h:outputText
-										value="#{messages.form_user_second_last_name}" /></label>
-								<div class="col-md-9">
-									<label class="label-form-user control-label"><h:outputText
-											value="#{personBB.dataPerson.secondLastName}" /></label>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="name"><h:outputText
-										value="#{messages.form_user_document_type}" /></label>
-								<div class="col-md-9">
-									<label class="label-form-user control-label"><h:outputText
-											value="#{personBB.dataPerson.documentType}" /></label>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="name"><h:outputText
-										value="#{messages.form_user_document_number}" /></label>
-								<div class="col-md-9">
-									<label class="label-form-user control-label"><h:outputText
-											value="#{personBB.dataPerson.documentNumber}" /></label>
-								</div>
-							</div>
+							<!-- IF donation state = FAILED -->
+
 							<div class="form-group">
 								<label class="col-md-3 control-label"
-									for="donations_input_search_date_from"><h:outputText
-										value="#{messages.form_user_birthday_date}" /></label>
-
-								<div class="col-md-9 col-lg-5">
-									<!--            <input id="birthday_date" for="donations_input_search_date_from" name="name" type="text" placeholder="#{messages.form_user_birthday_date}" class="form-control"/> -->
-									<!--                 <p:calendar id="donations_input_search_date_from" -->
-									<!-- 								value="MM/dd/yyyy" pattern="MM/dd/yyyy" /> -->
-
-									<p:calendar id="birthday_date" pattern="MM/dd/yyyy"
-										mode="popup" value="#{userBB.birthdayDate}" />
-
-									<!-- 					<div class="icon-list icon-edit pull-right cursor-pointer" onclick="enablesInputs()"/> -->
-									<!-- 					<button class="icon-list icon-edit pull-right" onclick="enablesInputs()"/> -->
-
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="name"><h:outputText
-										value="#{messages.form_user_state}" /></label>
-								<div class="col-md-9 col-lg-5">
-
-									<h:selectOneMenu class="form-control" value="#{userBB.states}"
-										style="height: 34px;">
-										<f:selectItems value="#{userBB.states}" var="state"
-											itemValue="state" itemLabel="#{state.name}" />
-										<f:ajax listener="#{userBB.changeState}" render="states" />
+									for="donation_failed_cause"><h:outputText
+										value="#{messages.donation_failed_cause}" /></label>
+								<div class="col-md-9">
+									<h:selectOneMenu id="donation_failed_cause"
+										class="form-control" value="#{donationBB.dataDonacion.fail}"
+										style="height: 34px;" converter="dataDonationFailConverter">
+										<f:selectItems value="#{donationBB.donationStates}" var="fail"
+											itemValue="#{fail.code}" itemLabel="#{fail.displayName}" />
 									</h:selectOneMenu>
-
-
-
-									<!--               	 <select class="form-control" id="state"> -->
-									<!--               	 	<option>aaa</option> -->
-									<!--               	 	<option>bbb</option> -->
-
-									<!--               	 	<c:forEach items="#{userBB.states}" var="stateItem"> -->
-									<!--                     	<c:if test="#{stateItem.key==personBB.dataPerson.state}"> -->
-									<!-- 						    <option  value="#{stateItem.key}" selected="selected"><h:outputText value="#{stateItem.value}"/></option> -->
-									<!-- 						</c:if> -->
-									<!-- 						<c:if test="#{stateItem.key!=personBB.dataPerson.state}"> -->
-									<!-- 						   <option  value="#{stateItem.key}"><h:outputText value="#{stateItem.value}"/></option> -->
-									<!-- 						</c:if> -->
-									<!--                     </c:forEach> -->
-									<!--                  </select> -->
-									<!--                  <p:ajax update="state"  listener="#{userBB.citiesState(state.value)}" /> -->
 								</div>
 							</div>
+
 							<div class="form-group">
-								<label class="col-md-3 control-label" for="name"><h:outputText
-										value="#{messages.form_user_city}" /></label>
-								<div class="col-md-9 col-lg-5">
-									<!--                 <input id="city" name="name" type="text" placeholder="#{messages.form_user_city}" class="form-control" -->
-									<!--                 	 value="#{personBB.dataPerson.city}"/> -->
-									<h:selectOneMenu class="form-control" id="cities"
-										value="#{userBB.city}" style="height: 34px;"
-										converter="dataCityConverter">
-										<f:selectItems value="#{userBB.cities}" var="city"
-											itemValue="#{city.code}" itemLabel="#{city.name}" />
+								<label class="col-md-3 control-label"
+									for="donation_failed_cause"><h:outputText
+										value="#{messages.donation_failed_cause}" /></label>
+								<div class="col-md-9">
+									<h:selectOneMenu id="donation_failed_cause"
+										class="form-control" value="#{donationBB.dataDonacion.fail}"
+										style="height: 34px;" converter="dataDonationFailConverter">
+										<f:selectItems value="#{donationBB.donationFails}" var="fail"
+											itemValue="#{fail.code}" itemLabel="#{fail.displayName}" />
 									</h:selectOneMenu>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-3 control-label"
+									for="donation_failed_cause"><h:outputText
+										value="#{messages.donation_failed_cause}" /></label>
+								<div class="col-md-9">
+									<h:selectOneMenu id="donation_failed_cause"
+										class="form-control"
+										value="#{donationBB.dataDonacion.fail.cause}"
+										style="height: 34px;"
+										converter="dataDonationFailCauseConverter">
+										<f:selectItems value="#{donationBB.donationFailCauses}"
+											var="cause" itemValue="#{cause.code}"
+											itemLabel="#{cause.displayName}" />
+									</h:selectOneMenu>
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-3 control-label" for="donation_failed_date"><h:outputText
+										value="#{messages.donation_failed_date}" /></label>
+								<div class="col-md-9">
+									<p:calendar id="donation_failed_date" class="form-control"
+										pattern="MM/dd/yyyy" mode="popup"
+										value="#{donationBB.dataDonacion.fail.date}" />
+								</div>
+							</div>
+
+							<div class="form-group">
+								<label class="col-md-3 control-label"
+									for="donation_failed_cause"><h:outputText
+										value="#{messages.donation_failed_cause}" /></label>
+								<div class="col-md-9">
+									<h:selectOneMenu id="donation_failed_cause"
+										class="form-control"
+										value="#{donationBB.dataDonacion.fail.cause}"
+										style="height: 34px;"
+										converter="dataDonationFailCauseConverter">
+										<f:selectItems value="#{donationBB.donationFailCauses}"
+											var="cause" itemValue="#{cause.code}"
+											itemLabel="#{cause.displayName}" />
+									</h:selectOneMenu>
+								</div>
+							</div>
 
 
-									<!--                  <select class="form-control" id="city"> -->
-									<!--               	 	<c:forEach items="#{userBB.citiesState(state.value)}" var="cityItem"> -->
-									<!--                     	<c:if test="#{cityItem.key==personBB.dataPerson.city}"> -->
-									<!-- 						    <option  value="#{cityItem.key}" selected="selected"><h:outputText value="#{cityItem.value}"/></option> -->
-									<!-- 						</c:if> -->
-									<!-- 						<c:if test="#{cityItem.key!=personBB.dataPerson.city}"> -->
-									<!-- 						   <option  value="#{cityItem.key}"><h:outputText value="#{cityItem.value}"/></option> -->
-									<!-- 						</c:if> -->
-									<!--                     </c:forEach> -->
-									<!--                  </select> -->
+							<!-- IF donation state = SUCCESS -->
+
+							<div class="form-group">
+								<label class="col-md-3 control-label" for="donation_abo_type"><h:outputText
+										value="#{messages.donation_abo_type}" /></label>
+								<div class="col-md-9">
+									<h:selectOneMenu id="donation_abo_type" class="form-control"
+										value="#{donationBB.dataDonacion.bloodABOType}"
+										style="height: 34px;" converter="dataDonationABOConverter">
+										<f:selectItems value="#{donationBB.donationABOTypes}"
+											var="type" itemValue="#{type.code}"
+											itemLabel="#{type.displayName}" />
+									</h:selectOneMenu>
 								</div>
 							</div>
+
 							<div class="form-group">
-								<label class="col-md-3 control-label" for="name"><h:outputText
-										value="#{messages.form_user_address}" /></label>
-								<div class="col-md-9 col-lg-5">
-									<input id="address" name="name" type="text"
-										placeholder="#{messages.form_user_address}"
-										class="form-control" value="#{personBB.dataPerson.address}" />
+								<label class="col-md-3 control-label" for="donation_d_type"><h:outputText
+										value="#{messages.donation_d_type}" /></label>
+								<div class="col-md-9">
+									<h:selectOneMenu id="donation_d_type" class="form-control"
+										value="#{donationBB.dataDonacion.bloodDType}"
+										style="height: 34px;" converter="dataDonationDConverter">
+										<f:selectItems value="#{donationBB.donationDTypes}" var="type"
+											itemValue="#{type.code}" itemLabel="#{cause.displayName}" />
+									</h:selectOneMenu>
 								</div>
 							</div>
+
 							<div class="form-group">
-								<label class="col-md-3 control-label" for="name"><h:outputText
-										value="#{messages.form_user_telephone}" /></label>
-								<div class="col-md-9 col-lg-5">
-									<input id="telephone" name="name" type="text"
-										placeholder="#{messages.form_user_telephone}"
-										class="form-control" value="#{personBB.dataPerson.telephone}" />
+								<label class="col-md-3 control-label" for="donation_d_type"><h:outputText
+										value="#{messages.donation_d_type}" /></label>
+								<div class="col-md-9">
+									<h:selectOneMenu id="donation_d_type" class="form-control"
+										value="#{donationBB.dataDonacion.bloodDType}"
+										style="height: 34px;" converter="dataDonationDConverter">
+										<f:selectItems value="#{donationBB.donationDTypes}"
+											var="cause" itemValue="#{cause.code}"
+											itemLabel="#{cause.displayName}" />
+									</h:selectOneMenu>
 								</div>
 							</div>
+
 							<div class="form-group">
-								<label class="col-md-3 control-label" for="email"><h:outputText
-										value="#{messages.form_user_email}" /></label>
-								<div class="col-md-9 col-lg-5">
-									<input id="email" name="name" type="text"
-										placeholder="#{messages.form_user_email}" class="form-control"
-										value="#{personBB.dataPerson.email}" />
+								<label class="col-md-3 control-label" for="donation_d_type"><h:outputText
+										value="#{messages.donation_d_type}" /></label>
+								<div class="col-md-9">
+									<pe:timePicker value="#{donationBB.dataDonacion.extractionTimeBegin}" mode="inline"/>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label class="col-md-3 control-label" for="donation_d_type"><h:outputText
+										value="#{messages.donation_d_type}" /></label>
+								<div class="col-md-9">
+									<pe:timePicker value="#{donationBB.dataDonacion.extractionTimeEnd}" mode="inline"/>
 								</div>
 							</div>
 

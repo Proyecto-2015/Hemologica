@@ -21,7 +21,6 @@
 		<param-value>true</param-value>
 	</context-param>
 
-
 	<welcome-file-list>
 		<welcome-file>index.xhtml</welcome-file>
 	</welcome-file-list>
@@ -64,5 +63,11 @@
 		<extension>map</extension>
 		<mime-type>application/json</mime-type>
 	</mime-mapping>
+
+
+	<error-page>
+		<exception-type>javax.faces.application.ViewExpiredException</exception-type>
+		<location>/index.xhtml</location>
+	</error-page>
 
 </web-app>
