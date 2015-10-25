@@ -125,4 +125,13 @@ public class DonationsBB implements Serializable{
 		return result;
 	}
 	
+	public void shareFacebook(){
+		
+		logger.info("facebook");
+	}
+	
+	public void shareTwitter(){
+		
+		logger.info("twitter");
+	}
 }

@@ -11,9 +11,16 @@
 	xmlns:pe="http://primefaces.org/ui/extensions">
 
 <ui:composition template="/template/template.xhtml">
-	
-	
 	<ui:define name="content">
+			<div id="fb-root"></div>
+<!-- 			<meta property="fb:app_id"        content="956915034395251" /> -->
+<!-- 			<meta property="og:url"           content="http://yodono.salud.uy" /> -->
+<!-- 		    <meta property="og:type"          content="article" /> -->
+<!-- 		    <meta property="og:title"         content="YoDono" /> -->
+<!-- 		    <meta property="og:description"   content="Dona sangre, salva vidas" /> -->
+<!-- 		    <meta property="og:image"         content="http://www.noblefoundation.co.in/img/bld.jpg" /> -->
+		
+	
 		 <div class="container-fluid">
 			<ol class="breadcrumb">
 				<li><a href="#"><h:outputText value="#{messages.menu_item_mis_donaciones}"/></a></li> 
@@ -47,8 +54,13 @@
 							<div class="timeline-heading">
 								<div id="container">
 									<h4 class="timeline-title" ><h:outputText value="#{donationItem.date}"/></h4>
-									<div class="facebook"></div>
-									<div class="twitter"></div>
+<!-- 									<div class="facebook"></div> -->
+<!-- 									<div class="twitter"></div> -->
+									<div class="fb-share-button facebook" data-href="https://developers.facebook.com/docs/plugins/" data-layout="icon"></div>
+									<div class="twitter">
+									<a href="https://twitter.com/share" class="twitter-share-button " data-url="www.yoDono.salud.uy" data-text="#{donationItem.name } #{messages.twitter_message}" data-via="yoDono" data-count="none" data-hashtags="SalvaVidas">Tweet</a>
+									</div>
+
 								</div>
 								<p>
 									<small class="text-muted" ><i

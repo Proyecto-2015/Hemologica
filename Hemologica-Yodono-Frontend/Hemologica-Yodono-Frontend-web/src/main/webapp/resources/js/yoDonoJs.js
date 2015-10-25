@@ -2,6 +2,48 @@
  * 
  */
 
+/**
+ * Facebook
+ */
+ window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '956915034395251',
+      xfbml      : true,
+      version    : 'v2.5'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/es_LA/sdk.js#xfbml=1&amp;version=v2.5&amp;appId=956915034395251";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+			
+//-------------------------
+ 
+/**
+ * Twitter
+ */
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+  
+ 
+  
+/**
+ * 
+ * @param date
+ * @returns {String}
+ */
+
 function getStringDifDates(date) {
 	
 	console.log("fecha donacion " + date);
@@ -66,9 +108,3 @@ function readPicture(input, output)
         reader.readAsDataURL(input.files[0]);
     }
 }
-
-$("[id='#{upload.clientId}']").change(
-    function()
-    {
-        readPicture(this, $("[id='#{image.clientId}']"));
-    });

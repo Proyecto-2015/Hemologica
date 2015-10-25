@@ -11,139 +11,179 @@
 	xmlns:pe="http://primefaces.org/ui/extensions">
 
 <ui:composition template="/template/template.xhtml">
-	
-  <ui:define name="content">
-   	<div class="container-fluid">
-		<ol class="breadcrumb">
-			<li><a href="#"><h:outputText value="#{messages.label_my_profile}"/></a></li> 
-		</ol>
 
-	<h:form class="form-horizontal" id="userForm">
-	
-<!-- 	<div class="col-md-6 col-md-offset-3"> -->
-<!-- 		<p:fileUpload binding="#{upload}" mode="simple" -->
-<!-- 		    allowTypes="/(\.|\/)(gif|jpe?g|png)$/" -->
-<!-- 		    value="#{userBB.uploadedPicture}"/> -->
-<!-- 		<p:graphicImage value="#" height="150" binding="#{image}" /> -->
-<!-- 	</div> -->
-	<div class="row">
-      <div class="col-md-6 col-md-offset-3">
-	
-		<fieldset>
-			
-			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true"/>
-              
-            <div class="form-group">
-              <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.form_user_first_name}"/></label>
-              <div class="col-md-9">
-                <label class="label-form-user control-label"><h:outputText value="#{userBB.dataUser.firstName}"/></label>
-              </div>
-            </div>         
-            <div class="form-group">
-              <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.form_user_second_name}"/></label>
-              <div class="col-md-9">
-                <label class="label-form-user control-label"><h:outputText value="#{userBB.dataUser.secondName}"/></label>
-              </div>
-            </div>     
-			<div class="form-group">
-              <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.form_user_first_last_name}"/></label>
-              <div class="col-md-9">
-                <label class="label-form-user control-label"><h:outputText value="#{userBB.dataUser.firstLastName}"/></label>
-              </div>
-            </div>
-			<div class="form-group">
-              <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.form_user_second_last_name}"/></label>
-              <div class="col-md-9">
-                <label class="label-form-user control-label"><h:outputText value="#{userBB.dataUser.secondLastName}"/></label>
-              </div>
-            </div>  
-            <div class="form-group">
-              <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.form_user_document_type}"/></label>
-              <div class="col-md-9">
-                <label class="label-form-user control-label"><h:outputText value="#{userBB.dataUser.documentType}"/></label>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.form_user_document_number}"/></label>
-              <div class="col-md-9">
-                <label class="label-form-user control-label"><h:outputText value="#{userBB.dataUser.documentNumber}"/></label>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-md-3 control-label" for="donations_input_search_date_from"><h:outputText value="#{messages.form_user_birthday_date}"/></label>
-                       
-				<div class="col-md-9 col-lg-5">
-				    <p:calendar id="birthday_date" pattern="dd/MM/yyyy" mode="popup" value="#{userBB.birthdayDate}"/>	
+	<ui:define name="content">
+		<!--    	<div class="container-fluid"> -->
+		<div>
+			<ol class="breadcrumb">
+				<li><a href="#"><h:outputText
+							value="#{messages.label_my_profile}" /></a></li>
+			</ol>
+
+			<h:form>
+				<div class="col-xs-12 col-md-12 col-lg-2">
+					
+					<p:graphicImage class="image-user center"  value="#{userBB.image}">
+<!-- 					<p:graphicImage class="image-user center" library="img" name="user-icon.png" > -->
+					</p:graphicImage>
+
+					<p:fileUpload class="center" mode="simple" style="padding-top: 5px;" skinSimple="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
+						value="#{userBB.uploadedPicture}" />
+
 				</div>
-            </div>
-            <div class="form-group">
-              <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.form_user_state}"/></label>
-              <div class="col-md-9 col-lg-5">   	
-              	<h:selectOneMenu class="form-control" value="#{userBB.state}" style="height: 34px;">
-              		<f:selectItems value="#{userBB.states}" var="state" itemValue="#{state}" itemLabel="#{state.name}" />
-              		<f:converter converterId="dataStateConverter" />
-				    <p:ajax update="cities"  />
-				</h:selectOneMenu>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.form_user_city}"/></label>
-              <div class="col-md-9 col-lg-5">
+				 <div class="col-xs-12 col-md-12 col-lg-9 bank-info ">
 
-				<h:selectOneMenu class="form-control" id="cities" value="#{userBB.city}" style="height: 34px;" converter="dataCityConverter" >
-				    <f:selectItems value="#{userBB.getCitiesState(userBB.state.code)}" var="city" itemValue="city" itemLabel="#{city.name}"/>
-				</h:selectOneMenu>
-              </div>
-            </div>
-            <div class="form-group">
-              <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.form_user_address}"/></label>
-              <div class="col-md-9 col-lg-5">
-                <h:inputText id="address" name="name" type="text" class="form-control" value="#{userBB.dataUser.address}"/>
-              </div>
-            </div>
-       		<div class="form-group">
-              <label class="col-md-3 control-label" for="name"><h:outputText value="#{messages.form_user_telephone}"/></label>
-              <div class="col-md-9 col-lg-5">
-                <h:inputText id="telephone" name="name" type="text" class="form-control" value="#{userBB.dataUser.telephone}" />
-              </div>
-            </div>     
-            <div class="form-group">
-              <label class="col-md-3 control-label" for="email"><h:outputText value="#{messages.form_user_email}"/></label>
-              <div class="col-md-9 col-lg-5">
-                <h:inputText id="email" name="name" type="text" class="form-control" value="#{userBB.dataUser.email}" />
-              </div>
-            </div>  
-            <div class="checkbox center">
-				<label>
-					<h:selectBooleanCheckbox id="allowNotificationNeedDonor" widgetVar="allowNotificationNeedDonor" value="#{userBB.dataUser.allowNotificationNeedDonor}"/>
-					<h:outputText value="#{messages.form_user_allow_notification_need_donor}"/>
-				</label>
-			</div>
-			<div class="checkbox center">
-				<label>
-					<h:selectBooleanCheckbox id="allowNotificationAbleToDonate" widgetVar="allowNotificationAbleToDonate" value="#{userBB.dataUser.allowNotificationAbleToDonate}" />
-					<h:outputText value="#{messages.form_user_allow_notification_able_to_donate}"/>
-				</label>
-			</div>
-    
-            <!-- Form actions -->
-            
-            <div class="form-group">
-              <div class="col-md-12 text-right" style="margin-top: 15px;">
-				<p:commandButton class="btn btn-primary btn-lg center btnSave" value="#{messages.label_save}" 
-					action="#{userBB.submit}" process="@form" update="@form"/>
-              </div>
-            </div>
-          </fieldset>
-          
-	
-		</div>
-		</div>
-		
-	</h:form>
-	</div>
+					<div class="row form-horizontal" id="userForm">
+						<fieldset>
+							<p:messages id="messages" showDetail="true" autoUpdate="true"
+								closable="true" />
 
- </ui:define>
-	
+							<div class="form-group">
+								<label class="col-md-3 control-label" for="name"><h:outputText
+										value="#{messages.form_user_first_name}" /></label>
+								<div class="col-md-9">
+									<label class="label-form-user control-label"><h:outputText
+											value="#{userBB.dataUser.firstName}" /></label>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label" for="name"><h:outputText
+										value="#{messages.form_user_second_name}" /></label>
+								<div class="col-md-9">
+									<label class="label-form-user control-label"><h:outputText
+											value="#{userBB.dataUser.secondName}" /></label>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label" for="name"><h:outputText
+										value="#{messages.form_user_first_last_name}" /></label>
+								<div class="col-md-9">
+									<label class="label-form-user control-label"><h:outputText
+											value="#{userBB.dataUser.firstLastName}" /></label>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label" for="name"><h:outputText
+										value="#{messages.form_user_second_last_name}" /></label>
+								<div class="col-md-9">
+									<label class="label-form-user control-label"><h:outputText
+											value="#{userBB.dataUser.secondLastName}" /></label>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label" for="name"><h:outputText
+										value="#{messages.form_user_document_type}" /></label>
+								<div class="col-md-9">
+									<label class="label-form-user control-label"><h:outputText
+											value="#{userBB.dataUser.documentType}" /></label>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label" for="name"><h:outputText
+										value="#{messages.form_user_document_number}" /></label>
+								<div class="col-md-9">
+									<label class="label-form-user control-label"><h:outputText
+											value="#{userBB.dataUser.documentNumber}" /></label>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label"
+									for="donations_input_search_date_from"><h:outputText
+										value="#{messages.form_user_birthday_date}" /></label>
+
+								<div class="col-md-9 col-lg-5">
+									<p:calendar id="birthday_date" pattern="dd/MM/yyyy"
+										mode="popup" value="#{userBB.birthdayDate}" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label" for="name"><h:outputText
+										value="#{messages.form_user_state}" /></label>
+								<div class="col-md-9 col-lg-5">
+									<h:selectOneMenu class="form-control" value="#{userBB.state}"
+										style="height: 34px;">
+										<f:selectItems value="#{userBB.states}" var="state"
+											itemValue="#{state}" itemLabel="#{state.name}" />
+										<f:converter converterId="dataStateConverter" />
+										<p:ajax update="cities" />
+									</h:selectOneMenu>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label" for="name"><h:outputText
+										value="#{messages.form_user_city}" /></label>
+								<div class="col-md-9 col-lg-5">
+
+									<h:selectOneMenu class="form-control" id="cities"
+										value="#{userBB.city}" style="height: 34px;"
+										converter="dataCityConverter">
+										<f:selectItems
+											value="#{userBB.getCitiesState(userBB.state.code)}"
+											var="city" itemValue="city" itemLabel="#{city.name}" />
+									</h:selectOneMenu>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label" for="name"><h:outputText
+										value="#{messages.form_user_address}" /></label>
+								<div class="col-md-9 col-lg-5">
+									<h:inputText id="address" name="name" type="text"
+										class="form-control" value="#{userBB.dataUser.address}" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label" for="name"><h:outputText
+										value="#{messages.form_user_telephone}" /></label>
+								<div class="col-md-9 col-lg-5">
+									<h:inputText id="telephone" name="name" type="text"
+										class="form-control" value="#{userBB.dataUser.telephone}" />
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-md-3 control-label" for="email"><h:outputText
+										value="#{messages.form_user_email}" /></label>
+								<div class="col-md-9 col-lg-5">
+									<h:inputText id="email" name="name" type="text"
+										class="form-control" value="#{userBB.dataUser.email}" />
+								</div>
+							</div>
+							<div class="checkbox center">
+								<label> <h:selectBooleanCheckbox
+										id="allowNotificationNeedDonor"
+										widgetVar="allowNotificationNeedDonor"
+										value="#{userBB.dataUser.allowNotificationNeedDonor}" /> <h:outputText
+										value="#{messages.form_user_allow_notification_need_donor}" />
+								</label>
+							</div>
+							<div class="checkbox center">
+								<label> <h:selectBooleanCheckbox
+										id="allowNotificationAbleToDonate"
+										widgetVar="allowNotificationAbleToDonate"
+										value="#{userBB.dataUser.allowNotificationAbleToDonate}" />
+									<h:outputText
+										value="#{messages.form_user_allow_notification_able_to_donate}" />
+								</label>
+							</div>
+
+							<!-- Form actions -->
+
+							<div class="form-group">
+								<div class="col-md-12 text-right" style="margin-top: 15px;">
+									<p:commandButton class="btn btn-primary btn-lg center btnSave"
+										value="#{messages.label_save}" action="#{userBB.submit}"
+										process="@form" update="@form" />
+								</div>
+							</div>
+						</fieldset>
+
+
+					</div>
+
+				</div>
+			</h:form>
+		</div>
+
+	</ui:define>
+
 </ui:composition>
 </html>
