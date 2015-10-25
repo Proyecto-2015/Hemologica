@@ -9,5 +9,6 @@ public class ConstantsRest {
 	public static final String PATH_BANKS = "banks";
 	public static final String PATH_CITIES = "cities";
 	public static final String PATH_STATES = "states";
+	public static final String PATH_CITIES_STATE= "citiesState";
 
 }

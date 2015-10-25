@@ -8,6 +8,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonacion;
+import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataUser;
@@ -79,4 +80,13 @@ public interface IServicesClient {
 	 * @throws ClientProtocolException 
 	 */
 	public List<DataState> getStates() throws ClientProtocolException, IOException;
+	
+	/**
+	 * Actualiza la informacion del usuario en la base de datos.
+	 * @param dataUser
+	 * @return DataResponse con estado del llamado.
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public DataResponse updateUserData(DataUser dataUser) throws ClientProtocolException, IOException;
 }

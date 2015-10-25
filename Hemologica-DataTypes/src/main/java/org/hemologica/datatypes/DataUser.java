@@ -14,6 +14,7 @@ public class DataUser {
 	private String address;
 	private String telephone;
 	private String email;
+	private byte[] image;
 	private boolean allowNotificationNeedDonor;
 	private boolean allowNotificationAbleToDonate;
 	
@@ -101,6 +102,11 @@ public class DataUser {
 	public void setCity(DataCity city) {
 		this.city = city;
 	}
-	
+	public byte[] getImage() {
+		return image;
+	}
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
 	
 }
