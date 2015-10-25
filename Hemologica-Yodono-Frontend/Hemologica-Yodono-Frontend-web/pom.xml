@@ -13,40 +13,11 @@
 	<packaging>war</packaging>
 
 	<dependencies>
-
-<<<<<<< HEAD
-		<!-- <dependency> -->
-		<!-- <groupId>net.bootsfaces</groupId> -->
-		<!-- <artifactId>bootsfaces</artifactId> -->
-		<!-- <version>0.6.6</version> -->
-		<!-- </dependency> -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.primefaces</groupId> -->
-		<!-- <artifactId>primefaces</artifactId> -->
-		<!-- <version>5.2</version> -->
-		<!-- </dependency> -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.primefaces.extensions</groupId> -->
-		<!-- <artifactId>all-themes</artifactId> -->
-		<!-- <version>1.0.8</version> -->
-		<!-- <type>pom</type> -->
-		<!-- </dependency> -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.primefaces.extensions</groupId> -->
-		<!-- <artifactId>master-pom</artifactId> -->
-		<!-- <version>3.9.0</version> -->
-		<!-- <type>pom</type> -->
-		<!-- </dependency> -->
-
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
 			<version>2.8.2</version>
 		</dependency>
-
-
-=======
->>>>>>> 8c5d1ee22192161ff1d429c65c427b7386580c1e
 		<dependency>
 			<groupId>javax</groupId>
 			<artifactId>javaee-api</artifactId>
