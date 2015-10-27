@@ -8,6 +8,7 @@ import java.util.List;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.log4j.Logger;
 import org.hemologica.constants.ConstansJson;
+import org.hemologica.constants.ConstantsRest;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCity;
@@ -17,7 +18,6 @@ import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataUser;
 import org.hemologica.datatypes.LoginData;
-import org.hemologica.yodono.constants.ConstantsRest;
 import org.hemologica.yodono.factories.RestFactory;
 
 import com.google.gson.Gson;
