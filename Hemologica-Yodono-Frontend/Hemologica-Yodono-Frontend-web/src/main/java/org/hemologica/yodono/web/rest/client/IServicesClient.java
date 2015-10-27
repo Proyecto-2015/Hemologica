@@ -98,4 +98,13 @@ public interface IServicesClient {
 	 * @throws ClientProtocolException 
 	 */
 	public List<DataCampaign> getCampaigns(int cant) throws ClientProtocolException, IOException;
+
+	/**
+	 * Devuelve la campaña con id el pasado por parametro
+	 * @param campaignId
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public DataCampaign getCampaign(String campaignId) throws ClientProtocolException, IOException;
 }

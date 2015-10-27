@@ -346,4 +346,11 @@ public class RestServicesImpl implements IRestServices {
 		return campaigns;
 	}
 
+	@Override
+	public DataCampaign getCampaign(String campaignId) {
+		List<DataCampaign> campaigns = getCampaigns("");
+		
+		return campaigns.get(Integer.parseInt(campaignId)-1);
+	}
+
 }

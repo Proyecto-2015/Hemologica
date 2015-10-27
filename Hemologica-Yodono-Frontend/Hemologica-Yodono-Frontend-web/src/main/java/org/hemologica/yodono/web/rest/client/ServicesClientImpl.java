@@ -248,4 +248,28 @@ public class ServicesClientImpl implements IServicesClient {
 		return campaigns;
 	}
 
+	@Override
+	public DataCampaign getCampaign(String campaignId) throws ClientProtocolException, IOException {
+		
+		String urlCampaign = url + ConstantsRest.PATH_CAMPAIGN;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		hash.put(ConstansJson.JSON_CAMPAIGN_ID, campaignId);
+		
+		String campaignString = "";
+		try {
+			
+			campaignString = RestFactory.getRestServicesUtils().get(urlCampaign, hash);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.error("Error al llamar al servicio", e);
+			
+		}
+		
+		DataCampaign campaign = new Gson().fromJson(campaignString, DataCampaign.class);
+		
+		return campaign;
+	}
+
 }

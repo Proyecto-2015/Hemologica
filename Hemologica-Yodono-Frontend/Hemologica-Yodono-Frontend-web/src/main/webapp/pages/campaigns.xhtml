@@ -34,11 +34,11 @@
 							   <div class="col-xs-6 col-lg-4">
 							     <h2><h:outputText value="#{campaignItem.title}"/></h2>
 							     <p><h:outputText value="#{campaignItem.summary}"/></p>
-							     <p><h:commandLink class="btn btn-default"  action="#{campaignsBB.setCampaignItem(campaignItem)}" role="button" >
-<!-- 							     		<p:ajax update="#{campaignsBB.setCampaignItem(campaignItem)}" /> -->
+							     <p><h:link class="btn btn-default"  outcome="campaignItem" role="button" >
 							     		<h:outputText value="#{messages.details}"/> &raquo;
-	        
-							     	</h:commandLink>
+							     		
+	        							<f:param name="campaignId" value="#{campaignItem.id}" /> 
+							     	</h:link>
 							    </p>
 							   </div>
 							</c:forEach>

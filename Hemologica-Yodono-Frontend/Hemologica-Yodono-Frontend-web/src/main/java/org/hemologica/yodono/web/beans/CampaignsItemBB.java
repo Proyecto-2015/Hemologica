@@ -1,14 +1,18 @@
 package org.hemologica.yodono.web.beans;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Map;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 
+import org.apache.http.client.ClientProtocolException;
 import org.hemologica.datatypes.DataCampaign;
+import org.hemologica.yodono.factories.RestFactory;
 
 
 public class CampaignsItemBB implements Serializable{
@@ -20,13 +24,23 @@ public class CampaignsItemBB implements Serializable{
 	
 	@PostConstruct
 	public void init(){
+		FacesContext context = FacesContext.getCurrentInstance();
+	    String campaignId = context.getExternalContext()
+	                .getRequestParameterMap().get("campaignId");
+	
 		
-		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
-		Map<String, Object> sessionMap = externalContext.getSessionMap();
-		
-		dataCampaign = (DataCampaign) sessionMap.get("campaignsItem"); 
-		
-		logger.info(dataCampaign.getTitle());
+		try {
+			
+			dataCampaign = RestFactory.getServicesClient().getCampaign(campaignId);
+			
+		} catch (ClientProtocolException e) {
+			
+			logger.log(Level.SEVERE, "Error al llamar al servicio web ClientProtocolException", e);
+			
+		} catch (IOException e) {
+			
+			logger.log(Level.SEVERE, "Error al llamar al servicio web IOException", e);
+		} 
 	}
 
 	public DataCampaign getDataCampaign() {

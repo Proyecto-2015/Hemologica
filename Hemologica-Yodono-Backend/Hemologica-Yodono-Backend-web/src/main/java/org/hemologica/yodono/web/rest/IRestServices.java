@@ -81,4 +81,9 @@ public interface IRestServices {
 	@Path("/campaigns")
 	@Produces("application/json")
 	public List<DataCampaign> getCampaigns(@QueryParam(ConstansJson.JSON_CANT) String cant);
+	
+	@GET
+	@Path("/campaign")
+	@Produces("application/json")
+	public DataCampaign getCampaign(@QueryParam(ConstansJson.JSON_CAMPAIGN_ID) String campaignId);
 }
