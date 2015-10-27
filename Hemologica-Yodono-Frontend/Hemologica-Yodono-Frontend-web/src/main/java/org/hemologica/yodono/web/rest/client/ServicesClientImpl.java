@@ -9,6 +9,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.log4j.Logger;
 import org.hemologica.constants.ConstansJson;
 import org.hemologica.datatypes.DataBank;
+import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonacion;
 import org.hemologica.datatypes.DataResponse;
@@ -220,6 +221,31 @@ public class ServicesClientImpl implements IServicesClient {
 		
 		return response;
 		
+	}
+
+	@Override
+	public List<DataCampaign> getCampaigns(int cant) throws ClientProtocolException, IOException {
+		
+		String urlCampaigns = url + ConstantsRest.PATH_CAMPAIGNS;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		hash.put(ConstansJson.JSON_CANT, Integer.toString(cant));
+		
+		String campaignsString = "";
+		try {
+			
+			campaignsString = RestFactory.getRestServicesUtils().get(urlCampaigns, hash);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.error("Error al llamar al servicio", e);
+			
+		}
+		
+		Type listType = new TypeToken<List<DataCampaign>>(){}.getType();
+		List<DataCampaign> campaigns = new Gson().fromJson(campaignsString, listType);
+		
+		return campaigns;
 	}
 
 }

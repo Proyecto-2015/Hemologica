@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import javax.ws.rs.core.Response;
 import org.hemologica.datatypes.DataBank;
+import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonacion;
 import org.hemologica.datatypes.DataResponse;
@@ -321,6 +322,28 @@ public class RestServicesImpl implements IRestServices {
 		dataResponse.setCode(0);
 		
 		return dataResponse;
+	}
+
+	@Override
+	public List<DataCampaign> getCampaigns(String cant) {
+		List<DataCampaign> campaigns = new ArrayList<DataCampaign>();
+		
+		for(int i=1;i<7;i++){
+			DataCampaign c1 = new DataCampaign();
+			c1.setId(Integer.toString(i));
+			c1.setTitle("Titulo " );
+			c1.setSubtitle("Sub Titulo");
+			
+			c1.setText("Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. "
+					+ "Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. "
+					+ "Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. " );
+			c1.setSummary("Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. " + i);
+			
+			c1.setDate("12/12/2015");
+			campaigns.add(c1);
+		}
+		
+		return campaigns;
 	}
 
 }

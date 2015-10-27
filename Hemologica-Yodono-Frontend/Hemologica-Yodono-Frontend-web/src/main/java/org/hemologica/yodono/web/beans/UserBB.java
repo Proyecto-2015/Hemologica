@@ -1,12 +1,15 @@
 package org.hemologica.yodono.web.beans;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
-import java.nio.file.Files;
+import java.net.DatagramSocketImpl;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,14 +22,13 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.ExternalContextFactory;
 import javax.faces.context.FacesContext;
+import javax.imageio.ImageIO;
 import javax.servlet.ServletContext;
+import javax.swing.ImageIcon;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.log4j.lf5.util.ResourceUtils;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
@@ -71,19 +73,25 @@ public class UserBB implements Serializable{
 				image = new DefaultStreamedContent(new ByteArrayInputStream(dataUser.getImage()));
 				
 			}else{
-				String relativeWebPath = "resources/img/user-icon.png";
-				ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-				String absoluteDiskPath = servletContext.getRealPath(relativeWebPath);
+//				String relativeWebPath = "resources/img/user-icon.png";
+//				ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+//				String absoluteDiskPath = servletContext.getRealPath(relativeWebPath);
+//				
 				File file = new File("/Users/paularoche/Desktop/img.png");
 				
+//				
 				byte[] bFile = new byte[(int) file.length()];
-			        
+//			        
 				FileInputStream fileInputStream = new FileInputStream(file);
 				fileInputStream.read(bFile);
 				fileInputStream.close();
 				imageByte = bFile;
 //				image =  new DefaultStreamedContent(new FileInputStream(file), "image/png");
-				image = new DefaultStreamedContent(new ByteArrayInputStream(bFile)); 
+				
+
+				//imageByte = imgBytes;
+				
+				image = new DefaultStreamedContent(new ByteArrayInputStream(bFile), "image/png"); 
 				
 			}
 		} catch (IOException e) {

@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">   
+     
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<ui:composition template="/template/template.xhtml">
+	
+	
+	<ui:define name="content">
+		<div class="container-fluid">
+			<ol class="breadcrumb">
+				<li><a href="#"><h:outputText value="#{messages.menu_item_campaigns}"/></a></li> 
+			</ol>
+		</div>
+		<h:form>
+	    	<div class="container">
+	      		<div class="row row-offcanvas row-offcanvas-right">
+	
+	        		<div class="col-xs-12 col-sm-12">
+	       
+						<div class="jumbotron">
+						  <h1><h:outputText  style="color: #912B2B" value="#{messages.message_campaigns_title}"/></h1>
+						  <p><h:outputText value="#{messages.message_campaigns_text}"/></p>
+						</div>
+						<div class="row">
+							<c:forEach items="#{campaignsBB.campaigns}" var="campaignItem" varStatus="counter">				
+							   <div class="col-xs-6 col-lg-4">
+							     <h2><h:outputText value="#{campaignItem.title}"/></h2>
+							     <p><h:outputText value="#{campaignItem.summary}"/></p>
+							     <p><h:commandLink class="btn btn-default"  action="#{campaignsBB.setCampaignItem(campaignItem)}" role="button" >
+<!-- 							     		<p:ajax update="#{campaignsBB.setCampaignItem(campaignItem)}" /> -->
+							     		<h:outputText value="#{messages.details}"/> &raquo;
+	        
+							     	</h:commandLink>
+							    </p>
+							   </div>
+							</c:forEach>
+	            		</div>
+	      				<hr/>
+	    			</div>	
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+
+</ui:composition>
+</html>

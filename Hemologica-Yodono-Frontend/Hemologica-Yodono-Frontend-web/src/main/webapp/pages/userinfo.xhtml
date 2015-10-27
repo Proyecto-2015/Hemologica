@@ -8,7 +8,9 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:pm="http://primefaces.org/mobile"
-	xmlns:pe="http://primefaces.org/ui/extensions">
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
 
 <ui:composition template="/template/template.xhtml">
 
@@ -22,10 +24,10 @@
 
 			<h:form>
 				<div class="col-xs-12 col-md-12 col-lg-2">
-					
-					<p:graphicImage class="image-user center"  value="#{userBB.image}">
-<!-- 					<p:graphicImage class="image-user center" library="img" name="user-icon.png" > -->
-					</p:graphicImage>
+<!-- 					<o:graphicImage value="#{userBB.imageByte}" /> -->
+					<h:graphicImage class="image-user center"  />
+<!-- 				<p:graphicImage class="image-user center" library="img" name="user-icon.png" > --> 
+<!-- 					</h:graphicImage> -->
 
 					<p:fileUpload class="center" mode="simple" style="padding-top: 5px;" skinSimple="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
 						value="#{userBB.uploadedPicture}" />
