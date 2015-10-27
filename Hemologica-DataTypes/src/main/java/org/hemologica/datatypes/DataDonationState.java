@@ -2,6 +2,8 @@ package org.hemologica.datatypes;
 
 import java.io.Serializable;
 
+import org.hemologica.constants.DataDonationStateEnum;
+
 public class DataDonationState implements Serializable {
 
 	/**
@@ -24,5 +26,19 @@ public class DataDonationState implements Serializable {
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
 	}
-
+	
+	public Boolean isApproved(){
+		return code != null && code.equals(DataDonationStateEnum.MADE.value);
+	}
+	
+	@Override
+	public boolean equals(Object obj){
+		if( (obj instanceof DataDonationState) &&
+			(obj != null)){
+			return this.code.equals(((DataDonationState)obj).getCode());
+		}
+		return super.equals(obj);
+		
+	}
+	
 }

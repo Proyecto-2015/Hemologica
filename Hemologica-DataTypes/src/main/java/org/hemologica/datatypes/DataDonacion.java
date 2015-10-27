@@ -17,7 +17,6 @@ public class DataDonacion implements Serializable {
 	private String bank;
 	private String institution;
 	private String donorType;
-	private Boolean approved;
 	private DataPerson person;
 	private DataDonationDonorType dataDonorType;
 	private DataDonationState state;
@@ -27,14 +26,13 @@ public class DataDonacion implements Serializable {
 	private List<DataLaboratoryResult> labResults;
 
 	private Date extractionTimeBegin;
-	private Date extractionTiemEnd;
+	private Date extractionTimeEnd;
 
 	public DataDonacion() {
 		this.fail = new DataDonationFail();
 		this.bloodABOType = new DataBloodABOType();
 		this.bloodDType = new DataBloodDType();
 		this.dataDonorType = new DataDonationDonorType();
-		this.state = new DataDonationState();
 		this.person = new DataPerson();
 		this.labResults = new ArrayList<DataLaboratoryResult>();
 	}
@@ -80,11 +78,15 @@ public class DataDonacion implements Serializable {
 	}
 
 	public Boolean isApproved() {
-		return approved;
+		return this.state.isApproved();
 	}
-
-	public void setApproved(Boolean approved) {
-		this.approved = approved;
+	
+	public Boolean isStateDefined(){
+		return this.state != null;
+	}
+	
+	public Boolean isNotApproved() {
+		return !this.state.isApproved();
 	}
 
 	public List<DataLaboratoryResult> getLabResults() {
@@ -93,14 +95,6 @@ public class DataDonacion implements Serializable {
 
 	public void setLabResults(List<DataLaboratoryResult> labResults) {
 		this.labResults = labResults;
-	}
-
-	public DataDonationState getState() {
-		return state;
-	}
-
-	public void setState(DataDonationState state) {
-		this.state = state;
 	}
 
 	public DataPerson getPerson() {
@@ -143,12 +137,12 @@ public class DataDonacion implements Serializable {
 		this.extractionTimeBegin = extractionTimeBegin;
 	}
 
-	public Date getExtractionTiemEnd() {
-		return extractionTiemEnd;
+	public Date getExtractionTimeEnd() {
+		return extractionTimeEnd;
 	}
 
-	public void setExtractionTiemEnd(Date extractionTiemEnd) {
-		this.extractionTiemEnd = extractionTiemEnd;
+	public void setExtractionTimeEnd(Date extractionTimeEnd) {
+		this.extractionTimeEnd = extractionTimeEnd;
 	}
 
 	public DataBloodDType getBloodDType() {
@@ -157,6 +151,14 @@ public class DataDonacion implements Serializable {
 
 	public void setBloodDType(DataBloodDType bloodDType) {
 		this.bloodDType = bloodDType;
+	}
+
+	public DataDonationState getState() {
+		return state;
+	}
+
+	public void setState(DataDonationState state) {
+		this.state = state;
 	}
 
 }

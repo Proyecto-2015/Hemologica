@@ -12,199 +12,149 @@
 </h:head>
 <h:body>
 
-	<ui:define name="content">
-		<div class="container-fluid">
-			<ol class="breadcrumb">
-				<li><a href="#"><h:outputText
-							value="#{messages.label_my_profile}" /></a></li>
-			</ol>
+	<div class="container-fluid">
 
-			<div class="row">
-				<div class="col-md-6 col-md-offset-3">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
 
-					<h:form class="form-horizontal" id="userForm">
-						<fieldset>
+				<h:form class="form-horizontal" id="donationInformationForm">
+					<fieldset>
 
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="donation_date"><h:outputText
-										value="#{messages.donation_date}" /></label>
-								<div class="col-md-9 col-lg-5">
-									<p:calendar id="donation_date" class="form-control"
-										pattern="MM/dd/yyyy" mode="popup"
-										value="#{donationBB.dataDonacion.date}" />
-								</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label" for="donation_date"><h:outputText
+									value="#{messages.donation_date}" /></label>
+							<div class="col-md-9 col-lg-5">
+								<p:calendar id="donation_date" pattern="MM/dd/yyyy" mode="popup"
+									value="#{donationBB.dataDonacion.date}" />
 							</div>
+						</div>
 
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="donation_state"><h:outputText
-										value="#{messages.donation_state}" /></label>
-								<div class="col-md-9">
-									<h:selectOneMenu id="donation_state" class="form-control"
-										value="#{donationBB.dataDonacion.state}" style="height: 34px;"
-										converter="dataDonationStateConverter">
-										<f:selectItems value="#{donationBB.donationStates}"
-											var="state" itemValue="#{state.code}"
-											itemLabel="#{state.displayName}" />
-									</h:selectOneMenu>
-								</div>
+						<div class="form-group">
+							<label class="col-md-3 control-label" for="donation_state"><h:outputText
+									value="#{messages.donation_state}" /></label>
+							<div class="col-md-9">
+								<h:selectOneMenu id="donation_state" styleClass="form-control"
+									value="#{donationBB.dataDonacion.state}" style="height: 34px;"
+									converter="dataDonationStateConverter"
+									valueChangeListener="#{donationBB.dataDonationStateChange}">
+									<p:ajax  update="@form"/>
+									<f:selectItems value="#{donationBB.donationStates}" var="state"
+										itemValue="#{state}" itemLabel="#{messages[state.displayName]}" />
+								</h:selectOneMenu>
 							</div>
+						</div>
 
-							<!-- IF donation state = FAILED -->
+						<!-- IF donation state = FAILED -->
 
-							<div class="form-group">
-								<label class="col-md-3 control-label"
-									for="donation_failed_cause"><h:outputText
-										value="#{messages.donation_failed_cause}" /></label>
-								<div class="col-md-9">
-									<h:selectOneMenu id="donation_failed_cause"
-										class="form-control" value="#{donationBB.dataDonacion.fail}"
-										style="height: 34px;" converter="dataDonationFailConverter">
-										<f:selectItems value="#{donationBB.donationStates}" var="fail"
-											itemValue="#{fail.code}" itemLabel="#{fail.displayName}" />
-									</h:selectOneMenu>
-								</div>
+						<h:panelGroup layout="block" styleClass="form-group" rendered="#{donationBB.dataDonacion.isStateDefined() and donationBB.dataDonacion.isNotApproved()}" >
+							<label class="col-md-3 control-label" for="donation_failed"><h:outputText
+									value="#{messages.donation_failed_type}" /></label>
+							<div class="col-md-9">
+								<h:selectOneMenu id="donation_failed" styleClass="form-control"
+									value="#{donationBB.dataDonacion.fail}" style="height: 34px;"
+									converter="dataDonationFailConverter">
+									<f:selectItems value="#{donationBB.donationStates}" var="fail"
+										itemValue="#{fail.code}" itemLabel="#{fail.displayName}" />
+								</h:selectOneMenu>
 							</div>
+						</h:panelGroup>
 
-							<div class="form-group">
-								<label class="col-md-3 control-label"
-									for="donation_failed_cause"><h:outputText
-										value="#{messages.donation_failed_cause}" /></label>
-								<div class="col-md-9">
-									<h:selectOneMenu id="donation_failed_cause"
-										class="form-control" value="#{donationBB.dataDonacion.fail}"
-										style="height: 34px;" converter="dataDonationFailConverter">
-										<f:selectItems value="#{donationBB.donationFails}" var="fail"
-											itemValue="#{fail.code}" itemLabel="#{fail.displayName}" />
-									</h:selectOneMenu>
-								</div>
+
+						<h:panelGroup layout="block" styleClass="form-group" rendered="#{donationBB.dataDonacion.isStateDefined() and donationBB.dataDonacion.isNotApproved()}" >
+							<label class="col-md-3 control-label" for="donation_failed_date"><h:outputText
+									value="#{messages.donation_failed_date}" /></label>
+							<div class="col-md-9">
+								<p:calendar id="donation_failed_date" pattern="MM/dd/yyyy"
+									mode="popup" value="#{donationBB.dataDonacion.fail.date}" />
 							</div>
+						</h:panelGroup>
 
-							<div class="form-group">
-								<label class="col-md-3 control-label"
-									for="donation_failed_cause"><h:outputText
-										value="#{messages.donation_failed_cause}" /></label>
-								<div class="col-md-9">
-									<h:selectOneMenu id="donation_failed_cause"
-										class="form-control"
-										value="#{donationBB.dataDonacion.fail.cause}"
-										style="height: 34px;"
-										converter="dataDonationFailCauseConverter">
-										<f:selectItems value="#{donationBB.donationFailCauses}"
-											var="cause" itemValue="#{cause.code}"
-											itemLabel="#{cause.displayName}" />
-									</h:selectOneMenu>
-								</div>
+						<h:panelGroup layout="block" styleClass="form-group" rendered="#{donationBB.dataDonacion.isStateDefined() and donationBB.dataDonacion.isNotApproved()}" >
+							<label class="col-md-3 control-label" for="donation_failed_cause"><h:outputText
+									value="#{messages.donation_failed_cause}" /></label>
+							<div class="col-md-9">
+								<h:selectOneMenu id="donation_failed_cause"
+									styleClass="form-control"
+									value="#{donationBB.dataDonacion.fail.cause}"
+									style="height: 34px;"
+									converter="dataDonationFailCauseConverter">
+									<f:selectItems value="#{donationBB.donationFailCauses}"
+										var="cause" itemValue="#{cause.code}"
+										itemLabel="#{cause.displayName}" />
+								</h:selectOneMenu>
 							</div>
+						</h:panelGroup>
 
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="donation_failed_date"><h:outputText
-										value="#{messages.donation_failed_date}" /></label>
-								<div class="col-md-9">
-									<p:calendar id="donation_failed_date" class="form-control"
-										pattern="MM/dd/yyyy" mode="popup"
-										value="#{donationBB.dataDonacion.fail.date}" />
-								</div>
+
+						<!-- IF donation state = SUCCESS -->
+
+						<h:panelGroup layout="block" styleClass="form-group" rendered="#{donationBB.dataDonacion.isStateDefined() and donationBB.dataDonacion.isApproved()}" >
+							<label class="col-md-3 control-label" for="donation_abo_type"><h:outputText
+									value="#{messages.donation_abo_type}" /></label>
+							<div class="col-md-9">
+								<h:selectOneMenu id="donation_abo_type"
+									styleClass="form-control"
+									value="#{donationBB.dataDonacion.bloodABOType}"
+									style="height: 34px;" converter="dataBloodABOTypeConverter">
+									<f:selectItems value="#{donationBB.donationABOTypes}"
+										var="type" itemValue="#{type.code}"
+										itemLabel="#{type.displayName}" />
+								</h:selectOneMenu>
 							</div>
+						</h:panelGroup>
 
-							<div class="form-group">
-								<label class="col-md-3 control-label"
-									for="donation_failed_cause"><h:outputText
-										value="#{messages.donation_failed_cause}" /></label>
-								<div class="col-md-9">
-									<h:selectOneMenu id="donation_failed_cause"
-										class="form-control"
-										value="#{donationBB.dataDonacion.fail.cause}"
-										style="height: 34px;"
-										converter="dataDonationFailCauseConverter">
-										<f:selectItems value="#{donationBB.donationFailCauses}"
-											var="cause" itemValue="#{cause.code}"
-											itemLabel="#{cause.displayName}" />
-									</h:selectOneMenu>
-								</div>
+						<h:panelGroup layout="block" styleClass="form-group" rendered="#{donationBB.dataDonacion.isStateDefined() and donationBB.dataDonacion.isApproved()}" >
+							<label class="col-md-3 control-label" for="donation_d_type"><h:outputText
+									value="#{messages.donation_d_type}" /></label>
+							<div class="col-md-9">
+								<h:selectOneMenu id="donation_d_type" styleClass="form-control"
+									value="#{donationBB.dataDonacion.bloodDType}"
+									style="height: 34px;" converter="dataBloodDTypeConverter">
+									<f:selectItems value="#{donationBB.donationDTypes}" var="type"
+										itemValue="#{type.code}" itemLabel="#{cause.displayName}" />
+								</h:selectOneMenu>
 							</div>
+						</h:panelGroup>
 
 
-							<!-- IF donation state = SUCCESS -->
 
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="donation_abo_type"><h:outputText
-										value="#{messages.donation_abo_type}" /></label>
-								<div class="col-md-9">
-									<h:selectOneMenu id="donation_abo_type" class="form-control"
-										value="#{donationBB.dataDonacion.bloodABOType}"
-										style="height: 34px;" converter="dataDonationABOConverter">
-										<f:selectItems value="#{donationBB.donationABOTypes}"
-											var="type" itemValue="#{type.code}"
-											itemLabel="#{type.displayName}" />
-									</h:selectOneMenu>
-								</div>
+						<h:panelGroup layout="block" styleClass="form-group" rendered="#{donationBB.dataDonacion.isStateDefined() and donationBB.dataDonacion.isApproved()}" >
+							<label class="col-md-3 control-label"
+								for="donation_extraction_time_begin"><h:outputText
+									value="#{messages.donation_extraction_time_begin}" /></label>
+							<div class="col-md-9">
+								<p:calendar id="donation_extraction_time_begin" 
+									timeOnly="true" pattern="HH:mm" title="Elija una hora"
+									value="#{donationBB.dataDonacion.extractionTimeBegin}"/>
 							</div>
+						</h:panelGroup>
 
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="donation_d_type"><h:outputText
-										value="#{messages.donation_d_type}" /></label>
-								<div class="col-md-9">
-									<h:selectOneMenu id="donation_d_type" class="form-control"
-										value="#{donationBB.dataDonacion.bloodDType}"
-										style="height: 34px;" converter="dataDonationDConverter">
-										<f:selectItems value="#{donationBB.donationDTypes}" var="type"
-											itemValue="#{type.code}" itemLabel="#{cause.displayName}" />
-									</h:selectOneMenu>
-								</div>
+						<h:panelGroup layout="block" styleClass="form-group" rendered="#{donationBB.dataDonacion.isStateDefined() and donationBB.dataDonacion.isApproved()}" >
+							<label class="col-md-3 control-label"
+								for="donation_extraction_time_end"><h:outputText
+									value="#{messages.donation_extraction_time_end}" /></label>
+							<div class="col-md-9">
+								<p:calendar id="donation_extraction_time_end"  timeOnly="true" pattern="HH:mm" 
+									value="#{donationBB.dataDonacion.extractionTimeEnd}" />
 							</div>
+						</h:panelGroup>
 
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="donation_d_type"><h:outputText
-										value="#{messages.donation_d_type}" /></label>
-								<div class="col-md-9">
-									<h:selectOneMenu id="donation_d_type" class="form-control"
-										value="#{donationBB.dataDonacion.bloodDType}"
-										style="height: 34px;" converter="dataDonationDConverter">
-										<f:selectItems value="#{donationBB.donationDTypes}"
-											var="cause" itemValue="#{cause.code}"
-											itemLabel="#{cause.displayName}" />
-									</h:selectOneMenu>
-								</div>
+
+						<!-- Form actions -->
+						<div class="form-group">
+							<div class="col-md-12 text-right" style="margin-top: 15px;">
+								<p:commandButton
+									styleClass="btn btn-primary btn-lg center btnSave"
+									value="#{messages.label_save}" action="#{personBB.submit()}"
+									process="@form" update="@form" />
+								<p:messages />
 							</div>
-
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="donation_d_type"><h:outputText
-										value="#{messages.donation_d_type}" /></label>
-								<div class="col-md-9">
-									<pe:timePicker value="#{donationBB.dataDonacion.extractionTimeBegin}" mode="inline"/>
-								</div>
-							</div>
-							
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="donation_d_type"><h:outputText
-										value="#{messages.donation_d_type}" /></label>
-								<div class="col-md-9">
-									<pe:timePicker value="#{donationBB.dataDonacion.extractionTimeEnd}" mode="inline"/>
-								</div>
-							</div>
-
-							<!-- Form actions -->
-
-							<div class="form-group">
-								<div class="col-md-12 text-right" style="margin-top: 15px;">
-
-
-									<p:commandButton class="btn btn-primary btn-lg center btnSave"
-										value="#{messages.label_save}" action="#{personBB.submit()}"
-										process="@form" update="@form" />
-
-									<p:messages />
-
-								</div>
-							</div>
-						</fieldset>
-					</h:form>
-				</div>
+						</div>
+					</fieldset>
+				</h:form>
 			</div>
 		</div>
-
-		<!-- 	</div> -->
-	</ui:define>
+	</div>
 
 </h:body>
 </html>

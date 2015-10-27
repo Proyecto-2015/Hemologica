@@ -31,8 +31,8 @@
 	</application>
 	
 	<converter>
-		<display-name>dataDonationBloodABOTypeConverter</display-name>
-		<converter-id>dataDonationBloodABOTypeConverter</converter-id>
+		<display-name>dataBloodABOTypeConverter</display-name>
+		<converter-id>dataBloodABOTypeConverter</converter-id>
 		<converter-class>org.hemologica.salud.web.converters.DataBloodABOTypeConverter</converter-class>
 	</converter>
 	<converter>
@@ -181,6 +181,14 @@
 		<navigation-case>
 			<from-outcome>person</from-outcome>
 			<to-view-id>/pages/person.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>donationCreateEdit</from-outcome>
+			<to-view-id>/pages/donationCreateEdit.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>

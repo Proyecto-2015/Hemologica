@@ -1,7 +1,15 @@
 package org.hemologica.yodono.web.beans;
 
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.net.DatagramSocketImpl;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -15,12 +23,19 @@ import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
+import javax.imageio.ImageIO;
+import javax.servlet.ServletContext;
+import javax.swing.ImageIcon;
+
+import org.apache.commons.io.IOUtils;
 import org.apache.http.client.ClientProtocolException;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataUser;
 import org.hemologica.yodono.factories.RestFactory;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 
 public class UserBB implements Serializable{
@@ -34,7 +49,10 @@ public class UserBB implements Serializable{
 	private List<DataCity> cities;
 	private DataCity city;
 	private Date birthdayDate;
+	
 	private UploadedFile uploadedPicture;
+	private StreamedContent image;
+	private byte[] imageByte;
 	
 	@ManagedProperty("#{messages}")
 	private ResourceBundle bundle;
@@ -50,6 +68,32 @@ public class UserBB implements Serializable{
 			state = dataUser.getState();
 			city = dataUser.getCity();
 			
+			if(dataUser.getImage() != null && dataUser.getImage().length != 0){
+				
+				image = new DefaultStreamedContent(new ByteArrayInputStream(dataUser.getImage()));
+				
+			}else{
+//				String relativeWebPath = "resources/img/user-icon.png";
+//				ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
+//				String absoluteDiskPath = servletContext.getRealPath(relativeWebPath);
+//				
+				File file = new File("/Users/paularoche/Desktop/img.png");
+				
+//				
+				byte[] bFile = new byte[(int) file.length()];
+//			        
+				FileInputStream fileInputStream = new FileInputStream(file);
+				fileInputStream.read(bFile);
+				fileInputStream.close();
+				imageByte = bFile;
+//				image =  new DefaultStreamedContent(new FileInputStream(file), "image/png");
+				
+
+				//imageByte = imgBytes;
+				
+				image = new DefaultStreamedContent(new ByteArrayInputStream(bFile), "image/png"); 
+				
+			}
 		} catch (IOException e) {
 			
 			logger.log(Level.SEVERE, "Error al llamar al servicio web", e);
@@ -130,6 +174,34 @@ public class UserBB implements Serializable{
 
 	public void setUploadedPicture(UploadedFile uploadedPicture) {
 		this.uploadedPicture = uploadedPicture;
+		
+		try {
+			InputStream input = uploadedPicture.getInputstream();
+			byte[] bytes = IOUtils.toByteArray(input);
+			dataUser.setImage(bytes);
+			image = new DefaultStreamedContent(new ByteArrayInputStream(dataUser.getImage()));
+			
+			
+		} catch (IOException e) {
+			
+			logger.log(Level.SEVERE, "Error al leer la imagen", e);
+		}
+	}
+
+	public StreamedContent getImage() {
+		return image;
+	}
+
+	public void setImage(StreamedContent image) {
+		this.image = image;
+	}
+
+	public byte[] getImageByte() {
+		return imageByte;
+	}
+
+	public void setImageByte(byte[] imageByte) {
+		this.imageByte = imageByte;
 	}
 
 	public List<DataCity> getCitiesState(String stateCode){

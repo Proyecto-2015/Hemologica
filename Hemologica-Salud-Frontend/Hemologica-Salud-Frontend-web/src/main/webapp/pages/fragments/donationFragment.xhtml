@@ -16,39 +16,31 @@
 </h:head>
 <h:body>
 
-	<ui:define name="content">
-		<div class="container-fluid">
-			<ol class="breadcrumb">
-				<li><a href="#"><h:outputText value="#{messages.label_my_profile}" /></a></li>
-			</ol>
-		</div>
-		<div>
-			  <p:tabView>
-			  	
-			  	<!-- Person -->
-			  	<p:tab>
-			  		<ui:include src="donationPersonFragment.xhtml" />
-			  	</p:tab>
-			  	
-			  	<!-- Donation Information -->
-			  	<p:tab>
-			  		<ui:include src="donationInformationFragment.xhtml" />
-			  	</p:tab>
-			  	
-			  	<!-- Donation Laboratory Results -->
-			  	<p:tab>
-			  		<ui:include src="donationLaboratoryResultFragment.xhtml" />
-			  	</p:tab>
-			  	
-			  	<!-- Donation Events -->
-			  	<p:tab>
-			  		<ui:include src="donationEventsFragment.xhtml" />
-			  	</p:tab>
-			  	
-			  </p:tabView>
-		</div>
+	<div>
+		<p:tabView>
 
-	</ui:define>
+			<!-- Person -->
+			<p:tab title="Donante">
+				<ui:include src="donationPersonFragment.xhtml" />
+			</p:tab>
+
+			<!-- Donation Information -->
+			<p:tab title="General">
+				<ui:include src="donationInformationFragment.xhtml" />
+			</p:tab>
+
+			<!-- Donation Laboratory Results -->
+			<p:tab title="Análisis">
+				<ui:include src="donationLaboratoryResultFragment.xhtml" />
+			</p:tab>
+
+			<!-- Donation Events -->
+			<p:tab title="Eventos Adversos">
+				<ui:include src="donationEventsFragment.xhtml" />
+			</p:tab>
+
+		</p:tabView>
+	</div>
 
 </h:body>
 </html>

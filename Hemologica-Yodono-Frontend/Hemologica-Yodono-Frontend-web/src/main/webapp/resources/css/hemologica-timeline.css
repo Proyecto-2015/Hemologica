@@ -112,22 +112,23 @@
 }
 
 .facebook{
-  background-image: url("#{resource['img/facebook-icon.png']}");
+/*   background-image: url("#{resource['img/facebook-icon.png']}"); */
   background-size: 20px 20px;
   background-repeat: no-repeat;
   background-position: right;
-  display: inline-block;
+/*   display: inline-block; */
+  display: inline-table;
   width: 20px;
   height: 20px;
   float: right;
   margin-left: 5px;
 }
 .twitter{
-	background-image: url("#{resource['img/twitter-icon.png']}");
+/* 	background-image: url("#{resource['img/twitter-icon.png']}"); */
   	background-size: 18px 18px;
   	background-repeat: no-repeat;
   	background-position: right;
-  	display: inline-block;
+  	display: grid;
   	width: 20px;
   	height: 20px;
   	float: right;
@@ -145,6 +146,10 @@
     width: 100%;
     margin-left: 10px;
     margin-right: 10px;
+}
+
+#container > div {
+    display: inline-table;
 }
 
 

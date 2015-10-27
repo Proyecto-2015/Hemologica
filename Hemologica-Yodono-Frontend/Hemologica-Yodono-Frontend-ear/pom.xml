@@ -32,6 +32,7 @@
 			<artifactId>Hemologica-Yodono-Frontend-web</artifactId>
 			<type>war</type>
 		</dependency>
+		
 	</dependencies>
 
 	<build>
@@ -66,7 +67,15 @@
 				<configuration>
 					<filename>${project.artifactId}.ear</filename>
 					<skip>false</skip>
-				</configuration>
+				</configuration>				
+<!-- 				<executions> -->
+<!-- 					<execution> -->
+<!-- 						<phase>install</phase> -->
+<!-- 						<goals> -->
+<!-- 							<goal>deploy</goal> -->
+<!-- 						</goals> -->
+<!-- 					</execution> -->
+<!-- 				</executions> -->
 			</plugin>
 		</plugins>
 	</build>

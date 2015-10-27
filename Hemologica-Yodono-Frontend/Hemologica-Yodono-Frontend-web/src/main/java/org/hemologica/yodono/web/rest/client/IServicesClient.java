@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
 import org.hemologica.datatypes.DataBank;
+import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonacion;
 import org.hemologica.datatypes.DataResponse;
@@ -89,4 +90,21 @@ public interface IServicesClient {
 	 * @throws ClientProtocolException 
 	 */
 	public DataResponse updateUserData(DataUser dataUser) throws ClientProtocolException, IOException;
+	
+	/**
+	 * Devuelve la cantidad de campañas pasadas por parametro por orden cronologico. Empezando por el dia de la fecha. 
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataCampaign> getCampaigns(int cant) throws ClientProtocolException, IOException;
+
+	/**
+	 * Devuelve la campaña con id el pasado por parametro
+	 * @param campaignId
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public DataCampaign getCampaign(String campaignId) throws ClientProtocolException, IOException;
 }

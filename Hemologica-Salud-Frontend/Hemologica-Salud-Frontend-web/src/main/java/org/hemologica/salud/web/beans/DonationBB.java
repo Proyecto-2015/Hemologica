@@ -2,9 +2,12 @@ package org.hemologica.salud.web.beans;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
+import javax.faces.event.ValueChangeEvent;
 
+import org.hemologica.constants.DataDonationStateEnum;
 import org.hemologica.datatypes.DataBloodABOType;
 import org.hemologica.datatypes.DataBloodDType;
 import org.hemologica.datatypes.DataDonacion;
@@ -20,6 +23,7 @@ public class DonationBB implements Serializable {
 	 */
 	private static final long serialVersionUID = -5395079020796675499L;
 	
+	private static final Logger logger = Logger.getLogger(DonationBB.class.getName());
 	
 	private SessionBB sessionBB;
 	private PersonBB personBB;
@@ -27,9 +31,7 @@ public class DonationBB implements Serializable {
 	
 	
 	private DataDonacion dataDonacion;
-	
 	private DataLaboratoryResult labResult;
-	
 	private List<DataDonationState> donationStates;
 	private List<DataDonationFail> donationFails;
 	private List<DataDonationFailCause> donationFailCauses;
@@ -39,38 +41,40 @@ public class DonationBB implements Serializable {
 	
 	@PostConstruct
 	public void init(){
+		logger.info("init DonationBB");
 		this.dataDonacion = new DataDonacion();
 		this.labResult = new DataLaboratoryResult();
+		this.donationStates = DataDonationStateEnum.getStates();
 	}
 	
+	
+	public void dataDonationStateChange(ValueChangeEvent ev){
+		dataDonacion.setState((DataDonationState) ev.getNewValue());
+	}
 
 	public DataDonacion getDataDonacion() {
 		return dataDonacion;
 	}
+	
 	public void setDataDonacion(DataDonacion dataDonacion) {
 		this.dataDonacion = dataDonacion;
 	}
+	
 	public SessionBB getSessionBB() {
 		return sessionBB;
 	}
+	
 	public void setSessionBB(SessionBB sessionBB) {
 		this.sessionBB = sessionBB;
 	}
+	
 	public PersonBB getPersonBB() {
 		return personBB;
 	}
+	
 	public void setPersonBB(PersonBB personBB) {
 		this.personBB = personBB;
 	}
-
-	public List<DataDonationState> getDonationStates() {
-		return donationStates;
-	}
-
-	public void setDonationStates(List<DataDonationState> donationStates) {
-		this.donationStates = donationStates;
-	}
-
 
 	public List<DataDonationFailCause> getDonationFailCauses() {
 		return donationFailCauses;
@@ -119,6 +123,16 @@ public class DonationBB implements Serializable {
 
 	public void setDonationDTypes(List<DataBloodDType> donationDTypes) {
 		this.donationDTypes = donationDTypes;
+	}
+
+
+	public List<DataDonationState> getDonationStates() {
+		return donationStates;
+	}
+
+
+	public void setDonationStates(List<DataDonationState> donationStates) {
+		this.donationStates = donationStates;
 	}
 
 }
