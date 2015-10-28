@@ -41,7 +41,7 @@ public class RestServicesImpl implements IRestServices {
 		List<DataDonacion> donaciones = new ArrayList<DataDonacion>();
 		
 		DataDonacion d = new DataDonacion();
-		d.setApproved(true);
+//		d.setApproved(true);
 		d.setBank("Banco de Sangre 1");
 		d.setInstitution("Hospital de clinicas");
 		d.setName("Pedro");
@@ -50,7 +50,7 @@ public class RestServicesImpl implements IRestServices {
 		donaciones.add(d);
 		
 		DataDonacion d3 = new DataDonacion();
-		d3.setApproved(true);
+//		d3.setApproved(true);
 		d3.setBank("Banco de Sangre 2");
 		d3.setInstitution("Hospital Britanico");
 		d3.setName("Pedro");
@@ -59,7 +59,7 @@ public class RestServicesImpl implements IRestServices {
 		donaciones.add(d3);
 		
 		DataDonacion d2 = new DataDonacion();
-		d2.setApproved(false);
+//		d2.setApproved(false);
 		d2.setBank("Banco de Sangre 2");
 		d2.setInstitution("Hospital Pereira Rossell");
 		d2.setName("Pedro2");
@@ -68,7 +68,7 @@ public class RestServicesImpl implements IRestServices {
 		donaciones.add(d2);
 		
 		DataDonacion d4 = new DataDonacion();
-		d4.setApproved(false);
+//		d4.setApproved(false);
 		d4.setBank("Banco de Sangre 2");
 		d4.setInstitution("Hospital de clinicas");
 		d4.setName("Pedro");

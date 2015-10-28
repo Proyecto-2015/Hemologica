@@ -12,114 +12,67 @@
 </h:head>
 <h:body>
 
-	<ui:define name="content">
-		<div class="container-fluid">
-			<ol class="breadcrumb">
-				<li><a href="#"><h:outputText
-							value="#{messages.label_my_profile}" /></a></li>
-			</ol>
+	<div class="container-fluid">
 
-			<div class="row">
-				<div class="col-md-6 col-md-offset-3">
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
 
-					<h:form class="form-horizontal" id="userForm">
-						<fieldset>
+				<h:form class="form-horizontal" id="userForm">
 
-							<div class="form-group">
-								<label class="col-md-3 control-label"
-									for="donation_date"><h:outputText
-										value="#{messages.donation_date}" /></label>
-								<div class="col-md-9 col-lg-5">
-									<p:calendar id="donation_date" class="form-control" 
-												pattern="MM/dd/yyyy" mode="popup" 
-												value="#{donationBB.dataDonacion.date}" />
-								</div>
-							</div>
+					<div class="container">
 
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="donation_state"><h:outputText
-										value="#{messages.donation_state}" /></label>
-								<div class="col-md-9">
-									<h:selectOneMenu id="donation_state" class="form-control"
-										value="#{donationBB.dataDonacion.state}" style="height: 34px;"
-										converter="dataDonationStateConverter">
-										<f:selectItems value="#{donationBB.donationStates}" var="state"
-											itemValue="#{state.code}" itemLabel="#{state.displayName}" />
-									</h:selectOneMenu>
-								</div>
-							</div>
-							
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="donation_failed_cause"><h:outputText
-										value="#{messages.donation_failed_cause}" /></label>
-								<div class="col-md-9">
-									<h:selectOneMenu id="donation_failed_cause" class="form-control"
-										value="#{donationBB.dataDonacion.fail}" style="height: 34px;"
-										converter="dataDonationFailConverter">
-										<f:selectItems value="#{donationBB.donationStates}" var="fail"
-											itemValue="#{fail.code}" itemLabel="#{fail.displayName}" />
-									</h:selectOneMenu>
-								</div>
-							</div>
-							
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="donation_failed_cause"><h:outputText
-										value="#{messages.donation_failed_cause}" /></label>
-								<div class="col-md-9">
-									<h:selectOneMenu id="donation_failed_cause" class="form-control"
-										value="#{donationBB.dataDonacion.fail}" style="height: 34px;"
-										converter="dataDonationFailConverter">
-										<f:selectItems value="#{donationBB.donationFails}" var="fail"
-											itemValue="#{fail.code}" itemLabel="#{fail.displayName}" />
-									</h:selectOneMenu>
-								</div>
-							</div>
-							
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="donation_failed_cause"><h:outputText
-										value="#{messages.donation_failed_cause}" /></label>
-								<div class="col-md-9">
-									<h:selectOneMenu id="donation_failed_cause" class="form-control"
-										value="#{donationBB.dataDonacion.fail.cause}" style="height: 34px;"
-										converter="dataDonationFailCauseConverter">
-										<f:selectItems value="#{donationBB.donationFailCauses}" var="cause"
-											itemValue="#{cause.code}" itemLabel="#{cause.displayName}" />
-									</h:selectOneMenu>
-								</div>
-							</div>
-							
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="donation_failed_date"><h:outputText
-										value="#{messages.donation_failed_date}" /></label>
-								<div class="col-md-9">
-									<p:calendar id="donation_failed_date" class="form-control"  pattern="MM/dd/yyyy" mode="popup"
-									 value="#{donationBB.dataDonacion.fail.date}"/>
-								</div>
-							</div>
+						<table
+							class="col-md-12 table-bordered table-striped table-condensed cf">
+							<thead class="cf">
+								<tr>
+									<th><h:outputText value="#{messages.label_date}" /></th>
+									<th><h:outputText value="#{messages.label_blood_bank}" /></th>
+									<th><h:outputText value="#{messages.label_institution}" /></th>
+									<th><h:outputText value="#{messages.label_product}" /></th>
 
 
-							<!-- Form actions -->
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td data-title="Fecha">
+										<h:intputText value="#{labResItem.date}" />
+									</td>
+									<td data-title="Banco de Sangre">
+										<h:intputText value="#{labResItem.bank}" />
+									</td>
+									<td data-title="Institución">
+										<h:intputText value="#{labResItem.institution}" />
+									</td>
+									<td data-title="Producto">
+										<h:intputText value="#{labResItem.product}" />
+									</td>
 
-							<div class="form-group">
-								<div class="col-md-12 text-right" style="margin-top: 15px;">
+								</tr>
+								<c:forEach items="#{donationBB.dataDonacion.labResults}"
+									var="labResItem" varStatus="counter">
+									<tr>
+										<td data-title="Fecha"><h:outputText
+												value="#{labResItem.date}" /></td>
+										<td data-title="Banco de Sangre"><h:outputText
+												value="#{labResItem.bank}" /></td>
+										<td data-title="Institución"><h:outputText
+												value="#{labResItem.institution}" /></td>
+										<td data-title="Producto"><h:outputText
+												value="#{labResItem.product}" /></td>
 
+									</tr>
+								</c:forEach>
 
-									<p:commandButton class="btn btn-primary btn-lg center btnSave"
-										value="#{messages.label_save}" action="#{personBB.submit()}"
-										process="@form" update="@form" />
+							</tbody>
+						</table>
 
-									<p:messages />
+					</div>
 
-								</div>
-							</div>
-						</fieldset>
-					</h:form>
-				</div>
+				</h:form>
 			</div>
 		</div>
-
-		<!-- 	</div> -->
-	</ui:define>
+	</div>
 
 </h:body>
 </html>
