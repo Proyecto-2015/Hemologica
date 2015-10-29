@@ -5,12 +5,14 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 import org.apache.http.client.ClientProtocolException;
+import org.hemologica.datatypes.BloodTypeData;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonacion;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataUser;
+import org.hemologica.datatypes.MessageOptionData;
 
 public interface IServicesClient {
 	
@@ -79,4 +81,20 @@ public interface IServicesClient {
 	 * @throws ClientProtocolException 
 	 */
 	public List<DataState> getStates() throws ClientProtocolException, IOException;
+
+	/**
+	 * Devuelve las opciones de envio de mensajes.
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<MessageOptionData> getMessageOptions() throws ClientProtocolException, IOException;
+
+	/**
+	 * Devuleve todos los tipos de sangre. Une la distincion entre ABO y R+
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<BloodTypeData> getBloodTypes() throws ClientProtocolException, IOException;
 }

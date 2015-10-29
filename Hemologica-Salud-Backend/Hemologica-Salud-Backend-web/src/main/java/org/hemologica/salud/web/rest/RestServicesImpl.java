@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.List;
 import javax.ws.rs.core.Response;
 
+import org.hemologica.datatypes.BloodTypeData;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonacion;
@@ -12,6 +13,7 @@ import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataUser;
 import org.hemologica.datatypes.LoginData;
+import org.hemologica.datatypes.MessageOptionData;
 
 
 public class RestServicesImpl implements IRestServices {
@@ -340,6 +342,50 @@ public class RestServicesImpl implements IRestServices {
 		}
 		
 		return cities;
+	}
+
+	@Override
+	public List<MessageOptionData> getMessageOptions() {
+		List<MessageOptionData>  options = new ArrayList<>();
+			
+		MessageOptionData o1 = new MessageOptionData();
+		o1.setCode("0");
+		o1.setDisplayName("Todos");
+		options.add(o1);
+		
+		MessageOptionData o2 = new MessageOptionData();
+		o2.setCode("1");
+		o2.setDisplayName("Solo Habilitados");
+		options.add(o2);
+		
+		return options;
+	}
+
+	@Override
+	public List<BloodTypeData> getBloodTypes() {
+		List<BloodTypeData>  options = new ArrayList<>();
+			
+		BloodTypeData o1 = new BloodTypeData();
+		o1.setCode("0");
+		o1.setDisplayName("AB+");
+		options.add(o1);
+		
+		BloodTypeData o2 = new BloodTypeData();
+		o2.setCode("1");
+		o2.setDisplayName("AB-");
+		options.add(o2);
+		
+		BloodTypeData o3 = new BloodTypeData();
+		o1.setCode("2");
+		o1.setDisplayName("0+");
+		options.add(o3);
+		
+		BloodTypeData o4 = new BloodTypeData();
+		o2.setCode("3");
+		o2.setDisplayName("0-");
+		options.add(o4);
+		
+		return options;
 	}
 
 }

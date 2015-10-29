@@ -80,6 +80,20 @@
 		<converter-id>dataStateConverter</converter-id>
 		<converter-class>org.hemologica.salud.web.converters.DataStateConverter</converter-class>
 	</converter>
+	
+	<converter>
+		<display-name>dataBloodTypeConverter</display-name>
+		<converter-id>dataBloodTypeConverter</converter-id>
+		<converter-class>org.hemologica.salud.web.converters.DataBloodTypeConverter</converter-class>
+	</converter>
+	
+	<converter>
+		<display-name>dataMessageOptionsConverter</display-name>
+		<converter-id>dataMessageOptionsConverter</converter-id>
+		<converter-class>org.hemologica.salud.web.converters.DataMessageOptionsConverter</converter-class>
+	</converter>
+	
+	
 	<managed-bean>
 		<managed-bean-name>applicationBB</managed-bean-name>
 		<managed-bean-class>org.hemologica.salud.web.beans.ApplicationBB</managed-bean-class>
@@ -134,6 +148,11 @@
 	<managed-bean>
 		<managed-bean-name>donationBB</managed-bean-name>
 		<managed-bean-class>org.hemologica.salud.web.beans.DonationBB</managed-bean-class>
+		<managed-bean-scope>view</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>campaignsBB</managed-bean-name>
+		<managed-bean-class>org.hemologica.salud.web.beans.CampaignsBB</managed-bean-class>
 		<managed-bean-scope>view</managed-bean-scope>
 	</managed-bean>
 

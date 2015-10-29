@@ -27,7 +27,7 @@ import com.google.gson.reflect.TypeToken;
 public class ServicesClientImpl implements IServicesClient {
 
 	private Logger logger = Logger.getLogger(ServicesClientImpl.class);
-	private String url = ConstantsRest.PATH_SERVICES;
+	private String url = ConstantsRest.PATH_SERVICES_YO_DONO;
 	
 	@Override
 	public int login(String user, String password) throws IOException {
