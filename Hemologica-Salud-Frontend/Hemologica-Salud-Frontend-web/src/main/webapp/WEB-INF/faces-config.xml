@@ -179,8 +179,16 @@
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
-			<from-outcome>person</from-outcome>
-			<to-view-id>/pages/person.xhtml</to-view-id>
+			<from-outcome>stadistics</from-outcome>
+			<to-view-id>/pages/statistics.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+		<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>advertisings</from-outcome>
+			<to-view-id>/pages/advertising.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>

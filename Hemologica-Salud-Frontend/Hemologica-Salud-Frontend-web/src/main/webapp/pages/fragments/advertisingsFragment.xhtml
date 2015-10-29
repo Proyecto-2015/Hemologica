@@ -3,11 +3,33 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
 
 <h:head>
 </h:head>
 <h:body>
+
+	<div>
+		<p:tabView>
+
+			<!-- Person -->
+			<p:tab title="#{messages.tab_messages}">
+				<ui:include src="messagesFragment.xhtml" />
+			</p:tab>
+
+			<!-- Donation Information -->
+			<p:tab title="#{messages.tab_campaign}">
+				<ui:include src="campaignFragment.xhtml" />
+			</p:tab>
+
+
+		</p:tabView>
+	</div>
+
 </h:body>
+
 </html>
