@@ -1,0 +1,77 @@
+CONFIGURACIÓN de CAS
+
+1-Keystore por defecto de Java : $JAVA_HOME/jre/lib/security/cacerts | en mi compu /usr/lib/jvm/java-8-oracle/jre/lib/security/cacerts
+2-Generar certificado y agregarlo al keystore: ~$sudo keytool -genkey -alias hemologica-yodono-cas -keyalg RSA -keystore cacerts
+	
+	Tener en cuenta que:
+		- al generar el certificado, el valor de "CN" debe ser igual al nombre de host. El keytool pide que ingreses Nombre y Apellido, pero no caigas en esa como yo.
+		- editar el archivo /etc/host para configurar el host colocado en CN para que apunte a la IP donde se encuentra CAS
+		- "changeit" es el password por defecto del keystore de java.
+
+
+3-Exportar el certificado: ~$sudo keytool -export -keystore cacerts -alias hemologica-yodono-cas -file hemologica-yodono-cas.cer -storepass changeit
+4-Borrar el certificado del keystore: ~$sudo keytool -delete -keystore cacerts -alias hemologica-yodono-cas -storepass changeit
+5-Importar certificado como trusted: ~$sudo keytool -import -trustcacerts -alias hemologica-yodono-cas -file hemologica-yodono-cas.cer -keystore cacerts -storepass changeit
+6-Copiar cacerts hacia el tomcat donde esta cas
+7-Cambiar el owner del archivo para poder leerlo con el usuarlo sin root: ~$sudo chwon paula:paula cacerts
+
+8-Configurar el conector en tomcat para https:
+
+<Connector port="8443" protocol="org.apache.coyote.http11.Http11Protocol"
+       maxThreads="150" SSLEnabled="true" scheme="https" secure="true"
+       clientAuth="false" sslProtocol="TLS" 
+       keystoreFile="/home/bruno/Desarrollo/Servidores/cas-server/cacerts" 
+       keystorePass="changeit" 
+       keyAlias="hemologica-yodono-cas" 
+       keyPass="hemologica"/>
+
+
+9- Configurar el archivo TOMCAT/webapps/cas/WEB-INF/classes/services/HTTPSandIMAPS-10000001.json para que el servicesId admita clientes por http. El archivo queda asi:
+
+{
+  "@class" : "org.jasig.cas.services.RegexRegisteredService",
+  "serviceId" : "^(http|https|imaps)://.*",
+  "name" : "HTTP, HTTPS and IMAPS",
+  "id" : 10000001,
+  "description" : "This service definition authorized all application urls that support HTTP, HTTPS and IMAPS protocols.",
+  "proxyPolicy" : {
+    "@class" : "org.jasig.cas.services.RefuseRegisteredServiceProxyPolicy"
+  },
+  "evaluationOrder" : 0,
+  "usernameAttributeProvider" : {
+    "@class" : "org.jasig.cas.services.DefaultRegisteredServiceUsernameProvider"
+  },
+  "logoutType" : "BACK_CHANNEL",
+  "attributeReleasePolicy" : {
+    "@class" : "org.jasig.cas.services.ReturnAllowedAttributeReleasePolicy",
+    "principalAttributesRepository" : {
+      "@class" : "org.jasig.cas.authentication.principal.DefaultPrincipalAttributesRepository"
+    },
+    "authorizedToReleaseCredentialPassword" : false,
+    "authorizedToReleaseProxyGrantingTicket" : false
+  },
+  "accessStrategy" : {
+    "@class" : "org.jasig.cas.services.DefaultRegisteredServiceAccessStrategy",
+    "enabled" : true,
+    "ssoEnabled" : true
+  }
+}
+
+
+10-Configurar la aplicación que va a usar CAS:
+	10.1- Configurar el pom.xml:
+		<dependency>
+			<groupId>cas</groupId>
+			<artifactId>casclient</artifactId>
+			<version>2.1.1</version>
+		</dependency>
+	10.2- Siguiendo la guía "https://wiki.jasig.org/display/casc/using+casfilter", hay que congfigurar el web.xml
+
+LISTO!!!!
+
+El usuario y password de cas es "casuser" y "Mellon" respectivamente.
+
+
+
+
+
