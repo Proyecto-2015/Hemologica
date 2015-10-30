@@ -15,10 +15,12 @@ import org.hemologica.datatypes.BloodTypeData;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonacion;
+import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataUser;
 import org.hemologica.datatypes.LoginData;
+import org.hemologica.datatypes.MailData;
 import org.hemologica.datatypes.MessageOptionData;
 import org.hemologica.salud.factories.RestFactory;
 
@@ -248,6 +250,27 @@ public class ServicesClientImpl implements IServicesClient {
 		List<BloodTypeData> bloodTypes = new Gson().fromJson(bloodTypesString, listType);
 		
 		return bloodTypes;
+	}
+
+	@Override
+	public DataResponse sendMessage(MailData mailData) {
+		
+		String urlSendMessage = url + ConstantsRest.PATH_CAMPAIGNS + "/" + ConstantsRest.PATH_SEND_MESSAGE;
+		
+		String sendMessageString = "";
+		try {
+			
+			sendMessageString = RestFactory.getRestServicesUtils().post(urlSendMessage, mailData);
+			
+		} catch (IOException e) {
+			
+			logger.log( Level.SEVERE, "Error al llamar al servicio", e);
+		}
+		
+		DataResponse response = new Gson().fromJson(sendMessageString, DataResponse.class);
+		
+		return response;
+		
 	}
 
 }

@@ -1,0 +1,130 @@
+package org.hemologica.salud.web.beans;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
+import javax.faces.application.Application;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
+
+import org.apache.http.client.ClientProtocolException;
+import org.hemologica.datatypes.BloodTypeData;
+import org.hemologica.datatypes.DataResponse;
+import org.hemologica.datatypes.MailData;
+import org.hemologica.datatypes.MessageOptionData;
+import org.hemologica.salud.factories.RestFactory;
+
+
+public class MessageBB implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+
+	private static final Logger logger = Logger.getLogger(MessageBB.class.getName());
+	
+	private List<MessageOptionData> messageOptions;
+	private List<BloodTypeData> bloodTypes;
+	
+	private MessageOptionData messageOption;
+	private BloodTypeData bloodType;
+	
+	private MailData mailData;
+	
+	@ManagedProperty("#{messages}")
+	private ResourceBundle bundle;
+	private String languageVarName = "messages";
+	
+	@PostConstruct
+    public void init() {
+		
+		try {
+			mailData = new MailData();
+			messageOptions = RestFactory.getServicesClient().getMessageOptions();
+			bloodTypes = RestFactory.getServicesClient().getBloodTypes();
+			
+		} catch (ClientProtocolException e) {
+			
+			logger.log(Level.SEVERE, "Error al llamar al servicio web ClientProtocolException", e);
+			
+		} catch (IOException e) {
+			
+			logger.log(Level.SEVERE, "Error al llamar al servicio web IOException", e);
+		}
+	}
+	
+	public void submit(){
+		
+		logger.info("holaaaaaaaaaa");
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		Application app = context.getApplication();
+		bundle = app.getResourceBundle(context, languageVarName);
+		
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, null, bundle.getString("message_send_error"));
+		
+		try {
+			
+			mailData.setBloodType(bloodType);
+			mailData.setMessageOption(messageOption);
+			
+			DataResponse response = RestFactory.getServicesClient().sendMessage(mailData);
+
+			if(response != null && response.getCode() == 0){
+				
+				msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, bundle.getString("message_send_success"));
+	
+			}
+			
+		} catch (IOException e) {
+			
+			logger.log(Level.SEVERE, "Error al llamar al servicio web IOException", e);
+		}
+		
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+		
+	}
+	
+	public List<MessageOptionData> getMessageOptions() {
+		return messageOptions;
+	}
+	public void setMessageOptions(List<MessageOptionData> messageOptions) {
+		this.messageOptions = messageOptions;
+	}
+
+	public List<BloodTypeData> getBloodTypes() {
+		return bloodTypes;
+	}
+
+	public void setBloodTypes(List<BloodTypeData> bloodTypes) {
+		this.bloodTypes = bloodTypes;
+	}
+
+	public MailData getMailData() {
+		return mailData;
+	}
+
+	public void setMailData(MailData mailData) {
+		this.mailData = mailData;
+	}
+
+	public MessageOptionData getMessageOption() {
+		return messageOption;
+	}
+
+	public void setMessageOption(MessageOptionData messageOption) {
+		this.messageOption = messageOption;
+	}
+
+	public BloodTypeData getBloodType() {
+		return bloodType;
+	}
+
+	public void setBloodType(BloodTypeData bloodType) {
+		this.bloodType = bloodType;
+	}
+
+}

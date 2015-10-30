@@ -31,8 +31,6 @@
 
 	</application>
 
-
-
 	<managed-bean>
 		<managed-bean-name>applicationBB</managed-bean-name>
 		<managed-bean-class>org.hemologica.salud.web.beans.ApplicationBB</managed-bean-class>
