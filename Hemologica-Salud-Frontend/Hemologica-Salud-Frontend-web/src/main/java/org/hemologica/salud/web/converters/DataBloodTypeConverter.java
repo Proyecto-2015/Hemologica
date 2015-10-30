@@ -53,7 +53,7 @@ public class DataBloodTypeConverter implements Converter {
 		
 		if(value instanceof BloodTypeData){
 			
-			return ((BloodTypeData)value).getDisplayName();
+			return ((BloodTypeData)value).getCode();
 		}
 		return null;
 	}

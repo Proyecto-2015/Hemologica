@@ -15,10 +15,12 @@ import org.hemologica.datatypes.BloodTypeData;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonacion;
+import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataUser;
 import org.hemologica.datatypes.LoginData;
+import org.hemologica.datatypes.MailData;
 import org.hemologica.datatypes.MessageOptionData;
 
 
@@ -80,4 +82,9 @@ public interface IRestServices {
 	@Path("/"+ConstantsRest.PATH_CODES + "/" + ConstantsRest.PATH_BLOOD_TYPES)
 	@Produces("application/json")
 	public List<BloodTypeData> getBloodTypes();
+	
+	@POST
+	@Path("/"+ConstantsRest.PATH_CAMPAIGNS + "/" + ConstantsRest.PATH_SEND_MESSAGE)
+	@Produces("application/json")
+	public DataResponse sendMessage(MailData mailData);
 }

@@ -53,7 +53,7 @@ public class DataMessageOptionsConverter implements Converter {
 		
 		if(value instanceof MessageOptionData){
 			
-			return ((MessageOptionData)value).getDisplayName();
+			return ((MessageOptionData)value).getCode();
 		}
 		return null;
 	}

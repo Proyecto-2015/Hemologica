@@ -3,21 +3,24 @@ package org.hemologica.salud.web.rest;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.ws.rs.core.Response;
-
 import org.hemologica.datatypes.BloodTypeData;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonacion;
+import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataUser;
 import org.hemologica.datatypes.LoginData;
+import org.hemologica.datatypes.MailData;
 import org.hemologica.datatypes.MessageOptionData;
 
 
 public class RestServicesImpl implements IRestServices {
 	
+	private Logger logger = Logger.getLogger(RestServicesImpl.class.getName());
 	
 	@Override
 	public Response login(LoginData datos) {
@@ -376,16 +379,29 @@ public class RestServicesImpl implements IRestServices {
 		options.add(o2);
 		
 		BloodTypeData o3 = new BloodTypeData();
-		o1.setCode("2");
-		o1.setDisplayName("0+");
+		o3.setCode("2");
+		o3.setDisplayName("0+");
 		options.add(o3);
 		
 		BloodTypeData o4 = new BloodTypeData();
-		o2.setCode("3");
-		o2.setDisplayName("0-");
+		o4.setCode("3");
+		o4.setDisplayName("0-");
 		options.add(o4);
 		
 		return options;
+	}
+
+	@Override
+	public DataResponse sendMessage(MailData mailData) {
+		DataResponse response = new DataResponse();
+		
+		logger.info(mailData.getSubject());
+		logger.info(mailData.getText());
+		logger.info(mailData.getBloodType().getDisplayName());
+		logger.info(mailData.getMessageOption().getDisplayName());
+		
+		response.setCode(0);
+		return response;
 	}
 
 }

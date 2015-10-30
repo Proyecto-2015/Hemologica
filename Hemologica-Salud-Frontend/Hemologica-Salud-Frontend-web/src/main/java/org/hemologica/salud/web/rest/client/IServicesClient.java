@@ -9,9 +9,11 @@ import org.hemologica.datatypes.BloodTypeData;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonacion;
+import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataUser;
+import org.hemologica.datatypes.MailData;
 import org.hemologica.datatypes.MessageOptionData;
 
 public interface IServicesClient {
@@ -97,4 +99,11 @@ public interface IServicesClient {
 	 * @throws ClientProtocolException 
 	 */
 	public List<BloodTypeData> getBloodTypes() throws ClientProtocolException, IOException;
+	
+	/**
+	 * Envia Mails a quien corresponda segun los datos en DAtaMail
+	 * @param mailData
+	 * @throws IOException 
+	 */
+	public DataResponse sendMessage(MailData mailData) throws IOException;
 }

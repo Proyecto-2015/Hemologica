@@ -3,7 +3,7 @@ package org.hemologica.constants;
 public class ConstantsRest {
 	
 	public static final String PATH_SERVICES_YO_DONO = "http://localhost:8080/Hemologica-Yodono-Backend-web/services/";
-	public static final String PATH_SERVICES_HEMOSALUD = "http://localhost:8080/Hemologica-Yodono-Backend-web/services/";
+	public static final String PATH_SERVICES_HEMOSALUD = "http://localhost:8080/Hemologica-Salud-Backend-web/services/";
 	
 	public static final String PATH_DONATIONS = "donations";
 	public static final String PATH_TRANSFUTIONS = "transfusions";
@@ -15,6 +15,7 @@ public class ConstantsRest {
 	public static final String PATH_CITIES_STATE= "citiesState";
 	public static final String PATH_CAMPAIGNS = "campaigns";
 	public static final String PATH_CAMPAIGN = "campaign";
+	public static final String PATH_SEND_MESSAGE = "sendmessage";
 	public static final String PATH_CAMPAIGNS_MESSAGES_OPTIONS = "messagesoptions";
 	
 	/**

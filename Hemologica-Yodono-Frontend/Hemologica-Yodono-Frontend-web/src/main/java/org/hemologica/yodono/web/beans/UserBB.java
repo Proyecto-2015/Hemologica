@@ -73,13 +73,10 @@ public class UserBB implements Serializable{
 				image = new DefaultStreamedContent(new ByteArrayInputStream(dataUser.getImage()));
 				
 			}else{
-//				String relativeWebPath = "resources/img/user-icon.png";
-//				ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();
-//				String absoluteDiskPath = servletContext.getRealPath(relativeWebPath);
-//				
+
 				File file = new File("/Users/paularoche/Desktop/img.png");
 				
-//				
+				
 				byte[] bFile = new byte[(int) file.length()];
 //			        
 				FileInputStream fileInputStream = new FileInputStream(file);
