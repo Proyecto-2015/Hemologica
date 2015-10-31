@@ -38,7 +38,7 @@
 									converter="dataDonationStateConverter"
 									valueChangeListener="#{donationBB.dataDonationStateChange}">
 									<p:ajax  update="@form"/>
-									<f:selectItems value="#{donationBB.donationStates}" var="state"
+									<f:selectItems value="#{applicationBB.donationStates}" var="state"
 										itemValue="#{state}" itemLabel="#{messages[state.displayName]}" />
 								</h:selectOneMenu>
 							</div>
@@ -53,7 +53,7 @@
 								<h:selectOneMenu id="donation_failed" styleClass="form-control"
 									value="#{donationBB.dataDonacion.fail}" style="height: 34px;"
 									converter="dataDonationFailConverter">
-									<f:selectItems value="#{donationBB.donationStates}" var="fail"
+									<f:selectItems value="#{applicationBB.donationStates}" var="fail"
 										itemValue="#{fail.code}" itemLabel="#{fail.displayName}" />
 								</h:selectOneMenu>
 							</div>
@@ -78,7 +78,7 @@
 									value="#{donationBB.dataDonacion.fail.cause}"
 									style="height: 34px;"
 									converter="dataDonationFailCauseConverter">
-									<f:selectItems value="#{donationBB.donationFailCauses}"
+									<f:selectItems value="#{applicationBB.donationFailCauses}"
 										var="cause" itemValue="#{cause.code}"
 										itemLabel="#{cause.displayName}" />
 								</h:selectOneMenu>
@@ -96,7 +96,7 @@
 									styleClass="form-control"
 									value="#{donationBB.dataDonacion.bloodABOType}"
 									style="height: 34px;" converter="dataBloodABOTypeConverter">
-									<f:selectItems value="#{donationBB.donationABOTypes}"
+									<f:selectItems value="#{applicationBB.donationABOTypes}"
 										var="type" itemValue="#{type.code}"
 										itemLabel="#{type.displayName}" />
 								</h:selectOneMenu>
@@ -110,7 +110,7 @@
 								<h:selectOneMenu id="donation_d_type" styleClass="form-control"
 									value="#{donationBB.dataDonacion.bloodDType}"
 									style="height: 34px;" converter="dataBloodDTypeConverter">
-									<f:selectItems value="#{donationBB.donationDTypes}" var="type"
+									<f:selectItems value="#{applicationBB.donationDTypes}" var="type"
 										itemValue="#{type.code}" itemLabel="#{cause.displayName}" />
 								</h:selectOneMenu>
 							</div>

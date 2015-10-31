@@ -33,12 +33,6 @@ public class DonationBB implements Serializable {
 	private DataDonation dataDonacion;
 	private DataLaboratoryResult labResult;
 	private DataDonationEvent event;
-	private List<DataDonationState> donationStates;
-	private List<DataDonationFail> donationFails;
-	private List<DataDonationFailCause> donationFailCauses;
-	private List<DataBloodABOType> donationABOTypes;
-	private List<DataBloodDType> donationDTypes;
-	
 	
 	private List<SelectItem> donationEvents;
 	private String donationEventSelected;
