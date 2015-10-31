@@ -48,6 +48,11 @@ public class DonationBB implements Serializable {
 	}
 	
 	
+	public void addLabResult(){
+		this.dataDonacion.getLabResults().add(this.labResult);
+		this.labResult = new DataLaboratoryResult();
+	}
+	
 	public void dataDonationStateChange(ValueChangeEvent ev){
 		dataDonacion.setState((DataDonationState) ev.getNewValue());
 	}

@@ -12,6 +12,7 @@ public class DataLaboratoryResult implements Serializable {
 
 	private String code;
 	private String displayName;
+	private String bank; /* Pueden ser en otro lugar que el de la donación???? */
 	private Date date;
 	private Boolean result;
 	
@@ -38,6 +39,12 @@ public class DataLaboratoryResult implements Serializable {
 	}
 	public void setResult(Boolean result) {
 		this.result = result;
+	}
+	public String getBank() {
+		return bank;
+	}
+	public void setBank(String bank) {
+		this.bank = bank;
 	}
 	
 }

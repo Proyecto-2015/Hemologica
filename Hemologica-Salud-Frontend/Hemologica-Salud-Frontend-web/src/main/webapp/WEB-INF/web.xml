@@ -63,6 +63,13 @@
 		<extension>map</extension>
 		<mime-type>application/json</mime-type>
 	</mime-mapping>
+	
+	<mime-mapping>
+		<extension>ico</extension>
+		<mime-type>image/x-icon</mime-type>
+	</mime-mapping>
+	
+	
 
 
 	<error-page>
