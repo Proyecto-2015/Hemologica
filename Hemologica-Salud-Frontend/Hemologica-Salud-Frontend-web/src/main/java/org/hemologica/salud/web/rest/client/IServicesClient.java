@@ -114,4 +114,21 @@ public interface IServicesClient {
 	 * @throws IOException 
 	 */
 	public DataResponse getSendCampaign(DataCampaign campaign);
+	
+	/**
+	 * Devuelve la cantidad de campañas pasadas por parametro por orden cronologico. Empezando por el dia de la fecha. 
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataCampaign> getCampaigns(int cant) throws ClientProtocolException, IOException;
+
+	/**
+	 * Devuelve la campaña con id el pasado por parametro
+	 * @param campaignId
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public DataCampaign getCampaign(String campaignId) throws ClientProtocolException, IOException;
 }

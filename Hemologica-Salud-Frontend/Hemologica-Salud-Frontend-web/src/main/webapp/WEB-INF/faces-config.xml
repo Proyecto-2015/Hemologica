@@ -100,6 +100,18 @@
 		<managed-bean-scope>application</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
+		<managed-bean-name>campaignsPrevItemBB</managed-bean-name>
+		<managed-bean-class>org.hemologica.salud.web.beans.CampaignsPrevItemBB</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>campaignsPrevBB</managed-bean-name>
+		<managed-bean-class>org.hemologica.salud.web.beans.CampaignsPrevBB</managed-bean-class>
+		<managed-bean-scope>application</managed-bean-scope>
+	</managed-bean>
+	
+	
+	<managed-bean>
 		<managed-bean-name>sessionBB</managed-bean-name>
 		<managed-bean-class>org.hemologica.salud.web.beans.SessionBB</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
@@ -216,6 +228,23 @@
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>campaignsPrev</from-outcome>
+			<to-view-id>/pages/campaigns_prev.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+		<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>campaignPrevItem</from-outcome>
+			<to-view-id>/pages/campaigns_prev_item.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>

@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import org.apache.http.client.ClientProtocolException;
 import org.hemologica.constants.ConstansJson;
 import org.hemologica.constants.ConstantsRest;
@@ -31,7 +30,7 @@ import com.google.gson.reflect.TypeToken;
 
 public class ServicesClientImpl implements IServicesClient {
 
-	private Logger logger = Logger.getLogger(ServicesClientImpl.class.getName());
+	private static final Logger logger = Logger.getLogger(ServicesClientImpl.class.getName());
 	private String url = ConstantsRest.PATH_SERVICES_HEMOSALUD;
 	
 	@Override
@@ -292,6 +291,55 @@ public class ServicesClientImpl implements IServicesClient {
 		DataResponse response = new Gson().fromJson(sendMessageString, DataResponse.class);
 		
 		return response;
+	}
+	
+	@Override
+	public List<DataCampaign> getCampaigns(int cant) throws ClientProtocolException, IOException {
+		
+		String urlCampaigns = url + ConstantsRest.PATH_CAMPAIGNS;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		hash.put(ConstansJson.JSON_CANT, Integer.toString(cant));
+		
+		String campaignsString = "";
+		try {
+			
+			campaignsString = RestFactory.getRestServicesUtils().get(urlCampaigns, hash);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.log(Level.SEVERE,"Error al llamar al servicio", e);
+			
+		}
+		
+		Type listType = new TypeToken<List<DataCampaign>>(){}.getType();
+		List<DataCampaign> campaigns = new Gson().fromJson(campaignsString, listType);
+		
+		return campaigns;
+	}
+
+	@Override
+	public DataCampaign getCampaign(String campaignId) throws ClientProtocolException, IOException {
+		
+		String urlCampaign = url + ConstantsRest.PATH_CAMPAIGN;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		hash.put(ConstansJson.JSON_CAMPAIGN_ID, campaignId);
+		
+		String campaignString = "";
+		try {
+			
+			campaignString = RestFactory.getRestServicesUtils().get(urlCampaign, hash);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.log(Level.SEVERE,"Error al llamar al servicio", e);
+			
+		}
+		
+		DataCampaign campaign = new Gson().fromJson(campaignString, DataCampaign.class);
+		
+		return campaign;
 	}
 
 }

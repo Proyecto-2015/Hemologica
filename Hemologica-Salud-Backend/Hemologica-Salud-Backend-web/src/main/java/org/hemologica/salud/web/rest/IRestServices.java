@@ -10,6 +10,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
+import org.hemologica.constants.ConstansJson;
 import org.hemologica.constants.ConstantsRest;
 import org.hemologica.datatypes.BloodTypeData;
 import org.hemologica.datatypes.DataBank;
@@ -93,4 +94,14 @@ public interface IRestServices {
 	@Path("/"+ConstantsRest.PATH_CAMPAIGNS + "/" + ConstantsRest.PATH_SEND_CAMPAIGN)
 	@Produces("application/json")
 	public DataResponse sendCampaign(DataCampaign dataCampaign);
+	
+	@GET
+	@Path("/"+ConstantsRest.PATH_CAMPAIGNS)
+	@Produces("application/json")
+	public List<DataCampaign> getCampaigns(@QueryParam(ConstansJson.JSON_CANT) String cant);
+	
+	@GET
+	@Path("/"+ConstantsRest.PATH_CAMPAIGN)
+	@Produces("application/json")
+	public DataCampaign getCampaign(@QueryParam(ConstansJson.JSON_CAMPAIGN_ID) String campaignId);
 }
