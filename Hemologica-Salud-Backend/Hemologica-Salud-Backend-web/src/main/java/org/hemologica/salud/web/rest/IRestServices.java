@@ -13,6 +13,7 @@ import javax.ws.rs.core.Response;
 import org.hemologica.constants.ConstantsRest;
 import org.hemologica.datatypes.BloodTypeData;
 import org.hemologica.datatypes.DataBank;
+import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataResponse;
@@ -87,4 +88,9 @@ public interface IRestServices {
 	@Path("/"+ConstantsRest.PATH_CAMPAIGNS + "/" + ConstantsRest.PATH_SEND_MESSAGE)
 	@Produces("application/json")
 	public DataResponse sendMessage(MailData mailData);
+	
+	@POST
+	@Path("/"+ConstantsRest.PATH_CAMPAIGNS + "/" + ConstantsRest.PATH_SEND_CAMPAIGN)
+	@Produces("application/json")
+	public DataResponse sendCampaign(DataCampaign dataCampaign);
 }

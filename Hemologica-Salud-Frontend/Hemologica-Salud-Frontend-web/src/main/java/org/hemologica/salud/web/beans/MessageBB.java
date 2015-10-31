@@ -2,6 +2,8 @@ package org.hemologica.salud.web.beans;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;

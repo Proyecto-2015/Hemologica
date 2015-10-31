@@ -13,6 +13,7 @@ import org.hemologica.constants.ConstansJson;
 import org.hemologica.constants.ConstantsRest;
 import org.hemologica.datatypes.BloodTypeData;
 import org.hemologica.datatypes.DataBank;
+import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataResponse;
@@ -271,6 +272,26 @@ public class ServicesClientImpl implements IServicesClient {
 		
 		return response;
 		
+	}
+
+	@Override
+	public DataResponse getSendCampaign(DataCampaign campaign) {
+		
+		String urlSendCampaign = url + ConstantsRest.PATH_CAMPAIGNS + "/" + ConstantsRest.PATH_SEND_CAMPAIGN;
+		
+		String sendMessageString = "";
+		try {
+			
+			sendMessageString = RestFactory.getRestServicesUtils().post(urlSendCampaign, campaign);
+			
+		} catch (IOException e) {
+			
+			logger.log( Level.SEVERE, "Error al llamar al servicio", e);
+		}
+		
+		DataResponse response = new Gson().fromJson(sendMessageString, DataResponse.class);
+		
+		return response;
 	}
 
 }

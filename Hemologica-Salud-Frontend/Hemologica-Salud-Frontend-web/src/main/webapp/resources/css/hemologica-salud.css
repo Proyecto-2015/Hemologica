@@ -241,3 +241,7 @@ h6 .h6 {
 	margin:0 auto;
 	padding-left: inherit;
 }
+
+.ui-messages-info-icon, .ui-messages-warn-icon, .ui-messages-error-icon, .ui-messages-fatal-icon, .ui-message-info-icon, .ui-message-warn-icon, .ui-message-error-icon, .ui-message-fatal-icon {
+    background: none;
+}
