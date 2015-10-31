@@ -23,26 +23,20 @@ public class PersonBB implements Serializable {
 	private static final long serialVersionUID = 8925888848602043532L;
 	
 	
+	private ApplicationBB applicationBB;
 	private SessionBB sessionBB;
 	
 	private DataPerson dataPerson;
 	
 	private List<DataState> states;
 	private DataState state;
-	private List<DataCity> cities;
 	private DataCity city;
-	private List<DataCountry> countries;
 	private DataCountry country;
-	private List<DataDocumentType> documentTypes;
 	private DataDocumentType documentType;
 	
 	@PostConstruct
 	public void init(){
 		dataPerson = new DataPerson();
-		/**
-		 *	TO-DO
-		 *	inicializar las codigueras 
-		 */
 	}
 	
 	
@@ -51,13 +45,6 @@ public class PersonBB implements Serializable {
 	}
 	
 	
-	public List<DataDocumentType> getDocumentTypes() {
-		return documentTypes;
-	}
-
-	public void setDocumentTypes(List<DataDocumentType> documentTypes) {
-		this.documentTypes = documentTypes;
-	}
 
 	public List<DataState> getStates() {
 		return states;
@@ -73,14 +60,6 @@ public class PersonBB implements Serializable {
 
 	public void setState(DataState state) {
 		this.state = state;
-	}
-
-	public List<DataCity> getCities() {
-		return cities;
-	}
-
-	public void setCities(List<DataCity> cities) {
-		this.cities = cities;
 	}
 
 	public DataCity getCity() {
@@ -110,15 +89,6 @@ public class PersonBB implements Serializable {
 		this.sessionBB = sessionBB;
 	}
 
-	public List<DataCountry> getCountries() {
-		return countries;
-	}
-
-	public void setCountries(List<DataCountry> countries) {
-		this.countries = countries;
-	}
-
-
 	public DataCountry getCountry() {
 		return country;
 	}
@@ -137,7 +107,16 @@ public class PersonBB implements Serializable {
 	public void setDocumentType(DataDocumentType documentType) {
 		this.documentType = documentType;
 	}
-	
+
+
+	public ApplicationBB getApplicationBB() {
+		return applicationBB;
+	}
+
+
+	public void setApplicationBB(ApplicationBB applicationBB) {
+		this.applicationBB = applicationBB;
+	}
 	
 	
 }
