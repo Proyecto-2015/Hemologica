@@ -77,7 +77,6 @@ public interface IRestServices {
 	@Produces("application/json")
 	public List<DataCity> getCities(@QueryParam(ConstansJson.JSON_STATE) String stateCode);
 	
-	
 	@GET
 	@Path("/"+ConstantsRest.PATH_CAMPAIGNS)
 	@Produces("application/json")
