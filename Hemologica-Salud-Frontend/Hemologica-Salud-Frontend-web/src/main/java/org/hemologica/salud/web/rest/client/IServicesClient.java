@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.http.client.ClientProtocolException;
 import org.hemologica.datatypes.BloodTypeData;
 import org.hemologica.datatypes.DataBank;
+import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonacion;
 import org.hemologica.datatypes.DataResponse;
@@ -106,4 +107,11 @@ public interface IServicesClient {
 	 * @throws IOException 
 	 */
 	public DataResponse sendMessage(MailData mailData) throws IOException;
+
+	/**
+	 * Envia la campaña para que la puedan ver los ciudadanos
+	 * @param mailData
+	 * @throws IOException 
+	 */
+	public DataResponse getSendCampaign(DataCampaign campaign);
 }

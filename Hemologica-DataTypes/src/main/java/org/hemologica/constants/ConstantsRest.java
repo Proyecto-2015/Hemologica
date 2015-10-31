@@ -16,6 +16,7 @@ public class ConstantsRest {
 	public static final String PATH_CAMPAIGNS = "campaigns";
 	public static final String PATH_CAMPAIGN = "campaign";
 	public static final String PATH_SEND_MESSAGE = "sendmessage";
+	public static final String PATH_SEND_CAMPAIGN = "sendcampaign";
 	public static final String PATH_CAMPAIGNS_MESSAGES_OPTIONS = "messagesoptions";
 	
 	/**
@@ -23,6 +24,7 @@ public class ConstantsRest {
 	 */
 	public static final String PATH_CODES = "codes";
 	public static final String PATH_BLOOD_TYPES = "bloodtypes";
+	
 	
 
 }

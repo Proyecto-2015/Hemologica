@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 import javax.ws.rs.core.Response;
 import org.hemologica.datatypes.BloodTypeData;
 import org.hemologica.datatypes.DataBank;
+import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonacion;
 import org.hemologica.datatypes.DataResponse;
@@ -399,6 +400,21 @@ public class RestServicesImpl implements IRestServices {
 		logger.info(mailData.getText());
 		logger.info(mailData.getBloodType().getDisplayName());
 		logger.info(mailData.getMessageOption().getDisplayName());
+		
+		response.setCode(0);
+		return response;
+	}
+
+	@Override
+	public DataResponse sendCampaign(DataCampaign dataCampaign) {
+		
+		DataResponse response = new DataResponse();
+		
+		logger.info(dataCampaign.getText());
+		logger.info(dataCampaign.getTitle());
+		logger.info(dataCampaign.getSummary());
+		logger.info(dataCampaign.getSubtitle());
+		logger.info(dataCampaign.getDate());
 		
 		response.setCode(0);
 		return response;
