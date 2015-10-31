@@ -25,4 +25,8 @@ public class ApplicationBB implements Serializable {
 		return null;
 	}
 	
+	public List<SelectItem> getItems2(String code2){
+		return null;
+	}
+	
 }
