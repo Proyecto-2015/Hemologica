@@ -3,14 +3,14 @@ package org.hemologica.salud.web.beans;
 import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Logger;
-
 import javax.annotation.PostConstruct;
 import javax.faces.event.ValueChangeEvent;
-
+import javax.faces.model.SelectItem;
 import org.hemologica.constants.DataDonationStateEnum;
 import org.hemologica.datatypes.DataBloodABOType;
 import org.hemologica.datatypes.DataBloodDType;
-import org.hemologica.datatypes.DataDonacion;
+import org.hemologica.datatypes.DataDonation;
+import org.hemologica.datatypes.DataDonationEvent;
 import org.hemologica.datatypes.DataDonationFail;
 import org.hemologica.datatypes.DataDonationFailCause;
 import org.hemologica.datatypes.DataDonationState;
@@ -25,13 +25,13 @@ public class DonationBB implements Serializable {
 	
 	private static final Logger logger = Logger.getLogger(DonationBB.class.getName());
 	
+	private ApplicationBB applicationBB;
 	private SessionBB sessionBB;
 	private PersonBB personBB;
 	
-	
-	
-	private DataDonacion dataDonacion;
+	private DataDonation dataDonacion;
 	private DataLaboratoryResult labResult;
+	private DataDonationEvent event;
 	private List<DataDonationState> donationStates;
 	private List<DataDonationFail> donationFails;
 	private List<DataDonationFailCause> donationFailCauses;
@@ -39,29 +39,47 @@ public class DonationBB implements Serializable {
 	private List<DataBloodDType> donationDTypes;
 	
 	
+	private List<SelectItem> donationEvents;
+	private String donationEventSelected;
+	
+	private List<SelectItem> severities;
+	private String severitySelected;
+	
+	
 	@PostConstruct
 	public void init(){
 		logger.info("init DonationBB");
-		this.dataDonacion = new DataDonacion();
+		this.dataDonacion = new DataDonation();
 		this.labResult = new DataLaboratoryResult();
 		this.donationStates = DataDonationStateEnum.getStates();
 	}
-	
-	
+
 	public void addLabResult(){
 		this.dataDonacion.getLabResults().add(this.labResult);
 		this.labResult = new DataLaboratoryResult();
 	}
 	
+	
+	
+	public List<SelectItem> getSeverities() {
+		return severities;
+	}
+	
+	public void setSeverities(List<SelectItem> severities) {
+		this.severities = severities;
+	}
+
+
+	
 	public void dataDonationStateChange(ValueChangeEvent ev){
 		dataDonacion.setState((DataDonationState) ev.getNewValue());
 	}
 
-	public DataDonacion getDataDonacion() {
+	public DataDonation getDataDonacion() {
 		return dataDonacion;
 	}
 	
-	public void setDataDonacion(DataDonacion dataDonacion) {
+	public void setDataDonacion(DataDonation dataDonacion) {
 		this.dataDonacion = dataDonacion;
 	}
 	
@@ -138,6 +156,48 @@ public class DonationBB implements Serializable {
 
 	public void setDonationStates(List<DataDonationState> donationStates) {
 		this.donationStates = donationStates;
+	}
+
+
+	public DataDonationEvent getEvent() {
+		return event;
+	}
+
+
+	public void setEvent(DataDonationEvent event) {
+		this.event = event;
+	}
+
+	public String getSeveritySelected() {
+		return severitySelected;
+	}
+
+	public void setSeveritySelected(String severitySelected) {
+		this.severitySelected = severitySelected;
+	}
+
+	public List<SelectItem> getDonationEvents() {
+		return donationEvents;
+	}
+
+	public void setDonationEvents(List<SelectItem> donationEvents) {
+		this.donationEvents = donationEvents;
+	}
+
+	public String getDonationEventSelected() {
+		return donationEventSelected;
+	}
+
+	public void setDonationEventSelected(String donationEventSelected) {
+		this.donationEventSelected = donationEventSelected;
+	}
+
+	public ApplicationBB getApplicationBB() {
+		return applicationBB;
+	}
+
+	public void setApplicationBB(ApplicationBB applicationBB) {
+		this.applicationBB = applicationBB;
 	}
 
 }

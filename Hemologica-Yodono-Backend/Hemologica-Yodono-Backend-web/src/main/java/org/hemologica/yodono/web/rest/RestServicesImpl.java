@@ -8,7 +8,7 @@ import javax.ws.rs.core.Response;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCity;
-import org.hemologica.datatypes.DataDonacion;
+import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
@@ -36,11 +36,11 @@ public class RestServicesImpl implements IRestServices {
 	}
 
 	@Override
-	public List<DataDonacion> getDonations(String user) {
+	public List<DataDonation> getDonations(String user) {
 		
-		List<DataDonacion> donaciones = new ArrayList<DataDonacion>();
+		List<DataDonation> donaciones = new ArrayList<DataDonation>();
 		
-		DataDonacion d = new DataDonacion();
+		DataDonation d = new DataDonation();
 //		d.setApproved(true);
 		d.setBank("Banco de Sangre 1");
 		d.setInstitution("Hospital de clinicas");
@@ -49,7 +49,7 @@ public class RestServicesImpl implements IRestServices {
 		d.setDate("10/10/2015");
 		donaciones.add(d);
 		
-		DataDonacion d3 = new DataDonacion();
+		DataDonation d3 = new DataDonation();
 //		d3.setApproved(true);
 		d3.setBank("Banco de Sangre 2");
 		d3.setInstitution("Hospital Britanico");
@@ -58,7 +58,7 @@ public class RestServicesImpl implements IRestServices {
 		d3.setDate("28/02/2015");
 		donaciones.add(d3);
 		
-		DataDonacion d2 = new DataDonacion();
+		DataDonation d2 = new DataDonation();
 //		d2.setApproved(false);
 		d2.setBank("Banco de Sangre 2");
 		d2.setInstitution("Hospital Pereira Rossell");
@@ -67,7 +67,7 @@ public class RestServicesImpl implements IRestServices {
 		d2.setDate("17/02/2014");
 		donaciones.add(d2);
 		
-		DataDonacion d4 = new DataDonacion();
+		DataDonation d4 = new DataDonation();
 //		d4.setApproved(false);
 		d4.setBank("Banco de Sangre 2");
 		d4.setInstitution("Hospital de clinicas");

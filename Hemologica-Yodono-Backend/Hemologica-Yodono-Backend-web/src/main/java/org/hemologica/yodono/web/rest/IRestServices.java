@@ -14,7 +14,7 @@ import javax.ws.rs.core.Response;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCity;
-import org.hemologica.datatypes.DataDonacion;
+import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
@@ -40,7 +40,7 @@ public interface IRestServices {
 	@GET
 	@Path("/"+ConstantsRest.PATH_DONATIONS)
 	@Produces("application/json")
-	public List<DataDonacion> getDonations(@QueryParam(ConstansJson.JSON_USER) String user);
+	public List<DataDonation> getDonations(@QueryParam(ConstansJson.JSON_USER) String user);
 	
 	@GET
 	@Path("/"+ConstantsRest.PATH_TRANSFUTIONS)

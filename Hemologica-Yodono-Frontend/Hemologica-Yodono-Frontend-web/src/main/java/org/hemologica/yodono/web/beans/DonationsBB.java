@@ -13,7 +13,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.Application;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
-import org.hemologica.datatypes.DataDonacion;
+import org.hemologica.datatypes.DataDonation;
 import org.hemologica.yodono.factories.RestFactory;
 import org.joda.time.Days;
 import org.joda.time.LocalDate;
@@ -25,7 +25,7 @@ public class DonationsBB implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private static final Logger logger = Logger.getLogger(DonationsBB.class.getName()); 
-	private List<DataDonacion> myDonations;
+	private List<DataDonation> myDonations;
 	
 	@ManagedProperty(value="#{language}")
 	private LanguageBB languageBB;
@@ -54,11 +54,11 @@ public class DonationsBB implements Serializable{
 		this.languageBB = languageBB;
 	}
 
-	public List<DataDonacion> getMyDonations() {
+	public List<DataDonation> getMyDonations() {
 		return myDonations;
 	}
 
-	public void setMyDonations(List<DataDonacion> myDonations,String language) {
+	public void setMyDonations(List<DataDonation> myDonations,String language) {
 		this.myDonations = myDonations;
 	}
 	

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class DataDonacion implements Serializable {
+public class DataDonation implements Serializable {
 
 	/**
 	 * 
@@ -24,11 +24,12 @@ public class DataDonacion implements Serializable {
 	private DataBloodDType bloodDType;
 	private DataDonationFail fail;
 	private List<DataLaboratoryResult> labResults;
+	private List<DataDonationEvent> events;
 
 	private Date extractionTimeBegin;
 	private Date extractionTimeEnd;
 
-	public DataDonacion() {
+	public DataDonation() {
 		this.fail = new DataDonationFail();
 		this.bloodABOType = new DataBloodABOType();
 		this.bloodDType = new DataBloodDType();
@@ -159,6 +160,14 @@ public class DataDonacion implements Serializable {
 
 	public void setState(DataDonationState state) {
 		this.state = state;
+	}
+
+	public List<DataDonationEvent> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<DataDonationEvent> events) {
+		this.events = events;
 	}
 
 }
