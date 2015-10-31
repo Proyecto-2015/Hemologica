@@ -14,12 +14,20 @@
 <h:body>
 	<h:form>
 		
-		<p:messages id="messages" showDetail="true" autoUpdate="true"
-								closable="true" />
+<!-- 		<p:message for="idForm" showDetail="true" autoUpdate="true" closable="true"  /> -->
+		<p:messages showDetail="true" autoUpdate="true" closable="true" ></p:messages>
+					
 		
 		<fieldset>
-			<legend><h:outputText value="#{messages.label_news}"/></legend>
-			
+			<legend>
+				<h:outputText value="#{messages.label_news}"/>
+					<p:commandLink style="margin-right: 100px;"  ajax="true" class="icon-list icon-preview pull-right"
+					title="#{messages.label_preview}" action="#{campaignsBB.preview()}"  target="_blank" >
+<!-- 						<f:ajax  execute="@form"  /> -->
+					
+					</p:commandLink>	
+			</legend>
+					
 			<div class="col-xs-12 col-md-12 col-lg-9 bank-info ">
 				<div class="row form-horizontal " id="userForm">
 			
@@ -27,7 +35,7 @@
 						<label class="col-md-2 control-label" for="name"><h:outputText
 								value="#{messages.label_title}" /></label>
 						<div class="col-md-8">
-							<h:inputText class="label-form-user form-control"
+							<h:inputText id="titleId" class="label-form-user form-control"
 								value="#{campaignsBB.campaign.title}" />
 						</div>
 					</div>
@@ -54,7 +62,8 @@
 				
 			</div>
 			<div class=" col-xs-12 col-md-12 col-lg-2">
-					<h:graphicImage class="image-user center"  value="campaignsBB.campaign"/>
+					<h:graphicImage class="image-user center" />  
+<!-- 					value="campaignsBB.campaign" -->
 
 					<p:fileUpload class="center" mode="simple" style="padding-top: 5px;" skinSimple="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
 						value="#{userBB.uploadedPicture}" />
@@ -71,7 +80,8 @@
 				        
 				        <p:commandButton value="#{messages.label_send}"  icon="ui-icon-disk" 
 				        	action="#{campaignsBB.submit}" process="@form" update="@form"/>
-				 	    <p:commandButton value="#{messages.label_clear}"  icon="ui-icon-close" />
+				 	    <p:commandButton value="#{messages.label_clear}" action="#{campaignsBB.clean}" process="@form" 
+				 	    	update="@form"  icon="ui-icon-close" />
 				        
 				   	</h:panelGrid>
 				</div>
