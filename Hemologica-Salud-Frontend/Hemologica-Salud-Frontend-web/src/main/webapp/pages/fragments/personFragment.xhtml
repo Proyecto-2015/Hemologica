@@ -30,7 +30,7 @@
 								<h:selectOneMenu class="form-control" id="countries"
 									value="#{personBB.dataPerson.documentCountry}" style="height: 34px;"
 									converter="dataCountryConverter">
-									<f:selectItems value="#{personBB.countries}" var="country"
+									<f:selectItems value="#{applicationBB.countries}" var="country"
 										itemValue="#{country.code}" itemLabel="#{country.displayName}" />
 								</h:selectOneMenu>
 							</div>
@@ -42,7 +42,7 @@
 								<h:selectOneMenu class="form-control" id="documents_types"
 									value="#{personBB.dataPerson.documentType}" style="height: 34px;"
 									converter="dataDocumentTypeConverter">
-									<f:selectItems value="#{personBB.documentTypes}" var="documentType"
+									<f:selectItems value="#{applicationBB.documentTypes}" var="documentType"
 										itemValue="#{documentType.code}" itemLabel="#{documentType.displayName}" />
 								</h:selectOneMenu>
 							</div>
@@ -127,7 +127,7 @@
 								<h:selectOneMenu class="form-control" id="cities"
 									value="#{personBB.city}" style="height: 34px;"
 									converter="dataCityConverter">
-									<f:selectItems value="#{personBB.cities}" var="city"
+									<f:selectItems value="#{applicationBB.cities}" var="city"
 										itemValue="#{city.code}" itemLabel="#{city.name}" />
 								</h:selectOneMenu>
 							</div>

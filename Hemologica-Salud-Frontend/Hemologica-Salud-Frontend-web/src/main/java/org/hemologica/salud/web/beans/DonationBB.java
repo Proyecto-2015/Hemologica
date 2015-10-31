@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 import org.hemologica.constants.DataDonationStateEnum;
@@ -32,12 +33,6 @@ public class DonationBB implements Serializable {
 	private DataDonation dataDonacion;
 	private DataLaboratoryResult labResult;
 	private DataDonationEvent event;
-	private List<DataDonationState> donationStates;
-	private List<DataDonationFail> donationFails;
-	private List<DataDonationFailCause> donationFailCauses;
-	private List<DataBloodABOType> donationABOTypes;
-	private List<DataBloodDType> donationDTypes;
-	
 	
 	private List<SelectItem> donationEvents;
 	private String donationEventSelected;
@@ -45,13 +40,18 @@ public class DonationBB implements Serializable {
 	private List<SelectItem> severities;
 	private String severitySelected;
 	
+	private FacesContext ctx;
 	
+	
+	
+
 	@PostConstruct
 	public void init(){
 		logger.info("init DonationBB");
 		this.dataDonacion = new DataDonation();
 		this.labResult = new DataLaboratoryResult();
 		this.donationStates = DataDonationStateEnum.getStates();
+		this.ctx = FacesContext.getCurrentInstance();
 	}
 
 	public void addLabResult(){
@@ -60,6 +60,9 @@ public class DonationBB implements Serializable {
 	}
 	
 	
+	public void setCtx(FacesContext ctx) {
+		this.ctx = ctx;
+	}
 	
 	public List<SelectItem> getSeverities() {
 		return severities;
