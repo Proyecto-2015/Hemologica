@@ -12,7 +12,7 @@ import org.hemologica.constants.ConstantsRest;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCity;
-import org.hemologica.datatypes.DataDonacion;
+import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
@@ -53,7 +53,7 @@ public class ServicesClientImpl implements IServicesClient {
 	}
 
 	@Override
-	public List<DataDonacion> getMyDonations(String user) throws IOException {
+	public List<DataDonation> getMyDonations(String user) throws IOException {
 		
 		String urlDonations = url + ConstantsRest.PATH_DONATIONS;
 		
@@ -67,8 +67,8 @@ public class ServicesClientImpl implements IServicesClient {
 			logger.error("Error al llamar al servicio", e);
 		}
 		
-		Type listType = new TypeToken<List<DataDonacion>>(){}.getType();
-		List<DataDonacion> donaciones = new Gson().fromJson(donacionesString, listType);
+		Type listType = new TypeToken<List<DataDonation>>(){}.getType();
+		List<DataDonation> donaciones = new Gson().fromJson(donacionesString, listType);
 		
 		return donaciones;
 	}

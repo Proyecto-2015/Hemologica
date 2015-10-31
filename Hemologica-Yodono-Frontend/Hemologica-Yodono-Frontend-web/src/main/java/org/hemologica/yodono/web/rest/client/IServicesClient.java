@@ -8,7 +8,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCity;
-import org.hemologica.datatypes.DataDonacion;
+import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
@@ -31,7 +31,7 @@ public interface IServicesClient {
 	 * @return
 	 * @throws IOException 
 	 */
-	public List<DataDonacion> getMyDonations(String user) throws IOException;
+	public List<DataDonation> getMyDonations(String user) throws IOException;
 
 	/**
 	 * Devuelve la lista de transfusiones del usuario pasado como parametro.
