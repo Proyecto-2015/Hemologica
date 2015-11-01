@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<h:head>
+</h:head>
+<h:body>
+	
+	<div class="container">
+	
+		<table class="col-md-12 table-bordered table-striped table-condensed cf">
+       		<thead class="cf">
+       			<tr>
+       				<th><h:outputText value="#{messages.person_document_type}"/></th>
+       				<th><h:outputText value="#{messages.person_document_country}"/></th>
+       				<th><h:outputText value="#{messages.person_name}"/></th>
+       				        				
+       			</tr>
+       		</thead>
+       		<tbody>
+       			<c:forEach items="#{personRecordBB.persons}" var="personItem" varStatus="counter">
+        			<tr>
+        				<td data-title="Fecha"><h:outputText value="#{transfusionItem.date}"/></td>
+        				<td data-title="Banco de Sangre"><h:outputText value="#{transfusionItem.bank}"/></td>
+        				<td data-title="Institución"><h:outputText value="#{transfusionItem.institution}"/></td>
+        				<td data-title="Producto" ><h:outputText value="#{transfusionItem.product}"/></td>
+        				
+        			</tr>
+        		</c:forEach>
+       		
+       		</tbody>
+        </table>
+	</div>
+</h:body>
+</html>
