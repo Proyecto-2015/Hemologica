@@ -3,6 +3,8 @@ package org.hemologica.datatypes;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.hemologica.constants.DataDonationRejectionType;
+
 public class DataDonationFail implements Serializable {
 
 	/**
@@ -15,6 +17,7 @@ public class DataDonationFail implements Serializable {
 	private String displayName;
 	private Date date;
 	private DataDonationFailCause cause;
+	private DataDonationRejectionType rejectionType;
 	
 	public DataDonationFail(){
 		this.cause = new DataDonationFailCause();
@@ -43,6 +46,14 @@ public class DataDonationFail implements Serializable {
 	}
 	public void setCause(DataDonationFailCause cause) {
 		this.cause = cause;
+	}
+
+	public DataDonationRejectionType getRejectionType() {
+		return rejectionType;
+	}
+
+	public void setRejectionType(DataDonationRejectionType rejectionType) {
+		this.rejectionType = rejectionType;
 	}
 	
 }

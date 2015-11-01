@@ -8,7 +8,7 @@ import javax.faces.model.SelectItem;
 import org.hemologica.constants.DataDonationStateEnum;
 import org.hemologica.constants.DataEventSeverityEnum;
 import org.hemologica.datatypes.DataBloodABOType;
-import org.hemologica.datatypes.DataBloodDType;
+import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataCountry;
 import org.hemologica.datatypes.DataDocumentType;
@@ -46,7 +46,7 @@ public class ApplicationBB implements Serializable {
 	private List<DataDonationFail> donationFails;
 	private List<DataDonationFailCause> donationFailCauses;
 	private List<DataBloodABOType> donationABOTypes;
-	private List<DataBloodDType> donationDTypes;
+	private List<DataBloodType> donationDTypes;
 	private List<DataDonationEvent> donationEvents;
 	private List<DataEventSeverityEnum> eventSeverities;
 	
@@ -108,7 +108,7 @@ public class ApplicationBB implements Serializable {
 		return donationABOTypes;
 	}
 
-	public List<DataBloodDType> getDonationDTypes() {
+	public List<DataBloodType> getDonationDTypes() {
 		return donationDTypes;
 	}
 

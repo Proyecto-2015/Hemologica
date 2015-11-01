@@ -7,15 +7,17 @@ import java.util.logging.Logger;
 import javax.ws.rs.core.Response;
 import org.hemologica.datatypes.BloodTypeData;
 import org.hemologica.datatypes.DataBank;
+import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonation;
+import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataUser;
 import org.hemologica.datatypes.DonationFilterData;
-import org.hemologica.datatypes.InstitutionData;
+import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.LoginData;
 import org.hemologica.datatypes.MailData;
 import org.hemologica.datatypes.MessageOptionData;
@@ -48,8 +50,16 @@ public class RestServicesImpl implements IRestServices {
 		
 		DataDonation d = new DataDonation();
 //		d.setApproved(true);
-		d.setBank("Banco de Sangre X");
-		d.setInstitution("Hospital de clinicas");
+		
+		DataBank b1 = new DataBank();
+		b1.setName("Banco de Sangre X");
+		
+		d.setBank(b1);
+		
+		DataInstitution di = new DataInstitution();
+		di.setName("Hospital de clinicas");
+		
+		d.setInstitution(di);
 		d.setName("Pedro");
 		d.setDonorType("Voluntario");
 		d.setDate("10/02/2015");
@@ -57,8 +67,17 @@ public class RestServicesImpl implements IRestServices {
 		
 		DataDonation d3 = new DataDonation();
 //		d3.setApproved(true);
-		d3.setBank("Banco de Sangre X");
-		d3.setInstitution("Hospital de clinicas");
+		
+		DataBank b13 = new DataBank();
+		b13.setName("Banco de Sangre X");
+		
+		d3.setBank(b13);
+		
+		DataInstitution di3 = new DataInstitution();
+		di3.setName("Hospital de clinicas");
+		
+		d3.setInstitution(di);
+		
 		d3.setName("Pedro");
 		d3.setDonorType("Voluntario");
 		d3.setDate("10/02/2015");
@@ -66,8 +85,15 @@ public class RestServicesImpl implements IRestServices {
 		
 		DataDonation d2 = new DataDonation();
 //		d2.setApproved(false);
-		d2.setBank("Banco X2");
-		d2.setInstitution("Hospital de clinicas2");
+		DataBank b133 = new DataBank();
+		b133.setName("Banco de Sangre X");
+		
+		d2.setBank(b13);
+		
+		DataInstitution di33 = new DataInstitution();
+		di33.setName("Hospital de clinicas");
+		
+		d2.setInstitution(di33);
 		d2.setName("Pedro2");
 		d2.setDonorType("Voluntario2");
 		d2.setDate("10/02/2014");
@@ -77,8 +103,17 @@ public class RestServicesImpl implements IRestServices {
 		
 		DataDonation d4 = new DataDonation();
 //		d4.setApproved(false);
-		d4.setBank("Banco X2");
-		d4.setInstitution("Hospital de clinicas2");
+		
+//		d2.setApproved(false);
+		DataBank b1333 = new DataBank();
+		b1333.setName("Banco de Sangre X");
+		
+		d4.setBank(b133);
+		
+		DataInstitution di333 = new DataInstitution();
+		di333.setName("Hospital de clinicas");
+		
+		d4.setInstitution(di333);
 		d4.setName("Pedro2");
 		d4.setDonorType("Voluntario2");
 		d4.setDate("10/02/2014");
@@ -87,23 +122,39 @@ public class RestServicesImpl implements IRestServices {
 		return donaciones;
 	}
 
+
 	@Override
 	public List<DataTransfusion> getTransfusions(String user) {
 		List<DataTransfusion> transfusions = new ArrayList<DataTransfusion>();
 		
 		DataTransfusion t1 = new DataTransfusion();
+		DataBank db = new DataBank();
+		db.setName("Banco X");
 		
-		t1.setBank("Banco X");
-		t1.setInstitution("Hospital de clinicas");
+		
+		t1.setBank(db);
+		
+		DataInstitution d2 = new DataInstitution();
+		d2.setName("Hospital de clinicas");
+		
+		t1.setInstitution(d2);
+		
 		t1.setName("Pedro");
 		t1.setDate("10/02/2015");
 		t1.setProduct("Plaquetas");
 		transfusions.add(t1);
 		
 		DataTransfusion t2 = new DataTransfusion();
+		DataBank db2 = new DataBank();
+		db2.setName("Banco X");
 		
-		t2.setBank("Banco X");
-		t2.setInstitution("Hospital de clinicas");
+		
+		t1.setBank(db2);
+		
+		DataInstitution di = new DataInstitution();
+		di.setName("Hospital de clinicas");
+		
+		t2.setInstitution(di);
 		t2.setName("Pedro");
 		t2.setDate("10/02/2015");
 		t2.setProduct("Plaquetas");
@@ -111,6 +162,7 @@ public class RestServicesImpl implements IRestServices {
 		
 		return transfusions;
 	}
+
 
 	@Override
 	public DataUser getUser(String user) {
@@ -154,7 +206,12 @@ public class RestServicesImpl implements IRestServices {
 		DataBank db1 = new DataBank();
 		db1.setCode("1");
 		db1.setName("Banco de Sangre 1");
-		db1.setInstitution("Institucion 1");
+		
+		DataInstitution di1 = new DataInstitution();
+		di1.setName("Institucion 1");
+		
+		db1.setInstitution(di1);
+		
 		db1.setAddress("Av Italia 345");
 		db1.setEmail("infobanco1@hc.com");
 		db1.setHour("Lunes a viernes de 8 - 18 hs ");
@@ -168,7 +225,12 @@ public class RestServicesImpl implements IRestServices {
 		DataBank db2 = new DataBank();
 		db2.setCode("2");
 		db2.setName("Banco de Sangre 2");
-		db2.setInstitution("Institucion 2");
+		
+		
+		DataInstitution di = new DataInstitution();
+		di.setName("Institucion 2");
+		
+		db2.setInstitution(di);
 		db2.setAddress("Rivera 567");
 		db2.setEmail("infobanco2@hc.com");
 		db2.setHour("Lunes a viernes de 8 - 20 hs y Sabados 8 - 12 ");
@@ -182,7 +244,10 @@ public class RestServicesImpl implements IRestServices {
 		DataBank db3 = new DataBank();
 		db3.setCode("3");
 		db3.setName("Banco de Sangre 3");
-		db3.setInstitution("Institucion 3");
+		DataInstitution di3 = new DataInstitution();
+		di3.setName("Institucion 3");
+		
+		db3.setInstitution(di3);
 		db3.setAddress("Melilla 7356");
 		db3.setEmail("infobanco3@hc.com");
 		db3.setHour("Lunes a jueves de 8 - 20 hs y Sabados 8 - 12 ");
@@ -554,10 +619,10 @@ public class RestServicesImpl implements IRestServices {
 	}
 
 	@Override
-	public List<InstitutionData> getInstitutionsUser(String user) {
+	public List<DataInstitution> getInstitutionsUser(String user) {
 	
-		List<InstitutionData> banks = new ArrayList<InstitutionData>();
-		InstitutionData db1 = new InstitutionData();
+		List<DataInstitution> banks = new ArrayList<DataInstitution>();
+		DataInstitution db1 = new DataInstitution();
 		db1.setCode("1");
 		db1.setName("Institucion 1");
 		db1.setAddress("Av Italia 345");
@@ -571,7 +636,7 @@ public class RestServicesImpl implements IRestServices {
 		banks.add(db1);
 		  
 		  
-		InstitutionData db2 = new InstitutionData();
+		DataInstitution db2 = new DataInstitution();
 		db2.setCode("2");
 		db1.setName("Institucion 2");
 		db2.setAddress("Rivera 567");
@@ -585,6 +650,61 @@ public class RestServicesImpl implements IRestServices {
 		banks.add(db2);
 		
 		return banks;
+	}
+
+	@Override
+	public List<DataPerson> getPersons() {
+		
+		List<DataPerson> persons = new ArrayList<>();
+		
+		DataPerson d1 = new DataPerson();
+		d1.setId("1");
+		d1.setDocumentType("Cedula de Identidad");
+		d1.setDocumentNumber("46714299");
+		d1.setFirstName("Paula");
+		d1.setSecondName("Paula");
+		d1.setFirstLastName("Roche");
+		d1.setSecondLastName("De Polsi");
+		
+		DataBloodType dtb = new DataBloodType();
+		dtb.setCode("0");
+		dtb.setDisplayName("AB+");
+		d1.setBloodType(dtb);
+		persons.add(d1);
+		
+		DataPerson d2 = new DataPerson();
+		d2.setId("2");
+		d2.setDocumentType("Cedula de Identidad 2");
+		d2.setDocumentNumber("46714299");
+		d2.setFirstName("Paula2");
+		d2.setSecondName("Paula2");
+		d2.setFirstLastName("Roche2");
+		d2.setSecondLastName("De Polsi2");
+		
+		DataBloodType dtb2 = new DataBloodType();
+		dtb2.setCode("1");
+		dtb2.setDisplayName("AB-");
+		d2.setBloodType(dtb2);
+		persons.add(d2);
+		
+		DataPerson d3 = new DataPerson();
+		d3.setId("3");
+		d3.setDocumentType("Cedula de Identidad3");
+		d3.setDocumentNumber("46714299");
+		d3.setFirstName("Paula3");
+		d3.setSecondName("Paula3");
+		d3.setFirstLastName("Roche3");
+		d3.setSecondLastName("De Polsi3");
+		
+		DataBloodType dtb3 = new DataBloodType();
+		dtb3.setCode("1");
+		dtb3.setDisplayName("AB-");
+		d3.setBloodType(dtb3);
+		persons.add(d2);
+		
+		persons.add(d3);
+		
+		return persons;
 	}
 
 }

@@ -3,7 +3,7 @@ package org.hemologica.salud.web.converters;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import org.hemologica.datatypes.DataBloodDType;
+import org.hemologica.datatypes.DataBloodType;
 
 public class DataBloodDTypeConverter implements Converter {
 	
@@ -15,9 +15,9 @@ public class DataBloodDTypeConverter implements Converter {
 
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
-		if(value instanceof DataBloodDType){
+		if(value instanceof DataBloodType){
 			
-			return ((DataBloodDType)value).getCode();
+			return ((DataBloodType)value).getCode();
 		}
 		return null;
 	}

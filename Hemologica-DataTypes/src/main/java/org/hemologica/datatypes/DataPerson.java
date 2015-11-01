@@ -10,6 +10,7 @@ public class DataPerson implements Serializable{
 	 */
 	private static final long serialVersionUID = 1221320030601695117L;
 	
+	private String id;
 	private String firstName;
 	private String secondName;
 	private String firstLastName;
@@ -23,6 +24,7 @@ public class DataPerson implements Serializable{
 	private String address;
 	private String telephone;
 	private String email;
+	private DataBloodType bloodType;
 	
 	public String getDocumentCountry() {
 		return documentCountry;
@@ -101,6 +103,23 @@ public class DataPerson implements Serializable{
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getFullName() {
+		
+		return firstName + " " + secondName + " " + firstLastName+ " " + secondLastName;
+		
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public DataBloodType getBloodType() {
+		return bloodType;
+	}
+	public void setBloodType(DataBloodType bloodType) {
+		this.bloodType = bloodType;
 	}
 	
 }

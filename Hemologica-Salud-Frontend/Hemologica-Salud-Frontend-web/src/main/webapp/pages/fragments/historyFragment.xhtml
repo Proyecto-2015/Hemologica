@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:pe="http://primefaces.org/ui/extensions">
@@ -11,7 +12,10 @@
 <h:head>
 </h:head>
 <h:body>
+	
+	<div class="container">
 		
-		<ui:include src="fragments/personsListFragment.xhtml" />
+		<ui:include src="personsListFragment.xhtml" />
+	</div>	
 </h:body>
 </html>

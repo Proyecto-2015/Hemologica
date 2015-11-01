@@ -17,12 +17,13 @@ import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonation;
+import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataUser;
 import org.hemologica.datatypes.DonationFilterData;
-import org.hemologica.datatypes.InstitutionData;
+import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.LoginData;
 import org.hemologica.datatypes.MailData;
 import org.hemologica.datatypes.MessageOptionData;
@@ -65,7 +66,7 @@ public interface IRestServices {
 	
 	@GET
 	@Path("/" + ConstantsRest.PATH_USERS + "/" + ConstantsRest.PATH_INSTITUTIONS)
-	public List<InstitutionData> getInstitutionsUser(@QueryParam("user") String user);
+	public List<DataInstitution> getInstitutionsUser(@QueryParam("user") String user);
 	
 	@GET
 	@Path("/banks")
@@ -126,4 +127,9 @@ public interface IRestServices {
 	@Path("/"+ConstantsRest.PATH_CAMPAIGN)
 	@Produces("application/json")
 	public DataCampaign getCampaign(@QueryParam(ConstansJson.JSON_CAMPAIGN_ID) String campaignId);
+	
+	@GET
+	@Path("/"+ConstantsRest.PATH_PERSONS)
+	@Produces("application/json")
+	public List<DataPerson> getPersons();
 }

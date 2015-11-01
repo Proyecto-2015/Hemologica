@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<h:head>
+</h:head>
+<h:body>
+	
+	<table class="col-md-12 table-bordered table-striped table-condensed cf">
+   		<thead class="cf">
+   			<tr>
+   				<th><h:outputText value="#{messages.donation_date}"/></th>
+   				<th><h:outputText value="#{messages.label_insitution}"/></th>
+   				<th><h:outputText value="#{messages.label_bank}"/></th>
+   				<th><h:outputText value="#{messages.label_product}"/></th>
+   				<th><h:outputText value="#{messages.label_volume}"/></th>
+   				<th><h:outputText value="#{messages.label_drawbacks}"/></th>      				
+   			</tr>
+   		</thead>
+   		<tbody>
+   			<c:forEach items="#{personRecordBloodBB.transfusions}" var="transfusionItem" varStatus="counter">
+    			<tr>
+    				<td data-title="#{messages.donation_date}"><h:outputText value="#{transfusionItem.date}"/></td>
+    				<td data-title="#{messages.label_insitution}"><h:outputText value="#{transfusionItem.institution.name}"/></td>
+    				<td data-title="#{messages.label_bank}"><h:outputText value="#{transfusionItem.bank.name}"/></td>
+    				<td data-title="#{messages.label_product}"><h:outputText value="#{transfusionItem.product}"/></td>
+    				<td data-title="#{messages.label_volume}"><h:outputText value="#{transfusionItem.volume}"/></td>
+<!--     				<td data-title="#{messages.label_drawbacks}"><h:outputText value="#{transfusionItem.fullName}"/></td> -->
+    				
+    				<td> 
+    				<p:commandLink  ajax="true" class="icon-list icon-preview"
+						title="#{messages.label_view}" action="#{personRecordBB.viewPerson(personItem.id)}"/>
+<!-- 						<f:ajax  execute="@form"  /> -->
+					</td>
+			
+   					
+   				
+   				</tr>
+   			</c:forEach>
+  		
+  		</tbody>
+	</table>
+</h:body>
+</html>

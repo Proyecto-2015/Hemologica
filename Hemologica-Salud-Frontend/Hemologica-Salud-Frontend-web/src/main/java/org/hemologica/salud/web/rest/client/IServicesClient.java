@@ -10,12 +10,13 @@ import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonation;
+import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataUser;
 import org.hemologica.datatypes.DonationFilterData;
-import org.hemologica.datatypes.InstitutionData;
+import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.MailData;
 import org.hemologica.datatypes.MessageOptionData;
 import org.hemologica.datatypes.TransfusionFilterData;
@@ -142,7 +143,7 @@ public interface IServicesClient {
 	 * @throws IOException 
 	 * @throws ClientProtocolException 
 	 */
-	public List<InstitutionData> getInstitution(String string) throws ClientProtocolException, IOException;
+	public List<DataInstitution> getInstitution(String string) throws ClientProtocolException, IOException;
 
 	/**
 	 * Devuelve los bancos a los que pertenece el usuario
@@ -170,4 +171,13 @@ public interface IServicesClient {
 	 * @throws ClientProtocolException 
 	 */
 	public List<TransfusionFilterData> getTransfusionsFilters() throws ClientProtocolException, IOException;
+	
+	/**
+	 * Devuelve los datos de las personas registradas en hemologica
+	 * @param campaignId
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataPerson> getPersons() throws ClientProtocolException, IOException;
 }

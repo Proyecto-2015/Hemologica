@@ -20,6 +20,7 @@ public class ConstantsRest {
 	public static final String PATH_SEND_MESSAGE = "sendmessage";
 	public static final String PATH_SEND_CAMPAIGN = "sendcampaign";
 	public static final String PATH_CAMPAIGNS_MESSAGES_OPTIONS = "messagesoptions";
+	public static final String PATH_PERSONS = "persons";
 	
 	/**
 	 * Bajo esta url podemos meter todos las "codigueras" que tenemos agregandole /option a la url
@@ -28,6 +29,7 @@ public class ConstantsRest {
 	public static final String PATH_BLOOD_TYPES = "bloodtypes";
 	public static final String PATH_DONATIONS_FILTERS = "donationsfilters";
 	public static final String PATH_TRANSFUSIONS_FILTERS = "transfusionsfilters";
+	
 	
 	
 	

@@ -12,7 +12,9 @@
 </h:head>
 <h:body>
 	
-	<div class="container">
+		<div class="page-header">
+			<h1> <h:outputText value="#{messages.label_persons}"/></h1>
+		</div>
 	
 		<table class="col-md-12 table-bordered table-striped table-condensed cf">
        		<thead class="cf">
@@ -20,22 +22,28 @@
        				<th><h:outputText value="#{messages.person_document_type}"/></th>
        				<th><h:outputText value="#{messages.person_document_country}"/></th>
        				<th><h:outputText value="#{messages.person_name}"/></th>
-       				        				
+       				<th></th>        				
        			</tr>
        		</thead>
        		<tbody>
        			<c:forEach items="#{personRecordBB.persons}" var="personItem" varStatus="counter">
         			<tr>
-        				<td data-title="Fecha"><h:outputText value="#{transfusionItem.date}"/></td>
-        				<td data-title="Banco de Sangre"><h:outputText value="#{transfusionItem.bank}"/></td>
-        				<td data-title="Institución"><h:outputText value="#{transfusionItem.institution}"/></td>
-        				<td data-title="Producto" ><h:outputText value="#{transfusionItem.product}"/></td>
+        				<td data-title="#{messages.person_document_type}"><h:outputText value="#{personItem.documentType}"/></td>
+        				<td data-title="#{messages.person_document_country}"><h:outputText value="#{personItem.documentNumber}"/></td>
+        				<td data-title="#{messages.person_name}">
+        					<h:outputText value="#{personItem.fullName}"/></td>
+        				<td> 
+        				<p:commandLink  ajax="true" class="icon-list icon-preview"
+				title="#{messages.label_view}" action="#{personRecordBB.viewPerson(personItem.id)}"/>
+	<!-- 						<f:ajax  execute="@form"  /> -->
+						</td>
+								
+        					
         				
         			</tr>
         		</c:forEach>
        		
        		</tbody>
         </table>
-	</div>
 </h:body>
 </html>

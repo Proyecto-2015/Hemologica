@@ -14,14 +14,14 @@ public class DataDonation implements Serializable {
 
 	private String name;
 	private String date;
-	private String bank;
-	private String institution;
+	private DataBank bank;
+	private DataInstitution institution;
 	private String donorType;
 	private DataPerson person;
 	private DataDonationDonorType dataDonorType;
 	private DataDonationState state;
 	private DataBloodABOType bloodABOType;
-	private DataBloodDType bloodDType;
+	private DataBloodType bloodDType;
 	private DataDonationFail fail;
 	private List<DataLaboratoryResult> labResults;
 	private List<DataDonationEvent> events;
@@ -32,7 +32,7 @@ public class DataDonation implements Serializable {
 	public DataDonation() {
 		this.fail = new DataDonationFail();
 		this.bloodABOType = new DataBloodABOType();
-		this.bloodDType = new DataBloodDType();
+		this.bloodDType = new DataBloodType();
 		this.dataDonorType = new DataDonationDonorType();
 		this.person = new DataPerson();
 		this.labResults = new ArrayList<DataLaboratoryResult>();
@@ -55,19 +55,19 @@ public class DataDonation implements Serializable {
 		this.date = date;
 	}
 
-	public String getBank() {
+	public DataBank getBank() {
 		return bank;
 	}
 
-	public void setBank(String bank) {
+	public void setBank(DataBank bank) {
 		this.bank = bank;
 	}
 
-	public String getInstitution() {
+	public DataInstitution getInstitution() {
 		return institution;
 	}
 
-	public void setInstitution(String institution) {
+	public void setInstitution(DataInstitution institution) {
 		this.institution = institution;
 	}
 
@@ -147,11 +147,11 @@ public class DataDonation implements Serializable {
 		this.extractionTimeEnd = extractionTimeEnd;
 	}
 
-	public DataBloodDType getBloodDType() {
+	public DataBloodType getBloodDType() {
 		return bloodDType;
 	}
 
-	public void setBloodDType(DataBloodDType bloodDType) {
+	public void setBloodDType(DataBloodType bloodDType) {
 		this.bloodDType = bloodDType;
 	}
 

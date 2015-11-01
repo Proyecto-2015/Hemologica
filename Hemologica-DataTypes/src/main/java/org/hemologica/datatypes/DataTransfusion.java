@@ -13,9 +13,10 @@ public class DataTransfusion implements Serializable {
 	
 	private String name;
 	private String date;
-	private String bank;
-	private String institution;
+	private DataBank bank;
+	private DataInstitution institution;
 	private String product;
+	private String volume;
 	
 	private DataPerson person;
 	private DataProduct dataProduct;
@@ -52,16 +53,16 @@ public class DataTransfusion implements Serializable {
 	public void setDate(String date) {
 		this.date = date;
 	}
-	public String getBank() {
+	public DataBank getBank() {
 		return bank;
 	}
-	public void setBank(String bank) {
+	public void setBank(DataBank bank) {
 		this.bank = bank;
 	}
-	public String getInstitution() {
+	public DataInstitution getInstitution() {
 		return institution;
 	}
-	public void setInstitution(String institution) {
+	public void setInstitution(DataInstitution institution) {
 		this.institution = institution;
 	}
 	public String getProduct() {
@@ -75,6 +76,12 @@ public class DataTransfusion implements Serializable {
 	}
 	public void setPerson(DataPerson person) {
 		this.person = person;
+	}
+	public String getVolume() {
+		return volume;
+	}
+	public void setVolume(String volume) {
+		this.volume = volume;
 	}
 	
 	

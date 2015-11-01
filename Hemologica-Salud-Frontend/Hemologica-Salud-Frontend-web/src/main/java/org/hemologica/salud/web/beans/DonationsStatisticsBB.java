@@ -14,7 +14,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.datatypes.DonationsStatisticsData;
-import org.hemologica.datatypes.InstitutionData;
+import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.salud.factories.RestFactory;
 import org.primefaces.event.ItemSelectEvent;
 import org.primefaces.model.chart.PieChartModel;
@@ -26,7 +26,7 @@ public class DonationsStatisticsBB implements Serializable{
 	
 	private DonationsStatisticsData statictic;
 	private List<DataBank> banks;
-	private List<InstitutionData> institutions;
+	private List<DataInstitution> institutions;
 	private List<DonationFilterData> filters;
 	private List<DonationFilterData> distinguish;
 	private List<DonationFilterData> allFilters;
@@ -96,10 +96,10 @@ public class DonationsStatisticsBB implements Serializable{
 	public void setBanks(List<DataBank> banks) {
 		this.banks = banks;
 	}
-	public List<InstitutionData> getInstitutions() {
+	public List<DataInstitution> getInstitutions() {
 		return institutions;
 	}
-	public void setInstitutions(List<InstitutionData> institutions) {
+	public void setInstitutions(List<DataInstitution> institutions) {
 		this.institutions = institutions;
 	}
 	public List<DonationFilterData> getFilters() {

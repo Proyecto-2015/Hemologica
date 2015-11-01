@@ -4,7 +4,7 @@ public class DataBank {
 	
 	private String code;
 	private String name;
-	private String institution;
+	private DataInstitution institution;
 	private String address;
 	private String hour;
 	private String telephone;
@@ -19,10 +19,10 @@ public class DataBank {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getInstitution() {
+	public DataInstitution getInstitution() {
 		return institution;
 	}
-	public void setInstitution(String institution) {
+	public void setInstitution(DataInstitution institution) {
 		this.institution = institution;
 	}
 	public String getAddress() {
