@@ -8,10 +8,6 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:pe="http://primefaces.org/ui/extensions">
 
-<!-- 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" -->
-<!-- 	xmlns:h="http://xmlns.jcp.org/jsf/html" -->
-<!-- 	xmlns:f="http://xmlns.jcp.org/jsf/core" -->
-
 <h:head>
 </h:head>
 <h:body>
@@ -21,23 +17,23 @@
 		
 
 			<!-- Person -->
-			<p:tab title="#{messages.donation_create_edit_tab_person_title}">
-				<ui:include src="donationPersonFragment.xhtml" />
+			<p:tab title="Donante">
+				<ui:include src="transfusionPersonFragment.xhtml" />
 			</p:tab>
 
 			<!-- Donation Information -->
-			<p:tab title="#{messages.donation_create_edit_tab_information_title}">
-				<ui:include src="donationInformationFragment.xhtml" />
+			<p:tab title="General">
+				<ui:include src="transfusionInformationFragment.xhtml" />
 			</p:tab>
 
 			<!-- Donation Laboratory Results -->
-			<p:tab title="#{messages.donation_create_edit_tab_laboratory_title}">
-				<ui:include src="donationLaboratoryResultFragment.xhtml" />
+			<p:tab title="Análisis">
+				<ui:include src="transfusionLaboratoryResultFragment.xhtml" />
 			</p:tab>
 
 			<!-- Donation Events -->
-			<p:tab title="#{messages.donation_create_edit_tab_events_title}">
-				<ui:include src="donationEventsFragment.xhtml" />
+			<p:tab title="Eventos Adversos">
+				<ui:include src="transfusionEventsFragment.xhtml" />
 			</p:tab>
 
 		</p:tabView>
