@@ -1,7 +1,7 @@
 package org.hemologica.services.dao;
 
 import org.hemologica.dao.PersonDAO;
-import org.hemologica.model.Person;
+import org.hemologica.dao.model.Person;
 import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
 public class PersonDAOSpringImpl extends HibernateDaoSupport implements PersonDAO{
