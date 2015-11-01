@@ -446,7 +446,7 @@ public class RestServicesImpl implements IRestServices {
 
 	@Override
 	public DataCampaign getCampaign(String campaignId) {
-		List<DataCampaign> campaigns = getCampaigns("");
+		List<DataCampaign> campaigns = getCampaigns("7");
 		
 		return campaigns.get(Integer.parseInt(campaignId)-1);
 	}

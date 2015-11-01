@@ -224,6 +224,25 @@ h6 .h6 {
 	background-image: url("../javax.faces.resource/images/ui-icons_ffffff_256x240.png.xhtml?ln=primefaces-bootstrap") !important;
 }
 
+.icon-preview{
+	
+	background-image: url("#{resource['img/preview.png']}");
+	cursor: pointer;
+	
+}
+
+.icon-list{
+	
+	background-size: 25px 25px !important;
+	background-repeat: no-repeat;
+	background-position: right;
+	display: inline-block;
+	width: 25px !important;
+	height: 25px !important;
+	float: right;
+	margin-right: 15px;
+}
+
 .div-center{
 	display: block;
   	margin-left: auto;

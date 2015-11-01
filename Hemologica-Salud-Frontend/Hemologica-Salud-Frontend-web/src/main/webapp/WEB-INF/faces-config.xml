@@ -114,14 +114,18 @@
 	<managed-bean>
 		<managed-bean-name>campaignsPrevItemBB</managed-bean-name>
 		<managed-bean-class>org.hemologica.salud.web.beans.CampaignsPrevItemBB</managed-bean-class>
-		<managed-bean-scope>application</managed-bean-scope>
+		<managed-bean-scope>view</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>campaignsPrevBB</managed-bean-name>
 		<managed-bean-class>org.hemologica.salud.web.beans.CampaignsPrevBB</managed-bean-class>
-		<managed-bean-scope>application</managed-bean-scope>
+		<managed-bean-scope>view</managed-bean-scope>
 	</managed-bean>
-	
+	<managed-bean>
+		<managed-bean-name>campaignsBB</managed-bean-name>
+		<managed-bean-class>org.hemologica.salud.web.beans.CampaignsBB</managed-bean-class>
+		<managed-bean-scope>view</managed-bean-scope>
+	</managed-bean>
 	
 	<managed-bean>
 		<managed-bean-name>sessionBB</managed-bean-name>
@@ -187,11 +191,6 @@
 	<managed-bean>
 		<managed-bean-name>messageBB</managed-bean-name>
 		<managed-bean-class>org.hemologica.salud.web.beans.MessageBB</managed-bean-class>
-		<managed-bean-scope>view</managed-bean-scope>
-	</managed-bean>
-	<managed-bean>
-		<managed-bean-name>campaignsBB</managed-bean-name>
-		<managed-bean-class>org.hemologica.salud.web.beans.CampaignsBB</managed-bean-class>
 		<managed-bean-scope>view</managed-bean-scope>
 	</managed-bean>
 

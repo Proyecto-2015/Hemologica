@@ -1,6 +1,10 @@
 package org.hemologica.datatypes;
 
-public class DataCampaign {
+import java.io.Serializable;
+
+public class DataCampaign implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	private String id;
 	private String title;

@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedProperty;
@@ -14,6 +15,7 @@ import javax.faces.context.FacesContext;
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.salud.factories.RestFactory;
+import org.hemologica.salud.web.utils.JSFUtils;
 
 public class CampaignsBB implements Serializable{
 
@@ -35,12 +37,23 @@ public class CampaignsBB implements Serializable{
 		this.campaign = campaign;
 	}
 	
-	public void submit(){
-		
+	@PostConstruct
+	public void init(){
 		
 		FacesContext context = FacesContext.getCurrentInstance();
 		Application app = context.getApplication();
 		bundle = app.getResourceBundle(context, languageVarName);
+		
+		DataCampaign campaignNew = (DataCampaign) context.getExternalContext().getSessionMap().get("campaignNew");
+		if(campaignNew != null){
+			
+			campaign = campaignNew;
+			
+		}
+		
+	}
+	
+	public void submit(){
 		
 		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, null, bundle.getString("message_send_campaign_error"));
 		
@@ -53,11 +66,69 @@ public class CampaignsBB implements Serializable{
 		if(response != null && response.getCode() == 0){
 			
 			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, bundle.getString("message_send_campaign_success"));
-
+			
+			FacesContext context = FacesContext.getCurrentInstance();
+			context.getExternalContext().getSessionMap().put("campaignNew", null);
+			
 		}
 		
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 		logger.info("submit");
+	}
+	
+	public void clean(){
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getSessionMap().put("campaignNew", null);
+		
+		campaign = new DataCampaign();
+		
+	}
+	
+	public String preview(){
+		
+		boolean error = false;
+		if(campaign.getTitle() == null || campaign.getTitle().equals("")){
+			
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, null, bundle.getString("message_title_empty"));
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+			error = true;
+		}
+		if(campaign.getSummary() == null || campaign.getSummary().equals("")){
+			
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, null, bundle.getString("message_summary_empty"));
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+			error = true;
+		}
+		if(campaign.getSubtitle() == null || campaign.getSubtitle().equals("")){
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, null, bundle.getString("message_subtitle_empty"));
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+			error = true;
+		}
+		if(campaign.getText() == null || campaign.getText().equals("")){
+			FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, null, bundle.getString("message_text_empty"));
+			FacesContext.getCurrentInstance().addMessage(null, msg);
+			error = true;
+		}
+		if(error){
+			
+			return null;
+			
+		}else{
+			
+			Calendar today = Calendar.getInstance();
+			SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+			campaign.setDate(format.format(today.getTime()));
+			
+			FacesContext context = FacesContext.getCurrentInstance();
+			campaign.setId("-1");
+			context.getExternalContext().getSessionMap().put("campaignNew", campaign);
+			
+			return "campaignsPrev";
+			
+		}
+		
+		
 	}
 	
 }
