@@ -15,13 +15,15 @@ public class PersonsRecord implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(unique=true, nullable=false)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private String id;
+
+	@Column(name="persons_record_cda_id")
+	private String personsRecordCdaId;
 
 	//bi-directional many-to-one association to Identification
 	@ManyToOne
-	@JoinColumn(name="identifications_id", nullable=false)
+	@JoinColumn(name="identifications_id")
 	private Identification identification;
 
 	public PersonsRecord() {
@@ -33,6 +35,14 @@ public class PersonsRecord implements Serializable {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getPersonsRecordCdaId() {
+		return this.personsRecordCdaId;
+	}
+
+	public void setPersonsRecordCdaId(String personsRecordCdaId) {
+		this.personsRecordCdaId = personsRecordCdaId;
 	}
 
 	public Identification getIdentification() {

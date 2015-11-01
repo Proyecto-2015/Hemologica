@@ -16,13 +16,15 @@ public class Identification implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(unique=true, nullable=false)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
+
+	@Column(name="identificacion_code")
+	private String identificacionCode;
 
 	//bi-directional many-to-one association to Person
 	@ManyToOne
-	@JoinColumn(name="persons_id", nullable=false)
+	@JoinColumn(name="persons_id")
 	private Person person;
 
 	//bi-directional many-to-one association to IdentificationsHistory
@@ -42,6 +44,14 @@ public class Identification implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getIdentificacionCode() {
+		return this.identificacionCode;
+	}
+
+	public void setIdentificacionCode(String identificacionCode) {
+		this.identificacionCode = identificacionCode;
 	}
 
 	public Person getPerson() {

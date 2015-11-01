@@ -16,8 +16,7 @@ public class MovementsType implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(unique=true, nullable=false)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 
 	//bi-directional many-to-one association to Movement

@@ -15,24 +15,23 @@ public class Movement implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(unique=true, nullable=false)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private String id;
+
+	//bi-directional many-to-one association to MovementsType
+	@ManyToOne
+	@JoinColumn(name="movements_types_id")
+	private MovementsType movementsType;
 
 	//bi-directional many-to-one association to Service
 	@ManyToOne
-	@JoinColumn(name="services_id", nullable=false)
+	@JoinColumn(name="services_id")
 	private Service service;
 
 	//bi-directional many-to-one association to Unit
 	@ManyToOne
-	@JoinColumn(name="units_id", nullable=false)
+	@JoinColumn(name="units_id")
 	private Unit unit;
-
-	//bi-directional many-to-one association to MovementsType
-	@ManyToOne
-	@JoinColumn(name="movements_types_id", nullable=false)
-	private MovementsType movementsType;
 
 	public Movement() {
 	}
@@ -43,6 +42,14 @@ public class Movement implements Serializable {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public MovementsType getMovementsType() {
+		return this.movementsType;
+	}
+
+	public void setMovementsType(MovementsType movementsType) {
+		this.movementsType = movementsType;
 	}
 
 	public Service getService() {
@@ -59,14 +66,6 @@ public class Movement implements Serializable {
 
 	public void setUnit(Unit unit) {
 		this.unit = unit;
-	}
-
-	public MovementsType getMovementsType() {
-		return this.movementsType;
-	}
-
-	public void setMovementsType(MovementsType movementsType) {
-		this.movementsType = movementsType;
 	}
 
 }

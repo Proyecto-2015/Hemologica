@@ -15,33 +15,31 @@ public class UsersRoleService implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(unique=true, nullable=false)
-	private Integer id;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
 
 	//bi-directional many-to-one association to Role
 	@ManyToOne
-	@JoinColumn(name="role_id", nullable=false, insertable=false, updatable=false)
 	private Role role;
 
 	//bi-directional many-to-one association to Service
 	@ManyToOne
-	@JoinColumn(name="services_id", nullable=false, insertable=false, updatable=false)
+	@JoinColumn(name="services_id")
 	private Service service;
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
-	@JoinColumn(name="users_id", nullable=false, insertable=false, updatable=false)
+	@JoinColumn(name="users_id")
 	private User user;
 
 	public UsersRoleService() {
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

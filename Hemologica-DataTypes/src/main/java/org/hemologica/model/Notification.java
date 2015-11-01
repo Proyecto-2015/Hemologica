@@ -16,8 +16,7 @@ public class Notification implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(unique=true, nullable=false)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private String id;
 
 	//bi-directional many-to-one association to NotificationsPerson
