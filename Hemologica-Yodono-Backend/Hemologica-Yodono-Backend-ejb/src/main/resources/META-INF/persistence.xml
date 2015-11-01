@@ -5,31 +5,48 @@
         http://xmlns.jcp.org/xml/ns/persistence
         http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 
-	<persistence-unit name="Hemologica-YodonoDS-PU" transaction-type="JTA">
+	<persistence-unit name="Hemologica-YodonoDS-PU"
+		transaction-type="JTA">
 		<jta-data-source>java:/jboss/datasources/Hemologica-DS</jta-data-source>
-		<class>org.hemologica.model.Advertisment</class>
-		<class>org.hemologica.model.AdvertismentsContent</class>
-		<class>org.hemologica.model.Center</class>
-		<class>org.hemologica.model.Concept</class>
-		<class>org.hemologica.model.ConceptsDisplay</class>
-		<class>org.hemologica.model.CountriesCode</class>
-		<class>org.hemologica.model.DocumentsTypesCode</class>
-		<class>org.hemologica.model.Identification</class>
-		<class>org.hemologica.model.IdentificationsHistory</class>
-		<class>org.hemologica.model.Institution</class>
-		<class>org.hemologica.model.Movement</class>
-		<class>org.hemologica.model.MovementsType</class>
-		<class>org.hemologica.model.Notification</class>
-		<class>org.hemologica.model.NotificationsPerson</class>
-		<class>org.hemologica.model.Permission</class>
-		<class>org.hemologica.model.Person</class>
-		<class>org.hemologica.model.PersonsRecord</class>
-		<class>org.hemologica.model.Role</class>
-		<class>org.hemologica.model.RolePermission</class>
-		<class>org.hemologica.model.Service</class>
-		<class>org.hemologica.model.Unit</class>
-		<class>org.hemologica.model.User</class>
-		<class>org.hemologica.model.UsersRoleService</class>
+		<class>org.hemologica.dao.model.Advertisment</class>
+		<class>org.hemologica.dao.model.AdvertismentsContent</class>
+		<class>org.hemologica.dao.model.BloodAboTypesCode</class>
+		<class>org.hemologica.dao.model.BloodDTypesCode</class>
+		<class>org.hemologica.dao.model.Center</class>
+		<class>org.hemologica.dao.model.CitiesCode</class>
+		<class>org.hemologica.dao.model.Concept</class>
+		<class>org.hemologica.dao.model.ConceptsDisplay</class>
+		<class>org.hemologica.dao.model.CountriesCode</class>
+		<class>org.hemologica.dao.model.Document</class>
+		<class>org.hemologica.dao.model.DocumentsTypesCode</class>
+		<class>org.hemologica.dao.model.DonationDonorTypesCode</class>
+		<class>org.hemologica.dao.model.DonationEventsCode</class>
+		<class>org.hemologica.dao.model.DonationFailCausesCode</class>
+		<class>org.hemologica.dao.model.DonationFailCode</class>
+		<class>org.hemologica.dao.model.DonationLaboratoyCode</class>
+		<class>org.hemologica.dao.model.DonationStatesCode</class>
+		<class>org.hemologica.dao.model.DonationTypesCode</class>
+		<class>org.hemologica.dao.model.GeoLocation</class>
+		<class>org.hemologica.dao.model.Identification</class>
+		<class>org.hemologica.dao.model.IdentificationsHistory</class>
+		<class>org.hemologica.dao.model.Institution</class>
+		<class>org.hemologica.dao.model.Movement</class>
+		<class>org.hemologica.dao.model.MovementsType</class>
+		<class>org.hemologica.dao.model.Notification</class>
+		<class>org.hemologica.dao.model.NotificationsPerson</class>
+		<class>org.hemologica.dao.model.Permission</class>
+		<class>org.hemologica.dao.model.Person</class>
+		<class>org.hemologica.dao.model.PersonsRecord</class>
+		<class>org.hemologica.dao.model.Role</class>
+		<class>org.hemologica.dao.model.RolePermission</class>
+		<class>org.hemologica.dao.model.Service</class>
+		<class>org.hemologica.dao.model.StatesCode</class>
+		<class>org.hemologica.dao.model.TransfusionEventsCode</class>
+		<class>org.hemologica.dao.model.TransfusionLaboratoryCode</class>
+		<class>org.hemologica.dao.model.Unit</class>
+		<class>org.hemologica.dao.model.UnitsType</class>
+		<class>org.hemologica.dao.model.User</class>
+		<class>org.hemologica.dao.model.UsersRoleService</class>
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="none" />
 			<property name="hibernate.show_sql" value="false" />

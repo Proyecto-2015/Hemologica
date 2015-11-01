@@ -4,7 +4,7 @@ import javax.persistence.EntityManager;
 
 import org.hemologica.dao.AbstractDAO;
 import org.hemologica.dao.IGenericDAO;
-import org.hemologica.model.Person;
+import org.hemologica.dao.model.Person;
 
 public class PersonDAOImpl extends AbstractDAO<Person> implements IGenericDAO<Person>{
 

@@ -7,6 +7,7 @@ import javax.faces.model.SelectItem;
 
 import org.hemologica.constants.DataDonationStateEnum;
 import org.hemologica.constants.DataEventSeverityEnum;
+import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataBloodABOType;
 import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataCity;
@@ -16,6 +17,7 @@ import org.hemologica.datatypes.DataDonationEvent;
 import org.hemologica.datatypes.DataDonationFail;
 import org.hemologica.datatypes.DataDonationFailCause;
 import org.hemologica.datatypes.DataDonationState;
+import org.hemologica.datatypes.DataInstitution;
 
 import javax.annotation.PostConstruct;
 
@@ -63,7 +65,14 @@ public class ApplicationBB implements Serializable {
 	 * Event codes END
 	 */
 	
-	
+	/**
+	 * Institutions BEGIN
+	 */
+	private List<DataBank> banks;
+	private List<DataInstitution> institutions;
+	/**
+	 * Institutions END
+	 */
 	
 	@PostConstruct
 	public void init(){
@@ -126,6 +135,22 @@ public class ApplicationBB implements Serializable {
 
 	public List<DataEventSeverityEnum> getEventSeverities() {
 		return eventSeverities;
+	}
+
+	public List<DataInstitution> getInstitutions() {
+		return institutions;
+	}
+
+	public void setInstitutions(List<DataInstitution> institutions) {
+		this.institutions = institutions;
+	}
+
+	public List<DataBank> getBanks() {
+		return banks;
+	}
+
+	public void setBanks(List<DataBank> banks) {
+		this.banks = banks;
 	}
 
 }
