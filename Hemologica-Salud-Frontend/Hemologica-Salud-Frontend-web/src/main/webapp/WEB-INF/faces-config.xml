@@ -181,6 +181,16 @@
 		<managed-bean-class>org.hemologica.salud.web.beans.MessageBB</managed-bean-class>
 		<managed-bean-scope>view</managed-bean-scope>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>donationsStatisticsBB</managed-bean-name>
+		<managed-bean-class>org.hemologica.salud.web.beans.DonationsStatisticsBB</managed-bean-class>
+		<managed-bean-scope>view</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>transfusionsStatistics</managed-bean-name>
+		<managed-bean-class>org.hemologica.salud.web.beans.TransfusionsStatistics</managed-bean-class>
+		<managed-bean-scope>view</managed-bean-scope>
+	</managed-bean>
 
 	<navigation-rule>
 		<from-view-id>*</from-view-id>
@@ -245,7 +255,7 @@
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
-		<navigation-rule>
+	<navigation-rule>
 		<from-view-id>*</from-view-id>
 		<navigation-case>
 			<from-outcome>campaignPrevItem</from-outcome>
@@ -253,6 +263,23 @@
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>campaignPrevItem</from-outcome>
+			<to-view-id>/pages/donationsStatisticsFragment.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>campaignPrevItem</from-outcome>
+			<to-view-id>/pages/transfusionsStatisticsFragment.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
 	
 	<navigation-rule>
 		<from-view-id>*</from-view-id>

@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+
+<h:head>
+</h:head>
+<h:body>
+		
+		<fieldset>
+			<legend>
+				<h:outputText value="#{messages.label_filter_insitution}"/>			
+			</legend>
+			
+			<div class="form-group div-center col-lg-12">
+				<label class="col-md-2 col-lg-1 control-label" for="name"><h:outputText
+						value="#{messages.donation_situation}" /></label>
+				<div class="col-md-9 col-lg-2">
+					<h:selectOneMenu id="options" class="form-control" value="#{messageBB.messageOption}"
+						style="height: 34px;" converter="dataMessageOptionsConverter">
+						
+						<f:selectItems value="#{messageBB.messageOptions}" var="messageOption"
+							itemValue="messageOption" itemLabel="#{messageOption.displayName}" />
+						
+					</h:selectOneMenu>
+				</div>
+		
+				<label class="col-md-2  col-lg-1 control-label" for="name"><h:outputText
+						value="#{messages.donation_blood_type}" /></label>
+				<div class="col-md-9 col-lg-2">
+					<h:selectOneMenu class="form-control" value="#{messageBB.bloodType}"
+						style="height: 34px;">
+						<f:selectItems value="#{messageBB.bloodTypes}" var="bloodType"
+							itemValue="bloodType" itemLabel="#{bloodType.displayName}" />
+						<f:converter converterId="dataBloodTypeConverter" />
+					</h:selectOneMenu>
+				</div>
+				
+				<div class="col-md-9 col-lg-2">
+					<label class="col-md-2 col-lg-1 control-label" for="name"><h:outputText
+							value="#{messages.label_date_from}" /></label>
+					<p:calendar pattern="dd/MM/yyyy" 
+							mode="popup" value="#{donationsStatisticsBB.statictic.fromDate}" />
+				</div>
+				<div class="col-md-3 col-lg-1">						
+					<label class="col-md-2 col-lg-1 control-label" for="name"><h:outputText
+							value="#{messages.label_date_to}" /></label>
+					<p:calendar  pattern="dd/MM/yyyy"
+							mode="popup" value="#{donationsStatisticsBB.statictic.toDate}" />
+				</div>
+			</div>
+		</fieldset>
+	
+</h:body>
+</html>
