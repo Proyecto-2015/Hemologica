@@ -4,7 +4,6 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
 /**
  * The persistent class for the persons database table.
  * 
@@ -13,6 +12,7 @@ import java.util.List;
 @Table(name="persons")
 @NamedQuery(name="Person.findAll", query="SELECT p FROM Person p")
 public class Person implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
