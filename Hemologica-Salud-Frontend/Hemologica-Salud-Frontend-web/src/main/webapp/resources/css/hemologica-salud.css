@@ -230,6 +230,30 @@ h6 .h6 {
 	cursor: pointer;
 	
 }
+.icon-filter{
+	
+	background-image: url("#{resource['img/filter-icon.png']}");
+	cursor: pointer;
+	
+	background-size: 45px 45px !important;
+	background-repeat: no-repeat;
+	background-position: right;
+	display: inline-block;
+	width: 45px !important;
+	height: 45px !important;
+	float: right;
+	margin-right: 15px;
+	
+}
+
+#button-search{
+	
+	font-size: initial;
+    margin-right: 19px;
+	
+}
+
+
 
 .icon-list{
 	
@@ -264,3 +288,23 @@ h6 .h6 {
 .ui-messages-info-icon, .ui-messages-warn-icon, .ui-messages-error-icon, .ui-messages-fatal-icon, .ui-message-info-icon, .ui-message-warn-icon, .ui-message-error-icon, .ui-message-fatal-icon {
     background: none;
 }
+
+.ui-inputfield, .ui-widget-content .ui-inputfield, .ui-widget-header .ui-inputfield {
+	
+	width: 100%;	
+}
+
+.jqplot-series-canvas {
+	
+ 	 background:whitesmoke;
+ 	 border: 0;
+}
+
+table.jqplot-table-legend, table.jqplot-cursor-legend {
+    background-color: whitesmoke;
+    border: none;
+    
+}
+
+
+

@@ -7,6 +7,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 import org.apache.http.client.ClientProtocolException;
 import org.hemologica.datatypes.DataBank;
@@ -14,6 +16,8 @@ import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.datatypes.DonationsStatisticsData;
 import org.hemologica.datatypes.InstitutionData;
 import org.hemologica.salud.factories.RestFactory;
+import org.primefaces.event.ItemSelectEvent;
+import org.primefaces.model.chart.PieChartModel;
 
 public class DonationsStatisticsBB implements Serializable{
 
@@ -26,6 +30,8 @@ public class DonationsStatisticsBB implements Serializable{
 	private List<DonationFilterData> filters;
 	private List<DonationFilterData> distinguish;
 	private List<DonationFilterData> allFilters;
+	
+	private PieChartModel pieModel1;
 
 	@PostConstruct
 	private void init(){
@@ -35,6 +41,8 @@ public class DonationsStatisticsBB implements Serializable{
 			institutions = RestFactory.getServicesClient().getInstitution("userId");
 			banks = RestFactory.getServicesClient().getBanks("userId");
 			allFilters = RestFactory.getServicesClient().getDonationsFilters();
+			statictic = new DonationsStatisticsData();
+			createPieModels();
 			
 		} catch (ClientProtocolException e) {
 			
@@ -46,7 +54,36 @@ public class DonationsStatisticsBB implements Serializable{
 		}	
 	}
 	
+	private void createPieModels() {
+        createPieModel1();
+    }
+     
+    private void createPieModel1() {
+        pieModel1 = new PieChartModel();
+         
+        pieModel1.set("Brand 1", 540);
+        pieModel1.set("Brand 2", 325);
+        pieModel1.set("Brand 3", 702);
+        pieModel1.set("Brand 4", 421);
+        pieModel1.setExtender("pieExtender");
+        pieModel1.setShowDataLabels(true);
+        pieModel1.setLegendPosition("w");
+    }
+    
+    public void find(){
+    	
+    	
+    	logger.info("IR a buscar la infoooo");
+    }
 	
+	public PieChartModel getPieModel1() {
+		return pieModel1;
+	}
+
+	public void setPieModel1(PieChartModel pieModel1) {
+		this.pieModel1 = pieModel1;
+	}
+
 	public DonationsStatisticsData getStatictic() {
 		return statictic;
 	}
@@ -82,6 +119,13 @@ public class DonationsStatisticsBB implements Serializable{
 	}
 	public void setAllFilters(List<DonationFilterData> allFilters) {
 		this.allFilters = allFilters;
+	}
+	
+	public void itemSelect(ItemSelectEvent event) {
+	        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Item selected",
+	            "Item Index: " + event.getItemIndex() + ", Series Index:" + event.getSeriesIndex());
+	     
+	    FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
 
 }
