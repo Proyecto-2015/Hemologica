@@ -14,8 +14,11 @@ import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataUser;
+import org.hemologica.datatypes.DonationFilterData;
+import org.hemologica.datatypes.InstitutionData;
 import org.hemologica.datatypes.MailData;
 import org.hemologica.datatypes.MessageOptionData;
+import org.hemologica.datatypes.TransfusionFilterData;
 
 public interface IServicesClient {
 	
@@ -131,4 +134,40 @@ public interface IServicesClient {
 	 * @throws ClientProtocolException 
 	 */
 	public DataCampaign getCampaign(String campaignId) throws ClientProtocolException, IOException;
+
+	/**
+	 * Devuelve las instituciones a las que pertenece el usuario
+	 * @param campaignId
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<InstitutionData> getInstitution(String string) throws ClientProtocolException, IOException;
+
+	/**
+	 * Devuelve los bancos a los que pertenece el usuario
+	 * @param campaignId
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataBank> getBanks(String string) throws ClientProtocolException, IOException;
+
+	/**
+	 * Devuelve los filtros habilitados para las donaciones
+	 * @param campaignId
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DonationFilterData> getDonationsFilters() throws ClientProtocolException, IOException;
+	
+	/**
+	 * Devuelve los filtros habilitados para las transfusiones
+	 * @param campaignId
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<TransfusionFilterData> getTransfusionsFilters() throws ClientProtocolException, IOException;
 }

@@ -8,6 +8,8 @@ public class ConstantsRest {
 	public static final String PATH_DONATIONS = "donations";
 	public static final String PATH_TRANSFUTIONS = "transfusions";
 	public static final String PATH_USERS = "users";
+	public static final String PATH_INSTITUTIONS = "institutions";
+	
 	public static final String PATH_BANKS = "banks";
 	public static final String PATH_CITIES = "cities";
 	public static final String PATH_LOGIN = "login";
@@ -24,6 +26,9 @@ public class ConstantsRest {
 	 */
 	public static final String PATH_CODES = "codes";
 	public static final String PATH_BLOOD_TYPES = "bloodtypes";
+	public static final String PATH_DONATIONS_FILTERS = "donationsfilters";
+	public static final String PATH_TRANSFUSIONS_FILTERS = "transfusionsfilters";
+	
 	
 	
 

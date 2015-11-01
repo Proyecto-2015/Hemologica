@@ -19,9 +19,12 @@ import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataUser;
+import org.hemologica.datatypes.DonationFilterData;
+import org.hemologica.datatypes.InstitutionData;
 import org.hemologica.datatypes.LoginData;
 import org.hemologica.datatypes.MailData;
 import org.hemologica.datatypes.MessageOptionData;
+import org.hemologica.datatypes.TransfusionFilterData;
 import org.hemologica.salud.factories.RestFactory;
 
 import com.google.gson.Gson;
@@ -340,6 +343,104 @@ public class ServicesClientImpl implements IServicesClient {
 		DataCampaign campaign = new Gson().fromJson(campaignString, DataCampaign.class);
 		
 		return campaign;
+	}
+
+	@Override
+	public List<InstitutionData> getInstitution(String userId) throws ClientProtocolException, IOException {
+		
+		String urlService = url + ConstantsRest.PATH_USERS + ConstantsRest.PATH_INSTITUTIONS;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		hash.put(ConstansJson.JSON_USER, userId);
+		
+		String responseString = "";
+		try {
+			
+			responseString = RestFactory.getRestServicesUtils().get(urlService, hash);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.log(Level.SEVERE,"Error al llamar al servicio", e);
+			
+		}
+		
+		Type listType = new TypeToken<List<InstitutionData>>(){}.getType();
+		List<InstitutionData> responseObject= new Gson().fromJson(responseString, listType);
+		
+		return responseObject;
+	}
+
+	@Override
+	public List<DataBank> getBanks(String userId) throws ClientProtocolException, IOException {
+		
+		String urlService = url + ConstantsRest.PATH_USERS + ConstantsRest.PATH_BANKS;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		hash.put(ConstansJson.JSON_USER, userId);
+		
+		String responseString = "";
+		try {
+			
+			responseString = RestFactory.getRestServicesUtils().get(urlService, hash);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.log(Level.SEVERE,"Error al llamar al servicio", e);
+			
+		}
+		
+		Type listType = new TypeToken<List<DataBank>>(){}.getType();
+		List<DataBank> responseObject= new Gson().fromJson(responseString, listType);
+		
+		return responseObject;
+	}
+
+	@Override
+	public List<DonationFilterData> getDonationsFilters() throws ClientProtocolException, IOException {
+		
+		String urlService = url + ConstantsRest.PATH_USERS + ConstantsRest.PATH_DONATIONS_FILTERS;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		
+		String responseString = "";
+		try {
+			
+			responseString = RestFactory.getRestServicesUtils().get(urlService, hash);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.log(Level.SEVERE,"Error al llamar al servicio", e);
+			
+		}
+		
+		Type listType = new TypeToken<List<DonationFilterData>>(){}.getType();
+		List<DonationFilterData> responseObject= new Gson().fromJson(responseString, listType);
+		
+		return responseObject;
+	}
+
+	@Override
+	public List<TransfusionFilterData> getTransfusionsFilters() throws ClientProtocolException, IOException {
+		
+		String urlService = url + ConstantsRest.PATH_USERS + ConstantsRest.PATH_DONATIONS_FILTERS;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		
+		String responseString = "";
+		try {
+			
+			responseString = RestFactory.getRestServicesUtils().get(urlService, hash);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.log(Level.SEVERE,"Error al llamar al servicio", e);
+			
+		}
+		
+		Type listType = new TypeToken<List<TransfusionFilterData>>(){}.getType();
+		List<TransfusionFilterData> responseObject= new Gson().fromJson(responseString, listType);
+		
+		return responseObject;
 	}
 
 }
