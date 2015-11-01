@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<h:head>
+</h:head>
+<h:body>
+
+	<div class="container-fluid">
+
+		<div class="row">
+			<div>
+
+				<h:form class="form-horizontal" id="eventForm">
+
+					<div>
+
+						<table id="lab_results_table"
+							class="col-md-12 table-bordered table-striped table-condensed cf">
+							<thead class="cf">
+								<tr>
+									<th><h:outputText value="#{messages.donation_event_code}" />
+									</th>
+									<th><h:outputText
+											value="#{messages.donation_event_display}" /></th>
+									<th><h:outputText
+											value="#{messages.donation_event_severity}" /></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+
+									<td data-title="#{messages.donation_event_code}"><h:inputText
+											value="#{donationBB.event.code}" /></td>
+									<td data-title="#{messages.donation_event_display}">
+										<h:inputText value="#{donationBB.event.display}" />
+									</td>
+
+									<td data-title="#{messages.donation_event_severity}"><h:selectOneMenu
+											id="donation_event_severity" styleClass="form-control"
+											value="#{donationBB.event.severity}" style="height: 34px;"
+											converter="dataEventSeverityConverter">
+											<f:selectItems var="severity" 
+												value="#{applicationBB.eventSeverities}"
+												itemValue="#{severity}" itemLabel="#{messages[severity.label]}" />
+										</h:selectOneMenu></td>
+
+
+									<td data-title="">
+										<p:commandButton value="Agregar" 
+										action="#{donationBB.addEvent()}" 
+										update="@form" />
+									</td>
+
+								</tr>
+
+								<c:forEach items="#{donationBB.dataDonacion.events}"
+									var="event" varStatus="counter">
+									<tr>
+										<td data-title="#{messages.donation_event_code}">
+											<h:outputText value="#{event.code}" />
+										</td>
+										<td data-title="#{messages.donation_event_display}">
+											<h:outputText value="#{event.display}" />
+										</td>
+										<td data-title="#{messages.donation_event_severity}">
+											<h:outputText value="#{messages[event.severity.label]}" />
+										</td>
+									</tr>
+								</c:forEach>
+
+							</tbody>
+						</table>
+
+					</div>
+
+				</h:form>
+			</div>
+		</div>
+	</div>
+
+</h:body>
+</html>

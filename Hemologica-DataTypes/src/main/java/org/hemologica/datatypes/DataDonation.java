@@ -36,6 +36,7 @@ public class DataDonation implements Serializable {
 		this.dataDonorType = new DataDonationDonorType();
 		this.person = new DataPerson();
 		this.labResults = new ArrayList<DataLaboratoryResult>();
+		this.events = new ArrayList<DataDonationEvent>();
 	}
 
 	public String getName() {

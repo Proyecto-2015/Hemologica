@@ -14,7 +14,6 @@ public class DataDonationFailCause implements Serializable {
 	private String code;
 	private String displayName;
 	private Date date;
-	private DataDonationFailCause cause;
 	
 	
 	public String getCode() {
@@ -35,5 +34,5 @@ public class DataDonationFailCause implements Serializable {
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
 	}
-	
+		
 }

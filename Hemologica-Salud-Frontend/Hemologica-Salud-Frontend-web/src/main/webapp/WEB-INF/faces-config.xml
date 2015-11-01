@@ -30,6 +30,18 @@
 		</resource-bundle>
 	</application>
 	
+	
+	
+	<converter>
+		<display-name>dataEventSeverityConverter</display-name>
+		<converter-id>dataEventSeverityConverter</converter-id>
+		<converter-class>org.hemologica.salud.web.converters.DataEventSeverityConverter</converter-class>
+	</converter>
+	<converter>
+		<display-name>dataDonationEventConverter</display-name>
+		<converter-id>dataDonationEventConverter</converter-id>
+		<converter-class>org.hemologica.salud.web.converters.DataDonationEventConverter</converter-class>
+	</converter>
 	<converter>
 		<display-name>dataBloodABOTypeConverter</display-name>
 		<converter-id>dataBloodABOTypeConverter</converter-id>
