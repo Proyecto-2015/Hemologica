@@ -1,6 +1,15 @@
 package org.hemologica.datatypes;
 
-public class DataTransfusion {
+import java.io.Serializable;
+import java.util.List;
+
+public class DataTransfusion implements Serializable {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3440653129221915523L;
+	
 	
 	private String name;
 	private String date;
@@ -8,6 +17,29 @@ public class DataTransfusion {
 	private String institution;
 	private String product;
 	
+	private DataPerson person;
+	private DataProduct dataProduct;
+	private List<DataLaboratoryResult> laboratoryResults;
+	private List<DataTransfusionEvent> events;
+	
+	public DataProduct getDataProduct() {
+		return dataProduct;
+	}
+	public void setDataProduct(DataProduct dataProduct) {
+		this.dataProduct = dataProduct;
+	}
+	public List<DataLaboratoryResult> getLaboratoryResults() {
+		return laboratoryResults;
+	}
+	public void setLaboratoryResults(List<DataLaboratoryResult> laboratoryResults) {
+		this.laboratoryResults = laboratoryResults;
+	}
+	public List<DataTransfusionEvent> getEvents() {
+		return events;
+	}
+	public void setEvents(List<DataTransfusionEvent> events) {
+		this.events = events;
+	}
 	public String getName() {
 		return name;
 	}
@@ -37,6 +69,12 @@ public class DataTransfusion {
 	}
 	public void setProduct(String product) {
 		this.product = product;
+	}
+	public DataPerson getPerson() {
+		return person;
+	}
+	public void setPerson(DataPerson person) {
+		this.person = person;
 	}
 	
 	

@@ -189,6 +189,21 @@
 		</managed-property>
 	</managed-bean>
 	<managed-bean>
+		<managed-bean-name>transfusionBB</managed-bean-name>
+		<managed-bean-class>org.hemologica.salud.web.beans.TransfusionBB</managed-bean-class>
+		<managed-bean-scope>view</managed-bean-scope>
+		<managed-property>
+			<property-name>applicationBB</property-name>
+			<property-class>org.hemologica.salud.web.beans.ApplicationBB</property-class>
+			<value>#{applicationBB}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>sessionBB</property-name>
+			<property-class>org.hemologica.salud.web.beans.SessionBB</property-class>
+			<value>#{sessionBB}</value>
+		</managed-property>
+	</managed-bean>
+	<managed-bean>
 		<managed-bean-name>messageBB</managed-bean-name>
 		<managed-bean-class>org.hemologica.salud.web.beans.MessageBB</managed-bean-class>
 		<managed-bean-scope>view</managed-bean-scope>
@@ -303,6 +318,14 @@
 		<navigation-case>
 			<from-outcome>donationCreateEdit</from-outcome>
 			<to-view-id>/pages/donationCreateEdit.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>transfusionCreateEdit</from-outcome>
+			<to-view-id>/pages/transfusionCreateEdit.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
