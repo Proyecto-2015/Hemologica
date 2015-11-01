@@ -33,27 +33,27 @@
 
 
 	<!-- CAS FILTER -->
-	<filter>
-		<filter-name>CAS Filter</filter-name>
-		<filter-class>edu.yale.its.tp.cas.client.filter.CASFilter</filter-class>
-		<init-param>
-			<param-name>edu.yale.its.tp.cas.client.filter.loginUrl</param-name>
-			<param-value>https://hemologica-yodono-cas:8444/Hemologica-Yodono-CAS/login</param-value>
-		</init-param>
-		<init-param>
-			<param-name>edu.yale.its.tp.cas.client.filter.validateUrl</param-name>
-			<param-value>https://hemologica-yodono-cas:8444/Hemologica-Yodono-CAS/serviceValidate</param-value>
-		</init-param>
-		<init-param>
-			<param-name>edu.yale.its.tp.cas.client.filter.serverName</param-name>
-			<param-value>localhost:8080</param-value>
-		</init-param>
-	</filter>
+<!-- 	<filter> -->
+<!-- 		<filter-name>CAS Filter</filter-name> -->
+<!-- 		<filter-class>edu.yale.its.tp.cas.client.filter.CASFilter</filter-class> -->
+<!-- 		<init-param> -->
+<!-- 			<param-name>edu.yale.its.tp.cas.client.filter.loginUrl</param-name> -->
+<!-- 			<param-value>https://hemologica-yodono-cas:8444/Hemologica-Yodono-CAS/login</param-value> -->
+<!-- 		</init-param> -->
+<!-- 		<init-param> -->
+<!-- 			<param-name>edu.yale.its.tp.cas.client.filter.validateUrl</param-name> -->
+<!-- 			<param-value>https://hemologica-yodono-cas:8444/Hemologica-Yodono-CAS/serviceValidate</param-value> -->
+<!-- 		</init-param> -->
+<!-- 		<init-param> -->
+<!-- 			<param-name>edu.yale.its.tp.cas.client.filter.serverName</param-name> -->
+<!-- 			<param-value>localhost:8080</param-value> -->
+<!-- 		</init-param> -->
+<!-- 	</filter> -->
 
-	<filter-mapping>
-		<filter-name>CAS Filter</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping>
+<!-- 	<filter-mapping> -->
+<!-- 		<filter-name>CAS Filter</filter-name> -->
+<!-- 		<url-pattern>/*</url-pattern> -->
+<!-- 	</filter-mapping> -->
 
 	<!-- CAS FILTER -->
 

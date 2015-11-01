@@ -11,20 +11,30 @@ public enum DataEventSeverityEnum implements Serializable{
 	MODERATE("moderate","event_moderate"),
 	SEVERE("severe","event_severe");
 	
-	public String value;
-	public String label;
+	private String value;
+	private String label;
 	
+	
+
 	private DataEventSeverityEnum(String value, String label){
 		this.value = value;
 		this.label = label;
 	}
 	
-	public static List<DataEventSeverityEnum> getStates(){
+	public static List<DataEventSeverityEnum> getSeverities(){
 		List<DataEventSeverityEnum> ret = new ArrayList<DataEventSeverityEnum>();
 		ret.add(MILD);
 		ret.add(MODERATE);
 		ret.add(SEVERE);
 		return ret;
+	}
+	
+	public String getValue() {
+		return value;
+	}
+
+	public String getLabel() {
+		return label;
 	}
 	
 }

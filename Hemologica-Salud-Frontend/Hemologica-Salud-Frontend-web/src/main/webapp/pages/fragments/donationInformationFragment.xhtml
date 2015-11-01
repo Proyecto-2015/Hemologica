@@ -53,8 +53,8 @@
 								<h:selectOneMenu id="donation_failed" styleClass="form-control"
 									value="#{donationBB.dataDonacion.fail}" style="height: 34px;"
 									converter="dataDonationFailConverter">
-									<f:selectItems value="#{applicationBB.donationStates}" var="fail"
-										itemValue="#{fail.code}" itemLabel="#{fail.displayName}" />
+									<f:selectItems value="#{applicationBB.donationFailCauses}" var="fail"
+										itemValue="#{fail}" itemLabel="#{messages[fail.displayName]}" />
 								</h:selectOneMenu>
 							</div>
 						</h:panelGroup>
