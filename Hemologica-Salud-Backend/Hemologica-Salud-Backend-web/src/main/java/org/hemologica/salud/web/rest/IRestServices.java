@@ -21,9 +21,12 @@ import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataUser;
+import org.hemologica.datatypes.DonationFilterData;
+import org.hemologica.datatypes.InstitutionData;
 import org.hemologica.datatypes.LoginData;
 import org.hemologica.datatypes.MailData;
 import org.hemologica.datatypes.MessageOptionData;
+import org.hemologica.datatypes.TransfusionFilterData;
 
 
 @Path("/services")
@@ -56,6 +59,15 @@ public interface IRestServices {
 	public DataUser getUser(@QueryParam("user") String user);
 	
 	@GET
+	@Path("/" + ConstantsRest.PATH_USERS + "/" + ConstantsRest.PATH_BANKS)
+	@Produces("application/json")
+	public List<DataBank> getBanksUser(@QueryParam("user") String user);
+	
+	@GET
+	@Path("/" + ConstantsRest.PATH_USERS + "/" + ConstantsRest.PATH_INSTITUTIONS)
+	public List<InstitutionData> getInstitutionsUser(@QueryParam("user") String user);
+	
+	@GET
 	@Path("/banks")
 	@Produces("application/json")
 	public List<DataBank> getBanks();
@@ -84,6 +96,16 @@ public interface IRestServices {
 	@Path("/"+ConstantsRest.PATH_CODES + "/" + ConstantsRest.PATH_BLOOD_TYPES)
 	@Produces("application/json")
 	public List<BloodTypeData> getBloodTypes();
+	
+	@GET
+	@Path("/"+ConstantsRest.PATH_CODES + "/" + ConstantsRest.PATH_DONATIONS_FILTERS)
+	@Produces("application/json")
+	public List<DonationFilterData> getDonationsFilters();
+	
+	@GET
+	@Path("/"+ConstantsRest.PATH_CODES + "/" + ConstantsRest.PATH_TRANSFUSIONS_FILTERS)
+	@Produces("application/json")
+	public List<TransfusionFilterData> getTransfusionsFilters();
 	
 	@POST
 	@Path("/"+ConstantsRest.PATH_CAMPAIGNS + "/" + ConstantsRest.PATH_SEND_MESSAGE)

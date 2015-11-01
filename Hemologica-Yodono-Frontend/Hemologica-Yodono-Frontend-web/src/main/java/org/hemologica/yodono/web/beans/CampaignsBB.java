@@ -9,10 +9,9 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.yodono.factories.RestFactory;
-import org.omnifaces.util.Faces;
+
 
 public class CampaignsBB implements Serializable{
 	

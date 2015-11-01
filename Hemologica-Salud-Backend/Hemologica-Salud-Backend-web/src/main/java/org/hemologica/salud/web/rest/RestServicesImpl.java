@@ -14,9 +14,12 @@ import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataUser;
+import org.hemologica.datatypes.DonationFilterData;
+import org.hemologica.datatypes.InstitutionData;
 import org.hemologica.datatypes.LoginData;
 import org.hemologica.datatypes.MailData;
 import org.hemologica.datatypes.MessageOptionData;
+import org.hemologica.datatypes.TransfusionFilterData;
 
 
 public class RestServicesImpl implements IRestServices {
@@ -449,6 +452,139 @@ public class RestServicesImpl implements IRestServices {
 		List<DataCampaign> campaigns = getCampaigns("7");
 		
 		return campaigns.get(Integer.parseInt(campaignId)-1);
+	}
+
+	@Override
+	public List<DonationFilterData> getDonationsFilters() {
+		List<DonationFilterData> filters =  new ArrayList<DonationFilterData>();
+		
+		DonationFilterData f1 = new DonationFilterData();
+		f1.setCode("0");
+		f1.setDisplayName("Sexo");
+		
+		List<DonationFilterData> f1Options=  new ArrayList<DonationFilterData>();
+		
+		DonationFilterData f11 = new DonationFilterData();
+		f11.setCode("01");
+		f11.setDisplayName("Hombre");
+		f1Options.add(f11);
+		
+		DonationFilterData f12 = new DonationFilterData();
+		f12.setCode("02");
+		f12.setDisplayName("Mujer");
+		f1Options.add(f12);
+		
+		f1.setOptions(f1Options);
+		filters.add(f1);
+		
+		
+		DonationFilterData f2 = new DonationFilterData();
+		f2.setCode("1");
+		f2.setDisplayName("Tipo Donante");
+		
+		List<DonationFilterData> f1Options2=  new ArrayList<DonationFilterData>();
+		
+		DonationFilterData f21 = new DonationFilterData();
+		f21.setCode("11");
+		f21.setDisplayName("Voluntario");
+		f1Options2.add(f21);
+		
+		DonationFilterData f22 = new DonationFilterData();
+		f22.setCode("12");
+		f22.setDisplayName("Reposicion");
+		f1Options2.add(f22);
+		
+		f2.setOptions(f1Options2);
+		filters.add(f2);
+
+		return filters;
+	}
+
+	@Override
+	public List<TransfusionFilterData> getTransfusionsFilters() {
+		
+		List<TransfusionFilterData> filters =  new ArrayList<TransfusionFilterData>();
+		
+		TransfusionFilterData f1 = new TransfusionFilterData();
+		f1.setCode("0");
+		f1.setDisplayName("Sexo");
+		
+		List<TransfusionFilterData> f1Options=  new ArrayList<TransfusionFilterData>();
+		
+		TransfusionFilterData f11 = new TransfusionFilterData();
+		f11.setCode("01");
+		f11.setDisplayName("Hombre");
+		f1Options.add(f11);
+		
+		TransfusionFilterData f12 = new TransfusionFilterData();
+		f12.setCode("02");
+		f12.setDisplayName("Mujer");
+		f1Options.add(f12);
+		
+		f1.setOptions(f1Options);
+		filters.add(f1);
+		
+		
+		TransfusionFilterData f2 = new TransfusionFilterData();
+		f2.setCode("1");
+		f2.setDisplayName("Producto");
+		
+		List<TransfusionFilterData> f1Options2=  new ArrayList<TransfusionFilterData>();
+		
+		TransfusionFilterData f21 = new TransfusionFilterData();
+		f21.setCode("11");
+		f21.setDisplayName("Plaquetas");
+		f1Options2.add(f21);
+		
+		TransfusionFilterData f22 = new TransfusionFilterData();
+		f22.setCode("12");
+		f22.setDisplayName("Plasma");
+		f1Options2.add(f22);
+		
+		f2.setOptions(f1Options2);
+		filters.add(f2);
+
+		return filters;
+	}
+
+	@Override
+	public List<DataBank> getBanksUser(String user) {
+		
+		return getBanks();
+	}
+
+	@Override
+	public List<InstitutionData> getInstitutionsUser(String user) {
+	
+		List<InstitutionData> banks = new ArrayList<InstitutionData>();
+		InstitutionData db1 = new InstitutionData();
+		db1.setCode("1");
+		db1.setName("Institucion 1");
+		db1.setAddress("Av Italia 345");
+		db1.setEmail("infobanco1@hc.com");
+		db1.setHour("Lunes a viernes de 8 - 18 hs ");
+		db1.setInformation("Se dan 40 numeros a partir de las 8 am.");
+		db1.setTelephone("12345678");
+		db1.setLatitude(-34.898930);
+		db1.setLongitude(-56.165753);
+		
+		banks.add(db1);
+		  
+		  
+		InstitutionData db2 = new InstitutionData();
+		db2.setCode("2");
+		db1.setName("Institucion 2");
+		db2.setAddress("Rivera 567");
+		db2.setEmail("infobanco2@hc.com");
+		db2.setHour("Lunes a viernes de 8 - 20 hs y Sabados 8 - 12 ");
+		db2.setInformation("Pedir hora por telefono");
+		db2.setTelephone("098765432");
+		db2.setLatitude(-34.871729);
+		db2.setLongitude(-56.188868);
+		
+		banks.add(db2);
+		
+		return banks;
 	}
 
 }
