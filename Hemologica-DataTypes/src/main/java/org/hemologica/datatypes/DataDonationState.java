@@ -27,7 +27,7 @@ public class DataDonationState implements Serializable {
 		this.displayName = displayName;
 	}
 	
-	public Boolean isApproved(){
+	public boolean isApproved(){
 		return code != null && code.equals(DataDonationStateEnum.MADE.value);
 	}
 	
