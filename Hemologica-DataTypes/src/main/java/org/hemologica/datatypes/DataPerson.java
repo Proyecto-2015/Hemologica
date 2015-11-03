@@ -25,6 +25,7 @@ public class DataPerson implements Serializable{
 	private String telephone;
 	private String email;
 	private DataBloodType bloodType;
+	private boolean ableToDonate;
 	
 	public String getDocumentCountry() {
 		return documentCountry;
@@ -120,6 +121,12 @@ public class DataPerson implements Serializable{
 	}
 	public void setBloodType(DataBloodType bloodType) {
 		this.bloodType = bloodType;
+	}
+	public boolean isAbleToDonate() {
+		return ableToDonate;
+	}
+	public void setAbleToDonate(boolean ableToDonate) {
+		this.ableToDonate = ableToDonate;
 	}
 	
 }

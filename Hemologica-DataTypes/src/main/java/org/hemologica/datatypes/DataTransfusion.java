@@ -17,13 +17,14 @@ public class DataTransfusion implements Serializable {
 	private DataInstitution institution;
 	private String product;
 	private String volume;
-	
 	private DataPerson person;
 	private DataProduct dataProduct;
 	private List<DataLaboratoryResult> laboratoryResults;
 	private List<DataTransfusionEvent> events;
 	
+	
 	public DataProduct getDataProduct() {
+		
 		return dataProduct;
 	}
 	public void setDataProduct(DataProduct dataProduct) {

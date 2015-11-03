@@ -5,16 +5,20 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.ws.rs.core.Response;
+
+import org.hemologica.constants.DataEventSeverityEnum;
 import org.hemologica.datatypes.BloodTypeData;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonation;
+import org.hemologica.datatypes.DataDonationEvent;
 import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
+import org.hemologica.datatypes.DataTransfusionEvent;
 import org.hemologica.datatypes.DataUser;
 import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.datatypes.DataInstitution;
@@ -49,12 +53,11 @@ public class RestServicesImpl implements IRestServices {
 		List<DataDonation> donaciones = new ArrayList<DataDonation>();
 		
 		DataDonation d = new DataDonation();
-//		d.setApproved(true);
-		
 		DataBank b1 = new DataBank();
 		b1.setName("Banco de Sangre X");
 		
 		d.setBank(b1);
+		
 		
 		DataInstitution di = new DataInstitution();
 		di.setName("Hospital de clinicas");
@@ -63,6 +66,21 @@ public class RestServicesImpl implements IRestServices {
 		d.setName("Pedro");
 		d.setDonorType("Voluntario");
 		d.setDate("10/02/2015");
+		
+		DataDonationEvent d1e = new DataDonationEvent();
+		d1e.setCode("0");
+		d1e.setDisplay("Evento edverso 1");
+		d1e.setSeverity(DataEventSeverityEnum.MILD);
+		
+		DataDonationEvent d2e = new DataDonationEvent();
+		d2e.setCode("1");
+		d2e.setDisplay("Evento edverso 2");
+		d2e.setSeverity(DataEventSeverityEnum.MODERATE);
+		
+		List<DataDonationEvent> list = new ArrayList<>();
+		list.add(d1e);
+		list.add(d2e);
+		d.setEvents(list);
 		donaciones.add(d);
 		
 		DataDonation d3 = new DataDonation();
@@ -117,6 +135,23 @@ public class RestServicesImpl implements IRestServices {
 		d4.setName("Pedro2");
 		d4.setDonorType("Voluntario2");
 		d4.setDate("10/02/2014");
+		
+		DataDonationEvent d1e1 = new DataDonationEvent();
+		d1e1.setCode("0");
+		d1e1.setDisplay("Evento edverso 11");
+		d1e1.setSeverity(DataEventSeverityEnum.MILD);
+		
+		DataDonationEvent d2e2 = new DataDonationEvent();
+		d2e2.setCode("1");
+		d2e2.setDisplay("Evento edverso 22");
+		d2e2.setSeverity(DataEventSeverityEnum.SEVERE);
+		
+		List<DataDonationEvent> list2 = new ArrayList<>();
+		list2.add(d1e1);
+		list2.add(d2e2);
+		d4.setEvents(list2);
+		
+		
 		donaciones.add(d4);
 		
 		return donaciones;
@@ -147,6 +182,22 @@ public class RestServicesImpl implements IRestServices {
 		DataTransfusion t2 = new DataTransfusion();
 		DataBank db2 = new DataBank();
 		db2.setName("Banco X");
+		
+		DataTransfusionEvent dte = new DataTransfusionEvent();
+		dte.setCode("0");
+		dte.setDisplay("Evento adverso 1");
+		dte.setSeverity(DataEventSeverityEnum.MODERATE);
+		
+		DataTransfusionEvent dte1 = new DataTransfusionEvent();
+		dte1.setCode("1");
+		dte1.setDisplay("Evento adverso 2");
+		dte1.setSeverity(DataEventSeverityEnum.SEVERE);
+		
+		List<DataTransfusionEvent> dteList = new ArrayList<>();
+		dteList.add(dte1);
+		dteList.add(dte);
+		
+		t2.setEvents(dteList);
 		
 		
 		t1.setBank(db2);
@@ -665,6 +716,7 @@ public class RestServicesImpl implements IRestServices {
 		d1.setSecondName("Paula");
 		d1.setFirstLastName("Roche");
 		d1.setSecondLastName("De Polsi");
+		d1.setAbleToDonate(true);
 		
 		DataBloodType dtb = new DataBloodType();
 		dtb.setCode("0");
@@ -680,7 +732,7 @@ public class RestServicesImpl implements IRestServices {
 		d2.setSecondName("Paula2");
 		d2.setFirstLastName("Roche2");
 		d2.setSecondLastName("De Polsi2");
-		
+		d2.setAbleToDonate(false);
 		DataBloodType dtb2 = new DataBloodType();
 		dtb2.setCode("1");
 		dtb2.setDisplayName("AB-");
@@ -695,6 +747,7 @@ public class RestServicesImpl implements IRestServices {
 		d3.setSecondName("Paula3");
 		d3.setFirstLastName("Roche3");
 		d3.setSecondLastName("De Polsi3");
+		d3.setAbleToDonate(true);
 		
 		DataBloodType dtb3 = new DataBloodType();
 		dtb3.setCode("1");

@@ -80,7 +80,11 @@ public class DataDonation implements Serializable {
 	}
 
 	public Boolean isApproved() {
-		return this.state.isApproved();
+		
+		if(this.state != null)
+			return this.state.isApproved();
+		else
+			return false;
 	}
 	
 	public Boolean isStateDefined(){
@@ -88,7 +92,10 @@ public class DataDonation implements Serializable {
 	}
 	
 	public Boolean isNotApproved() {
-		return !this.state.isApproved();
+		if(this.state != null)
+			return !this.state.isApproved();
+		else
+			return true;
 	}
 
 	public List<DataLaboratoryResult> getLabResults() {

@@ -16,5 +16,10 @@
 	width: 40px;
   
   }
-
+  
+  h3, .h3 {
+  
+    font-size: 18px;
+    
+  }
 }

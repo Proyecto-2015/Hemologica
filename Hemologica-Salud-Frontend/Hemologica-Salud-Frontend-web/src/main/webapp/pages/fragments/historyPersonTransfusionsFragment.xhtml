@@ -13,11 +13,9 @@
 </h:head>
 <h:body>
 	
-	<div class="page-header">
-			<h3> <h:outputText value="#{messages.label_donations_history}"/></h3>
-		</div>
-	
-	
+	<div class="page-header" style="margin-bottom: 10px;">
+			<h3> <h:outputText value="#{messages.label_transfusions_history}"/></h3>
+	</div>
 	
 	<table class="col-md-12 table-bordered table-striped table-condensed cf">
    		<thead class="cf">
@@ -38,20 +36,51 @@
     				<td data-title="#{messages.label_bank}"><h:outputText value="#{transfusionItem.bank.name}"/></td>
     				<td data-title="#{messages.label_product}"><h:outputText value="#{transfusionItem.product}"/></td>
     				<td data-title="#{messages.label_volume}"><h:outputText value="#{transfusionItem.volume}"/></td>
-<!--     				<td data-title="#{messages.label_drawbacks}"><h:outputText value="#{transfusionItem.fullName}"/></td> -->
     				
     				<td> 
-    				<p:commandLink  ajax="true" class="icon-list icon-preview"
-						title="#{messages.label_view}" action="#{personRecordBB.viewPerson(personItem.id)}"/>
-<!-- 						<f:ajax  execute="@form"  /> -->
-					</td>
-			
-   					
-   				
+    				
+    					<c:choose>
+					        <c:when test="${transfusionItem.events != null and transfusionItem.events.size() != 0}">
+					        	<h:outputText value="#{messages.label_si}"/>
+					            <p:commandLink  class="icon-list icon-preview"  title="#{messages.label_view}"
+					            action="#{personRecordBloodBB.setTransfusionItem(transfusionItem)}" ajax="true"
+					              update="adverse-events">
+<!-- 			 						<f:ajax  execute="@form"  "/> -->
+			 					</p:commandLink>
+							</c:when>
+						        <c:otherwise>
+						        	   <h:outputText value="#{messages.label_no}"/>
+						        </c:otherwise>
+						    </c:choose>
+					</td>	
    				</tr>
    			</c:forEach>
-  		
   		</tbody>
-	</table>
+  	</table>
+  	<h:panelGroup id="adverse-events" widgetVar="panelwv">
+	  	
+	  	<div class="col-md-6 center " style="padding-top: 20px;">	
+	  		<fieldset id="adverse-events" >
+			    
+			    <legend><h:outputText value="#{messages.label_adverse_events}"/></legend>
+			    <table class="col-md-12 table-bordered table-striped table-condensed cf">
+			   		<thead class="cf">
+			   			<tr>
+			   				<th><h:outputText value="#{messages.label_reaccion_type}"/></th>
+			   				<th><h:outputText value="#{messages.label_severity}"/></th>      				
+			   			</tr>
+			   		</thead>
+		   			<tbody>
+			   			<c:forEach items="#{personRecordBloodBB.transfusionItem.events}" var="eventItem" varStatus="counter">
+			    			<tr>
+			    				<td data-title="#{messages.label_reaccion_type}"><h:outputText value="#{eventItem.display}"/></td>
+			    				<td data-title="#{messages.label_severity}"><h:outputText value="#{messages[eventItem.severity.label]}"/></td>
+			   				</tr>
+			   			</c:forEach>
+		  			</tbody>
+	  			</table>   
+			</fieldset>  
+		</div>
+	</h:panelGroup>
 </h:body>
 </html>

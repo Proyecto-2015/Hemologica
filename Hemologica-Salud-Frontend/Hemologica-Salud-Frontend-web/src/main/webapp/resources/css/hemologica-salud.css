@@ -311,5 +311,19 @@ table.jqplot-table-legend, table.jqplot-cursor-legend {
 	color: #912B2B;
 }
 
+#tabs-border{
+	
+	border-bottom: 0px;
+}
+
+.able{
+	
+	color: green;
+}
+
+.disble{
+	
+	color: red;
+}
 
 

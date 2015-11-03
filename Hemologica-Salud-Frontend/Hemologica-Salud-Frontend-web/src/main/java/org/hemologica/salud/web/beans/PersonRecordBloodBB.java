@@ -23,6 +23,10 @@ public class PersonRecordBloodBB implements Serializable{
 	private List<DataDonation> donations;
 	private List<DataTransfusion> transfusions;
 	
+	private DataDonation donationItem;
+	private DataTransfusion transfusionItem;
+	
+	
 	@PostConstruct
 	private void init(){
 		
@@ -61,5 +65,24 @@ public class PersonRecordBloodBB implements Serializable{
 	}
 	public void setTransfusions(List<DataTransfusion> transfusions) {
 		this.transfusions = transfusions;
+	}
+
+	public DataDonation getDonationItem() {
+		return donationItem;
+	}
+
+	public void setDonationItem(DataDonation donationItem) {
+		this.donationItem = donationItem;
+	}
+
+	public DataTransfusion getTransfusionItem() {
+		return transfusionItem;
+	}
+
+	public void setTransfusionItem(DataTransfusion transfusionItem) {
+		this.transfusionItem = transfusionItem;
+		
 	}	
+	
+	
 }
