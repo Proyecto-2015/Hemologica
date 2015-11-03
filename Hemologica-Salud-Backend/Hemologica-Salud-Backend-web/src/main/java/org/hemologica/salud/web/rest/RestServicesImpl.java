@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import javax.ws.rs.core.Response;
 
+import org.hemologica.constants.DataDonationStateEnum;
 import org.hemologica.constants.DataEventSeverityEnum;
 import org.hemologica.datatypes.BloodTypeData;
 import org.hemologica.datatypes.DataBank;
@@ -13,6 +14,7 @@ import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonation;
+import org.hemologica.datatypes.DataDonationDonorType;
 import org.hemologica.datatypes.DataDonationEvent;
 import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataResponse;
@@ -53,37 +55,28 @@ public class RestServicesImpl implements IRestServices {
 		List<DataDonation> donaciones = new ArrayList<DataDonation>();
 		
 		DataDonation d = new DataDonation();
+		
+		d.setState(DataDonationStateEnum.MADE);
+		
 		DataBank b1 = new DataBank();
 		b1.setName("Banco de Sangre X");
 		
 		d.setBank(b1);
-		
 		
 		DataInstitution di = new DataInstitution();
 		di.setName("Hospital de clinicas");
 		
 		d.setInstitution(di);
 		d.setName("Pedro");
-		d.setDonorType("Voluntario");
+		
+		DataDonationDonorType a = new DataDonationDonorType();
+		a.setDisplayName("Voluntario");
+		d.setDataDonorType(a);
 		d.setDate("10/02/2015");
-		
-		DataDonationEvent d1e = new DataDonationEvent();
-		d1e.setCode("0");
-		d1e.setDisplay("Evento edverso 1");
-		d1e.setSeverity(DataEventSeverityEnum.MILD);
-		
-		DataDonationEvent d2e = new DataDonationEvent();
-		d2e.setCode("1");
-		d2e.setDisplay("Evento edverso 2");
-		d2e.setSeverity(DataEventSeverityEnum.MODERATE);
-		
-		List<DataDonationEvent> list = new ArrayList<>();
-		list.add(d1e);
-		list.add(d2e);
-		d.setEvents(list);
 		donaciones.add(d);
 		
 		DataDonation d3 = new DataDonation();
+		d3.setState(DataDonationStateEnum.REJECTED);
 //		d3.setApproved(true);
 		
 		DataBank b13 = new DataBank();
@@ -97,11 +90,15 @@ public class RestServicesImpl implements IRestServices {
 		d3.setInstitution(di);
 		
 		d3.setName("Pedro");
-		d3.setDonorType("Voluntario");
+		DataDonationDonorType a3 = new DataDonationDonorType();
+		a3.setDisplayName("Reposicion");
+		
+		d3.setDataDonorType(a3);
 		d3.setDate("10/02/2015");
 		donaciones.add(d3);
 		
 		DataDonation d2 = new DataDonation();
+		d2.setState(DataDonationStateEnum.MADE);
 //		d2.setApproved(false);
 		DataBank b133 = new DataBank();
 		b133.setName("Banco de Sangre X");
@@ -113,7 +110,11 @@ public class RestServicesImpl implements IRestServices {
 		
 		d2.setInstitution(di33);
 		d2.setName("Pedro2");
-		d2.setDonorType("Voluntario2");
+		
+		DataDonationDonorType a1 = new DataDonationDonorType();
+		a1.setDisplayName("Reposicion");
+		
+		d2.setDataDonorType(a1);
 		d2.setDate("10/02/2014");
 		donaciones.add(d2);
 		
@@ -121,7 +122,7 @@ public class RestServicesImpl implements IRestServices {
 		
 		DataDonation d4 = new DataDonation();
 //		d4.setApproved(false);
-		
+		d4.setState(DataDonationStateEnum.REJECTED);
 //		d2.setApproved(false);
 		DataBank b1333 = new DataBank();
 		b1333.setName("Banco de Sangre X");
@@ -133,30 +134,18 @@ public class RestServicesImpl implements IRestServices {
 		
 		d4.setInstitution(di333);
 		d4.setName("Pedro2");
-		d4.setDonorType("Voluntario2");
+		
+		DataDonationDonorType a4 = new DataDonationDonorType();
+
+		a4.setDisplayName("Voluntario");
+		
+		
+		d4.setDataDonorType(a4);
 		d4.setDate("10/02/2014");
-		
-		DataDonationEvent d1e1 = new DataDonationEvent();
-		d1e1.setCode("0");
-		d1e1.setDisplay("Evento edverso 11");
-		d1e1.setSeverity(DataEventSeverityEnum.MILD);
-		
-		DataDonationEvent d2e2 = new DataDonationEvent();
-		d2e2.setCode("1");
-		d2e2.setDisplay("Evento edverso 22");
-		d2e2.setSeverity(DataEventSeverityEnum.SEVERE);
-		
-		List<DataDonationEvent> list2 = new ArrayList<>();
-		list2.add(d1e1);
-		list2.add(d2e2);
-		d4.setEvents(list2);
-		
-		
 		donaciones.add(d4);
 		
 		return donaciones;
 	}
-
 
 	@Override
 	public List<DataTransfusion> getTransfusions(String user) {

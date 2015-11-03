@@ -43,10 +43,10 @@
 			    	</c:choose>
     				
     				<li class="#{inverted}">						
-    					<c:if test="#{donationItem.state.approved}">
+    					<c:if test="#{donationItem.isApproved()}">
 						   <div class="timeline-badge success rojo"/>
 						</c:if>
-						<c:if test="#{!donationItem.state.approved}">
+						<c:if test="#{!donationItem.isApproved()}">
 						   <div class="timeline-badge warning gris"/>
 						</c:if>
 						
@@ -69,9 +69,9 @@
 								</p>
 							</div>
 							<div class="timeline-body">
-								<p><h:outputText value="#{donationItem.institution}"/></p>
-								<p><h:outputText value="#{donationItem.bank}"/></p>
-								<p><h:outputText value="#{donationItem.donorType}"/></p>
+								<p><h:outputText value="#{donationItem.institution.name}"/></p>
+								<p><h:outputText value="#{donationItem.bank.name}"/></p>
+								<p><h:outputText value="#{donationItem.dataDonorType.displayName}"/></p>
 							</div>
 						</div>
 					</li>

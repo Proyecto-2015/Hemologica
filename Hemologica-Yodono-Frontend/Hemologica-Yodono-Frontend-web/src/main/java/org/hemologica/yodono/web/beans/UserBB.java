@@ -1,5 +1,8 @@
 package org.hemologica.yodono.web.beans;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.text.DateFormat;
@@ -21,6 +24,8 @@ import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataUser;
 import org.hemologica.yodono.factories.RestFactory;
+import org.primefaces.model.DefaultStreamedContent;
+import org.primefaces.model.StreamedContent;
 import org.primefaces.model.UploadedFile;
 
 public class UserBB implements Serializable{
@@ -36,7 +41,7 @@ public class UserBB implements Serializable{
 	private Date birthdayDate;
 	
 	private UploadedFile uploadedPicture;
-//	private StreamedContent image;
+	private StreamedContent image;
 	private byte[] imageByte;
 	
 	@ManagedProperty("#{messages}")
@@ -53,29 +58,29 @@ public class UserBB implements Serializable{
 			state = dataUser.getState();
 			city = dataUser.getCity();
 			
-//			if(dataUser.getImage() != null && dataUser.getImage().length != 0){
-//				
-//				image = new DefaultStreamedContent(new ByteArrayInputStream(dataUser.getImage()));
-//				
-//			}else{
-//
-//				File file = new File("/Users/paularoche/Desktop/img.png");
-//				
-//				
-//				byte[] bFile = new byte[(int) file.length()];
-////			        
-//				FileInputStream fileInputStream = new FileInputStream(file);
-//				fileInputStream.read(bFile);
-//				fileInputStream.close();
-//				imageByte = bFile;
-////				image =  new DefaultStreamedContent(new FileInputStream(file), "image/png");
-//				
-//
-//				//imageByte = imgBytes;
-//				
-//				image = new DefaultStreamedContent(new ByteArrayInputStream(bFile), "image/png"); 
-//				
-//			}
+			if(dataUser.getImage() != null && dataUser.getImage().length != 0){
+				
+				image = new DefaultStreamedContent(new ByteArrayInputStream(dataUser.getImage()));
+				
+			}else{
+
+				File file = new File("/Users/paularoche/Desktop/img.png");
+				
+				
+				byte[] bFile = new byte[(int) file.length()];
+//			        
+				FileInputStream fileInputStream = new FileInputStream(file);
+				fileInputStream.read(bFile);
+				fileInputStream.close();
+				imageByte = bFile;
+//				image =  new DefaultStreamedContent(new FileInputStream(file), "image/png");
+				
+
+				//imageByte = imgBytes;
+				
+				image = new DefaultStreamedContent(new ByteArrayInputStream(bFile), "image/png"); 
+				
+			}
 		} catch (IOException e) {
 			
 			logger.log(Level.SEVERE, "Error al llamar al servicio web", e);
@@ -170,13 +175,13 @@ public class UserBB implements Serializable{
 //		}
 //	}
 
-//	public StreamedContent getImage() {
-//		return image;
-//	}
-//
-//	public void setImage(StreamedContent image) {
-//		this.image = image;
-//	}
+	public StreamedContent getImage() {
+		return image;
+	}
+
+	public void setImage(StreamedContent image) {
+		this.image = image;
+	}
 
 	public byte[] getImageByte() {
 		return imageByte;
