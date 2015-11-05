@@ -39,7 +39,7 @@
 									valueChangeListener="#{donationBB.dataDonationStateChange}">
 									<p:ajax  update="@form"/>
 									<f:selectItems value="#{applicationBB.donationStates}" var="state"
-										itemValue="#{state}" itemLabel="#{messages[state.displayName]}" />
+										itemValue="#{state}" itemLabel="#{messages[state.label]}" />
 								</h:selectOneMenu>
 							</div>
 						</div>
