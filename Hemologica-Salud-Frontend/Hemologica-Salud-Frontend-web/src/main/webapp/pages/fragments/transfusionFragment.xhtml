@@ -11,33 +11,49 @@
 <h:head>
 </h:head>
 <h:body>
-
-	<div class="container">
-		<p:tabView>
+	<h:form>
+	
+		<p:messages/>
+		<div class="container">
 		
-
-			<!-- Person -->
-			<p:tab title="Donante">
-				<ui:include src="transfusionPersonFragment.xhtml" />
-			</p:tab>
-
-			<!-- Donation Information -->
-			<p:tab title="General">
-				<ui:include src="transfusionInformationFragment.xhtml" />
-			</p:tab>
-
-			<!-- Donation Laboratory Results -->
-			<p:tab title="Análisis">
-				<ui:include src="transfusionLaboratoryResultFragment.xhtml" />
-			</p:tab>
-
-			<!-- Donation Events -->
-			<p:tab title="Eventos Adversos">
-				<ui:include src="transfusionEventsFragment.xhtml" />
-			</p:tab>
-
-		</p:tabView>
-	</div>
-
+			<p:wizard flowListener="#{transfusionBB.onFlowProcess}">
+			
+				<p:tab id="donante" title="#{messages.label_personal_information}">
+<!-- 					<p:panel header="Personal Details"> -->
+				
+					<ui:include src="transfusionPersonFragment.xhtml" />
+<!-- 					</p:panel> -->
+				</p:tab>
+	
+				<p:tab id="general" title="#{messages.label_transfusion}">
+				<p:panel header="Personal Details">
+					<ui:include src="transfusionInformationFragment.xhtml" />
+					</p:panel>
+				</p:tab>
+	
+				<p:tab id="analisis" title="#{messages.label_analysis}">
+				<p:panel header="Personal Details">
+					<ui:include src="transfusionLaboratoryResultFragment.xhtml" />
+					
+					 <div class="form-group">
+							<div class="col-md-12 text-right" style="margin-top: 15px;">
+								<p:commandButton
+									styleClass="btn btn-primary btn-lg center btnSave"
+									value="#{messages.label_save}" action="#{transfusionBB.submit()}"
+									process="@form" update="@form" />
+								<p:messages />
+							</div>
+						</div>
+					</p:panel>
+				</p:tab>
+	
+<!-- 				Donation Events -->
+<!-- 	 			<p:tab title="#{messages.label_adverse_events}">  -->
+<!-- 	 				<ui:include src="transfusionEventsFragment.xhtml" />  -->
+<!-- 				</p:tab>  -->
+	
+			</p:wizard>
+		</div>
+	</h:form>
 </h:body>
 </html>

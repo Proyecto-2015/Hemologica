@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
@@ -12,6 +13,7 @@ import org.hemologica.constants.DataDonationStateEnum;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataDonationEvent;
 import org.hemologica.datatypes.DataLaboratoryResult;
+import org.primefaces.event.FlowEvent;
 
 public class TransfusionBB implements Serializable {
 
@@ -26,12 +28,12 @@ public class TransfusionBB implements Serializable {
 	private SessionBB sessionBB;
 	private PersonBB personBB;
 	
-	private DataDonation dataDonacion;
-	private DataLaboratoryResult labResult;
-	private DataDonationEvent event;
-	
-	private List<SelectItem> donationEvents;
-	private String donationEventSelected;
+//	private DataDonation dataDonacion;
+//	private DataLaboratoryResult labResult;
+//	private DataDonationEvent event;
+//	
+//	private List<SelectItem> donationEvents;
+//	private String donationEventSelected;
 	
 	private List<SelectItem> severities;
 	private String severitySelected;
@@ -42,21 +44,21 @@ public class TransfusionBB implements Serializable {
 	@PostConstruct
 	public void init(){
 		logger.info("init DonationBB");
-		this.dataDonacion = new DataDonation();
-		this.labResult = new DataLaboratoryResult();
-		this.event = new DataDonationEvent();
-		this.ctx = FacesContext.getCurrentInstance();
+//		this.dataDonacion = new DataDonation();
+//		this.labResult = new DataLaboratoryResult();
+//		this.event = new DataDonationEvent();
+//		this.ctx = FacesContext.getCurrentInstance();
 	}
 
-	public void addLabResult(){
-		this.dataDonacion.getLabResults().add(this.labResult);
-		this.labResult = new DataLaboratoryResult();
-	}
-	
-	public void addEvent(){
-		this.dataDonacion.getEvents().add(this.event);
-		this.event = new DataDonationEvent();
-	}
+//	public void addLabResult(){
+//		this.dataDonacion.getLabResults().add(this.labResult);
+//		this.labResult = new DataLaboratoryResult();
+//	}
+//	
+//	public void addEvent(){
+//		this.dataDonacion.getEvents().add(this.event);
+//		this.event = new DataDonationEvent();
+//	}
 	
 	
 	public void setCtx(FacesContext ctx) {
@@ -73,17 +75,17 @@ public class TransfusionBB implements Serializable {
 
 
 	
-	public void dataDonationStateChange(ValueChangeEvent ev){
-		dataDonacion.setState((DataDonationStateEnum) ev.getNewValue());
-	}
-
-	public DataDonation getDataDonacion() {
-		return dataDonacion;
-	}
-	
-	public void setDataDonacion(DataDonation dataDonacion) {
-		this.dataDonacion = dataDonacion;
-	}
+//	public void dataDonationStateChange(ValueChangeEvent ev){
+//		dataDonacion.setState((DataDonationStateEnum) ev.getNewValue());
+//	}
+//
+//	public DataDonation getDataDonacion() {
+//		return dataDonacion;
+//	}
+//	
+//	public void setDataDonacion(DataDonation dataDonacion) {
+//		this.dataDonacion = dataDonacion;
+//	}
 	
 	public SessionBB getSessionBB() {
 		return sessionBB;
@@ -102,24 +104,24 @@ public class TransfusionBB implements Serializable {
 	}
 
 	
-	public DataLaboratoryResult getLabResult() {
-		return labResult;
-	}
-
-
-	public void setLabResult(DataLaboratoryResult labResult) {
-		this.labResult = labResult;
-	}
-
-
-	public DataDonationEvent getEvent() {
-		return event;
-	}
-
-
-	public void setEvent(DataDonationEvent event) {
-		this.event = event;
-	}
+//	public DataLaboratoryResult getLabResult() {
+//		return labResult;
+//	}
+//
+//
+//	public void setLabResult(DataLaboratoryResult labResult) {
+//		this.labResult = labResult;
+//	}
+//
+//
+//	public DataDonationEvent getEvent() {
+//		return event;
+//	}
+//
+//
+//	public void setEvent(DataDonationEvent event) {
+//		this.event = event;
+//	}
 
 	public String getSeveritySelected() {
 		return severitySelected;
@@ -128,22 +130,22 @@ public class TransfusionBB implements Serializable {
 	public void setSeveritySelected(String severitySelected) {
 		this.severitySelected = severitySelected;
 	}
-
-	public List<SelectItem> getDonationEvents() {
-		return donationEvents;
-	}
-
-	public void setDonationEvents(List<SelectItem> donationEvents) {
-		this.donationEvents = donationEvents;
-	}
-
-	public String getDonationEventSelected() {
-		return donationEventSelected;
-	}
-
-	public void setDonationEventSelected(String donationEventSelected) {
-		this.donationEventSelected = donationEventSelected;
-	}
+//
+//	public List<SelectItem> getDonationEvents() {
+//		return donationEvents;
+//	}
+//
+//	public void setDonationEvents(List<SelectItem> donationEvents) {
+//		this.donationEvents = donationEvents;
+//	}
+//
+//	public String getDonationEventSelected() {
+//		return donationEventSelected;
+//	}
+//
+//	public void setDonationEventSelected(String donationEventSelected) {
+//		this.donationEventSelected = donationEventSelected;
+//	}
 
 	public ApplicationBB getApplicationBB() {
 		return applicationBB;
@@ -152,5 +154,16 @@ public class TransfusionBB implements Serializable {
 	public void setApplicationBB(ApplicationBB applicationBB) {
 		this.applicationBB = applicationBB;
 	}
+	
+	public String onFlowProcess(FlowEvent event) {
+       
+		return event.getNewStep();
+        
+    }
+	
+	public void save() {        
+        FacesMessage msg = new FacesMessage("Successful", "Welcome :");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
 
 }

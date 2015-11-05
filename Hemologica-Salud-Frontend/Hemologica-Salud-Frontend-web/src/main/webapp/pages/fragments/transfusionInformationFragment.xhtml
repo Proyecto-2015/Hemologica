@@ -8,8 +8,6 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:pe="http://primefaces.org/ui/extensions">
 
-<h:head>
-</h:head>
 <h:body>
 
 	<div class="container-fluid">
@@ -24,8 +22,8 @@
 							<label class="col-md-3 control-label" for="donation_date"><h:outputText
 									value="#{messages.donation_date}" /></label>
 							<div class="col-md-9 col-lg-5">
-								<p:calendar id="donation_date" pattern="MM/dd/yyyy" mode="popup"
-									value="#{donationBB.dataDonacion.date}" />
+<!-- 								<p:calendar id="donation_date" pattern="MM/dd/yyyy" mode="popup" -->
+<!-- 									value="#{donationBB.dataDonacion.date}" /> -->
 							</div>
 						</div>
 
@@ -39,12 +37,12 @@
 									valueChangeListener="#{donationBB.dataDonationStateChange}">
 									<p:ajax  update="@form"/>
 									<f:selectItems value="#{applicationBB.donationStates}" var="state"
-										itemValue="#{state}" itemLabel="#{messages[state.displayName]}" />
+										itemValue="#{state}" itemLabel="#{messages[state.label]}" />
 								</h:selectOneMenu>
 							</div>
 						</div>
 
-						<!-- IF donation state = FAILED -->
+						IF donation state = FAILED
 
 						<h:panelGroup layout="block" styleClass="form-group" rendered="#{donationBB.dataDonacion.isStateDefined() and donationBB.dataDonacion.isNotApproved()}" >
 							<label class="col-md-3 control-label" for="donation_failed"><h:outputText
@@ -64,8 +62,8 @@
 							<label class="col-md-3 control-label" for="donation_failed_date"><h:outputText
 									value="#{messages.donation_failed_date}" /></label>
 							<div class="col-md-9">
-								<p:calendar id="donation_failed_date" pattern="MM/dd/yyyy"
-									mode="popup" value="#{donationBB.dataDonacion.fail.date}" />
+<!-- 								<p:calendar id="donation_failed_date" pattern="MM/dd/yyyy" -->
+<!-- 									mode="popup" value="#{donationBB.dataDonacion.fail.date}" /> -->
 							</div>
 						</h:panelGroup>
 
@@ -86,7 +84,7 @@
 						</h:panelGroup>
 
 
-						<!-- IF donation state = SUCCESS -->
+						IF donation state = SUCCESS
 
 						<h:panelGroup layout="block" styleClass="form-group" rendered="#{donationBB.dataDonacion.isStateDefined() and donationBB.dataDonacion.isApproved()}" >
 							<label class="col-md-3 control-label" for="donation_abo_type"><h:outputText
@@ -123,9 +121,9 @@
 								for="donation_extraction_time_begin"><h:outputText
 									value="#{messages.donation_extraction_time_begin}" /></label>
 							<div class="col-md-9">
-								<p:calendar id="donation_extraction_time_begin" 
-									timeOnly="true" pattern="HH:mm" title="Elija una hora"
-									value="#{donationBB.dataDonacion.extractionTimeBegin}"/>
+<!-- 								<p:calendar id="donation_extraction_time_begin"  -->
+<!-- 									timeOnly="true" pattern="HH:mm" title="Elija una hora" -->
+<!-- 									value="#{donationBB.dataDonacion.extractionTimeBegin}"/> -->
 							</div>
 						</h:panelGroup>
 
@@ -134,22 +132,11 @@
 								for="donation_extraction_time_end"><h:outputText
 									value="#{messages.donation_extraction_time_end}" /></label>
 							<div class="col-md-9">
-								<p:calendar id="donation_extraction_time_end"  timeOnly="true" pattern="HH:mm" 
-									value="#{donationBB.dataDonacion.extractionTimeEnd}" />
+<!-- 								<p:calendar id="donation_extraction_time_end"  timeOnly="true" pattern="HH:mm"  -->
+<!-- 									value="#{donationBB.dataDonacion.extractionTimeEnd}" /> -->
 							</div>
 						</h:panelGroup>
-
-
-						<!-- Form actions -->
-						<div class="form-group">
-							<div class="col-md-12 text-right" style="margin-top: 15px;">
-								<p:commandButton
-									styleClass="btn btn-primary btn-lg center btnSave"
-									value="#{messages.label_save}" action="#{personBB.submit()}"
-									process="@form" update="@form" />
-								<p:messages />
-							</div>
-						</div>
+					
 					</fieldset>
 				</h:form>
 			</div>
