@@ -11,6 +11,8 @@ import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataDonationEvent;
 import org.hemologica.datatypes.DataDonationState;
 import org.hemologica.datatypes.DataLaboratoryResult;
+import org.hemologica.datatypes.DataTransfusion;
+import org.hemologica.datatypes.DataTransfusionEvent;
 
 public class TransfusionBB implements Serializable {
 
@@ -25,12 +27,12 @@ public class TransfusionBB implements Serializable {
 	private SessionBB sessionBB;
 	private PersonBB personBB;
 	
-	private DataDonation dataDonacion;
+	private DataTransfusion dataTransfusion;
 	private DataLaboratoryResult labResult;
-	private DataDonationEvent event;
+	private DataTransfusionEvent event;
 	
-	private List<SelectItem> donationEvents;
-	private String donationEventSelected;
+	private List<SelectItem> transfusionEvents;
+	private String transfusionEventSelected;
 	
 	private List<SelectItem> severities;
 	private String severitySelected;
@@ -41,20 +43,20 @@ public class TransfusionBB implements Serializable {
 	@PostConstruct
 	public void init(){
 		logger.info("init DonationBB");
-		this.dataDonacion = new DataDonation();
+		this.dataTransfusion = new DataTransfusion();
 		this.labResult = new DataLaboratoryResult();
-		this.event = new DataDonationEvent();
+		this.event = new DataTransfusionEvent();
 		this.ctx = FacesContext.getCurrentInstance();
 	}
 
 	public void addLabResult(){
-		this.dataDonacion.getLabResults().add(this.labResult);
+		this.dataTransfusion.getLaboratoryResults().add(this.labResult);
 		this.labResult = new DataLaboratoryResult();
 	}
 	
 	public void addEvent(){
-		this.dataDonacion.getEvents().add(this.event);
-		this.event = new DataDonationEvent();
+		this.dataTransfusion.getEvents().add(this.event);
+		this.event = new DataTransfusionEvent();
 	}
 	
 	
@@ -70,20 +72,6 @@ public class TransfusionBB implements Serializable {
 		this.severities = severities;
 	}
 
-
-	
-	public void dataDonationStateChange(ValueChangeEvent ev){
-		dataDonacion.setState((DataDonationState) ev.getNewValue());
-	}
-
-	public DataDonation getDataDonacion() {
-		return dataDonacion;
-	}
-	
-	public void setDataDonacion(DataDonation dataDonacion) {
-		this.dataDonacion = dataDonacion;
-	}
-	
 	public SessionBB getSessionBB() {
 		return sessionBB;
 	}
@@ -111,12 +99,12 @@ public class TransfusionBB implements Serializable {
 	}
 
 
-	public DataDonationEvent getEvent() {
+	public DataTransfusionEvent getEvent() {
 		return event;
 	}
 
 
-	public void setEvent(DataDonationEvent event) {
+	public void setEvent(DataTransfusionEvent event) {
 		this.event = event;
 	}
 
@@ -128,28 +116,28 @@ public class TransfusionBB implements Serializable {
 		this.severitySelected = severitySelected;
 	}
 
-	public List<SelectItem> getDonationEvents() {
-		return donationEvents;
-	}
-
-	public void setDonationEvents(List<SelectItem> donationEvents) {
-		this.donationEvents = donationEvents;
-	}
-
-	public String getDonationEventSelected() {
-		return donationEventSelected;
-	}
-
-	public void setDonationEventSelected(String donationEventSelected) {
-		this.donationEventSelected = donationEventSelected;
-	}
-
 	public ApplicationBB getApplicationBB() {
 		return applicationBB;
 	}
 
 	public void setApplicationBB(ApplicationBB applicationBB) {
 		this.applicationBB = applicationBB;
+	}
+
+	public List<SelectItem> getTransfusionEvents() {
+		return transfusionEvents;
+	}
+
+	public void setTransfusionEvents(List<SelectItem> transfusionEvents) {
+		this.transfusionEvents = transfusionEvents;
+	}
+
+	public String getTransfusionEventSelected() {
+		return transfusionEventSelected;
+	}
+
+	public void setTransfusionEventSelected(String transfusionEventSelected) {
+		this.transfusionEventSelected = transfusionEventSelected;
 	}
 
 }
