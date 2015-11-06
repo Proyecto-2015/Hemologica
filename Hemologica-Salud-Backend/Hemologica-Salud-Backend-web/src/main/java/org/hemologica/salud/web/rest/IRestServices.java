@@ -10,15 +10,15 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
-
 import org.hemologica.constants.ConstansJson;
 import org.hemologica.constants.ConstantsRest;
-import org.hemologica.datatypes.BloodTypeData;
 import org.hemologica.datatypes.DataBank;
+import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataPerson;
+import org.hemologica.datatypes.DataProductType;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataStock;
@@ -109,7 +109,12 @@ public interface IRestServices {
 	@GET
 	@Path("/"+ConstantsRest.PATH_CODES + "/" + ConstantsRest.PATH_BLOOD_TYPES)
 	@Produces("application/json")
-	public List<BloodTypeData> getBloodTypes();
+	public List<DataBloodType> getBloodTypes();
+	
+	@GET
+	@Path("/"+ConstantsRest.PATH_CODES + "/" + ConstantsRest.PATH_PRODUCTS)
+	@Produces("application/json")
+	public List<DataProductType> getProducts();
 	
 	@GET
 	@Path("/"+ConstantsRest.PATH_CODES + "/" + ConstantsRest.PATH_DONATIONS_FILTERS)

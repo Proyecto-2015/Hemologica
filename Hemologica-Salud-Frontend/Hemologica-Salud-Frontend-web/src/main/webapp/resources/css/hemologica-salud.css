@@ -326,4 +326,8 @@ table.jqplot-table-legend, table.jqplot-cursor-legend {
 	color: red;
 }
 
+.ui-widget-header {
+    border: none;
+}
+
 

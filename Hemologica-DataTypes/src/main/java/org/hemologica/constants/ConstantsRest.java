@@ -25,12 +25,13 @@ public class ConstantsRest {
 	public static final String PATH_PERSONS = "persons";
 	
 	/**
-	 * Bajo esta url podemos meter todos las "codigueras" que tenemos agregandole /option a la url
+	 * Bajo esta url podemos meter todos las "codigueras" que tenemos agregandole /option a la url ej: codes/bloodtypes
 	 */
 	public static final String PATH_CODES = "codes";
 	public static final String PATH_BLOOD_TYPES = "bloodtypes";
 	public static final String PATH_DONATIONS_FILTERS = "donationsfilters";
 	public static final String PATH_TRANSFUSIONS_FILTERS = "transfusionsfilters";
+	public static final String PATH_PRODUCTS = "products";
 	
 	
 

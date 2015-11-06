@@ -3,7 +3,7 @@ package org.hemologica.datatypes;
 public class MailData {
 	
 	private MessageOptionData messageOption;
-	private BloodTypeData bloodType;
+	private DataBloodType bloodType;
 	private String subject;
 	private String text;
 	
@@ -14,10 +14,10 @@ public class MailData {
 	public void setMessageOption(MessageOptionData messageOption) {
 		this.messageOption = messageOption;
 	}
-	public BloodTypeData getBloodType() {
+	public DataBloodType getBloodType() {
 		return bloodType;
 	}
-	public void setBloodType(BloodTypeData bloodType) {
+	public void setBloodType(DataBloodType bloodType) {
 		this.bloodType = bloodType;
 	}
 	public String getSubject() {

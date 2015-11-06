@@ -1,10 +1,14 @@
 package org.hemologica.salud.web.beans;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.faces.model.SelectItem;
 
+import org.apache.http.client.ClientProtocolException;
 import org.hemologica.constants.DataDonationStateEnum;
 import org.hemologica.constants.DataEventSeverityEnum;
 import org.hemologica.datatypes.DataBank;
@@ -17,6 +21,9 @@ import org.hemologica.datatypes.DataDonationEvent;
 import org.hemologica.datatypes.DataDonationFail;
 import org.hemologica.datatypes.DataDonationFailCause;
 import org.hemologica.datatypes.DataInstitution;
+import org.hemologica.datatypes.DataProduct;
+import org.hemologica.datatypes.DataProductType;
+import org.hemologica.salud.factories.RestFactory;
 
 import javax.annotation.PostConstruct;
 
@@ -26,6 +33,7 @@ public class ApplicationBB implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -6967430387332405694L;
+	private static final Logger logger = Logger.getLogger(ApplicationBB.class.getName());
 	
 	/**
 	 * Identification Codes BEGIN
@@ -34,6 +42,9 @@ public class ApplicationBB implements Serializable {
 	private List<DataCity> cities;
 	private List<DataCountry> countries;
 	private List<DataDocumentType> documentTypes;
+	
+	private List<DataProductType> products;
+	private List<DataBloodType> bloodTypes;
 	
 	/**
 	 * Identification Codes END
@@ -77,6 +88,21 @@ public class ApplicationBB implements Serializable {
 	public void init(){
 		this.donationStates = DataDonationStateEnum.getStates();
 		this.eventSeverities = DataEventSeverityEnum.getSeverities();
+		try {
+			
+			this.products = RestFactory.getServicesClient().getProducts();
+			this.bloodTypes = RestFactory.getServicesClient().getBloodTypes();
+			
+			
+		} catch (ClientProtocolException e) {
+			
+			logger.log(Level.SEVERE, "Error al llamar al servicio web: ClientProtocolException", e);
+			
+		} catch (IOException e) {
+			
+			logger.log(Level.SEVERE, "Error al llamar al servicio web: IOException", e);
+			
+		}
 	}
 
 	public List<SelectItem> getItems(String code){
@@ -151,5 +177,22 @@ public class ApplicationBB implements Serializable {
 	public void setBanks(List<DataBank> banks) {
 		this.banks = banks;
 	}
+
+	public List<DataProductType> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<DataProductType> products) {
+		this.products = products;
+	}
+
+	public List<DataBloodType> getBloodTypes() {
+		return bloodTypes;
+	}
+
+	public void setBloodTypes(List<DataBloodType> bloodTypes) {
+		this.bloodTypes = bloodTypes;
+	}
+	
 
 }

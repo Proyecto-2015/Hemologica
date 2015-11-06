@@ -11,28 +11,27 @@
 <h:head>
 </h:head>
 <h:body>
-	<h:form>
 	
-		<p:messages/>
+	<h:form>
 		<div class="container">
 		
-			<p:wizard flowListener="#{transfusionBB.onFlowProcess}">
+			<p:wizard flowListener="#{transfusionBB.onFlowProcess}" >
 			
 				<p:tab id="donante" title="#{messages.label_personal_information}">
-<!-- 					<p:panel header="Personal Details"> -->
+					<p:panel header="#{messages.label_personal_information}" style="background-color: whitesmoke;">
 				
-					<ui:include src="transfusionPersonFragment.xhtml" />
-<!-- 					</p:panel> -->
+					<ui:include src="personFragment.xhtml"/>	
+					</p:panel>
 				</p:tab>
 	
 				<p:tab id="general" title="#{messages.label_transfusion}">
-				<p:panel header="Personal Details">
+				<p:panel header="#{messages.label_transfusion}" style="background-color: whitesmoke;">
 					<ui:include src="transfusionInformationFragment.xhtml" />
 					</p:panel>
 				</p:tab>
 	
 				<p:tab id="analisis" title="#{messages.label_analysis}">
-				<p:panel header="Personal Details">
+				<p:panel header="#{messages.label_analysis}" style="background-color: whitesmoke;">
 					<ui:include src="transfusionLaboratoryResultFragment.xhtml" />
 					
 					 <div class="form-group">

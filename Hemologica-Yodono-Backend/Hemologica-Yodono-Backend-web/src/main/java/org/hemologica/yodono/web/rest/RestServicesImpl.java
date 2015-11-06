@@ -13,6 +13,7 @@ import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataDonationDonorType;
 import org.hemologica.datatypes.DataInstitution;
+import org.hemologica.datatypes.DataProductType;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
@@ -155,7 +156,11 @@ public class RestServicesImpl implements IRestServices {
 		
 		t1.setName("Pedro");
 		t1.setDate("10/02/2015");
-		t1.setProduct("Plaquetas");
+		
+		DataProductType dp1 = new DataProductType();
+		dp1.setCode("0");
+		dp1.setDisplay("Plaquetas");
+		t1.setDataProduct(dp1);
 		transfusions.add(t1);
 		
 		DataTransfusion t2 = new DataTransfusion();
@@ -171,7 +176,10 @@ public class RestServicesImpl implements IRestServices {
 		t2.setInstitution(di);
 		t2.setName("Pedro");
 		t2.setDate("10/02/2015");
-		t2.setProduct("Plaquetas");
+		DataProductType dp2 = new DataProductType();
+		dp2.setCode("0");
+		dp2.setDisplay("Plasma");
+		t1.setDataProduct(dp2);
 		transfusions.add(t2);
 		
 		return transfusions;

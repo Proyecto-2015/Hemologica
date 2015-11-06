@@ -8,7 +8,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import org.apache.http.client.ClientProtocolException;
-import org.hemologica.datatypes.BloodTypeData;
+import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.salud.factories.RestFactory;
 
 public class DataBloodTypeConverter implements Converter {
@@ -22,7 +22,7 @@ public class DataBloodTypeConverter implements Converter {
 			return null;
 		}
 		
-		List<BloodTypeData> typesList = null;
+		List<DataBloodType> typesList = null;
 		try {
 			
 			typesList = RestFactory.getServicesClient().getBloodTypes();
@@ -38,7 +38,7 @@ public class DataBloodTypeConverter implements Converter {
 		}
 		
 		if(typesList != null){
-			for(BloodTypeData type : typesList){
+			for(DataBloodType type : typesList){
 				
 				if(type.getCode() != null && type.getCode().equals(value)){
 					return type;
@@ -51,9 +51,9 @@ public class DataBloodTypeConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext arg0, UIComponent arg1, Object value) {
 		
-		if(value instanceof BloodTypeData){
+		if(value instanceof DataBloodType){
 			
-			return ((BloodTypeData)value).getCode();
+			return ((DataBloodType)value).getCode();
 		}
 		return null;
 	}
