@@ -20,7 +20,25 @@
 					<li><a href="#"><h:outputText value="#{messages.title_persons}"/></a></li> 
 				</ol>
 			</div>
-			<ui:include src="fragments/personFragment.xhtml" />
+			
+			<h:form  class="form-horizontal" id="personForm">
+				<ui:include src="fragments/personFragment.xhtml" />
+				
+				<!-- Form actions -->
+	
+				<div class="form-group">
+					<div class="col-md-12 text-right" style="margin-top: 15px;">
+	
+	
+						<p:commandButton class="btn btn-primary btn-lg center btnSave"
+							value="#{messages.label_save}" action="#{personBB.submit()}"
+							process=":personForm" update=":personForm" />
+	
+						<p:messages />
+	
+					</div>
+				</div>
+			</h:form>
 		</ui:define>
 	</ui:composition>
 

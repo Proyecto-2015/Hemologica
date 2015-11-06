@@ -35,8 +35,8 @@
         			<c:forEach items="#{transfusionBB.myTransfusions}" var="transfusionItem" varStatus="counter">
 	        			<tr>
 	        				<td data-title="Fecha"><h:outputText value="#{transfusionItem.date}"/></td>
-	        				<td data-title="Banco de Sangre"><h:outputText value="#{transfusionItem.bank}"/></td>
-	        				<td data-title="Institución"><h:outputText value="#{transfusionItem.institution}"/></td>
+	        				<td data-title="Banco de Sangre"><h:outputText value="#{transfusionItem.bank.name}"/></td>
+	        				<td data-title="Institución"><h:outputText value="#{transfusionItem.institution.name}"/></td>
 	        				<td data-title="Producto" ><h:outputText value="#{transfusionItem.product}"/></td>
 	        				
 	        			</tr>

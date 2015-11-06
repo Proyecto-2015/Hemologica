@@ -22,7 +22,7 @@
 			<h:form>
 				<div class="col-xs-12 col-md-12 col-lg-2">
 <!-- 					<o:graphicImage value="#{userBB.imageByte}" /> -->
-<!-- 					<p:graphicImage class="image-user center"  /> -->
+					<p:graphicImage class="image-user center"  />
 <!-- 				<p:graphicImage class="image-user center" library="img" name="user-icon.png" > --> 
 <!-- 					</h:graphicImage> -->
 
@@ -33,7 +33,52 @@
 				 <div class="col-xs-12 col-md-12 col-lg-9 bank-info ">
 
 					<div class="row form-horizontal " id="userForm">
+					
 						<fieldset>
+							<legend><h:outputText value="#{messages.label_identification}"/></legend>
+							
+							<div class="form-group">
+							<label class="col-md-3 control-label" for="name"><h:outputText
+									value="#{messages.form_user_document_country}" /></label>
+							<div class="col-md-9">
+<!-- 								<div class="col-md-9"> -->
+<!-- 									<label class="label-form-user control-label"><h:outputText -->
+<!-- 											value="#{userBB.dataUser.documentCountry}" /></label> -->
+<!-- 								</div> -->
+							
+							
+<!-- 								<h:selectOneMenu class="form-control" id="countries" -->
+<!-- 									value="#{personBB.dataPerson.documentCountry}" style="height: 34px;" -->
+<!-- 									converter="dataCountryConverter"> -->
+<!-- 									<f:selectItems value="#{applicationBB.countries}" var="country" -->
+<!-- 										itemValue="#{country.code}" itemLabel="#{country.displayName}" /> -->
+<!-- 								</h:selectOneMenu> -->
+							</div>
+							</div>
+							
+							
+							<div class="form-group">
+								<label class="col-md-3 control-label" for="name"><h:outputText
+										value="#{messages.form_user_document_type}" /></label>
+								<div class="col-md-9">
+									<label class="label-form-user control-label"><h:outputText
+											value="#{userBB.dataUser.documentType}" /></label>
+								</div>
+							</div>
+						
+							<div class="form-group">
+								<label class="col-md-3 control-label" for="name"><h:outputText
+										value="#{messages.form_user_document_number}" /></label>
+								<div class="col-md-9">
+									<label class="label-form-user control-label"><h:outputText
+											value="#{userBB.dataUser.documentNumber}" /></label>
+								</div>
+							</div>
+						</fieldset>	
+					
+						<fieldset>
+							<legend><h:outputText value="#{messages.label_names_surname}"/></legend>
+							
 							<p:messages id="messages" showDetail="true" autoUpdate="true"
 								closable="true" />
 
@@ -69,22 +114,10 @@
 											value="#{userBB.dataUser.secondLastName}" /></label>
 								</div>
 							</div>
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="name"><h:outputText
-										value="#{messages.form_user_document_type}" /></label>
-								<div class="col-md-9">
-									<label class="label-form-user control-label"><h:outputText
-											value="#{userBB.dataUser.documentType}" /></label>
-								</div>
-							</div>
-							<div class="form-group">
-								<label class="col-md-3 control-label" for="name"><h:outputText
-										value="#{messages.form_user_document_number}" /></label>
-								<div class="col-md-9">
-									<label class="label-form-user control-label"><h:outputText
-											value="#{userBB.dataUser.documentNumber}" /></label>
-								</div>
-							</div>
+						</fieldset>
+						<fieldset>
+							<legend><h:outputText value="#{messages.label_contact}"/></legend>
+							
 							<div class="form-group">
 								<label class="col-md-3 control-label"
 									for="donations_input_search_date_from"><h:outputText
@@ -146,6 +179,9 @@
 										class="form-control" value="#{userBB.dataUser.email}" />
 								</div>
 							</div>
+						<fieldset>
+							<legend><h:outputText value="#{messages.label_notification}"/></legend>
+							
 							<div class="checkbox center">
 								<label> <h:selectBooleanCheckbox
 										id="allowNotificationNeedDonor"
@@ -163,6 +199,7 @@
 										value="#{messages.form_user_allow_notification_able_to_donate}" />
 								</label>
 							</div>
+						</fieldset>
 
 							<!-- Form actions -->
 

@@ -8,8 +8,6 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:pe="http://primefaces.org/ui/extensions">
 
-<h:head>
-</h:head>
 <h:body>
 
 	<div class="container-fluid">
@@ -160,20 +158,6 @@
 							</div>
 						</div>
 						
-						<!-- Form actions -->
-
-						<div class="form-group">
-							<div class="col-md-12 text-right" style="margin-top: 15px;">
-
-
-								<p:commandButton class="btn btn-primary btn-lg center btnSave"
-									value="#{messages.label_save}" action="#{personBB.submit()}"
-									process="@form" update="@form" />
-
-								<p:messages />
-
-							</div>
-						</div>
 					</fieldset>
 				</h:form>
 			</div>

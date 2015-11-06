@@ -7,9 +7,10 @@ import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
+
+import org.hemologica.constants.DataDonationStateEnum;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataDonationEvent;
-import org.hemologica.datatypes.DataDonationState;
 import org.hemologica.datatypes.DataLaboratoryResult;
 
 public class DonationBB implements Serializable {
@@ -73,7 +74,7 @@ public class DonationBB implements Serializable {
 
 	
 	public void dataDonationStateChange(ValueChangeEvent ev){
-		dataDonacion.setState((DataDonationState) ev.getNewValue());
+		dataDonacion.setState((DataDonationStateEnum) ev.getNewValue());
 	}
 
 	public DataDonation getDataDonacion() {

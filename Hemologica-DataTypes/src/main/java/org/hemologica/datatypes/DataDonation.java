@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.hemologica.constants.DataDonationStateEnum;
+
 public class DataDonation implements Serializable {
 
 	/**
@@ -16,10 +18,9 @@ public class DataDonation implements Serializable {
 	private String date;
 	private DataBank bank;
 	private DataInstitution institution;
-	private String donorType;
 	private DataPerson person;
 	private DataDonationDonorType dataDonorType;
-	private DataDonationState state;
+	private DataDonationStateEnum state;
 	private DataBloodABOType bloodABOType;
 	private DataBloodType bloodDType;
 	private DataDonationFail fail;
@@ -71,31 +72,16 @@ public class DataDonation implements Serializable {
 		this.institution = institution;
 	}
 
-	public String getDonorType() {
-		return donorType;
-	}
-
-	public void setDonorType(String donorType) {
-		this.donorType = donorType;
-	}
-
 	public Boolean isApproved() {
-		
+			
 		if(this.state != null)
-			return this.state.isApproved();
+			return this.state.compareTo(DataDonationStateEnum.MADE)==0;
 		else
 			return false;
 	}
 	
 	public Boolean isStateDefined(){
 		return this.state != null;
-	}
-	
-	public Boolean isNotApproved() {
-		if(this.state != null)
-			return !this.state.isApproved();
-		else
-			return true;
 	}
 
 	public List<DataLaboratoryResult> getLabResults() {
@@ -162,20 +148,20 @@ public class DataDonation implements Serializable {
 		this.bloodDType = bloodDType;
 	}
 
-	public DataDonationState getState() {
-		return state;
-	}
-
-	public void setState(DataDonationState state) {
-		this.state = state;
-	}
-
 	public List<DataDonationEvent> getEvents() {
 		return events;
 	}
 
 	public void setEvents(List<DataDonationEvent> events) {
 		this.events = events;
+	}
+
+	public DataDonationStateEnum getState() {
+		return state;
+	}
+
+	public void setState(DataDonationStateEnum state) {
+		this.state = state;
 	}
 
 }

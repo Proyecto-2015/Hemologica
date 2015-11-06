@@ -6,6 +6,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
@@ -20,6 +21,7 @@ import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
+import org.hemologica.datatypes.DataStock;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataUser;
 import org.hemologica.datatypes.DonationFilterData;
@@ -72,6 +74,11 @@ public interface IRestServices {
 	@Path("/banks")
 	@Produces("application/json")
 	public List<DataBank> getBanks();
+	
+	@GET
+	@Path("/bank/stock")
+	@Produces("application/json")
+	public DataStock getBankStock(@QueryParam("bank") String code);
 	
 	@GET
 	@Path("/states")

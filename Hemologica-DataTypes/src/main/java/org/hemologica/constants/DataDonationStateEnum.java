@@ -1,9 +1,6 @@
 package org.hemologica.constants;
 
 import java.io.Serializable;
-
-import org.hemologica.datatypes.DataDonationState;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,16 +17,36 @@ public enum DataDonationStateEnum implements Serializable {
 		this.label = label;
 	}
 	
-	public static List<DataDonationState> getStates(){
-		List<DataDonationState> ret = new ArrayList<DataDonationState>();
-		DataDonationState state = new DataDonationState();
-		state.setCode(MADE.value);
-		state.setDisplayName(MADE.label);
-		ret.add(state);
-		state = new DataDonationState();
-		state.setCode(REJECTED.value);
-		state.setDisplayName(REJECTED.label);
-		ret.add(state);
+	public static List<DataDonationStateEnum> getStates(){
+		List<DataDonationStateEnum> ret = new ArrayList<DataDonationStateEnum>();
+		
+		ret.add(DataDonationStateEnum.MADE);
+		ret.add(DataDonationStateEnum.REJECTED);
+//		DataDonationStateEnum state = new DataDonationStateEnum();
+//		state.setCode(MADE.value);
+//		state.setDisplayName(MADE.label);
+//		ret.add(state);
+//		state = new DataDonationState();
+//		state.setCode(REJECTED.value);
+//		state.setDisplayName(REJECTED.label);
+//		ret.add(state);
 		return ret;
 	}
+
+	public String getValue() {
+		return value;
+	}
+
+	public void setValue(String value) {
+		this.value = value;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
+	
 }

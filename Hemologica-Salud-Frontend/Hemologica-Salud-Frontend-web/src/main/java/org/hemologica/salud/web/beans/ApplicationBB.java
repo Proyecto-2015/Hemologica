@@ -16,7 +16,6 @@ import org.hemologica.datatypes.DataDocumentType;
 import org.hemologica.datatypes.DataDonationEvent;
 import org.hemologica.datatypes.DataDonationFail;
 import org.hemologica.datatypes.DataDonationFailCause;
-import org.hemologica.datatypes.DataDonationState;
 import org.hemologica.datatypes.DataInstitution;
 
 import javax.annotation.PostConstruct;
@@ -44,7 +43,7 @@ public class ApplicationBB implements Serializable {
 	 * Donation Codes BEGIN
 	 */
 	
-	private List<DataDonationState> donationStates;
+	private List<DataDonationStateEnum> donationStates;
 	private List<DataDonationFail> donationFails;
 	private List<DataDonationFailCause> donationFailCauses;
 	private List<DataBloodABOType> donationABOTypes;
@@ -89,7 +88,7 @@ public class ApplicationBB implements Serializable {
 		return null;
 	}
 	
-	public List<DataDonationState> getDonationStates(){
+	public List<DataDonationStateEnum> getDonationStates(){
 		return this.donationStates;
 	}
 
@@ -121,7 +120,7 @@ public class ApplicationBB implements Serializable {
 		return donationDTypes;
 	}
 
-	public void setDonationStates(List<DataDonationState> donationStates) {
+	public void setDonationStates(List<DataDonationStateEnum> donationStates) {
 		this.donationStates = donationStates;
 	}
 

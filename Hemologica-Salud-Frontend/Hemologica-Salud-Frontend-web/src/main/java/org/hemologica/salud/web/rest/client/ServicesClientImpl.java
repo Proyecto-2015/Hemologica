@@ -18,6 +18,7 @@ import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
+import org.hemologica.datatypes.DataStock;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataUser;
 import org.hemologica.datatypes.DonationFilterData;
@@ -140,6 +141,27 @@ public class ServicesClientImpl implements IServicesClient {
 		List<DataBank> banks = new Gson().fromJson(banksString, listType);
 		
 		return banks;
+	}
+	
+	
+	@Override
+	public DataStock getBankStock(String code) throws ClientProtocolException, IOException, URISyntaxException{
+		
+		String urlBanks = url + ConstantsRest.PATH_BANKS_STOCK;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		hash.put(ConstansJson.JSON_BANK, code);
+		
+		String stockString = "";
+		try {
+			stockString = RestFactory.getRestServicesUtils().get(urlBanks, hash);
+			
+		} catch (IOException e) {
+			logger.log( Level.SEVERE, "Error al llamar al servicio IOException", e);
+		}
+		
+		DataStock stock = new Gson().fromJson(stockString, DataStock.class);
+		return stock;
 	}
 	
 
