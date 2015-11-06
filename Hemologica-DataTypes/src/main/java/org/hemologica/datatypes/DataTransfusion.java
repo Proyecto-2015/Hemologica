@@ -15,19 +15,20 @@ public class DataTransfusion implements Serializable {
 	private String date;
 	private DataBank bank;
 	private DataInstitution institution;
-	private String product;
 	private String volume;
 	private DataPerson person;
-	private DataProduct dataProduct;
+	private DataDonation associatedDonation;
+	private DataProductType dataProduct;
 	private List<DataLaboratoryResult> laboratoryResults;
 	private List<DataTransfusionEvent> events;
+	private ResponsibleTransfusionPerson responsibleTransfusionPerson;
 	
 	
-	public DataProduct getDataProduct() {
+	public DataProductType getDataProduct() {
 		
 		return dataProduct;
 	}
-	public void setDataProduct(DataProduct dataProduct) {
+	public void setDataProduct(DataProductType dataProduct) {
 		this.dataProduct = dataProduct;
 	}
 	public List<DataLaboratoryResult> getLaboratoryResults() {
@@ -66,12 +67,6 @@ public class DataTransfusion implements Serializable {
 	public void setInstitution(DataInstitution institution) {
 		this.institution = institution;
 	}
-	public String getProduct() {
-		return product;
-	}
-	public void setProduct(String product) {
-		this.product = product;
-	}
 	public DataPerson getPerson() {
 		return person;
 	}
@@ -83,6 +78,18 @@ public class DataTransfusion implements Serializable {
 	}
 	public void setVolume(String volume) {
 		this.volume = volume;
+	}
+	public ResponsibleTransfusionPerson getResponsibleTransfusionPerson() {
+		return responsibleTransfusionPerson;
+	}
+	public void setResponsibleTransfusionPerson(ResponsibleTransfusionPerson responsibleTransfusionPerson) {
+		this.responsibleTransfusionPerson = responsibleTransfusionPerson;
+	}
+	public DataDonation getAssociatedDonation() {
+		return associatedDonation;
+	}
+	public void setAssociatedDonation(DataDonation associatedDonation) {
+		this.associatedDonation = associatedDonation;
 	}
 	
 	

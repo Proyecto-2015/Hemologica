@@ -10,12 +10,14 @@ import java.util.logging.Logger;
 import org.apache.http.client.ClientProtocolException;
 import org.hemologica.constants.ConstansJson;
 import org.hemologica.constants.ConstantsRest;
-import org.hemologica.datatypes.BloodTypeData;
 import org.hemologica.datatypes.DataBank;
+import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataPerson;
+import org.hemologica.datatypes.DataProduct;
+import org.hemologica.datatypes.DataProductType;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
@@ -234,7 +236,7 @@ public class ServicesClientImpl implements IServicesClient {
 	}
 
 	@Override
-	public List<BloodTypeData> getBloodTypes() throws ClientProtocolException, IOException {
+	public List<DataBloodType> getBloodTypes() throws ClientProtocolException, IOException {
 		
 		String urlBloodTypes = url + ConstantsRest.PATH_CODES + "/" + ConstantsRest.PATH_BLOOD_TYPES;
 		
@@ -250,8 +252,8 @@ public class ServicesClientImpl implements IServicesClient {
 			logger.log( Level.SEVERE, "Error al llamar al servicio", e);
 		}
 		
-		Type listType = new TypeToken<List<BloodTypeData>>(){}.getType();
-		List<BloodTypeData> bloodTypes = new Gson().fromJson(bloodTypesString, listType);
+		Type listType = new TypeToken<List<DataBloodType>>(){}.getType();
+		List<DataBloodType> bloodTypes = new Gson().fromJson(bloodTypesString, listType);
 		
 		return bloodTypes;
 	}
@@ -464,6 +466,29 @@ public class ServicesClientImpl implements IServicesClient {
 		
 		Type listType = new TypeToken<List<DataPerson>>(){}.getType();
 		List<DataPerson> responseObject= new Gson().fromJson(responseString, listType);
+		
+		return responseObject;
+	}
+
+	@Override
+	public List<DataProductType> getProducts() throws ClientProtocolException, IOException {
+		String urlService = url + ConstantsRest.PATH_CODES +"/" + ConstantsRest.PATH_PRODUCTS;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		
+		String responseString = "";
+		try {
+			
+			responseString = RestFactory.getRestServicesUtils().get(urlService, hash);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.log(Level.SEVERE,"Error al llamar al servicio", e);
+			
+		}
+		
+		Type listType = new TypeToken<List<DataProductType>>(){}.getType();
+		List<DataProductType> responseObject= new Gson().fromJson(responseString, listType);
 		
 		return responseObject;
 	}

@@ -13,9 +13,8 @@ import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
-
 import org.apache.http.client.ClientProtocolException;
-import org.hemologica.datatypes.BloodTypeData;
+import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.MailData;
 import org.hemologica.datatypes.MessageOptionData;
@@ -29,10 +28,10 @@ public class MessageBB implements Serializable{
 	private static final Logger logger = Logger.getLogger(MessageBB.class.getName());
 	
 	private List<MessageOptionData> messageOptions;
-	private List<BloodTypeData> bloodTypes;
+	private List<DataBloodType> bloodTypes;
 	
 	private MessageOptionData messageOption;
-	private BloodTypeData bloodType;
+	private DataBloodType bloodType;
 	
 	private MailData mailData;
 	
@@ -97,11 +96,11 @@ public class MessageBB implements Serializable{
 		this.messageOptions = messageOptions;
 	}
 
-	public List<BloodTypeData> getBloodTypes() {
+	public List<DataBloodType> getBloodTypes() {
 		return bloodTypes;
 	}
 
-	public void setBloodTypes(List<BloodTypeData> bloodTypes) {
+	public void setBloodTypes(List<DataBloodType> bloodTypes) {
 		this.bloodTypes = bloodTypes;
 	}
 
@@ -121,11 +120,11 @@ public class MessageBB implements Serializable{
 		this.messageOption = messageOption;
 	}
 
-	public BloodTypeData getBloodType() {
+	public DataBloodType getBloodType() {
 		return bloodType;
 	}
 
-	public void setBloodType(BloodTypeData bloodType) {
+	public void setBloodType(DataBloodType bloodType) {
 		this.bloodType = bloodType;
 	}
 

@@ -8,7 +8,7 @@ import javax.ws.rs.core.Response;
 
 import org.hemologica.constants.DataDonationStateEnum;
 import org.hemologica.constants.DataEventSeverityEnum;
-import org.hemologica.datatypes.BloodTypeData;
+import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataCampaign;
@@ -17,6 +17,8 @@ import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataDonationDonorType;
 import org.hemologica.datatypes.DataDonationEvent;
 import org.hemologica.datatypes.DataPerson;
+import org.hemologica.datatypes.DataProduct;
+import org.hemologica.datatypes.DataProductType;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
@@ -165,7 +167,10 @@ public class RestServicesImpl implements IRestServices {
 		
 		t1.setName("Pedro");
 		t1.setDate("10/02/2015");
-		t1.setProduct("Plaquetas");
+		
+		DataProductType dp1 = new DataProductType();
+		dp1.setDisplay("Plaquetas");
+		t1.setDataProduct(dp1);
 		transfusions.add(t1);
 		
 		DataTransfusion t2 = new DataTransfusion();
@@ -197,7 +202,9 @@ public class RestServicesImpl implements IRestServices {
 		t2.setInstitution(di);
 		t2.setName("Pedro");
 		t2.setDate("10/02/2015");
-		t2.setProduct("Plaquetas");
+		DataProductType dp2 = new DataProductType();
+		dp2.setDisplay("Plaquetas");
+		t2.setDataProduct(dp2);
 		transfusions.add(t2);
 		
 		return transfusions;
@@ -474,25 +481,25 @@ public class RestServicesImpl implements IRestServices {
 	}
 
 	@Override
-	public List<BloodTypeData> getBloodTypes() {
-		List<BloodTypeData>  options = new ArrayList<>();
+	public List<DataBloodType> getBloodTypes() {
+		List<DataBloodType>  options = new ArrayList<>();
 			
-		BloodTypeData o1 = new BloodTypeData();
+		DataBloodType o1 = new DataBloodType();
 		o1.setCode("0");
 		o1.setDisplayName("AB+");
 		options.add(o1);
 		
-		BloodTypeData o2 = new BloodTypeData();
+		DataBloodType o2 = new DataBloodType();
 		o2.setCode("1");
 		o2.setDisplayName("AB-");
 		options.add(o2);
 		
-		BloodTypeData o3 = new BloodTypeData();
+		DataBloodType o3 = new DataBloodType();
 		o3.setCode("2");
 		o3.setDisplayName("0+");
 		options.add(o3);
 		
-		BloodTypeData o4 = new BloodTypeData();
+		DataBloodType o4 = new DataBloodType();
 		o4.setCode("3");
 		o4.setDisplayName("0-");
 		options.add(o4);
@@ -747,6 +754,24 @@ public class RestServicesImpl implements IRestServices {
 		persons.add(d3);
 		
 		return persons;
+	}
+
+	@Override
+	public List<DataProductType> getProducts() {
+		List<DataProductType> products = new ArrayList<>();
+		
+		DataProductType dp1 = new DataProductType();
+		dp1.setCode("0");
+		dp1.setDisplay("Plaquetas");
+		
+		DataProductType dp2 = new DataProductType();
+		dp2.setCode("1");
+		dp2.setDisplay("Plasma");
+		
+		
+		products.add(dp1);
+		products.add(dp2);
+		return products;
 	}
 
 }

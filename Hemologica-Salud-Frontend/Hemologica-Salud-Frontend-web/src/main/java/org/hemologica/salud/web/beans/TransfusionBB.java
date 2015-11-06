@@ -13,6 +13,7 @@ import org.hemologica.constants.DataDonationStateEnum;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataDonationEvent;
 import org.hemologica.datatypes.DataLaboratoryResult;
+import org.hemologica.datatypes.DataTransfusion;
 import org.primefaces.event.FlowEvent;
 
 public class TransfusionBB implements Serializable {
@@ -28,7 +29,7 @@ public class TransfusionBB implements Serializable {
 	private SessionBB sessionBB;
 	private PersonBB personBB;
 	
-//	private DataDonation dataDonacion;
+	private DataTransfusion dataTransfusion; 
 //	private DataLaboratoryResult labResult;
 //	private DataDonationEvent event;
 //	
@@ -149,6 +150,14 @@ public class TransfusionBB implements Serializable {
 
 	public ApplicationBB getApplicationBB() {
 		return applicationBB;
+	}
+
+	public DataTransfusion getDataTransfusion() {
+		return dataTransfusion;
+	}
+
+	public void setDataTransfusion(DataTransfusion dataTransfusion) {
+		this.dataTransfusion = dataTransfusion;
 	}
 
 	public void setApplicationBB(ApplicationBB applicationBB) {

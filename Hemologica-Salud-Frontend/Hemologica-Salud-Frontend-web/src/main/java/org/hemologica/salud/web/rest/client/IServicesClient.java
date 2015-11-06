@@ -3,14 +3,14 @@ package org.hemologica.salud.web.rest.client;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
-
 import org.apache.http.client.ClientProtocolException;
-import org.hemologica.datatypes.BloodTypeData;
 import org.hemologica.datatypes.DataBank;
+import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataPerson;
+import org.hemologica.datatypes.DataProductType;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
@@ -103,7 +103,7 @@ public interface IServicesClient {
 	 * @throws IOException 
 	 * @throws ClientProtocolException 
 	 */
-	public List<BloodTypeData> getBloodTypes() throws ClientProtocolException, IOException;
+	public List<DataBloodType> getBloodTypes() throws ClientProtocolException, IOException;
 	
 	/**
 	 * Envia Mails a quien corresponda segun los datos en DAtaMail
@@ -180,4 +180,12 @@ public interface IServicesClient {
 	 * @throws ClientProtocolException 
 	 */
 	public List<DataPerson> getPersons() throws ClientProtocolException, IOException;
+
+	/**
+	 * Devuelve los tipos de productos.
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataProductType> getProducts() throws ClientProtocolException, IOException;
 }
