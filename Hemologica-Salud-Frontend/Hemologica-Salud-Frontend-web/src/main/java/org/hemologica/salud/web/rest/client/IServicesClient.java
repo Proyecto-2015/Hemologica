@@ -13,6 +13,7 @@ import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataProductType;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
+import org.hemologica.datatypes.DataStock;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataUser;
 import org.hemologica.datatypes.DonationFilterData;
@@ -63,6 +64,14 @@ public interface IServicesClient {
 	 * @throws URISyntaxException 
 	 */
 	public List<DataBank> getBanks() throws ClientProtocolException, IOException, URISyntaxException;
+	
+	/**
+	 * Devuelve el stock del banco con el code ingresado
+	 * @param code
+	 * @return
+	 * @throws URISyntaxException
+	 */
+	public DataStock getBankStock(String code) throws ClientProtocolException, IOException, URISyntaxException;
 	
 	/**
 	 * Devuelve la informacion todos las ciudades.

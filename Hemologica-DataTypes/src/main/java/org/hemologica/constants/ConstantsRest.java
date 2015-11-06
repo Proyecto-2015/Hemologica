@@ -11,6 +11,7 @@ public class ConstantsRest {
 	public static final String PATH_INSTITUTIONS = "institutions";
 	
 	public static final String PATH_BANKS = "banks";
+	public static final String PATH_BANKS_STOCK = "bank/stock";
 	public static final String PATH_CITIES = "cities";
 	public static final String PATH_LOGIN = "login";
 	public static final String PATH_STATES = "states";
@@ -30,8 +31,6 @@ public class ConstantsRest {
 	public static final String PATH_DONATIONS_FILTERS = "donationsfilters";
 	public static final String PATH_TRANSFUSIONS_FILTERS = "transfusionsfilters";
 	public static final String PATH_PRODUCTS = "products";
-	
-	
 	
 	
 

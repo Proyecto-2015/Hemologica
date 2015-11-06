@@ -1,6 +1,7 @@
 package org.hemologica.datatypes;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class DataStock implements Serializable {
 
@@ -9,8 +10,7 @@ public class DataStock implements Serializable {
 	 */
 	private static final long serialVersionUID = -979972334865660149L;
 	private DataBank bank;
-	private Integer count;
-	private DataProductType product;
+	private List<DataStockProductType> products;
 	
 	public DataBank getBank() {
 		return bank;
@@ -18,20 +18,12 @@ public class DataStock implements Serializable {
 	public void setBank(DataBank bank) {
 		this.bank = bank;
 	}
-	public Integer getCount() {
-		return count;
+	public List<DataStockProductType> getProducts() {
+		return products;
 	}
-	public void setCount(Integer count) {
-		this.count = count;
+	public void setProducts(List<DataStockProductType> products) {
+		this.products = products;
 	}
-	public DataProductType getProduct() {
-		return product;
-	}
-	public void setProduct(DataProductType product) {
-		this.product = product;
-	}
-
-	
 	
 	
 }
