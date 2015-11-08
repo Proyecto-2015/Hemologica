@@ -27,12 +27,13 @@
 						<table id="lab_results_table"
 							class="col-md-12 table-bordered table-striped table-condensed cf">
 							<thead class="cf">
-								<!-- 							<tr> -->
 
-								<!-- 								<c:forEach items="#{applicationBB.}" var="bloodType"> -->
-								<!-- 									<th><h:outputText value="#{bloodType.display}" /></th> -->
-								<!-- 								</c:forEach> -->
-								<!-- 							</tr> -->
+								<tr>
+									<th><h:outputText value="Producto" /></th>
+									<c:forEach items="#{applicationBB.bloodTypes}" var="bloodType">
+										<th><h:outputText value="#{bloodType.displayName}" /></th>
+									</c:forEach>
+								</tr>
 							</thead>
 							<tbody>
 								<c:forEach items="#{stockBB.nationalStockList}" var="product"
@@ -52,40 +53,111 @@
 
 					</p:outputPanel>
 
+					<p:outputPanel styleClass="row ui-grid-row">
+
+						<p:chart type="bar" model="#{stockBB.nationalStockModel}" style="height:300px" />
+						<!-- 							<pe:gChart value="#{stockBB.nationalStockGModel}" title="national stock"/> -->
+					</p:outputPanel>
+
 				</p:tab>
 
 				<p:tab title="Banks Stock">
 
 					<p:outputPanel id="banksStockPanel" styleClass="row ui-grid-row">
 
+						<script src="http://maps.google.com/maps/api/js?sensor=true"
+							type="text/javascript"></script>
+
+						<p:messages />
+
+						<p:outputPanel styleClass="row ui-grid-row">
+
+							<p:panelGrid id="filterGrid" layout="grid" columns="2"
+								columnClasses="ui-grid-col-3,ui-grid-col-9">
+
+								<p:outputLabel for="stock_bank_filter"
+									value="#{messages.stock_bank_filter}" />
+								<p:selectOneMenu id="stock_bank_filter"
+									value="#{stockBB.banksItemsSelected}">
+									<f:selectItem itemLabel="" itemValue="" />
+									<f:selectItems value="#{stockBB.banksItems}" />
+								</p:selectOneMenu>
+
+								<p:outputLabel for="stock_product_type_filter"
+									value="#{messages.stock_product_type_filter}" />
+								<p:selectOneMenu id="stock_product_type_filter"
+									value="#{stockBB.productTypeCode}"
+									converter="#{dataProductTypeConverter}">
+									<f:selectItem itemLabel="" itemValue="" />
+									<f:selectItems value="#{applicationBB.products}"
+										var="productType" itemValue="#{productType}"
+										itemLabel="#{productType.display}" />
+								</p:selectOneMenu>
+
+								<p:outputLabel for="stock_blood_type_filter"
+									value="#{messages.stock_blood_type_filter}" />
+								<p:selectOneMenu id="stock_blood_type_filter"
+									value="#{stockBB.bloodTypeCode}"
+									converter="#{dataBloodTypeConverter}">
+									<f:selectItem itemLabel="" itemValue="" />
+									<f:selectItems value="#{applicationBB.bloodTypes}"
+										var="bloodType" itemValue="#{bloodType}"
+										itemLabel="#{bloodType.displayName}" />
+								</p:selectOneMenu>
+
+								<p:outputLabel for="stock_count_filter"
+									value="#{messages.stock_count_filter}" />
+								<p:inputText id="stock_count_filter" value="#{stockBB.count}"
+									placeholder="#{messages.stock_count_filter}"
+									styleClass="form-control" />
+
+							</p:panelGrid>
+
+							<p:commandButton action="#{stockBB.search()}"
+								value="#{messages.generic_search}" update="banksStockPanel" />
+							<p:commandLink value="#{messages.generic_search_clear}"
+								update="banksStockPanel"
+								resetValues="stock_bank_filter stock_product_type_filter stock_blood_type_filter stock_count_filter" />
+
+
+
+
+							<!-- 							<p:commandButton ajax="true" onclick="PF('banksMap').show();" -->
+							<!-- 								icon="ui-icon-image" /> -->
+
+						</p:outputPanel>
+
+						<!-- 						<p:dialog id="banksMap" widgetVar="banksMap" closable="true" -->
+						<!-- 							resizable="true" position="top center" width="400px" -->
+						<!-- 							height="400px" modal="true"> -->
+
+						<!-- 							  <p:ajax event="close" update="banksStockPanel" immediate="true"/> -->
+
 						<p:outputPanel>
-
-							<script src="http://maps.google.com/maps/api/js?sensor=true"
-								type="text/javascript"></script>
-
 							<p:gmap id="mapa" center="-34.8059635,-56.2145634,11" zoom="10"
-								style="width:100%;height:400px" type="ROADMAP"
-								model="#{stockBB.gmapModel}">
+								style="width:100%; height:400px; max-height: 100%;"
+								type="ROADMAP" model="#{stockBB.gmapModel}">
 								<p:ajax event="overlaySelect"
 									listener="#{stockBB.onMarkerSelect}" update="banksStockPanel" />
 							</p:gmap>
 						</p:outputPanel>
+
+
+						<!-- 						</p:dialog> -->
 
 						<p:outputPanel styleClass="row ui-grid-row"
 							rendered="#{stockBB.stock != null}">
 
 							<table id="lab_results_table"
 								class="col-md-12 table-bordered table-striped table-condensed cf">
-								<!-- 												<thead class="cf"> -->
-								<!-- 													<tr> -->
-
-								<!-- 														<c:forEach items="#{product.bloodTypes}" var="bloodType"> -->
-								<!-- 															<th> -->
-								<!-- 																<h:outputText value="#{bloodType.display}" /> -->
-								<!-- 															</th> -->
-								<!-- 														</c:forEach> -->
-								<!-- 													</tr> -->
-								<!-- 												</thead> -->
+								<thead class="cf">
+									<tr>
+										<th><h:outputText value="Producto" /></th>
+										<c:forEach items="#{applicationBB.bloodTypes}" var="bloodType">
+											<th><h:outputText value="#{bloodType.displayName}" /></th>
+										</c:forEach>
+									</tr>
+								</thead>
 								<tbody>
 									<c:forEach items="#{stockBB.stock.products}" var="product"
 										varStatus="counter">
@@ -103,6 +175,10 @@
 							</table>
 
 						</p:outputPanel>
+						<p:outputPanel styleClass="row ui-grid-row">
+							<!-- 							<p:chart type="bar" model="#{stockBB.stockModel}" style="height:300px" /> -->
+						</p:outputPanel>
+
 					</p:outputPanel>
 
 				</p:tab>

@@ -478,21 +478,41 @@ public class RestServicesImpl implements IRestServices {
 			
 		DataBloodType o1 = new DataBloodType();
 		o1.setCode("0");
+		o1.setDisplayName("A+");
+		options.add(o1);
+		
+		o1 = new DataBloodType();
+		o1.setCode("1");
+		o1.setDisplayName("A-");
+		options.add(o1);
+		
+		o1 = new DataBloodType();
+		o1.setCode("2");
+		o1.setDisplayName("B+");
+		options.add(o1);
+		
+		o1 = new DataBloodType();
+		o1.setCode("3");
+		o1.setDisplayName("B-");
+		options.add(o1);
+		
+		o1 = new DataBloodType();
+		o1.setCode("4");
 		o1.setDisplayName("AB+");
 		options.add(o1);
 		
 		DataBloodType o2 = new DataBloodType();
-		o2.setCode("1");
+		o2.setCode("5");
 		o2.setDisplayName("AB-");
 		options.add(o2);
 		
 		DataBloodType o3 = new DataBloodType();
-		o3.setCode("2");
+		o3.setCode("6");
 		o3.setDisplayName("0+");
 		options.add(o3);
 		
 		DataBloodType o4 = new DataBloodType();
-		o4.setCode("3");
+		o4.setCode("7");
 		o4.setDisplayName("0-");
 		options.add(o4);
 
@@ -940,6 +960,22 @@ public class RestServicesImpl implements IRestServices {
 		
 		return products;
 	
+	}
+
+	@Override
+	public List<DataBank> getBanks(String bankCode, String productTypeCode, String bloodTypeCode, Integer count) {
+		
+		List<DataBank> ret = this.getBanks();
+		if(bankCode != null && !bankCode.equals("")){
+			for(DataBank b : ret){
+				if(b.getCode().equals(bankCode)){
+					ret.clear();
+					ret.add(b);
+					return ret;
+				}
+			}
+		}
+		return ret;
 	}
 
 }

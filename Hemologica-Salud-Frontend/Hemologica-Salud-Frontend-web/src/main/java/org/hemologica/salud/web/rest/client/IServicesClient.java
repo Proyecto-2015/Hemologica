@@ -65,6 +65,16 @@ public interface IServicesClient {
 	 * @throws URISyntaxException 
 	 */
 	public List<DataBank> getBanks() throws ClientProtocolException, IOException, URISyntaxException;
+
+	
+	/**
+	 * Devuelve la informacion todos los bancos de sangre que cumplan con el criterio de busqueda. 
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 * @throws URISyntaxException 
+	 */
+	public List<DataBank> getBanks(String bankCode, String productTypeCode, String bloodTypeCode, Integer count) throws ClientProtocolException, IOException, URISyntaxException;
 	
 	/**
 	 * Devuelve el stock del banco con el code ingresado

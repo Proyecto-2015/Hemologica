@@ -2,53 +2,51 @@ package org.hemologica.salud.web.converters;
 
 import java.io.Serializable;
 import java.util.List;
-//import java.util.logging.Logger;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import org.hemologica.datatypes.DataBloodType;
+import org.hemologica.datatypes.DataProductType;
 import org.hemologica.salud.web.beans.ApplicationBB;
 import org.hemologica.salud.web.beans.SessionBB;
 
-public class DataBloodTypeConverter implements Converter, Serializable {
+public class DataProductTypeConverter implements Converter, Serializable {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 421603990867590424L;
-
-
-//	private static final Logger logger = Logger.getLogger(DataBloodTypeConverter.class.getName());
-
+	private static final long serialVersionUID = 447082888928991445L;
 
 	private ApplicationBB applicationBB;
 	private SessionBB sessionBB;
 
 	@Override
-	public Object getAsObject(FacesContext arg0, UIComponent arg1, String value) {
-		
+	public Object getAsObject(FacesContext context, UIComponent component, String value) {
+
 		if (value == null) {
 			return null;
 		}
 
-		List<DataBloodType> typesList = applicationBB.getBloodTypes();
-		
+		List<DataProductType> typesList;
+		typesList = applicationBB.getProducts();
+
 		if (typesList != null) {
-			for (DataBloodType type : typesList) {
+			for (DataProductType type : typesList) {
 
 				if (type.getCode() != null && type.getCode().equals(value)) {
 					return type;
 				}
 			}
 		}
+
 		return null;
+
 	}
 
 	@Override
-	public String getAsString(FacesContext arg0, UIComponent arg1, Object value) {
+	public String getAsString(FacesContext context, UIComponent component, Object value) {
 
-		if (value instanceof DataBloodType) {
-			return ((DataBloodType) value).getCode();
+		if (value instanceof DataProductType) {
+			return ((DataProductType) value).getCode();
 		}
 		return null;
 	}
