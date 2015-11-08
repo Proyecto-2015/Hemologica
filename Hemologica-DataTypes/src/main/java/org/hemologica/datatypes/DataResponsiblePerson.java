@@ -1,6 +1,6 @@
 package org.hemologica.datatypes;
 
-public class ResponsibleTransfusionPerson {
+public class DataResponsiblePerson {
 	
 	private String id;
 	private String firstName;
@@ -10,6 +10,7 @@ public class ResponsibleTransfusionPerson {
 	private String documentCountry;
 	private String documentType;
 	private String documentNumber;
+	
 	public String getId() {
 		return id;
 	}
@@ -57,6 +58,11 @@ public class ResponsibleTransfusionPerson {
 	}
 	public void setDocumentNumber(String documentNumber) {
 		this.documentNumber = documentNumber;
+	}
+	
+	public String getFullName(){
+		
+		return firstName + " " + secondName + " " + firstLastName+ " " + secondLastName;
 	}
 	
 }

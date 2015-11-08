@@ -23,7 +23,9 @@ public class ConstantsRest {
 	public static final String PATH_SEND_MESSAGE = "sendmessage";
 	public static final String PATH_SEND_CAMPAIGN = "sendcampaign";
 	public static final String PATH_CAMPAIGNS_MESSAGES_OPTIONS = "messagesoptions";
-	public static final String PATH_PERSONS = "persons";
+	public static final String PATH_PERSONS = "responsibleTransfusion";
+	
+	public static final String PATH_RESPONSIBLE_TRENSFUSION = "";
 	
 	/**
 	 * Bajo esta url podemos meter todos las "codigueras" que tenemos agregandole /option a la url ej: codes/bloodtypes
@@ -33,6 +35,9 @@ public class ConstantsRest {
 	public static final String PATH_DONATIONS_FILTERS = "donationsfilters";
 	public static final String PATH_TRANSFUSIONS_FILTERS = "transfusionsfilters";
 	public static final String PATH_PRODUCTS = "products";
+	public static final String PATH_TRANSFUSIONS_ANALYSIS = "transfusionsanalisis";
+	public static final String PATH_TRANSFUSIONS_EVENTS = "transfusionevents";
+	public static final String PATH_SEVERITIES = "severities";
 	
 	
 

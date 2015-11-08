@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<h:body>
+
+	<div class="container-fluid">
+
+		<div class="row">
+	
+			<table id="lab_results_table_2"
+				class="col-md-12 table-bordered table-striped table-condensed cf">
+				<thead class="cf">
+					<tr>
+	
+						<th><h:outputText
+								value="#{messages.label_reaccion_type}" /></th>
+						<th><h:outputText
+								value="#{messages.label_severity}" /></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						
+						<td data-title="#{messages.label_reaccion_type}">
+
+							<h:selectOneMenu class="form-control" value="#{transfusionBB.event.event.displayName}"
+										style="height: 34px;" converter="#{dataResponsiblePersonConverter}">
+											<f:selectItems value="#{applicationBB.transfusionEvents}" var="item"
+												itemValue="#{item}" itemLabel="#{item.displayName}" />
+						
+							</h:selectOneMenu>	
+						</td> 
+						
+						
+						<td data-title="#{messages.label_severity}">
+						
+						<h:selectOneMenu class="form-control" value="#{transfusionBB.event.severity}"
+										style="height: 34px;" converter="#{dataResponsiblePersonConverter}">
+											<f:selectItems value="#{applicationBB.severities}" var="item"
+												itemValue="#{item}" itemLabel="#{messages[item.displayName]}" />
+						
+							</h:selectOneMenu>	
+							
+						
+						</td> 
+	
+	
+						<td data-title="">
+							<p:commandButton value="#{messages.label_add}" action="#{transfusionBB.addEvent()}"  update="@form" />
+						</td>
+	
+					</tr>
+	
+					<c:forEach items="#{transfusionBB.dataTransfusion.events}"
+						var="event" varStatus="counter">
+						<tr>
+							<td data-title="#{messages.label_reaccion_type}">
+								<h:outputText value="#{event.display}" />
+							</td>
+							<td data-title="#{messages.label_severity}">
+								<h:outputText value="#{messages[event.severity.code]}" />
+							</td>
+						</tr>
+					</c:forEach>
+	
+				</tbody>
+			</table>
+
+		</div>
+
+	</div>
+
+</h:body>
+</html>

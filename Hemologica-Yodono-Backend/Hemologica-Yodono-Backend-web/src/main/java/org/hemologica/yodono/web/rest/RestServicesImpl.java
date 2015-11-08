@@ -13,6 +13,7 @@ import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataDonationDonorType;
 import org.hemologica.datatypes.DataInstitution;
+import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataProductType;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
@@ -186,9 +187,9 @@ public class RestServicesImpl implements IRestServices {
 	}
 
 	@Override
-	public DataUser getUser(String user) {
+	public DataPerson getUser(String user) {
 		
-		DataUser dataUser = new DataUser();
+		DataPerson dataUser = new DataPerson();
 		dataUser.setFirstName("Paula");
 		dataUser.setSecondName("segundo");
 		dataUser.setFirstLastName("Roche");
@@ -408,7 +409,7 @@ public class RestServicesImpl implements IRestServices {
 	}
 
 	@Override
-	public DataResponse updateUser(DataUser dataUser) {
+	public DataResponse updateUser(DataPerson dataUser) {
 		
 		logger.info(dataUser.getAddress());
 		logger.info(dataUser.getBirthdayDate());

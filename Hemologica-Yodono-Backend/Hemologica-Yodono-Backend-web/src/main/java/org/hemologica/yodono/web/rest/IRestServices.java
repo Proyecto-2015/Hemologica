@@ -15,6 +15,7 @@ import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonation;
+import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
@@ -50,12 +51,12 @@ public interface IRestServices {
 	@GET
 	@Path("/"+ConstantsRest.PATH_USERS)
 	@Produces("application/json")
-	public DataUser getUser(@QueryParam(ConstansJson.JSON_USER) String user);
+	public DataPerson getUser(@QueryParam(ConstansJson.JSON_USER) String user);
 	
 	@PUT
 	@Path("/"+ ConstantsRest.PATH_USERS)
 	@Produces("application/json")
-	public DataResponse updateUser(DataUser dataUser);
+	public DataResponse updateUser(DataPerson dataUser);
 	
 	@GET
 	@Path("/"+ConstantsRest.PATH_BANKS)

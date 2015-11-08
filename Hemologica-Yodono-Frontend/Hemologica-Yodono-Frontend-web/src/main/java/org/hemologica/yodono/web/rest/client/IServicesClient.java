@@ -9,6 +9,7 @@ import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonation;
+import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
@@ -46,7 +47,7 @@ public interface IServicesClient {
 	 * @param string
 	 * @return
 	 */
-	public DataUser getDataUser(String string) throws IOException;
+	public DataPerson getDataUser(String string) throws IOException;
 
 	/**
 	 * Devuelve la informacion todos los bancos de sangre. 
@@ -89,7 +90,7 @@ public interface IServicesClient {
 	 * @throws IOException 
 	 * @throws ClientProtocolException 
 	 */
-	public DataResponse updateUserData(DataUser dataUser) throws ClientProtocolException, IOException;
+	public DataResponse updateUserData(DataPerson dataUser) throws ClientProtocolException, IOException;
 	
 	/**
 	 * Devuelve la cantidad de campañas pasadas por parametro por orden cronologico. Empezando por el dia de la fecha. 
