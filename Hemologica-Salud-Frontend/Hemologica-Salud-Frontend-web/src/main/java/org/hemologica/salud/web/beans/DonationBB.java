@@ -1,6 +1,7 @@
 package org.hemologica.salud.web.beans;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -12,6 +13,8 @@ import org.hemologica.constants.DataDonationStateEnum;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataDonationEvent;
 import org.hemologica.datatypes.DataLaboratoryResult;
+import org.hemologica.datatypes.DataTransfusionEvent;
+import org.primefaces.event.FlowEvent;
 
 public class DonationBB implements Serializable {
 
@@ -49,14 +52,39 @@ public class DonationBB implements Serializable {
 	}
 
 	public void addLabResult(){
-		this.dataDonacion.getLabResults().add(this.labResult);
+		
+		if(this.dataDonacion.getLabResults() != null)
+		
+			this.dataDonacion.getLabResults().add(0,this.labResult);
+		
+		else{
+			
+			List<DataLaboratoryResult> list = new ArrayList<>();
+			list.add(this.labResult);
+			this.dataDonacion.setLabResults(list);
+		}
+		
 		this.labResult = new DataLaboratoryResult();
 	}
 	
 	public void addEvent(){
-		this.dataDonacion.getEvents().add(this.event);
+		
+		if(this.dataDonacion.getEvents() != null){
+			
+			this.dataDonacion.getEvents().add(0,this.event);
+				
+		}else{
+			
+			List<DataDonationEvent> events = new ArrayList<>();
+			events.add(this.event);
+			this.dataDonacion.setEvents(events);
+			
+		}
+		
 		this.event = new DataDonationEvent();
+		
 	}
+	
 	
 	
 	public void setCtx(FacesContext ctx) {
@@ -150,5 +178,11 @@ public class DonationBB implements Serializable {
 	public void setApplicationBB(ApplicationBB applicationBB) {
 		this.applicationBB = applicationBB;
 	}
+	
+	public String onFlowProcess(FlowEvent event) {
+	       
+		return event.getNewStep();
+        
+    }
 
 }

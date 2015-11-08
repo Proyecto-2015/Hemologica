@@ -178,7 +178,14 @@ public class RestServicesImpl implements IRestServices {
 		dc1.setCode("0");
 		dc1.setDisplayName("Evento adverso 1");
 		d1.setEvent(dc1);
-		d1.setSeverity(DataEventSeverityEnum.MODERATE);
+		
+		
+		
+		DataCode dc13 = new DataCode();
+		dc13.setCode(DataEventSeverityEnum.MODERATE.getValue());
+		dc13.setDisplayName(DataEventSeverityEnum.MODERATE.getLabel());
+		
+		d1.setSeverity(dc13);
 
 		DataCode dc2 = new DataCode();
 		dc2.setCode("1");
@@ -188,8 +195,12 @@ public class RestServicesImpl implements IRestServices {
 		
 		DataTransfusionEvent d22 = new DataTransfusionEvent();
 		d22.setEvent(dc2);
-		d22.setSeverity(DataEventSeverityEnum.MODERATE);
 		
+		DataCode dc133 = new DataCode();
+		dc133.setCode(DataEventSeverityEnum.SEVERE.getValue());
+		dc133.setDisplayName(DataEventSeverityEnum.SEVERE.getLabel());
+		
+		d1.setSeverity(dc133);		
 
 		List<DataTransfusionEvent> dteList = new ArrayList<>();
 		dteList.add(d1);
@@ -1028,6 +1039,112 @@ public class RestServicesImpl implements IRestServices {
 		
 		return products;
 	
+	}
+
+	@Override
+	public List<DataCode> getDonationsAnalysis() {
+		
+		List<DataCode> analisis = new ArrayList<>();
+		DataCode code1 = new DataCode();
+		code1.setCode("0");
+		code1.setDisplayName("Analisis donacion 1");
+		
+		DataCode code2 = new DataCode();
+		code2.setCode("1");
+		code2.setDisplayName("Analisis donacion 2");
+		
+		analisis.add(code1);
+		analisis.add(code2);
+		
+		return analisis;
+	}
+
+	@Override
+	public List<DataCode> getDonationsEvents() {
+		List<DataCode> analisis = new ArrayList<>();
+		DataCode code1 = new DataCode();
+		code1.setCode("0");
+		code1.setDisplayName("Evento Donacion 1");
+		
+		DataCode code2 = new DataCode();
+		code2.setCode("1");
+		code2.setDisplayName("Evento Donacion 2");
+		
+		analisis.add(code1);
+		analisis.add(code2);
+		
+		return analisis;
+	}
+
+	@Override
+	public List<DataCode> getDonationABOTypes() {
+		
+		List<DataCode> analisis = new ArrayList<>();
+		DataCode code1 = new DataCode();
+		code1.setCode("0");
+		code1.setDisplayName("A");
+		
+		DataCode code2 = new DataCode();
+		code2.setCode("1");
+		code2.setDisplayName("0");
+		
+		analisis.add(code1);
+		analisis.add(code2);
+		
+		return analisis;
+	}
+
+	@Override
+	public List<DataCode> getDonationDTTypes() {
+
+		List<DataCode> analisis = new ArrayList<>();
+		DataCode code1 = new DataCode();
+		code1.setCode("0");
+		code1.setDisplayName("RH+");
+		
+		DataCode code2 = new DataCode();
+		code2.setCode("1");
+		code2.setDisplayName("RH-");
+		
+		analisis.add(code1);
+		analisis.add(code2);
+		
+		return analisis;
+	}
+
+	@Override
+	public List<DataCode> getRejectionReasons() {
+		
+		List<DataCode> analisis = new ArrayList<>();
+		DataCode code1 = new DataCode();
+		code1.setCode("0");
+		code1.setDisplayName("Bajo peso");
+		
+		DataCode code2 = new DataCode();
+		code2.setCode("1");
+		code2.setDisplayName("Viaje");
+		
+		analisis.add(code1);
+		analisis.add(code2);
+		
+		return analisis;
+	}
+
+	@Override
+	public List<DataCode> getRejectionTypes() {
+		List<DataCode> analisis = new ArrayList<>();
+		DataCode code1 = new DataCode();
+		code1.setCode("0");
+		code1.setDisplayName("Permanente");
+		
+		DataCode code2 = new DataCode();
+		code2.setCode("1");
+		code2.setDisplayName("Temporal");
+		
+		analisis.add(code1);
+		analisis.add(code2);
+		
+		return analisis;
 	}
 
 }

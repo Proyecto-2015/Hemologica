@@ -243,4 +243,52 @@ public interface IServicesClient {
 	 * @throws ClientProtocolException 
 	 */
 	public List<DataCode> getTransfusionsEvents() throws ClientProtocolException, IOException;
+
+	/**
+	 * Devuelve los tipos de analisis de laboratorio de las donaciones.
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataCode> getDonationAnalysis() throws ClientProtocolException, IOException;
+
+	/**
+	 * Devuelve los tipos de eventos adversos de las donaciones.
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataCode> getDonationsEvents() throws ClientProtocolException, IOException;
+
+	/**
+	 * Devuelve los typos de sangre ABO
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataCode> getDonationABOTypes() throws ClientProtocolException, IOException;
+
+	/**
+	 * Devuelve los tipos de sangre RH
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataCode> getDonationDTTypes() throws ClientProtocolException, IOException;
+
+	/**
+	 * Devuelve los motivos de rechazo de una donacion.
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataCode> getRejectionReasons() throws ClientProtocolException, IOException;
+
+	/**
+	 * Devuelve los tipos de rechazo de una donacion.
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataCode> getRejectionTypes() throws ClientProtocolException, IOException;
 }

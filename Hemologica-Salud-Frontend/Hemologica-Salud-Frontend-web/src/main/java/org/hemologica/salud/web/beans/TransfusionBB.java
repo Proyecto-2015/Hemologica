@@ -17,6 +17,7 @@ import org.hemologica.datatypes.DataEvent;
 import org.hemologica.datatypes.DataLaboratoryResult;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataTransfusionEvent;
+import org.hemologica.salud.web.converters.DataEventTransfusionConverter;
 import org.primefaces.event.FlowEvent;
 
 public class TransfusionBB implements Serializable {
@@ -53,7 +54,7 @@ public class TransfusionBB implements Serializable {
 	
 	public void addLabResult(){
 		if(this.dataTransfusion.getLaboratoryResults() != null)
-			this.dataTransfusion.getLaboratoryResults().add(this.labResult);
+			this.dataTransfusion.getLaboratoryResults().add(0,this.labResult);
 		else{
 			
 			List<DataLaboratoryResult> list = new ArrayList<>();
@@ -65,7 +66,20 @@ public class TransfusionBB implements Serializable {
 	}
 	
 	public void addEvent(){
-		this.dataTransfusion.getEvents().add(this.event);
+		
+		if(this.dataTransfusion.getEvents() != null){
+			
+			this.dataTransfusion.getEvents().add(0,this.event);
+			
+			
+		}else{
+			
+			List<DataTransfusionEvent> events = new ArrayList<>();
+			events.add(this.event);
+			this.dataTransfusion.setEvents(events);
+			
+		}
+		
 		this.event = new DataTransfusionEvent();
 		
 	}

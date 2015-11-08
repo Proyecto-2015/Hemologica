@@ -44,9 +44,15 @@ public class ApplicationBB implements Serializable {
 	
 	private List<DataProductType> products;
 	private List<DataBloodType> bloodTypes;
-	private List<DataCode> transfusionAnalysis; 
+	private List<DataCode> transfusionAnalysis;
+	private List<DataCode> donationAnalysis;
+	
 	private List<DataCode> severities;
 	private List<DataCode> transfusionEvents;
+	private List<DataCode> donationsEvents;
+	
+	private List<DataCode> rejectionTypes;
+	private List<DataCode> rejectionReasons;
 	
 	/**
 	 * Identification Codes END
@@ -57,10 +63,16 @@ public class ApplicationBB implements Serializable {
 	 */
 	
 	private List<DataDonationStateEnum> donationStates;
-	private List<DataDonationFail> donationFails;
-	private List<DataDonationFailCause> donationFailCauses;
-	private List<DataBloodABOType> donationABOTypes;
-	private List<DataBloodType> donationDTypes;
+	
+
+	
+	/**
+	 * Se cambio por motivo rechazo y tipo rechazo
+	 */
+//	private List<DataDonationFail> donationFails;
+//	private List<DataDonationFailCause> donationFailCauses;
+	private List<DataCode> donationABOTypes;
+	private List<DataCode> donationDTypes;
 	private List<DataDonationEvent> donationEvents;
 	
 	/**
@@ -99,9 +111,16 @@ public class ApplicationBB implements Serializable {
 			this.products = RestFactory.getServicesClient().getProducts();
 			this.bloodTypes = RestFactory.getServicesClient().getBloodTypes();
 			this.transfusionAnalysis = RestFactory.getServicesClient().getTransfusionsAnalysis();
+			this.donationAnalysis  = RestFactory.getServicesClient().getDonationAnalysis();
+			
 			this.severities = RestFactory.getServicesClient().getSeverities();
 			this.transfusionEvents = RestFactory.getServicesClient().getTransfusionsEvents();
+			this.donationsEvents = RestFactory.getServicesClient().getDonationsEvents();
 			
+			this.donationABOTypes = RestFactory.getServicesClient().getDonationABOTypes();
+			this.donationDTypes = RestFactory.getServicesClient().getDonationDTTypes();
+			this.rejectionReasons = RestFactory.getServicesClient().getRejectionReasons();
+			this.rejectionTypes = RestFactory.getServicesClient().getRejectionTypes();
 			
 		} catch (ClientProtocolException e) {
 			
@@ -138,20 +157,12 @@ public class ApplicationBB implements Serializable {
 	public List<DataDocumentType> getDocumentTypes() {
 		return documentTypes;
 	}
-	
-	public List<DataDonationFail> getDonationFails() {
-		return donationFails;
-	}
 
-	public List<DataDonationFailCause> getDonationFailCauses() {
-		return donationFailCauses;
-	}
-
-	public List<DataBloodABOType> getDonationABOTypes() {
+	public List<DataCode> getDonationABOTypes() {
 		return donationABOTypes;
 	}
 
-	public List<DataBloodType> getDonationDTypes() {
+	public List<DataCode> getDonationDTypes() {
 		return donationDTypes;
 	}
 
@@ -221,6 +232,46 @@ public class ApplicationBB implements Serializable {
 
 	public void setTransfusionEvents(List<DataCode> transfusionEvents) {
 		this.transfusionEvents = transfusionEvents;
+	}
+
+	public List<DataCode> getDonationAnalysis() {
+		return donationAnalysis;
+	}
+
+	public void setDonationAnalysis(List<DataCode> donationAnalysis) {
+		this.donationAnalysis = donationAnalysis;
+	}
+
+	public List<DataCode> getDonationsEvents() {
+		return donationsEvents;
+	}
+
+	public void setDonationsEvents(List<DataCode> donationsEvents) {
+		this.donationsEvents = donationsEvents;
+	}
+
+	public List<DataCode> getRejectionTypes() {
+		return rejectionTypes;
+	}
+
+	public void setRejectionTypes(List<DataCode> rejectionTypes) {
+		this.rejectionTypes = rejectionTypes;
+	}
+
+	public List<DataCode> getRejectionReasons() {
+		return rejectionReasons;
+	}
+
+	public void setRejectionReasons(List<DataCode> rejectionReasons) {
+		this.rejectionReasons = rejectionReasons;
+	}
+
+	public void setDonationABOTypes(List<DataCode> donationABOTypes) {
+		this.donationABOTypes = donationABOTypes;
+	}
+
+	public void setDonationDTypes(List<DataCode> donationDTypes) {
+		this.donationDTypes = donationDTypes;
 	}
 	
 }

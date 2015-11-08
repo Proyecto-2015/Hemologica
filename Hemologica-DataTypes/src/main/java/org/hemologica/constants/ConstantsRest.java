@@ -37,6 +37,12 @@ public class ConstantsRest {
 	public static final String PATH_TRANSFUSIONS_ANALYSIS = "transfusionsanalisis";
 	public static final String PATH_TRANSFUSIONS_EVENTS = "transfusionevents";
 	public static final String PATH_SEVERITIES = "severities";
+	public static final String PATH_DONATIONS_ANALYSIS = "donationsanalisis";
+	public static final String PATH_DONATIONS_EVENTS = "donationsevents";
+	public static final String PATH_REJECTION_TYPES = "rejectiontypes";
+	public static final String PATH_REJECTION_REASONS = "rejectionreasons";
+	public static final String PATH_BLOOD_TYPES_RH = "bloodtypesrh";
+	public static final String PATH_BLOOD_TYPES_ABO = "bloodtypesabo";
 	
 	
 

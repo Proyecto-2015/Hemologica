@@ -30,8 +30,8 @@
 						
 						<td data-title="#{messages.label_reaccion_type}">
 
-							<h:selectOneMenu class="form-control" value="#{transfusionBB.event.event.displayName}"
-										style="height: 34px;" converter="#{dataResponsiblePersonConverter}">
+							<h:selectOneMenu class="form-control" value="#{transfusionBB.event.event}"
+										style="height: 34px;" converter="#{dataEventTransfusionConverter}">
 											<f:selectItems value="#{applicationBB.transfusionEvents}" var="item"
 												itemValue="#{item}" itemLabel="#{item.displayName}" />
 						
@@ -42,7 +42,7 @@
 						<td data-title="#{messages.label_severity}">
 						
 						<h:selectOneMenu class="form-control" value="#{transfusionBB.event.severity}"
-										style="height: 34px;" converter="#{dataResponsiblePersonConverter}">
+										style="height: 34px;" converter="#{dataEventSeverityConverter}">
 											<f:selectItems value="#{applicationBB.severities}" var="item"
 												itemValue="#{item}" itemLabel="#{messages[item.displayName]}" />
 						
@@ -62,10 +62,10 @@
 						var="event" varStatus="counter">
 						<tr>
 							<td data-title="#{messages.label_reaccion_type}">
-								<h:outputText value="#{event.display}" />
+								<h:outputText value="#{event.event.displayName}" />
 							</td>
 							<td data-title="#{messages.label_severity}">
-								<h:outputText value="#{messages[event.severity.code]}" />
+								<h:outputText value="#{messages[event.severity.displayName]}" />
 							</td>
 						</tr>
 					</c:forEach>

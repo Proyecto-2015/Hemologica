@@ -162,12 +162,42 @@ public interface IRestServices {
 	public List<DataCode> getTransfusionsAnalysis();
 	
 	@GET
+	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_DONATIONS_ANALYSIS)
+	@Produces("application/json")
+	public List<DataCode> getDonationsAnalysis();
+	
+	@GET
 	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_TRANSFUSIONS_EVENTS)
 	@Produces("application/json")
 	public List<DataCode> getTransfusionsEvents();
 	
 	@GET
+	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_DONATIONS_EVENTS)
+	@Produces("application/json")
+	public List<DataCode> getDonationsEvents();
+	
+	@GET
 	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_SEVERITIES)
 	@Produces("application/json")
 	public List<DataCode> getSeverities();
+	
+	@GET
+	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_BLOOD_TYPES_ABO)
+	@Produces("application/json")
+	public List<DataCode> getDonationABOTypes();
+	
+	@GET
+	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_BLOOD_TYPES_RH)
+	@Produces("application/json")
+	public List<DataCode> getDonationDTTypes();
+	
+	@GET
+	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_REJECTION_REASONS)
+	@Produces("application/json")
+	public List<DataCode> getRejectionReasons();
+	
+	@GET
+	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_REJECTION_TYPES)
+	@Produces("application/json")
+	public List<DataCode> getRejectionTypes();
 }

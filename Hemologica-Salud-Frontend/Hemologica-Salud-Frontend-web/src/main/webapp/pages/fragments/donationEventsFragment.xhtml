@@ -8,25 +8,18 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:pe="http://primefaces.org/ui/extensions">
 
-<h:head>
-</h:head>
 <h:body>
 
 	<div class="container-fluid">
 
 		<div class="row">
 			<div>
-
-				<h:form class="form-horizontal" id="eventForm">
-
 					<div>
 
 						<table id="lab_results_table"
 							class="col-md-12 table-bordered table-striped table-condensed cf">
 							<thead class="cf">
 								<tr>
-									<th><h:outputText value="#{messages.donation_event_code}" />
-									</th>
 									<th><h:outputText
 											value="#{messages.donation_event_display}" /></th>
 									<th><h:outputText
@@ -35,25 +28,40 @@
 							</thead>
 							<tbody>
 								<tr>
+									
+									<td data-title="#{messages.label_reaccion_type}">
 
-									<td data-title="#{messages.donation_event_code}"><h:inputText
-											value="#{donationBB.event.code}" /></td>
-									<td data-title="#{messages.donation_event_display}">
-										<h:inputText value="#{donationBB.event.display}" />
-									</td>
+										<h:selectOneMenu class="form-control" value="#{donationBB.event.event}"
+													style="height: 34px;" converter="#{dataEventDonationConverter}">
+												<f:selectItems value="#{applicationBB.donationsEvents}" var="item"
+													itemValue="#{item}" itemLabel="#{item.displayName}" />
+									
+										</h:selectOneMenu>	
+									</td> 
+									
+									<td data-title="#{messages.donation_event_severity}">
+						
+										<h:selectOneMenu class="form-control" value="#{donationBB.event.severity}"
+														style="height: 34px;" converter="#{dataEventSeverityConverter}">
+												<f:selectItems value="#{applicationBB.severities}" var="item"
+													itemValue="#{item}" itemLabel="#{messages[item.displayName]}" />
+										
+										</h:selectOneMenu>	
+									</td> 
+									
 
-									<td data-title="#{messages.donation_event_severity}"><h:selectOneMenu
-											id="donation_event_severity" styleClass="form-control"
-											value="#{donationBB.event.severity}" style="height: 34px;"
-											converter="dataEventSeverityConverter">
-											<f:selectItems var="severity" 
-												value="#{applicationBB.severities}"
-												itemValue="#{severity}" itemLabel="#{messages[severity.code]}" />
-										</h:selectOneMenu></td>
+<!-- 									<td data-title="#{messages.donation_event_severity}"><h:selectOneMenu -->
+<!-- 											id="donation_event_severity" styleClass="form-control" -->
+<!-- 											value="#{donationBB.event.severity}" style="height: 34px;" -->
+<!-- 											converter="dataEventSeverityConverter"> -->
+<!-- 											<f:selectItems var="severity"  -->
+<!-- 												value="#{applicationBB.severities}" -->
+<!-- 												itemValue="#{severity}" itemLabel="#{messages[severity.code]}" /> -->
+<!-- 										</h:selectOneMenu></td> -->
 
 
 									<td data-title="">
-										<p:commandButton value="Agregar" 
+										<p:commandButton value="#{messages.label_add}" 
 										action="#{donationBB.addEvent()}" 
 										update="@form" />
 									</td>
@@ -63,14 +71,11 @@
 								<c:forEach items="#{donationBB.dataDonacion.events}"
 									var="event" varStatus="counter">
 									<tr>
-										<td data-title="#{messages.donation_event_code}">
-											<h:outputText value="#{event.code}" />
-										</td>
 										<td data-title="#{messages.donation_event_display}">
-											<h:outputText value="#{event.display}" />
+											<h:outputText value="#{event.event.displayName}" />
 										</td>
 										<td data-title="#{messages.donation_event_severity}">
-											<h:outputText value="#{messages[event.severity.code]}" />
+											<h:outputText value="#{messages[event.severity.displayName]}" />
 										</td>
 									</tr>
 								</c:forEach>
@@ -80,7 +85,7 @@
 
 					</div>
 
-				</h:form>
+<!-- 				</h:form> -->
 			</div>
 		</div>
 	</div>
