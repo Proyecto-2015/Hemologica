@@ -15,10 +15,6 @@ import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataDonationDonorType;
 import org.hemologica.datatypes.DataPerson;
-<<<<<<< HEAD
-=======
-import org.hemologica.datatypes.DataProduct;
->>>>>>> 7d4940ce75517deeec6fe50428521eea6b8c2291
 import org.hemologica.datatypes.DataProductType;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataResponsiblePerson;
@@ -501,16 +497,11 @@ public class RestServicesImpl implements IRestServices {
 		o3.setCode("2");
 		o3.setDisplayName("0+");
 		options.add(o3);
-		
-<<<<<<< HEAD
-		
-=======
 		DataBloodType o4 = new DataBloodType();
 		o4.setCode("3");
 		o4.setDisplayName("0-");
 		options.add(o4);
 
->>>>>>> 7d4940ce75517deeec6fe50428521eea6b8c2291
 		return options;
 	}
 
@@ -784,13 +775,9 @@ public class RestServicesImpl implements IRestServices {
 		products.add(dp2);
 		products.add(dp3);
 		return products;
-<<<<<<< HEAD
-		
+
 	}
-=======
-	}
-	
->>>>>>> 7d4940ce75517deeec6fe50428521eea6b8c2291
+
 	public DataStock getBankStock(String code) {
 
 		DataStock ret = new DataStock();
@@ -882,7 +869,6 @@ public class RestServicesImpl implements IRestServices {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public List<DataResponsiblePerson> getResponsibleTransfusionPersons(String bankCode) {
 		
 		List<DataResponsiblePerson> responsible = new ArrayList<DataResponsiblePerson>();
@@ -962,7 +948,8 @@ public class RestServicesImpl implements IRestServices {
 		analisis.add(code2);
 		
 		return analisis;
-=======
+	}
+	
 	public List<DataStockProductType> getBankNationalStock() {
 		
 	
@@ -1041,7 +1028,6 @@ public class RestServicesImpl implements IRestServices {
 		
 		return products;
 	
->>>>>>> 7d4940ce75517deeec6fe50428521eea6b8c2291
 	}
 
 }

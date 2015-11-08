@@ -20,6 +20,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import org.apache.http.client.ClientProtocolException;
 import org.hemologica.datatypes.DataCity;
+import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataUser;
@@ -33,7 +34,7 @@ public class UserBB implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	private static final Logger logger = Logger.getLogger(UserBB.class.getName()); 
-	private DataUser dataUser;
+	private DataPerson dataUser;
 	private List<DataState> states;
 	private DataState state;
 	private List<DataCity> cities;
@@ -87,12 +88,12 @@ public class UserBB implements Serializable{
 		}
 	}
 	
-	public DataUser getDataUser() {
+	public DataPerson getDataUser() {
 		
 		return dataUser;
 	}
 	
-	public void setDataUser(DataUser dataUser) {
+	public void setDataUser(DataPerson dataUser) {
 		this.dataUser = dataUser;
 	}
 	

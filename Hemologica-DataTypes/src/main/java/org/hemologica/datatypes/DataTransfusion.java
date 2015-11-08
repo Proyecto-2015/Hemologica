@@ -10,7 +10,6 @@ public class DataTransfusion implements Serializable {
 	 */
 	private static final long serialVersionUID = 3440653129221915523L;
 	
-	
 	private String name;
 	private String date;
 	private DataBank bank;

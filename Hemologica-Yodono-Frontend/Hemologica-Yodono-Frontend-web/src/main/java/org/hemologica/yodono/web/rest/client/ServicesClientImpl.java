@@ -13,6 +13,7 @@ import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataDonation;
+import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
@@ -95,7 +96,7 @@ public class ServicesClientImpl implements IServicesClient {
 	}
 
 	@Override
-	public DataUser getDataUser(String user) throws IOException {
+	public DataPerson getDataUser(String user) throws IOException {
 		
 		String urlUsers = url + ConstantsRest.PATH_USERS;
 		
@@ -109,7 +110,7 @@ public class ServicesClientImpl implements IServicesClient {
 			logger.error("Error al llamar al servicio", e);
 		}
 		
-		DataUser dataUser = new Gson().fromJson(userString, DataUser.class);
+		DataPerson dataUser = new Gson().fromJson(userString, DataPerson.class);
 		
 		return dataUser;
 	}
@@ -210,7 +211,7 @@ public class ServicesClientImpl implements IServicesClient {
 	}
 
 	@Override
-	public DataResponse updateUserData(DataUser dataUser) throws ClientProtocolException, IOException {
+	public DataResponse updateUserData(DataPerson dataUser) throws ClientProtocolException, IOException {
 		
 		String urlUsers = url + ConstantsRest.PATH_USERS;
 		
