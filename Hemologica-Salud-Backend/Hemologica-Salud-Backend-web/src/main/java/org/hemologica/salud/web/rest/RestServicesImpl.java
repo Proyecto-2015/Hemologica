@@ -5,31 +5,25 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.ws.rs.core.Response;
-
 import org.hemologica.constants.DataDonationStateEnum;
 import org.hemologica.constants.DataEventSeverityEnum;
 import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataBank;
-import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCity;
+import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataDonationDonorType;
-import org.hemologica.datatypes.DataDonationEvent;
 import org.hemologica.datatypes.DataPerson;
-<<<<<<< HEAD
-import org.hemologica.datatypes.DataProduct;
-=======
->>>>>>> c87f32e28f65557f094113da4da545dc94c5a91e
 import org.hemologica.datatypes.DataProductType;
 import org.hemologica.datatypes.DataResponse;
+import org.hemologica.datatypes.DataResponsiblePerson;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataStock;
 import org.hemologica.datatypes.DataStockProductType;
 import org.hemologica.datatypes.DataStockProductTypeBloodType;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataTransfusionEvent;
-import org.hemologica.datatypes.DataUser;
 import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.LoginData;
@@ -178,19 +172,28 @@ public class RestServicesImpl implements IRestServices {
 		DataBank db2 = new DataBank();
 		db2.setName("Banco X");
 
-		DataTransfusionEvent dte = new DataTransfusionEvent();
-		dte.setCode("0");
-		dte.setDisplay("Evento adverso 1");
-		dte.setSeverity(DataEventSeverityEnum.MODERATE);
+		DataTransfusionEvent d1 = new DataTransfusionEvent();
+		
+		DataCode dc1 = new DataCode();
+		dc1.setCode("0");
+		dc1.setDisplayName("Evento adverso 1");
+		d1.setEvent(dc1);
+		d1.setSeverity(DataEventSeverityEnum.MODERATE);
 
-		DataTransfusionEvent dte1 = new DataTransfusionEvent();
-		dte1.setCode("1");
-		dte1.setDisplay("Evento adverso 2");
-		dte1.setSeverity(DataEventSeverityEnum.SEVERE);
+		DataCode dc2 = new DataCode();
+		dc2.setCode("1");
+		
+		dc2.setDisplayName("Evento adverso 2");
+		
+		
+		DataTransfusionEvent d22 = new DataTransfusionEvent();
+		d22.setEvent(dc2);
+		d22.setSeverity(DataEventSeverityEnum.MODERATE);
+		
 
 		List<DataTransfusionEvent> dteList = new ArrayList<>();
-		dteList.add(dte1);
-		dteList.add(dte);
+		dteList.add(d1);
+		dteList.add(d22);
 
 		t2.setEvents(dteList);
 
@@ -211,9 +214,9 @@ public class RestServicesImpl implements IRestServices {
 	}
 
 	@Override
-	public DataUser getUser(String user) {
+	public DataPerson getPerson(String user) {
 
-		DataUser dataUser = new DataUser();
+		DataPerson dataUser = new DataPerson();
 		dataUser.setFirstName("Paula");
 		dataUser.setSecondName("segundo");
 		dataUser.setFirstLastName("Roche");
@@ -476,8 +479,8 @@ public class RestServicesImpl implements IRestServices {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public List<DataBloodType> getBloodTypes() {
+		
 		List<DataBloodType>  options = new ArrayList<>();
 			
 		DataBloodType o1 = new DataBloodType();
@@ -495,32 +498,7 @@ public class RestServicesImpl implements IRestServices {
 		o3.setDisplayName("0+");
 		options.add(o3);
 		
-		DataBloodType o4 = new DataBloodType();
-=======
-	public List<BloodTypeData> getBloodTypes() {
-		List<BloodTypeData> options = new ArrayList<>();
-
-		BloodTypeData o1 = new BloodTypeData();
-		o1.setCode("0");
-		o1.setDisplayName("AB+");
-		options.add(o1);
-
-		BloodTypeData o2 = new BloodTypeData();
-		o2.setCode("1");
-		o2.setDisplayName("AB-");
-		options.add(o2);
-
-		BloodTypeData o3 = new BloodTypeData();
-		o3.setCode("2");
-		o3.setDisplayName("0+");
-		options.add(o3);
-
-		BloodTypeData o4 = new BloodTypeData();
->>>>>>> c87f32e28f65557f094113da4da545dc94c5a91e
-		o4.setCode("3");
-		o4.setDisplayName("0-");
-		options.add(o4);
-
+		
 		return options;
 	}
 
@@ -774,7 +752,6 @@ public class RestServicesImpl implements IRestServices {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public List<DataProductType> getProducts() {
 		List<DataProductType> products = new ArrayList<>();
 		
@@ -790,7 +767,8 @@ public class RestServicesImpl implements IRestServices {
 		products.add(dp1);
 		products.add(dp2);
 		return products;
-=======
+		
+	}
 	public DataStock getBankStock(String code) {
 
 		DataStock ret = new DataStock();
@@ -879,7 +857,88 @@ public class RestServicesImpl implements IRestServices {
 		}
 
 		return null;
->>>>>>> c87f32e28f65557f094113da4da545dc94c5a91e
+	}
+
+	@Override
+	public List<DataResponsiblePerson> getResponsibleTransfusionPersons(String bankCode) {
+		
+		List<DataResponsiblePerson> responsible = new ArrayList<DataResponsiblePerson>();
+		
+		DataResponsiblePerson dataUser = new DataResponsiblePerson();
+		dataUser.setId("id1");
+		dataUser.setFirstName("Paula");
+		dataUser.setSecondName("segundo");
+		dataUser.setFirstLastName("Roche");
+		dataUser.setSecondLastName("De Polsi");
+		dataUser.setDocumentType("CI");
+		dataUser.setDocumentNumber("46714299");
+		
+		responsible.add(dataUser);
+		
+		DataResponsiblePerson dataUser2 = new DataResponsiblePerson();
+		dataUser2.setId("id2");
+		dataUser2.setFirstName("Paula");
+		dataUser2.setSecondName("segundo");
+		dataUser2.setFirstLastName("Roche");
+		dataUser2.setSecondLastName("De Polsi");
+		dataUser2.setDocumentType("CI");
+		dataUser2.setDocumentNumber("46714299");
+		
+		responsible.add(dataUser2);
+		
+		return responsible;
+	}
+
+	@Override
+	public List<DataCode> getTransfusionsAnalysis() {
+		
+		List<DataCode> analisis = new ArrayList<>();
+		DataCode code1 = new DataCode();
+		code1.setCode("0");
+		code1.setDisplayName("Analisis 1");
+		
+		DataCode code2 = new DataCode();
+		code2.setCode("1");
+		code2.setDisplayName("Analisis 2");
+		
+		analisis.add(code1);
+		analisis.add(code2);
+		
+		return analisis;
+	}
+
+	@Override
+	public List<DataCode> getTransfusionsEvents() {
+		List<DataCode> analisis = new ArrayList<>();
+		DataCode code1 = new DataCode();
+		code1.setCode("0");
+		code1.setDisplayName("Evento 1");
+		
+		DataCode code2 = new DataCode();
+		code2.setCode("1");
+		code2.setDisplayName("Evento 2");
+		
+		analisis.add(code1);
+		analisis.add(code2);
+		
+		return analisis;
+	}
+
+	@Override
+	public List<DataCode> getSeverities() {
+		List<DataCode> analisis = new ArrayList<>();
+		DataCode code1 = new DataCode();
+		code1.setCode("0");
+		code1.setDisplayName(DataEventSeverityEnum.MILD.getLabel());
+		
+		DataCode code2 = new DataCode();
+		code2.setCode("1");
+		code2.setDisplayName(DataEventSeverityEnum.SEVERE.getLabel());
+		
+		analisis.add(code1);
+		analisis.add(code2);
+		
+		return analisis;
 	}
 
 }

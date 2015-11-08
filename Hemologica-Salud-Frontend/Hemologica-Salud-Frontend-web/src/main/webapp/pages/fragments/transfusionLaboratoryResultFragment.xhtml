@@ -11,11 +11,11 @@
 <h:body>
 
 	<div class="container-fluid">
-
+		<p:messages/>
 		<div>
 			<div>
 
-				<h:form id="labResultForm">
+<!-- 				<h:form id="labResultForm"> -->
 
 					<div >
 
@@ -24,56 +24,70 @@
 							<thead class="cf">
 								<tr>
 									<th><h:outputText
-											value="#{messages.donation_lab_result_code}" /></th>
-									<th><h:outputText
-											value="#{messages.donation_lab_result_display}" /></th>
+											value="#{messages.label_analysis}" /></th>
 									<th><h:outputText
 											value="#{messages.donation_lab_result_date}" /></th>
 									<th><h:outputText
-											value="#{messages.donation_lab_result_value}" /></th>
-									<th></th>
+											value="#{messages.label_responsible_transfusion_person}" /></th>
+									<th><h:outputText
+											value="#{messages.label_result}" /></th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 
-									<td data-title="#{messages.donation_lab_result_code}"><h:inputText
-											value="#{donationBB.labResult.code}" /></td>
-									<td data-title="#{messages.donation_lab_result_display}">
-										<h:inputText value="#{donationBB.labResult.displayName}" />
+									<td data-title="#{messages.label_analysis}">
+										<h:selectOneMenu class="form-control" value="#{transfusionBB.labResult.analysis}"
+											style="height: 34px;" converter="#{dataTransfusionAnalysisConverter}">
+										
+											<f:selectItems value="#{applicationBB.transfusionAnalysis}" var="item"
+												itemValue="#{item}" itemLabel="#{item.displayName}" />
+							
+										</h:selectOneMenu>
 									</td>
+									
 									<td data-title="#{messages.donation_lab_result_date}"><p:calendar
-											value="#{donationBB.labResult.date}">
+											value="#{transfusionBB.labResult.date}">
 											<f:convertDateTime pattern="dd/MM/yyyy" />
 										</p:calendar></td>
+									
+									
+									<td data-title="#{messages.label_responsible_transfusion_person}">
+										<h:selectOneMenu class="form-control" value="#{transfusionBB.labResult.responsiblePerson}"
+										style="height: 34px;" converter="#{dataResponsiblePersonConverter}">
+											<f:selectItems value="#{sessionBB.responsibleTransfusionPersons}" var="item"
+												itemValue="#{item}" itemLabel="#{item.fullName}" />
+						
+										</h:selectOneMenu>		
+									</td>
+									
 									<td data-title="#{messages.donation_lab_result_value}"><h:selectBooleanCheckbox
-											value="#{donationBB.labResult.result}" /></td>
-
+											value="#{transfusionBB.labResult.result}" /></td>
 									<td data-title="">
-										<p:commandButton value="Agregar" action="#{donationBB.addLabResult()}" update="@form"/>
+										<p:commandButton value="#{messages.label_add}" action="#{transfusionBB.addLabResult()}" update="@form"/>
 									</td>
 
 								</tr>
 
-								<c:forEach items="#{donationBB.dataDonacion.labResults}"
+								<c:forEach items="#{transfusionBB.dataTransfusion.laboratoryResults}"
 									var="labResItem" varStatus="counter">
 									<tr>
 										<td
-											data-title="#{messages.donation_lab_result_code_placeholder}">
-											<h:inputText value="#{labResItem.code}" />
+											data-title="#{messages.label_analysis}">
+											<h:inputText value="#{labResItem.analysis.displayName}" />
 										</td>
 										<td
-											data-title="#{messages.donation_lab_result_display_placeholder}">
-											<h:inputText value="#{labResItem.displayName}" />
-										</td>
-										<td
-											data-title="#{messages.donation_lab_result_date_placeholder}">
+											data-title="#{messages.donation_lab_result_date}">
 											<p:calendar value="#{labResItem.date}">
 												<f:convertDateTime pattern="dd/MM/yyyy" />
 											</p:calendar>
 										</td>
 										<td
-											data-title="#{messages.donation_lab_result_value_placeholder}">
+											data-title="#{messages.label_responsible_transfusion_person}">
+											<h:inputText value="#{labResItem.responsiblePerson.getFullName()}" />
+										</td>
+										<td
+											data-title="#{messages.donation_lab_result_value}">
 											<h:inputText value="#{labResItem.result}" />
 										</td>
 									</tr>
@@ -84,7 +98,7 @@
 
 					</div>
 
-				</h:form>
+<!-- 				</h:form> -->
 			</div>
 		</div>
 	</div>

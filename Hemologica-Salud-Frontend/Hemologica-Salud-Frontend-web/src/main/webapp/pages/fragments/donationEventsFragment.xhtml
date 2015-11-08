@@ -47,8 +47,8 @@
 											value="#{donationBB.event.severity}" style="height: 34px;"
 											converter="dataEventSeverityConverter">
 											<f:selectItems var="severity" 
-												value="#{applicationBB.eventSeverities}"
-												itemValue="#{severity}" itemLabel="#{messages[severity.label]}" />
+												value="#{applicationBB.severities}"
+												itemValue="#{severity}" itemLabel="#{messages[severity.code]}" />
 										</h:selectOneMenu></td>
 
 
@@ -70,7 +70,7 @@
 											<h:outputText value="#{event.display}" />
 										</td>
 										<td data-title="#{messages.donation_event_severity}">
-											<h:outputText value="#{messages[event.severity.label]}" />
+											<h:outputText value="#{messages[event.severity.code]}" />
 										</td>
 									</tr>
 								</c:forEach>

@@ -71,8 +71,6 @@ public class DonationBB implements Serializable {
 		this.severities = severities;
 	}
 
-
-	
 	public void dataDonationStateChange(ValueChangeEvent ev){
 		dataDonacion.setState((DataDonationStateEnum) ev.getNewValue());
 	}

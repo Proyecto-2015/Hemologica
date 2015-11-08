@@ -6,7 +6,6 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
@@ -16,14 +15,15 @@ import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCity;
+import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataProductType;
 import org.hemologica.datatypes.DataResponse;
+import org.hemologica.datatypes.DataResponsiblePerson;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataStock;
 import org.hemologica.datatypes.DataTransfusion;
-import org.hemologica.datatypes.DataUser;
 import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.LoginData;
@@ -59,7 +59,7 @@ public interface IRestServices {
 	@GET
 	@Path("/users")
 	@Produces("application/json")
-	public DataUser getUser(@QueryParam("user") String user);
+	public DataPerson getPerson(@QueryParam("user") String user);
 	
 	@GET
 	@Path("/" + ConstantsRest.PATH_USERS + "/" + ConstantsRest.PATH_BANKS)
@@ -144,4 +144,24 @@ public interface IRestServices {
 	@Path("/"+ConstantsRest.PATH_PERSONS)
 	@Produces("application/json")
 	public List<DataPerson> getPersons();
+	
+	@GET
+	@Path("/"+ConstantsRest.PATH_PERSONS + "/"+ ConstantsRest.PATH_RESPONSIBLE_TRENSFUSION)
+	@Produces("application/json")
+	public List<DataResponsiblePerson> getResponsibleTransfusionPersons(@QueryParam("user") String bankCode);
+	
+	@GET
+	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_TRANSFUSIONS_ANALYSIS)
+	@Produces("application/json")
+	public List<DataCode> getTransfusionsAnalysis();
+	
+	@GET
+	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_TRANSFUSIONS_EVENTS)
+	@Produces("application/json")
+	public List<DataCode> getTransfusionsEvents();
+	
+	@GET
+	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_SEVERITIES)
+	@Produces("application/json")
+	public List<DataCode> getSeverities();
 }

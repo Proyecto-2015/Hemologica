@@ -17,7 +17,7 @@ public class DataDonationEventConverter implements Converter {
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if(value instanceof DataDonationEvent){
 			
-			return ((DataDonationEvent)value).getCode();
+			return ((DataDonationEvent)value).getEvent().getCode();
 		}
 		return null;
 	}

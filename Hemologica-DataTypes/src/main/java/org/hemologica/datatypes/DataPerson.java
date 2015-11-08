@@ -26,6 +26,9 @@ public class DataPerson implements Serializable{
 	private String email;
 	private DataBloodType bloodType;
 	private boolean ableToDonate;
+	private byte[] image;
+	private boolean allowNotificationNeedDonor;
+	private boolean allowNotificationAbleToDonate;
 	
 	public String getDocumentCountry() {
 		return documentCountry;
@@ -128,5 +131,22 @@ public class DataPerson implements Serializable{
 	public void setAbleToDonate(boolean ableToDonate) {
 		this.ableToDonate = ableToDonate;
 	}
-	
+	public byte[] getImage() {
+		return image;
+	}
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+	public boolean isAllowNotificationNeedDonor() {
+		return allowNotificationNeedDonor;
+	}
+	public void setAllowNotificationNeedDonor(boolean allowNotificationNeedDonor) {
+		this.allowNotificationNeedDonor = allowNotificationNeedDonor;
+	}
+	public boolean isAllowNotificationAbleToDonate() {
+		return allowNotificationAbleToDonate;
+	}
+	public void setAllowNotificationAbleToDonate(boolean allowNotificationAbleToDonate) {
+		this.allowNotificationAbleToDonate = allowNotificationAbleToDonate;
+	}
 }

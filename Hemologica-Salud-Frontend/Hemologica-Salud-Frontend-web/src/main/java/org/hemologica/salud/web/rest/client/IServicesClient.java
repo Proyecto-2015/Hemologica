@@ -8,6 +8,7 @@ import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCity;
+import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataProductType;
@@ -20,6 +21,7 @@ import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.MailData;
 import org.hemologica.datatypes.MessageOptionData;
+import org.hemologica.datatypes.DataResponsiblePerson;
 import org.hemologica.datatypes.TransfusionFilterData;
 
 public interface IServicesClient {
@@ -197,4 +199,37 @@ public interface IServicesClient {
 	 * @throws ClientProtocolException 
 	 */
 	public List<DataProductType> getProducts() throws ClientProtocolException, IOException;
+
+	/**
+	 * Devuelve los responsables de realizar transfusiones en el banco pasado por parametro. 
+	 * @param bank
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataResponsiblePerson> getResponsibleTransfusionPersons(DataBank bank) throws ClientProtocolException, IOException;
+
+	/**
+	 * DEvulve los nombres de los analisis de las transfusiones
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataCode> getTransfusionsAnalysis() throws ClientProtocolException, IOException;
+	
+	/**
+	 * Devuelve los tipos de severidad.
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataCode> getSeverities() throws ClientProtocolException, IOException;
+
+	/**
+	 * Devuelve los tipos de eventos de las transfusiones.
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataCode> getTransfusionsEvents() throws ClientProtocolException, IOException;
 }

@@ -14,6 +14,7 @@ import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCity;
+import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataProduct;
@@ -28,6 +29,7 @@ import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.LoginData;
 import org.hemologica.datatypes.MailData;
 import org.hemologica.datatypes.MessageOptionData;
+import org.hemologica.datatypes.DataResponsiblePerson;
 import org.hemologica.datatypes.TransfusionFilterData;
 import org.hemologica.salud.factories.RestFactory;
 
@@ -511,6 +513,106 @@ public class ServicesClientImpl implements IServicesClient {
 		
 		Type listType = new TypeToken<List<DataProductType>>(){}.getType();
 		List<DataProductType> responseObject= new Gson().fromJson(responseString, listType);
+		
+		return responseObject;
+	}
+
+	@Override
+	public List<DataResponsiblePerson> getResponsibleTransfusionPersons(DataBank bank) throws ClientProtocolException, IOException {
+		
+		String urlService = url + ConstantsRest.PATH_PERSONS + ConstantsRest.PATH_RESPONSIBLE_TRENSFUSION;
+		
+		if(bank == null){
+			
+			return null;
+		}
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		hash.put(ConstansJson.JSON_BANK, bank.getCode());
+		
+		String responseString = "";
+		try {
+			
+			responseString = RestFactory.getRestServicesUtils().get(urlService, hash);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.log(Level.SEVERE,"Error al llamar al servicio", e);
+			
+		}
+		
+		Type listType = new TypeToken<List<DataResponsiblePerson>>(){}.getType();
+		List<DataResponsiblePerson> responseObject= new Gson().fromJson(responseString, listType);
+		
+		return responseObject;
+		
+	}
+
+	@Override
+	public List<DataCode> getTransfusionsAnalysis() throws ClientProtocolException, IOException {
+		
+		String urlService = url + ConstantsRest.PATH_CODES +"/"+ ConstantsRest.PATH_TRANSFUSIONS_ANALYSIS;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		String responseString = "";
+		try {
+			
+			responseString = RestFactory.getRestServicesUtils().get(urlService, hash);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.log(Level.SEVERE,"Error al llamar al servicio", e);
+			
+		}
+		
+		Type listType = new TypeToken<List<DataCode>>(){}.getType();
+		List<DataCode> responseObject= new Gson().fromJson(responseString, listType);
+		
+		return responseObject;
+	}
+
+	@Override
+	public List<DataCode> getSeverities() throws ClientProtocolException, IOException {
+		
+		String urlService = url + ConstantsRest.PATH_CODES +"/"+ ConstantsRest.PATH_SEVERITIES;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		String responseString = "";
+		try {
+			
+			responseString = RestFactory.getRestServicesUtils().get(urlService, hash);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.log(Level.SEVERE,"Error al llamar al servicio", e);
+			
+		}
+		
+		Type listType = new TypeToken<List<DataCode>>(){}.getType();
+		List<DataCode> responseObject= new Gson().fromJson(responseString, listType);
+		
+		return responseObject;
+	}
+
+	@Override
+	public List<DataCode> getTransfusionsEvents() throws ClientProtocolException, IOException {
+		
+		String urlService = url + ConstantsRest.PATH_CODES +"/"+ ConstantsRest.PATH_TRANSFUSIONS_EVENTS;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		String responseString = "";
+		try {
+			
+			responseString = RestFactory.getRestServicesUtils().get(urlService, hash);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.log(Level.SEVERE,"Error al llamar al servicio", e);
+			
+		}
+		
+		Type listType = new TypeToken<List<DataCode>>(){}.getType();
+		List<DataCode> responseObject= new Gson().fromJson(responseString, listType);
 		
 		return responseObject;
 	}

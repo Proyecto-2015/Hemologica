@@ -5,9 +5,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.faces.model.SelectItem;
-
 import org.apache.http.client.ClientProtocolException;
 import org.hemologica.constants.DataDonationStateEnum;
 import org.hemologica.constants.DataEventSeverityEnum;
@@ -15,13 +13,14 @@ import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataBloodABOType;
 import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataCity;
+import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataCountry;
 import org.hemologica.datatypes.DataDocumentType;
 import org.hemologica.datatypes.DataDonationEvent;
 import org.hemologica.datatypes.DataDonationFail;
 import org.hemologica.datatypes.DataDonationFailCause;
 import org.hemologica.datatypes.DataInstitution;
-import org.hemologica.datatypes.DataProduct;
+import org.hemologica.datatypes.DataLaboratoryResult;
 import org.hemologica.datatypes.DataProductType;
 import org.hemologica.salud.factories.RestFactory;
 
@@ -45,6 +44,9 @@ public class ApplicationBB implements Serializable {
 	
 	private List<DataProductType> products;
 	private List<DataBloodType> bloodTypes;
+	private List<DataCode> transfusionAnalysis; 
+	private List<DataCode> severities;
+	private List<DataCode> transfusionEvents;
 	
 	/**
 	 * Identification Codes END
@@ -60,7 +62,11 @@ public class ApplicationBB implements Serializable {
 	private List<DataBloodABOType> donationABOTypes;
 	private List<DataBloodType> donationDTypes;
 	private List<DataDonationEvent> donationEvents;
-	private List<DataEventSeverityEnum> eventSeverities;
+	
+	/**
+	 * Se cambio por severities
+	 */
+//	private List<DataEventSeverityEnum> eventSeverities;
 	
 	/**
 	 * Donation Codes END
@@ -87,11 +93,14 @@ public class ApplicationBB implements Serializable {
 	@PostConstruct
 	public void init(){
 		this.donationStates = DataDonationStateEnum.getStates();
-		this.eventSeverities = DataEventSeverityEnum.getSeverities();
+//		this.eventSeverities = DataEventSeverityEnum.getSeverities();
 		try {
 			
 			this.products = RestFactory.getServicesClient().getProducts();
 			this.bloodTypes = RestFactory.getServicesClient().getBloodTypes();
+			this.transfusionAnalysis = RestFactory.getServicesClient().getTransfusionsAnalysis();
+			this.severities = RestFactory.getServicesClient().getSeverities();
+			this.transfusionEvents = RestFactory.getServicesClient().getTransfusionsEvents();
 			
 			
 		} catch (ClientProtocolException e) {
@@ -158,10 +167,6 @@ public class ApplicationBB implements Serializable {
 		this.donationEvents = donationEvents;
 	}
 
-	public List<DataEventSeverityEnum> getEventSeverities() {
-		return eventSeverities;
-	}
-
 	public List<DataInstitution> getInstitutions() {
 		return institutions;
 	}
@@ -193,6 +198,29 @@ public class ApplicationBB implements Serializable {
 	public void setBloodTypes(List<DataBloodType> bloodTypes) {
 		this.bloodTypes = bloodTypes;
 	}
-	
 
+	public List<DataCode> getTransfusionAnalysis() {
+		return transfusionAnalysis;
+	}
+
+	public void setTransfusionAnalysis(List<DataCode> transfusionAnalysis) {
+		this.transfusionAnalysis = transfusionAnalysis;
+	}
+
+	public List<DataCode> getSeverities() {
+		return severities;
+	}
+
+	public void setSeverities(List<DataCode> severities) {
+		this.severities = severities;
+	}
+
+	public List<DataCode> getTransfusionEvents() {
+		return transfusionEvents;
+	}
+
+	public void setTransfusionEvents(List<DataCode> transfusionEvents) {
+		this.transfusionEvents = transfusionEvents;
+	}
+	
 }

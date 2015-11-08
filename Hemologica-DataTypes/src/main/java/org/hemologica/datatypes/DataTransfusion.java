@@ -21,7 +21,7 @@ public class DataTransfusion implements Serializable {
 	private DataProductType dataProduct;
 	private List<DataLaboratoryResult> laboratoryResults;
 	private List<DataTransfusionEvent> events;
-	private ResponsibleTransfusionPerson responsibleTransfusionPerson;
+	private DataResponsiblePerson responsibleTransfusionPerson;
 	
 	
 	public DataProductType getDataProduct() {
@@ -79,10 +79,10 @@ public class DataTransfusion implements Serializable {
 	public void setVolume(String volume) {
 		this.volume = volume;
 	}
-	public ResponsibleTransfusionPerson getResponsibleTransfusionPerson() {
+	public DataResponsiblePerson getResponsibleTransfusionPerson() {
 		return responsibleTransfusionPerson;
 	}
-	public void setResponsibleTransfusionPerson(ResponsibleTransfusionPerson responsibleTransfusionPerson) {
+	public void setResponsibleTransfusionPerson(DataResponsiblePerson responsibleTransfusionPerson) {
 		this.responsibleTransfusionPerson = responsibleTransfusionPerson;
 	}
 	public DataDonation getAssociatedDonation() {

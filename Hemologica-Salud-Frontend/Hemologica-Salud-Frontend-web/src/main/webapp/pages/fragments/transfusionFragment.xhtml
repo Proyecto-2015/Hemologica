@@ -34,22 +34,23 @@
 				<p:panel header="#{messages.label_analysis}" style="background-color: whitesmoke;">
 					<ui:include src="transfusionLaboratoryResultFragment.xhtml" />
 					
-					 <div class="form-group">
-							<div class="col-md-12 text-right" style="margin-top: 15px;">
-								<p:commandButton
-									styleClass="btn btn-primary btn-lg center btnSave"
-									value="#{messages.label_save}" action="#{transfusionBB.submit()}"
-									process="@form" update="@form" />
-								<p:messages />
-							</div>
-						</div>
 					</p:panel>
 				</p:tab>
 	
-<!-- 				Donation Events -->
-<!-- 	 			<p:tab title="#{messages.label_adverse_events}">  -->
-<!-- 	 				<ui:include src="transfusionEventsFragment.xhtml" />  -->
-<!-- 				</p:tab>  -->
+	 			<p:tab title="#{messages.label_adverse_events}"> 
+	 				<p:panel header="#{messages.label_adverse_events}" style="background-color: whitesmoke;">
+		 				<ui:include src="transfusionEventsFragment.xhtml" />
+		 				
+		 				
+						<div class="col-md-12 text-right" style="margin-top: 15px;">
+							<p:commandButton
+								styleClass="btn btn-primary btn-lg center btnSave"
+								value="#{messages.label_save}" action="#{transfusionBB.submit()}"
+								process="@form" update="@form" />
+							<p:messages />
+						</div>
+					</p:panel> 
+				</p:tab> 
 	
 			</p:wizard>
 		</div>
