@@ -301,4 +301,36 @@ public interface IServicesClient {
 	 * @throws ClientProtocolException 
 	 */
 	public List<DataCode> getRejectionTypes() throws ClientProtocolException, IOException;
+
+	/**
+	 * Devuelve las ciudades.
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataCode> getCitiesCodes() throws ClientProtocolException, IOException;
+	
+	/**
+	 * Devuelve loas departamentos.
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataCode> getStatesCodes() throws ClientProtocolException, IOException;
+	
+	/**
+	 * Devuelve los paises.
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataCode> getCountries() throws ClientProtocolException, IOException;
+	
+	/**
+	 * Devuelve los tipos de documentos.
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataCode> getDocumentsTypes() throws ClientProtocolException, IOException;
 }

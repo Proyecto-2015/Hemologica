@@ -209,4 +209,26 @@ public interface IRestServices {
 	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_REJECTION_TYPES)
 	@Produces("application/json")
 	public List<DataCode> getRejectionTypes();
+	
+	@GET
+	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_DOCUMENTS_TYPE)
+	@Produces("application/json")
+	public List<DataCode> getDocumentsTypes();
+	
+	@GET
+	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_COUNTRIES)
+	@Produces("application/json")
+	public List<DataCode> getCountries();
+	
+	@GET
+	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_STATES)
+	@Produces("application/json")
+	public List<DataCode> getStatesCodes();
+	
+	@GET
+	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_CITIES)
+	@Produces("application/json")
+	public List<DataCode> getCitiesCodes();
+	
+	
 }

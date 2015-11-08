@@ -44,6 +44,8 @@ public class ConstantsRest {
 	public static final String PATH_REJECTION_REASONS = "rejectionreasons";
 	public static final String PATH_BLOOD_TYPES_RH = "bloodtypesrh";
 	public static final String PATH_BLOOD_TYPES_ABO = "bloodtypesabo";
+	public static final String PATH_COUNTRIES = "countries";
+	public static final String PATH_DOCUMENTS_TYPE = "documentstypes";
 	
 	
 

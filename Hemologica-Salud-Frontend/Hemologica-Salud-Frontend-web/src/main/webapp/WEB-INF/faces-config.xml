@@ -29,9 +29,6 @@
 			<var>messages</var>
 		</resource-bundle>
 	</application>
-<<<<<<< HEAD
-=======
-	
 	
 	<!-- Faces Converters -->
 	<converter>
@@ -193,26 +190,6 @@
 		<converter-id>dataStateConverter</converter-id>
 		<converter-class>org.hemologica.salud.web.converters.DataStateConverter</converter-class>
 	</converter>
-	
-<<<<<<< HEAD
-	<converter>
-		<display-name>dataBloodTypeConverter</display-name>
-		<converter-id>dataBloodTypeConverter</converter-id>
-		<converter-class>org.hemologica.salud.web.converters.DataBloodTypeConverter</converter-class>
-	</converter>
-	<managed-bean>
-        <managed-bean-name>dataBloodTypeConverter</managed-bean-name>
-        <managed-bean-class>org.hemologica.salud.web.converters.DataBloodTypeConverter</managed-bean-class>
-        <managed-bean-scope>request</managed-bean-scope>
-        <managed-property>
-            <property-name>applicationBB</property-name>
-            <property-class>org.hemologica.salud.web.beans.ApplicationBB</property-class>
-            <value>#{applicationBB}</value>
-        </managed-property>
-    </managed-bean>
-=======
-	
->>>>>>> 57dc7001f811438c9f396f3f3b598985ac2f777f
 	
 	<converter>
 		<display-name>dataMessageOptionsConverter</display-name>

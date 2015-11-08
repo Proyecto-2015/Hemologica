@@ -8,19 +8,14 @@ import java.util.logging.Logger;
 import javax.faces.model.SelectItem;
 import org.apache.http.client.ClientProtocolException;
 import org.hemologica.constants.DataDonationStateEnum;
-import org.hemologica.constants.DataEventSeverityEnum;
 import org.hemologica.datatypes.DataBank;
-import org.hemologica.datatypes.DataBloodABOType;
 import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataCountry;
 import org.hemologica.datatypes.DataDocumentType;
 import org.hemologica.datatypes.DataDonationEvent;
-import org.hemologica.datatypes.DataDonationFail;
-import org.hemologica.datatypes.DataDonationFailCause;
 import org.hemologica.datatypes.DataInstitution;
-import org.hemologica.datatypes.DataLaboratoryResult;
 import org.hemologica.datatypes.DataProductType;
 import org.hemologica.salud.factories.RestFactory;
 
@@ -38,9 +33,10 @@ public class ApplicationBB implements Serializable {
 	 * Identification Codes BEGIN
 	 */
 	
-	private List<DataCity> cities;
-	private List<DataCountry> countries;
-	private List<DataDocumentType> documentTypes;
+	private List<DataCode> cities;
+	private List<DataCode> states;
+	private List<DataCode> countries;
+	private List<DataCode> documentTypes;
 	
 	private List<DataProductType> products;
 	private List<DataBloodType> bloodTypes;
@@ -53,6 +49,7 @@ public class ApplicationBB implements Serializable {
 	
 	private List<DataCode> rejectionTypes;
 	private List<DataCode> rejectionReasons;
+	
 	
 	/**
 	 * Identification Codes END
@@ -122,6 +119,11 @@ public class ApplicationBB implements Serializable {
 			this.rejectionReasons = RestFactory.getServicesClient().getRejectionReasons();
 			this.rejectionTypes = RestFactory.getServicesClient().getRejectionTypes();
 			
+			this.cities = RestFactory.getServicesClient().getCitiesCodes();
+			this.states = RestFactory.getServicesClient().getStatesCodes();
+			this.countries = RestFactory.getServicesClient().getCountries();
+			this.documentTypes = RestFactory.getServicesClient().getDocumentsTypes();
+			
 		} catch (ClientProtocolException e) {
 			
 			logger.log(Level.SEVERE, "Error al llamar al servicio web: ClientProtocolException", e);
@@ -144,18 +146,6 @@ public class ApplicationBB implements Serializable {
 	
 	public List<DataDonationStateEnum> getDonationStates(){
 		return this.donationStates;
-	}
-
-	public List<DataCity> getCities() {
-		return cities;
-	}
-
-	public List<DataCountry> getCountries() {
-		return countries;
-	}
-
-	public List<DataDocumentType> getDocumentTypes() {
-		return documentTypes;
 	}
 
 	public List<DataCode> getDonationABOTypes() {
@@ -272,6 +262,38 @@ public class ApplicationBB implements Serializable {
 
 	public void setDonationDTypes(List<DataCode> donationDTypes) {
 		this.donationDTypes = donationDTypes;
+	}
+
+	public List<DataCode> getStates() {
+		return states;
+	}
+
+	public void setStates(List<DataCode> states) {
+		this.states = states;
+	}
+
+	public void setCities(List<DataCode> cities) {
+		this.cities = cities;
+	}
+
+	public void setCountries(List<DataCode> countries) {
+		this.countries = countries;
+	}
+
+	public void setDocumentTypes(List<DataCode> documentTypes) {
+		this.documentTypes = documentTypes;
+	}
+
+	public List<DataCode> getCountries() {
+		return countries;
+	}
+
+	public List<DataCode> getCities() {
+		return cities;
+	}
+
+	public List<DataCode> getDocumentTypes() {
+		return documentTypes;
 	}
 	
 }

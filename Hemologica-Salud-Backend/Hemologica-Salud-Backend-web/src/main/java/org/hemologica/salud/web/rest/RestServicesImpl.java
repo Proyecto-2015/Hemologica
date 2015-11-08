@@ -1062,7 +1062,6 @@ public class RestServicesImpl implements IRestServices {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public List<DataCode> getDonationsAnalysis() {
 		
 		List<DataCode> analisis = new ArrayList<>();
@@ -1166,7 +1165,8 @@ public class RestServicesImpl implements IRestServices {
 		analisis.add(code2);
 		
 		return analisis;
-=======
+		
+	}
 	public List<DataBank> getBanks(String bankCode, String productTypeCode, String bloodTypeCode, Integer count) {
 		
 		List<DataBank> ret = this.getBanks();
@@ -1180,7 +1180,75 @@ public class RestServicesImpl implements IRestServices {
 			}
 		}
 		return ret;
->>>>>>> 57dc7001f811438c9f396f3f3b598985ac2f777f
+	}
+
+	@Override
+	public List<DataCode> getDocumentsTypes() {
+		List<DataCode> analisis = new ArrayList<>();
+		DataCode code1 = new DataCode();
+		code1.setCode("0");
+		code1.setDisplayName("CI");
+		
+		DataCode code2 = new DataCode();
+		code2.setCode("1");
+		code2.setDisplayName("Pasaport");
+		
+		analisis.add(code1);
+		analisis.add(code2);
+		
+		return analisis;
+	}
+
+	@Override
+	public List<DataCode> getCountries() {
+		List<DataCode> analisis = new ArrayList<>();
+		DataCode code1 = new DataCode();
+		code1.setCode("0");
+		code1.setDisplayName("Uruguay");
+		
+		DataCode code2 = new DataCode();
+		code2.setCode("1");
+		code2.setDisplayName("Argentina");
+		
+		analisis.add(code1);
+		analisis.add(code2);
+		
+		return analisis;
+	}
+
+	@Override
+	public List<DataCode> getStatesCodes() {
+		
+		List<DataCode> analisis = new ArrayList<>();
+		DataCode code1 = new DataCode();
+		code1.setCode("0");
+		code1.setDisplayName("Montevideo");
+		
+		DataCode code2 = new DataCode();
+		code2.setCode("1");
+		code2.setDisplayName("Maldonado");
+		
+		analisis.add(code1);
+		analisis.add(code2);
+		
+		return analisis;
+	}
+
+	@Override
+	public List<DataCode> getCitiesCodes() {
+		List<DataCode> analisis = new ArrayList<>();
+		DataCode code1 = new DataCode();
+		code1.setCode("0");
+		code1.setDisplayName("Las piedras");
+		
+		DataCode code2 = new DataCode();
+		code2.setCode("1");
+		code2.setDisplayName("Atlantida");
+		
+		analisis.add(code1);
+		analisis.add(code2);
+		
+		return analisis;
 	}
 
 }
