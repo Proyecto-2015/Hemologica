@@ -18,7 +18,6 @@ import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataPerson;
-import org.hemologica.datatypes.DataProduct;
 import org.hemologica.datatypes.DataProductType;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataState;
@@ -58,7 +57,6 @@ public class ServicesClientImpl implements IServicesClient {
 		try {
 			String respnse = (String) RestFactory.getRestServicesUtils().get(url, hash);
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -552,6 +550,35 @@ public class ServicesClientImpl implements IServicesClient {
 		List<DataProductType> responseObject= new Gson().fromJson(responseString, listType);
 		
 		return responseObject;
+	}
+
+	@Override
+	public List<DataBank> getBanks(String bankCode, String productCode, String bloodTypeCode, Integer count)
+			throws ClientProtocolException, IOException, URISyntaxException {
+		
+
+		String urlBanks = url + ConstantsRest.PATH_BANKS_QUERY;
+		HashMap<String, String> hash = new HashMap<String, String>();
+		hash.put("bank", bankCode);
+		hash.put("productTypeCode", productCode);
+		hash.put("bloodTypeCode", bloodTypeCode);
+		if(count != null){ hash.put("count", count.toString());};
+		String banksString = "";
+		try {
+			banksString = RestFactory.getRestServicesUtils().get(urlBanks, hash);
+
+		} catch (IOException e) {
+			logger.log(Level.SEVERE, "Error al llamar al servicio IOException", e);
+		}
+
+		Type listType = new TypeToken<List<DataBank>>() {
+		}.getType();
+		List<DataBank> banks = new Gson().fromJson(banksString, listType);
+
+		return banks;
+		
+		
+		
 	}
 
 	@Override

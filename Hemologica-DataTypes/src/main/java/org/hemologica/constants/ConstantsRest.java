@@ -11,6 +11,7 @@ public class ConstantsRest {
 	public static final String PATH_INSTITUTIONS = "institutions";
 	
 	public static final String PATH_BANKS = "banks";
+	public static final String PATH_BANKS_QUERY = "banks/query";
 	public static final String PATH_BANKS_STOCK = "bank/stock";
 	public static final String PATH_NATIONAL_STOCK = "national/stock";
 	public static final String PATH_CITIES = "cities";

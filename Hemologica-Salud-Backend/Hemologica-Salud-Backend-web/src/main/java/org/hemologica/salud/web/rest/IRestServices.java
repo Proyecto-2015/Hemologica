@@ -77,6 +77,15 @@ public interface IRestServices {
 	public List<DataBank> getBanks();
 	
 	@GET
+	@Path("/banks/query")
+	@Produces("application/json")
+	public List<DataBank> getBanks(
+			@QueryParam("bank") String bankCode, 
+			@QueryParam("productTypeCode") String productTypeCode, 
+			@QueryParam("bloodType") String bloodTypeCode, 
+			@QueryParam("count") Integer count);
+	
+	@GET
 	@Path("/bank/stock")
 	@Produces("application/json")
 	public DataStock getBankStock(@QueryParam("bank") String code);
