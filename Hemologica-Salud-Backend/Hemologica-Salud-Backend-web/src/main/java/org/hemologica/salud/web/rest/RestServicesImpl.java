@@ -15,6 +15,10 @@ import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataDonationDonorType;
 import org.hemologica.datatypes.DataPerson;
+<<<<<<< HEAD
+=======
+import org.hemologica.datatypes.DataProduct;
+>>>>>>> 7d4940ce75517deeec6fe50428521eea6b8c2291
 import org.hemologica.datatypes.DataProductType;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataResponsiblePerson;
@@ -498,7 +502,15 @@ public class RestServicesImpl implements IRestServices {
 		o3.setDisplayName("0+");
 		options.add(o3);
 		
+<<<<<<< HEAD
 		
+=======
+		DataBloodType o4 = new DataBloodType();
+		o4.setCode("3");
+		o4.setDisplayName("0-");
+		options.add(o4);
+
+>>>>>>> 7d4940ce75517deeec6fe50428521eea6b8c2291
 		return options;
 	}
 
@@ -763,12 +775,22 @@ public class RestServicesImpl implements IRestServices {
 		dp2.setCode("1");
 		dp2.setDisplay("Plasma");
 		
+		DataProductType dp3 = new DataProductType();
+		dp3.setCode("2");
+		dp3.setDisplay("Globulos Rojos");
+		
 		
 		products.add(dp1);
 		products.add(dp2);
+		products.add(dp3);
 		return products;
+<<<<<<< HEAD
 		
 	}
+=======
+	}
+	
+>>>>>>> 7d4940ce75517deeec6fe50428521eea6b8c2291
 	public DataStock getBankStock(String code) {
 
 		DataStock ret = new DataStock();
@@ -860,6 +882,7 @@ public class RestServicesImpl implements IRestServices {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public List<DataResponsiblePerson> getResponsibleTransfusionPersons(String bankCode) {
 		
 		List<DataResponsiblePerson> responsible = new ArrayList<DataResponsiblePerson>();
@@ -939,6 +962,86 @@ public class RestServicesImpl implements IRestServices {
 		analisis.add(code2);
 		
 		return analisis;
+=======
+	public List<DataStockProductType> getBankNationalStock() {
+		
+	
+		List<DataStockProductTypeBloodType> bloodTypes = new ArrayList<>();
+		
+		
+		
+		DataStockProductTypeBloodType o5 = new DataStockProductTypeBloodType();
+		o5.setCode("1");
+		o5.setDisplayName("A+");
+		o5.setCount(1000);
+		bloodTypes.add(o5);
+		
+		DataStockProductTypeBloodType o8 = new DataStockProductTypeBloodType();
+		o8.setCode("2");
+		o8.setDisplayName("A-");
+		o8.setCount(1000);
+		bloodTypes.add(o8);
+		
+		DataStockProductTypeBloodType o6 = new DataStockProductTypeBloodType();
+		o6.setCode("3");
+		o6.setDisplayName("B+");
+		o6.setCount(1000);
+		bloodTypes.add(o6);
+		
+		DataStockProductTypeBloodType o7 = new DataStockProductTypeBloodType();
+		o7.setCode("4");
+		o7.setDisplayName("B-");
+		o7.setCount(1000);
+		bloodTypes.add(o7);
+		
+		DataStockProductTypeBloodType o1 = new DataStockProductTypeBloodType();
+		o1.setCode("0");
+		o1.setDisplayName("AB+");
+		o1.setCount(1000);
+		bloodTypes.add(o1);
+
+		DataStockProductTypeBloodType o2 = new DataStockProductTypeBloodType();
+		o2.setCode("5");
+		o2.setDisplayName("AB-");
+		o2.setCount(1000);
+		bloodTypes.add(o2);
+
+		DataStockProductTypeBloodType o3 = new DataStockProductTypeBloodType();
+		o3.setCode("6");
+		o3.setDisplayName("0+");
+		o3.setCount(1000);
+		bloodTypes.add(o3);
+
+		DataStockProductTypeBloodType o4 = new DataStockProductTypeBloodType();
+		o4.setCode("7");
+		o4.setDisplayName("0-");
+		o4.setCount(1000);
+		bloodTypes.add(o4);
+		
+		
+		List<DataStockProductType> products = new ArrayList<>();
+		
+		DataStockProductType p1 = new DataStockProductType();
+		p1.setBloodTypes(bloodTypes);
+		p1.setCode("0");
+		p1.setDisplay("Plasma");
+		products.add(p1);
+
+		p1 = new DataStockProductType();
+		p1.setBloodTypes(bloodTypes);
+		p1.setCode("2");
+		p1.setDisplay("Plaquetas");
+		products.add(p1);
+
+		p1 = new DataStockProductType();
+		p1.setBloodTypes(bloodTypes);
+		p1.setCode("3");
+		p1.setDisplay("Glóbulos Rojos");
+		products.add(p1);
+		
+		return products;
+	
+>>>>>>> 7d4940ce75517deeec6fe50428521eea6b8c2291
 	}
 
 }

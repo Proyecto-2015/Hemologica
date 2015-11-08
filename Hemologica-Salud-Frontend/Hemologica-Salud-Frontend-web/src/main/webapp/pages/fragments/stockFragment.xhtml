@@ -15,56 +15,99 @@
 	<div class="container">
 
 		<h:form id="stockForm">
-			<p:messages />
+
 			<p:message for="stockForm" />
-			
 
-			<p:outputPanel styleClass="row ui-grid-row" >
+			<p:tabView>
 
-				<p:outputPanel>
+				<p:tab title="National Stock">
 
-					<script src="http://maps.google.com/maps/api/js?sensor=true" type="text/javascript"></script>
+					<p:outputPanel styleClass="row ui-grid-row">
 
-					<p:gmap id="mapa" center="-34.8059635,-56.2145634,11" zoom="10" style="width:100%;height:400px" 
-						type="ROADMAP" model="#{stockBB.gmapModel}">
-						<p:ajax event="overlaySelect" listener="#{stockBB.onMarkerSelect}" update="@form"/>
-					</p:gmap>
-				</p:outputPanel>
+						<table id="lab_results_table"
+							class="col-md-12 table-bordered table-striped table-condensed cf">
+							<thead class="cf">
+								<!-- 							<tr> -->
 
-				<p:outputPanel styleClass="row ui-grid-row" 
-					rendered="#{stockBB.stock != null}">
+								<!-- 								<c:forEach items="#{applicationBB.}" var="bloodType"> -->
+								<!-- 									<th><h:outputText value="#{bloodType.display}" /></th> -->
+								<!-- 								</c:forEach> -->
+								<!-- 							</tr> -->
+							</thead>
+							<tbody>
+								<c:forEach items="#{stockBB.nationalStockList}" var="product"
+									varStatus="counter">
+									<tr>
+										<td data-title="Producto"><h:outputText
+												value="#{product.display}" /></td>
+										<c:forEach items="#{product.bloodTypes}" var="bloodType">
+											<td data-title="#{bloodType.displayName}"><h:outputText
+													value="#{bloodType.count}" /></td>
+										</c:forEach>
+									</tr>
+								</c:forEach>
 
-					<table id="lab_results_table"
-						class="col-md-12 table-bordered table-striped table-condensed cf">
-<!-- 												<thead class="cf"> -->
-<!-- 													<tr> -->
+							</tbody>
+						</table>
 
-<!-- 														<c:forEach items="#{product.bloodTypes}" var="bloodType"> -->
-<!-- 															<th> -->
-<!-- 																<h:outputText value="#{bloodType.display}" /> -->
-<!-- 															</th> -->
-<!-- 														</c:forEach> -->
-<!-- 													</tr> -->
-<!-- 												</thead> -->
-						<tbody>
-							<c:forEach items="#{stockBB.stock.products}" var="product"
-								varStatus="counter">
-								<tr>
-									<td data-title="Producto">
-										<h:outputText value="#{product.display}" />
-									</td>
-									<c:forEach items="#{product.bloodTypes}" var="bloodType">
-										<td data-title="#{bloodType.displayName}"><h:outputText
-												value="#{bloodType.count}" /></td>
+					</p:outputPanel>
+
+				</p:tab>
+
+				<p:tab title="Banks Stock">
+
+					<p:outputPanel id="banksStockPanel" styleClass="row ui-grid-row">
+
+						<p:outputPanel>
+
+							<script src="http://maps.google.com/maps/api/js?sensor=true"
+								type="text/javascript"></script>
+
+							<p:gmap id="mapa" center="-34.8059635,-56.2145634,11" zoom="10"
+								style="width:100%;height:400px" type="ROADMAP"
+								model="#{stockBB.gmapModel}">
+								<p:ajax event="overlaySelect"
+									listener="#{stockBB.onMarkerSelect}" update="banksStockPanel" />
+							</p:gmap>
+						</p:outputPanel>
+
+						<p:outputPanel styleClass="row ui-grid-row"
+							rendered="#{stockBB.stock != null}">
+
+							<table id="lab_results_table"
+								class="col-md-12 table-bordered table-striped table-condensed cf">
+								<!-- 												<thead class="cf"> -->
+								<!-- 													<tr> -->
+
+								<!-- 														<c:forEach items="#{product.bloodTypes}" var="bloodType"> -->
+								<!-- 															<th> -->
+								<!-- 																<h:outputText value="#{bloodType.display}" /> -->
+								<!-- 															</th> -->
+								<!-- 														</c:forEach> -->
+								<!-- 													</tr> -->
+								<!-- 												</thead> -->
+								<tbody>
+									<c:forEach items="#{stockBB.stock.products}" var="product"
+										varStatus="counter">
+										<tr>
+											<td data-title="Producto"><h:outputText
+													value="#{product.display}" /></td>
+											<c:forEach items="#{product.bloodTypes}" var="bloodType">
+												<td data-title="#{bloodType.displayName}"><h:outputText
+														value="#{bloodType.count}" /></td>
+											</c:forEach>
+										</tr>
 									</c:forEach>
-								</tr>
-							</c:forEach>
 
-						</tbody>
-					</table>
+								</tbody>
+							</table>
 
-				</p:outputPanel>
-			</p:outputPanel>
+						</p:outputPanel>
+					</p:outputPanel>
+
+				</p:tab>
+
+			</p:tabView>
 
 		</h:form>
 

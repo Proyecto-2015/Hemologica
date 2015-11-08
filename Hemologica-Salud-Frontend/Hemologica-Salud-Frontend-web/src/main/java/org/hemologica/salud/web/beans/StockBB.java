@@ -14,7 +14,9 @@ import javax.faces.context.FacesContext;
 import org.apache.http.client.ClientProtocolException;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataStock;
+import org.hemologica.datatypes.DataStockProductType;
 import org.hemologica.salud.factories.RestFactory;
+import org.hemologica.salud.web.rest.client.IServicesClient;
 import org.primefaces.event.map.OverlaySelectEvent;
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
@@ -39,6 +41,12 @@ public class StockBB implements Serializable {
 	private Marker marker;
 	private DataBank bank;
 	private DataStock stock;
+	
+	//Stock Nacional
+	private List<DataStockProductType> nationalStockList;
+	
+	
+	
 
 	private Logger logger = Logger.getLogger(StockBB.class.getName());
 
@@ -48,13 +56,15 @@ public class StockBB implements Serializable {
 		try {
 
 			gmapModel = new DefaultMapModel();
-
-			banks = RestFactory.getServicesClient().getBanks();
+			IServicesClient client = RestFactory.getServicesClient();
+			banks = client.getBanks();
 
 			for (DataBank dataBank : banks) {
 				LatLng coord1 = new LatLng(dataBank.getLatitude(), dataBank.getLongitude());
 				gmapModel.addOverlay(new Marker(coord1, dataBank.getCode()));
 			}
+			
+			nationalStockList = client.getNationalStock();
 
 		} catch (ClientProtocolException e) {
 
@@ -156,5 +166,13 @@ public class StockBB implements Serializable {
 		this.stock = stock;
 	}
 
+	public List<DataStockProductType> getNationalStockList() {
+		return nationalStockList;
+	}
 
+	public void setNationalStockList(List<DataStockProductType> nationalStockList) {
+		this.nationalStockList = nationalStockList;
+	}
+
+	
 }

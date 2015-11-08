@@ -23,6 +23,7 @@ import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataResponsiblePerson;
 import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataStock;
+import org.hemologica.datatypes.DataStockProductType;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.datatypes.DataInstitution;
@@ -79,6 +80,11 @@ public interface IRestServices {
 	@Path("/bank/stock")
 	@Produces("application/json")
 	public DataStock getBankStock(@QueryParam("bank") String code);
+	
+	@GET
+	@Path("/national/stock")
+	@Produces("application/json")
+	public List<DataStockProductType> getBankNationalStock();
 	
 	@GET
 	@Path("/states")
