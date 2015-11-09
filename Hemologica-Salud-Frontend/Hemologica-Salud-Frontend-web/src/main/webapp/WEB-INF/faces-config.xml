@@ -12,9 +12,7 @@
 <!-- Marker file indicating JSF 2.2 should be enabled in the application -->
 <faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="
-        http://xmlns.jcp.org/xml/ns/javaee
-        http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+	xsi:schemaLocation=" http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
 
 	<application>
 		<locale-config>
@@ -116,9 +114,7 @@
 			<value>#{sessionBB}</value>
 		</managed-property>
 	</managed-bean>
-	
-	
->>>>>>> 57dc7001f811438c9f396f3f3b598985ac2f777f
+
 	<converter>
 		<display-name>dataEventSeverityConverter</display-name>
 		<converter-id>dataEventSeverityConverter</converter-id>
@@ -134,7 +130,6 @@
             <value>#{applicationBB}</value>
         </managed-property>
     </managed-bean>
-	
 	
 	<converter>
 		<display-name>dataDonationEventConverter</display-name>
