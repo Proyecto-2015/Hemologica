@@ -12,17 +12,21 @@ public abstract class DataEvent implements Serializable{
 	private static final long serialVersionUID = 3438561495575100047L;
 	
 	private DataCode event;
-	private DataEventSeverityEnum severity;
+	private DataCode severity;
 	
-	public DataEventSeverityEnum getSeverity() {
+	
+	public DataCode getSeverity() {
 		return severity;
 	}
-	public void setSeverity(DataEventSeverityEnum severity) {
+	
+	public void setSeverity(DataCode severity) {
 		this.severity = severity;
 	}
+	
 	public DataCode getEvent() {
 		return event;
 	}
+	
 	public void setEvent(DataCode event) {
 		this.event = event;
 	}

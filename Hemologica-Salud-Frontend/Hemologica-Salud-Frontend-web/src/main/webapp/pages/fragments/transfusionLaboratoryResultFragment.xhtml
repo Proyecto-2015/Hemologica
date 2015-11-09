@@ -74,21 +74,22 @@
 									<tr>
 										<td
 											data-title="#{messages.label_analysis}">
-											<h:inputText value="#{labResItem.analysis.displayName}" />
+											<h:outputText value="#{labResItem.analysis.displayName}" />
 										</td>
 										<td
 											data-title="#{messages.donation_lab_result_date}">
-											<p:calendar value="#{labResItem.date}">
-												<f:convertDateTime pattern="dd/MM/yyyy" />
-											</p:calendar>
+<!-- 											<p:calendar value="#{labResItem.date}"> -->
+<!-- 												<f:convertDateTime pattern="dd/MM/yyyy" /> -->
+<!-- 											</p:calendar> -->
+											<h:outputText value="#{labResItem.date}" />
 										</td>
 										<td
 											data-title="#{messages.label_responsible_transfusion_person}">
-											<h:inputText value="#{labResItem.responsiblePerson.getFullName()}" />
+											<h:outputText value="#{labResItem.responsiblePerson.getFullName()}" />
 										</td>
 										<td
 											data-title="#{messages.donation_lab_result_value}">
-											<h:inputText value="#{labResItem.result}" />
+											<h:outputText value="#{labResItem.result}" />
 										</td>
 									</tr>
 								</c:forEach>

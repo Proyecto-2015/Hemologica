@@ -187,4 +187,55 @@ public interface IRestServices {
 	public List<DataUnit> getUnits();
 	
 	
+	
+	@GET
+	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_BLOOD_TYPES_ABO)
+	@Produces("application/json")
+	public List<DataCode> getDonationABOTypes();
+	
+	@GET
+	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_BLOOD_TYPES_RH)
+	@Produces("application/json")
+	public List<DataCode> getDonationDTTypes();
+	
+	@GET
+	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_REJECTION_REASONS)
+	@Produces("application/json")
+	public List<DataCode> getRejectionReasons();
+	
+	@GET
+	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_REJECTION_TYPES)
+	@Produces("application/json")
+	public List<DataCode> getRejectionTypes();
+	
+	@GET
+	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_DOCUMENTS_TYPE)
+	@Produces("application/json")
+	public List<DataCode> getDocumentsTypes();
+	
+	@GET
+	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_COUNTRIES)
+	@Produces("application/json")
+	public List<DataCode> getCountries();
+	
+	@GET
+	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_STATES)
+	@Produces("application/json")
+	public List<DataCode> getStatesCodes();
+	
+	@GET
+	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_CITIES)
+	@Produces("application/json")
+	public List<DataCode> getCitiesCodes();
+	
+	@GET
+	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_DONATIONS_ANALYSIS)
+	@Produces("application/json")
+	public List<DataCode> getDonationsAnalysis();
+	
+	@GET
+	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_DONATIONS_EVENTS)
+	@Produces("application/json")
+	public List<DataCode> getDonationsEvents();
+	
 }

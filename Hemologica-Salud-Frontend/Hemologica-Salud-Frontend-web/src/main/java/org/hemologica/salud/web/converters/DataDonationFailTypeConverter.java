@@ -6,7 +6,7 @@ import javax.faces.convert.Converter;
 import org.hemologica.datatypes.DataCode;
 import org.hemologica.salud.web.beans.ApplicationBB;
 
-public class DataDonationFailCauseConverter implements Converter{
+public class DataDonationFailTypeConverter implements Converter{
 	
 	private ApplicationBB applicationBB;
 	

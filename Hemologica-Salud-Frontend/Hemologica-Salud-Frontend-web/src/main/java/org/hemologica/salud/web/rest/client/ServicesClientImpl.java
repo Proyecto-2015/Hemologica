@@ -707,4 +707,233 @@ public class ServicesClientImpl implements IServicesClient {
 		
 	}
 
+	@Override
+	public List<DataCode> getDonationAnalysis() throws ClientProtocolException, IOException {
+		
+		String urlService = url + ConstantsRest.PATH_CODES +"/"+ ConstantsRest.PATH_DONATIONS_ANALYSIS;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		String responseString = "";
+		try {
+			
+			responseString = RestFactory.getRestServicesUtils().get(urlService, hash);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.log(Level.SEVERE,"Error al llamar al servicio", e);
+			
+		}
+		
+		Type listType = new TypeToken<List<DataCode>>(){}.getType();
+		List<DataCode> responseObject= new Gson().fromJson(responseString, listType);
+		
+		return responseObject;
+	}
+
+	@Override
+	public List<DataCode> getDonationsEvents() throws ClientProtocolException, IOException {
+		
+		String urlService = url + ConstantsRest.PATH_CODES +"/"+ ConstantsRest.PATH_DONATIONS_EVENTS;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		String responseString = "";
+		try {
+			
+			responseString = RestFactory.getRestServicesUtils().get(urlService, hash);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.log(Level.SEVERE,"Error al llamar al servicio", e);
+			
+		}
+		
+		Type listType = new TypeToken<List<DataCode>>(){}.getType();
+		List<DataCode> responseObject= new Gson().fromJson(responseString, listType);
+		
+		return responseObject;
+	}
+
+	@Override
+	public List<DataCode> getDonationABOTypes() throws ClientProtocolException, IOException {
+		
+		String urlService = url + ConstantsRest.PATH_CODES +"/"+ ConstantsRest.PATH_BLOOD_TYPES_ABO;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		String responseString = "";
+		try {
+			
+			responseString = RestFactory.getRestServicesUtils().get(urlService, hash);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.log(Level.SEVERE,"Error al llamar al servicio", e);
+			
+		}
+		
+		Type listType = new TypeToken<List<DataCode>>(){}.getType();
+		List<DataCode> responseObject= new Gson().fromJson(responseString, listType);
+		
+		return responseObject;
+	}
+
+	@Override
+	public List<DataCode> getDonationDTTypes() throws ClientProtocolException, IOException {
+		
+		String urlService = url + ConstantsRest.PATH_CODES +"/"+ ConstantsRest.PATH_BLOOD_TYPES_RH;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		String responseString = "";
+		try {
+			
+			responseString = RestFactory.getRestServicesUtils().get(urlService, hash);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.log(Level.SEVERE,"Error al llamar al servicio", e);
+			
+		}
+		
+		Type listType = new TypeToken<List<DataCode>>(){}.getType();
+		List<DataCode> responseObject= new Gson().fromJson(responseString, listType);
+		
+		return responseObject;
+	}
+
+	@Override
+	public List<DataCode> getRejectionReasons() throws ClientProtocolException, IOException {
+		
+		String urlService = url + ConstantsRest.PATH_CODES +"/"+ ConstantsRest.PATH_REJECTION_REASONS;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		String responseString = "";
+		try {
+			
+			responseString = RestFactory.getRestServicesUtils().get(urlService, hash);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.log(Level.SEVERE,"Error al llamar al servicio", e);
+			
+		}
+		
+		Type listType = new TypeToken<List<DataCode>>(){}.getType();
+		List<DataCode> responseObject= new Gson().fromJson(responseString, listType);
+		
+		return responseObject;
+	}
+
+	@Override
+	public List<DataCode> getRejectionTypes() throws ClientProtocolException, IOException {
+		String urlService = url + ConstantsRest.PATH_CODES +"/"+ ConstantsRest.PATH_REJECTION_TYPES;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		String responseString = "";
+		try {
+			
+			responseString = RestFactory.getRestServicesUtils().get(urlService, hash);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.log(Level.SEVERE,"Error al llamar al servicio", e);
+			
+		}
+		
+		Type listType = new TypeToken<List<DataCode>>(){}.getType();
+		List<DataCode> responseObject= new Gson().fromJson(responseString, listType);
+		
+		return responseObject;
+	}
+
+	@Override
+	public List<DataCode> getCitiesCodes() throws ClientProtocolException, IOException {
+		
+		String urlService = url + ConstantsRest.PATH_CODES +"/"+ ConstantsRest.PATH_CITIES;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		String responseString = "";
+		try {
+			
+			responseString = RestFactory.getRestServicesUtils().get(urlService, hash);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.log(Level.SEVERE,"Error al llamar al servicio", e);
+			
+		}
+		
+		Type listType = new TypeToken<List<DataCode>>(){}.getType();
+		List<DataCode> responseObject= new Gson().fromJson(responseString, listType);
+		
+		return responseObject;
+	}
+
+	@Override
+	public List<DataCode> getStatesCodes() throws ClientProtocolException, IOException {
+		
+		String urlService = url + ConstantsRest.PATH_CODES +"/"+ ConstantsRest.PATH_STATES;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		String responseString = "";
+		try {
+			
+			responseString = RestFactory.getRestServicesUtils().get(urlService, hash);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.log(Level.SEVERE,"Error al llamar al servicio", e);
+			
+		}
+		
+		Type listType = new TypeToken<List<DataCode>>(){}.getType();
+		List<DataCode> responseObject= new Gson().fromJson(responseString, listType);
+		
+		return responseObject;
+	}
+
+	@Override
+	public List<DataCode> getCountries() throws ClientProtocolException, IOException {
+		
+		String urlService = url + ConstantsRest.PATH_CODES +"/"+ ConstantsRest.PATH_COUNTRIES;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		String responseString = "";
+		try {
+			
+			responseString = RestFactory.getRestServicesUtils().get(urlService, hash);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.log(Level.SEVERE,"Error al llamar al servicio", e);
+			
+		}
+		
+		Type listType = new TypeToken<List<DataCode>>(){}.getType();
+		List<DataCode> responseObject= new Gson().fromJson(responseString, listType);
+		
+		return responseObject;
+	}
+
+	@Override
+	public List<DataCode> getDocumentsTypes() throws ClientProtocolException, IOException {
+		
+		String urlService = url + ConstantsRest.PATH_CODES +"/"+ ConstantsRest.PATH_DOCUMENTS_TYPE;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		String responseString = "";
+		try {
+			
+			responseString = RestFactory.getRestServicesUtils().get(urlService, hash);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.log(Level.SEVERE,"Error al llamar al servicio", e);
+			
+		}
+		
+		Type listType = new TypeToken<List<DataCode>>(){}.getType();
+		List<DataCode> responseObject= new Gson().fromJson(responseString, listType);
+		
+		return responseObject;
+	}
+
 }

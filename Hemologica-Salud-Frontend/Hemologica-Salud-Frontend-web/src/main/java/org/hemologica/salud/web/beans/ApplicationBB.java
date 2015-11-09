@@ -8,19 +8,14 @@ import java.util.logging.Logger;
 import javax.faces.model.SelectItem;
 import org.apache.http.client.ClientProtocolException;
 import org.hemologica.constants.DataDonationStateEnum;
-import org.hemologica.constants.DataEventSeverityEnum;
 import org.hemologica.datatypes.DataBank;
-import org.hemologica.datatypes.DataBloodABOType;
 import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataCountry;
 import org.hemologica.datatypes.DataDocumentType;
 import org.hemologica.datatypes.DataDonationEvent;
-import org.hemologica.datatypes.DataDonationFail;
-import org.hemologica.datatypes.DataDonationFailCause;
 import org.hemologica.datatypes.DataInstitution;
-import org.hemologica.datatypes.DataLaboratoryResult;
 import org.hemologica.datatypes.DataProductType;
 import org.hemologica.salud.factories.RestFactory;
 
@@ -38,15 +33,23 @@ public class ApplicationBB implements Serializable {
 	 * Identification Codes BEGIN
 	 */
 	
-	private List<DataCity> cities;
-	private List<DataCountry> countries;
-	private List<DataDocumentType> documentTypes;
+	private List<DataCode> cities;
+	private List<DataCode> states;
+	private List<DataCode> countries;
+	private List<DataCode> documentTypes;
 	
 	private List<DataProductType> products;
 	private List<DataBloodType> bloodTypes;
-	private List<DataCode> transfusionAnalysis; 
+	private List<DataCode> transfusionAnalysis;
+	private List<DataCode> donationAnalysis;
+	
 	private List<DataCode> severities;
 	private List<DataCode> transfusionEvents;
+	private List<DataCode> donationsEvents;
+	
+	private List<DataCode> rejectionTypes;
+	private List<DataCode> rejectionReasons;
+	
 	
 	/**
 	 * Identification Codes END
@@ -57,10 +60,16 @@ public class ApplicationBB implements Serializable {
 	 */
 	
 	private List<DataDonationStateEnum> donationStates;
-	private List<DataDonationFail> donationFails;
-	private List<DataDonationFailCause> donationFailCauses;
-	private List<DataBloodABOType> donationABOTypes;
-	private List<DataBloodType> donationDTypes;
+	
+
+	
+	/**
+	 * Se cambio por motivo rechazo y tipo rechazo
+	 */
+//	private List<DataDonationFail> donationFails;
+//	private List<DataDonationFailCause> donationFailCauses;
+	private List<DataCode> donationABOTypes;
+	private List<DataCode> donationDTypes;
 	private List<DataDonationEvent> donationEvents;
 	
 	/**
@@ -100,9 +109,21 @@ public class ApplicationBB implements Serializable {
 			this.products = RestFactory.getServicesClient().getProducts();
 			this.bloodTypes = RestFactory.getServicesClient().getBloodTypes();
 			this.transfusionAnalysis = RestFactory.getServicesClient().getTransfusionsAnalysis();
+			this.donationAnalysis  = RestFactory.getServicesClient().getDonationAnalysis();
+			
 			this.severities = RestFactory.getServicesClient().getSeverities();
 			this.transfusionEvents = RestFactory.getServicesClient().getTransfusionsEvents();
+			this.donationsEvents = RestFactory.getServicesClient().getDonationsEvents();
 			
+			this.donationABOTypes = RestFactory.getServicesClient().getDonationABOTypes();
+			this.donationDTypes = RestFactory.getServicesClient().getDonationDTTypes();
+			this.rejectionReasons = RestFactory.getServicesClient().getRejectionReasons();
+			this.rejectionTypes = RestFactory.getServicesClient().getRejectionTypes();
+			
+			this.cities = RestFactory.getServicesClient().getCitiesCodes();
+			this.states = RestFactory.getServicesClient().getStatesCodes();
+			this.countries = RestFactory.getServicesClient().getCountries();
+			this.documentTypes = RestFactory.getServicesClient().getDocumentsTypes();
 			
 		} catch (ClientProtocolException e) {
 			
@@ -128,31 +149,11 @@ public class ApplicationBB implements Serializable {
 		return this.donationStates;
 	}
 
-	public List<DataCity> getCities() {
-		return cities;
-	}
-
-	public List<DataCountry> getCountries() {
-		return countries;
-	}
-
-	public List<DataDocumentType> getDocumentTypes() {
-		return documentTypes;
-	}
-	
-	public List<DataDonationFail> getDonationFails() {
-		return donationFails;
-	}
-
-	public List<DataDonationFailCause> getDonationFailCauses() {
-		return donationFailCauses;
-	}
-
-	public List<DataBloodABOType> getDonationABOTypes() {
+	public List<DataCode> getDonationABOTypes() {
 		return donationABOTypes;
 	}
 
-	public List<DataBloodType> getDonationDTypes() {
+	public List<DataCode> getDonationDTypes() {
 		return donationDTypes;
 	}
 
@@ -222,6 +223,78 @@ public class ApplicationBB implements Serializable {
 
 	public void setTransfusionEvents(List<DataCode> transfusionEvents) {
 		this.transfusionEvents = transfusionEvents;
+	}
+
+	public List<DataCode> getDonationAnalysis() {
+		return donationAnalysis;
+	}
+
+	public void setDonationAnalysis(List<DataCode> donationAnalysis) {
+		this.donationAnalysis = donationAnalysis;
+	}
+
+	public List<DataCode> getDonationsEvents() {
+		return donationsEvents;
+	}
+
+	public void setDonationsEvents(List<DataCode> donationsEvents) {
+		this.donationsEvents = donationsEvents;
+	}
+
+	public List<DataCode> getRejectionTypes() {
+		return rejectionTypes;
+	}
+
+	public void setRejectionTypes(List<DataCode> rejectionTypes) {
+		this.rejectionTypes = rejectionTypes;
+	}
+
+	public List<DataCode> getRejectionReasons() {
+		return rejectionReasons;
+	}
+
+	public void setRejectionReasons(List<DataCode> rejectionReasons) {
+		this.rejectionReasons = rejectionReasons;
+	}
+
+	public void setDonationABOTypes(List<DataCode> donationABOTypes) {
+		this.donationABOTypes = donationABOTypes;
+	}
+
+	public void setDonationDTypes(List<DataCode> donationDTypes) {
+		this.donationDTypes = donationDTypes;
+	}
+
+	public List<DataCode> getStates() {
+		return states;
+	}
+
+	public void setStates(List<DataCode> states) {
+		this.states = states;
+	}
+
+	public void setCities(List<DataCode> cities) {
+		this.cities = cities;
+	}
+
+	public void setCountries(List<DataCode> countries) {
+		this.countries = countries;
+	}
+
+	public void setDocumentTypes(List<DataCode> documentTypes) {
+		this.documentTypes = documentTypes;
+	}
+
+	public List<DataCode> getCountries() {
+		return countries;
+	}
+
+	public List<DataCode> getCities() {
+		return cities;
+	}
+
+	public List<DataCode> getDocumentTypes() {
+		return documentTypes;
 	}
 	
 }

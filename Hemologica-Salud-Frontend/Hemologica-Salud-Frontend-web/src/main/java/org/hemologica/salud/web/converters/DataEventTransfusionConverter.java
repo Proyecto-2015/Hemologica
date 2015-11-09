@@ -3,12 +3,13 @@ package org.hemologica.salud.web.converters;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
+
 import org.hemologica.datatypes.DataCode;
 import org.hemologica.salud.web.beans.ApplicationBB;
 
-public class DataDonationFailCauseConverter implements Converter{
+public class DataEventTransfusionConverter implements Converter{
 	
-	private ApplicationBB applicationBB;
+private ApplicationBB applicationBB;
 	
 	@Override
 	public Object getAsObject(FacesContext arg0, UIComponent arg1, String arg2) {
@@ -18,8 +19,8 @@ public class DataDonationFailCauseConverter implements Converter{
 		}
 		
 		
-		if(applicationBB.getRejectionReasons() != null){
-			for(DataCode code : applicationBB.getRejectionReasons()){
+		if(applicationBB.getTransfusionEvents() != null){
+			for(DataCode code : applicationBB.getTransfusionEvents()){
 				
 				if(code.getCode().equals(arg2)){
 					return code;
