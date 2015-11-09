@@ -77,33 +77,33 @@
 
 								<p:outputLabel for="stock_bank_filter"
 									value="#{messages.stock_bank_filter}" />
-								<p:selectOneMenu id="stock_bank_filter"
+								<h:selectOneMenu id="stock_bank_filter"
 									value="#{stockBB.banksItemsSelected}">
 									<f:selectItem itemLabel="" itemValue="" />
 									<f:selectItems value="#{stockBB.banksItems}" />
-								</p:selectOneMenu>
+								</h:selectOneMenu>
 
 								<p:outputLabel for="stock_product_type_filter"
 									value="#{messages.stock_product_type_filter}" />
-								<p:selectOneMenu id="stock_product_type_filter"
+								<h:selectOneMenu id="stock_product_type_filter"
 									value="#{stockBB.productTypeCode}"
 									converter="#{dataProductTypeConverter}">
 									<f:selectItem itemLabel="" itemValue="" />
 									<f:selectItems value="#{applicationBB.products}"
 										var="productType" itemValue="#{productType}"
 										itemLabel="#{productType.display}" />
-								</p:selectOneMenu>
+								</h:selectOneMenu>
 
 								<p:outputLabel for="stock_blood_type_filter"
 									value="#{messages.stock_blood_type_filter}" />
-								<p:selectOneMenu id="stock_blood_type_filter"
+								<h:selectOneMenu id="stock_blood_type_filter"
 									value="#{stockBB.bloodTypeCode}"
 									converter="#{dataBloodTypeConverter}">
 									<f:selectItem itemLabel="" itemValue="" />
 									<f:selectItems value="#{applicationBB.bloodTypes}"
 										var="bloodType" itemValue="#{bloodType}"
 										itemLabel="#{bloodType.displayName}" />
-								</p:selectOneMenu>
+								</h:selectOneMenu>
 
 								<p:outputLabel for="stock_count_filter"
 									value="#{messages.stock_count_filter}" />

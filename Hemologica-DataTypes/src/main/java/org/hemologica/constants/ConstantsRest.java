@@ -27,6 +27,10 @@ public class ConstantsRest {
 	
 	public static final String PATH_RESPONSIBLE_TRENSFUSION = "";
 	
+	public static final String PATH_UNITS = "units";
+	public static final String PATH_UNITS_QUERY = "units/query";
+	
+	
 	/**
 	 * Bajo esta url podemos meter todos las "codigueras" que tenemos agregandole /option a la url ej: codes/bloodtypes
 	 */
@@ -38,6 +42,9 @@ public class ConstantsRest {
 	public static final String PATH_TRANSFUSIONS_ANALYSIS = "transfusionsanalisis";
 	public static final String PATH_TRANSFUSIONS_EVENTS = "transfusionevents";
 	public static final String PATH_SEVERITIES = "severities";
+	
+	
+	
 	
 	
 

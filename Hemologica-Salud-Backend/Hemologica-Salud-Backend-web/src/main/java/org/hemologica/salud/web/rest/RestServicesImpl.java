@@ -1,7 +1,9 @@
 package org.hemologica.salud.web.rest;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.ws.rs.core.Response;
@@ -24,6 +26,7 @@ import org.hemologica.datatypes.DataStockProductType;
 import org.hemologica.datatypes.DataStockProductTypeBloodType;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataTransfusionEvent;
+import org.hemologica.datatypes.DataUnit;
 import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.LoginData;
@@ -162,7 +165,7 @@ public class RestServicesImpl implements IRestServices {
 
 		t1.setName("Pedro");
 		t1.setDate("10/02/2015");
-		
+
 		DataProductType dp1 = new DataProductType();
 		dp1.setDisplay("Plaquetas");
 		t1.setDataProduct(dp1);
@@ -173,7 +176,7 @@ public class RestServicesImpl implements IRestServices {
 		db2.setName("Banco X");
 
 		DataTransfusionEvent d1 = new DataTransfusionEvent();
-		
+
 		DataCode dc1 = new DataCode();
 		dc1.setCode("0");
 		dc1.setDisplayName("Evento adverso 1");
@@ -182,14 +185,12 @@ public class RestServicesImpl implements IRestServices {
 
 		DataCode dc2 = new DataCode();
 		dc2.setCode("1");
-		
+
 		dc2.setDisplayName("Evento adverso 2");
-		
-		
+
 		DataTransfusionEvent d22 = new DataTransfusionEvent();
 		d22.setEvent(dc2);
 		d22.setSeverity(DataEventSeverityEnum.MODERATE);
-		
 
 		List<DataTransfusionEvent> dteList = new ArrayList<>();
 		dteList.add(d1);
@@ -480,39 +481,39 @@ public class RestServicesImpl implements IRestServices {
 
 	@Override
 	public List<DataBloodType> getBloodTypes() {
-		
-		List<DataBloodType>  options = new ArrayList<>();
-			
+
+		List<DataBloodType> options = new ArrayList<>();
+
 		DataBloodType o1 = new DataBloodType();
 		o1.setCode("0");
 		o1.setDisplayName("A+");
 		options.add(o1);
-		
+
 		o1 = new DataBloodType();
 		o1.setCode("1");
 		o1.setDisplayName("A-");
 		options.add(o1);
-		
+
 		o1 = new DataBloodType();
 		o1.setCode("2");
 		o1.setDisplayName("B+");
 		options.add(o1);
-		
+
 		o1 = new DataBloodType();
 		o1.setCode("3");
 		o1.setDisplayName("B-");
 		options.add(o1);
-		
+
 		o1 = new DataBloodType();
 		o1.setCode("4");
 		o1.setDisplayName("AB+");
 		options.add(o1);
-		
+
 		DataBloodType o2 = new DataBloodType();
 		o2.setCode("5");
 		o2.setDisplayName("AB-");
 		options.add(o2);
-		
+
 		DataBloodType o3 = new DataBloodType();
 		o3.setCode("6");
 		o3.setDisplayName("0+");
@@ -777,20 +778,19 @@ public class RestServicesImpl implements IRestServices {
 	@Override
 	public List<DataProductType> getProducts() {
 		List<DataProductType> products = new ArrayList<>();
-		
+
 		DataProductType dp1 = new DataProductType();
 		dp1.setCode("0");
 		dp1.setDisplay("Plaquetas");
-		
+
 		DataProductType dp2 = new DataProductType();
 		dp2.setCode("1");
 		dp2.setDisplay("Plasma");
-		
+
 		DataProductType dp3 = new DataProductType();
 		dp3.setCode("2");
 		dp3.setDisplay("Globulos Rojos");
-		
-		
+
 		products.add(dp1);
 		products.add(dp2);
 		products.add(dp3);
@@ -803,33 +803,31 @@ public class RestServicesImpl implements IRestServices {
 		DataStock ret = new DataStock();
 
 		List<DataStockProductTypeBloodType> bloodTypes = new ArrayList<>();
-		
-		
-		
+
 		DataStockProductTypeBloodType o5 = new DataStockProductTypeBloodType();
 		o5.setCode("1");
 		o5.setDisplayName("A+");
 		o5.setCount(10);
 		bloodTypes.add(o5);
-		
+
 		DataStockProductTypeBloodType o8 = new DataStockProductTypeBloodType();
 		o8.setCode("2");
 		o8.setDisplayName("A-");
 		o8.setCount(10);
 		bloodTypes.add(o8);
-		
+
 		DataStockProductTypeBloodType o6 = new DataStockProductTypeBloodType();
 		o6.setCode("3");
 		o6.setDisplayName("B+");
 		o6.setCount(10);
 		bloodTypes.add(o6);
-		
+
 		DataStockProductTypeBloodType o7 = new DataStockProductTypeBloodType();
 		o7.setCode("4");
 		o7.setDisplayName("B-");
 		o7.setCount(10);
 		bloodTypes.add(o7);
-		
+
 		DataStockProductTypeBloodType o1 = new DataStockProductTypeBloodType();
 		o1.setCode("0");
 		o1.setDisplayName("AB+");
@@ -853,10 +851,9 @@ public class RestServicesImpl implements IRestServices {
 		o4.setDisplayName("0-");
 		o4.setCount(10);
 		bloodTypes.add(o4);
-		
-		
+
 		List<DataStockProductType> products = new ArrayList<>();
-		
+
 		DataStockProductType p1 = new DataStockProductType();
 		p1.setBloodTypes(bloodTypes);
 		p1.setCode("0");
@@ -874,7 +871,7 @@ public class RestServicesImpl implements IRestServices {
 		p1.setCode("3");
 		p1.setDisplay("Glóbulos Rojos");
 		products.add(p1);
-		
+
 		ret.setProducts(products);
 
 		List<DataBank> banks = this.getBanks();
@@ -890,9 +887,9 @@ public class RestServicesImpl implements IRestServices {
 
 	@Override
 	public List<DataResponsiblePerson> getResponsibleTransfusionPersons(String bankCode) {
-		
+
 		List<DataResponsiblePerson> responsible = new ArrayList<DataResponsiblePerson>();
-		
+
 		DataResponsiblePerson dataUser = new DataResponsiblePerson();
 		dataUser.setId("id1");
 		dataUser.setFirstName("Paula");
@@ -901,9 +898,9 @@ public class RestServicesImpl implements IRestServices {
 		dataUser.setSecondLastName("De Polsi");
 		dataUser.setDocumentType("CI");
 		dataUser.setDocumentNumber("46714299");
-		
+
 		responsible.add(dataUser);
-		
+
 		DataResponsiblePerson dataUser2 = new DataResponsiblePerson();
 		dataUser2.setId("id2");
 		dataUser2.setFirstName("Paula");
@@ -912,27 +909,27 @@ public class RestServicesImpl implements IRestServices {
 		dataUser2.setSecondLastName("De Polsi");
 		dataUser2.setDocumentType("CI");
 		dataUser2.setDocumentNumber("46714299");
-		
+
 		responsible.add(dataUser2);
-		
+
 		return responsible;
 	}
 
 	@Override
 	public List<DataCode> getTransfusionsAnalysis() {
-		
+
 		List<DataCode> analisis = new ArrayList<>();
 		DataCode code1 = new DataCode();
 		code1.setCode("0");
 		code1.setDisplayName("Analisis 1");
-		
+
 		DataCode code2 = new DataCode();
 		code2.setCode("1");
 		code2.setDisplayName("Analisis 2");
-		
+
 		analisis.add(code1);
 		analisis.add(code2);
-		
+
 		return analisis;
 	}
 
@@ -942,14 +939,14 @@ public class RestServicesImpl implements IRestServices {
 		DataCode code1 = new DataCode();
 		code1.setCode("0");
 		code1.setDisplayName("Evento 1");
-		
+
 		DataCode code2 = new DataCode();
 		code2.setCode("1");
 		code2.setDisplayName("Evento 2");
-		
+
 		analisis.add(code1);
 		analisis.add(code2);
-		
+
 		return analisis;
 	}
 
@@ -959,48 +956,45 @@ public class RestServicesImpl implements IRestServices {
 		DataCode code1 = new DataCode();
 		code1.setCode("0");
 		code1.setDisplayName(DataEventSeverityEnum.MILD.getLabel());
-		
+
 		DataCode code2 = new DataCode();
 		code2.setCode("1");
 		code2.setDisplayName(DataEventSeverityEnum.SEVERE.getLabel());
-		
+
 		analisis.add(code1);
 		analisis.add(code2);
-		
+
 		return analisis;
 	}
-	
+
 	public List<DataStockProductType> getBankNationalStock() {
-		
-	
+
 		List<DataStockProductTypeBloodType> bloodTypes = new ArrayList<>();
-		
-		
-		
+
 		DataStockProductTypeBloodType o5 = new DataStockProductTypeBloodType();
 		o5.setCode("1");
 		o5.setDisplayName("A+");
 		o5.setCount(1000);
 		bloodTypes.add(o5);
-		
+
 		DataStockProductTypeBloodType o8 = new DataStockProductTypeBloodType();
 		o8.setCode("2");
 		o8.setDisplayName("A-");
 		o8.setCount(1000);
 		bloodTypes.add(o8);
-		
+
 		DataStockProductTypeBloodType o6 = new DataStockProductTypeBloodType();
 		o6.setCode("3");
 		o6.setDisplayName("B+");
 		o6.setCount(1000);
 		bloodTypes.add(o6);
-		
+
 		DataStockProductTypeBloodType o7 = new DataStockProductTypeBloodType();
 		o7.setCode("4");
 		o7.setDisplayName("B-");
 		o7.setCount(1000);
 		bloodTypes.add(o7);
-		
+
 		DataStockProductTypeBloodType o1 = new DataStockProductTypeBloodType();
 		o1.setCode("0");
 		o1.setDisplayName("AB+");
@@ -1024,10 +1018,9 @@ public class RestServicesImpl implements IRestServices {
 		o4.setDisplayName("0-");
 		o4.setCount(1000);
 		bloodTypes.add(o4);
-		
-		
+
 		List<DataStockProductType> products = new ArrayList<>();
-		
+
 		DataStockProductType p1 = new DataStockProductType();
 		p1.setBloodTypes(bloodTypes);
 		p1.setCode("0");
@@ -1045,24 +1038,81 @@ public class RestServicesImpl implements IRestServices {
 		p1.setCode("3");
 		p1.setDisplay("Glóbulos Rojos");
 		products.add(p1);
-		
+
 		return products;
-	
+
 	}
 
 	@Override
 	public List<DataBank> getBanks(String bankCode, String productTypeCode, String bloodTypeCode, Integer count) {
-		
+
 		List<DataBank> ret = this.getBanks();
-		if(bankCode != null && !bankCode.equals("")){
-			for(DataBank b : ret){
-				if(b.getCode().equals(bankCode)){
+		if (bankCode != null && !bankCode.equals("")) {
+			for (DataBank b : ret) {
+				if (b.getCode().equals(bankCode)) {
 					ret.clear();
 					ret.add(b);
 					return ret;
 				}
 			}
 		}
+		return ret;
+	}
+
+	@Override
+	public List<DataUnit> getUnits() {
+
+		List<DataInstitution> banks = new ArrayList<DataInstitution>();
+		DataInstitution db1 = new DataInstitution();
+		db1.setCode("1");
+		db1.setName("Institucion 1");
+		db1.setAddress("Av Italia 345");
+		db1.setEmail("infobanco1@hc.com");
+		db1.setHour("Lunes a viernes de 8 - 18 hs ");
+		db1.setInformation("Se dan 40 numeros a partir de las 8 am.");
+		db1.setTelephone("12345678");
+		db1.setLatitude(-34.898930);
+		db1.setLongitude(-56.165753);
+
+		banks.add(db1);
+
+		DataInstitution db2 = new DataInstitution();
+		db2.setCode("2");
+		db1.setName("Institucion 2");
+		db2.setAddress("Rivera 567");
+		db2.setEmail("infobanco2@hc.com");
+		db2.setHour("Lunes a viernes de 8 - 20 hs y Sabados 8 - 12 ");
+		db2.setInformation("Pedir hora por telefono");
+		db2.setTelephone("098765432");
+		db2.setLatitude(-34.871729);
+		db2.setLongitude(-56.188868);
+
+		List<DataProductType> productTypes = this.getProducts();
+		List<DataBloodType> bloodTypes = this.getBloodTypes();
+		
+		List<DataUnit> ret = new ArrayList<>();
+		DataUnit d;
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+
+		for (DataBloodType bt : bloodTypes) {
+			for (DataProductType pt : productTypes) {
+				for (int i = 0; i < 10; ++i) {
+					d = new DataUnit();
+					d.setActive(true);
+					d.setCode("" + i);
+					d.setDonationId(new Long(i));
+					d.setId(new Long(i));
+					d.setDueDate(sdf.format(new Date()));
+					d.setInstitution(db1.getCode());
+					d.setInstitutionCode("123456789-"+i);
+					d.setProductType(pt);
+					d.setBloodType(bt);
+					ret.add(d);
+				}
+			}
+		}
+
 		return ret;
 	}
 

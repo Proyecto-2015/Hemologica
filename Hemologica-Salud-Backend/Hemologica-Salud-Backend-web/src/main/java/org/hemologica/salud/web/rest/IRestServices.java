@@ -25,6 +25,7 @@ import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataStock;
 import org.hemologica.datatypes.DataStockProductType;
 import org.hemologica.datatypes.DataTransfusion;
+import org.hemologica.datatypes.DataUnit;
 import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.LoginData;
@@ -72,26 +73,26 @@ public interface IRestServices {
 	public List<DataInstitution> getInstitutionsUser(@QueryParam("user") String user);
 	
 	@GET
-	@Path("/banks")
+	@Path("/" + ConstantsRest.PATH_BANKS)
 	@Produces("application/json")
 	public List<DataBank> getBanks();
 	
 	@GET
-	@Path("/banks/query")
+	@Path("/" + ConstantsRest.PATH_BANKS_QUERY)
 	@Produces("application/json")
 	public List<DataBank> getBanks(
-			@QueryParam("bank") String bankCode, 
-			@QueryParam("productTypeCode") String productTypeCode, 
-			@QueryParam("bloodType") String bloodTypeCode, 
-			@QueryParam("count") Integer count);
+			@QueryParam(ConstansJson.JSON_BANK) String bankCode, 
+			@QueryParam(ConstansJson.JSON_PRODUCT_TYPE) String productTypeCode, 
+			@QueryParam(ConstansJson.JSON_BLOOD_TYPE) String bloodTypeCode, 
+			@QueryParam(ConstansJson.JSON_COUNT) Integer count);
 	
 	@GET
-	@Path("/bank/stock")
+	@Path("/" + ConstantsRest.PATH_BANKS_STOCK)
 	@Produces("application/json")
 	public DataStock getBankStock(@QueryParam("bank") String code);
 	
 	@GET
-	@Path("/national/stock")
+	@Path("/" + ConstantsRest.PATH_NATIONAL_STOCK)
 	@Produces("application/json")
 	public List<DataStockProductType> getBankNationalStock();
 	
@@ -179,4 +180,11 @@ public interface IRestServices {
 	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_SEVERITIES)
 	@Produces("application/json")
 	public List<DataCode> getSeverities();
+	
+	@GET
+	@Path("/" +ConstantsRest.PATH_UNITS)
+	@Produces("application/json")
+	public List<DataUnit> getUnits();
+	
+	
 }

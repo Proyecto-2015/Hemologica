@@ -17,6 +17,7 @@ import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataStock;
 import org.hemologica.datatypes.DataStockProductType;
 import org.hemologica.datatypes.DataTransfusion;
+import org.hemologica.datatypes.DataUnit;
 import org.hemologica.datatypes.DataUser;
 import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.datatypes.DataInstitution;
@@ -253,4 +254,14 @@ public interface IServicesClient {
 	 * @throws ClientProtocolException 
 	 */
 	public List<DataCode> getTransfusionsEvents() throws ClientProtocolException, IOException;
+	
+	
+	/**
+	 * Devuelve las unidades de los bancos de sangre
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataUnit> getUnits() throws ClientProtocolException, IOException;
+	
 }

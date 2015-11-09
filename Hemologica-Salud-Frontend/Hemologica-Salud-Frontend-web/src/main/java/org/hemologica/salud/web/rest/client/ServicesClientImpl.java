@@ -23,6 +23,7 @@ import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataStock;
 import org.hemologica.datatypes.DataStockProductType;
 import org.hemologica.datatypes.DataTransfusion;
+import org.hemologica.datatypes.DataUnit;
 import org.hemologica.datatypes.DataUser;
 import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.datatypes.DataInstitution;
@@ -34,6 +35,7 @@ import org.hemologica.datatypes.TransfusionFilterData;
 import org.hemologica.salud.factories.RestFactory;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 public class ServicesClientImpl implements IServicesClient {
@@ -558,10 +560,10 @@ public class ServicesClientImpl implements IServicesClient {
 
 		String urlBanks = url + ConstantsRest.PATH_BANKS_QUERY;
 		HashMap<String, String> hash = new HashMap<String, String>();
-		hash.put("bank", bankCode);
-		hash.put("productTypeCode", productCode);
-		hash.put("bloodTypeCode", bloodTypeCode);
-		if(count != null){ hash.put("count", count.toString());};
+		hash.put(ConstansJson.JSON_BANK, bankCode);
+		hash.put(ConstansJson.JSON_PRODUCT_TYPE, productCode);
+		hash.put(ConstansJson.JSON_BLOOD_TYPE, bloodTypeCode);
+		if(count != null){ hash.put(ConstansJson.JSON_COUNT, count.toString());};
 		String banksString = "";
 		try {
 			banksString = RestFactory.getRestServicesUtils().get(urlBanks, hash);
@@ -678,6 +680,31 @@ public class ServicesClientImpl implements IServicesClient {
 		List<DataCode> responseObject= new Gson().fromJson(responseString, listType);
 		
 		return responseObject;
+	}
+
+	@Override
+	public List<DataUnit> getUnits() throws ClientProtocolException, IOException {
+		
+		
+		String urlService = url + ConstantsRest.PATH_UNITS;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		String responseString = "";
+		try {
+			
+			responseString = RestFactory.getRestServicesUtils().get(urlService, hash);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.log(Level.SEVERE,"Error al llamar al servicio", e);
+			
+		}
+		
+		Type listType = new TypeToken<List<DataUnit>>(){}.getType();
+		List<DataUnit> responseObject= new Gson().fromJson(responseString, listType);
+		
+		return responseObject;
+		
 	}
 
 }
