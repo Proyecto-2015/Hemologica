@@ -29,7 +29,7 @@ public class ConstantsRest {
 	
 	public static final String PATH_UNITS = "units";
 	public static final String PATH_UNITS_QUERY = "units/query";
-	
+	public static final String PATH_UNIT_INFO = "unitinfo";
 	
 	/**
 	 * Bajo esta url podemos meter todos las "codigueras" que tenemos agregandole /option a la url ej: codes/bloodtypes
@@ -50,6 +50,7 @@ public class ConstantsRest {
 	public static final String PATH_BLOOD_TYPES_ABO = "bloodtypesabo";
 	public static final String PATH_COUNTRIES = "countries";
 	public static final String PATH_DOCUMENTS_TYPE = "documentstypes";
+	
 	
 	
 	

@@ -183,6 +183,7 @@
         </managed-property>
     </managed-bean>
 	
+	
 	<converter>
 		<display-name>dataDonationStateConverter</display-name>
 		<converter-id>dataDonationStateConverter</converter-id>

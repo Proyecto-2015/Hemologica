@@ -715,7 +715,7 @@ public class RestServicesImpl implements IRestServices {
 
 		DataInstitution db2 = new DataInstitution();
 		db2.setCode("2");
-		db1.setName("Institucion 2");
+		db2.setName("Institucion 2");
 		db2.setAddress("Rivera 567");
 		db2.setEmail("infobanco2@hc.com");
 		db2.setHour("Lunes a viernes de 8 - 20 hs y Sabados 8 - 12 ");
@@ -1176,7 +1176,7 @@ public class RestServicesImpl implements IRestServices {
 	}
 
 	@Override
-	public List<DataUnit> getUnits() {
+	public DataUnit getUnit() {
 
 		List<DataInstitution> banks = new ArrayList<DataInstitution>();
 		DataInstitution db1 = new DataInstitution();
@@ -1190,6 +1190,7 @@ public class RestServicesImpl implements IRestServices {
 		db1.setLatitude(-34.898930);
 		db1.setLongitude(-56.165753);
 
+		
 		banks.add(db1);
 
 		DataInstitution db2 = new DataInstitution();
@@ -1206,14 +1207,14 @@ public class RestServicesImpl implements IRestServices {
 		List<DataProductType> productTypes = this.getProducts();
 		List<DataBloodType> bloodTypes = this.getBloodTypes();
 		
-		List<DataUnit> ret = new ArrayList<>();
-		DataUnit d;
+//		List<DataUnit> ret = new ArrayList<>();
+		DataUnit d = null;
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
 		for (DataBloodType bt : bloodTypes) {
 			for (DataProductType pt : productTypes) {
-				for (int i = 0; i < 10; ++i) {
+				for (int i = 0; i < 1; ++i) {
 					d = new DataUnit();
 					d.setActive(true);
 					d.setCode("" + i);
@@ -1224,12 +1225,12 @@ public class RestServicesImpl implements IRestServices {
 					d.setInstitutionCode("123456789-"+i);
 					d.setProductType(pt);
 					d.setBloodType(bt);
-					ret.add(d);
+//					ret.add(d);
 				}
 			}
 		}
 
-		return ret;
+		return d;
 	}
 
 	@Override
@@ -1299,6 +1300,11 @@ public class RestServicesImpl implements IRestServices {
 		analisis.add(code2);
 		
 		return analisis;
+	}
+
+	@Override
+	public List<DataInstitution> getInstitutions() {
+		return getInstitutionsUser("");
 	}
 
 }

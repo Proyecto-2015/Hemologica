@@ -24,6 +24,7 @@ import org.hemologica.datatypes.DataStock;
 import org.hemologica.datatypes.DataStockProductType;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataUnit;
+import org.hemologica.datatypes.DataUnitInfo;
 import org.hemologica.datatypes.DataUser;
 import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.datatypes.DataInstitution;
@@ -683,7 +684,7 @@ public class ServicesClientImpl implements IServicesClient {
 	}
 
 	@Override
-	public List<DataUnit> getUnits() throws ClientProtocolException, IOException {
+	public DataUnit getUnit() throws ClientProtocolException, IOException {
 		
 		
 		String urlService = url + ConstantsRest.PATH_UNITS;
@@ -700,8 +701,8 @@ public class ServicesClientImpl implements IServicesClient {
 			
 		}
 		
-		Type listType = new TypeToken<List<DataUnit>>(){}.getType();
-		List<DataUnit> responseObject= new Gson().fromJson(responseString, listType);
+//		Type listType = new TypeToken<List<DataUnit>>(){}.getType();
+		DataUnit responseObject= new Gson().fromJson(responseString, DataUnit.class);
 		
 		return responseObject;
 		
@@ -932,6 +933,52 @@ public class ServicesClientImpl implements IServicesClient {
 		
 		Type listType = new TypeToken<List<DataCode>>(){}.getType();
 		List<DataCode> responseObject= new Gson().fromJson(responseString, listType);
+		
+		return responseObject;
+	}
+
+	@Override
+	public List<DataInstitution> getInstitutions() throws ClientProtocolException, IOException {
+		
+		String urlService = url + ConstantsRest.PATH_CODES +"/"+ ConstantsRest.PATH_INSTITUTIONS;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		String responseString = "";
+		try {
+			
+			responseString = RestFactory.getRestServicesUtils().get(urlService, hash);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.log(Level.SEVERE,"Error al llamar al servicio", e);
+			
+		}
+		
+		Type listType = new TypeToken<List<DataInstitution>>(){}.getType();
+		List<DataInstitution> responseObject= new Gson().fromJson(responseString, listType);
+		
+		return responseObject;
+	}
+
+	@Override
+	public DataUnitInfo getUnitInfo(String code) throws ClientProtocolException, IOException {
+		
+		String urlService = url + ConstantsRest.PATH_UNIT_INFO;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		String responseString = "";
+		try {
+			
+			responseString = RestFactory.getRestServicesUtils().get(urlService, hash);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.log(Level.SEVERE,"Error al llamar al servicio", e);
+			
+		}
+		
+		
+		DataUnitInfo responseObject = new Gson().fromJson(responseString, DataUnitInfo.class);
 		
 		return responseObject;
 	}

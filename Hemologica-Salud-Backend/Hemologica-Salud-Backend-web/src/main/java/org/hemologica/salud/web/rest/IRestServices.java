@@ -184,9 +184,7 @@ public interface IRestServices {
 	@GET
 	@Path("/" +ConstantsRest.PATH_UNITS)
 	@Produces("application/json")
-	public List<DataUnit> getUnits();
-	
-	
+	public DataUnit getUnit();
 	
 	@GET
 	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_BLOOD_TYPES_ABO)
@@ -237,5 +235,11 @@ public interface IRestServices {
 	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_DONATIONS_EVENTS)
 	@Produces("application/json")
 	public List<DataCode> getDonationsEvents();
+	
+	
+	@GET
+	@Path("/" +ConstantsRest.PATH_CODES +"/"+ ConstantsRest.PATH_INSTITUTIONS)
+	@Produces("application/json")
+	public List<DataInstitution> getInstitutions();
 	
 }

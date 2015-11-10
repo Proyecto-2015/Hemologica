@@ -18,6 +18,7 @@ import org.hemologica.datatypes.DataStock;
 import org.hemologica.datatypes.DataStockProductType;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataUnit;
+import org.hemologica.datatypes.DataUnitInfo;
 import org.hemologica.datatypes.DataUser;
 import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.datatypes.DataInstitution;
@@ -262,7 +263,7 @@ public interface IServicesClient {
 	 * @throws IOException 
 	 * @throws ClientProtocolException 
 	 */
-	public List<DataUnit> getUnits() throws ClientProtocolException, IOException;
+	public DataUnit getUnit() throws ClientProtocolException, IOException;
 	
 
 	/**
@@ -344,4 +345,21 @@ public interface IServicesClient {
 	 * @throws ClientProtocolException 
 	 */
 	public List<DataCode> getDocumentsTypes() throws ClientProtocolException, IOException;
+	
+	/**
+	 * Devuelve todas las instituciones del sistema.
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataInstitution> getInstitutions() throws ClientProtocolException, IOException;
+
+	/**
+	 * Devuelve la informacion completa de una unidad dado su codigo
+	 * @param code
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public DataUnitInfo getUnitInfo(String code) throws ClientProtocolException, IOException;
 }

@@ -105,7 +105,7 @@ public class ApplicationBB implements Serializable {
 //		this.eventSeverities = DataEventSeverityEnum.getSeverities();
 		try {
 			
-//			this.institutions = RestFactory.getServicesClient().getInstitution("algo");
+			this.institutions = RestFactory.getServicesClient().getInstitutions();
 			this.products = RestFactory.getServicesClient().getProducts();
 			this.bloodTypes = RestFactory.getServicesClient().getBloodTypes();
 			this.transfusionAnalysis = RestFactory.getServicesClient().getTransfusionsAnalysis();
