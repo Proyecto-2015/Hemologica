@@ -17,10 +17,6 @@ public class DataInstitutionConverter implements Converter, Serializable {
 	 */
 	private static final long serialVersionUID = 421603990867590424L;
 
-
-//	private static final Logger logger = Logger.getLogger(DataBloodTypeConverter.class.getName());
-
-
 	private ApplicationBB applicationBB;
 	private SessionBB sessionBB;
 
