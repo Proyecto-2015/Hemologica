@@ -1,12 +1,19 @@
-package org.hemologica.dao;
+package org.hemologica.dao.impl;
 
 import javax.persistence.EntityManager;
 
-public abstract class AbstractDAO<T>{
+import org.hemologica.dao.IGenericDAO;
+
+public abstract class GenericDAOImpl<T> implements IGenericDAO<T>{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2784405517190179877L;
 	
 	protected EntityManager em;
 	
-	public AbstractDAO(EntityManager em){
+	public GenericDAOImpl(EntityManager em){
 		this.em = em;
 	}
 	
