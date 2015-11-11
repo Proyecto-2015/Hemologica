@@ -18,12 +18,14 @@
 	
 
 	<import resource="../beans.xml" />
-	<import resource="spring-integration-context-cda-flow.xml" />
-	<import resource="spring-integration-context-stock-flow.xml" />
+<!-- 	<import resource="spring-integration-context-cda-flow.xml" /> -->
+<!-- 	<import resource="spring-integration-context-stock-flow.xml" /> -->
 
 	<int:annotation-config />
 	
-	<int-jms:message-driven-channel-adapter id="jmsIn" channel="inbound-filter" container="messageListenerContainer" />
+	<int-jms:message-driven-channel-adapter id="jmsIn" 
+	channel="inbound-filter" 
+	container="messageListenerContainer" />
 
 	<int:channel id="inbound-filter" />
 	
