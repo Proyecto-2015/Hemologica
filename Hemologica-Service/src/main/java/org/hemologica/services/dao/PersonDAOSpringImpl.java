@@ -11,9 +11,6 @@ public class PersonDAOSpringImpl extends HibernateDaoSupport implements PersonDA
 	 */
 	private static final long serialVersionUID = 269171786403624819L;
 	
-	public PersonDAOSpringImpl( ) {
-	}
-
 	@Override
 	public Person create(Person entity) {
 		this.getHibernateTemplate().save(entity);

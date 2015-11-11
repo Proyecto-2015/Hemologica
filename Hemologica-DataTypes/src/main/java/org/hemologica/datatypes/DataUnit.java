@@ -1,7 +1,6 @@
 package org.hemologica.datatypes;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class DataUnit implements Serializable {
 

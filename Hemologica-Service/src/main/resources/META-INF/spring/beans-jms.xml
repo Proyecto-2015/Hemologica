@@ -8,13 +8,34 @@
 	 					http://www.springframework.org/schema/tx/ http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 
-	<context:property-placeholder location="classpath:META-INF/spring/hemologica.properties" />
-	<context:property-placeholder location="classpath:META-INF/spring/beans-jms.xml" />
+	<context:property-placeholder
+		location="classpath:META-INF/spring/hemologica.properties" />
 
+	<bean id="connectionFactory" class="${jms.connection.factory}">
+		<property name="brokerURL" value="${jms.connection.factory.broker.url}" />
+	</bean>
 
-	<bean id="messageValidator" class="org.hemologica.services.filters.MessageValidator"/>
+	<bean id="receiveQueue" class="${jms.queue}">
+		<constructor-arg index="0">
+			<value>${jms.queue.receive}</value>
+		</constructor-arg>
+	</bean>
 	
-	<!-- JMS -->
+	
+	
+
+	<bean id="sendQueue" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0">
+			<value>send_queue</value>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="discardQueue" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg index="0">
+			<value>invalid_messages</value>
+		</constructor-arg>
+	</bean>
+	
 	<bean id="messageListenerContainer"
 		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
 		<property name="connectionFactory" ref="connectionFactory" />
@@ -27,20 +48,7 @@
 		<property name="autoStartup" value="true" />
 	</bean>
 
-	<!-- Handlers -->
-
 	<bean id="messageHandler" class="org.hemologica.services.handler.MessageHandler" />
-	<bean id="cdaHeaderProcessMessageHandler" class="org.hemologica.services.handler.cdaHeaderProcessMessageHandler" >
-		<property name="empi" ref="empiAdapter" />
-	</bean>
-	<bean id="cdaLocalStoreProcessMessageHandler" class="org.hemologica.services.handler.cdaLocalStoreProcessMessageHandler">
-		
-	</bean>
-	
-	<bean id="cdaXDSStoreProcessMessageHandler" class="org.hemologica.services.handler.cdaXDSStoreProcessMessageHandler">
-	</bean>
-
-	<!-- EMPI Connection -->
 
 	<bean id="pixConnection" class="org.hemologica.empi.adapter.connection.MLLPConnection">
 		<constructor-arg name="host" value="${empi.pix.connection.host}" />
@@ -70,24 +78,10 @@
 			</map>
 		</constructor-arg>
 	</bean>
-	
-	
-	<!-- EMPI Connection -->
-	
-	<!-- Person Managment -->
 
 	<bean id="personBean" class="org.hemologica.services.business.impl.PersonBeanImpl">
 		<property name="empi" ref="empiAdapter" />
-		<property name="personDAO" ref="personDAO"></property>
 	</bean>
-	
-	
-	<bean id="personDAO" class="org.hemologica.services.dao.PersonDAOSpringImpl" />
-	
-	
-	<!-- Person Managment -->
-	
-	<!-- Database -->
 	
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
           p:driverClassName="${jdbc.driverClassName}"
@@ -115,8 +109,6 @@
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
     
-    <!-- Database -->
-    
-    
+    <bean id="messageValidator" class="org.hemologica.services.filters.MessageValidator"/>
 	
 </beans>

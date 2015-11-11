@@ -15,11 +15,8 @@
 		http://www.springframework.org/schema/integration/xml http://www.springframework.org/schema/integration/xml/spring-integration-xml.xsd">
 
 	<context:component-scan base-package="org.hemologica.services" />
-	
 
 	<import resource="../beans.xml" />
-	<import resource="spring-integration-context-cda-flow.xml" />
-	<import resource="spring-integration-context-stock-flow.xml" />
 
 	<int:annotation-config />
 	

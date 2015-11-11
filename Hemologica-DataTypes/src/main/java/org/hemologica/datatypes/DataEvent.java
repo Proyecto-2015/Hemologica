@@ -2,8 +2,6 @@ package org.hemologica.datatypes;
 
 import java.io.Serializable;
 
-import org.hemologica.constants.DataEventSeverityEnum;
-
 public abstract class DataEvent implements Serializable{
 
 	/**
