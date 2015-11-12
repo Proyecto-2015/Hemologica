@@ -6,6 +6,8 @@
 	<artifactId>Hemologica-Service</artifactId>
 	<version>1.0.0.BUILD-SNAPSHOT</version>
 	<packaging>war</packaging>
+	
+
 
 	<name>Hemologica-Services</name>
 	<url>http://www.springsource.org/spring-integration</url>
