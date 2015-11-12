@@ -6,6 +6,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
+
+import javax.ejb.EJB;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.ws.rs.core.Response;
 import org.hemologica.constants.DataDonationStateEnum;
 import org.hemologica.constants.DataEventSeverityEnum;
@@ -33,11 +37,16 @@ import org.hemologica.datatypes.LoginData;
 import org.hemologica.datatypes.MailData;
 import org.hemologica.datatypes.MessageOptionData;
 import org.hemologica.datatypes.TransfusionFilterData;
+import org.hemologica.salud.ejb.beans.IInstitutionBeanLocal;
+
 
 public class RestServicesImpl implements IRestServices {
 
 	private Logger logger = Logger.getLogger(RestServicesImpl.class.getName());
 
+	@Inject
+	private IInstitutionBeanLocal institutionBean;
+	
 	@Override
 	public Response login(LoginData datos) {
 
@@ -1304,7 +1313,9 @@ public class RestServicesImpl implements IRestServices {
 
 	@Override
 	public List<DataInstitution> getInstitutions() {
-		return getInstitutionsUser("");
+		
+		return institutionBean.getInstitutions();
+		
 	}
 
 }

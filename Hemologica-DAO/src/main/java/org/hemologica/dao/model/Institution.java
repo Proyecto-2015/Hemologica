@@ -11,7 +11,10 @@ import java.util.List;
  */
 @Entity
 @Table(name="institutions")
-@NamedQuery(name="Institution.findAll", query="SELECT i FROM Institution i")
+@NamedQueries({
+@NamedQuery(name="Institution.findAll", query="SELECT i FROM Institution i"),
+@NamedQuery(name="Institution.getInstitutionCode", query="SELECT i FROM Institution i where i.institutionCode = :code")
+})
 public class Institution implements Serializable {
 	private static final long serialVersionUID = 1L;
 

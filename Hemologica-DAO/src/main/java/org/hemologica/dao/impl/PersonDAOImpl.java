@@ -1,11 +1,10 @@
 package org.hemologica.dao.impl;
 
 import javax.persistence.EntityManager;
-
-import org.hemologica.dao.IGenericDAO;
+import org.hemologica.dao.IPersonDAO;
 import org.hemologica.dao.model.Person;
 
-public class PersonDAOImpl extends GenericDAOImpl<Person> implements IGenericDAO<Person>{
+public class PersonDAOImpl extends GenericDAOImpl<Person> implements IPersonDAO{
 
 	/**
 	 * 
