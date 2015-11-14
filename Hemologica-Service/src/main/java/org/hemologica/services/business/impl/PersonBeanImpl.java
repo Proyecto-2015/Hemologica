@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.hemologica.dao.PersonDAO;
+import org.hemologica.dao.IPersonDAO;
 import org.hemologica.empi.adapter.IEMPIAdapter;
 import org.hemologica.empi.adapter.pixpdq.exception.PDQAdapterException;
 import org.hemologica.empi.adapter.pixpdq.exception.PIXAdapterException;
@@ -22,8 +22,9 @@ public class PersonBeanImpl implements PersonBean, Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -5105280976531369972L;
+
 	private IEMPIAdapter empi;
-	private PersonDAO personDAO;
+	private IPersonDAO personDAO;
 
 	@Override
 	public Identifier getID(Map<String, String> data) {
@@ -32,7 +33,6 @@ public class PersonBeanImpl implements PersonBean, Serializable {
 
 			PDQQueryPatientRequest pdqQueryPatientRequest = new PDQQueryPatientRequest(data);
 			PDQQueryPatientResponse pdqQueryPatientResponse = empi.query(pdqQueryPatientRequest);
-
 			List<Identifier> identifiers = pdqQueryPatientResponse.getIdetifiers("HEMOLOGICA");
 			Identifier identifier = null;
 
@@ -44,19 +44,18 @@ public class PersonBeanImpl implements PersonBean, Serializable {
 				values.put("patientIdentifier", identifier.getId());
 				CreatePatientRequest createPatientRequest = new CreatePatientRequest(values);
 				CreatePatientResponse createPatientResponse = empi.create(createPatientRequest);
-				
 
 			} else {
 
-				//choose/get identifier
+				// choose/get identifier
 				identifier = identifiers.get(0);
-				
-				if(identifiers.size() > 1){
-					//send update to Hemologica Database to fix persons-records
-								
+
+				if (identifiers.size() > 1) {
+					// send update to Hemologica Database to fix persons-records
+
 				}
 			}
-			
+
 			return identifier;
 
 		} catch (PDQAdapterException e) {
@@ -80,11 +79,11 @@ public class PersonBeanImpl implements PersonBean, Serializable {
 		this.empi = empi;
 	}
 
-	public PersonDAO getPersonDAO() {
+	public IPersonDAO getPersonDAO() {
 		return personDAO;
 	}
 
-	public void setPersonDAO(PersonDAO personDAO) {
+	public void setPersonDAO(IPersonDAO personDAO) {
 		this.personDAO = personDAO;
 	}
 
