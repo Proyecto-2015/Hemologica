@@ -194,21 +194,65 @@
 		<converter-id>dataDocumentTypeConverter</converter-id>
 		<converter-class>org.hemologica.salud.web.converters.DataDocumentTypeConverter</converter-class>
 	</converter>
+	<managed-bean>
+        <managed-bean-name>dataDocumentTypeConverter</managed-bean-name>
+        <managed-bean-class>org.hemologica.salud.web.converters.DataDocumentTypeConverter</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>applicationBB</property-name>
+            <property-class>org.hemologica.salud.web.beans.ApplicationBB</property-class>
+            <value>#{applicationBB}</value>
+        </managed-property>
+    </managed-bean>
+	
 	<converter>
 		<display-name>dataCityConverter</display-name>
 		<converter-id>dataCityConverter</converter-id>
 		<converter-class>org.hemologica.salud.web.converters.DataCityConverter</converter-class>
 	</converter>
+	<managed-bean>
+        <managed-bean-name>dataCityConverter</managed-bean-name>
+        <managed-bean-class>org.hemologica.salud.web.converters.DataCityConverter</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>applicationBB</property-name>
+            <property-class>org.hemologica.salud.web.beans.ApplicationBB</property-class>
+            <value>#{applicationBB}</value>
+        </managed-property>
+    </managed-bean>
+	
 	<converter>
 		<display-name>dataCountryConverter</display-name>
 		<converter-id>dataCountryConverter</converter-id>
 		<converter-class>org.hemologica.salud.web.converters.DataCountryConverter</converter-class>
 	</converter>
+	<managed-bean>
+        <managed-bean-name>dataCountryConverter</managed-bean-name>
+        <managed-bean-class>org.hemologica.salud.web.converters.DataCountryConverter</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>applicationBB</property-name>
+            <property-class>org.hemologica.salud.web.beans.ApplicationBB</property-class>
+            <value>#{applicationBB}</value>
+        </managed-property>
+    </managed-bean>
+	
+	
 	<converter>
 		<display-name>dataStateConverter</display-name>
 		<converter-id>dataStateConverter</converter-id>
 		<converter-class>org.hemologica.salud.web.converters.DataStateConverter</converter-class>
 	</converter>
+	<managed-bean>
+        <managed-bean-name>dataStateConverter</managed-bean-name>
+        <managed-bean-class>org.hemologica.salud.web.converters.DataStateConverter</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>applicationBB</property-name>
+            <property-class>org.hemologica.salud.web.beans.ApplicationBB</property-class>
+            <value>#{applicationBB}</value>
+        </managed-property>
+    </managed-bean>
 	
 	<converter>
 		<display-name>dataMessageOptionsConverter</display-name>

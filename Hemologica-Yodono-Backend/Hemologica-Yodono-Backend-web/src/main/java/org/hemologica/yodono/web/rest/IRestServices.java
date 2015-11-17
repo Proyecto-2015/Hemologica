@@ -2,6 +2,7 @@ package org.hemologica.yodono.web.rest;
 
 import java.util.List;
 
+import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -24,6 +25,7 @@ import org.hemologica.datatypes.LoginData;
 import org.hemologica.constants.ConstansJson;
 import org.hemologica.constants.ConstantsRest;
 
+@RequestScoped
 @Path("/services")
 public interface IRestServices {
 	

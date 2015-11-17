@@ -10,6 +10,8 @@ import javax.inject.Inject;
 import javax.ws.rs.core.Response;
 import org.hemologica.constants.DataDonationStateEnum;
 import org.hemologica.constants.DataEventSeverityEnum;
+import org.hemologica.dao.model.Movement;
+import org.hemologica.dao.model.MovementsType;
 import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCampaign;
@@ -18,6 +20,7 @@ import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataDonationDonorType;
 import org.hemologica.datatypes.DataPerson;
+import org.hemologica.datatypes.DataProduct;
 import org.hemologica.datatypes.DataProductType;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataResponsiblePerson;
@@ -28,8 +31,10 @@ import org.hemologica.datatypes.DataStockProductTypeBloodType;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataTransfusionEvent;
 import org.hemologica.datatypes.DataUnit;
+import org.hemologica.datatypes.DataUnitInfo;
 import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.datatypes.DataInstitution;
+import org.hemologica.datatypes.DataMovement;
 import org.hemologica.datatypes.LoginData;
 import org.hemologica.datatypes.MailData;
 import org.hemologica.datatypes.MessageOptionData;
@@ -1216,6 +1221,8 @@ public class RestServicesImpl implements IRestServices{
 //		List<DataUnit> ret = new ArrayList<>();
 		DataUnit d = null;
 		
+		
+		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
 		for (DataBloodType bt : bloodTypes) {
@@ -1313,6 +1320,77 @@ public class RestServicesImpl implements IRestServices{
 		
 		return institutionBean.getInstitutions();
 		
+	}
+
+	@Override
+	public DataUnitInfo getUnitInfo() {
+		
+		DataUnitInfo dataUnitInfo = new DataUnitInfo();
+		
+		DataTransfusion dataTransfusion = new DataTransfusion();
+		dataTransfusion.setDate("10/10/2015");
+		
+		DataBank b2 = new DataBank();
+		b2.setName("Banco de Sangre 2");
+		
+		
+		dataTransfusion.setBank(b2);
+		
+		DataProductType dataProduct = new DataProductType();
+		dataProduct.setDisplay("Plaquetas");
+		dataTransfusion.setDataProduct(dataProduct);
+		dataTransfusion.setVolume("20ml");
+		dataUnitInfo.setTransfusion(dataTransfusion);
+		
+//		List<Movement> movements = new ArrayList<>();
+//		
+//		Movement m1 = new Movement();
+//		
+//		MovementsType mt1= new MovementsType();
+//		
+//		m1.setMovementsType(movementsType);
+		
+		
+		DataDonation d = new DataDonation();
+		d.setState(DataDonationStateEnum.MADE);
+		DataBank b1 = new DataBank();
+		b1.setName("Banco de Sangre 1");
+		d.setBank(b1);
+		DataInstitution di = new DataInstitution();
+		di.setName("Hospital de clinicas");
+		d.setInstitution(di);
+		d.setName("Pedro");
+
+		DataDonationDonorType a = new DataDonationDonorType();
+		a.setDisplayName("Voluntario");
+		d.setDataDonorType(a);
+		d.setDate("10/02/2015");
+		
+		DataPerson dataPerson = new DataPerson();
+		DataBloodType dataBloodType = new DataBloodType();
+		dataBloodType.setDisplayName("AB+");
+		
+		dataPerson.setBloodType(dataBloodType);
+		d.setPerson(dataPerson);
+		dataUnitInfo.setDonation(d);
+		
+		List<DataMovement> movements = new ArrayList<>();
+		
+		DataMovement d1 = new DataMovement();
+		d1.setDate("15/03/2015");
+		d1.setCenterName("Banco de Sangre 1");
+		d1.setMovementsType("Salida");
+		
+		DataMovement d2 = new DataMovement();
+		d2.setDate("15/03/2015");
+		d2.setCenterName("Banco de Sangre 2");
+		d2.setMovementsType("Entrada");
+		
+		movements.add(d2);
+		movements.add(d1);
+		
+		dataUnitInfo.setMovements(movements);
+		return dataUnitInfo;
 	}
 
 }

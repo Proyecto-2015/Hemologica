@@ -73,8 +73,8 @@
 		   			<tbody>
 			   			<c:forEach items="#{personRecordBloodBB.transfusionItem.events}" var="eventItem" varStatus="counter">
 			    			<tr>
-			    				<td data-title="#{messages.label_reaccion_type}"><h:outputText value="#{eventItem.display}"/></td>
-			    				<td data-title="#{messages.label_severity}"><h:outputText value="#{messages[eventItem.severity.label]}"/></td>
+			    				<td data-title="#{messages.label_reaccion_type}"><h:outputText value="#{eventItem.event.displayName}"/></td>
+			    				<td data-title="#{messages.label_severity}"><h:outputText value="#{messages[eventItem.severity.displayName]}"/></td>
 			   				</tr>
 			   			</c:forEach>
 		  			</tbody>

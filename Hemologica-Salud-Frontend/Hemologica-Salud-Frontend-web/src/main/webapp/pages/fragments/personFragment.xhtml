@@ -11,7 +11,9 @@
 <h:body>
 
 	<div class="container-fluid">
-
+	  
+	  
+	  <p:messages/>
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
 
@@ -30,7 +32,7 @@
 							<div class="col-md-9 col-lg-5">
 								<h:selectOneMenu class="form-control" id="countries"
 									value="#{personBB.dataPerson.documentCountry}" style="height: 34px;"
-									converter="dataCountryConverter">
+									converter="#{dataCountryConverter}">
 									<f:selectItems value="#{applicationBB.countries}" var="country"
 										itemValue="#{country.code}" itemLabel="#{country.displayName}" />
 								</h:selectOneMenu>
@@ -42,7 +44,7 @@
 							<div class="col-md-9 col-lg-5">
 								<h:selectOneMenu class="form-control" id="documents_types"
 									value="#{personBB.dataPerson.documentType}" style="height: 34px;"
-									converter="dataDocumentTypeConverter">
+									converter="#{dataDocumentTypeConverter}">
 									<f:selectItems value="#{applicationBB.documentTypes}" var="documentType"
 										itemValue="#{documentType.code}" itemLabel="#{documentType.displayName}" />
 								</h:selectOneMenu>
@@ -105,8 +107,9 @@
 								for="donations_input_search_date_from"><h:outputText
 									value="#{messages.person_birthday_date}" /></label>
 							<div class="col-md-9 col-lg-5">
-								<p:calendar id="birthday_date" pattern="MM/dd/yyyy" mode="popup"
-									value="#{personBB.dataPerson.birthdayDate}" />
+<!-- 								<p:calendar id="birthday_date" pattern="MM/dd/yyyy" mode="popup" -->
+<!-- 									value="#{personBB.dataPerson.birthdayDate}" /> -->
+									
 							</div>
 						</div>
 						<div class="form-group">
@@ -114,10 +117,10 @@
 									value="#{messages.person_state}" /></label>
 							<div class="col-md-9 col-lg-5">
 								<h:selectOneMenu class="form-control" value="#{personBB.states}"
-									style="height: 34px;">
+									style="height: 34px;" converter="#{dataStateConverter}">
 									<f:selectItems value="#{applicationBB.states}" var="state"
 										itemValue="state" itemLabel="#{state.displayName}" />
-<!-- 									<f:ajax listener="#{personBB.changeState}" render="states" /> -->
+<!-- 								<f:ajax listener="#{personBB.changeState}" render="states" />  -->
 								</h:selectOneMenu>
 							</div>
 						</div>
@@ -127,7 +130,7 @@
 							<div class="col-md-9 col-lg-5">
 								<h:selectOneMenu class="form-control" id="cities"
 									value="#{personBB.city}" style="height: 34px;"
-									converter="dataCityConverter">
+									converter="#{dataCityConverter}">
 									<f:selectItems value="#{applicationBB.cities}" var="city"
 										itemValue="#{city.code}" itemLabel="#{city.displayName}" />
 								</h:selectOneMenu>

@@ -10,10 +10,13 @@ import javax.faces.convert.Converter;
 
 import org.apache.http.client.ClientProtocolException;
 import org.hemologica.datatypes.DataCity;
+import org.hemologica.datatypes.DataCode;
 import org.hemologica.salud.factories.RestFactory;
+import org.hemologica.salud.web.beans.ApplicationBB;
 
-//@FacesConverter(value="dataCityConverter")
 public class DataCityConverter implements Converter {
+	
+private ApplicationBB applicationBB;
 	
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
@@ -22,17 +25,11 @@ public class DataCityConverter implements Converter {
 			return null;
 		}
 		
-		List<DataCity> citiesList = null;
-		try {
-			citiesList = RestFactory.getServicesClient().getCities();
-		} catch (ClientProtocolException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		List<DataCode> citiesList = applicationBB.getCities();
+		
 		
 		if(citiesList != null){
-			for(DataCity city : citiesList){
+			for(DataCode city : citiesList){
 				
 				if(city.getCode() != null && city.getCode().equals(value)){
 					return city;
@@ -44,11 +41,19 @@ public class DataCityConverter implements Converter {
 
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
-		if(value instanceof DataCity){
+		if(value instanceof DataCode){
 			
-			return ((DataCity)value).getName();
+			return ((DataCode)value).getCode();
 		}
 		return null;
+	}
+
+	public ApplicationBB getApplicationBB() {
+		return applicationBB;
+	}
+
+	public void setApplicationBB(ApplicationBB applicationBB) {
+		this.applicationBB = applicationBB;
 	}
 
 }

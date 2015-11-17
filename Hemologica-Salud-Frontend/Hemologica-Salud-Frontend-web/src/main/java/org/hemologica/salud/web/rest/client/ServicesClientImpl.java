@@ -7,6 +7,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import javax.ws.rs.ApplicationPath;
+import javax.ws.rs.Path;
+
 import org.apache.http.client.ClientProtocolException;
 import org.hemologica.constants.ConstansJson;
 import org.hemologica.constants.ConstantsRest;
@@ -38,6 +42,7 @@ import org.hemologica.salud.factories.RestFactory;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
+
 
 public class ServicesClientImpl implements IServicesClient {
 
@@ -433,8 +438,8 @@ public class ServicesClientImpl implements IServicesClient {
 
 	@Override
 	public List<DonationFilterData> getDonationsFilters() throws ClientProtocolException, IOException {
-
-		String urlService = url + ConstantsRest.PATH_USERS + ConstantsRest.PATH_DONATIONS_FILTERS;
+		
+		String urlService = url + ConstantsRest.PATH_CODES + "/" + ConstantsRest.PATH_DONATIONS_FILTERS;
 
 		HashMap<String, String> hash = new HashMap<String, String>();
 

@@ -3,6 +3,9 @@ package org.hemologica.salud.web.rest.client;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
+
+import javax.enterprise.context.RequestScoped;
+
 import org.apache.http.client.ClientProtocolException;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataBloodType;
@@ -27,6 +30,7 @@ import org.hemologica.datatypes.MessageOptionData;
 import org.hemologica.datatypes.DataResponsiblePerson;
 import org.hemologica.datatypes.TransfusionFilterData;
 
+@RequestScoped
 public interface IServicesClient {
 	
 	/**

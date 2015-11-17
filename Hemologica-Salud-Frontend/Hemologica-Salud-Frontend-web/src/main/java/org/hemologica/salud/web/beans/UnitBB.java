@@ -44,7 +44,7 @@ public class UnitBB implements Serializable {
 			
 			System.out.println("hOLA");
 			unit =  RestFactory.getServicesClient().getUnitInfo(code);
-
+			System.out.println("hOLA");
 			
 		} catch (IOException e) {
 			e.printStackTrace();

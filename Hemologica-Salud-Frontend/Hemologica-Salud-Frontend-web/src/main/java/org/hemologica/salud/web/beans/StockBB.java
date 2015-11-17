@@ -7,13 +7,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -77,6 +80,10 @@ public class StockBB implements Serializable {
 	private String banksItemsSelected;
 
 	private BarChartModel barModel;
+	
+	@ManagedProperty("#{messages}")
+	private ResourceBundle bundle;
+	private String languageVarName = "messages";
 
 	private Logger logger = Logger.getLogger(StockBB.class.getName());
 
@@ -100,10 +107,19 @@ public class StockBB implements Serializable {
 
 			nationalStockList = client.getNationalStock();
 			nationalStockModel = this.initCharModel(nationalStockList);
-			nationalStockModel.setTitle("National Stock");
+			
+			
+			FacesContext context = FacesContext.getCurrentInstance();
+			Application app = context.getApplication();
+			bundle = app.getResourceBundle(context, languageVarName);
+			
+			nationalStockModel.setTitle(bundle.getString("label_national_stock"));
 			nationalStockModel.setLegendPosition("ne");
 			Axis xAxis = nationalStockModel.getAxis(AxisType.X);
-			xAxis.setLabel("Tipo Producto & Tipo de Sangre");
+			
+			
+			
+			xAxis.setLabel(bundle.getString("label_product_blood_type"));
 			Axis yAxis = nationalStockModel.getAxis(AxisType.Y);
 			yAxis.setLabel("Cantidad");
 			yAxis.setMin(0);

@@ -2,16 +2,13 @@ package org.hemologica.salud.web.rest;
 
 import java.util.List;
 
-import javax.ejb.Stateless;
 import javax.enterprise.context.RequestScoped;
-import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Application;
 import javax.ws.rs.core.Response;
 import org.hemologica.constants.ConstansJson;
 import org.hemologica.constants.ConstantsRest;
@@ -30,6 +27,7 @@ import org.hemologica.datatypes.DataStock;
 import org.hemologica.datatypes.DataStockProductType;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataUnit;
+import org.hemologica.datatypes.DataUnitInfo;
 import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.LoginData;
@@ -189,6 +187,11 @@ public interface IRestServices {
 	@Path("/" +ConstantsRest.PATH_UNITS)
 	@Produces("application/json")
 	public DataUnit getUnit();
+	
+	@GET
+	@Path("/" +ConstantsRest.PATH_UNIT_INFO)
+	@Produces("application/json")
+	public DataUnitInfo getUnitInfo();
 	
 	@GET
 	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_BLOOD_TYPES_ABO)

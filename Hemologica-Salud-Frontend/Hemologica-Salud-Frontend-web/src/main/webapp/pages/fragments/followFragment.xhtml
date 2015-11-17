@@ -50,49 +50,79 @@
 								
 								<p:commandButton icon="ui-icon-search"
 									styleClass="form-control search-btn col-xs-2 col-sm-3 col-md-3 col-lg-1"
-								 action="#{unitBB.search()}"/>
+								 action="#{unitBB.search()}" process="@form" update="@form" />
 							</div>
 						</div>
 					</fieldset>	
 					
 					<div id="seguimiento">
-<!-- 						<fieldset id="fieldset-history" style ="font-size: x-large; border:1px solid #999; padding-bottom: 16px; margin-bottom: 20px; padding-top: 20px;" > -->
-								
-<!-- 								estado actual -->
-								
-								
-	<!-- 						<label class="col-md-2 col-lg-5 control-label" > -->
-	<!-- 							<h:outputText value="#{personRecordBloodBB.person.fullName}" /></label> -->
-							
-	<!-- 						<label class="col-md-2 col-lg-3 control-label" style="font-weight: 300;" > -->
-	<!-- 							<h:outputText value="#{personRecordBloodBB.person.documentType}"/></label> -->
-								
-	<!-- 						<label class="col-md-2 col-lg-3 control-label" style="font-weight: 300;"> -->
-	<!-- 							<h:outputText value="#{personRecordBloodBB.person.documentNumber}" /></label> -->
-								
-	<!-- 						<label class="col-md-2 col-lg-1 control-label pull-right blood-type" > -->
-	<!-- 							<h:outputText value="#{personRecordBloodBB.person.bloodType.displayName}" /></label> -->
-						
-<!-- 						</fieldset> -->
-						
 						
 						<div class="row">
-							<div class="col-md-6 col-md-offset-3">
+							<div class="col-md-8 col-md-offset-3">
 								
 <!-- 								if transfusion != null -->
 								<fieldset>
 									<legend>
 										<h:outputText value="#{messages.label_transfusion}"/>
 									</legend>	
-									<div class="form-group">
-	<!-- 								<label class="col-md-3 control-label" for="name"><h:outputText -->
-	<!-- 										value="#{messages.label_transfusion}" /></label> -->
-										<div class="col-md-9">
-		<!-- 									<label class="label-form-user control-label"><h:outputText -->
-		<!-- 											value="#{userBB.dataUser.documentType}" /></label> -->
+									<div class="form-horizontal">
+										<div class="row">
+											<div class="form-group">
+										
+												<label class="col-md-5 control-label" for="name"><h:outputText
+														value="#{messages.donation_date}" />:</label>
+												
+												<label class="col-md-5 control-label" style="text-align: left;">
+													<h:outputText value="#{unitBB.unit.transfusion.date}" />
+												</label>
+												
+											</div>
+											<div class="form-group">
+										
+												<label class="col-md-5 control-label" for="name"><h:outputText
+														value="#{messages.stock_bank_filter}" />:</label>
+												
+													<label class="col-md-7 control-label" style="text-align: left;">
+														<h:outputText value="#{unitBB.unit.transfusion.bank.name}" />
+													</label>
+												
+											</div>
+
+											<div class="form-group">
+											
+												<label class="col-md-5 control-label" for="name"><h:outputText
+														value="#{messages.label_product}" />:</label>
+												
+												<label class="col-md-7 control-label" style="text-align: left;">
+													<h:outputText value="#{unitBB.unit.transfusion.dataProduct.display}" />
+												</label>
+												
+											</div>
+											<div class="form-group">	
+												<label class="col-md-5 control-label" for="name"><h:outputText
+														value="#{messages.label_volume}" />:</label>
+												
+												<label class="col-md-7 control-label" style="text-align: left;">
+													<h:outputText value="#{unitBB.unit.transfusion.volume}" />
+												</label>
+												
+											</div>
 										</div>
 									</div>
 								</fieldset>
+								
+							</div>
+					</div>	
+					
+					
+					
+							<div class="row">
+							<div class="col-md-8 col-md-offset-3" style="padding-bottom: 30px;">
+								<fieldset>
+									<legend>
+										<h:outputText value="#{messages.label_movements}"/>
+									</legend>	
+					
 <!-- 								if movimiento != null -->								
 								<table class="col-md-12 col-lg-12 table-bordered table-striped table-condensed cf">
 					        		<thead class="cf">
@@ -104,35 +134,70 @@
 					        			</tr>
 					        		</thead>
 					        		<tbody>
-<!-- 					        			<c:forEach items="#{transfusionBB.myTransfusions}" var="transfusionItem" varStatus="counter"> -->
-<!-- 						        			<tr> -->
-<!-- 						        				<td data-title="Fecha"><h:outputText value="#{transfusionItem.date}"/></td> -->
-<!-- 						        				<td data-title="Banco de Sangre"><h:outputText value="#{transfusionItem.bank.name}"/></td> -->
-<!-- 						        				<td data-title="Institución"><h:outputText value="#{transfusionItem.institution.name}"/></td> -->
-<!-- 						        				<td data-title="Producto" ><h:outputText value="#{transfusionItem.dataProduct.display}"/></td> -->
+					        			<c:forEach items="#{unitBB.unit.movements}" var="movement" varStatus="counter">
+						        			<tr>
+						        				<td data-title="#{messages.donation_date}"><h:outputText value="#{movement.date}"/></td>
+						        				<td data-title="#{messages.label_movement}"><h:outputText value="#{movement.movementsType}"/></td>
+						        				<td data-title="#{messages.label_center}"><h:outputText value="#{movement.centerName}"/></td>
 						        				
-<!-- 						        			</tr> -->
-<!-- 						        		</c:forEach> -->
+						        			</tr>
+						        		</c:forEach>
 					        		
 					        		</tbody>
 					        	
         						</table>
-								
+							</fieldset>
+							</div>
+							</div>	
 <!-- 								if donacion != null -->
+
+							<div class="row">
+							<div class="col-md-8 col-md-offset-3">
 								<fieldset>
 									<legend>
 										<h:outputText value="#{messages.label_donation}"/>
 									</legend>									
-									<div class="form-group">
-<!-- 								<label class="col-md-3 control-label" for="name"><h:outputText -->
-<!-- 										value="#{messages.label_donation}" /></label> -->
-										<div class="col-md-9">
-		<!-- 									<label class="label-form-user control-label"><h:outputText -->
-		<!-- 											value="#{userBB.dataUser.documentType}" /></label> -->
+									
+									<div class="form-horizontal">
+										<div class="row">
+											
+											<div class="form-group">
+										
+												<label class="col-md-5 control-label" for="name"><h:outputText
+														value="#{messages.donation_date}" />:</label>
+												
+												<label class="col-md-7 control-label" style="text-align: left;">
+													<h:outputText value="#{unitBB.unit.donation.date}" />
+												</label>
+												
+											</div>
+											<div class="form-group">
+											
+												<label class="col-md-5 control-label" for="name"><h:outputText
+														value="#{messages.stock_bank_filter}" />:</label>
+												
+												<label class="col-md-7 control-label" style="text-align: left;">
+													<h:outputText value="#{unitBB.unit.donation.bank.name}" />
+												</label>
+												
+											</div>
+											<div class="form-group">	
+												<label class="col-md-5 control-label" for="name"><h:outputText
+														value="#{messages.donation_blood_type}" />:</label>
+												
+												<label class="col-md-7 control-label" style="text-align: left;">
+													<h:outputText value="#{unitBB.unit.donation.person.bloodType.displayName}" />
+												</label>
+												
+											</div>
 										</div>
-								
 									</div>
+									
+									
+									
 								</fieldset>
+							</div>
+							</div>
 			
 						</div>
 						
@@ -142,8 +207,8 @@
 			</div>
 						
 					
-		</div>
-	</div>
+<!-- 		</div> -->
+<!-- 	</div> -->
 		
 					
 <!-- 					<p:panelGrid layout="grid" columns="2" -->

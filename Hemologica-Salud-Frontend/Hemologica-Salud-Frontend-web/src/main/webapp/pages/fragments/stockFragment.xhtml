@@ -20,7 +20,7 @@
 
 			<p:tabView>
 
-				<p:tab title="National Stock">
+				<p:tab title="#{messages.label_national_stock}">
 
 					<p:outputPanel styleClass="row ui-grid-row">
 
@@ -29,7 +29,7 @@
 							<thead class="cf">
 
 								<tr>
-									<th><h:outputText value="Producto" /></th>
+									<th><h:outputText value="#{messages.label_product}" /></th>
 									<c:forEach items="#{applicationBB.bloodTypes}" var="bloodType">
 										<th><h:outputText value="#{bloodType.displayName}" /></th>
 									</c:forEach>
@@ -39,7 +39,7 @@
 								<c:forEach items="#{stockBB.nationalStockList}" var="product"
 									varStatus="counter">
 									<tr>
-										<td data-title="Producto"><h:outputText
+										<td data-title="#{messages.label_product}"><h:outputText
 												value="#{product.display}" /></td>
 										<c:forEach items="#{product.bloodTypes}" var="bloodType">
 											<td data-title="#{bloodType.displayName}"><h:outputText
@@ -61,7 +61,7 @@
 
 				</p:tab>
 
-				<p:tab title="Banks Stock">
+				<p:tab title="#{messages.label_banks_stock}">
 
 					<p:outputPanel id="banksStockPanel" styleClass="row ui-grid-row">
 
@@ -152,7 +152,7 @@
 								class="col-md-12 table-bordered table-striped table-condensed cf">
 								<thead class="cf">
 									<tr>
-										<th><h:outputText value="Producto" /></th>
+										<th><h:outputText value="#{messages.label_product}" /></th>
 										<c:forEach items="#{applicationBB.bloodTypes}" var="bloodType">
 											<th><h:outputText value="#{bloodType.displayName}" /></th>
 										</c:forEach>
@@ -162,7 +162,7 @@
 									<c:forEach items="#{stockBB.stock.products}" var="product"
 										varStatus="counter">
 										<tr>
-											<td data-title="Producto"><h:outputText
+											<td data-title="#{messages.label_product}"><h:outputText
 													value="#{product.display}" /></td>
 											<c:forEach items="#{product.bloodTypes}" var="bloodType">
 												<td data-title="#{bloodType.displayName}"><h:outputText

@@ -1,0 +1,360 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="RepositorioXDS" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="adocumentrepository_servicesService" targetNamespace="RepositorioXDS">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0" xmlns:ns1="RepositorioXDS" targetNamespace="urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0" version="1.0">
+
+  <xs:import namespace="RepositorioXDS"/>
+
+  <xs:element name="RegistryErrorList" type="tns:RegistryErrorList"/>
+
+  <xs:complexType final="extension restriction" name="RegistryErrorList">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" ref="ns1:RegistryError"/>
+    </xs:sequence>
+    <xs:attribute name="highestSeverity" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType final="extension restriction" name="RegistryError">
+    <xs:sequence/>
+    <xs:attribute name="codeContext" type="xs:string"/>
+    <xs:attribute name="errorCode" type="xs:string"/>
+    <xs:attribute name="location" type="xs:string"/>
+    <xs:attribute name="severity" type="xs:string"/>
+  </xs:complexType>
+
+</xs:schema>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0" xmlns:ns1="RepositorioXDS" targetNamespace="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0" version="1.0">
+
+  <xs:import namespace="RepositorioXDS"/>
+
+  <xs:complexType final="extension restriction" name="AssociationType1">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Slot" type="tns:SlotType1"/>
+    </xs:sequence>
+    <xs:attribute name="associationType" type="xs:string"/>
+    <xs:attribute name="home" type="xs:string"/>
+    <xs:attribute name="id" type="xs:string"/>
+    <xs:attribute name="lid" type="xs:string"/>
+    <xs:attribute name="objectType" type="xs:string"/>
+    <xs:attribute name="sourceObject" type="xs:string"/>
+    <xs:attribute name="status" type="xs:string"/>
+    <xs:attribute name="targetObject" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType final="extension restriction" name="SlotType1">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Value" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="name" type="xs:string"/>
+    <xs:attribute name="slotType" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType final="extension restriction" name="ClassificationType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Name" type="tns:LocalizedStringType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Slot" type="tns:SlotType1"/>
+    </xs:sequence>
+    <xs:attribute name="classificationNode" type="xs:string"/>
+    <xs:attribute name="classificationScheme" type="xs:string"/>
+    <xs:attribute name="classifiedObject" type="xs:string"/>
+    <xs:attribute name="home" type="xs:string"/>
+    <xs:attribute name="id" type="xs:string"/>
+    <xs:attribute name="lid" type="xs:string"/>
+    <xs:attribute name="nodeRepresentation" type="xs:string"/>
+    <xs:attribute name="objectType" type="xs:string"/>
+    <xs:attribute name="status" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType final="extension restriction" name="LocalizedStringType">
+    <xs:sequence/>
+    <xs:attribute name="charset" type="xs:string"/>
+    <xs:attribute name="lang" type="xs:string"/>
+    <xs:attribute name="value" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType final="extension restriction" name="ExternalIdentifierType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Name" type="tns:LocalizedStringType"/>
+    </xs:sequence>
+    <xs:attribute name="home" type="xs:string"/>
+    <xs:attribute name="id" type="xs:string"/>
+    <xs:attribute name="identificationScheme" type="xs:string"/>
+    <xs:attribute name="lid" type="xs:string"/>
+    <xs:attribute name="objectType" type="xs:string"/>
+    <xs:attribute name="registryObject" type="xs:string"/>
+    <xs:attribute name="status" type="xs:string"/>
+    <xs:attribute name="value" type="xs:string"/>
+  </xs:complexType>
+
+</xs:schema>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:ihe:iti:xds-b:2007" version="1.0">
+
+  <xs:complexType final="extension restriction" name="RetrieveDocumentSetRequestType.DocumentRequest">
+    <xs:sequence>
+      <xs:element form="qualified" minOccurs="0" name="DocumentUniqueId" type="xs:string"/>
+      <xs:element form="qualified" minOccurs="0" name="HomeCommunityId" type="xs:string"/>
+      <xs:element form="qualified" minOccurs="0" name="RepositoryUniqueId" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType final="extension restriction" name="RetrieveDocumentSetResponseType.DocumentResponse">
+    <xs:sequence>
+      <xs:element form="qualified" minOccurs="0" name="Document" type="xs:string"/>
+      <xs:element form="qualified" minOccurs="0" name="DocumentUniqueId" type="xs:string"/>
+      <xs:element form="qualified" minOccurs="0" name="HomeCommunityId" type="xs:string"/>
+      <xs:element form="qualified" minOccurs="0" name="mimeType" type="xs:string"/>
+      <xs:element form="qualified" minOccurs="0" name="RepositoryUniqueId" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="RepositorioXDS" xmlns:ns3="urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0" xmlns:ns2="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0" xmlns:ns1="urn:ihe:iti:xds-b:2007" elementFormDefault="unqualified" targetNamespace="RepositorioXDS" version="1.0">
+
+  <xs:import namespace="urn:ihe:iti:xds-b:2007"/>
+
+  <xs:import namespace="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0"/>
+
+  <xs:import namespace="urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0"/>
+
+  <xs:element name="AssociationType1" type="ns2:AssociationType1"/>
+
+  <xs:element name="ClassificationType" type="ns2:ClassificationType"/>
+
+  <xs:element name="DocumentType" type="tns:DocumentType"/>
+
+  <xs:element name="DocumentsRequest" type="tns:DocumentsRequest"/>
+
+  <xs:element name="ExternalIdentifierType" type="ns2:ExternalIdentifierType"/>
+
+  <xs:element name="ExtrinsicObjectType" type="tns:ExtrinsicObjectType"/>
+
+  <xs:element name="LocalizedStringType" type="ns2:LocalizedStringType"/>
+
+  <xs:element name="PING" type="tns:PING"/>
+
+  <xs:element name="PINGResponse" type="tns:PINGResponse"/>
+
+  <xs:element name="PROVIDEANDREGISTERDOCUMENTSET" type="tns:PROVIDEANDREGISTERDOCUMENTSET"/>
+
+  <xs:element name="PROVIDEANDREGISTERDOCUMENTSETResponse" type="tns:PROVIDEANDREGISTERDOCUMENTSETResponse"/>
+
+  <xs:element name="RETRIEVEDOCUMENTSET" type="tns:RETRIEVEDOCUMENTSET"/>
+
+  <xs:element name="RETRIEVEDOCUMENTSETResponse" type="tns:RETRIEVEDOCUMENTSETResponse"/>
+
+  <xs:element name="RegistryError" type="ns3:RegistryError"/>
+
+  <xs:element name="RegistryErrorList" type="ns3:RegistryErrorList"/>
+
+  <xs:element name="RegistryPackageType" type="tns:RegistryPackageType"/>
+
+  <xs:element name="RegistryResponseType" type="tns:RegistryResponseType"/>
+
+  <xs:element name="RetrieveDocumentSetRequestType.DocumentRequest" type="ns1:RetrieveDocumentSetRequestType.DocumentRequest"/>
+
+  <xs:element name="RetrieveDocumentSetResponseType.DocumentResponse" type="ns1:RetrieveDocumentSetResponseType.DocumentResponse"/>
+
+  <xs:element name="SlotType1" type="ns2:SlotType1"/>
+
+  <xs:element name="SubmitObjectsRequest" type="tns:SubmitObjectsRequest"/>
+
+  <xs:element name="SubmitObjectsRequest.RegistryObjectList" type="tns:SubmitObjectsRequest.RegistryObjectList"/>
+
+  <xs:complexType name="RETRIEVEDOCUMENTSET">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Retrievedocumentsetrequest" type="ns1:RetrieveDocumentSetRequestType.DocumentRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+
+  <xs:complexType name="RETRIEVEDOCUMENTSETResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Retrievedocumentsetresponse" type="ns1:RetrieveDocumentSetResponseType.DocumentResponse"/>
+    </xs:sequence>
+  </xs:complexType>
+
+
+  <xs:complexType name="PROVIDEANDREGISTERDOCUMENTSET">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Submitobjectsrequest" type="tns:SubmitObjectsRequest"/>
+      <xs:element minOccurs="0" name="Documentsrequest" type="tns:DocumentsRequest"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType final="extension restriction" name="SubmitObjectsRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="RegistryObjectList" type="tns:SubmitObjectsRequest.RegistryObjectList"/>
+    </xs:sequence>
+    <xs:attribute name="comment" type="xs:string"/>
+    <xs:attribute name="id" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType final="extension restriction" name="SubmitObjectsRequest.RegistryObjectList">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Association" type="ns2:AssociationType1"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Classification" type="ns2:ClassificationType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="ExtrinsicObject" type="tns:ExtrinsicObjectType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="RegistryPackage" type="tns:RegistryPackageType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+
+
+
+
+  <xs:complexType final="extension restriction" name="ExtrinsicObjectType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Classification" type="ns2:ClassificationType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Description" type="ns2:LocalizedStringType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="ExternalIdentifier" type="ns2:ExternalIdentifierType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Name" type="ns2:LocalizedStringType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Slot" type="ns2:SlotType1"/>
+    </xs:sequence>
+    <xs:attribute name="home" type="xs:string"/>
+    <xs:attribute name="id" type="xs:string"/>
+    <xs:attribute name="isOpaque" type="xs:boolean" use="required"/>
+    <xs:attribute name="lid" type="xs:string"/>
+    <xs:attribute name="mimeType" type="xs:string"/>
+    <xs:attribute name="objectType" type="xs:string"/>
+    <xs:attribute name="status" type="xs:string"/>
+  </xs:complexType>
+
+
+  <xs:complexType final="extension restriction" name="RegistryPackageType">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Classification" type="ns2:ClassificationType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="ExternalIdentifier" type="ns2:ExternalIdentifierType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="LocalizedString" type="ns2:LocalizedStringType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Name" type="ns2:LocalizedStringType"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Slot" type="ns2:SlotType1"/>
+    </xs:sequence>
+    <xs:attribute name="home" type="xs:string"/>
+    <xs:attribute name="id" type="xs:string"/>
+    <xs:attribute name="lid" type="xs:string"/>
+    <xs:attribute name="objectType" type="xs:string"/>
+    <xs:attribute name="status" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType final="extension restriction" name="DocumentsRequest">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Document" type="tns:DocumentType"/>
+    </xs:sequence>
+    <xs:attribute name="dummy" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType final="extension restriction" name="DocumentType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="data" type="xs:string"/>
+    </xs:sequence>
+    <xs:attribute name="id" type="xs:string"/>
+  </xs:complexType>
+
+  <xs:complexType name="PROVIDEANDREGISTERDOCUMENTSETResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Registryresponse" type="tns:RegistryResponseType"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType final="extension restriction" name="RegistryResponseType">
+    <xs:sequence>
+      <xs:element minOccurs="0" ref="tns:RegistryErrorList"/>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="Slot" type="ns2:SlotType1"/>
+    </xs:sequence>
+    <xs:attribute name="requestId" type="xs:string"/>
+    <xs:attribute name="status" type="xs:string"/>
+  </xs:complexType>
+
+
+
+  <xs:complexType name="PING">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="PINGResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Pingresult" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="PROVIDEANDREGISTERDOCUMENTSETResponse">
+    <wsdl:part element="tns:PROVIDEANDREGISTERDOCUMENTSETResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="RETRIEVEDOCUMENTSET">
+    <wsdl:part element="tns:RETRIEVEDOCUMENTSET" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="RETRIEVEDOCUMENTSETResponse">
+    <wsdl:part element="tns:RETRIEVEDOCUMENTSETResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="PINGResponse">
+    <wsdl:part element="tns:PINGResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="PROVIDEANDREGISTERDOCUMENTSET">
+    <wsdl:part element="tns:PROVIDEANDREGISTERDOCUMENTSET" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="PING">
+    <wsdl:part element="tns:PING" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="adocumentrepository">
+    <wsdl:operation name="RETRIEVEDOCUMENTSET">
+      <wsdl:input message="tns:RETRIEVEDOCUMENTSET" name="RETRIEVEDOCUMENTSET">
+    </wsdl:input>
+      <wsdl:output message="tns:RETRIEVEDOCUMENTSETResponse" name="RETRIEVEDOCUMENTSETResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PROVIDEANDREGISTERDOCUMENTSET">
+      <wsdl:input message="tns:PROVIDEANDREGISTERDOCUMENTSET" name="PROVIDEANDREGISTERDOCUMENTSET">
+    </wsdl:input>
+      <wsdl:output message="tns:PROVIDEANDREGISTERDOCUMENTSETResponse" name="PROVIDEANDREGISTERDOCUMENTSETResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PING">
+      <wsdl:input message="tns:PING" name="PING">
+    </wsdl:input>
+      <wsdl:output message="tns:PINGResponse" name="PINGResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="adocumentrepository_servicesServiceSoapBinding" type="tns:adocumentrepository">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="RETRIEVEDOCUMENTSET">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="RETRIEVEDOCUMENTSET">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="RETRIEVEDOCUMENTSETResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PROVIDEANDREGISTERDOCUMENTSET">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="PROVIDEANDREGISTERDOCUMENTSET">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="PROVIDEANDREGISTERDOCUMENTSETResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PING">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="PING">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="PINGResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="adocumentrepository_servicesService">
+    <wsdl:port binding="tns:adocumentrepository_servicesServiceSoapBinding" name="adocumentrepositoryPort">
+      <soap:address location="https://localhost:8082/RepositorioXDS/adocumentrepository_services"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
