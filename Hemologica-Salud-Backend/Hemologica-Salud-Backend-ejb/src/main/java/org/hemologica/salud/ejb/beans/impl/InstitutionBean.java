@@ -47,7 +47,7 @@ public class InstitutionBean implements IInstitutionBeanLocal {
 				
 			}
 		}
-		return null;
+		return dataInstitutions;
 	}
     
     
