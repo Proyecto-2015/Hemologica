@@ -6,10 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
-
-import javax.ejb.EJB;
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.ws.rs.core.Response;
 import org.hemologica.constants.DataDonationStateEnum;
 import org.hemologica.constants.DataEventSeverityEnum;
@@ -40,7 +37,8 @@ import org.hemologica.datatypes.TransfusionFilterData;
 import org.hemologica.salud.ejb.beans.IInstitutionBeanLocal;
 
 
-public class RestServicesImpl implements IRestServices {
+
+public class RestServicesImpl implements IRestServices{
 
 	private Logger logger = Logger.getLogger(RestServicesImpl.class.getName());
 
