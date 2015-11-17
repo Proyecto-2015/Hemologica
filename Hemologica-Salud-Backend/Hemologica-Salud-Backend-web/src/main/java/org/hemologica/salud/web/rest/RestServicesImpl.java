@@ -37,7 +37,6 @@ import org.hemologica.datatypes.TransfusionFilterData;
 import org.hemologica.salud.ejb.beans.IInstitutionBeanLocal;
 
 
-
 public class RestServicesImpl implements IRestServices{
 
 	private Logger logger = Logger.getLogger(RestServicesImpl.class.getName());

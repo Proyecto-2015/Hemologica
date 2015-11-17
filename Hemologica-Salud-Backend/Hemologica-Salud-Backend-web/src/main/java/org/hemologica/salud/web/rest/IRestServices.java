@@ -38,6 +38,7 @@ import org.hemologica.datatypes.MessageOptionData;
 import org.hemologica.datatypes.TransfusionFilterData;
 
 @Path("/services")
+@RequestScoped
 public interface IRestServices {
 	
 	@POST
