@@ -9,10 +9,14 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+
 import org.apache.http.client.ClientProtocolException;
 import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataResponse;
@@ -20,7 +24,8 @@ import org.hemologica.datatypes.MailData;
 import org.hemologica.datatypes.MessageOptionData;
 import org.hemologica.salud.factories.RestFactory;
 
-
+//@Named("messageBB")
+//@SessionScoped
 public class MessageBB implements Serializable{
 	
 	private static final long serialVersionUID = 1L;

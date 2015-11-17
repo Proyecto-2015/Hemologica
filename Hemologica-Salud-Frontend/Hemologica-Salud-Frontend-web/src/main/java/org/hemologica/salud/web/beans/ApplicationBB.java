@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.model.SelectItem;
+import javax.inject.Named;
+
 import org.apache.http.client.ClientProtocolException;
 import org.hemologica.constants.DataDonationStateEnum;
 import org.hemologica.datatypes.DataBank;
@@ -18,9 +20,11 @@ import org.hemologica.datatypes.DataDonationEvent;
 import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.DataProductType;
 import org.hemologica.salud.factories.RestFactory;
-
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.ApplicationScoped;
 
+//@Named(value="applicationBB")
+//@ApplicationScoped
 public class ApplicationBB implements Serializable {
 
 	/**

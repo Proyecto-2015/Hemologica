@@ -7,12 +7,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
+import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.apache.http.client.ClientProtocolException;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataResponsiblePerson;
 import org.hemologica.salud.factories.RestFactory;
 
+//@Named("sessionBB")
+//@SessionScoped
 public class SessionBB implements Serializable {
 
 	/**
@@ -22,7 +27,9 @@ public class SessionBB implements Serializable {
 	private static final Logger logger = Logger.getLogger(SessionBB.class.getName());
 	
 	private List<DataResponsiblePerson> responsibleTransfusionPersons;
+	
 	private ApplicationBB applicationBB;
+	
 	private DataBank bank;
 
 	

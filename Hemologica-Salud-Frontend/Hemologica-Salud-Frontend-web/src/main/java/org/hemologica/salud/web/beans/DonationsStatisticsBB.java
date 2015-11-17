@@ -9,6 +9,8 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 
 import org.apache.http.client.ClientProtocolException;
 import org.hemologica.datatypes.DataBank;
@@ -19,6 +21,8 @@ import org.hemologica.salud.factories.RestFactory;
 import org.primefaces.event.ItemSelectEvent;
 import org.primefaces.model.chart.PieChartModel;
 
+//@Named("donationsStatisticsBB")
+//@ViewScoped
 public class DonationsStatisticsBB implements Serializable{
 
 	private static final long serialVersionUID = 1L;

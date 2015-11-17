@@ -14,6 +14,9 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.apache.http.client.ClientProtocolException;
 import org.hemologica.datatypes.DataBank;
@@ -38,6 +41,8 @@ import org.primefaces.model.map.LatLng;
 import org.primefaces.model.map.MapModel;
 import org.primefaces.model.map.Marker;
 
+//@Named("stockBB")
+//@ViewScoped
 public class StockBB implements Serializable {
 
 	/**
@@ -85,7 +90,7 @@ public class StockBB implements Serializable {
 			gmapModel = new DefaultMapModel();
 			IServicesClient client = RestFactory.getServicesClient();
 			banks = client.getBanks();
-			banksItems = new ArrayList<>();
+			banksItems = new ArrayList<SelectItem>();
 
 			for (DataBank dataBank : banks) {
 				LatLng coord1 = new LatLng(dataBank.getLatitude(), dataBank.getLongitude());
@@ -132,7 +137,7 @@ public class StockBB implements Serializable {
 
 			this.banks = client.getBanks(banksItemsSelected, productTypeCode != null ? productTypeCode.getCode() : null,
 					bloodTypeCode != null ? bloodTypeCode.getCode() : null, count);
-			banksItems = new ArrayList<>();
+			banksItems = new ArrayList<SelectItem>();
 
 			gmapModel = new DefaultMapModel();
 
@@ -228,9 +233,9 @@ public class StockBB implements Serializable {
 
 		GChartModelBuilder gmodelBuilder = new GChartModelBuilder();
 		gmodelBuilder.setChartType(GChartType.COLUMN);
-		Map<String, List<Integer>> counts = new HashMap<>();
+		Map<String, List<Integer>> counts = new HashMap<String, List<Integer>>();
 		List<Integer> aux;
-		List<String> columnsStrings = new ArrayList<>();
+		List<String> columnsStrings = new ArrayList<String>();
 		for (DataStockProductType spt : products) {
 			columnsStrings.add(spt.getDisplay());
 			for (DataStockProductTypeBloodType sptbt : spt.getBloodTypes()) {

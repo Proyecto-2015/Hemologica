@@ -5,8 +5,12 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.inject.Named;
 
+//@Named(value="languageBB")
+//@SessionScoped
 public class LanguageBB implements Serializable{
 	
 	private static final long serialVersionUID = 5800497220271872843L;

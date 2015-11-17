@@ -9,10 +9,15 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
+
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.salud.factories.RestFactory;
 
 
+//@Named("campaignsPrevBB")
+//@ViewScoped
 public class CampaignsPrevBB implements Serializable{
 	
 	private static final long serialVersionUID = 1L;

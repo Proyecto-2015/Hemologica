@@ -6,9 +6,12 @@ import java.util.List;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.hemologica.constants.DataDonationStateEnum;
 import org.hemologica.datatypes.DataDonation;
@@ -20,6 +23,9 @@ import org.hemologica.datatypes.DataTransfusionEvent;
 import org.hemologica.salud.web.converters.DataEventTransfusionConverter;
 import org.primefaces.event.FlowEvent;
 
+
+//@Named("transfusionBB")
+//@ViewScoped
 public class TransfusionBB implements Serializable {
 
 	/**
@@ -57,7 +63,7 @@ public class TransfusionBB implements Serializable {
 			this.dataTransfusion.getLaboratoryResults().add(0,this.labResult);
 		else{
 			
-			List<DataLaboratoryResult> list = new ArrayList<>();
+			List<DataLaboratoryResult> list = new ArrayList<DataLaboratoryResult>();
 			list.add(this.labResult);
 			this.dataTransfusion.setLaboratoryResults(list);
 		}
@@ -74,7 +80,7 @@ public class TransfusionBB implements Serializable {
 			
 		}else{
 			
-			List<DataTransfusionEvent> events = new ArrayList<>();
+			List<DataTransfusionEvent> events = new ArrayList<DataTransfusionEvent>();
 			events.add(this.event);
 			this.dataTransfusion.setEvents(events);
 			

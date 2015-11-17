@@ -8,6 +8,9 @@ import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.hemologica.constants.DataDonationStateEnum;
 import org.hemologica.datatypes.DataDonation;
@@ -16,6 +19,8 @@ import org.hemologica.datatypes.DataLaboratoryResult;
 import org.hemologica.datatypes.DataTransfusionEvent;
 import org.primefaces.event.FlowEvent;
 
+//@Named("donationBB")
+//@ViewScoped
 public class DonationBB implements Serializable {
 
 	/**
@@ -59,7 +64,7 @@ public class DonationBB implements Serializable {
 		
 		else{
 			
-			List<DataLaboratoryResult> list = new ArrayList<>();
+			List<DataLaboratoryResult> list = new ArrayList<DataLaboratoryResult>();
 			list.add(this.labResult);
 			this.dataDonacion.setLabResults(list);
 		}
@@ -75,7 +80,7 @@ public class DonationBB implements Serializable {
 				
 		}else{
 			
-			List<DataDonationEvent> events = new ArrayList<>();
+			List<DataDonationEvent> events = new ArrayList<DataDonationEvent>();
 			events.add(this.event);
 			this.dataDonacion.setEvents(events);
 			

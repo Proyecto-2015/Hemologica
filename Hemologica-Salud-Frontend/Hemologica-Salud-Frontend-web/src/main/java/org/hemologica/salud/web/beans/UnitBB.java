@@ -4,10 +4,16 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.faces.bean.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.DataUnitInfo;
 import org.hemologica.salud.factories.RestFactory;
 
+//@Named("unitBB")
+//@ViewScoped
 public class UnitBB implements Serializable {
 
 	
@@ -18,9 +24,9 @@ public class UnitBB implements Serializable {
 	 */
 	private static final long serialVersionUID = 8925888848602043532L;
 	
-	
 	private ApplicationBB applicationBB;
 	private SessionBB sessionBB;
+	
 	private DataInstitution institution;
 	private String code;	
 	private DataUnitInfo unit;
