@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PING")
+@XmlType(name = "PING", namespace="tns:PING")
 public class PING {
 
 

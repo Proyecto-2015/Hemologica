@@ -30,7 +30,7 @@ import org.hemologica.xds.respository.adapter.ihe.iti.xds_b._2007.RetrieveDocume
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "RETRIEVEDOCUMENTSETResponse", propOrder = {
+@XmlType(name = "RETRIEVEDOCUMENTSETResponse", namespace="tns:RETRIVEDOCUMENTSETResponse", propOrder = {
     "retrievedocumentsetresponse"
 })
 public class RETRIEVEDOCUMENTSETResponse {

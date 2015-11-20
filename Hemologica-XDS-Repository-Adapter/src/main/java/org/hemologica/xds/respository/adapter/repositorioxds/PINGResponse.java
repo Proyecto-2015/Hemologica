@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PINGResponse", propOrder = {
+@XmlType(name = "PINGResponse", namespace="tns:PINGResponse", propOrder = {
     "pingresult"
 })
 public class PINGResponse {
