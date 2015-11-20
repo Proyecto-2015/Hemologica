@@ -22,33 +22,24 @@ import org.hemologica.salud.ejb.beans.IInstitutionBeanLocal;
 @LocalBean
 public class InstitutionBean implements IInstitutionBeanLocal {
 
-	@PersistenceContext(unitName="Hemologica-Salud-PU")
-	 private EntityManager em;
-	
-	
-    public InstitutionBean() {
-        // TODO Auto-generated constructor stub
-    }
-
+	@PersistenceContext(unitName = "Hemologica-Salud-PU")
+	private EntityManager em;
 
 	@Override
 	public List<DataInstitution> getInstitutions() {
-		
+
 		List<Institution> institutions = FactoryDAO.getInstitutionDAO(em).getInstitutions();
 		List<DataInstitution> dataInstitutions = new ArrayList<>();
-		
-		if(institutions != null){
-			for(Institution i : institutions){
-				
+
+		if (institutions != null) {
+			for (Institution i : institutions) {
 				DataInstitution dataIins = new DataInstitution();
 				dataIins.setCode(i.getInstitutionCode());
 				dataIins.setName(dataIins.getName());
 				dataInstitutions.add(dataIins);
-				
 			}
 		}
 		return dataInstitutions;
 	}
-    
-    
+
 }

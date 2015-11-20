@@ -3,89 +3,75 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:int="http://www.springframework.org/schema/integration"
-	xmlns:int-amqp="http://www.springframework.org/schema/integration/amqp"
 	xmlns:int-jms="http://www.springframework.org/schema/integration/jms"
-	xmlns:int-xml="http://www.springframework.org/schema/integration/xml"
-	xsi:schemaLocation="http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-4.2.xsd
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	xsi:schemaLocation="http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+		http://www.springframework.org/schema/beans	http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/integration/jms http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd
-		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
-		http://www.springframework.org/schema/integration/twitter http://www.springframework.org/schema/integration/twitter/spring-integration-twitter.xsd
-		http://www.springframework.org/schema/integration/xml http://www.springframework.org/schema/integration/xml/spring-integration-xml.xsd">
+		http://www.springframework.org/schema/integration/jms http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd">
 
-	<context:component-scan base-package="org.hemologica.services" />
+<!-- 	<context:component-scan base-package="org.hemologica.service" /> -->
+
+<!-- 	<context:property-placeholder location="../hemologica.properties"/> -->
+
+	<context:property-placeholder location="classpath:/hemologica.properties"/>
+
+	<bean id="connectionFactory" class="${jms.connection.factory}">
+		<property name="brokerURL" value="${jms.connection.factory.broker.url}" />
+	</bean>
+
+	<bean id="receiveQueue" class="${jms.queue}">
+		<constructor-arg index="0" >
+			<value>${jms.queue.cda.receive}</value>
+		</constructor-arg>
+	</bean>
 	
+	
+	<bean id="sendQueue" class="${jms.queue}">
+		<constructor-arg index="0">
+			<value>${jms.queue.cda.send}</value>
+		</constructor-arg>
+	</bean>
+	
+	<bean id="discardQueue" class="${jms.queue}">
+		<constructor-arg index="0">
+			<value>${jms.queue.cda.discard}</value>
+		</constructor-arg>
+	</bean>
 
-	<import resource="../beans.xml" />
-<!-- 	<import resource="spring-integration-context-cda-flow.xml" /> -->
-<!-- 	<import resource="spring-integration-context-stock-flow.xml" /> -->
-
-	<int:annotation-config />
+	
+	<bean id="messageListenerContainer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destination" ref="receiveQueue" />
+		<property name="sessionTransacted" value="true" />
+		<property name="maxConcurrentConsumers" value="1" />
+		<property name="concurrentConsumers" value="1" />
+		<property name="receiveTimeout" value="5000" />
+		<property name="recoveryInterval" value="60000" />
+		<property name="autoStartup" value="true" />
+	</bean>
+	
+	
+	
+	<!-- flow -->
 	
 	<int-jms:message-driven-channel-adapter id="jmsIn" 
-	channel="inbound-filter" 
-	container="messageListenerContainer" />
-
-	<int:channel id="inbound-filter" />
+				channel="inbound-channel" 
+				container="messageListenerContainer" />
 	
-	<int:filter input-channel="inbound-filter"
-				ref="messageValidator"
-				method="filter"
-				output-channel="outbound-filter" 
-				discard-channel="discard-channel-filter"/>
+	<int:channel id="inbound-channel" />
 	
-	<int:channel id="outbound-filter" />
-	<int-xml:xpath-router 	id="cda-stock-router" input-channel="outbound-filter" >
-		<!-- xpath para obtener el valor del codigo del documento -->
-		<int-xml:xpath-expression expression="/ClinicalDocument" />
-	</int-xml:xpath-router>
-	
-	<int:channel id="discard-channel-filter" />
-	<int-jms:outbound-channel-adapter id="jmsDiscard"
-		channel="discard-channel-filter"
-		connection-factory="connectionFactory"
-		destination="discardQueue"
-		delivery-persistent="true"/>
-	
-	
-	<int:channel id="inbound-stock-message-validator-filter" />
-	
-	<int-xml:validating-filter schema-type="xml-schema" 
-					schema-location="stockMessage.xsd" 
-					input-channel="inbound-stock-message-validator-filter" 
-					output-channel="outbound-stock-message-validator-filter" 
-					discard-channel="discard-stock-message-validator-filter"/>
-	
-	
-	<int:channel id="outbound-stock-message-validator-filter" />
-	<int:channel id="discard-stock-message-validator-filter" />
-	
-	<int:channel id="inbound-cda-router" />
-	
-	<int-xml:xpath-router id="cda-router" input-channel="inbound-cda-router" >
-		<!-- xpath para obtener el valor del codigo del documento -->
-		<int-xml:xpath-expression expression="/ClinicalDocument/code/@code" />
-		<int-xml:mapping value="4321000179101" channel="inbound-process-cda-donation" />
-		<int-xml:mapping value="4321000179102" channel="inbound-process-cda-laboratory" />
-		<int-xml:mapping value="4321000179103" channel="inbound-process-cda-transfusion" />
-	</int-xml:xpath-router>
-	
-	<int:channel id="inbound-process-cda" />
-	<int:channel id="inbound-process-stock" />
+	<bean id="activator" class="org.hemologica.service.activator.DefaultServiceActivator" />
+	<int:service-activator  input-channel="inbound-channel"
+							output-channel="outbound-channel"
+                            ref="activator"
+                            method="process" />
+                            
+    <int:channel id="outbound-channel" />
 	
 	<int-jms:outbound-channel-adapter id="jmsOut"
-		channel="outbound" 
-		connection-factory="connectionFactory" 
-		destination="sendQueue"
-		delivery-persistent="true" />
-
-	<int:channel id="outbound-filter" />
-	
-	<int:service-activator  input-channel="inbound"
-                            output-channel="outbound" 
-                            ref="messageHandler"
-                            method="onMessage" 
-                            requires-reply="true" />
+				channel="outbound-channel"
+				destination="sendQueue"/>
+			          
 	
 </beans>
