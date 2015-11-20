@@ -11,67 +11,50 @@
 
 <!-- 	<context:component-scan base-package="org.hemologica.service" /> -->
 
-<!-- 	<context:property-placeholder location="../hemologica.properties"/> -->
+	<context:property-placeholder location="classpath:/hemologica.properties" />
 
-	<context:property-placeholder location="classpath:/hemologica.properties"/>
-
-	<bean id="connectionFactory" class="${jms.connection.factory}">
-		<property name="brokerURL" value="${jms.connection.factory.broker.url}" />
-	</bean>
-
-	<bean id="receiveQueue" class="${jms.queue}">
-		<constructor-arg index="0" >
-			<value>${jms.queue.cda.receive}</value>
-		</constructor-arg>
-	</bean>
-	
-	
-	<bean id="sendQueue" class="${jms.queue}">
-		<constructor-arg index="0">
-			<value>${jms.queue.cda.send}</value>
-		</constructor-arg>
-	</bean>
-	
-	<bean id="discardQueue" class="${jms.queue}">
-		<constructor-arg index="0">
-			<value>${jms.queue.cda.discard}</value>
-		</constructor-arg>
-	</bean>
-
-	
-	<bean id="messageListenerContainer"
-		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
-		<property name="connectionFactory" ref="connectionFactory" />
-		<property name="destination" ref="receiveQueue" />
-		<property name="sessionTransacted" value="true" />
-		<property name="maxConcurrentConsumers" value="1" />
-		<property name="concurrentConsumers" value="1" />
-		<property name="receiveTimeout" value="5000" />
-		<property name="recoveryInterval" value="60000" />
-		<property name="autoStartup" value="true" />
-	</bean>
-	
+	<import resource="../beans.xml"/>
+		
 	
 	
 	<!-- flow -->
 	
 	<int-jms:message-driven-channel-adapter id="jmsIn" 
-				channel="inbound-channel" 
+				channel="inbound-channel-1" 
 				container="messageListenerContainer" />
 	
-	<int:channel id="inbound-channel" />
+	<int:channel id="inbound-channel-1" />
 	
-	<bean id="activator" class="org.hemologica.service.activator.DefaultServiceActivator" />
-	<int:service-activator  input-channel="inbound-channel"
-							output-channel="outbound-channel"
+	
+	<int:service-activator  input-channel="inbound-channel-1"
+							output-channel="outbound-channel-1"
                             ref="activator"
                             method="process" />
                             
-    <int:channel id="outbound-channel" />
+    <int:channel id="outbound-channel-1" />
+    
+	<int:service-activator  input-channel="outbound-channel-1"
+							output-channel="outbound-channel-1"
+                            ref="cdaHeaderProcessActivator"
+                            method="process" />
+                            
+    <int:channel id="outbound-channel-2" />
+   
+	
+	<int:service-activator  input-channel="inbound-channel-2"
+							output-channel="outbound-channel-3"
+                            ref="activator"
+                            method="process" />
+                            
+    <int:channel id="outbound-channel-3" />
 	
 	<int-jms:outbound-channel-adapter id="jmsOut"
-				channel="outbound-channel"
+				channel="outbound-channel-3"
 				destination="sendQueue"/>
+				
+				
+	
+	
 			          
 	
 </beans>
