@@ -7,7 +7,7 @@
 	<version>1.0.0.BUILD-SNAPSHOT</version>
 	<packaging>war</packaging>
 
-	<name>Hemologica-Service2</name>
+	<name>Hemologica-Service</name>
 	<url>http://www.springsource.org/spring-integration</url>
 
 	<prerequisites>

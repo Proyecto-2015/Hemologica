@@ -20,6 +20,6 @@
             <dependency-type>uses</dependency-type>
         </dependent-module>
         <property name="java-output-path" value="target/classes"/>
-        <property name="context-root" value="Hemologica-Service2"/>
+        <property name="context-root" value="Hemologica-Service"/>
     </wb-module>
 </project-modules>

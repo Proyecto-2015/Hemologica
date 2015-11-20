@@ -1,56 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 
-	<context:component-scan base-package="org.hemologica.service" />
-	<context:property-placeholder location="classpath:hemologica.properties"/>
-	
-	
-	<!-- EMPI Connection -->
+	<context:property-placeholder location="classpath:/hemologica.properties" />
 
-	<bean id="pixConnection" class="org.hemologica.empi.adapter.connection.MLLPConnection">
-		<constructor-arg name="host" value="${empi.pix.connection.host}" />
-		<constructor-arg name="port" value="${empi.pix.connection.port}]" />
+	<bean id="connectionFactory" class="${jms.connection.factory}">
+		<property name="brokerURL" value="${jms.connection.factory.broker.url}" />
 	</bean>
 
-	<bean id="pdqConnection" class="org.hemologica.empi.adapter.connection.MLLPConnection">
-		<constructor-arg name="host" value="${empi.pdq.connection.host}" />
-		<constructor-arg name="port" value="${empi.pdq.connection.port}]" />
-	</bean>
-
-	<bean id="hl7Parser" class="${hl7.parser}" />
-
-	<bean id="empiAdapter" class="${empi.adapter}">
-		<constructor-arg name="pixConnection" ref="pixConnection" />
-		<constructor-arg name="pdqConnection" ref="pixConnection" />
-		<constructor-arg name="parser" ref="hl7Parser" />
-		<constructor-arg name="context">
-			<map key-type="java.lang.String" value-type="java.lang.String">
-				<entry key="sendingApplication" value="${empi.context.sending.application}" />
-				<entry key="sendingFacility" value="${empi.context.sending.facility}" />
-				<entry key="receivingApplication" value="${empi.context.receiving.application}" />
-				<entry key="receivingFacility" value="${empi.context.receiving.facility}" />
-				<entry key="aa_namespace" value="${empi.context.namespace}" />
-				<entry key="aa_universal_id" value="${empi.context.universal.id}" />
-				<entry key="aa_universal_id_type" value="${empi.context.universal.type}" />
-			</map>
+	<bean id="receiveQueue" class="${jms.queue}">
+		<constructor-arg index="0">
+			<value>${jms.queue.cda.receive}</value>
 		</constructor-arg>
 	</bean>
-	
-	
-	<!-- EMPI Connection -->
-	
-	
-	<bean id="cdaHeaderProcessMessageHandler" class="org.hemologica.service.handler.cdaHeaderProcessMessageHandler" >
-		<property name="empi" ref="empiAdapter" />
+
+
+	<bean id="sendQueue" class="${jms.queue}">
+		<constructor-arg index="0">
+			<value>${jms.queue.cda.send}</value>
+		</constructor-arg>
 	</bean>
-	
-	<!-- JMS -->
-	<bean id="messageListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+
+	<bean id="discardQueue" class="${jms.queue}">
+		<constructor-arg index="0">
+			<value>${jms.queue.cda.discard}</value>
+		</constructor-arg>
+	</bean>
+
+
+	<bean id="messageListenerContainer"
+		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="destination" ref="receiveQueue" />
 		<property name="sessionTransacted" value="true" />
@@ -61,4 +43,13 @@
 		<property name="autoStartup" value="true" />
 	</bean>
 	
+	<!-- Activators -->
+	<bean id="activator" class="org.hemologica.service.activator.DefaultServiceActivator" />
+	<bean id="cdaHeaderProcessActivator" class="org.hemologica.service.activator.CDAHeaderProcessActivator" />
+	<bean id="cdaEMPIProcessActivator" class="org.hemologica.service.activator.CDAEMPIProcessActivator" />
+	<bean id="cdaLocalProcessActivator" class="org.hemologica.service.activator.CDALocalProcessActivator" />
+	
+	
+
+
 </beans>

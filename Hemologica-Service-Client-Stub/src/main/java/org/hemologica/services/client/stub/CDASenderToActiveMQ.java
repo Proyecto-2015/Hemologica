@@ -51,7 +51,8 @@ public class CDASenderToActiveMQ {
                 producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
  
                 // Create a messages
-                String text = "Hello world! From: " + Thread.currentThread().getName() + " : " + this.hashCode();
+//                String text = "Hello world! From: " + Thread.currentThread().getName() + " : " + this.hashCode();
+                String text = "<hola><pepe id=\"1\"></pepe></hola>";
                 TextMessage message = session.createTextMessage(text);
  
                 // Tell the producer to send the message
