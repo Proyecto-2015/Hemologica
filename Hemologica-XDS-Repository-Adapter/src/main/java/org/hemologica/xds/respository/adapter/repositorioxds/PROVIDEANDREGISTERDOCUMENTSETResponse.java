@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PROVIDEANDREGISTERDOCUMENTSETResponse", propOrder = {
+@XmlType(name = "PROVIDEANDREGISTERDOCUMENTSETResponse", namespace="tns:PROVIDEANDREGISTERDOCUMENTSETtns:PROVIDEANDREGISTERDOCUMENTSE", propOrder = {
     "registryresponse"
 })
 public class PROVIDEANDREGISTERDOCUMENTSETResponse {

@@ -108,7 +108,10 @@
   </xs:complexType>
 
 </xs:schema>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="RepositorioXDS" xmlns:ns3="urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0" xmlns:ns2="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0" xmlns:ns1="urn:ihe:iti:xds-b:2007" elementFormDefault="unqualified" targetNamespace="RepositorioXDS" version="1.0">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="RepositorioXDS" 
+xmlns:ns3="urn:oasis:names:tc:ebxml-regrep:xsd:rs:3.0" 
+xmlns:ns2="urn:oasis:names:tc:ebxml-regrep:xsd:rim:3.0" 
+xmlns:ns1="urn:ihe:iti:xds-b:2007" elementFormDefault="unqualified" targetNamespace="RepositorioXDS" version="1.0">
 
   <xs:import namespace="urn:ihe:iti:xds-b:2007"/>
 

@@ -30,7 +30,8 @@ public class AdocumentrepositoryServicesService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("file:/home/bruno/Desarrollo/Proyectos/XDS-Saluduy-Client/adocumentrepository_services.wsdl");
+        	
+            url = new URL("file:/Users/paularoche/Documents/Git/Hemologica/Hemologica-XDS-Repository-Adapter/src/main/resources/wsdl/adocumentrepository_services.wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
