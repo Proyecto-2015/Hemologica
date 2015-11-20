@@ -15,16 +15,19 @@ public class MainPrueba {
 		String codingSchemeSNOMEDCTId = "11429006";
 		String codingSchemeSNOMEDCTName = "Consulta (procedimiento)";
 		String languageCode = "es-uy";
-		String cdaID = "b2c8c900-2c7f-11e5-b870-005056010832";
+		String cdaID = "b2c8c900-2c7f-11e5-b870-005056010837";
 		String cdaDocumentType = "99999";
 		String cda = "soy un CDA";
-		
-		
+		String submissionTime = "20150717093107";
+		String PID5 = "RODRIGUEZ^MARIA             ^^^^";
+		String PID7 = "19321115";
+		String PID8 = "1";
 		
 		repositoryXDSImpl.saveCDA(authorPerson , authorInstitution,
 				authorRole, codingSchemeLOINCId, codingSchemeLOINCname,
 				codingSchemeSNOMEDCTId,codingSchemeSNOMEDCTName,
-				languageCode, cdaID,cdaDocumentType, cda);
+				PID5, PID7, PID8,
+				languageCode, cdaID,cdaDocumentType, cda, submissionTime);
 
 	}
 
