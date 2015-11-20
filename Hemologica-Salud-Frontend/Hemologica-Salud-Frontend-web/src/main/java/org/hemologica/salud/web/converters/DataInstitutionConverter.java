@@ -33,7 +33,7 @@ public class DataInstitutionConverter implements Converter, Serializable {
 			for (DataInstitution type : typesList) {
 
 				if (type.getCode() != null && type.getCode().equals(value)) {
-					return type;
+					return type.getCode();
 				}
 			}
 		}

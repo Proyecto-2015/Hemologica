@@ -15,7 +15,7 @@
 		<level value="info" />
 	</logger>
 
-	<logger name="org.hemologica.services">
+	<logger name="org.hemologica.service">
 		<level value="info" />
 	</logger>
 
