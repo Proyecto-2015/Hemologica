@@ -1,29 +1,19 @@
 package org.hemologica.service.activator;
 
-import java.io.StringWriter;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
+import java.io.IOException;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+
+import org.hemologica.service.datatype.CDA;
 import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 
 public class CDAHeaderProcessActivator {
 
-	public String process(Document cda) throws TransformerException{
+	public CDA process(Document cda) throws TransformerException, ParserConfigurationException, SAXException, IOException{
 		
-		DOMSource domSource = new DOMSource(cda);
-		StringWriter writer = new StringWriter();
-		StreamResult result = new StreamResult(writer);
-		TransformerFactory tf = TransformerFactory.newInstance();
-		Transformer transformer = tf.newTransformer();
-		transformer.transform(domSource, result);
-		String msg = writer.toString();
-		System.out.println("#########################");
-		System.out.println(msg);
-		System.out.println("#########################");
-		return msg;
+		return new CDA(cda);
 		
 	}
 }

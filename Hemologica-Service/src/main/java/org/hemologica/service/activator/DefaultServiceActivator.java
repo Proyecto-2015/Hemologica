@@ -12,10 +12,6 @@ public class DefaultServiceActivator {
 	
 	public Document process(String msg) throws SAXException, IOException, ParserConfigurationException{
 		
-		System.out.println("#########################");
-		System.out.println(msg);
-		System.out.println("#########################");
-		
 		StringInputStream input = new StringInputStream(msg);
 		return DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(input);
 		
