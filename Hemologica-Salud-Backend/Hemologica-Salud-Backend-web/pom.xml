@@ -43,42 +43,6 @@
 			<scope>provided</scope>
 		</dependency>
 
-		<!-- Import the JAX-RS API, we use provided scope as the API is included 
-			in JBoss WildFly -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.jboss.resteasy</groupId> -->
-		<!-- <artifactId>jaxrs-api</artifactId> -->
-		<!-- <scope>provided</scope> -->
-		<!-- </dependency> -->
-
-
-		<!-- Import the CDI API, we use provided scope as the API is included in 
-			JBoss WildFly -->
-		<!-- <dependency> -->
-		<!-- <groupId>javax.enterprise</groupId> -->
-		<!-- <artifactId>cdi-api</artifactId> -->
-		<!-- <scope>provided</scope> -->
-		<!-- </dependency> -->
-
-		<!-- Import the JSF API, we use provided scope as the API is included in 
-			JBoss WildFly -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.jboss.spec.javax.faces</groupId> -->
-		<!-- <artifactId>jboss-jsf-api_2.2_spec</artifactId> -->
-		<!-- <scope>provided</scope> -->
-		<!-- </dependency> -->
-
-		<!-- Import the JPA API, we use provided scope as the API is included in 
-			JBoss WildFly -->
-		<!-- <dependency> -->
-		<!-- <groupId>org.hibernate.javax.persistence</groupId> -->
-		<!-- <artifactId>hibernate-jpa-2.1-api</artifactId> -->
-		<!-- <scope>provided</scope> -->
-		<!-- </dependency> -->
-
-		<!-- JSR-303 (Bean Validation) Implementation -->
-		<!-- Provides portable constraints such as @Email -->
-		<!-- Hibernate Validator is shipped in JBoss WildFly -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
@@ -142,7 +106,7 @@
 		<dependency>
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jaxrs</artifactId>
-			<version>3.0.6.Final</version>
+			<version>3.0.13.Final</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -167,8 +131,6 @@
 			<artifactId>resteasy-multipart-provider</artifactId>
 			<version>3.0.6.Final</version>
 		</dependency>
-
-
 	</dependencies>
 
 	<build>

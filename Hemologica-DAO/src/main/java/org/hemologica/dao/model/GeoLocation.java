@@ -21,10 +21,10 @@ public class GeoLocation implements Serializable {
 	private String geoLocationId;
 
 	@Column(name="geo_locations_x")
-	private int geoLocationsX;
+	private double geoLocationsX;
 
 	@Column(name="geo_locations_y")
-	private int geoLocationsY;
+	private double geoLocationsY;
 
 	//bi-directional many-to-one association to Center
 	@OneToMany(mappedBy="geoLocation")
@@ -41,7 +41,7 @@ public class GeoLocation implements Serializable {
 		this.geoLocationId = geoLocationId;
 	}
 
-	public int getGeoLocationsX() {
+	public double getGeoLocationsX() {
 		return this.geoLocationsX;
 	}
 
@@ -49,7 +49,7 @@ public class GeoLocation implements Serializable {
 		this.geoLocationsX = geoLocationsX;
 	}
 
-	public int getGeoLocationsY() {
+	public double getGeoLocationsY() {
 		return this.geoLocationsY;
 	}
 

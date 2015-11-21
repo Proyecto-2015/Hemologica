@@ -15,6 +15,8 @@ import javax.naming.NamingException;
 import javax.ws.rs.core.Response;
 import org.hemologica.constants.DataDonationStateEnum;
 import org.hemologica.constants.DataEventSeverityEnum;
+import org.hemologica.dao.ICodesDAO;
+import org.hemologica.dao.impl.CodesDAOImpl;
 import org.hemologica.dao.model.Movement;
 import org.hemologica.dao.model.MovementsType;
 import org.hemologica.datatypes.DataBloodType;
@@ -42,8 +44,12 @@ import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.DataMovement;
 import org.hemologica.datatypes.LoginData;
 import org.hemologica.datatypes.MailData;
-import org.hemologica.datatypes.MessageOptionData;
+import org.hemologica.datatypes.DataMessageOption;
 import org.hemologica.datatypes.TransfusionFilterData;
+import org.hemologica.factories.FactoryDAO;
+import org.hemologica.salud.ejb.beans.CentersBeanLocal;
+import org.hemologica.salud.ejb.beans.CodesBeanLocal;
+import org.hemologica.salud.ejb.beans.IBloodLocal;
 import org.hemologica.salud.ejb.beans.IInstitutionBeanLocal;
 
 
@@ -53,6 +59,15 @@ public class RestServicesImpl implements IRestServices{
 
 	@Inject
 	private IInstitutionBeanLocal institutionBean;
+	
+	@Inject
+	private IBloodLocal bloodLocal;
+	
+	@Inject
+	private CodesBeanLocal codeBeans;
+	
+	@Inject
+	private CentersBeanLocal centerBeans;
 	
 	@Override
 	public Response login(LoginData datos) {
@@ -278,61 +293,9 @@ public class RestServicesImpl implements IRestServices{
 
 	@Override
 	public List<DataBank> getBanks() {
-
-		List<DataBank> banks = new ArrayList<>();
-		DataBank db1 = new DataBank();
-		db1.setCode("1");
-		db1.setName("Banco de Sangre 1");
-
-		DataInstitution di1 = new DataInstitution();
-		di1.setName("Institucion 1");
-
-		db1.setInstitution(di1);
-
-		db1.setAddress("Av Italia 345");
-		db1.setEmail("infobanco1@hc.com");
-		db1.setHour("Lunes a viernes de 8 - 18 hs ");
-		db1.setInformation("Se dan 40 numeros a partir de las 8 am.");
-		db1.setTelephone("12345678");
-		db1.setLatitude(-34.898930);
-		db1.setLongitude(-56.165753);
-		banks.add(db1);
-
-		DataBank db2 = new DataBank();
-		db2.setCode("2");
-		db2.setName("Banco de Sangre 2");
-
-		DataInstitution di = new DataInstitution();
-		di.setName("Institucion 2");
-
-		db2.setInstitution(di);
-		db2.setAddress("Rivera 567");
-		db2.setEmail("infobanco2@hc.com");
-		db2.setHour("Lunes a viernes de 8 - 20 hs y Sabados 8 - 12 ");
-		db2.setInformation("Pedir hora por telefono");
-		db2.setTelephone("098765432");
-		db2.setLatitude(-34.871729);
-		db2.setLongitude(-56.188868);
-
-		banks.add(db2);
-
-		DataBank db3 = new DataBank();
-		db3.setCode("3");
-		db3.setName("Banco de Sangre 3");
-		DataInstitution di3 = new DataInstitution();
-		di3.setName("Institucion 3");
-
-		db3.setInstitution(di3);
-		db3.setAddress("Melilla 7356");
-		db3.setEmail("infobanco3@hc.com");
-		db3.setHour("Lunes a jueves de 8 - 20 hs y Sabados 8 - 12 ");
-		db3.setInformation("Pedir hora por la pagina web bancoDesangre3.org.uy");
-		db3.setTelephone("098765432");
-		db3.setLatitude(-34.758027);
-		db3.setLongitude(-56.272928);
-
-		banks.add(db3);
-		return banks;
+		
+		return getCenterBean().getBanks();
+		
 	}
 
 	@Override
@@ -490,67 +453,26 @@ public class RestServicesImpl implements IRestServices{
 	}
 
 	@Override
-	public List<MessageOptionData> getMessageOptions() {
-		List<MessageOptionData> options = new ArrayList<>();
+	public List<DataMessageOption> getMessageOptions() {
 
-		MessageOptionData o1 = new MessageOptionData();
-		o1.setCode("0");
-		o1.setDisplayName("Todos");
-		options.add(o1);
-
-		MessageOptionData o2 = new MessageOptionData();
-		o2.setCode("1");
-		o2.setDisplayName("Solo Habilitados");
-		options.add(o2);
-
-		return options;
+		return getCodeBeans().getMessageOptions();
+		
 	}
 
 	@Override
 	public List<DataBloodType> getBloodTypes() {
-
-		List<DataBloodType> options = new ArrayList<>();
-
-		DataBloodType o1 = new DataBloodType();
-		o1.setCode("0");
-		o1.setDisplayName("A+");
-		options.add(o1);
-
-		o1 = new DataBloodType();
-		o1.setCode("1");
-		o1.setDisplayName("A-");
-		options.add(o1);
-
-		o1 = new DataBloodType();
-		o1.setCode("2");
-		o1.setDisplayName("B+");
-		options.add(o1);
-
-		o1 = new DataBloodType();
-		o1.setCode("3");
-		o1.setDisplayName("B-");
-		options.add(o1);
-
-		o1 = new DataBloodType();
-		o1.setCode("4");
-		o1.setDisplayName("AB+");
-		options.add(o1);
-
-		DataBloodType o2 = new DataBloodType();
-		o2.setCode("5");
-		o2.setDisplayName("AB-");
-		options.add(o2);
-
-		DataBloodType o3 = new DataBloodType();
-		o3.setCode("6");
-		o3.setDisplayName("0+");
-		options.add(o3);
-		DataBloodType o4 = new DataBloodType();
-		o4.setCode("7");
-		o4.setDisplayName("0-");
-		options.add(o4);
-
-		return options;
+		
+		List<DataBloodType> listResult = new ArrayList<>();
+		
+		for(DataCode dataCode : getBloodLocal().getDonationABOTypes()){
+			
+			DataBloodType data = new DataBloodType();
+			data.setCode(dataCode.getCode());
+			data.setDisplayName(dataCode.getDisplayName());
+			listResult.add(data);
+			
+		}
+		return listResult;
 	}
 
 	@Override
@@ -559,7 +481,13 @@ public class RestServicesImpl implements IRestServices{
 
 		logger.info(mailData.getSubject());
 		logger.info(mailData.getText());
-		logger.info(mailData.getBloodType().getDisplayName());
+		logger.info(mailData.getBloodTypeABO().getCode());
+		logger.info(mailData.getBloodTypeABO().getDisplayName());
+		
+		logger.info(mailData.getBloodTypeRH().getCode());
+		logger.info(mailData.getBloodTypeRH().getDisplayName());
+		
+		logger.info(mailData.getMessageOption().getCode());
 		logger.info(mailData.getMessageOption().getDisplayName());
 
 		response.setCode(0);
@@ -804,24 +732,8 @@ public class RestServicesImpl implements IRestServices{
 
 	@Override
 	public List<DataProductType> getProducts() {
-		List<DataProductType> products = new ArrayList<>();
 
-		DataProductType dp1 = new DataProductType();
-		dp1.setCode("0");
-		dp1.setDisplay("Plaquetas");
-
-		DataProductType dp2 = new DataProductType();
-		dp2.setCode("1");
-		dp2.setDisplay("Plasma");
-
-		DataProductType dp3 = new DataProductType();
-		dp3.setCode("2");
-		dp3.setDisplay("Globulos Rojos");
-
-		products.add(dp1);
-		products.add(dp2);
-		products.add(dp3);
-		return products;
+		return getCodeBeans().getProducts();
 
 	}
 
@@ -1108,37 +1020,40 @@ public class RestServicesImpl implements IRestServices{
 	@Override
 	public List<DataCode> getDonationABOTypes() {
 		
-		List<DataCode> analisis = new ArrayList<>();
-		DataCode code1 = new DataCode();
-		code1.setCode("0");
-		code1.setDisplayName("A");
+//		List<DataCode> analisis = new ArrayList<>();
+//		DataCode code1 = new DataCode();
+//		code1.setCode("0");
+//		code1.setDisplayName("A");
+//		
+//		DataCode code2 = new DataCode();
+//		code2.setCode("1");
+//		code2.setDisplayName("0");
+//		
+//		analisis.add(code1);
+//		analisis.add(code2);
 		
-		DataCode code2 = new DataCode();
-		code2.setCode("1");
-		code2.setDisplayName("0");
 		
-		analisis.add(code1);
-		analisis.add(code2);
 		
-		return analisis;
+		
+		return getBloodLocal().getDonationABOTypes();
 	}
 
 	@Override
 	public List<DataCode> getDonationDTTypes() {
 
-		List<DataCode> analisis = new ArrayList<>();
-		DataCode code1 = new DataCode();
-		code1.setCode("0");
-		code1.setDisplayName("RH+");
+//		List<DataCode> analisis = new ArrayList<>();
+//		DataCode code1 = new DataCode();
+//		code1.setCode("0");
+//		code1.setDisplayName("RH+");
+//		
+//		DataCode code2 = new DataCode();
+//		code2.setCode("1");
+//		code2.setDisplayName("RH-");
+//		
+//		analisis.add(code1);
+//		analisis.add(code2);
 		
-		DataCode code2 = new DataCode();
-		code2.setCode("1");
-		code2.setDisplayName("RH-");
-		
-		analisis.add(code1);
-		analisis.add(code2);
-		
-		return analisis;
+		return getBloodLocal().getDonationDTTypes();
 	}
 
 	@Override
@@ -1324,18 +1239,7 @@ public class RestServicesImpl implements IRestServices{
 	public List<DataInstitution> getInstitutions() {
 		
 		
-		if(institutionBean == null){
-			
-			try {
-
-				institutionBean = InitialContext.doLookup("java:global/Hemologica-Salud-Backend-ear/Hemologica-Salud-Backend-ejb/InstitutionBea");
-				
-			} catch (NamingException e) {
-				logger.log(Level.SEVERE, e.getMessage(), e);
-				e.printStackTrace();
-			}
-		}
-		return institutionBean.getInstitutions();
+		return getInstitutionBean().getInstitutions();
 		
 	}
 
@@ -1410,4 +1314,74 @@ public class RestServicesImpl implements IRestServices{
 		return dataUnitInfo;
 	}
 
+	public IInstitutionBeanLocal getInstitutionBean() {
+		
+		if(institutionBean == null){
+			
+			try {
+				
+				institutionBean = InitialContext.doLookup("java:global/Hemologica-Salud-Backend-ear/Hemologica-Salud-Backend-ejb/InstitutionBean!org.hemologica.salud.ejb.beans.impl.InstitutionBean");
+				
+			} catch (NamingException e) {
+				
+				logger.log(Level.SEVERE, e.getMessage(), e);
+				
+			}
+		}
+		return institutionBean;
+	}
+
+	public IBloodLocal getBloodLocal() {
+			
+		if(bloodLocal == null){
+			
+			try {
+				
+				bloodLocal = InitialContext.doLookup("java:global/Hemologica-Salud-Backend-ear/Hemologica-Salud-Backend-ejb/BloodBean!org.hemologica.salud.ejb.beans.IBloodLocal");
+				
+			} catch (NamingException e) {
+				
+				logger.log(Level.SEVERE, e.getMessage(), e);
+				
+			}
+		}
+		return bloodLocal;
+		
+	}
+
+	public CodesBeanLocal getCodeBeans() {
+		
+		if(codeBeans == null){
+			
+			try {
+				
+				codeBeans = InitialContext.doLookup("java:global/Hemologica-Salud-Backend-ear/Hemologica-Salud-Backend-ejb/CodesBean!org.hemologica.salud.ejb.beans.impl.CodesBean");
+				
+			} catch (NamingException e) {
+
+				logger.log(Level.SEVERE, e.getMessage(), e);
+
+			}
+		}
+		return codeBeans;
+	}
+	
+	public CentersBeanLocal getCenterBean() {
+		
+		if(centerBeans == null){
+			
+			try {
+				
+				centerBeans = InitialContext.doLookup("java:global/Hemologica-Salud-Backend-ear/Hemologica-Salud-Backend-ejb/CentersBean!org.hemologica.salud.ejb.beans.CentersBeanLocal");
+				
+			} catch (NamingException e) {
+				
+				logger.log(Level.SEVERE, e.getMessage(), e);
+				
+			}
+		}
+		return centerBeans;
+	}
+
+	
 }

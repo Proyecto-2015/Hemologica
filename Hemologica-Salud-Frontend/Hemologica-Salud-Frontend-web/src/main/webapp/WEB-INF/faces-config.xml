@@ -95,13 +95,34 @@
 	</managed-bean>
 	
 	<converter>
-		<display-name>dataBloodTypeConverter</display-name>
-		<converter-id>dataBloodTypeConverter</converter-id>
-		<converter-class>org.hemologica.salud.web.converters.DataBloodTypeConverter</converter-class>
+		<display-name>dataBloodTypeConverterABO</display-name>
+		<converter-id>dataBloodTypeConverterABO</converter-id>
+		<converter-class>org.hemologica.salud.web.converters.DataBloodTypeConverterABO</converter-class>
 	</converter>
 	<managed-bean>
-		<managed-bean-name>dataBloodTypeConverter</managed-bean-name>
-		<managed-bean-class>org.hemologica.salud.web.converters.DataBloodTypeConverter</managed-bean-class>
+		<managed-bean-name>dataBloodTypeConverterABO</managed-bean-name>
+		<managed-bean-class>org.hemologica.salud.web.converters.DataBloodTypeConverterABO</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>applicationBB</property-name>
+			<property-class>org.hemologica.salud.web.beans.ApplicationBB</property-class>
+			<value>#{applicationBB}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>sessionBB</property-name>
+			<property-class>org.hemologica.salud.web.beans.SessionBB</property-class>
+			<value>#{sessionBB}</value>
+		</managed-property>
+	</managed-bean>
+	
+	<converter>
+		<display-name>dataBloodTypeConverterRH</display-name>
+		<converter-id>dataBloodTypeConverterRH</converter-id>
+		<converter-class>org.hemologica.salud.web.converters.DataBloodTypeConverterRH</converter-class>
+	</converter>
+	<managed-bean>
+		<managed-bean-name>dataBloodTypeConverterRH</managed-bean-name>
+		<managed-bean-class>org.hemologica.salud.web.converters.DataBloodTypeConverterRH</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 		<managed-property>
 			<property-name>applicationBB</property-name>
@@ -259,6 +280,17 @@
 		<converter-id>dataMessageOptionsConverter</converter-id>
 		<converter-class>org.hemologica.salud.web.converters.DataMessageOptionsConverter</converter-class>
 	</converter>
+	<managed-bean>
+        <managed-bean-name>dataMessageOptionsConverter</managed-bean-name>
+        <managed-bean-class>org.hemologica.salud.web.converters.DataMessageOptionsConverter</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>applicationBB</property-name>
+            <property-class>org.hemologica.salud.web.beans.ApplicationBB</property-class>
+            <value>#{applicationBB}</value>
+        </managed-property>
+    </managed-bean>
+	
 	
 	<converter>
 		<display-name>dataTransfusionAnalysisConverter</display-name>

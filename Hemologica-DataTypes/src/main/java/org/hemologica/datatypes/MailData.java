@@ -2,23 +2,31 @@ package org.hemologica.datatypes;
 
 public class MailData {
 	
-	private MessageOptionData messageOption;
-	private DataBloodType bloodType;
+	private DataMessageOption messageOption;
+	private DataCode bloodTypeABO;
+	private DataCode bloodTypeRH;
 	private String subject;
 	private String text;
 	
 	
-	public MessageOptionData getMessageOption() {
+	public DataMessageOption getMessageOption() {
 		return messageOption;
 	}
-	public void setMessageOption(MessageOptionData messageOption) {
+	public void setMessageOption(DataMessageOption messageOption) {
 		this.messageOption = messageOption;
 	}
-	public DataBloodType getBloodType() {
-		return bloodType;
+
+	public DataCode getBloodTypeABO() {
+		return bloodTypeABO;
 	}
-	public void setBloodType(DataBloodType bloodType) {
-		this.bloodType = bloodType;
+	public void setBloodTypeABO(DataCode bloodTypeABO) {
+		this.bloodTypeABO = bloodTypeABO;
+	}
+	public DataCode getBloodTypeRH() {
+		return bloodTypeRH;
+	}
+	public void setBloodTypeRH(DataCode bloodTypeRH) {
+		this.bloodTypeRH = bloodTypeRH;
 	}
 	public String getSubject() {
 		return subject;

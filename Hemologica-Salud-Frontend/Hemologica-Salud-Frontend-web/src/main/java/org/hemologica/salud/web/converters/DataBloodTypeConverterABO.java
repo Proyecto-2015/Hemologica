@@ -2,21 +2,20 @@ package org.hemologica.salud.web.converters;
 
 import java.io.Serializable;
 import java.util.List;
-//import java.util.logging.Logger;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import org.hemologica.datatypes.DataInstitution;
+import org.hemologica.datatypes.DataCode;
 import org.hemologica.salud.web.beans.ApplicationBB;
 import org.hemologica.salud.web.beans.SessionBB;
 
-public class DataInstitutionConverter implements Converter, Serializable {
+public class DataBloodTypeConverterABO implements Converter, Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 421603990867590424L;
-
+	
 	private ApplicationBB applicationBB;
 	private SessionBB sessionBB;
 
@@ -27,10 +26,10 @@ public class DataInstitutionConverter implements Converter, Serializable {
 			return null;
 		}
 
-		List<DataInstitution> typesList = applicationBB.getInstitutions();
+		List<DataCode> typesList = applicationBB.getDonationABOTypes();
 		
 		if (typesList != null) {
-			for (DataInstitution type : typesList) {
+			for (DataCode type : typesList) {
 
 				if (type.getCode() != null && type.getCode().equals(value)) {
 					return type;
@@ -43,8 +42,8 @@ public class DataInstitutionConverter implements Converter, Serializable {
 	@Override
 	public String getAsString(FacesContext arg0, UIComponent arg1, Object value) {
 
-		if (value instanceof DataInstitution) {
-			return ((DataInstitution) value).getCode();
+		if (value instanceof DataCode) {
+			return ((DataCode) value).getCode();
 		}
 		return null;
 	}

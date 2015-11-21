@@ -2,7 +2,7 @@ package org.hemologica.datatypes;
 
 import java.io.Serializable;
 
-public class MessageOptionData implements Serializable {
+public class DataMessageOption implements Serializable {
 
 	/**
 	 * 

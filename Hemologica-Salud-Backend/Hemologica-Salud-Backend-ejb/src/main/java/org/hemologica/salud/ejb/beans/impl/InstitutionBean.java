@@ -2,10 +2,8 @@ package org.hemologica.salud.ejb.beans.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -35,7 +33,7 @@ public class InstitutionBean implements IInstitutionBeanLocal {
 			for (Institution i : institutions) {
 				DataInstitution dataIins = new DataInstitution();
 				dataIins.setCode(i.getInstitutionCode());
-				dataIins.setName(dataIins.getName());
+				dataIins.setName(i.getInstitutionDisplayName());
 				dataInstitutions.add(dataIins);
 			}
 		}

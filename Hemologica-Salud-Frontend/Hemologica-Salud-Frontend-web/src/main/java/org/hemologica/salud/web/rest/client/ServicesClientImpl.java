@@ -34,7 +34,7 @@ import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.LoginData;
 import org.hemologica.datatypes.MailData;
-import org.hemologica.datatypes.MessageOptionData;
+import org.hemologica.datatypes.DataMessageOption;
 import org.hemologica.datatypes.DataResponsiblePerson;
 import org.hemologica.datatypes.TransfusionFilterData;
 import org.hemologica.salud.factories.RestFactory;
@@ -246,7 +246,7 @@ public class ServicesClientImpl implements IServicesClient {
 	}
 
 	@Override
-	public List<MessageOptionData> getMessageOptions() throws ClientProtocolException, IOException {
+	public List<DataMessageOption> getMessageOptions() throws ClientProtocolException, IOException {
 
 		String urlMessages = url + ConstantsRest.PATH_CAMPAIGNS + "/" + ConstantsRest.PATH_CAMPAIGNS_MESSAGES_OPTIONS;
 
@@ -262,9 +262,9 @@ public class ServicesClientImpl implements IServicesClient {
 			logger.log(Level.SEVERE, "Error al llamar al servicio", e);
 		}
 
-		Type listType = new TypeToken<List<MessageOptionData>>() {
+		Type listType = new TypeToken<List<DataMessageOption>>() {
 		}.getType();
-		List<MessageOptionData> options = new Gson().fromJson(statesOptions, listType);
+		List<DataMessageOption> options = new Gson().fromJson(statesOptions, listType);
 
 		return options;
 	}
@@ -560,7 +560,7 @@ public class ServicesClientImpl implements IServicesClient {
 	}
 
 	@Override
-	public List<DataBank> getBanks(String bankCode, String productCode, String bloodTypeCode, Integer count)
+	public List<DataBank> getBanks(String bankCode, String productCode, String bloodTypeCodeRH, String bloodTypeCodeABO, Integer count)
 			throws ClientProtocolException, IOException, URISyntaxException {
 		
 
@@ -568,7 +568,8 @@ public class ServicesClientImpl implements IServicesClient {
 		HashMap<String, String> hash = new HashMap<String, String>();
 		hash.put(ConstansJson.JSON_BANK, bankCode);
 		hash.put(ConstansJson.JSON_PRODUCT_TYPE, productCode);
-		hash.put(ConstansJson.JSON_BLOOD_TYPE, bloodTypeCode);
+		hash.put(ConstansJson.JSON_BLOOD_TYPE_ABO, bloodTypeCodeRH);
+		hash.put(ConstansJson.JSON_BLOOD_TYPE_RH, bloodTypeCodeABO);
 		if(count != null){ hash.put(ConstansJson.JSON_COUNT, count.toString());};
 		String banksString = "";
 		try {
