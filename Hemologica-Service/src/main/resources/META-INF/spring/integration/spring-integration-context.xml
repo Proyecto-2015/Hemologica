@@ -34,22 +34,29 @@
     <int:channel id="outbound-channel-1" />
     
 	<int:service-activator  input-channel="outbound-channel-1"
-							output-channel="outbound-channel-1"
+							output-channel="outbound-channel-2"
                             ref="cdaHeaderProcessActivator"
                             method="process" />
                             
     <int:channel id="outbound-channel-2" />
    
 	
-	<int:service-activator  input-channel="inbound-channel-2"
+	<int:service-activator  input-channel="outbound-channel-2"
 							output-channel="outbound-channel-3"
-                            ref="activator"
+                            ref="cdaEMPIProcessActivator"
                             method="process" />
                             
     <int:channel id="outbound-channel-3" />
+   
+	<int:service-activator  input-channel="outbound-channel-3"
+							output-channel="outbound-channel-4"
+                            ref="cdaLocalProcessActivator"
+                            method="process" />
+	
+	<int:channel id="outbound-channel-4" />
 	
 	<int-jms:outbound-channel-adapter id="jmsOut"
-				channel="outbound-channel-3"
+				channel="outbound-channel-4"
 				destination="sendQueue"/>
 				
 				
