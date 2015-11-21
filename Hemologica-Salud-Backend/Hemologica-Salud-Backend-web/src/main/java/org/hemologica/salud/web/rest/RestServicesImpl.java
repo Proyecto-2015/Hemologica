@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.inject.Inject;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.ws.rs.core.Response;
 import org.hemologica.constants.DataDonationStateEnum;
 import org.hemologica.constants.DataEventSeverityEnum;
@@ -1318,6 +1321,18 @@ public class RestServicesImpl implements IRestServices{
 	@Override
 	public List<DataInstitution> getInstitutions() {
 		
+		
+		if(institutionBean == null){
+			
+			try {
+
+				institutionBean = InitialContext.doLookup("java:global/Hemologica-Salud-Backend-ear/Hemologica-Salud-Backend-ejb/InstitutionBea");
+				
+			} catch (NamingException e) {
+				logger.log(Level.SEVERE, e.getMessage(), e);
+				e.printStackTrace();
+			}
+		}
 		return institutionBean.getInstitutions();
 		
 	}
