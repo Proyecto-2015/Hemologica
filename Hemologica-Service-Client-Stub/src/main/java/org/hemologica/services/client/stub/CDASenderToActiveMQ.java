@@ -1,5 +1,6 @@
 package org.hemologica.services.client.stub;
 
+import java.io.File;
 import javax.jms.Connection;
 import javax.jms.DeliveryMode;
 import javax.jms.Destination;
@@ -12,16 +13,57 @@ import javax.jms.Session;
 import javax.jms.TextMessage;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.apache.commons.io.FileUtils;
 
 public class CDASenderToActiveMQ {
 
 	
 	public static void main(String[] args) throws Exception {
-		for(int i = 0 ; i < 10; ++i){
-			thread(new HelloWorldProducer(), false);
-	        Thread.sleep(1000);
+//		for(int i = 0 ; i < 10; ++i){
+//			thread(new HelloWorldProducer(), false);
+//	        Thread.sleep(1000);
+//		}
+		
+		
+		if(args.length == 0){
+			System.out.println("ingrese la url del archivo que desea enviar");
+			return;
 		}
 
+		String path = args[0];
+		
+		 // Create a ConnectionFactory
+        ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616");
+
+        // Create a Connection
+        Connection connection = connectionFactory.createConnection();
+        connection.start();
+
+        // Create a Session
+        Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+
+        // Create the destination (Topic or Queue)
+        Destination destination = session.createQueue("cdaReceiveQueue");
+
+        // Create a MessageProducer from the Session to the Topic or Queue
+        MessageProducer producer = session.createProducer(destination);
+        producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
+
+        // Create a messages
+        
+        String text = FileUtils.readFileToString(new File(path));
+        TextMessage message = session.createTextMessage(text);
+         
+
+        // Tell the producer to send the message
+        System.out.println("Sent message: "+ message.hashCode() + " : " + Thread.currentThread().getName());
+        producer.send(message);
+
+        // Clean up
+        session.close();
+        connection.close();
+		
+		
     }
  
     public static void thread(Runnable runnable, boolean daemon) {

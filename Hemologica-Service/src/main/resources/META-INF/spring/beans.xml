@@ -42,22 +42,27 @@
 		<property name="recoveryInterval" value="60000" />
 		<property name="autoStartup" value="true" />
 	</bean>
-	
+
 	<!-- Activators -->
 	<bean id="activator" class="org.hemologica.service.activator.DefaultServiceActivator" />
-	<bean id="cdaHeaderProcessActivator" class="org.hemologica.service.activator.CDAHeaderProcessActivator" />
-	<bean id="cdaEMPIProcessActivator" class="org.hemologica.service.activator.CDAEMPIProcessActivator" />
-	<bean id="cdaLocalProcessActivator" class="org.hemologica.service.activator.CDALocalProcessActivator" />
 	
-	<!-- EMPI -->
-	<bean id="pixConnection" class="org.hemologica.empi.adapter.connection.MLLPConnection">
-		<constructor-arg name="host" value="${empi.pix.connection.host}"/>
-		<constructor-arg name="port" value="${empi.pix.connection.port}"/>
+	<bean id="cdaHeaderProcessActivator" class="org.hemologica.service.activator.CDAHeaderProcessActivator" />
+	
+	<bean id="cdaEMPIProcessActivator" class="org.hemologica.service.activator.CDAEMPIProcessActivator">
+		<property name="personBean" ref="personBean" />
 	</bean>
 	
+	<bean id="cdaLocalProcessActivator" class="org.hemologica.service.activator.CDALocalProcessActivator" />
+
+	<!-- EMPI -->
+	<bean id="pixConnection" class="org.hemologica.empi.adapter.connection.MLLPConnection">
+		<constructor-arg name="host" value="${empi.pix.connection.host}" />
+		<constructor-arg name="port" value="${empi.pix.connection.port}" />
+	</bean>
+
 	<bean id="pdqConnection" class="org.hemologica.empi.adapter.connection.MLLPConnection">
-		<constructor-arg name="host" value="${empi.pdq.connection.host}"/>
-		<constructor-arg name="port" value="${empi.pdq.connection.port}"/>
+		<constructor-arg name="host" value="${empi.pdq.connection.host}" />
+		<constructor-arg name="port" value="${empi.pdq.connection.port}" />
 	</bean>
 
 	<bean id="hl7Parser" class="${hl7.parser}" />
@@ -65,22 +70,52 @@
 	<bean id="empiAdapter" class="${empi.adapter}">
 		<constructor-arg name="pdqConnection" ref="pdqConnection" />
 		<constructor-arg name="pixConnection" ref="pixConnection" />
-		<constructor-arg name="parser" ref="hl7Parser"/>
-		<constructor-arg name="context" >
+		<constructor-arg name="parser" ref="hl7Parser" />
+		<constructor-arg name="context">
 			<map>
-				<entry key="sendingApplication" value="${empi.context.sending.application}"/>
-				<entry key="sendingFacility" value="${empi.context.sending.facility}"/>
-				<entry key="receivingApplication" value="${empi.context.receiving.application}"/>
-				<entry key="receivingFacility" value="${empi.context.receiving.facility}"/>
-				<entry key="aa_namespace" value="${empi.context.namespace}"/>
-				<entry key="aa_universal_id" value="${empi.context.universal.id}"/>
-				<entry key="aa_universal_id_type" value="${empi.context.universal.type}"/>
+				<entry key="sendingApplication" value="${empi.context.sending.application}" />
+				<entry key="sendingFacility" value="${empi.context.sending.facility}" />
+				<entry key="receivingApplication" value="${empi.context.receiving.application}" />
+				<entry key="receivingFacility" value="${empi.context.receiving.facility}" />
+				<entry key="aa_namespace" value="${empi.context.namespace}" />
+				<entry key="aa_universal_id" value="${empi.context.universal.id}" />
+				<entry key="aa_universal_id_type" value="${empi.context.universal.type}" />
 			</map>
 		</constructor-arg>
 	</bean>
+
+
+	<!-- Business -->
+	<bean id="personBean" class="org.hemologica.service.business.impl.PersonBean" >
+		<property name="personDAO" ref="personDao" />
+		<property name="empi" ref="empiAdapter"/>
+	</bean>
+
+	<!-- Data Access Objet & Database -->
+	<bean id="personDao" class="org.hemologica.service.dao.PersonDAOSpringImpl">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
+				<prop key="hibernate.current_session_context_class">thread</prop>
+			</props>
+		</property>
+
+	</bean>
+
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
 	
-
-
-	
-
 </beans>

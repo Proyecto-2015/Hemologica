@@ -1,6 +1,8 @@
 package org.hemologica.service.utils.xml;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.io.StringReader;
 import java.io.StringWriter;
 
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -29,7 +31,7 @@ public class XMLUtils {
 	
 	public static Document stringToDocument(String input) throws SAXException, IOException, ParserConfigurationException{
 		
-		return DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(input);
+		return DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new ByteArrayInputStream(input.getBytes()));
 		
 	}
 	
@@ -38,5 +40,14 @@ public class XMLUtils {
 		
 		return XMLUtils.stringToDocument(XMLUtils.documentToString(doc));
 	}
+	
+	
+//	public static NodeList executeXPath(Document doc, String xpath){
+//		
+//	}
+//	
+//	public static NodeList executeXPath(Element doc, String xpath){
+//		
+//	}
 	
 }

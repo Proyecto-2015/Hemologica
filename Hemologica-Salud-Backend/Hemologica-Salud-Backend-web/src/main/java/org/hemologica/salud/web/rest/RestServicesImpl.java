@@ -1326,7 +1326,7 @@ public class RestServicesImpl implements IRestServices{
 			
 			try {
 
-				institutionBean = InitialContext.doLookup("java:global/Hemologica-Salud-Backend-ear/Hemologica-Salud-Backend-ejb/InstitutionBea");
+				institutionBean = InitialContext.doLookup("java:global/Hemologica-Salud-Backend-ear/Hemologica-Salud-Backend-ejb/InstitutionBean");
 				
 			} catch (NamingException e) {
 				logger.log(Level.SEVERE, e.getMessage(), e);
