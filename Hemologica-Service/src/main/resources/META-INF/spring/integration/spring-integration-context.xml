@@ -46,7 +46,7 @@
                             ref="cdaEMPIProcessActivator"
                             method="process" />
                             
-    <int:channel id="outbound-channel-2" />
+<!--     <int:channel id="outbound-channel-2" /> -->
    
 <!-- 	<int:service-activator  input-channel="outbound-channel-3" -->
 <!-- 							output-channel="outbound-channel-4" -->
@@ -55,9 +55,9 @@
 	
 <!-- 	<int:channel id="outbound-channel-4" /> -->
 	
-	<int-jms:outbound-channel-adapter id="jmsOut"
-				channel="outbound-channel-2"
-				destination="sendQueue"/>
+<!-- 	<int-jms:outbound-channel-adapter id="jmsOut" -->
+<!-- 				channel="outbound-channel-2" -->
+<!-- 				destination="sendQueue"/> -->
 				
 				
 	

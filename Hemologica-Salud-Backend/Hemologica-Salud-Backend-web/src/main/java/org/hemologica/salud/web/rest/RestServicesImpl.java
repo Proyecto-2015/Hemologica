@@ -15,10 +15,6 @@ import javax.naming.NamingException;
 import javax.ws.rs.core.Response;
 import org.hemologica.constants.DataDonationStateEnum;
 import org.hemologica.constants.DataEventSeverityEnum;
-import org.hemologica.dao.ICodesDAO;
-import org.hemologica.dao.impl.CodesDAOImpl;
-import org.hemologica.dao.model.Movement;
-import org.hemologica.dao.model.MovementsType;
 import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCampaign;
@@ -27,7 +23,6 @@ import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataDonationDonorType;
 import org.hemologica.datatypes.DataPerson;
-import org.hemologica.datatypes.DataProduct;
 import org.hemologica.datatypes.DataProductType;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataResponsiblePerson;
@@ -46,7 +41,6 @@ import org.hemologica.datatypes.LoginData;
 import org.hemologica.datatypes.MailData;
 import org.hemologica.datatypes.DataMessageOption;
 import org.hemologica.datatypes.TransfusionFilterData;
-import org.hemologica.factories.FactoryDAO;
 import org.hemologica.salud.ejb.beans.CentersBeanLocal;
 import org.hemologica.salud.ejb.beans.CodesBeanLocal;
 import org.hemologica.salud.ejb.beans.IBloodLocal;
@@ -1091,7 +1085,7 @@ public class RestServicesImpl implements IRestServices{
 		return analisis;
 		
 	}
-	public List<DataBank> getBanks(String bankCode, String productTypeCode, String bloodTypeCode, Integer count) {
+	public List<DataBank> getBanks(String bankCode, String productTypeCode, String bloodTypeCodeABO,  String bloodTypeCodeRH, Integer count) {
 
 		List<DataBank> ret = this.getBanks();
 		if (bankCode != null && !bankCode.equals("")) {
@@ -1237,7 +1231,6 @@ public class RestServicesImpl implements IRestServices{
 
 	@Override
 	public List<DataInstitution> getInstitutions() {
-		
 		
 		return getInstitutionBean().getInstitutions();
 		

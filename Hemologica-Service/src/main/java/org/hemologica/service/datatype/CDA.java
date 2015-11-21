@@ -37,9 +37,9 @@ public class CDA {
 
 	public void splitHeaderBody() throws ParserConfigurationException, SAXException, IOException, TransformerException {
 
-		NodeList nodes = document.getElementsByTagName("component");
-		documentBody = (Element) nodes.item(0);
 		documentHeader = XMLUtils.cloneDocument(document).getDocumentElement();
+		NodeList nodes = documentHeader.getElementsByTagName("component");
+		documentBody = (Element) nodes.item(0);
 		documentHeader.removeChild(documentBody);
 
 	}
@@ -54,38 +54,38 @@ public class CDA {
 		Element patientName = (Element) patientElem.getElementsByTagName("name").item(0);
 
 		NodeList nodes = patientName.getElementsByTagName("given");
-		userData.put("primerNombre", nodes.item(0).getNodeValue());
+		userData.put("primerNombre", nodes.item(0).getTextContent());
 		if (nodes.getLength() > 1) {
-			userData.put("segundoNombre", nodes.item(0).getNodeValue());
+			userData.put("segundoNombre", nodes.item(1).getTextContent());
 		}
 		nodes = patientName.getElementsByTagName("family");
-		userData.put("primerApellido", nodes.item(0).getNodeValue());
+		userData.put("primerApellido", nodes.item(0).getTextContent());
 		if (nodes.getLength() > 1) {
-			userData.put("segundoApellido", nodes.item(0).getNodeValue());
+			userData.put("segundoApellido", nodes.item(1).getTextContent());
 		}
 
 		// obtener identificador
 		nodes = patientElem.getElementsByTagName("id");
 		if (nodes != null && nodes.getLength() > 0) {
-			userData.put("patientIdentifier", nodes.item(0).getNodeValue());
+			userData.put("patientIdentifier", nodes.item(0).getTextContent());
 		}
 
 		// obtener fecha de nacimiento
 		nodes = patientElem.getElementsByTagName("birthTime");
 		if (nodes != null && nodes.getLength() > 0) {
-			userData.put("birthday", nodes.item(0).getNodeValue());
+			userData.put("birthday", nodes.item(0).getTextContent());
 		}
 
 		// obtener sexo
 		nodes = patientElem.getElementsByTagName("administrativeGenderCode");
 		if (nodes != null && nodes.getLength() > 0) {
-			userData.put("sex", nodes.item(0).getAttributes().getNamedItem("code").getNodeValue());
+			userData.put("sex", nodes.item(0).getAttributes().getNamedItem("code").getTextContent());
 		}
 
 		// obtener lugar de nacimiento
 		nodes = patientElem.getElementsByTagName("birthPlace");
 		if (nodes != null && nodes.getLength() > 0) {
-			userData.put("birthdayPlace", nodes.item(0).getNodeValue());
+			userData.put("birthdayPlace", nodes.item(0).getTextContent());
 		}
 		
 		
@@ -102,7 +102,7 @@ public class CDA {
 			} //obtener mail
 			else if(elem.getAttribute("value").startsWith("mailto:")){
 
-				userData.put("email", elem.getAttribute("value").replaceAll("mailto", ""));
+				userData.put("email", elem.getAttribute("value").replaceAll("mailto:", ""));
 			}
 		}
 
