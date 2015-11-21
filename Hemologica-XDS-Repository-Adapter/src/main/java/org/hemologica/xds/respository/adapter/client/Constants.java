@@ -21,6 +21,7 @@ public class Constants {
 	static final String XDSDocumentEntryTypeCode =  "urn:uuid:f0306f51-975f-434e-a61c-c59651d33983";
 	static final String XDSDocumentEntryPatientId = "urn:uuid:58a6f841-87b3-4a3e-92fd-a8ffeff98427";
 	static final String XDSDocumentEntryUniqueId = "urn:uuid:2e82c1f6-a085-4c72-9da3-8640a32e42ab";
+	static final String XDSSubmissionSet = "urn:uuid:a54d6aa5-d40d-43f9-88c5-b4633d873bdd";
 	static final String XDSSubmissionSetAuthor = "urn:uuid:a7058bb9-b4e4-4307-ba5b-e3f0ab85e12d";
 	static final String XDSSubmissionSetContentTypeCode = "urn:uuid:aa543740-bdda-424e-8c96-df4873be8500";
 	static final String XDSSubmissionSetUniqueId = "urn:uuid:96fdda7c-d067-4183-912e-bf5ee74998a8";
@@ -32,6 +33,8 @@ public class Constants {
 	static final String labelXDSSubmissionSetUniqueId = "XDSSubmissionSet.uniqueId";
 	static final String labelXDSSubmissionSetSourceId = "XDSSubmissionSet.sourceId";
 	static final String labelXDSSubmissionSetPatientId = "XDSSubmissionSet.patientId";
+	static final String labelSubmissionTime = "submissionTime";
+	static final String labelSourcePatientId = "sourcePatientId";
 	
 	static final String classificationNode = "urn:uuid:fc104250-3992-4c43-94e2-aa77fa4e2f99";
 	

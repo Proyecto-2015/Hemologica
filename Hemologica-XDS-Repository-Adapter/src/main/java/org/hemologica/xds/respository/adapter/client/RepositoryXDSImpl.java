@@ -32,14 +32,15 @@ public class RepositoryXDSImpl implements IRepositoryXDS {
 	public void saveCDA(String authorPerson , String authorInstitution,
 			String authorRole, String codingSchemeLOINCId, String codingSchemeLOINCname,
 			String codingSchemeSNOMEDCTId,String codingSchemeSNOMEDCTName,
-			String languageCode, String cdaID,String cdaDocumentType, String cda) {
+			String languageCode, String PID5, String PID7, String PID8, String cdaID,String cdaDocumentType, String cda, String submissionTime) {
 		
 		logger.info("Crear Mensaje");
 		
 		PROVIDEANDREGISTERDOCUMENTSET pro = getProvideAndRegisterDocumentSet(authorPerson , authorInstitution,
 				authorRole, codingSchemeLOINCId, codingSchemeLOINCname,
 				codingSchemeSNOMEDCTId,codingSchemeSNOMEDCTName,
-				languageCode, cdaID,cdaDocumentType, cda);
+				PID5, PID7, PID8,
+				languageCode, cdaID,cdaDocumentType, cda, submissionTime);
 		
 		
 		logger.info("aDocumentrepositoryServices ");
@@ -85,7 +86,8 @@ public class RepositoryXDSImpl implements IRepositoryXDS {
 	private PROVIDEANDREGISTERDOCUMENTSET getProvideAndRegisterDocumentSet(String authorPerson , String authorInstitution,
 			String authorRole, String codingSchemeLOINCId, String codingSchemeLOINCname,
 			String codingSchemeSNOMEDCTId,String codingSchemeSNOMEDCTName,
-			String languageCode, String cdaID, String cdaDocumentType, String cda){
+			String PID5, String PID7, String PID8,
+			String languageCode, String cdaID, String cdaDocumentType, String cda, String submissionTime){
 		
 		
 		SubmitObjectsRequest submitObjectsRequest = new SubmitObjectsRequest();
@@ -102,15 +104,15 @@ public class RepositoryXDSImpl implements IRepositoryXDS {
 		associationType1.setAssociationType(Constants.associationType1HasMember);
 		associationType1.setId(Constants.associationTypeNumber);
 		
+		// asociacion 
+		associationType1.setSourceObject(Constants.associationSourceObject);
+		associationType1.setTargetObject(Constants.associationTargerObject);
+		
 		SlotType1 slotType1 = new SlotType1();
 		slotType1.setName("");
 		slotType1.setSlotType("");
 		slotType1.getValue().add("ejemplo");
 		associationType1.getSlot().add(slotType1);
-		
-		// asociacion 
-		associationType1.setSourceObject(Constants.associationSourceObject);
-		associationType1.setTargetObject(Constants.associationTargerObject);
 		
 		registryObjectList.getAssociation().add(associationType1);
 			
@@ -119,8 +121,7 @@ public class RepositoryXDSImpl implements IRepositoryXDS {
 		 */
 		
 		ClassificationType classificationType = new ClassificationType();
-		// XDSSubmissionSet - urn:uuid:a54d6aa5-d40d-43f9-88c5-b4633d873bdd
-		classificationType.setClassificationNode("urn:uuid:a54d6aa5-d40d-43f9-88c5-b4633d873bdd");
+		classificationType.setClassificationNode(Constants.XDSSubmissionSet);
 		classificationType.setClassificationScheme("");
 		classificationType.setClassifiedObject(Constants.associationSourceObject);
 		
@@ -210,7 +211,7 @@ public class RepositoryXDSImpl implements IRepositoryXDS {
 		classificationClassCode.setNodeRepresentation(codingSchemeLOINCId); // CODIGO LOINC DEL DOCUMENTO
 		//Mismo que XDSDocumentEntry.author
 		//TODO ver estoooo
-		classificationClassCode.setClassificationNode("urn:uuid:fc104250-3992-4c43-94e2-aa77fa4e2f99");
+		classificationClassCode.setClassificationNode(Constants.classificationNode);
 		
 //		<Name charset="" lang="" value="Hoja de consulta ambulatoria">
 //        </Name>
@@ -248,7 +249,7 @@ public class RepositoryXDSImpl implements IRepositoryXDS {
 		classificationTypeCode.setNodeRepresentation(codingSchemeSNOMEDCTId); // CODIGO SNOMEDCT DEL DOCUMENTO
 		//Mismo que XDSDocumentEntry.author
 		//TODO ver estoooo
-		classificationTypeCode.setClassificationNode("urn:uuid:fc104250-3992-4c43-94e2-aa77fa4e2f99");
+		classificationTypeCode.setClassificationNode(Constants.classificationNode);
 		
 //		<Name charset="" lang="" value="Hoja de consulta ambulatoria">
 //        </Name>
@@ -295,7 +296,7 @@ public class RepositoryXDSImpl implements IRepositoryXDS {
 		
 		// No se que es esto.
 		//TODO ver estooo
-		externalIdentifierPatientId.setRegistryObject("urn:uuid:fc104250-3992-4c43-94e2-aa77fa4e2f99");
+		externalIdentifierPatientId.setRegistryObject(Constants.classificationNode);
 		
 		LocalizedStringType localizedPatientId = new LocalizedStringType();
 		localizedPatientId.setValue(Constants.labelXDSDocumentEntrypatientId);
@@ -314,7 +315,7 @@ public class RepositoryXDSImpl implements IRepositoryXDS {
 		externalIdentifierUniqueId.setValue("2.16.858.2.10002825.67430.20150717093107.7672.");
 		
 		// No se que es esto.
-		externalIdentifierUniqueId.setRegistryObject("urn:uuid:fc104250-3992-4c43-94e2-aa77fa4e2f99");
+		externalIdentifierUniqueId.setRegistryObject(Constants.classificationNode);
 		
 		LocalizedStringType localizedUniqueId = new LocalizedStringType();
 		localizedUniqueId.setValue(Constants.labelXDSDocumentEntryUniqueId);
@@ -383,12 +384,12 @@ public class RepositoryXDSImpl implements IRepositoryXDS {
 		
 		//TODO ver estoo
 		SlotType1 slotSourcePatientInfo = new SlotType1();
-		slotSourcePatientInfo.setName("sourcePatientId");
+		slotSourcePatientInfo.setName(Constants.labelSourcePatientId);
 		slotSourcePatientInfo.setSlotType("");
 		slotSourcePatientInfo.getValue().add("");
-		slotSourcePatientInfo.getValue().add("PID-5|RODRIGUEZ^MARIA             ^^^^");
-		slotSourcePatientInfo.getValue().add("PID-7|19321115");
-		slotSourcePatientInfo.getValue().add("PID-8|1");
+		slotSourcePatientInfo.getValue().add("PID-5|" + PID5);
+		slotSourcePatientInfo.getValue().add("PID-7|" + PID7);
+		slotSourcePatientInfo.getValue().add("PID-8|" + PID8);
 		slotSourcePatientInfo.getValue().add("");
 		extrinsicObjectType.getSlot().add(slotSourcePatientInfo);
 		
@@ -554,7 +555,7 @@ public class RepositoryXDSImpl implements IRepositoryXDS {
 		 * LocalizedStringType
 		 */
 		LocalizedStringType localizedString = new LocalizedStringType();
-		localizedString.setValue("Consulta (procedimiento)");
+		localizedString.setValue(codingSchemeSNOMEDCTName);
 		registryPackageType.getLocalizedString().add(localizedString);
 		
 		LocalizedStringType localizedNameRegistryPackage = new LocalizedStringType();
@@ -562,9 +563,9 @@ public class RepositoryXDSImpl implements IRepositoryXDS {
 		registryPackageType.getName().add(localizedRegistrySourceId);
 		
 		SlotType1 slotRegistryPackage = new SlotType1();
-		slotRegistryPackage.setName("submissionTime");
+		slotRegistryPackage.setName(Constants.labelSubmissionTime);
 		slotRegistryPackage.setSlotType("");
-		slotRegistryPackage.getValue().add("20150717093107");
+		slotRegistryPackage.getValue().add(submissionTime);
 		registryPackageType.getSlot().add(slotRegistryPackage);
 	
 		registryObjectList.getRegistryPackage().add(registryPackageType);

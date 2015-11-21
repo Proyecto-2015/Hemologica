@@ -5,8 +5,9 @@ public interface IRepositoryXDS {
 	
 	public void saveCDA(String authorPerson , String authorInstitution,
 			String authorRole, String codingSchemeLOINCId, String codingSchemeLOINCname,
-			String codingSchemeSNOMEDCTId,String codingSchemeSNOMEDCTName,
-			String languageCode, String cdaID,String cdaDocumentType, String cda); 
+			String codingSchemeSNOMEDCTId,String codingSchemeSNOMEDCTName, String languageCode, 
+			String PID5, String PID7, String PID8, 
+			String cdaID,String cdaDocumentType, String cda, String submissionTime); 
 	
 	
 //	public void saveCDA(String cda); 
@@ -21,4 +22,8 @@ public interface IRepositoryXDS {
 	// codingSchemeSNOMEDCTName - Consulta (procedimiento)
 	
 	// languageCode - es-uy
+	// submissionTime = "20150717093107";
+	// PID5 = "RODRIGUEZ^MARIA             ^^^^";
+	// PID7 = "19321115";
+	// PID8 = "1";
 }
