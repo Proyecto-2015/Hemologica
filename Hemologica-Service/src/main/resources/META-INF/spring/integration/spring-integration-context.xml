@@ -2,12 +2,16 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
 	xmlns:int="http://www.springframework.org/schema/integration"
 	xmlns:int-jms="http://www.springframework.org/schema/integration/jms"
-	xsi:schemaLocation="http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
+	xmlns:int-jdbc="http://www.springframework.org/schema/integration/jdbc"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
 		http://www.springframework.org/schema/beans	http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/integration/jms http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd">
+		http://www.springframework.org/schema/integration/jms http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd
+		http://www.springframework.org/schema/integration/jdbc http://www.springframework.org/schema/integration/jdbc/spring-integration-jdbc.xsd">
 
 <!-- 	<context:component-scan base-package="org.hemologica.service" /> -->
 
@@ -46,7 +50,9 @@
                             ref="cdaEMPIProcessActivator"
                             method="process" />
                             
-<!--     <int:channel id="outbound-channel-2" /> -->
+                            
+                            
+    <int:channel id="outbound-channel-2" />
    
 <!-- 	<int:service-activator  input-channel="outbound-channel-3" -->
 <!-- 							output-channel="outbound-channel-4" -->
@@ -55,9 +61,9 @@
 	
 <!-- 	<int:channel id="outbound-channel-4" /> -->
 	
-<!-- 	<int-jms:outbound-channel-adapter id="jmsOut" -->
-<!-- 				channel="outbound-channel-2" -->
-<!-- 				destination="sendQueue"/> -->
+	<int-jms:outbound-channel-adapter id="jmsOut"
+				channel="outbound-channel-2"
+				destination="sendQueue"/>
 				
 				
 	

@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
+
+import org.hemologica.empi.datatypes.Identifier;
 
 import ca.uhn.hl7v2.model.v231.message.ADT_A04;
 import ca.uhn.hl7v2.HL7Exception;
@@ -424,6 +427,17 @@ public class MessageFactory implements Serializable {
 		GenericPrimitive domainData = (GenericPrimitive) domainVaries.getData();
 		domainData.setValue(values.get("domain"));
 		return qpd;
+	}
+
+	public Identifier createIdentifier() {
+		Identifier id = new Identifier();
+		id.setDomain(context.get("aa_namespace"));
+		id.setId(UUID.randomUUID().toString());
+		return id;
+	}
+
+	public String getMyDomain() {
+		return context.get("aa_namespace");
 	}
 	
 }

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 
@@ -44,15 +46,19 @@
 	</bean>
 
 	<!-- Activators -->
-	<bean id="activator" class="org.hemologica.service.activator.DefaultServiceActivator" />
-	
-	<bean id="cdaHeaderProcessActivator" class="org.hemologica.service.activator.CDAHeaderProcessActivator" />
-	
-	<bean id="cdaEMPIProcessActivator" class="org.hemologica.service.activator.CDAEMPIProcessActivator">
+	<bean id="activator"
+		class="org.hemologica.service.activator.DefaultServiceActivator" />
+
+	<bean id="cdaHeaderProcessActivator"
+		class="org.hemologica.service.activator.CDAHeaderProcessActivator" />
+
+	<bean id="cdaEMPIProcessActivator"
+		class="org.hemologica.service.activator.CDAEMPIProcessActivator">
 		<property name="personBean" ref="personBean" />
 	</bean>
-	
-	<bean id="cdaLocalProcessActivator" class="org.hemologica.service.activator.CDALocalProcessActivator" />
+
+	<bean id="cdaLocalProcessActivator"
+		class="org.hemologica.service.activator.CDALocalProcessActivator" />
 
 	<!-- EMPI -->
 	<bean id="pixConnection" class="org.hemologica.empi.adapter.connection.MLLPConnection">
@@ -86,36 +92,82 @@
 
 
 	<!-- Business -->
-	<bean id="personBean" class="org.hemologica.service.business.impl.PersonBean" >
-		<property name="personDAO" ref="personDao" />
-		<property name="empi" ref="empiAdapter"/>
+
+	<bean id="personBean" class="org.hemologica.service.business.impl.PersonBean">
+		<!-- <property name="personDAO" ref="personDao" /> -->
+		<property name="empi" ref="empiAdapter" />
 	</bean>
 
-	<!-- Data Access Objet & Database -->
-	<bean id="personDao" class="org.hemologica.service.dao.PersonDAOSpringImpl">
-		<property name="hibernateTemplate" ref="hibernateTemplate" />
-	</bean>
+	<!-- Data Access Objet -->
 
-	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate">
-		<property name="sessionFactory" ref="sessionFactory" />
-	</bean>
+	<!-- <bean id="personDao" class="org.hemologica.service.dao.PersonDAOSpringImpl"> -->
+	<!-- <property name="hibernateTemplate" ref="hibernateTemplate" /> -->
+	<!-- </bean> -->
 
-	<bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="hibernateProperties">
-			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
-				<prop key="hibernate.current_session_context_class">thread</prop>
-			</props>
-		</property>
+	<!-- <bean id="personRecordDao" class="org.hemologica.service.dao.PersonRecordDAOSpringImpl"> -->
+	<!-- <property name="hibernateTemplate" ref="hibernateTemplate" /> -->
+	<!-- </bean> -->
 
-	</bean>
+	<!-- <bean id="identificationDao" class="org.hemologica.service.dao.PersonRecordDAOSpringImpl"> -->
+	<!-- <property name="hibernateTemplate" ref="hibernateTemplate" /> -->
+	<!-- </bean> -->
+
+	<!-- Database -->
+
+	<!-- <bean id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate"> -->
+	<!-- <property name="sessionFactory" ref="sessionFactory" /> -->
+	<!-- </bean> -->
+
+	<!-- <bean id="sessionFactory" -->
+	<!-- class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"> -->
+	<!-- <property name="jtaTransactionManager" ref="transactionManager" /> -->
+	<!-- <property name="dataSource" ref="dataSource" /> -->
+	<!-- <property name="hibernateProperties"> -->
+	<!-- <props> -->
+	<!-- <prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop> -->
+	<!-- <prop key="hibernate.current_session_context_class">thread</prop> -->
+	<!-- </props> -->
+	<!-- </property> -->
+	<!-- </bean> -->
+
+	<context:annotation-config />
 
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="${jdbc.driverClassName}" />
-		<property name="url" value="${jdbc.url}" />
-		<property name="username" value="${jdbc.username}" />
-		<property name="password" value="${jdbc.password}" />
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+<!-- 		<property name="url" value="${jdbc.url}" /> -->
+<!-- 		<property name="username" value="${jdbc.username}" /> -->
+<!-- 		<property name="password" value="${jdbc.password}" /> -->
+		<property name="url" value="jdbc:mysql://localhost:3306/hemologica" />
+		<property name="username" value="root" />
+		<property name="password" value=".lh2324" />
+	</bean>
+
+	<bean id="emf"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
+		<property name="persistenceUnitName" value="Hemologica-Service-PU" />
+		<property name="packagesToScan" value="org.hemologica.dao.model" />
 	</bean>
 	
+	
+	<bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+		<property name="database" value="MYSQL" />
+		<property name="showSql" value="true" />
+		<property name="generateDdl" value="true" />
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="emf" />
+	</bean>
+
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<!-- <bean id="persistenceContextAnnotation" -->
+	<!-- class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"> -->
+	<!-- <property name="defaultPersistenceUnitName" value="Hemologica-Service-PU" 
+		/> -->
+	<!-- </bean> -->
+
 </beans>

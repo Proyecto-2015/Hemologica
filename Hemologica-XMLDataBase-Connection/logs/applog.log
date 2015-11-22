@@ -61,3 +61,36 @@ java.io.IOException: Stopped at ., 1/150:
 	at org.hemologica.xmldatabase.connection.impl.BaseXClient$Query.execute(BaseXClient.java:359)
 	at org.hemologica.xmldatabase.connection.impl.XbaseConnection.getElementPatientId(XbaseConnection.java:166)
 	at org.hemologica.xmldatabase.connection.Main.main(Main.java:18)
+2015-11-21 17:44:13 ERROR BaseXConnection:154 - Error al intentar recuperarlos elementos en la base de datos.
+java.io.IOException: Stopped at ., 1/24:
+[FODC0002] Resource '/home/bruno/Desarrollo/Servidores/basex/basex-core/xmlHemologica' does not exist.
+	at org.hemologica.xmldatabase.connection.impl.BaseXClient$Query.exec(BaseXClient.java:399)
+	at org.hemologica.xmldatabase.connection.impl.BaseXClient$Query.execute(BaseXClient.java:359)
+	at org.hemologica.xmldatabase.connection.impl.BaseXConnection.getElementPatientId(BaseXConnection.java:146)
+	at org.hemologica.xmldatabase.connection.Main.main(Main.java:18)
+2015-11-21 17:45:40 ERROR BaseXConnection:64 - Error al intentar agregar el elemnto a la base de datos.
+java.io.IOException: Stopped at ., 1/8:
+[bxerr:BXDB0002] Database 'xmlHemologica' was not found.
+	at org.hemologica.xmldatabase.connection.impl.BaseXClient$Query.exec(BaseXClient.java:399)
+	at org.hemologica.xmldatabase.connection.impl.BaseXClient$Query.execute(BaseXClient.java:359)
+	at org.hemologica.xmldatabase.connection.impl.BaseXConnection.addElement(BaseXConnection.java:61)
+	at org.hemologica.xmldatabase.connection.Main.main(Main.java:24)
+2015-11-21 17:46:07 ERROR BaseXConnection:64 - Error al intentar agregar el elemnto a la base de datos.
+java.io.IOException: [bxerr:BXDB0007] Database 'BaseX' is currently opened by another process.
+	at org.hemologica.xmldatabase.connection.impl.BaseXClient$Query.exec(BaseXClient.java:399)
+	at org.hemologica.xmldatabase.connection.impl.BaseXClient$Query.execute(BaseXClient.java:359)
+	at org.hemologica.xmldatabase.connection.impl.BaseXConnection.addElement(BaseXConnection.java:61)
+	at org.hemologica.xmldatabase.connection.Main.main(Main.java:24)
+2015-11-21 17:52:47 ERROR BaseXConnection:64 - Error al intentar agregar el elemnto a la base de datos.
+java.io.IOException: Stopped at ., 1/8:
+[bxerr:BXDB0002] Database 'BaseX2' was not found.
+	at org.hemologica.xmldatabase.connection.impl.BaseXClient$Query.exec(BaseXClient.java:399)
+	at org.hemologica.xmldatabase.connection.impl.BaseXClient$Query.execute(BaseXClient.java:359)
+	at org.hemologica.xmldatabase.connection.impl.BaseXConnection.addElement(BaseXConnection.java:61)
+	at org.hemologica.xmldatabase.connection.Main.main(Main.java:24)
+2015-11-21 17:58:51 ERROR BaseXConnection:64 - Error al intentar agregar el elemnto a la base de datos.
+java.io.IOException: [bxerr:BXDB0007] Database 'BaseX2' is currently opened by another process.
+	at org.hemologica.xmldatabase.connection.impl.BaseXClient$Query.exec(BaseXClient.java:399)
+	at org.hemologica.xmldatabase.connection.impl.BaseXClient$Query.execute(BaseXClient.java:359)
+	at org.hemologica.xmldatabase.connection.impl.BaseXConnection.addElement(BaseXConnection.java:61)
+	at org.hemologica.xmldatabase.connection.Main.main(Main.java:24)

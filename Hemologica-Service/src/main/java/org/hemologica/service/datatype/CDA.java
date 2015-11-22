@@ -1,6 +1,7 @@
 package org.hemologica.service.datatype;
 
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +19,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-public class CDA {
+public class CDA{
 
 	private static final Logger logger = Logger.getLogger(CDA.class.getName());
 
