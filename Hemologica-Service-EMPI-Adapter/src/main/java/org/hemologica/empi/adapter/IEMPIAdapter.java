@@ -14,6 +14,7 @@ import org.hemologica.empi.adapter.pixpdq.message.PIXQueryPatientRequest;
 import org.hemologica.empi.adapter.pixpdq.message.PIXQueryPatientResponse;
 import org.hemologica.empi.adapter.pixpdq.message.UpdatePatientRequest;
 import org.hemologica.empi.adapter.pixpdq.message.UpdatePatientResponse;
+import org.hemologica.empi.datatypes.Identifier;
 
 public interface IEMPIAdapter extends PDQAdapter, PIXAdapter{
 
@@ -32,5 +33,14 @@ public interface IEMPIAdapter extends PDQAdapter, PIXAdapter{
 	 * PDQ Adapter methods
 	 */
 	public PDQQueryPatientResponse query(PDQQueryPatientRequest request) throws PDQAdapterException;
+	
+	
+	/**
+	 * Utils
+	 * 
+	 */
+	public Identifier createIdentifier();
+	
+	public String getMyDomain();
 	
 }

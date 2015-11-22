@@ -1,10 +1,10 @@
 //package org.hemologica.service.dao;
 //
-//import org.hemologica.dao.IPersonDAO;
-//import org.hemologica.dao.model.Person;
+//import org.hemologica.dao.IPersonRecordDAO;
+//import org.hemologica.dao.model.PersonsRecord;
 //import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 //
-//public class PersonDAOSpringImpl extends HibernateDaoSupport implements IPersonDAO{
+//public class PersonRecordDAOSpringImpl extends HibernateDaoSupport implements IPersonRecordDAO{
 //
 //	/**
 //	 * 
@@ -13,24 +13,24 @@
 //
 //
 //	@Override
-//	public Person create(Person entity) {
+//	public PersonsRecord create(PersonsRecord entity) {
 //		super.getHibernateTemplate().persist(entity);
 //		return entity;
 //	}
 //
 //	@Override
-//	public Person update(Person entity) {
+//	public PersonsRecord update(PersonsRecord entity) {
 //		super.getHibernateTemplate().update(entity);
 //		return entity;
 //	}
 //
 //	@Override
-//	public void delete(Person entity) {
+//	public void delete(PersonsRecord entity) {
 //		super.getHibernateTemplate().delete(entity);
 //	}
 //
 //	@Override
-//	public void refresh(Person entity) {
+//	public void refresh(PersonsRecord entity) {
 //		super.getHibernateTemplate().refresh(entity);
 //	}
 //

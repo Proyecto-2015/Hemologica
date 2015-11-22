@@ -21,6 +21,7 @@ import org.hemologica.empi.adapter.pixpdq.message.PIXQueryPatientRequest;
 import org.hemologica.empi.adapter.pixpdq.message.PIXQueryPatientResponse;
 import org.hemologica.empi.adapter.pixpdq.message.UpdatePatientRequest;
 import org.hemologica.empi.adapter.pixpdq.message.UpdatePatientResponse;
+import org.hemologica.empi.datatypes.Identifier;
 
 import ca.uhn.hl7v2.HL7Exception;
 import ca.uhn.hl7v2.model.Message;
@@ -40,6 +41,7 @@ public class OpenEMPIAdapter implements IEMPIAdapter {
 		this.parser = parser;
 
 	}
+	
 
 	/**
 	 * PIX Adapter methods
@@ -202,6 +204,18 @@ public class OpenEMPIAdapter implements IEMPIAdapter {
 		} catch (Exception e) {
 			throw new PDQAdapterException(e);
 		}
+	}
+
+
+	@Override
+	public Identifier createIdentifier() {
+		return messageFactory.createIdentifier();
+	}
+
+
+	@Override
+	public String getMyDomain() {
+		return messageFactory.getMyDomain();
 	}
 	
 }

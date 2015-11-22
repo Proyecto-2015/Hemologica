@@ -11,13 +11,17 @@ import java.util.List;
  */
 @Entity
 @Table(name="identifications")
-@NamedQuery(name="Identification.findAll", query="SELECT i FROM Identification i")
+@NamedQueries(value={
+		@NamedQuery(name="Identification.findAll", query="SELECT i FROM Identification i"),
+		@NamedQuery(name="Identification.findById", query="SELECT i FROM Identification i WHERE i.id = :id"),
+		@NamedQuery(name="Identification.findByCode", query="SELECT i FROM Identification i WHERE i.identificacionCode= :code")
+})
 public class Identification implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private Integer id;
 
 	@Column(name="identificacion_code")
 	private String identificacionCode;
@@ -38,11 +42,11 @@ public class Identification implements Serializable {
 	public Identification() {
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

@@ -22,7 +22,7 @@ public class CDAEMPIProcessActivator {
 
 	private IPersonBean personBean;
 	
-	public CDA process(Document doc) {
+	public Document process(Document doc) {
 		
 		CDA cda = null;
 		
@@ -38,10 +38,9 @@ public class CDAEMPIProcessActivator {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		
-		
 		cda.setIdentifier(personBean.getID(cda.getUserData()));
-		
-		return cda;
+	
+		return doc;
 		
 	}
 	

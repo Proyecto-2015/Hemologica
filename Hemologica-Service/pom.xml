@@ -16,13 +16,14 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring.integration.version>4.2.0.RELEASE</spring.integration.version>
-		<spring.version>4.2.1.RELEASE</spring.version>
+		<spring.integration.version>4.0.0.RELEASE</spring.integration.version>
+		<spring.version>4.0.0.RELEASE</spring.version>
 		<guava.version>14.0.1</guava.version>
 		<jackson.version>1.9.11</jackson.version>
 		<junit.version>4.11</junit.version>
 		<log4j.version>1.2.17</log4j.version>
 		<wro4j.version>1.7.0</wro4j.version>
+		<hibernate.version>4.3.9.Final</hibernate.version>
 	</properties>
 
 	<repositories>
@@ -40,8 +41,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.1</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.8</source>
+					<target>1.8</target>
 					<compilerArgument>-Xlint:all</compilerArgument>
 					<showWarnings>true</showWarnings>
 					<showDeprecation>true</showDeprecation>
@@ -74,11 +75,24 @@
 			<scope>test</scope>
 		</dependency>
 
+
 		<!-- Spring -->
 
 		<dependency>
 			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
 
@@ -93,31 +107,26 @@
 			<artifactId>spring-oxm</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-orm</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
-		
-		
+
+		<!-- spring tx -->
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-jdbc</artifactId>
+			<artifactId>spring-aop</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+
 
 		<!-- Spring Integration -->
 
 		<dependency>
 			<groupId>org.springframework.integration</groupId>
 			<artifactId>spring-integration-core</artifactId>
-			<version>${spring.integration.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.integration</groupId>
-			<artifactId>spring-integration-twitter</artifactId>
 			<version>${spring.integration.version}</version>
 		</dependency>
 
@@ -150,19 +159,16 @@
 			<artifactId>spring-integration-ws</artifactId>
 			<version>${spring.integration.version}</version>
 		</dependency>
-		
-	
+
+
 		<dependency>
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-all</artifactId>
 			<version>5.12.0</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-spring-integration</artifactId>
-			<version>2.16.0</version>
-		</dependency>
+
+
 
 
 		<!-- Logging -->
@@ -232,6 +238,23 @@
 		</dependency>
 
 
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-entitymanager</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.openehealth.ipf.oht.mdht</groupId>
+			<artifactId>ipf-oht-mdht-uml-cda</artifactId>
+			<version>1.2.0.201212201425</version>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.33</version>
+		</dependency>
 
 		<!-- Hemologica -->
 
@@ -256,11 +279,6 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.openehealth.ipf.oht.mdht</groupId>
-			<artifactId>ipf-oht-mdht-uml-cda</artifactId>
-			<version>1.2.0.201212201425</version>
-		</dependency>
 
 
 
