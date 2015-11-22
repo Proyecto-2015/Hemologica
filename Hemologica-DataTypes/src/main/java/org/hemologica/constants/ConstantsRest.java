@@ -23,9 +23,9 @@ public class ConstantsRest {
 	public static final String PATH_SEND_MESSAGE = "sendmessage";
 	public static final String PATH_SEND_CAMPAIGN = "sendcampaign";
 	public static final String PATH_CAMPAIGNS_MESSAGES_OPTIONS = "messagesoptions";
-	public static final String PATH_PERSONS = "responsibleTransfusion";
+	public static final String PATH_PERSONS = "persons";
 	
-	public static final String PATH_RESPONSIBLE_TRENSFUSION = "";
+	public static final String PATH_RESPONSIBLE_TRENSFUSION = "responsibletransfusion";
 	
 	public static final String PATH_UNITS = "units";
 	public static final String PATH_UNITS_QUERY = "units/query";
@@ -50,6 +50,7 @@ public class ConstantsRest {
 	public static final String PATH_BLOOD_TYPES_ABO = "bloodtypesabo";
 	public static final String PATH_COUNTRIES = "countries";
 	public static final String PATH_DOCUMENTS_TYPE = "documentstypes";
+	public static final String PATH_DONATION_STATES = "donationstates";
 	
 	
 	

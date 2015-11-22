@@ -3,7 +3,6 @@ package org.hemologica.salud.web.converters;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import org.hemologica.constants.DataEventSeverityEnum;
 import org.hemologica.datatypes.DataCode;
 import org.hemologica.salud.web.beans.ApplicationBB;
 

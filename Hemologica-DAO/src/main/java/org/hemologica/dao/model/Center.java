@@ -173,7 +173,7 @@ public class Center implements Serializable {
 	public void setCenterInformation(String centerInformation) {
 		this.centerInformation = centerInformation;
 	}
-
+	
 	public Unit addUnit(Unit unit) {
 		getUnits().add(unit);
 		unit.setCenter(this);

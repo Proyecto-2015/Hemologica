@@ -22,8 +22,14 @@ public class User implements Serializable {
 	private String code;
 
 	//bi-directional many-to-one association to Person
-	@OneToMany(mappedBy="user")
-	private List<Person> persons;
+//	@OneToMany(mappedBy="user")
+//	private List<Person> persons;
+	
+	//bi-directional many-to-one association to Person
+	@ManyToOne
+	@JoinColumn(name="persons_id")
+	private Person person;
+	
 
 	//bi-directional many-to-one association to UsersRoleService
 	@OneToMany(mappedBy="user")
@@ -48,27 +54,27 @@ public class User implements Serializable {
 		this.code = code;
 	}
 
-	public List<Person> getPersons() {
-		return this.persons;
-	}
-
-	public void setPersons(List<Person> persons) {
-		this.persons = persons;
-	}
-
-	public Person addPerson(Person person) {
-		getPersons().add(person);
-		person.setUser(this);
-
+	public Person getPerson() {
 		return person;
 	}
 
-	public Person removePerson(Person person) {
-		getPersons().remove(person);
-		person.setUser(null);
-
-		return person;
+	public void setPerson(Person person) {
+		this.person = person;
 	}
+
+//	public Person addPerson(Person person) {
+//		getPersons().add(person);
+//		person.setUser(this);
+//
+//		return person;
+//	}
+//
+//	public Person removePerson(Person person) {
+//		getPersons().remove(person);
+//		person.setUser(null);
+//
+//		return person;
+//	}
 
 	public List<UsersRoleService> getUsersRoleServices() {
 		return this.usersRoleServices;

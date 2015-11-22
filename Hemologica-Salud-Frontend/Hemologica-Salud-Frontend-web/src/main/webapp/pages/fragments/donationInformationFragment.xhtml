@@ -37,7 +37,7 @@
 									valueChangeListener="#{donationBB.dataDonationStateChange}">
 									<p:ajax  update="@form"/>
 									<f:selectItems value="#{applicationBB.donationStates}" var="state"
-										itemValue="#{state}" itemLabel="#{messages[state.label]}" />
+										itemValue="#{state}" itemLabel="#{messages[state.displayName]}" />
 								</h:selectOneMenu>
 							</div>
 						</div>
@@ -52,7 +52,7 @@
 									value="#{donationBB.dataDonacion.fail}" style="height: 34px;"
 									converter="#{dataDonationFailTypeConverter}">
 									<f:selectItems value="#{applicationBB.rejectionTypes}" var="fail"
-										itemValue="#{fail}" itemLabel="#{fail.displayName}" />
+										itemValue="#{fail}" itemLabel="#{messages[fail.displayName]}" />
 								</h:selectOneMenu>
 							</div>
 						</h:panelGroup>
@@ -78,7 +78,7 @@
 									converter="#{dataDonationFailCauseConverter}">
 									<f:selectItems value="#{applicationBB.rejectionReasons}"
 										var="cause" itemValue="#{cause.code}"
-										itemLabel="#{cause.displayName}" />
+										itemLabel="#{messages[cause.displayName]}" />
 								</h:selectOneMenu>
 							</div>
 						</h:panelGroup>

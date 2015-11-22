@@ -106,12 +106,12 @@ public interface IRestServices {
 	@GET
 	@Path("/cities")
 	@Produces("application/json")
-	public List<DataCity> getCities();
+	public List<DataCode> getCities();
 	
 	@GET
 	@Path("/cities")
 	@Produces("application/json")
-	public List<DataCity> getCities(@QueryParam("user") String stateCode);
+	public List<DataCode> getCities(@QueryParam("user") String stateCode);
 	
 	@GET
 	@Path("/"+ConstantsRest.PATH_CAMPAIGNS + "/" + ConstantsRest.PATH_CAMPAIGNS_MESSAGES_OPTIONS)
@@ -166,7 +166,7 @@ public interface IRestServices {
 	@GET
 	@Path("/"+ConstantsRest.PATH_PERSONS + "/"+ ConstantsRest.PATH_RESPONSIBLE_TRENSFUSION)
 	@Produces("application/json")
-	public List<DataResponsiblePerson> getResponsibleTransfusionPersons(@QueryParam("user") String bankCode);
+	public List<DataResponsiblePerson> getResponsibleTransfusionPersons(@QueryParam(ConstansJson.JSON_BANK) String bankCode);
 	
 	@GET
 	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_TRANSFUSIONS_ANALYSIS)
@@ -243,10 +243,15 @@ public interface IRestServices {
 	@Produces("application/json")
 	public List<DataCode> getDonationsEvents();
 	
-	
 	@GET
 	@Path("/" +ConstantsRest.PATH_CODES +"/"+ ConstantsRest.PATH_INSTITUTIONS)
 	@Produces("application/json")
 	public List<DataInstitution> getInstitutions();
+	
+	@GET
+	@Path("/" + ConstantsRest.PATH_CODES +"/"+ ConstantsRest.PATH_DONATION_STATES)
+	@Produces("application/json")
+	public List<DataCode> getDonationState();
+
 	
 }

@@ -34,7 +34,7 @@
 									value="#{personBB.dataPerson.documentCountry}" style="height: 34px;"
 									converter="#{dataCountryConverter}">
 									<f:selectItems value="#{applicationBB.countries}" var="country"
-										itemValue="#{country.code}" itemLabel="#{country.displayName}" />
+										itemValue="#{country.code}" itemLabel="#{messages[country.displayName]}" />
 								</h:selectOneMenu>
 							</div>
 						</div>
@@ -46,7 +46,7 @@
 									value="#{personBB.dataPerson.documentType}" style="height: 34px;"
 									converter="#{dataDocumentTypeConverter}">
 									<f:selectItems value="#{applicationBB.documentTypes}" var="documentType"
-										itemValue="#{documentType.code}" itemLabel="#{documentType.displayName}" />
+										itemValue="#{documentType.code}" itemLabel="#{messages[documentType.displayName]}" />
 								</h:selectOneMenu>
 							</div>
 						</div>
@@ -119,7 +119,7 @@
 								<h:selectOneMenu class="form-control" value="#{personBB.states}"
 									style="height: 34px;" converter="#{dataStateConverter}">
 									<f:selectItems value="#{applicationBB.states}" var="state"
-										itemValue="state" itemLabel="#{state.displayName}" />
+										itemValue="state" itemLabel="#{messages[state.displayName]}" />
 <!-- 								<f:ajax listener="#{personBB.changeState}" render="states" />  -->
 								</h:selectOneMenu>
 							</div>
@@ -132,7 +132,7 @@
 									value="#{personBB.city}" style="height: 34px;"
 									converter="#{dataCityConverter}">
 									<f:selectItems value="#{applicationBB.cities}" var="city"
-										itemValue="#{city.code}" itemLabel="#{city.displayName}" />
+										itemValue="#{city.code}" itemLabel="#{messages[city.displayName]}" />
 								</h:selectOneMenu>
 							</div>
 						</div>

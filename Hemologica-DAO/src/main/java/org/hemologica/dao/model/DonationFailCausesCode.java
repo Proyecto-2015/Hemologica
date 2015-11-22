@@ -24,6 +24,10 @@ public class DonationFailCausesCode implements Serializable {
 
 	@Column(name="donation_fail_cause_code_value")
 	private String donationFailCauseCodeValue;
+	
+	@ManyToOne
+	@JoinColumn(name="donation_fail_cause_code_snomed")
+	private Concept concept;
 
 	public DonationFailCausesCode() {
 	}

@@ -9,9 +9,9 @@ import javax.persistence.*;
  * 
  */
 @Entity
-@Table(name="donation_fail_codes")
-@NamedQuery(name="DonationFailCode.findAll", query="SELECT d FROM DonationFailCode d")
-public class DonationFailCode implements Serializable {
+@Table(name="donation_fail_type_codes")
+@NamedQuery(name="DonationFailTypeCode.findAll", query="SELECT d FROM DonationFailTypeCode d")
+public class DonationFailTypeCode implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -25,7 +25,7 @@ public class DonationFailCode implements Serializable {
 	@Column(name="donation_fail_code_value")
 	private String donationFailCodeValue;
 
-	public DonationFailCode() {
+	public DonationFailTypeCode() {
 	}
 
 	public int getDonationFailCodeId() {

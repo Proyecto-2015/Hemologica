@@ -34,7 +34,7 @@
 										<h:selectOneMenu class="form-control" value="#{donationBB.event.event}"
 													style="height: 34px;" converter="#{dataEventDonationConverter}">
 												<f:selectItems value="#{applicationBB.donationsEvents}" var="item"
-													itemValue="#{item}" itemLabel="#{item.displayName}" />
+													itemValue="#{item}" itemLabel="#{messages[item.displayName]}" />
 									
 										</h:selectOneMenu>	
 									</td> 
@@ -72,7 +72,7 @@
 									var="event" varStatus="counter">
 									<tr>
 										<td data-title="#{messages.donation_event_display}">
-											<h:outputText value="#{event.event.displayName}" />
+											<h:outputText value="#{messages[event.event.displayName]}" />
 										</td>
 										<td data-title="#{messages.donation_event_severity}">
 											<h:outputText value="#{messages[event.severity.displayName]}" />

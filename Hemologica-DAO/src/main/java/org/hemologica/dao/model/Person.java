@@ -60,9 +60,8 @@ public class Person implements Serializable {
 	private CitiesCode citiesCode;
 
 	//bi-directional many-to-one association to User
-	@ManyToOne
-	@JoinColumn(name="person_user_id")
-	private User user;
+	@OneToMany(mappedBy="person")
+	private List<User> users;
 
 	public Person() {
 	}
@@ -205,12 +204,12 @@ public class Person implements Serializable {
 		this.citiesCode = citiesCode;
 	}
 
-	public User getUser() {
-		return this.user;
+	public List<User> getUsers() {
+		return users;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setUsers(List<User> users) {
+		this.users = users;
 	}
 
 }

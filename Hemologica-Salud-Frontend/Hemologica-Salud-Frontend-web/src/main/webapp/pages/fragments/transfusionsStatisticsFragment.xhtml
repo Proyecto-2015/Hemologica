@@ -53,12 +53,21 @@
 							value="#{messages.label_bank}" /></label>
 					<div class="col-md-9 col-lg-2">
 						<h:selectOneMenu class="form-control" value="#{messageBB.bloodType}"
-							style="height: 34px;">
-							<f:selectItems value="#{messageBB.bloodTypes}" var="bloodType"
+							style="height: 34px;" converter="#{dataBloodTypeConverterABO}">
+							<f:selectItems value="#{applicationBB.donationABOTypes}" var="bloodType"
 								itemValue="bloodType" itemLabel="#{bloodType.displayName}" />
-							<f:converter converterId="dataBloodTypeConverter" />
+<!-- 							<f:converter converterId="dataBloodTypeConverter" /> -->
 						</h:selectOneMenu>
 					</div>
+					<div class="col-md-9 col-lg-2">
+						<h:selectOneMenu class="form-control" value="#{messageBB.bloodType}"
+							style="height: 34px;" converter="#{dataBloodTypeConverterRH}">
+							<f:selectItems value="#{applicationBB.donationDTypes}" var="bloodType"
+								itemValue="bloodType" itemLabel="#{bloodType.displayName}" />
+<!-- 							<f:converter converterId="dataBloodTypeConverter" /> -->
+						</h:selectOneMenu>
+					</div>
+					
 					
 					<label class="col-md-1 col-lg-1 control-label" for="name"><h:outputText
 								value="#{messages.label_date_from}" /></label>
@@ -126,7 +135,7 @@
 								style="height: 34px;">
 								<f:selectItems value="#{messageBB.bloodTypes}" var="bloodType"
 									itemValue="bloodType" itemLabel="#{bloodType.displayName}" />
-								<f:converter converterId="dataBloodTypeConverter" />
+<!-- 								<f:converter converterId="dataBloodTypeConverter" /> -->
 							</h:selectOneMenu>
 						</div>
 				</div>		

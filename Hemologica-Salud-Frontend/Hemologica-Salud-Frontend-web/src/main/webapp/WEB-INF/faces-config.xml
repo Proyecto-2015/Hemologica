@@ -210,6 +210,18 @@
 		<converter-id>dataDonationStateConverter</converter-id>
 		<converter-class>org.hemologica.salud.web.converters.DataDonationStateConverter</converter-class>
 	</converter>
+	<managed-bean>
+        <managed-bean-name>dataDonationStateConverter</managed-bean-name>
+        <managed-bean-class>org.hemologica.salud.web.converters.DataDonationStateConverter</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>applicationBB</property-name>
+            <property-class>org.hemologica.salud.web.beans.ApplicationBB</property-class>
+            <value>#{applicationBB}</value>
+        </managed-property>
+    </managed-bean>
+	
+	
 	<converter>
 		<display-name>dataDocumentTypeConverter</display-name>
 		<converter-id>dataDocumentTypeConverter</converter-id>

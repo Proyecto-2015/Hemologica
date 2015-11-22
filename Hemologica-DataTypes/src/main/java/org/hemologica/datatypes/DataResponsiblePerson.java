@@ -7,9 +7,8 @@ public class DataResponsiblePerson {
 	private String secondName;
 	private String firstLastName;
 	private String secondLastName;
-	private String documentCountry;
-	private String documentType;
-	private String documentNumber;
+	private DataDocument documents;
+
 	
 	public String getId() {
 		return id;
@@ -41,25 +40,13 @@ public class DataResponsiblePerson {
 	public void setSecondLastName(String secondLastName) {
 		this.secondLastName = secondLastName;
 	}
-	public String getDocumentCountry() {
-		return documentCountry;
-	}
-	public void setDocumentCountry(String documentCountry) {
-		this.documentCountry = documentCountry;
-	}
-	public String getDocumentType() {
-		return documentType;
-	}
-	public void setDocumentType(String documentType) {
-		this.documentType = documentType;
-	}
-	public String getDocumentNumber() {
-		return documentNumber;
-	}
-	public void setDocumentNumber(String documentNumber) {
-		this.documentNumber = documentNumber;
-	}
 	
+	public DataDocument getDocuments() {
+		return documents;
+	}
+	public void setDocuments(DataDocument documents) {
+		this.documents = documents;
+	}
 	public String getFullName(){
 		
 		return firstName + " " + secondName + " " + firstLastName+ " " + secondLastName;

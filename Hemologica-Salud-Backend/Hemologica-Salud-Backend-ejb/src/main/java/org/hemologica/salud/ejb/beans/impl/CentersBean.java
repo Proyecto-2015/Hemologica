@@ -7,8 +7,13 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.hemologica.dao.model.Center;
+import org.hemologica.dao.model.Document;
+import org.hemologica.dao.model.ResponsibleTransfusionPerson;
 import org.hemologica.datatypes.DataBank;
+import org.hemologica.datatypes.DataCode;
+import org.hemologica.datatypes.DataDocument;
 import org.hemologica.datatypes.DataInstitution;
+import org.hemologica.datatypes.DataResponsiblePerson;
 import org.hemologica.factories.FactoryDAO;
 import org.hemologica.salud.ejb.beans.CentersBeanLocal;
 
@@ -68,6 +73,36 @@ public class CentersBean implements CentersBeanLocal {
 		return listReturn;
 	}
 	
+	@Override
+	public List<DataResponsiblePerson> getResponsibleTransfusionPersons(String centerCode) {
+		
+		List<DataResponsiblePerson> listReturn = new ArrayList<>();
+		List<ResponsibleTransfusionPerson> list = FactoryDAO.getCodesDAO(em).getResponsibleTransfusionPerson(centerCode);
+		
+		for(ResponsibleTransfusionPerson unit :list){
+			
+			if(unit.getPerson() != null){
+			
+				DataResponsiblePerson data = new DataResponsiblePerson();
+				data.setFirstName(unit.getPerson().getPersonFirstName());
+				data.setSecondName(unit.getPerson().getPersonSecondLastname());
+				data.setFirstLastName(unit.getPerson().getPersonFirstName());
+				data.setSecondLastName(unit.getPerson().getPersonSecondLastname());
+				
+				if(unit.getPerson().getDocuments() != null && unit.getPerson().getDocuments().size() != 0){
+					
+					Document d = unit.getPerson().getDocuments().get(0);
+					DataDocument dataDoc = new DataDocument();
+					dataDoc.setDocumentCountry(d.getCountriesCode().getCountryCodeLabel());
+					dataDoc.setDocumentNumber(d.getDocumentNumber());
+					dataDoc.setDocumentType(d.getDocumentsTypesCode().getDocumentsTypeCodeLabel());
+					data.setDocuments(dataDoc);
+				}
+					
+				listReturn.add(data);
+			}
+		}
+		return listReturn;
+	}
 	
-
 }
