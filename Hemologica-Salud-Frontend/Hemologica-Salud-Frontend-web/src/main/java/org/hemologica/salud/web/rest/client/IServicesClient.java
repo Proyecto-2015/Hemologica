@@ -26,7 +26,7 @@ import org.hemologica.datatypes.DataUser;
 import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.MailData;
-import org.hemologica.datatypes.MessageOptionData;
+import org.hemologica.datatypes.DataMessageOption;
 import org.hemologica.datatypes.DataResponsiblePerson;
 import org.hemologica.datatypes.TransfusionFilterData;
 
@@ -82,7 +82,7 @@ public interface IServicesClient {
 	 * @throws ClientProtocolException 
 	 * @throws URISyntaxException 
 	 */
-	public List<DataBank> getBanks(String bankCode, String productTypeCode, String bloodTypeCode, Integer count) throws ClientProtocolException, IOException, URISyntaxException;
+	public List<DataBank> getBanks(String bankCode, String productTypeCode, String bloodTypeCodeRH, String bloodTypeCodeABO, Integer count) throws ClientProtocolException, IOException, URISyntaxException;
 	
 	/**
 	 * Devuelve el stock del banco con el code ingresado
@@ -133,7 +133,7 @@ public interface IServicesClient {
 	 * @throws IOException 
 	 * @throws ClientProtocolException 
 	 */
-	public List<MessageOptionData> getMessageOptions() throws ClientProtocolException, IOException;
+	public List<DataMessageOption> getMessageOptions() throws ClientProtocolException, IOException;
 
 	/**
 	 * Devuleve todos los tipos de sangre. Une la distincion entre ABO y R+

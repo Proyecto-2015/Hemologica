@@ -18,6 +18,9 @@ public class ConceptsDisplay implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 
+	@Column(name="concepts_label")
+	private String conceptLabel;
+	
 	//bi-directional many-to-one association to Concept
 	@ManyToOne
 	@JoinColumn(name="concepts_id")
@@ -32,6 +35,14 @@ public class ConceptsDisplay implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	
+	public String getConceptLabel() {
+		return conceptLabel;
+	}
+
+	public void setConceptLabel(String conceptLabel) {
+		this.conceptLabel = conceptLabel;
 	}
 
 	public Concept getConcept() {

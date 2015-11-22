@@ -10,7 +10,10 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="blood_d_types_codes")
-@NamedQuery(name="BloodDTypesCode.findAll", query="SELECT b FROM BloodDTypesCode b")
+@NamedQueries({
+@NamedQuery(name="BloodDTypesCode.findAll", query="SELECT b FROM BloodDTypesCode b"),
+@NamedQuery(name="BloodDTypesCode.getBloodDTypesCodeByCode", query="SELECT i FROM BloodDTypesCode i where i.bloodDTypeCodeId = :code")
+})
 public class BloodDTypesCode implements Serializable {
 	private static final long serialVersionUID = 1L;
 

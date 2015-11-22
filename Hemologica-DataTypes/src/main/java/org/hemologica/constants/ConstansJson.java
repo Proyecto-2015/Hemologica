@@ -9,6 +9,8 @@ public class ConstansJson {
 	public static final String JSON_BANK = "bank";
 	public static final String JSON_CAMPAIGN_ID = "campaignId";
 	public static final String JSON_PRODUCT_TYPE = "productTypeCode";
-	public static final String JSON_BLOOD_TYPE = "bloodTypeCode";
+//	public static final String JSON_BLOOD_TYPE = "bloodTypeCode";
 	public static final String JSON_COUNT = "count";
+	public static final String JSON_BLOOD_TYPE_ABO = "bloodTypeCodeABO";
+	public static final String JSON_BLOOD_TYPE_RH = "bloodTypeCodeRH";
 }

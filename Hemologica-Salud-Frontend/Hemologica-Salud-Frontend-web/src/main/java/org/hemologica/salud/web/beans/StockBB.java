@@ -24,6 +24,7 @@ import javax.inject.Named;
 import org.apache.http.client.ClientProtocolException;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataBloodType;
+import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataProductType;
 import org.hemologica.datatypes.DataStock;
 import org.hemologica.datatypes.DataStockProductType;
@@ -73,7 +74,11 @@ public class StockBB implements Serializable {
 
 	private String bankCode;
 	private DataProductType productTypeCode;
-	private DataBloodType bloodTypeCode;
+//	private DataBloodType bloodTypeCode;
+//	
+	private DataCode bloodTypeABO;
+	private DataCode bloodTypeRH;
+	
 	private Integer count;
 
 	private List<SelectItem> banksItems;
@@ -152,7 +157,7 @@ public class StockBB implements Serializable {
 			IServicesClient client = RestFactory.getServicesClient();
 
 			this.banks = client.getBanks(banksItemsSelected, productTypeCode != null ? productTypeCode.getCode() : null,
-					bloodTypeCode != null ? bloodTypeCode.getCode() : null, count);
+					bloodTypeABO != null ? bloodTypeABO.getCode() : null, bloodTypeRH != null ? bloodTypeRH.getCode() : null, count);
 			banksItems = new ArrayList<SelectItem>();
 
 			gmapModel = new DefaultMapModel();
@@ -391,13 +396,13 @@ public class StockBB implements Serializable {
 		this.productTypeCode = productTypeCode;
 	}
 
-	public DataBloodType getBloodTypeCode() {
-		return bloodTypeCode;
-	}
-
-	public void setBloodTypeCode(DataBloodType bloodTypeCode) {
-		this.bloodTypeCode = bloodTypeCode;
-	}
+//	public DataBloodType getBloodTypeCode() {
+//		return bloodTypeCode;
+//	}
+//
+//	public void setBloodTypeCode(DataBloodType bloodTypeCode) {
+//		this.bloodTypeCode = bloodTypeCode;
+//	}
 
 	public Integer getCount() {
 		return count;
@@ -463,4 +468,20 @@ public class StockBB implements Serializable {
 		this.barModel = barModel;
 	}
 
+	public DataCode getBloodTypeABO() {
+		return bloodTypeABO;
+	}
+
+	public void setBloodTypeABO(DataCode bloodTypeABO) {
+		this.bloodTypeABO = bloodTypeABO;
+	}
+
+	public DataCode getBloodTypeRH() {
+		return bloodTypeRH;
+	}
+
+	public void setBloodTypeRH(DataCode bloodTypeRH) {
+		this.bloodTypeRH = bloodTypeRH;
+	}
+	
 }

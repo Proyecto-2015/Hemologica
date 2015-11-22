@@ -6,25 +6,18 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.model.SelectItem;
-import javax.inject.Named;
-
 import org.apache.http.client.ClientProtocolException;
 import org.hemologica.constants.DataDonationStateEnum;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataBloodType;
-import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataCode;
-import org.hemologica.datatypes.DataCountry;
-import org.hemologica.datatypes.DataDocumentType;
 import org.hemologica.datatypes.DataDonationEvent;
 import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.DataProductType;
+import org.hemologica.datatypes.DataMessageOption;
 import org.hemologica.salud.factories.RestFactory;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
 
-//@Named(value="applicationBB")
-//@ApplicationScoped
 public class ApplicationBB implements Serializable {
 
 	/**
@@ -53,6 +46,8 @@ public class ApplicationBB implements Serializable {
 	
 	private List<DataCode> rejectionTypes;
 	private List<DataCode> rejectionReasons;
+	
+	private List<DataMessageOption> messageOptions;
 	
 	
 	/**
@@ -128,6 +123,8 @@ public class ApplicationBB implements Serializable {
 			this.states = RestFactory.getServicesClient().getStatesCodes();
 			this.countries = RestFactory.getServicesClient().getCountries();
 			this.documentTypes = RestFactory.getServicesClient().getDocumentsTypes();
+			
+			this.messageOptions = RestFactory.getServicesClient().getMessageOptions();
 			
 		} catch (ClientProtocolException e) {
 			
@@ -300,5 +297,13 @@ public class ApplicationBB implements Serializable {
 	public List<DataCode> getDocumentTypes() {
 		return documentTypes;
 	}
-	
+
+	public List<DataMessageOption> getMessageOptions() {
+		return messageOptions;
+	}
+
+	public void setMessageOptions(List<DataMessageOption> messageOptions) {
+		this.messageOptions = messageOptions;
+	}
+
 }

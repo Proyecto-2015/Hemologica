@@ -2,6 +2,9 @@ package org.hemologica.dao.model;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.hemologica.dao.enums.CenterType;
+
 import java.util.List;
 
 
@@ -11,7 +14,11 @@ import java.util.List;
  */
 @Entity
 @Table(name="centers")
-@NamedQuery(name="Center.findAll", query="SELECT c FROM Center c")
+@NamedQueries({
+@NamedQuery(name="Center.findAll", query="SELECT c FROM Center c"),
+@NamedQuery(name="Center.findAllBanks", query="SELECT c FROM Center c WHERE c.centerType = 'bank' "),
+@NamedQuery(name="Center.findAllTransfusionCenters", query="SELECT c FROM Center c WHERE c.centerType = 'transfusionCenter' ")
+})
 public class Center implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -28,6 +35,24 @@ public class Center implements Serializable {
 	@Column(name="center_oid")
 	private String centerOid;
 
+	@Column(name="center_type")
+	private CenterType centerType;
+	
+	@Column(name="center_address")
+	private String centerAddress;
+	
+	@Column(name="center_email")
+	private String centerEmail;
+	
+	@Column(name="center_hour")
+	private String centerHour;
+	
+	@Column(name="center_telephone")
+	private String centerTelephone;
+	
+	@Column(name="center_information")
+	private String centerInformation;
+	
 	//bi-directional many-to-one association to GeoLocation
 	@ManyToOne
 	@JoinColumn(name="center_location")
@@ -92,6 +117,14 @@ public class Center implements Serializable {
 	public void setInstitution(Institution institution) {
 		this.institution = institution;
 	}
+	
+	public CenterType getCenterType() {
+		return centerType;
+	}
+
+	public void setCenterType(CenterType centerType) {
+		this.centerType = centerType;
+	}
 
 	public List<Unit> getUnits() {
 		return this.units;
@@ -99,6 +132,46 @@ public class Center implements Serializable {
 
 	public void setUnits(List<Unit> units) {
 		this.units = units;
+	}
+	
+	public String getCenterAddress() {
+		return centerAddress;
+	}
+
+	public void setCenterAddress(String centerAddress) {
+		this.centerAddress = centerAddress;
+	}
+
+	public String getCenterEmail() {
+		return centerEmail;
+	}
+
+	public void setCenterEmail(String centerEmail) {
+		this.centerEmail = centerEmail;
+	}
+
+	public String getCenterHour() {
+		return centerHour;
+	}
+
+	public void setCenterHour(String centerHour) {
+		this.centerHour = centerHour;
+	}
+
+	public String getCenterTelephone() {
+		return centerTelephone;
+	}
+
+	public void setCenterTelephone(String centerTelephone) {
+		this.centerTelephone = centerTelephone;
+	}
+
+	public String getCenterInformation() {
+		return centerInformation;
+	}
+
+	public void setCenterInformation(String centerInformation) {
+		this.centerInformation = centerInformation;
 	}
 
 	public Unit addUnit(Unit unit) {

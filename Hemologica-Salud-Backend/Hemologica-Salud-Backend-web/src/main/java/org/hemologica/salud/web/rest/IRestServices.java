@@ -1,7 +1,6 @@
 package org.hemologica.salud.web.rest;
 
 import java.util.List;
-
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -32,7 +31,7 @@ import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.LoginData;
 import org.hemologica.datatypes.MailData;
-import org.hemologica.datatypes.MessageOptionData;
+import org.hemologica.datatypes.DataMessageOption;
 import org.hemologica.datatypes.TransfusionFilterData;
 
 @Path("/services")
@@ -85,7 +84,8 @@ public interface IRestServices {
 	public List<DataBank> getBanks(
 			@QueryParam(ConstansJson.JSON_BANK) String bankCode, 
 			@QueryParam(ConstansJson.JSON_PRODUCT_TYPE) String productTypeCode, 
-			@QueryParam(ConstansJson.JSON_BLOOD_TYPE) String bloodTypeCode, 
+			@QueryParam(ConstansJson.JSON_BLOOD_TYPE_ABO) String bloodTypeCodeABO, 
+			@QueryParam(ConstansJson.JSON_BLOOD_TYPE_RH) String bloodTypeCodeRH,
 			@QueryParam(ConstansJson.JSON_COUNT) Integer count);
 	
 	@GET
@@ -116,7 +116,7 @@ public interface IRestServices {
 	@GET
 	@Path("/"+ConstantsRest.PATH_CAMPAIGNS + "/" + ConstantsRest.PATH_CAMPAIGNS_MESSAGES_OPTIONS)
 	@Produces("application/json")
-	public List<MessageOptionData> getMessageOptions();
+	public List<DataMessageOption> getMessageOptions();
 	
 	@GET
 	@Path("/"+ConstantsRest.PATH_CODES + "/" + ConstantsRest.PATH_BLOOD_TYPES)

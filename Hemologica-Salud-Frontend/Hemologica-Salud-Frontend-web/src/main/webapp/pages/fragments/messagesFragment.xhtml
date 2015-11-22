@@ -23,23 +23,32 @@
 				<label class="col-md-2 control-label" for="name"><h:outputText
 						value="#{messages.donation_situation}" /></label>
 				<div class="col-md-9 col-lg-2">
-					<h:selectOneMenu id="options" class="form-control" value="#{messageBB.messageOption}"
-						style="height: 34px;" converter="dataMessageOptionsConverter">
+					<h:selectOneMenu id="options" class="form-control" value="#{messageBB.mailData.messageOption}"
+						style="height: 34px;" converter="#{dataMessageOptionsConverter}">
 						
-						<f:selectItems value="#{messageBB.messageOptions}" var="messageOption"
-							itemValue="messageOption" itemLabel="#{messageOption.displayName}" />
+						<f:selectItems value="#{applicationBB.messageOptions}" var="messageOption"
+							itemValue="#{messageOption}" itemLabel="#{messages[messageOption.displayName]}" />
 						
 					</h:selectOneMenu>
 				</div>
 		
 				<label class="col-md-2 control-label" for="name"><h:outputText
 						value="#{messages.donation_blood_type}" /></label>
+						
 				<div class="col-md-9 col-lg-2">
-					<h:selectOneMenu class="form-control" value="#{messageBB.bloodType}"
-						style="height: 34px;">
-						<f:selectItems value="#{messageBB.bloodTypes}" var="bloodType"
-							itemValue="bloodType" itemLabel="#{bloodType.displayName}" />
-						<f:converter converterId="dataBloodTypeConverter" />
+					<h:selectOneMenu class="form-control" value="#{messageBB.mailData.bloodTypeABO}"
+						id="ABO" style="height: 34px;" converter="#{dataBloodTypeConverterABO}">
+						<f:selectItems value="#{applicationBB.donationABOTypes}" var="bloodTypeABO"
+						itemValue="#{bloodTypeABO}" itemLabel="#{bloodTypeABO.displayName}" />
+					</h:selectOneMenu>
+				</div>		
+				
+				<div class="col-md-9 col-lg-2">
+					<h:selectOneMenu class="form-control" value="#{messageBB.mailData.bloodTypeRH}"
+						id="RH" style="height: 34px;" converter="#{dataBloodTypeConverterRH}">
+						<f:selectItems value="#{applicationBB.donationDTypes}" var="bloodTypeRH"
+							itemValue="#{bloodTypeRH}" itemLabel="#{bloodTypeRH.displayName}" />
+
 					</h:selectOneMenu>
 				</div>
 			</div>

@@ -20,11 +20,15 @@ public class UnitsType implements Serializable {
 	@Column(name="unit_type_id")
 	private int unitTypeId;
 
-	@Column(name="unit_type_code")
-	private String unitTypeCode;
+	@Column(name="unit_type_code_label")
+	private String unitTypeCodeLabel;
 
-	@Column(name="unit_type_display")
-	private String unitTypeDisplay;
+	@Column(name="unit_type_code_value")
+	private String unitTypeCodeValue;
+	
+	@ManyToOne
+	@JoinColumn(name="unit_type_code_snomed")
+	private Concept concept;
 
 	//bi-directional many-to-one association to Unit
 	@OneToMany(mappedBy="unitsType")
@@ -41,20 +45,20 @@ public class UnitsType implements Serializable {
 		this.unitTypeId = unitTypeId;
 	}
 
-	public String getUnitTypeCode() {
-		return this.unitTypeCode;
+	public String getUnitTypeCodeLabel() {
+		return unitTypeCodeLabel;
 	}
 
-	public void setUnitTypeCode(String unitTypeCode) {
-		this.unitTypeCode = unitTypeCode;
+	public void setUnitTypeCodeLabel(String unitTypeCodeLabel) {
+		this.unitTypeCodeLabel = unitTypeCodeLabel;
 	}
 
-	public String getUnitTypeDisplay() {
-		return this.unitTypeDisplay;
+	public String getUnitTypeCodeValue() {
+		return unitTypeCodeValue;
 	}
 
-	public void setUnitTypeDisplay(String unitTypeDisplay) {
-		this.unitTypeDisplay = unitTypeDisplay;
+	public void setUnitTypeCodeValue(String unitTypeCodeValue) {
+		this.unitTypeCodeValue = unitTypeCodeValue;
 	}
 
 	public List<Unit> getUnits() {

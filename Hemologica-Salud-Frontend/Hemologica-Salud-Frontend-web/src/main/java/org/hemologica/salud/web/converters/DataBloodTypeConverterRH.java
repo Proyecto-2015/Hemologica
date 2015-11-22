@@ -2,25 +2,20 @@ package org.hemologica.salud.web.converters;
 
 import java.io.Serializable;
 import java.util.List;
-//import java.util.logging.Logger;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import org.hemologica.datatypes.DataBloodType;
+import org.hemologica.datatypes.DataCode;
 import org.hemologica.salud.web.beans.ApplicationBB;
 import org.hemologica.salud.web.beans.SessionBB;
 
-public class DataBloodTypeConverter implements Converter, Serializable {
+public class DataBloodTypeConverterRH implements Converter, Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 421603990867590424L;
-
-
-//	private static final Logger logger = Logger.getLogger(DataBloodTypeConverter.class.getName());
-
-
+	
 	private ApplicationBB applicationBB;
 	private SessionBB sessionBB;
 
@@ -31,10 +26,10 @@ public class DataBloodTypeConverter implements Converter, Serializable {
 			return null;
 		}
 
-		List<DataBloodType> typesList = applicationBB.getBloodTypes();
+		List<DataCode> typesList = applicationBB.getDonationDTypes();
 		
 		if (typesList != null) {
-			for (DataBloodType type : typesList) {
+			for (DataCode type : typesList) {
 
 				if (type.getCode() != null && type.getCode().equals(value)) {
 					return type;
@@ -47,8 +42,8 @@ public class DataBloodTypeConverter implements Converter, Serializable {
 	@Override
 	public String getAsString(FacesContext arg0, UIComponent arg1, Object value) {
 
-		if (value instanceof DataBloodType) {
-			return ((DataBloodType) value).getCode();
+		if (value instanceof DataCode) {
+			return ((DataCode) value).getCode();
 		}
 		return null;
 	}
