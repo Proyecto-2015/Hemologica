@@ -98,6 +98,7 @@ public class CentersBean implements CentersBeanLocal {
 					dataDoc.setDocumentType(d.getDocumentsTypesCode().getDocumentsTypeCodeLabel());
 					data.setDocuments(dataDoc);
 				}
+				data.setId(unit.getId());
 					
 				listReturn.add(data);
 			}

@@ -30,6 +30,15 @@ public class ResponsibleTransfusionPerson implements Serializable {
 	@JoinColumn(name="person_center")
 	private Center center;
 	
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public Person getPerson() {
 		return person;
 	}
