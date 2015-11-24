@@ -1,10 +1,9 @@
 package org.hemologica.datatypes;
 
-import java.io.Serializable;
 import java.util.List;
 
-public class DonationsStatisticsData implements Serializable{
-
+public class DataTransfusionsStatistics {
+	
 	private static final long serialVersionUID = 1L;
 	
 	private String type;
@@ -12,8 +11,8 @@ public class DonationsStatisticsData implements Serializable{
 	private String toDate;
 	private DataCode institution;
 	private DataCode bloodBank;
-	private List<DonationFilterData> filters;
-	private List<DonationFilterData> distinguish;
+	private List<TransfusionFilterData> filters;
+	private List<TransfusionFilterData> distinguish;
 	
 	public String getType() {
 		return type;
@@ -45,17 +44,17 @@ public class DonationsStatisticsData implements Serializable{
 	public void setBloodBank(DataCode bloodBank) {
 		this.bloodBank = bloodBank;
 	}
-	public List<DonationFilterData> getFilters() {
+	public List<TransfusionFilterData> getFilters() {
 		return filters;
 	}
-	public void setFilters(List<DonationFilterData> filters) {
+	public void setFilters(List<TransfusionFilterData> filters) {
 		this.filters = filters;
 	}
-	public List<DonationFilterData> getDistinguish() {
+	public List<TransfusionFilterData> getDistinguish() {
 		return distinguish;
 	}
-	public void setDistinguish(List<DonationFilterData> distinguish) {
+	public void setDistinguish(List<TransfusionFilterData> distinguish) {
 		this.distinguish = distinguish;
 	}
-
+	
 }

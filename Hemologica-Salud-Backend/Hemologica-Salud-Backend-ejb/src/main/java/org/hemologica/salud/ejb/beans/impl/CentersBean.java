@@ -10,7 +10,6 @@ import org.hemologica.dao.model.Center;
 import org.hemologica.dao.model.Document;
 import org.hemologica.dao.model.ResponsibleTransfusionPerson;
 import org.hemologica.datatypes.DataBank;
-import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataDocument;
 import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.DataResponsiblePerson;
@@ -103,6 +102,46 @@ public class CentersBean implements CentersBeanLocal {
 				listReturn.add(data);
 			}
 		}
+		return listReturn;
+	}
+
+	@Override
+	public List<DataBank> getBanksUser(String user) {
+		
+		List<DataBank> listReturn = new ArrayList<>();
+		List<Center> list = FactoryDAO.getCenterDAO(em).getBanksUser(user);
+		if(list != null){
+			for(Center c : list){
+				
+				DataBank dataBank = new DataBank();
+				dataBank.setCode(c.getCenterCode());
+				dataBank.setName(c.getCenterDisplayName());
+				dataBank.setAddress(c.getCenterAddress());
+				dataBank.setEmail(c.getCenterEmail());
+				dataBank.setHour(c.getCenterHour());
+				dataBank.setInformation(c.getCenterInformation());
+				dataBank.setTelephone(c.getCenterTelephone());
+				
+				if(c.getInstitution() != null){
+				
+					DataInstitution dataInstitution = new DataInstitution();
+					dataInstitution.setName(c.getInstitution().getInstitutionDisplayName());
+					dataInstitution.setCode(c.getInstitution().getInstitutionDisplayName());	
+					dataBank.setInstitution(dataInstitution);
+					
+				}
+				
+				if(c.getGeoLocation() != null){
+					
+					dataBank.setLatitude(c.getGeoLocation().getGeoLocationsX());
+					dataBank.setLongitude(c.getGeoLocation().getGeoLocationsY());
+					
+				}
+				
+				listReturn.add(dataBank);
+			}
+		}
+		
 		return listReturn;
 	}
 	

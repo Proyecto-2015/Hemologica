@@ -13,9 +13,6 @@ import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataTransfusionEvent;
 import org.primefaces.event.FlowEvent;
 
-
-//@Named("transfusionBB")
-//@ViewScoped
 public class TransfusionBB implements Serializable {
 
 	/**

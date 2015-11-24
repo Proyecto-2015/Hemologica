@@ -6,7 +6,6 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.ws.rs.core.Response;
-import org.hemologica.constants.DataDonationStateEnum;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCity;

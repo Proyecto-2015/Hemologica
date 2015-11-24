@@ -11,6 +11,7 @@ import org.hemologica.dao.model.DonationLaboratoyCode;
 import org.hemologica.dao.model.MessageSendOption;
 import org.hemologica.dao.model.ResponsibleTransfusionPerson;
 import org.hemologica.dao.model.StatesCode;
+import org.hemologica.dao.model.TransfusionEventsCode;
 import org.hemologica.dao.model.TransfusionLaboratoryCode;
 import org.hemologica.dao.model.UnitsType;
 
@@ -41,5 +42,7 @@ public interface ICodesDAO {
 	public List<ResponsibleTransfusionPerson> getResponsibleTransfusionPerson(String centerCode);
 
 	public List<TransfusionLaboratoryCode> getTransfusionsAnalysis();
+
+	public List<TransfusionEventsCode> getTransfusionsEvents();
 
 }

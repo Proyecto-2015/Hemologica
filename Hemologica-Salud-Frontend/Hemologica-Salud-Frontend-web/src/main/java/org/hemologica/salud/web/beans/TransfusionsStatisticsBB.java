@@ -9,21 +9,21 @@ import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import org.apache.http.client.ClientProtocolException;
-import org.hemologica.datatypes.DonationFilterData;
-import org.hemologica.datatypes.DonationsStatisticsData;
+import org.hemologica.datatypes.DataTransfusionsStatistics;
+import org.hemologica.datatypes.TransfusionFilterData;
 import org.hemologica.salud.factories.RestFactory;
 import org.primefaces.event.ItemSelectEvent;
 import org.primefaces.model.chart.PieChartModel;
 
-public class DonationsStatisticsBB implements Serializable{
-
+public class TransfusionsStatisticsBB implements Serializable{
+	
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = Logger.getLogger(DonationsStatisticsBB.class.getName());
 	
-	private DonationsStatisticsData statictic;
-	private List<DonationFilterData> filters;
-	private List<DonationFilterData> distinguish;
-	private List<DonationFilterData> allFilters;
+	private DataTransfusionsStatistics statictic;
+	private List<TransfusionFilterData> filters;
+	private List<TransfusionFilterData> distinguish;
+	private List<TransfusionFilterData> allFilters;
 	
 	private PieChartModel pieModel1;
 
@@ -32,8 +32,8 @@ public class DonationsStatisticsBB implements Serializable{
 		
 		try {
 			
-			allFilters = RestFactory.getServicesClient().getDonationsFilters();
-			statictic = new DonationsStatisticsData();
+			allFilters = RestFactory.getServicesClient().getTransfusionsFilters();
+			statictic = new DataTransfusionsStatistics();
 			createPieModels();
 			
 		} catch (ClientProtocolException e) {
@@ -76,31 +76,38 @@ public class DonationsStatisticsBB implements Serializable{
 		this.pieModel1 = pieModel1;
 	}
 
-	public DonationsStatisticsData getStatictic() {
+	public DataTransfusionsStatistics getStatictic() {
 		return statictic;
 	}
-	public void setStatictic(DonationsStatisticsData statictic) {
+
+	public void setStatictic(DataTransfusionsStatistics statictic) {
 		this.statictic = statictic;
 	}
-	public List<DonationFilterData> getFilters() {
+	
+	public List<TransfusionFilterData> getFilters() {
 		return filters;
 	}
-	public void setFilters(List<DonationFilterData> filters) {
+
+	public void setFilters(List<TransfusionFilterData> filters) {
 		this.filters = filters;
 	}
-	public List<DonationFilterData> getDistinguish() {
+
+	public List<TransfusionFilterData> getDistinguish() {
 		return distinguish;
 	}
-	public void setDistinguish(List<DonationFilterData> distinguish) {
+
+	public void setDistinguish(List<TransfusionFilterData> distinguish) {
 		this.distinguish = distinguish;
 	}
-	public List<DonationFilterData> getAllFilters() {
+
+	public List<TransfusionFilterData> getAllFilters() {
 		return allFilters;
 	}
-	public void setAllFilters(List<DonationFilterData> allFilters) {
+
+	public void setAllFilters(List<TransfusionFilterData> allFilters) {
 		this.allFilters = allFilters;
 	}
-	
+
 	public void itemSelect(ItemSelectEvent event) {
 	        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Item selected",
 	            "Item Index: " + event.getItemIndex() + ", Series Index:" + event.getSeriesIndex());

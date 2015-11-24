@@ -12,7 +12,10 @@ import java.util.List;
  */
 @Entity
 @Table(name="persons")
-@NamedQuery(name="Person.findAll", query="SELECT p FROM Person p")
+@NamedQueries({
+@NamedQuery(name="Person.findAll", query="SELECT p FROM Person p"),
+@NamedQuery(name="Person.findById", query="SELECT p FROM Person p where p.id = :id")
+})
 public class Person implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -41,6 +44,12 @@ public class Person implements Serializable {
 
 	@Column(name="person_telephone")
 	private String personTelephone;
+	
+	@Column(name="person_allow_notification_able")
+	private boolean allowNotificationAbleToDonate;
+	
+	@Column(name="person_allow_notification_need_donor")
+	private boolean allowNotificationNeedDonor;
 
 	//bi-directional many-to-one association to Document
 	@OneToMany(mappedBy="person")
@@ -136,6 +145,22 @@ public class Person implements Serializable {
 
 	public void setDocuments(List<Document> documents) {
 		this.documents = documents;
+	}
+	
+	public boolean getAllowNotificationAbleToDonate() {
+		return allowNotificationAbleToDonate;
+	}
+
+	public void setAllowNotificationAbleToDonate(boolean allowNotificationAbleToDonate) {
+		this.allowNotificationAbleToDonate = allowNotificationAbleToDonate;
+	}
+
+	public boolean getAllowNotificationNeedDonor() {
+		return allowNotificationNeedDonor;
+	}
+
+	public void setAllowNotificationNeedDonor(boolean allowNotificationNeedDonor) {
+		this.allowNotificationNeedDonor = allowNotificationNeedDonor;
 	}
 
 	public Document addDocument(Document document) {

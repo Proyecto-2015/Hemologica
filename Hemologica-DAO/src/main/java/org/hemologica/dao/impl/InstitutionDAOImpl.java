@@ -33,6 +33,11 @@ public class InstitutionDAOImpl extends GenericDAOImpl<Institution> implements I
 		return (Institution) query.getSingleResult();
 		
 	}
+
+	public List<Institution> getInstitutionsUser(String user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 
 }

@@ -512,8 +512,8 @@
 		<managed-bean-scope>view</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
-		<managed-bean-name>transfusionsStatistics</managed-bean-name>
-		<managed-bean-class>org.hemologica.salud.web.beans.TransfusionsStatistics</managed-bean-class>
+		<managed-bean-name>TransfusionsStatisticsBB</managed-bean-name>
+		<managed-bean-class>org.hemologica.salud.web.beans.TransfusionsStatisticsBB</managed-bean-class>
 		<managed-bean-scope>view</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>

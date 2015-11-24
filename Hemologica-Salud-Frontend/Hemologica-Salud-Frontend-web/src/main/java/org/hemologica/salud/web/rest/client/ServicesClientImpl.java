@@ -387,7 +387,7 @@ public class ServicesClientImpl implements IServicesClient {
 	@Override
 	public List<DataInstitution> getInstitution(String userId) throws ClientProtocolException, IOException {
 
-		String urlService = url + ConstantsRest.PATH_USERS + ConstantsRest.PATH_INSTITUTIONS;
+		String urlService = url + ConstantsRest.PATH_USERS + "/" + ConstantsRest.PATH_INSTITUTIONS;
 
 		HashMap<String, String> hash = new HashMap<String, String>();
 		hash.put(ConstansJson.JSON_USER, userId);
@@ -413,7 +413,7 @@ public class ServicesClientImpl implements IServicesClient {
 	@Override
 	public List<DataBank> getBanks(String userId) throws ClientProtocolException, IOException {
 
-		String urlService = url + ConstantsRest.PATH_USERS + ConstantsRest.PATH_BANKS;
+		String urlService = url + ConstantsRest.PATH_USERS + "/" + ConstantsRest.PATH_BANKS;
 
 		HashMap<String, String> hash = new HashMap<String, String>();
 		hash.put(ConstansJson.JSON_USER, userId);

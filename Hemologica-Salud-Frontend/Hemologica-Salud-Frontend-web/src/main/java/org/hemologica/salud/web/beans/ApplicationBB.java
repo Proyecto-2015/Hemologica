@@ -100,7 +100,6 @@ public class ApplicationBB implements Serializable {
 	@PostConstruct
 	public void init(){
 		
-//		this.eventSeverities = DataEventSeverityEnum.getSeverities();
 		try {
 			
 			this.donationStates = RestFactory.getServicesClient().getDonationState();

@@ -17,6 +17,7 @@ import org.hemologica.dao.model.DonationFailTypeCode;
 import org.hemologica.dao.model.DonationLaboratoyCode;
 import org.hemologica.dao.model.MessageSendOption;
 import org.hemologica.dao.model.StatesCode;
+import org.hemologica.dao.model.TransfusionEventsCode;
 import org.hemologica.dao.model.TransfusionLaboratoryCode;
 import org.hemologica.dao.model.UnitsType;
 import org.hemologica.datatypes.DataCode;
@@ -270,6 +271,23 @@ public class CodesBean implements CodesBeanLocal {
 			DataCode data = new DataCode();
 			data.setCode(unit.getTransfusionLaboratoryCodeValue());
 			data.setDisplayName(unit.getTransfusionLaboratoryCodeLabel());
+			listReturn.add(data);
+			
+		}
+		return listReturn;
+	}
+
+	@Override
+	public List<DataCode> getTransfusionsEvents() {
+		
+		List<DataCode> listReturn = new ArrayList<>();
+		List<TransfusionEventsCode> list = FactoryDAO.getCodesDAO(em).getTransfusionsEvents();
+		
+		for(TransfusionEventsCode unit :list){
+			
+			DataCode data = new DataCode();
+			data.setCode(unit.getTransfusionEventCodeValue());
+			data.setDisplayName(unit.getTransfusionEventCodeLabel());
 			listReturn.add(data);
 			
 		}

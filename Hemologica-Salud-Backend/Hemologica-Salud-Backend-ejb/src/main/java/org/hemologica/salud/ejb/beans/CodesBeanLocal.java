@@ -37,4 +37,6 @@ public interface CodesBeanLocal {
 
 	public List<DataCode> getTransfusionsAnalysis();
 
+	public List<DataCode> getTransfusionsEvents();
+
 }

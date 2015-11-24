@@ -23,4 +23,9 @@ public class CenterDAOImpl extends GenericDAOImpl<Center> implements ICenterDAO 
 		return query.getResultList();
 		
 	}
+
+	public List<Center> getBanksUser(String user) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

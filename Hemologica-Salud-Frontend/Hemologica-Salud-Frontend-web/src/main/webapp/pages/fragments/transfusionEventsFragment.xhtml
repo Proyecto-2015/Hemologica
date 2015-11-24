@@ -33,7 +33,7 @@
 							<h:selectOneMenu class="form-control" value="#{transfusionBB.event.event}"
 										style="height: 34px;" converter="#{dataEventTransfusionConverter}">
 											<f:selectItems value="#{applicationBB.transfusionEvents}" var="item"
-												itemValue="#{item}" itemLabel="#{item.displayName}" />
+												itemValue="#{item}" itemLabel="#{messages[item.displayName]}" />
 						
 							</h:selectOneMenu>	
 						</td> 
@@ -62,7 +62,7 @@
 						var="event" varStatus="counter">
 						<tr>
 							<td data-title="#{messages.label_reaccion_type}">
-								<h:outputText value="#{event.event.displayName}" />
+								<h:outputText value="#{messages[event.event.displayName]}" />
 							</td>
 							<td data-title="#{messages.label_severity}">
 								<h:outputText value="#{messages[event.severity.displayName]}" />
