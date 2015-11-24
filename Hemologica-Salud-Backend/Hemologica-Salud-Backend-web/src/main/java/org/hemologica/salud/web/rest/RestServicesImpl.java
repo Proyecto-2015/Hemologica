@@ -330,21 +330,9 @@ public class RestServicesImpl implements IRestServices{
 
 	@Override
 	public DataResponse sendMessage(MailData mailData) {
-		DataResponse response = new DataResponse();
-
-		logger.info(mailData.getSubject());
-		logger.info(mailData.getText());
-		logger.info(mailData.getBloodTypeABO().getCode());
-		logger.info(mailData.getBloodTypeABO().getDisplayName());
 		
-		logger.info(mailData.getBloodTypeRH().getCode());
-		logger.info(mailData.getBloodTypeRH().getDisplayName());
+		return getAdvertismentBean().sendMessage(mailData); 
 		
-		logger.info(mailData.getMessageOption().getCode());
-		logger.info(mailData.getMessageOption().getDisplayName());
-
-		response.setCode(0);
-		return response;
 	}
 
 	@Override
@@ -462,11 +450,16 @@ public class RestServicesImpl implements IRestServices{
 	@Override
 	public List<DataBank> getBanksUser(String user) {
 
+		if(user == null)
+			return null;
 		return getCenterBean().getBanksUser(user);
 	}
 
 	@Override
 	public List<DataInstitution> getInstitutionsUser(String user) {
+		
+		if(user == null)
+			return null;
 		
 		return getInstitutionBean().getInstitutionsUser(user);
 		
@@ -575,7 +568,10 @@ public class RestServicesImpl implements IRestServices{
 
 	@Override
 	public List<DataResponsiblePerson> getResponsibleTransfusionPersons(String centerCode) {
-
+		
+		if(centerCode == null)
+			return null;
+		
 		return getCenterBean().getResponsibleTransfusionPersons(centerCode);
 		
 	}

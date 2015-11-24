@@ -6,6 +6,7 @@ import javax.ejb.Local;
 
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataResponse;
+import org.hemologica.datatypes.MailData;
 
 @Local
 public interface AdvertismentBeanLocal {
@@ -15,5 +16,7 @@ public interface AdvertismentBeanLocal {
 	DataResponse sendCampaign(DataCampaign dataCampaign);
 
 	DataCampaign getCampaign(String campaignId);
+
+	DataResponse sendMessage(MailData mailData);
 
 }

@@ -7,12 +7,14 @@ import org.hemologica.dao.IBloodDAO;
 import org.hemologica.dao.ICenterDAO;
 import org.hemologica.dao.ICodesDAO;
 import org.hemologica.dao.IInstitutionDAO;
+import org.hemologica.dao.INotificationDAO;
 import org.hemologica.dao.IPersonDAO;
 import org.hemologica.dao.impl.AdvertismentDAOImpl;
 import org.hemologica.dao.impl.BloodDAOImpl;
 import org.hemologica.dao.impl.CenterDAOImpl;
 import org.hemologica.dao.impl.CodesDAOImpl;
 import org.hemologica.dao.impl.InstitutionDAOImpl;
+import org.hemologica.dao.impl.NotificationDAOImpl;
 import org.hemologica.dao.impl.PersonDAOImpl;
 
 public class FactoryDAO {
@@ -23,6 +25,7 @@ public class FactoryDAO {
 	private static ICodesDAO codesDAO;
 	private static ICenterDAO centerDAO;
 	private static IAdvertismentDAO advertismentDAO;
+	private static INotificationDAO notificationDAO;
 	
 	
 	public static IPersonDAO getRestServicesUtils(EntityManager em) {
@@ -93,5 +96,15 @@ public class FactoryDAO {
 			
 		}
 		return advertismentDAO;
+	}
+	
+	public static INotificationDAO getNotificationDAO(EntityManager em) {
+		
+		if(notificationDAO == null){
+			
+			return new NotificationDAOImpl(em);
+			
+		}
+		return notificationDAO;
 	}
 }

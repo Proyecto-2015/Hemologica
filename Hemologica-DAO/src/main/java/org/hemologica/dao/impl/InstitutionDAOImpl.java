@@ -29,7 +29,7 @@ public class InstitutionDAOImpl extends GenericDAOImpl<Institution> implements I
 	public Institution findInstitutionByCode(String code){
 		
 		Query query = em.createNamedQuery("Institution.getInstitutionCode");
-		query.setParameter("code", code);
+		query.setParameter("code", Integer.parseInt(code));
 		return (Institution) query.getSingleResult();
 		
 	}
