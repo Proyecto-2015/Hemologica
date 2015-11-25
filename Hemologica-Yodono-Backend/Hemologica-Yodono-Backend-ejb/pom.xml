@@ -29,7 +29,16 @@
     <packaging>ejb</packaging>
 
     <name>Hemologica-Yodono-Backend: EJB Module</name>
-
+	
+	<url>http://wildfly.org</url>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <distribution>repo</distribution>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+        </license>
+    </licenses>
+	
     <build>
         <finalName>${project.artifactId}</finalName>
         <plugins>
@@ -45,10 +54,18 @@
     </build>
 
     <dependencies>
+    	
+    
+    
     	<dependency>
-    		<groupId>org.hemologica</groupId>
-    		<artifactId>Hemologica-DAO</artifactId>
-    		<version>0.0.1-SNAPSHOT</version>
-    	</dependency>
+        	<groupId>org.hemologica</groupId>
+        	<artifactId>Hemologica-DataTypes</artifactId>
+        	<version>1.0</version>
+        </dependency>
+        <dependency>
+        	<groupId>org.hemologica</groupId>
+        	<artifactId>Hemologica-DAO</artifactId>
+        	<version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>
