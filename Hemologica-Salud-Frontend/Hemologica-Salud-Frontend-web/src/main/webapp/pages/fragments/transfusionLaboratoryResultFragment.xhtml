@@ -41,7 +41,7 @@
 											style="height: 34px;" converter="#{dataTransfusionAnalysisConverter}">
 										
 											<f:selectItems value="#{applicationBB.transfusionAnalysis}" var="item"
-												itemValue="#{item}" itemLabel="#{item.displayName}" />
+												itemValue="#{item}" itemLabel="#{messages[item.displayName]}" />
 							
 										</h:selectOneMenu>
 									</td>
@@ -74,7 +74,7 @@
 									<tr>
 										<td
 											data-title="#{messages.label_analysis}">
-											<h:outputText value="#{labResItem.analysis.displayName}" />
+											<h:outputText value="#{messages[labResItem.analysis.displayName]}" />
 										</td>
 										<td
 											data-title="#{messages.donation_lab_result_date}">

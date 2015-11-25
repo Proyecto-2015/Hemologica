@@ -18,6 +18,12 @@ public class CountriesCode implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
+	
+	@Column(name="country_code_label")
+	private String countryCodeLabel;
+
+	@Column(name="country_code_value")
+	private String countryCodeValue;
 
 	//bi-directional many-to-one association to Document
 	@OneToMany(mappedBy="countriesCode")
@@ -58,6 +64,22 @@ public class CountriesCode implements Serializable {
 		document.setCountriesCode(null);
 
 		return document;
+	}
+
+	public String getCountryCodeLabel() {
+		return countryCodeLabel;
+	}
+
+	public void setCountryCodeLabel(String countryCodeLabel) {
+		this.countryCodeLabel = countryCodeLabel;
+	}
+
+	public String getCountryCodeValue() {
+		return countryCodeValue;
+	}
+
+	public void setCountryCodeValue(String countryCodeValue) {
+		this.countryCodeValue = countryCodeValue;
 	}
 
 	public List<StatesCode> getStatesCodes() {

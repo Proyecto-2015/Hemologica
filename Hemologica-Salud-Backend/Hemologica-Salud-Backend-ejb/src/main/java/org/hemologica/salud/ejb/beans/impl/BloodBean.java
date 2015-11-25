@@ -2,18 +2,14 @@ package org.hemologica.salud.ejb.beans.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import org.hemologica.dao.model.BloodAboTypesCode;
 import org.hemologica.dao.model.BloodDTypesCode;
-import org.hemologica.dao.model.Institution;
 import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataCode;
-import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.factories.FactoryDAO;
 import org.hemologica.salud.ejb.beans.IBloodLocal;
 

@@ -5,32 +5,22 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
-
 import org.apache.http.client.ClientProtocolException;
-import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.datatypes.DonationsStatisticsData;
-import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.salud.factories.RestFactory;
 import org.primefaces.event.ItemSelectEvent;
 import org.primefaces.model.chart.PieChartModel;
 
-//@Named("donationsStatisticsBB")
-//@ViewScoped
 public class DonationsStatisticsBB implements Serializable{
 
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = Logger.getLogger(DonationsStatisticsBB.class.getName());
 	
 	private DonationsStatisticsData statictic;
-	private List<DataBank> banks;
-	private List<DataInstitution> institutions;
 	private List<DonationFilterData> filters;
 	private List<DonationFilterData> distinguish;
 	private List<DonationFilterData> allFilters;
@@ -42,8 +32,6 @@ public class DonationsStatisticsBB implements Serializable{
 		
 		try {
 			
-			institutions = RestFactory.getServicesClient().getInstitution("userId");
-			banks = RestFactory.getServicesClient().getBanks("userId");
 			allFilters = RestFactory.getServicesClient().getDonationsFilters();
 			statictic = new DonationsStatisticsData();
 			createPieModels();
@@ -93,18 +81,6 @@ public class DonationsStatisticsBB implements Serializable{
 	}
 	public void setStatictic(DonationsStatisticsData statictic) {
 		this.statictic = statictic;
-	}
-	public List<DataBank> getBanks() {
-		return banks;
-	}
-	public void setBanks(List<DataBank> banks) {
-		this.banks = banks;
-	}
-	public List<DataInstitution> getInstitutions() {
-		return institutions;
-	}
-	public void setInstitutions(List<DataInstitution> institutions) {
-		this.institutions = institutions;
 	}
 	public List<DonationFilterData> getFilters() {
 		return filters;

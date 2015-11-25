@@ -5,19 +5,14 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.SessionScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import org.apache.http.client.ClientProtocolException;
 import org.hemologica.datatypes.DataBank;
+import org.hemologica.datatypes.DataInstitution;
+import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataResponsiblePerson;
 import org.hemologica.salud.factories.RestFactory;
 
-//@Named("sessionBB")
-//@SessionScoped
 public class SessionBB implements Serializable {
 
 	/**
@@ -27,7 +22,10 @@ public class SessionBB implements Serializable {
 	private static final Logger logger = Logger.getLogger(SessionBB.class.getName());
 	
 	private List<DataResponsiblePerson> responsibleTransfusionPersons;
+	private List<DataInstitution> userInstitutions;
+	private List<DataBank> userBanks;
 	
+	private DataPerson person;
 	private ApplicationBB applicationBB;
 	
 	private DataBank bank;
@@ -37,8 +35,14 @@ public class SessionBB implements Serializable {
 	public void init(){
 		
 		try {
+			DataBank bank = new DataBank();
+			bank.setCode("348");
+			this.responsibleTransfusionPersons = RestFactory.getServicesClient().getResponsibleTransfusionPersons(bank);
 			
-			this.responsibleTransfusionPersons = RestFactory.getServicesClient().getResponsibleTransfusionPersons(new DataBank());
+			person = new DataPerson();
+			person.setId("unId");
+			this.userInstitutions = RestFactory.getServicesClient().getInstitution(person.getId());
+			this.userBanks = RestFactory.getServicesClient().getBanks(person.getId());
 			
 		} catch (ClientProtocolException e) {
 			
@@ -82,6 +86,30 @@ public class SessionBB implements Serializable {
 
 	public void setBank(DataBank bank) {
 		this.bank = bank;
+	}
+
+	public List<DataInstitution> getUserInstitutions() {
+		return userInstitutions;
+	}
+
+	public void setUserInstitutions(List<DataInstitution> userInstitutions) {
+		this.userInstitutions = userInstitutions;
+	}
+
+	public DataPerson getPerson() {
+		return person;
+	}
+
+	public void setPerson(DataPerson person) {
+		this.person = person;
+	}
+
+	public List<DataBank> getUserBanks() {
+		return userBanks;
+	}
+
+	public void setUserBanks(List<DataBank> userBanks) {
+		this.userBanks = userBanks;
 	}
 	
 }

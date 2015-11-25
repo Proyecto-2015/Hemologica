@@ -18,6 +18,12 @@ public class DocumentsTypesCode implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
+	
+	@Column(name="documents_type_code_label")
+	private String documentsTypeCodeLabel;
+
+	@Column(name="documents_type_code_value")
+	private String documentsTypeCodeValue;
 
 	//bi-directional many-to-one association to Document
 	@OneToMany(mappedBy="documentsTypesCode")
@@ -42,6 +48,22 @@ public class DocumentsTypesCode implements Serializable {
 		this.documents = documents;
 	}
 
+	public String getDocumentsTypeCodeLabel() {
+		return documentsTypeCodeLabel;
+	}
+
+	public void setDocumentsTypeCodeLabel(String documentsTypeCodeLabel) {
+		this.documentsTypeCodeLabel = documentsTypeCodeLabel;
+	}
+
+	public String getDocumentsTypeCodeValue() {
+		return documentsTypeCodeValue;
+	}
+
+	public void setDocumentsTypeCodeValue(String documentsTypeCodeValue) {
+		this.documentsTypeCodeValue = documentsTypeCodeValue;
+	}
+
 	public Document addDocument(Document document) {
 		getDocuments().add(document);
 		document.setDocumentsTypesCode(this);
@@ -55,5 +77,6 @@ public class DocumentsTypesCode implements Serializable {
 
 		return document;
 	}
+	
 
 }

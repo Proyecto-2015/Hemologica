@@ -118,7 +118,7 @@
 										<div class="col-md-9 col-lg-2">
 											<h:selectOneMenu  class="form-control" id="stock_blood_type_filter_abo"
 												value="#{stockBB.bloodTypeABO}"
-												converter="#{dataBloodTypeConverter}">
+												converter="#{dataBloodTypeConverterABO}">
 												<f:selectItem itemLabel="" itemValue="" />
 												<f:selectItems value="#{applicationBB.donationABOTypes}"
 													var="bloodType" itemValue="#{bloodType}"
@@ -129,7 +129,7 @@
 										<div class="col-md-9 col-lg-2">
 											<h:selectOneMenu  class="form-control" id="stock_blood_type_filter_rh"
 												value="#{stockBB.bloodTypeRH}"
-												converter="#{dataBloodTypeConverter}">
+												converter="#{dataBloodTypeConverterRH}">
 												<f:selectItem itemLabel="" itemValue="" />
 												<f:selectItems value="#{applicationBB.donationDTypes}"
 													var="bloodType" itemValue="#{bloodType}"

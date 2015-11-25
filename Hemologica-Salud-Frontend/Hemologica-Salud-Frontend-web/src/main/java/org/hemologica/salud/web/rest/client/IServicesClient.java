@@ -3,9 +3,7 @@ package org.hemologica.salud.web.rest.client;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
-
 import javax.enterprise.context.RequestScoped;
-
 import org.apache.http.client.ClientProtocolException;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataBloodType;
@@ -366,4 +364,12 @@ public interface IServicesClient {
 	 * @throws ClientProtocolException 
 	 */
 	public DataUnitInfo getUnitInfo(String code) throws ClientProtocolException, IOException;
+	
+	/**
+	 * Devuelve los estados de una donacion.
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataCode> getDonationState() throws ClientProtocolException, IOException;
 }

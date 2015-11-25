@@ -14,14 +14,12 @@ import org.hemologica.constants.ConstantsRest;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataCampaign;
-import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataProductType;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataResponsiblePerson;
-import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataStock;
 import org.hemologica.datatypes.DataStockProductType;
 import org.hemologica.datatypes.DataTransfusion;
@@ -52,26 +50,27 @@ public interface IRestServices {
 	@GET
 	@Path("/donations")
 	@Produces("application/json")
-	public List<DataDonation> getDonations(@QueryParam("user") String user);
+	public List<DataDonation> getDonations(@QueryParam(ConstansJson.JSON_USER) String user);
 	
 	@GET
 	@Path("/transfusions")
 	@Produces("application/json")
-	public List<DataTransfusion> getTransfusions(@QueryParam("user") String user);
+	public List<DataTransfusion> getTransfusions(@QueryParam(ConstansJson.JSON_USER) String user);
 	
 	@GET
 	@Path("/users")
 	@Produces("application/json")
-	public DataPerson getPerson(@QueryParam("user") String user);
+	public DataPerson getPerson(@QueryParam(ConstansJson.JSON_USER) String user);
 	
 	@GET
 	@Path("/" + ConstantsRest.PATH_USERS + "/" + ConstantsRest.PATH_BANKS)
 	@Produces("application/json")
-	public List<DataBank> getBanksUser(@QueryParam("user") String user);
+	public List<DataBank> getBanksUser(@QueryParam(ConstansJson.JSON_USER) String user);
 	
 	@GET
 	@Path("/" + ConstantsRest.PATH_USERS + "/" + ConstantsRest.PATH_INSTITUTIONS)
-	public List<DataInstitution> getInstitutionsUser(@QueryParam("user") String user);
+	@Produces("application/json")
+	public List<DataInstitution> getInstitutionsUser(@QueryParam(ConstansJson.JSON_USER) String user);
 	
 	@GET
 	@Path("/" + ConstantsRest.PATH_BANKS)
@@ -99,19 +98,14 @@ public interface IRestServices {
 	public List<DataStockProductType> getBankNationalStock();
 	
 	@GET
-	@Path("/states")
+	@Path("/cities")
 	@Produces("application/json")
-	public List<DataState> getStates();
+	public List<DataCode> getCities();
 	
 	@GET
 	@Path("/cities")
 	@Produces("application/json")
-	public List<DataCity> getCities();
-	
-	@GET
-	@Path("/cities")
-	@Produces("application/json")
-	public List<DataCity> getCities(@QueryParam("user") String stateCode);
+	public List<DataCode> getCities(@QueryParam(ConstansJson.JSON_USER) String stateCode);
 	
 	@GET
 	@Path("/"+ConstantsRest.PATH_CAMPAIGNS + "/" + ConstantsRest.PATH_CAMPAIGNS_MESSAGES_OPTIONS)
@@ -166,7 +160,7 @@ public interface IRestServices {
 	@GET
 	@Path("/"+ConstantsRest.PATH_PERSONS + "/"+ ConstantsRest.PATH_RESPONSIBLE_TRENSFUSION)
 	@Produces("application/json")
-	public List<DataResponsiblePerson> getResponsibleTransfusionPersons(@QueryParam("user") String bankCode);
+	public List<DataResponsiblePerson> getResponsibleTransfusionPersons(@QueryParam(ConstansJson.JSON_BANK) String bankCode);
 	
 	@GET
 	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_TRANSFUSIONS_ANALYSIS)
@@ -243,10 +237,15 @@ public interface IRestServices {
 	@Produces("application/json")
 	public List<DataCode> getDonationsEvents();
 	
-	
 	@GET
 	@Path("/" +ConstantsRest.PATH_CODES +"/"+ ConstantsRest.PATH_INSTITUTIONS)
 	@Produces("application/json")
 	public List<DataInstitution> getInstitutions();
+	
+	@GET
+	@Path("/" + ConstantsRest.PATH_CODES +"/"+ ConstantsRest.PATH_DONATION_STATES)
+	@Produces("application/json")
+	public List<DataCode> getDonationState();
+
 	
 }

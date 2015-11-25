@@ -10,8 +10,8 @@ public class DonationsStatisticsData implements Serializable{
 	private String type;
 	private String fromDate;
 	private String toDate;
-	private String institutionId;
-	private String bloodBankId;
+	private DataCode institution;
+	private DataCode bloodBank;
 	private List<DonationFilterData> filters;
 	private List<DonationFilterData> distinguish;
 	
@@ -33,17 +33,17 @@ public class DonationsStatisticsData implements Serializable{
 	public void setToDate(String toDate) {
 		this.toDate = toDate;
 	}
-	public String getInstitutionId() {
-		return institutionId;
+	public DataCode getInstitution() {
+		return institution;
 	}
-	public void setInstitutionId(String institutionId) {
-		this.institutionId = institutionId;
+	public void setInstitution(DataCode institution) {
+		this.institution = institution;
 	}
-	public String getBloodBankId() {
-		return bloodBankId;
+	public DataCode getBloodBank() {
+		return bloodBank;
 	}
-	public void setBloodBankId(String bloodBankId) {
-		this.bloodBankId = bloodBankId;
+	public void setBloodBank(DataCode bloodBank) {
+		this.bloodBank = bloodBank;
 	}
 	public List<DonationFilterData> getFilters() {
 		return filters;

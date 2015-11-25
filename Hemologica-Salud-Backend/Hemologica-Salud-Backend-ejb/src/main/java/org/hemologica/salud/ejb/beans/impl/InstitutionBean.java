@@ -40,4 +40,21 @@ public class InstitutionBean implements IInstitutionBeanLocal {
 		return dataInstitutions;
 	}
 
+	@Override
+	public List<DataInstitution> getInstitutionsUser(String user) {
+		
+		List<Institution> institutions = FactoryDAO.getInstitutionDAO(em).getInstitutionsUser(user);
+		List<DataInstitution> dataInstitutions = new ArrayList<>();
+
+		if (institutions != null) {
+			for (Institution i : institutions) {
+				DataInstitution dataIins = new DataInstitution();
+				dataIins.setCode(i.getInstitutionCode());
+				dataIins.setName(i.getInstitutionDisplayName());
+				dataInstitutions.add(dataIins);
+			}
+		}
+		return dataInstitutions;
+	}
+
 }

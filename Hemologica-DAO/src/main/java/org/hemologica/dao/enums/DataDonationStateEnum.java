@@ -1,4 +1,4 @@
-package org.hemologica.constants;
+package org.hemologica.dao.enums;
 
 import java.io.Serializable;
 import java.util.ArrayList;

@@ -2,23 +2,20 @@ package org.hemologica.salud.web.rest;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.ws.rs.core.Response;
-import org.hemologica.constants.DataDonationStateEnum;
-import org.hemologica.constants.DataEventSeverityEnum;
+import org.hemologica.dao.enums.DataDonationStateEnum;
+import org.hemologica.dao.enums.DataEventSeverityEnum;
 import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCampaign;
-import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataDonationDonorType;
@@ -26,7 +23,6 @@ import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataProductType;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataResponsiblePerson;
-import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataStock;
 import org.hemologica.datatypes.DataStockProductType;
 import org.hemologica.datatypes.DataStockProductTypeBloodType;
@@ -41,10 +37,12 @@ import org.hemologica.datatypes.LoginData;
 import org.hemologica.datatypes.MailData;
 import org.hemologica.datatypes.DataMessageOption;
 import org.hemologica.datatypes.TransfusionFilterData;
+import org.hemologica.salud.ejb.beans.AdvertismentBeanLocal;
 import org.hemologica.salud.ejb.beans.CentersBeanLocal;
 import org.hemologica.salud.ejb.beans.CodesBeanLocal;
 import org.hemologica.salud.ejb.beans.IBloodLocal;
 import org.hemologica.salud.ejb.beans.IInstitutionBeanLocal;
+import org.hemologica.salud.ejb.beans.PersonBeanLocal;
 
 
 public class RestServicesImpl implements IRestServices{
@@ -62,6 +60,12 @@ public class RestServicesImpl implements IRestServices{
 	
 	@Inject
 	private CentersBeanLocal centerBeans;
+	
+	@Inject
+	private PersonBeanLocal personBeans;
+	
+	@Inject
+	private AdvertismentBeanLocal advertismentBean;
 	
 	@Override
 	public Response login(LoginData datos) {
@@ -85,7 +89,12 @@ public class RestServicesImpl implements IRestServices{
 
 		DataDonation d = new DataDonation();
 
-		d.setState(DataDonationStateEnum.MADE);
+		
+		DataCode dc222 = new DataCode();
+		dc222.setCode(DataDonationStateEnum.MADE.label);
+		dc222.setDisplayName(DataDonationStateEnum.MADE.label);
+		
+		d.setState(dc222);
 
 		DataBank b1 = new DataBank();
 		b1.setName("Banco de Sangre X");
@@ -105,7 +114,11 @@ public class RestServicesImpl implements IRestServices{
 		donaciones.add(d);
 
 		DataDonation d3 = new DataDonation();
-		d3.setState(DataDonationStateEnum.REJECTED);
+		
+		DataCode dc = new DataCode();
+		dc.setCode(DataDonationStateEnum.REJECTED.label);
+		dc.setDisplayName(DataDonationStateEnum.REJECTED.label);
+		d3.setState(dc);
 		// d3.setApproved(true);
 
 		DataBank b13 = new DataBank();
@@ -127,7 +140,12 @@ public class RestServicesImpl implements IRestServices{
 		donaciones.add(d3);
 
 		DataDonation d2 = new DataDonation();
-		d2.setState(DataDonationStateEnum.MADE);
+		
+		DataCode dc2 = new DataCode();
+		dc2.setCode(DataDonationStateEnum.MADE.label);
+		dc2.setDisplayName(DataDonationStateEnum.MADE.label);
+		
+		d2.setState(dc2);
 		// d2.setApproved(false);
 		DataBank b133 = new DataBank();
 		b133.setName("Banco de Sangre X");
@@ -149,7 +167,13 @@ public class RestServicesImpl implements IRestServices{
 
 		DataDonation d4 = new DataDonation();
 		// d4.setApproved(false);
-		d4.setState(DataDonationStateEnum.REJECTED);
+		
+		
+		DataCode dc22 = new DataCode();
+		dc22.setCode(DataDonationStateEnum.REJECTED.label);
+		dc22.setDisplayName(DataDonationStateEnum.REJECTED.label);
+		
+		d4.setState(dc22);
 		// d2.setApproved(false);
 		DataBank b1333 = new DataBank();
 		b1333.setName("Banco de Sangre X");
@@ -210,6 +234,7 @@ public class RestServicesImpl implements IRestServices{
 		
 		
 		DataCode dc13 = new DataCode();
+		
 		dc13.setCode(DataEventSeverityEnum.MODERATE.getValue());
 		dc13.setDisplayName(DataEventSeverityEnum.MODERATE.getLabel());
 		
@@ -251,38 +276,10 @@ public class RestServicesImpl implements IRestServices{
 	}
 
 	@Override
-	public DataPerson getPerson(String user) {
+	public DataPerson getPerson(String id) {
+				
+		return getPersonBean().getPersonId(id);
 
-		DataPerson dataUser = new DataPerson();
-		dataUser.setFirstName("Paula");
-		dataUser.setSecondName("segundo");
-		dataUser.setFirstLastName("Roche");
-		dataUser.setSecondLastName("De Polsi");
-		dataUser.setDocumentType("CI");
-		dataUser.setDocumentNumber("46714299");
-		dataUser.setTelephone("099876678");
-
-		Calendar c = Calendar.getInstance();
-		c.set(1989, 9, 14);
-		dataUser.setBirthdayDate("14/10/1989");
-
-		DataState state = new DataState();
-		state.setId(1);
-		state.setName("Montevideo state");
-		dataUser.setState(state);
-
-		DataCity city = new DataCity();
-		city.setId(1);
-		city.setName("Montevideo city");
-
-		dataUser.setCity(city);
-		dataUser.setAddress("Rivera 2711");
-		dataUser.setEmail("pula14@gmail.com");
-
-		dataUser.setAllowNotificationAbleToDonate(true);
-		dataUser.setAllowNotificationNeedDonor(false);
-
-		return dataUser;
 	}
 
 	@Override
@@ -293,157 +290,19 @@ public class RestServicesImpl implements IRestServices{
 	}
 
 	@Override
-	public List<DataState> getStates() {
+	public List<DataCode> getCities() {
 
-		List<DataState> cities = new ArrayList<DataState>();
-
-		DataState dataCity = new DataState();
-		dataCity.setCode("0");
-		dataCity.setName("Montevideo 111");
-		cities.add(dataCity);
-
-		DataState dataCity2 = new DataState();
-		dataCity2.setCode("2");
-		dataCity2.setName("Montevideo 122");
-		cities.add(dataCity2);
-
-		DataState dataCity3 = new DataState();
-		dataCity3.setCode("3");
-		dataCity3.setName("Montevideo 133");
-		cities.add(dataCity3);
-
-		return cities;
+		return getCodeBeans().getCities();
 	}
 
 	@Override
-	public List<DataCity> getCities() {
-		List<DataCity> cities = new ArrayList<DataCity>();
-
-		DataCity dataCity = new DataCity();
-		dataCity.setId(1);
-		dataCity.setCode("1");
-		dataCity.setName("Montevideo 1");
-		cities.add(dataCity);
-
-		DataCity dataCity2 = new DataCity();
-		dataCity2.setId(2);
-		dataCity.setCode("2");
-		dataCity2.setName("Montevideo 2");
-		cities.add(dataCity2);
-
-		DataCity dataCity3 = new DataCity();
-		dataCity3.setId(3);
-		dataCity.setCode("3");
-		dataCity3.setName("Montevideo 3");
-		cities.add(dataCity3);
-
-		DataCity dataCity4 = new DataCity();
-		dataCity4.setId(4);
-		dataCity.setCode("4");
-		dataCity4.setName("Montevideo 12");
-		cities.add(dataCity4);
-
-		DataCity dataCity5 = new DataCity();
-		dataCity5.setId(2);
-		dataCity.setCode("5");
-		dataCity5.setName("Montevideo 22");
-		cities.add(dataCity5);
-
-		DataCity dataCity6 = new DataCity();
-		dataCity6.setId(3);
-		dataCity.setCode("6");
-		dataCity6.setName("Montevideo 32");
-		cities.add(dataCity6);
-
-		DataCity dataCity7 = new DataCity();
-		dataCity7.setId(1);
-		dataCity.setCode("7");
-		dataCity7.setName("Montevideo 13");
-		cities.add(dataCity7);
-
-		DataCity dataCity8 = new DataCity();
-		dataCity8.setId(2);
-		dataCity.setCode("8");
-		dataCity8.setName("Montevideo 23");
-		cities.add(dataCity8);
-
-		DataCity dataCity9 = new DataCity();
-		dataCity9.setId(3);
-		dataCity.setCode("9");
-		dataCity9.setName("Montevideo 33");
-		cities.add(dataCity9);
-
-		return cities;
-	}
-
-	@Override
-	public List<DataCity> getCities(String stateCode) {
+	public List<DataCode> getCities(String stateCode) {
 
 		if (stateCode == null) {
 			return this.getCities();
 		}
 
-		List<DataCity> cities = new ArrayList<DataCity>();
-
-		if (stateCode.equals("0")) {
-			DataCity dataCity = new DataCity();
-			dataCity.setId(1);
-			dataCity.setCode("1");
-			dataCity.setName("Montevideo 1");
-			cities.add(dataCity);
-
-			DataCity dataCity2 = new DataCity();
-			dataCity2.setId(2);
-			dataCity.setCode("2");
-			dataCity2.setName("Montevideo 2");
-			cities.add(dataCity2);
-
-			DataCity dataCity3 = new DataCity();
-			dataCity3.setId(3);
-			dataCity.setCode("3");
-			dataCity3.setName("Montevideo 3");
-			cities.add(dataCity3);
-		}
-		if (stateCode.equals("1")) {
-			DataCity dataCity = new DataCity();
-			dataCity.setId(1);
-			dataCity.setCode("12");
-			dataCity.setName("Montevideo 12");
-			cities.add(dataCity);
-
-			DataCity dataCity2 = new DataCity();
-			dataCity2.setId(2);
-			dataCity.setCode("22");
-			dataCity2.setName("Montevideo 22");
-			cities.add(dataCity2);
-
-			DataCity dataCity3 = new DataCity();
-			dataCity3.setId(3);
-			dataCity.setCode("32");
-			dataCity3.setName("Montevideo 32");
-			cities.add(dataCity3);
-		}
-		if (stateCode.equals("2")) {
-			DataCity dataCity = new DataCity();
-			dataCity.setId(1);
-			dataCity.setCode("13");
-			dataCity.setName("Montevideo 13");
-			cities.add(dataCity);
-
-			DataCity dataCity2 = new DataCity();
-			dataCity2.setId(2);
-			dataCity.setCode("23");
-			dataCity2.setName("Montevideo 23");
-			cities.add(dataCity2);
-
-			DataCity dataCity3 = new DataCity();
-			dataCity3.setId(3);
-			dataCity.setCode("33");
-			dataCity3.setName("Montevideo 33");
-			cities.add(dataCity3);
-		}
-
-		return cities;
+		return  getCodeBeans().getCitiesByState(stateCode);
 	}
 
 	@Override
@@ -455,86 +314,46 @@ public class RestServicesImpl implements IRestServices{
 
 	@Override
 	public List<DataBloodType> getBloodTypes() {
-		
+		// Este metodo no deberia usarse mas
 		List<DataBloodType> listResult = new ArrayList<>();
 		
-		for(DataCode dataCode : getBloodLocal().getDonationABOTypes()){
-			
-			DataBloodType data = new DataBloodType();
-			data.setCode(dataCode.getCode());
-			data.setDisplayName(dataCode.getDisplayName());
-			listResult.add(data);
-			
-		}
+//		for(DataCode dataCode : getBloodLocal().getDonationABOTypes()){
+//			
+//			DataBloodType data = new DataBloodType();
+//			data.setCode(dataCode.getCode());
+//			data.setDisplayName(dataCode.getDisplayName());
+//			listResult.add(data);
+//			
+//		}
 		return listResult;
 	}
 
 	@Override
 	public DataResponse sendMessage(MailData mailData) {
-		DataResponse response = new DataResponse();
-
-		logger.info(mailData.getSubject());
-		logger.info(mailData.getText());
-		logger.info(mailData.getBloodTypeABO().getCode());
-		logger.info(mailData.getBloodTypeABO().getDisplayName());
 		
-		logger.info(mailData.getBloodTypeRH().getCode());
-		logger.info(mailData.getBloodTypeRH().getDisplayName());
+		return getAdvertismentBean().sendMessage(mailData); 
 		
-		logger.info(mailData.getMessageOption().getCode());
-		logger.info(mailData.getMessageOption().getDisplayName());
-
-		response.setCode(0);
-		return response;
 	}
 
 	@Override
 	public DataResponse sendCampaign(DataCampaign dataCampaign) {
+		
+		return getAdvertismentBean().sendCampaign(dataCampaign);
 
-		DataResponse response = new DataResponse();
-
-		logger.info(dataCampaign.getText());
-		logger.info(dataCampaign.getTitle());
-		logger.info(dataCampaign.getSummary());
-		logger.info(dataCampaign.getSubtitle());
-		logger.info(dataCampaign.getDate());
-
-		response.setCode(0);
-		return response;
 	}
 
 	@Override
 	public List<DataCampaign> getCampaigns(String cant) {
-		List<DataCampaign> campaigns = new ArrayList<DataCampaign>();
+		
+		return getAdvertismentBean().getCampaigns(cant);
 
-		int cantInt = Integer.valueOf(cant);
-
-		for (int i = 1; i <= cantInt; i++) {
-			DataCampaign c1 = new DataCampaign();
-			c1.setId(Integer.toString(i));
-			c1.setTitle("Titulo ");
-			c1.setSubtitle("Sub Titulo");
-
-			c1.setText(
-					"Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. "
-							+ "Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. "
-							+ "Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. ");
-			c1.setSummary(
-					"Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. "
-							+ i);
-
-			c1.setDate("12/12/2015");
-			campaigns.add(c1);
-		}
-
-		return campaigns;
 	}
 
 	@Override
 	public DataCampaign getCampaign(String campaignId) {
-		List<DataCampaign> campaigns = getCampaigns("7");
-
-		return campaigns.get(Integer.parseInt(campaignId) - 1);
+		
+		return getAdvertismentBean().getCampaign(campaignId);
+		
 	}
 
 	@Override
@@ -631,97 +450,26 @@ public class RestServicesImpl implements IRestServices{
 	@Override
 	public List<DataBank> getBanksUser(String user) {
 
-		return getBanks();
+		if(user == null)
+			return null;
+		return getCenterBean().getBanksUser(user);
 	}
 
 	@Override
 	public List<DataInstitution> getInstitutionsUser(String user) {
-
-		List<DataInstitution> banks = new ArrayList<DataInstitution>();
-		DataInstitution db1 = new DataInstitution();
-		db1.setCode("1");
-		db1.setName("Institucion 1");
-		db1.setAddress("Av Italia 345");
-		db1.setEmail("infobanco1@hc.com");
-		db1.setHour("Lunes a viernes de 8 - 18 hs ");
-		db1.setInformation("Se dan 40 numeros a partir de las 8 am.");
-		db1.setTelephone("12345678");
-		db1.setLatitude(-34.898930);
-		db1.setLongitude(-56.165753);
-
-		banks.add(db1);
-
-		DataInstitution db2 = new DataInstitution();
-		db2.setCode("2");
-		db2.setName("Institucion 2");
-		db2.setAddress("Rivera 567");
-		db2.setEmail("infobanco2@hc.com");
-		db2.setHour("Lunes a viernes de 8 - 20 hs y Sabados 8 - 12 ");
-		db2.setInformation("Pedir hora por telefono");
-		db2.setTelephone("098765432");
-		db2.setLatitude(-34.871729);
-		db2.setLongitude(-56.188868);
-
-		banks.add(db2);
-
-		return banks;
+		
+		if(user == null)
+			return null;
+		
+		return getInstitutionBean().getInstitutionsUser(user);
+		
 	}
 
 	@Override
 	public List<DataPerson> getPersons() {
+		
+		return getPersonBean().getPersonsFilters(new HashMap<String,Object>());
 
-		List<DataPerson> persons = new ArrayList<>();
-
-		DataPerson d1 = new DataPerson();
-		d1.setId("1");
-		d1.setDocumentType("Cedula de Identidad");
-		d1.setDocumentNumber("46714299");
-		d1.setFirstName("Paula");
-		d1.setSecondName("Paula");
-		d1.setFirstLastName("Roche");
-		d1.setSecondLastName("De Polsi");
-		d1.setAbleToDonate(true);
-
-		DataBloodType dtb = new DataBloodType();
-		dtb.setCode("0");
-		dtb.setDisplayName("AB+");
-		d1.setBloodType(dtb);
-		persons.add(d1);
-
-		DataPerson d2 = new DataPerson();
-		d2.setId("2");
-		d2.setDocumentType("Cedula de Identidad 2");
-		d2.setDocumentNumber("46714299");
-		d2.setFirstName("Paula2");
-		d2.setSecondName("Paula2");
-		d2.setFirstLastName("Roche2");
-		d2.setSecondLastName("De Polsi2");
-		d2.setAbleToDonate(false);
-		DataBloodType dtb2 = new DataBloodType();
-		dtb2.setCode("1");
-		dtb2.setDisplayName("AB-");
-		d2.setBloodType(dtb2);
-		persons.add(d2);
-
-		DataPerson d3 = new DataPerson();
-		d3.setId("3");
-		d3.setDocumentType("Cedula de Identidad3");
-		d3.setDocumentNumber("46714299");
-		d3.setFirstName("Paula3");
-		d3.setSecondName("Paula3");
-		d3.setFirstLastName("Roche3");
-		d3.setSecondLastName("De Polsi3");
-		d3.setAbleToDonate(true);
-
-		DataBloodType dtb3 = new DataBloodType();
-		dtb3.setCode("1");
-		dtb3.setDisplayName("AB-");
-		d3.setBloodType(dtb3);
-		persons.add(d2);
-
-		persons.add(d3);
-
-		return persons;
 	}
 
 	@Override
@@ -819,85 +567,31 @@ public class RestServicesImpl implements IRestServices{
 	}
 
 	@Override
-	public List<DataResponsiblePerson> getResponsibleTransfusionPersons(String bankCode) {
-
-		List<DataResponsiblePerson> responsible = new ArrayList<DataResponsiblePerson>();
-
-		DataResponsiblePerson dataUser = new DataResponsiblePerson();
-		dataUser.setId("id1");
-		dataUser.setFirstName("Paula");
-		dataUser.setSecondName("segundo");
-		dataUser.setFirstLastName("Roche");
-		dataUser.setSecondLastName("De Polsi");
-		dataUser.setDocumentType("CI");
-		dataUser.setDocumentNumber("46714299");
-
-		responsible.add(dataUser);
-
-		DataResponsiblePerson dataUser2 = new DataResponsiblePerson();
-		dataUser2.setId("id2");
-		dataUser2.setFirstName("Paula");
-		dataUser2.setSecondName("segundo");
-		dataUser2.setFirstLastName("Roche");
-		dataUser2.setSecondLastName("De Polsi");
-		dataUser2.setDocumentType("CI");
-		dataUser2.setDocumentNumber("46714299");
-
-		responsible.add(dataUser2);
-
-		return responsible;
+	public List<DataResponsiblePerson> getResponsibleTransfusionPersons(String centerCode) {
+		
+		if(centerCode == null)
+			return null;
+		
+		return getCenterBean().getResponsibleTransfusionPersons(centerCode);
+		
 	}
 
 	@Override
 	public List<DataCode> getTransfusionsAnalysis() {
 
-		List<DataCode> analisis = new ArrayList<>();
-		DataCode code1 = new DataCode();
-		code1.setCode("0");
-		code1.setDisplayName("Analisis 1");
-
-		DataCode code2 = new DataCode();
-		code2.setCode("1");
-		code2.setDisplayName("Analisis 2");
-
-		analisis.add(code1);
-		analisis.add(code2);
-
-		return analisis;
+		return getCodeBeans().getTransfusionsAnalysis();
 	}
 
 	@Override
 	public List<DataCode> getTransfusionsEvents() {
-		List<DataCode> analisis = new ArrayList<>();
-		DataCode code1 = new DataCode();
-		code1.setCode("0");
-		code1.setDisplayName("Evento 1");
 
-		DataCode code2 = new DataCode();
-		code2.setCode("1");
-		code2.setDisplayName("Evento 2");
-
-		analisis.add(code1);
-		analisis.add(code2);
-
-		return analisis;
+		return getCodeBeans().getTransfusionsEvents();
 	}
 
 	@Override
 	public List<DataCode> getSeverities() {
-		List<DataCode> analisis = new ArrayList<>();
-		DataCode code1 = new DataCode();
-		code1.setCode("0");
-		code1.setDisplayName(DataEventSeverityEnum.MILD.getLabel());
 
-		DataCode code2 = new DataCode();
-		code2.setCode("1");
-		code2.setDisplayName(DataEventSeverityEnum.SEVERE.getLabel());
-
-		analisis.add(code1);
-		analisis.add(code2);
-
-		return analisis;
+		return getCodeBeans().getSeverities();
 	}
 
 	public List<DataStockProductType> getBankNationalStock() {
@@ -979,112 +673,42 @@ public class RestServicesImpl implements IRestServices{
 	@Override
 	public List<DataCode> getDonationsAnalysis() {
 		
-		List<DataCode> analisis = new ArrayList<>();
-		DataCode code1 = new DataCode();
-		code1.setCode("0");
-		code1.setDisplayName("Analisis donacion 1");
+		return getCodeBeans().getDonationsAnalysis();
 		
-		DataCode code2 = new DataCode();
-		code2.setCode("1");
-		code2.setDisplayName("Analisis donacion 2");
-		
-		analisis.add(code1);
-		analisis.add(code2);
-		
-		return analisis;
 	}
 
 	@Override
 	public List<DataCode> getDonationsEvents() {
-		List<DataCode> analisis = new ArrayList<>();
-		DataCode code1 = new DataCode();
-		code1.setCode("0");
-		code1.setDisplayName("Evento Donacion 1");
 		
-		DataCode code2 = new DataCode();
-		code2.setCode("1");
-		code2.setDisplayName("Evento Donacion 2");
-		
-		analisis.add(code1);
-		analisis.add(code2);
-		
-		return analisis;
+		return getCodeBeans().getDonationsEvents();
 	}
 
 	@Override
 	public List<DataCode> getDonationABOTypes() {
-		
-//		List<DataCode> analisis = new ArrayList<>();
-//		DataCode code1 = new DataCode();
-//		code1.setCode("0");
-//		code1.setDisplayName("A");
-//		
-//		DataCode code2 = new DataCode();
-//		code2.setCode("1");
-//		code2.setDisplayName("0");
-//		
-//		analisis.add(code1);
-//		analisis.add(code2);
-		
-		
-		
 		
 		return getBloodLocal().getDonationABOTypes();
 	}
 
 	@Override
 	public List<DataCode> getDonationDTTypes() {
-
-//		List<DataCode> analisis = new ArrayList<>();
-//		DataCode code1 = new DataCode();
-//		code1.setCode("0");
-//		code1.setDisplayName("RH+");
-//		
-//		DataCode code2 = new DataCode();
-//		code2.setCode("1");
-//		code2.setDisplayName("RH-");
-//		
-//		analisis.add(code1);
-//		analisis.add(code2);
 		
 		return getBloodLocal().getDonationDTTypes();
+		
 	}
 
 	@Override
 	public List<DataCode> getRejectionReasons() {
 		
-		List<DataCode> analisis = new ArrayList<>();
-		DataCode code1 = new DataCode();
-		code1.setCode("0");
-		code1.setDisplayName("Bajo peso");
-		
-		DataCode code2 = new DataCode();
-		code2.setCode("1");
-		code2.setDisplayName("Viaje");
-		
-		analisis.add(code1);
-		analisis.add(code2);
-		
-		return analisis;
+		return getCodeBeans().getRejectionReasons();
 	}
 
 	@Override
 	public List<DataCode> getRejectionTypes() {
-		List<DataCode> analisis = new ArrayList<>();
-		DataCode code1 = new DataCode();
-		code1.setCode("0");
-		code1.setDisplayName("Permanente");
-		
-		DataCode code2 = new DataCode();
-		code2.setCode("1");
-		code2.setDisplayName("Temporal");
-		
-		analisis.add(code1);
-		analisis.add(code2);
-		
-		return analisis;
+	
+		return getCodeBeans().getRejectionTypes();
 		
 	}
+	
 	public List<DataBank> getBanks(String bankCode, String productTypeCode, String bloodTypeCodeABO,  String bloodTypeCodeRH, Integer count) {
 
 		List<DataBank> ret = this.getBanks();
@@ -1162,71 +786,29 @@ public class RestServicesImpl implements IRestServices{
 
 	@Override
 	public List<DataCode> getDocumentsTypes() {
-		List<DataCode> analisis = new ArrayList<>();
-		DataCode code1 = new DataCode();
-		code1.setCode("0");
-		code1.setDisplayName("CI");
 		
-		DataCode code2 = new DataCode();
-		code2.setCode("1");
-		code2.setDisplayName("Pasaport");
+		return getCodeBeans().getDocumentsTypes();
 		
-		analisis.add(code1);
-		analisis.add(code2);
-		
-		return analisis;
 	}
 
 	@Override
 	public List<DataCode> getCountries() {
-		List<DataCode> analisis = new ArrayList<>();
-		DataCode code1 = new DataCode();
-		code1.setCode("0");
-		code1.setDisplayName("Uruguay");
 		
-		DataCode code2 = new DataCode();
-		code2.setCode("1");
-		code2.setDisplayName("Argentina");
+		return getCodeBeans().getCountries();
 		
-		analisis.add(code1);
-		analisis.add(code2);
-		
-		return analisis;
 	}
 
 	@Override
 	public List<DataCode> getStatesCodes() {
 		
-		List<DataCode> analisis = new ArrayList<>();
-		DataCode code1 = new DataCode();
-		code1.setCode("0");
-		code1.setDisplayName("Montevideo");
-		
-		DataCode code2 = new DataCode();
-		code2.setCode("1");
-		code2.setDisplayName("Maldonado");
-		
-		analisis.add(code1);
-		analisis.add(code2);
-		
-		return analisis;
+		return getCodeBeans().getStates();
 	}
 
 	@Override
 	public List<DataCode> getCitiesCodes() {
-		List<DataCode> analisis = new ArrayList<>();
-		DataCode code1 = new DataCode();
-		code1.setCode("0");
-		code1.setDisplayName("Las piedras");
 		
-		DataCode code2 = new DataCode();
-		code2.setCode("1");
-		code2.setDisplayName("Atlantida");
+		return getCodeBeans().getCities();
 		
-		analisis.add(code1);
-		analisis.add(code2);
-		
-		return analisis;
 	}
 
 	@Override
@@ -1266,7 +848,13 @@ public class RestServicesImpl implements IRestServices{
 		
 		
 		DataDonation d = new DataDonation();
-		d.setState(DataDonationStateEnum.MADE);
+		
+		DataCode dc24 = new DataCode();
+		dc24.setCode(DataDonationStateEnum.MADE.label);
+		dc24.setDisplayName(DataDonationStateEnum.MADE.label);
+		
+		
+		d.setState(dc24);
 		DataBank b1 = new DataBank();
 		b1.setName("Banco de Sangre 1");
 		d.setBank(b1);
@@ -1305,6 +893,13 @@ public class RestServicesImpl implements IRestServices{
 		
 		dataUnitInfo.setMovements(movements);
 		return dataUnitInfo;
+	}
+	
+	@Override
+	public List<DataCode> getDonationState() {
+		
+		return getCodeBeans().getDonationsStates();
+		
 	}
 
 	public IInstitutionBeanLocal getInstitutionBean() {
@@ -1374,6 +969,41 @@ public class RestServicesImpl implements IRestServices{
 			}
 		}
 		return centerBeans;
+	}
+
+	
+	public PersonBeanLocal getPersonBean() {
+		
+		if(personBeans == null){
+			
+			try {
+				
+				personBeans = InitialContext.doLookup("java:global/Hemologica-Salud-Backend-ear/Hemologica-Salud-Backend-ejb/PersonBean!org.hemologica.salud.ejb.beans.PersonBeanLocal");
+				
+			} catch (NamingException e) {
+				
+				logger.log(Level.SEVERE, e.getMessage(), e);
+				
+			}
+		}
+		return personBeans;
+	}
+	
+	public AdvertismentBeanLocal getAdvertismentBean() {
+		
+		if(advertismentBean == null){
+			
+			try {
+				
+				advertismentBean = InitialContext.doLookup("java:global/Hemologica-Salud-Backend-ear/Hemologica-Salud-Backend-ejb/AdvertismentBean!org.hemologica.salud.ejb.beans.impl.AdvertismentBean");
+				
+			} catch (NamingException e) {
+				
+				logger.log(Level.SEVERE, e.getMessage(), e);
+				
+			}
+		}
+		return advertismentBean;
 	}
 
 	

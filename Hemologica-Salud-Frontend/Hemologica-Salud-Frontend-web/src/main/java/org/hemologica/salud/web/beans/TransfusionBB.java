@@ -6,26 +6,13 @@ import java.util.List;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
-import javax.inject.Inject;
-import javax.inject.Named;
-
-import org.hemologica.constants.DataDonationStateEnum;
-import org.hemologica.datatypes.DataDonation;
-import org.hemologica.datatypes.DataDonationEvent;
-import org.hemologica.datatypes.DataEvent;
 import org.hemologica.datatypes.DataLaboratoryResult;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataTransfusionEvent;
-import org.hemologica.salud.web.converters.DataEventTransfusionConverter;
 import org.primefaces.event.FlowEvent;
 
-
-//@Named("transfusionBB")
-//@ViewScoped
 public class TransfusionBB implements Serializable {
 
 	/**

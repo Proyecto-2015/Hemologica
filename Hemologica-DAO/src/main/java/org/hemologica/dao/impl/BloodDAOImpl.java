@@ -28,7 +28,7 @@ public class BloodDAOImpl implements IBloodDAO{
 	public BloodAboTypesCode findBloodAboTypesCodeByCode(String code){
 		
 		Query query = em.createNamedQuery("BloodAboTypesCode.getBloodAboTypesCodeByCode");
-		query.setParameter("code", code);
+		query.setParameter("code", Integer.parseInt(code));
 		return (BloodAboTypesCode) query.getSingleResult();
 		
 	}
@@ -44,7 +44,7 @@ public class BloodDAOImpl implements IBloodDAO{
 	public BloodDTypesCode findBloodDTypesCodeByCode(String code){
 		
 		Query query = em.createNamedQuery("BloodDTypesCode.getBloodDTypesCodeByCode");
-		query.setParameter("code", code);
+		query.setParameter("code", Integer.parseInt(code));
 		return (BloodDTypesCode) query.getSingleResult();
 		
 	}

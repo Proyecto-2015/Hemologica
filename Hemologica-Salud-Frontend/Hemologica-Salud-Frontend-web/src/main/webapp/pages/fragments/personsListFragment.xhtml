@@ -28,7 +28,7 @@
        		<tbody>
        			<c:forEach items="#{personRecordBB.persons}" var="personItem" varStatus="counter">
         			<tr>
-        				<td data-title="#{messages.person_document_type}"><h:outputText value="#{personItem.documentType}"/></td>
+        				<td data-title="#{messages.person_document_type}"><h:outputText value="#{messages[personItem.documentType]}"/></td>
         				<td data-title="#{messages.person_document_country}"><h:outputText value="#{personItem.documentNumber}"/></td>
         				<td data-title="#{messages.person_name}">
         					<h:outputText value="#{personItem.fullName}"/></td>

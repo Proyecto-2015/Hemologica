@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.hemologica.constants.DataDonationStateEnum;
-
 public class DataDonation implements Serializable {
 
 	/**
@@ -20,12 +18,13 @@ public class DataDonation implements Serializable {
 	private DataInstitution institution;
 	private DataPerson person;
 	private DataDonationDonorType dataDonorType;
-	private DataDonationStateEnum state;
+	private DataCode state;
 	private DataBloodABOType bloodABOType;
 	private DataBloodType bloodDType;
 	private DataDonationFail fail;
 	private List<DataLaboratoryResult> labResults;
 	private List<DataDonationEvent> events;
+	private boolean approved; 
 
 	private Date extractionTimeBegin;
 	private Date extractionTimeEnd;
@@ -72,10 +71,11 @@ public class DataDonation implements Serializable {
 		this.institution = institution;
 	}
 
-	public Boolean isApproved() {
+	public boolean isApproved() {
 			
+//		return approved;
 		if(this.state != null)
-			return this.state.compareTo(DataDonationStateEnum.MADE)==0;
+			return this.state.getCode() != null && this.state.getCode().equals("made");
 		else
 			return false;
 	}
@@ -156,11 +156,11 @@ public class DataDonation implements Serializable {
 		this.events = events;
 	}
 
-	public DataDonationStateEnum getState() {
+	public DataCode getState() {
 		return state;
 	}
 
-	public void setState(DataDonationStateEnum state) {
+	public void setState(DataCode state) {
 		this.state = state;
 	}
 

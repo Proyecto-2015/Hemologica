@@ -8,24 +8,14 @@ import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
-import javax.faces.view.ViewScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-
-import org.hemologica.constants.DataDonationStateEnum;
+import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataDonationEvent;
 import org.hemologica.datatypes.DataLaboratoryResult;
-import org.hemologica.datatypes.DataTransfusionEvent;
 import org.primefaces.event.FlowEvent;
 
-//@Named("donationBB")
-//@ViewScoped
 public class DonationBB implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -5395079020796675499L;
 	
 	private static final Logger logger = Logger.getLogger(DonationBB.class.getName());
@@ -49,7 +39,7 @@ public class DonationBB implements Serializable {
 
 	@PostConstruct
 	public void init(){
-		logger.info("init DonationBB");
+		
 		this.dataDonacion = new DataDonation();
 		this.labResult = new DataLaboratoryResult();
 		this.event = new DataDonationEvent();
@@ -105,7 +95,7 @@ public class DonationBB implements Serializable {
 	}
 
 	public void dataDonationStateChange(ValueChangeEvent ev){
-		dataDonacion.setState((DataDonationStateEnum) ev.getNewValue());
+		dataDonacion.setState((DataCode) ev.getNewValue());
 	}
 
 	public DataDonation getDataDonacion() {

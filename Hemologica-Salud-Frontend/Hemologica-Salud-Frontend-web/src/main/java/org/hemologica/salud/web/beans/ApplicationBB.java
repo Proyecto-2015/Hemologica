@@ -7,7 +7,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.faces.model.SelectItem;
 import org.apache.http.client.ClientProtocolException;
-import org.hemologica.constants.DataDonationStateEnum;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataCode;
@@ -58,7 +57,7 @@ public class ApplicationBB implements Serializable {
 	 * Donation Codes BEGIN
 	 */
 	
-	private List<DataDonationStateEnum> donationStates;
+	private List<DataCode> donationStates;
 	
 
 	
@@ -100,10 +99,10 @@ public class ApplicationBB implements Serializable {
 	
 	@PostConstruct
 	public void init(){
-		this.donationStates = DataDonationStateEnum.getStates();
-//		this.eventSeverities = DataEventSeverityEnum.getSeverities();
+		
 		try {
 			
+			this.donationStates = RestFactory.getServicesClient().getDonationState();
 			this.institutions = RestFactory.getServicesClient().getInstitutions();
 			this.products = RestFactory.getServicesClient().getProducts();
 			this.bloodTypes = RestFactory.getServicesClient().getBloodTypes();
@@ -146,7 +145,7 @@ public class ApplicationBB implements Serializable {
 		return null;
 	}
 	
-	public List<DataDonationStateEnum> getDonationStates(){
+	public List<DataCode> getDonationStates(){
 		return this.donationStates;
 	}
 
@@ -158,7 +157,7 @@ public class ApplicationBB implements Serializable {
 		return donationDTypes;
 	}
 
-	public void setDonationStates(List<DataDonationStateEnum> donationStates) {
+	public void setDonationStates(List<DataCode> donationStates) {
 		this.donationStates = donationStates;
 	}
 

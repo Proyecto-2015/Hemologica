@@ -34,7 +34,7 @@
 		<class>org.hemologica.dao.model.DonationDonorTypesCode</class>
 		<class>org.hemologica.dao.model.DonationEventsCode</class>
 		<class>org.hemologica.dao.model.DonationFailCausesCode</class>
-		<class>org.hemologica.dao.model.DonationFailCode</class>
+		<class>org.hemologica.dao.model.DonationFailTypeCode</class>
 		<class>org.hemologica.dao.model.DonationLaboratoyCode</class>
 		<class>org.hemologica.dao.model.DonationStatesCode</class>
 		<class>org.hemologica.dao.model.DonationTypesCode</class>
@@ -60,6 +60,7 @@
 		<class>org.hemologica.dao.model.User</class>
 		<class>org.hemologica.dao.model.UsersRoleService</class>
 		<class>org.hemologica.dao.model.MessageSendOption</class>
+		<class>org.hemologica.dao.model.ResponsibleTransfusionPerson</class>
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.show_sql" value="false" />

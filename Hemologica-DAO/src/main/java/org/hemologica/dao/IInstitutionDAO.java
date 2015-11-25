@@ -8,4 +8,6 @@ public interface IInstitutionDAO  extends IGenericDAO<Institution>{
 	
 	public List<Institution> getInstitutions();
 
+	public List<Institution> getInstitutionsUser(String user);
+
 }

@@ -5,19 +5,13 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
-
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.salud.factories.RestFactory;
 
-//@Named("personaRecordBloodBB")
-//@ViewScoped
 public class PersonRecordBloodBB implements Serializable{
 
 	private static final long serialVersionUID = 1L;
