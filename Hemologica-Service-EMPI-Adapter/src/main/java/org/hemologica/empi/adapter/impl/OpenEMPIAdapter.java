@@ -34,14 +34,14 @@ public class OpenEMPIAdapter implements IEMPIAdapter {
 	private MessageFactory messageFactory;
 	private Parser parser;
 
-	public OpenEMPIAdapter(IConnection pixConnection, IConnection pdqConnection, Map<String, String> context, Parser parser) {
+	public OpenEMPIAdapter(IConnection pixConnection, IConnection pdqConnection, Map<String, String> context,
+			Parser parser) {
 		this.pixConnection = pixConnection;
 		this.pdqConnection = pdqConnection;
 		this.messageFactory = new MessageFactory(context);
 		this.parser = parser;
 
 	}
-	
 
 	/**
 	 * PIX Adapter methods
@@ -54,7 +54,7 @@ public class OpenEMPIAdapter implements IEMPIAdapter {
 			String msgReq = parser.encode(message);
 			pixConnection.connect();
 			String msgResp = pixConnection.sendMessage(msgReq, true);
-			Map<String,String> values = new HashMap<String, String>();
+			Map<String, String> values = new HashMap<String, String>();
 			values.put("request", msgReq);
 			values.put("response", msgResp);
 			CreatePatientResponse resp = new CreatePatientResponse(values);
@@ -70,6 +70,12 @@ public class OpenEMPIAdapter implements IEMPIAdapter {
 			throw new PIXAdapterException(e);
 		} catch (Exception e) {
 			throw new PIXAdapterException(e);
+		} finally {
+			try {
+				pixConnection.disconnect();
+			} catch (IOException e) {
+				throw new PIXAdapterException(e);
+			}
 		}
 
 	}
@@ -83,7 +89,7 @@ public class OpenEMPIAdapter implements IEMPIAdapter {
 			pixConnection.connect();
 			String msgResp = pixConnection.sendMessage(msgReq, true);
 			message = parser.parse(msgResp);
-			Map<String,String> values = new HashMap<String, String>();
+			Map<String, String> values = new HashMap<String, String>();
 			values.put("request", msgReq);
 			values.put("response", msgResp);
 			UpdatePatientResponse resp = new UpdatePatientResponse(values);
@@ -99,12 +105,17 @@ public class OpenEMPIAdapter implements IEMPIAdapter {
 			throw new PIXAdapterException(e);
 		} catch (Exception e) {
 			throw new PIXAdapterException(e);
+		} finally {
+			try {
+				pixConnection.disconnect();
+			} catch (IOException e) {
+				throw new PIXAdapterException(e);
+			}
 		}
 
 	}
 
 	public MergePatientResponse merge(MergePatientRequest request) throws PIXAdapterException {
-		
 
 		try {
 
@@ -113,7 +124,7 @@ public class OpenEMPIAdapter implements IEMPIAdapter {
 			pixConnection.connect();
 			String msgResp = pixConnection.sendMessage(msgReq, true);
 			message = parser.parse(msgResp);
-			Map<String,String> values = new HashMap<String, String>();
+			Map<String, String> values = new HashMap<String, String>();
 			values.put("request", msgReq);
 			values.put("response", msgResp);
 			MergePatientResponse resp = new MergePatientResponse(values);
@@ -129,8 +140,14 @@ public class OpenEMPIAdapter implements IEMPIAdapter {
 			throw new PIXAdapterException(e);
 		} catch (Exception e) {
 			throw new PIXAdapterException(e);
+		} finally {
+			try {
+				pixConnection.disconnect();
+			} catch (IOException e) {
+				throw new PIXAdapterException(e);
+			}
 		}
-		
+
 	}
 
 	public PIXQueryPatientResponse query(PIXQueryPatientRequest request) throws PIXAdapterException {
@@ -143,7 +160,7 @@ public class OpenEMPIAdapter implements IEMPIAdapter {
 			pixConnection.connect();
 			String msgResp = pixConnection.sendMessage(msgReq, true);
 			message = parser.parse(msgResp);
-			Map<String,String> values = new HashMap<String, String>();
+			Map<String, String> values = new HashMap<String, String>();
 			values.put("request", msgReq);
 			values.put("response", msgResp);
 			/**
@@ -154,7 +171,7 @@ public class OpenEMPIAdapter implements IEMPIAdapter {
 			PIXQueryPatientResponse resp = new PIXQueryPatientResponse(values);
 			Message messageResp = parser.parse(msgResp);
 			resp.load(messageResp);
-			
+
 			return resp;
 
 		} catch (MessageFactoryException e) {
@@ -167,6 +184,12 @@ public class OpenEMPIAdapter implements IEMPIAdapter {
 			throw new PIXAdapterException(e);
 		} catch (Exception e) {
 			throw new PIXAdapterException(e);
+		} finally {
+			try {
+				pixConnection.disconnect();
+			} catch (IOException e) {
+				throw new PIXAdapterException(e);
+			}
 		}
 	}
 
@@ -174,23 +197,24 @@ public class OpenEMPIAdapter implements IEMPIAdapter {
 	 * PDQ Adapter methods
 	 */
 
-	public PDQQueryPatientResponse query(PDQQueryPatientRequest request) throws PDQAdapterException{
-		
+	public PDQQueryPatientResponse query(PDQQueryPatientRequest request) throws PDQAdapterException {
+
 		try {
 
 			Message message = messageFactory.create_QBP_Q22(request.getValues());
 			String msgReq = parser.encode(message);
 			pdqConnection.connect();
 			String msgResp = pdqConnection.sendMessage(msgReq, true);
+
 			message = parser.parse(msgResp);
-			Map<String,String> values = new HashMap<String, String>();
+			Map<String, String> values = new HashMap<String, String>();
 			values.put("request", msgReq);
 			values.put("response", msgResp);
-			
+
 			PDQQueryPatientResponse resp = new PDQQueryPatientResponse(values);
 			Message messageResp = parser.parse(msgResp);
 			resp.load(messageResp);
-			
+
 			return resp;
 
 		} catch (MessageFactoryException e) {
@@ -203,19 +227,23 @@ public class OpenEMPIAdapter implements IEMPIAdapter {
 			throw new PDQAdapterException(e);
 		} catch (Exception e) {
 			throw new PDQAdapterException(e);
+		} finally {
+			try {
+				pdqConnection.disconnect();
+			} catch (IOException e) {
+				throw new PDQAdapterException(e);
+			}
 		}
 	}
-
 
 	@Override
 	public Identifier createIdentifier() {
 		return messageFactory.createIdentifier();
 	}
 
-
 	@Override
 	public String getMyDomain() {
 		return messageFactory.getMyDomain();
 	}
-	
+
 }
