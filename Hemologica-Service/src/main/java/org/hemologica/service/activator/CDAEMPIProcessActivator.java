@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
+import javax.xml.xpath.XPathExpressionException;
 
 import org.hemologica.empi.adapter.IEMPIAdapter;
 import org.hemologica.empi.adapter.pixpdq.message.CreatePatientRequest;
@@ -14,15 +15,16 @@ import org.hemologica.service.datatype.CDA;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 public class CDAEMPIProcessActivator {
 	
 	private static Logger logger = Logger.getLogger(CDAEMPIProcessActivator.class.getName());
 	
-	
-
 	private IPersonBean personBean;
 	
-	public Document process(Document doc) {
+	public String process(Document doc) {
 		
 		CDA cda = null;
 		
@@ -36,11 +38,13 @@ public class CDAEMPIProcessActivator {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		} catch (TransformerException e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
+		} catch (XPathExpressionException e) {
+			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		
 		cda.setIdentifier(personBean.getID(cda.getUserData()));
-	
-		return doc;
+		
+		return new Gson().toJson(cda);
 		
 	}
 	

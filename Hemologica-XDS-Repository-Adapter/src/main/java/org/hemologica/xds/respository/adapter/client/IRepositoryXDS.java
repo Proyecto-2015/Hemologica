@@ -1,8 +1,27 @@
 package org.hemologica.xds.respository.adapter.client;
 
 
+//  http://wiki.ihe.net/index.php?title=PCC_TF-1/XDS-MS
+
 public interface IRepositoryXDS {
 	
+	/**
+	 * @param authorPerson 
+	 * @param authorInstitution
+	 * @param authorRole 
+	 * @param codingSchemeLOINCId 
+	 * @param codingSchemeLOINCname 
+	 * @param codingSchemeSNOMEDCTId 
+	 * @param codingSchemeSNOMEDCTName 
+	 * @param languageCode 
+	 * @param PID5 
+	 * @param PID7 
+	 * @param PID8 
+	 * @param cdaID 
+	 * @param cdaDocumentType 
+	 * @param cda 
+	 * @param submissionTime 
+	 */
 	public void saveCDA(String authorPerson , String authorInstitution,
 			String authorRole, String codingSchemeLOINCId, String codingSchemeLOINCname,
 			String codingSchemeSNOMEDCTId,String codingSchemeSNOMEDCTName, String languageCode, 

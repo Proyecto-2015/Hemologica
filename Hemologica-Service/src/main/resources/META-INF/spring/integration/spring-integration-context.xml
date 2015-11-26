@@ -54,19 +54,22 @@
                             
     <int:channel id="outbound-channel-2" />
    
-<!-- 	<int:service-activator  input-channel="outbound-channel-3" -->
-<!-- 							output-channel="outbound-channel-4" -->
-<!--                             ref="cdaLocalProcessActivator" -->
-<!--                             method="process" /> -->
-	
-<!-- 	<int:channel id="outbound-channel-4" /> -->
-	
 	<int-jms:outbound-channel-adapter id="jmsOut"
 				channel="outbound-channel-2"
 				destination="sendQueue"/>
 				
 				
 	
+	
+	
+	<int-jms:message-driven-channel-adapter id="cdaToXDSjmsIn" 
+				channel="cda_to_xds_inbound-channel-1" 
+				container="messageListenerContainer2" />
+	
+	<int:channel id="cda_to_xds_inbound-channel-1" />
+	<int:service-activator  input-channel="cda_to_xds_inbound-channel-1"
+                            ref="cdaXDSProcessActivator"
+                            method="process" />
 	
 			          
 	

@@ -28,6 +28,9 @@ public class RepositoryXDSImpl implements IRepositoryXDS {
 
 	private static final Logger logger = Logger.getLogger(RepositoryXDSImpl.class.getName());
 	
+	private static String SOAP_ACTION; 
+	
+	
 	@Override
 	public void saveCDA(String authorPerson , String authorInstitution,
 			String authorRole, String codingSchemeLOINCId, String codingSchemeLOINCname,
@@ -50,7 +53,7 @@ public class RepositoryXDSImpl implements IRepositoryXDS {
 		BindingProvider port = (BindingProvider) adocumentrepository;
 		
 		// para definir la url a la cual envia los mensajes
-		port.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, "https://appliancePS:8082/RepositorioXDS/adocumentrepository_services");
+		port.getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, SOAP_ACTION);
 		
 		logger.info("Llamar al servicio " + aDocumentrepositoryServices.getWSDLDocumentLocation().toString());
 		
@@ -174,7 +177,7 @@ public class RepositoryXDSImpl implements IRepositoryXDS {
 		
 //		<Slot name="authorPerson" slotType="">
 //      <Value xmlns="">1234567^PEREZ^JUAN^^^^^^^^^&amp;2.16.858.0.2.16.86.1.0.0.212567060019.0001&amp;ISO</Value>
-//		</Slot>
+//		</Slot>co
 		SlotType1 slotTypeAuthorPerson = new SlotType1();
 		slotTypeAuthorPerson.setName(Constants.authorPerson);
 		slotTypeAuthorPerson.setSlotType("");
@@ -601,6 +604,20 @@ public class RepositoryXDSImpl implements IRepositoryXDS {
 		return provideAndRegisterDocument;
 		
 		
+	}
+	
+	
+	
+	public String getSOAP_ACTION() {
+		synchronized(SOAP_ACTION){
+			return SOAP_ACTION;
+		}
+	}
+
+	public void setSOAP_ACTION(String sOAP_ACTION) {
+		synchronized(SOAP_ACTION){
+			SOAP_ACTION = sOAP_ACTION;
+		}
 	}
 
 }
