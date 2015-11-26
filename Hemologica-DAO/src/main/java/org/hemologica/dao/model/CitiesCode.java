@@ -13,8 +13,8 @@ import java.util.List;
 @Table(name="cities_codes")
 @NamedQueries({
 @NamedQuery(name="CitiesCode.findAll", query="SELECT c FROM CitiesCode c"),
-@NamedQuery(name="CitiesCode.getCitiesByCode", query="SELECT c FROM CitiesCode c WHERE c.statesCode.stateCode = :code")
-
+@NamedQuery(name="CitiesCode.getCitiesByStateCode", query="SELECT c FROM CitiesCode c WHERE c.statesCode.stateCode = :code"),
+@NamedQuery(name="CitiesCode.getCitiesByCode", query="SELECT c FROM CitiesCode c WHERE c.cityCode = :code")
 })
 public class CitiesCode implements Serializable {
 	private static final long serialVersionUID = 1L;

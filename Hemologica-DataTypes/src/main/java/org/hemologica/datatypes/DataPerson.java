@@ -19,8 +19,8 @@ public class DataPerson implements Serializable{
 	private String documentType;
 	private String documentNumber;
 	private String birthdayDate;
-	private DataState state;
-	private DataCity city;
+	private DataCode state;
+	private DataCode city;
 	private String address;
 	private String telephone;
 	private String email;
@@ -78,16 +78,16 @@ public class DataPerson implements Serializable{
 	public void setBirthdayDate(String birthdayDate) {
 		this.birthdayDate = birthdayDate;
 	}
-	public DataState getState() {
+	public DataCode getState() {
 		return state;
 	}
-	public void setState(DataState state) {
+	public void setState(DataCode state) {
 		this.state = state;
 	}
-	public DataCity getCity() {
+	public DataCode getCity() {
 		return city;
 	}
-	public void setCity(DataCity city) {
+	public void setCity(DataCode city) {
 		this.city = city;
 	}
 	public String getAddress() {

@@ -77,7 +77,7 @@ public class CodesDAOImpl implements ICodesDAO{
 	@SuppressWarnings("unchecked")
 	public List<CitiesCode> getCitiesByState(String stateCode) {
 		
-		Query query = em.createNamedQuery("CitiesCode.getCitiesByCode");
+		Query query = em.createNamedQuery("CitiesCode.getCitiesByStateCode");
 		query.setParameter("code", stateCode);
 		return query.getResultList();
 	}
@@ -144,6 +144,19 @@ public class CodesDAOImpl implements ICodesDAO{
 		Query query = em.createNamedQuery("TransfusionEventsCode.findAll");
 		return query.getResultList();
 		
+	}
+
+	public CitiesCode getCitiesByCode(String code) {
+		
+		Query query = em.createNamedQuery("CitiesCode.getCitiesByCode");
+		query.setParameter("code", code);
+		return (CitiesCode) query.getSingleResult();
+	}
+
+	public StatesCode getStatesCodeByCode(String code) {
+		Query query = em.createNamedQuery("StatesCode.findByCode");
+		query.setParameter("code", code);
+		return (StatesCode) query.getSingleResult();
 	}
 
 }

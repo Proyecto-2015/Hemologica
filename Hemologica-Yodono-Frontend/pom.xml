@@ -23,7 +23,15 @@
     <artifactId>Hemologica-Yodono-Frontend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-
+	
+	<url>http://wildfly.org</url>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <distribution>repo</distribution>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+        </license>
+    </licenses>
     <modules>
         <module>Hemologica-Yodono-Frontend-web</module>
         <module>Hemologica-Yodono-Frontend-ear</module>
@@ -68,6 +76,29 @@
                 <version>${project.version}</version>
                 <type>war</type>
                 <scope>compile</scope>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.hemologica</groupId>
+                <artifactId>Hemologica-Yodono-Frontend-ejb</artifactId>
+                <version>${project.version}</version>
+                <type>ejb</type>
+            </dependency>
+            
+             <dependency>
+                <groupId>org.wildfly.bom</groupId>
+                <artifactId>jboss-javaee-7.0-with-tools</artifactId>
+                <version>${version.jboss.bom}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.wildfly.bom</groupId>
+                <artifactId>jboss-javaee-7.0-with-hibernate</artifactId>
+                <version>${version.jboss.bom}</version>
+                <type>pom</type>
+                <scope>import</scope>
             </dependency>
 
         </dependencies>

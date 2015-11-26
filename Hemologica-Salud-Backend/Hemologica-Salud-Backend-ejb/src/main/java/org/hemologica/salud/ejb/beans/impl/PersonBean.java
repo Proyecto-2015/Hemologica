@@ -11,7 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.hemologica.dao.model.Person;
 import org.hemologica.datatypes.DataBloodType;
-import org.hemologica.datatypes.DataCity;
+import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataPerson;
 import org.hemologica.factories.FactoryDAO;
 import org.hemologica.salud.ejb.beans.PersonBeanLocal;
@@ -46,6 +46,7 @@ public class PersonBean implements PersonBeanLocal {
 			data.setFirstLastName((p.getPersonFirstLastname() == null) ? "" :p.getPersonFirstLastname());
 			data.setSecondLastName((p.getPersonSecondLastname() == null) ? "" :p.getPersonSecondLastname());
 			data.setAddress((p.getPersonAddress() == null) ? "" :p.getPersonAddress());
+			data.setEmail((p.getPersonEmail() == null) ? "" :p.getPersonEmail());
 			
 			if(p.getDocuments() != null && p.getDocuments().size() != 0){
 				
@@ -71,10 +72,17 @@ public class PersonBean implements PersonBeanLocal {
 			}
 			
 			if(p.getCitiesCode() != null){
-				DataCity city = new DataCity();
+				DataCode city = new DataCode();
 				city.setCode((p.getCitiesCode().getCityCode() == null) ? "" :p.getCitiesCode().getCityCode());
-				city.setName((p.getCitiesCode().getCityDisplayName() == null) ? "" :p.getCitiesCode().getCityDisplayName());
+				city.setDisplayName((p.getCitiesCode().getCityDisplayName() == null) ? "" :p.getCitiesCode().getCityDisplayName());
 				data.setCity(city);
+			}
+			
+			if(p.getStateCode() != null){
+				DataCode state = new DataCode();
+				state.setCode((p.getStateCode().getStateCode() == null) ? "" :p.getStateCode().getStateCode());
+				state.setDisplayName((p.getStateCode().getStateDisplayName() == null) ? "" :p.getStateCode().getStateDisplayName());
+				data.setState(state);
 			}
 			listReturn.add(data);
 			
@@ -99,6 +107,7 @@ public class PersonBean implements PersonBeanLocal {
 			data.setFirstLastName((p.getPersonFirstLastname() == null) ? "" :p.getPersonFirstLastname());
 			data.setSecondLastName((p.getPersonSecondLastname() == null) ? "" :p.getPersonSecondLastname());
 			data.setAddress((p.getPersonAddress() == null) ? "" :p.getPersonAddress());
+			data.setEmail((p.getPersonEmail() == null) ? "" :p.getPersonEmail());
 			
 			if(p.getDocuments() != null && p.getDocuments().size() != 0){
 				
@@ -124,10 +133,17 @@ public class PersonBean implements PersonBeanLocal {
 			}
 			
 			if(p.getCitiesCode() != null){
-				DataCity city = new DataCity();
+				DataCode city = new DataCode();
 				city.setCode((p.getCitiesCode().getCityCode() == null) ? "" :p.getCitiesCode().getCityCode());
-				city.setName((p.getCitiesCode().getCityDisplayName() == null) ? "" :p.getCitiesCode().getCityDisplayName());
+				city.setDisplayName((p.getCitiesCode().getCityDisplayName() == null) ? "" :p.getCitiesCode().getCityDisplayName());
 				data.setCity(city);
+			}
+			
+			if(p.getStateCode() != null){
+				DataCode state = new DataCode();
+				state.setCode((p.getStateCode().getStateCode() == null) ? "" :p.getStateCode().getStateCode());
+				state.setDisplayName((p.getStateCode().getStateDisplayName() == null) ? "" :p.getStateCode().getStateDisplayName());
+				data.setState(state);
 			}
 			
 			data.setAllowNotificationAbleToDonate(p.getAllowNotificationAbleToDonate());

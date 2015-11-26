@@ -1,14 +1,10 @@
 package org.hemologica.salud.web.converters;
 
-import java.io.IOException;
 import java.util.List;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import org.apache.http.client.ClientProtocolException;
 import org.hemologica.datatypes.DataCode;
-import org.hemologica.datatypes.DataState;
-import org.hemologica.salud.factories.RestFactory;
 import org.hemologica.salud.web.beans.ApplicationBB;
 
 public class DataStateConverter implements Converter {

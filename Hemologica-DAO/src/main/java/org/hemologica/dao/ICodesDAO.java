@@ -45,4 +45,8 @@ public interface ICodesDAO {
 
 	public List<TransfusionEventsCode> getTransfusionsEvents();
 
+	public CitiesCode getCitiesByCode(String code);
+
+	public StatesCode getStatesCodeByCode(String code);
+
 }

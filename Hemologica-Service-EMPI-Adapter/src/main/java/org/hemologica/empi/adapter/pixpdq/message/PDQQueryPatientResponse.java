@@ -34,10 +34,9 @@ public class PDQQueryPatientResponse extends AbstractResponse implements Seriali
 	public void load(Message msg){
 		super.load(msg);
 		/**
-		 * TODO
 		 * load identifiers map
 		 */
-		
+		System.out.print("RSP_K21: "+ msg.getClass().getName());
 		RSP_K21 resp = (RSP_K21) msg;
 		CX[] cx = resp.getQUERY_RESPONSE().getPID().getPatientIdentifierList();
 		List<Identifier> ids_domain;
@@ -70,7 +69,7 @@ public class PDQQueryPatientResponse extends AbstractResponse implements Seriali
 	
 	public List<Identifier> getIdetifiers(String domain){
 		List<Identifier> ret = this.identifiers.get(domain);
-		if(ret == null){
+		if(domain != null && ret == null){
 			ret = new ArrayList<Identifier>();
 			this.identifiers.put(domain, ret);
 		}
@@ -82,7 +81,9 @@ public class PDQQueryPatientResponse extends AbstractResponse implements Seriali
 	}
 	
 	public void addIdentifier(String id, String domain){
-		this.addIdentifier(new Identifier(id,domain));
+		if(id != null && domain != null){
+			this.addIdentifier(new Identifier(id,domain));
+		}
 	}
 
 }

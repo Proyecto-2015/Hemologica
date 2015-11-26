@@ -31,7 +31,9 @@
 
 				</div>
 				 <div class="col-xs-12 col-md-12 col-lg-9 bank-info ">
-
+					<p:messages id="messages" showDetail="true" autoUpdate="true"
+						closable="true" />
+					
 					<div class="row form-horizontal " id="userForm">
 					
 						<fieldset>
@@ -41,18 +43,9 @@
 							<label class="col-md-3 control-label" for="name"><h:outputText
 									value="#{messages.form_user_document_country}" /></label>
 							<div class="col-md-9">
-<!-- 								<div class="col-md-9"> -->
-<!-- 									<label class="label-form-user control-label"><h:outputText -->
-<!-- 											value="#{userBB.dataUser.documentCountry}" /></label> -->
-<!-- 								</div> -->
-							
-							
-<!-- 								<h:selectOneMenu class="form-control" id="countries" -->
-<!-- 									value="#{personBB.dataPerson.documentCountry}" style="height: 34px;" -->
-<!-- 									converter="dataCountryConverter"> -->
-<!-- 									<f:selectItems value="#{applicationBB.countries}" var="country" -->
-<!-- 										itemValue="#{country.code}" itemLabel="#{country.displayName}" /> -->
-<!-- 								</h:selectOneMenu> -->
+								
+								<label class="label-form-user control-label"><h:outputText value="#{messages[userBB.dataUser.documentCountry]}" /></label>
+								
 							</div>
 							</div>
 							
@@ -62,7 +55,7 @@
 										value="#{messages.form_user_document_type}" /></label>
 								<div class="col-md-9">
 									<label class="label-form-user control-label"><h:outputText
-											value="#{userBB.dataUser.documentType}" /></label>
+											value="#{messages[userBB.dataUser.documentType]}" /></label>
 								</div>
 							</div>
 						
@@ -78,9 +71,6 @@
 					
 						<fieldset>
 							<legend><h:outputText value="#{messages.label_names_surname}"/></legend>
-							
-							<p:messages id="messages" showDetail="true" autoUpdate="true"
-								closable="true" />
 
 							<div class="form-group ">
 								<label class="col-md-3 control-label" for="name"><h:outputText
@@ -133,10 +123,9 @@
 										value="#{messages.form_user_state}" /></label>
 								<div class="col-md-9 col-lg-5">
 									<h:selectOneMenu class="form-control" value="#{userBB.state}"
-										style="height: 34px;">
-										<f:selectItems value="#{userBB.states}" var="state"
-											itemValue="#{state}" itemLabel="#{state.name}" />
-										<f:converter converterId="dataStateConverter" />
+										style="height: 34px;" converter="#{dataStateConverter}">
+										<f:selectItems value="#{applicationBB.states}" var="state"
+											itemValue="#{state.code}" itemLabel="#{messages[state.displayName]}" />
 										<p:ajax update="cities" />
 									</h:selectOneMenu>
 								</div>
@@ -148,10 +137,10 @@
 
 									<h:selectOneMenu class="form-control" id="cities"
 										value="#{userBB.city}" style="height: 34px;"
-										converter="dataCityConverter">
+										converter="#{dataCityConverter}">
 										<f:selectItems
-											value="#{userBB.getCitiesState(userBB.state.code)}"
-											var="city" itemValue="city" itemLabel="#{city.name}" />
+											value="#{userBB.getCitiesState(userBB.state.code)}" var="city"
+											itemValue="#{city.code}" itemLabel="#{messages[city.displayName]}" />
 									</h:selectOneMenu>
 								</div>
 							</div>

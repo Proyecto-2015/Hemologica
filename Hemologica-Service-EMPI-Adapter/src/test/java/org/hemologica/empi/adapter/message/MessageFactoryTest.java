@@ -24,13 +24,13 @@ public class MessageFactoryTest {
 		context.put("aa_universal_id_type", "OID");
 	}
 	
-	@Test
-	public void testMessageFactory() {
-//		fail("Not yet implemented");
-	}
+//	@Test
+//	public void testMessageFactory() {
+////		fail("Not yet implemented");
+//	}
 
-	@Test
-	public void testCreate_ADT_A01() {
+//	@Test
+//	public void testCreate_ADT_A01() {
 		
 //		HashMap<String, String> values = new HashMap<String, String>();
 //		values.put("patientIdentifier", "HEMO-111");
@@ -63,10 +63,10 @@ public class MessageFactoryTest {
 //		}
 		
 		
-	}
+//	}
 
-	@Test
-	public void testCreate_ADT_A04() {
+//	@Test
+//	public void testCreate_ADT_A04() {
 
 //		HashMap<String, String> values = new HashMap<String, String>();
 //		values.put("patientIdentifier", "HEMO-111");
@@ -98,10 +98,10 @@ public class MessageFactoryTest {
 //			fail("Exception: "+ e.getMessage());
 //		}
 		
-	}
-
-	@Test
-	public void testCreate_ADT_A05() {
+//	}
+//
+//	@Test
+//	public void testCreate_ADT_A05() {
 
 //		HashMap<String, String> values = new HashMap<String, String>();
 //		values.put("patientIdentifier", "HEMO-111");
@@ -133,10 +133,10 @@ public class MessageFactoryTest {
 //			fail("Exception: "+ e.getMessage());
 //		}
 		
-	}
-
-	@Test
-	public void testCreate_ADT_A08() {
+//	}
+//
+//	@Test
+//	public void testCreate_ADT_A08() {
 
 //		HashMap<String, String> values = new HashMap<String, String>();
 //		values.put("patientIdentifier", "HEMO-111");
@@ -168,7 +168,7 @@ public class MessageFactoryTest {
 //			fail("Exception: "+ e.getMessage());
 //		}
 		
-	}
+//	}
 
 	@Test
 	public void testCreate_QBP_Q21() {
@@ -186,6 +186,7 @@ public class MessageFactoryTest {
 //		values.put("surname", "ROCHE");
 //		values.put("surname", "ROCHE");
 //		values.put("surname", "ROCHE");
+		
 		
 		
 		MessageFactory factory = new MessageFactory(context);

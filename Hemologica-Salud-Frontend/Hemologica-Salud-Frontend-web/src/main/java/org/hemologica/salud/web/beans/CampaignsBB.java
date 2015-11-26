@@ -5,22 +5,16 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
-
 import javax.annotation.PostConstruct;
 import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
-
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.salud.factories.RestFactory;
-import org.hemologica.salud.web.utils.JSFUtils;
 
-//@Named("campaignsBB")
-//@ViewScoped
+
 public class CampaignsBB implements Serializable{
 
 	private static final long serialVersionUID = 1L;

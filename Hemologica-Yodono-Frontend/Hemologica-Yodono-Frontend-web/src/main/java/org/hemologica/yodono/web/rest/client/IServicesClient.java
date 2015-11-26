@@ -3,17 +3,14 @@ package org.hemologica.yodono.web.rest.client;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.List;
-
 import org.apache.http.client.ClientProtocolException;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCampaign;
-import org.hemologica.datatypes.DataCity;
+import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataResponse;
-import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
-import org.hemologica.datatypes.DataUser;
 
 public interface IServicesClient {
 	
@@ -64,7 +61,7 @@ public interface IServicesClient {
 	 * @throws IOException 
 	 * @throws ClientProtocolException 
 	 */
-	public List<DataCity> getCities() throws ClientProtocolException, IOException;
+	public List<DataCode> getCities() throws ClientProtocolException, IOException;
 	
 	/**
 	 * Devuelve la informacion de todas las ciudades para un departamento dado.
@@ -73,7 +70,7 @@ public interface IServicesClient {
 	 * @throws IOException 
 	 * @throws ClientProtocolException 
 	 */
-	public List<DataCity> getCities(String statesCode) throws ClientProtocolException, IOException;
+	public List<DataCode> getCities(String statesCode) throws ClientProtocolException, IOException;
 	
 	/**
 	 * Devuelve la informacion todos los departamentos.
@@ -81,7 +78,7 @@ public interface IServicesClient {
 	 * @throws IOException 
 	 * @throws ClientProtocolException 
 	 */
-	public List<DataState> getStates() throws ClientProtocolException, IOException;
+	public List<DataCode> getStates() throws ClientProtocolException, IOException;
 	
 	/**
 	 * Actualiza la informacion del usuario en la base de datos.
@@ -108,4 +105,21 @@ public interface IServicesClient {
 	 * @throws ClientProtocolException 
 	 */
 	public DataCampaign getCampaign(String campaignId) throws ClientProtocolException, IOException;
+	
+	/**
+	 * Devuelve las ciudades.
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataCode> getCitiesCodes() throws ClientProtocolException, IOException;
+	
+	/**
+	 * Devuelve loas departamentos.
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataCode> getStatesCodes() throws ClientProtocolException, IOException;
+	
 }

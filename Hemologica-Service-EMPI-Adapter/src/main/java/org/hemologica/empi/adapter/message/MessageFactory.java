@@ -280,40 +280,41 @@ public class MessageFactory implements Serializable {
 			
 			Terser terser = new Terser(msg);
 			terser.set("/QPD-3(0)-1", "@PID.5.1.1");
-			terser.set("/QPD-3(0)-2", values.get("surname"));
+			terser.set("/QPD-3(0)-2", values.get("surname").toUpperCase());
 			terser.set("/QPD-3(1)-1", "@PID.5.2.1");
-			terser.set("/QPD-3(1)-2", values.get("name"));
+			terser.set("/QPD-3(1)-2", values.get("name").toUpperCase());
 			
 			
 			if(values.containsKey("secondSurname")){ 
 				terser.set("/QPD-3(2)-1", "@PID.5.1.2");
-				terser.set("/QPD-3(2)-2", values.get("secondSurname"));
+				terser.set("/QPD-3(2)-2", values.get("secondSurname").toUpperCase());
 			}
 			
 			if(values.containsKey("secondName")){ 
 				terser.set("/QPD-3(3)-1", "@PID.5.2.2");
-				terser.set("/QPD-3(3)-2", values.get("secondName"));
+				terser.set("/QPD-3(3)-2", values.get("secondName").toUpperCase());
 			}
-			if(values.containsKey("birthday")){ 
-				terser.set("/QPD-3(4)-1", "@PID.7");
-				terser.set("/QPD-3(4)-2", values.get("birthday"));
-			}
+//			if(values.containsKey("birthday")){ 
+//				terser.set("/QPD-3(4)-1", "@PID.7");
+//				terser.set("/QPD-3(4)-2", values.get("birthday"));
+//			}
 			if(values.containsKey("birthdayPlace")){ 
 				terser.set("/QPD-3(5)-1", "@PID.23");
 				terser.set("/QPD-3(5)-2", values.get("birthdayPlace"));
 			}
-			if(values.containsKey("sex")){ 
-				terser.set("/QPD-3(6)-1", "@PID.8");
-				terser.set("/QPD-3(6)-2", values.get("sex"));
-			}
+//			if(values.containsKey("sex")){ 
+//				terser.set("/QPD-3(6)-1", "@PID.8");
+//				terser.set("/QPD-3(6)-2", values.get("sex"));
+//			}
 			if(values.containsKey("addressStreet")){ 
 				terser.set("/QPD-3(7)-1", "@PID.11");
 				terser.set("/QPD-3(7)-2", values.get("addressStreet"));
 			}
-			if(values.containsKey("phone")){ 
-				terser.set("/QPD-3(8)-1", "@PID.13");
-				terser.set("/QPD-3(8)-2", values.get("phone"));
-			}
+//			if(values.containsKey("phone")){ 
+//				terser.set("/QPD-3(8)-1", "@PID.13");
+//				terser.set("/QPD-3(8)-2", values.get("phone"));
+//			}
+			terser.set("/QPD-8-4", this.getMyDomain());
 
 			return msg;
 			

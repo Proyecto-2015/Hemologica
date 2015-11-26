@@ -48,54 +48,13 @@ public class ApplicationBB implements Serializable {
 	
 	private List<DataMessageOption> messageOptions;
 	
-	
-	/**
-	 * Identification Codes END
-	 */
-
-	/**
-	 * Donation Codes BEGIN
-	 */
-	
 	private List<DataCode> donationStates;
-	
-
-	
-	/**
-	 * Se cambio por motivo rechazo y tipo rechazo
-	 */
-//	private List<DataDonationFail> donationFails;
-//	private List<DataDonationFailCause> donationFailCauses;
 	private List<DataCode> donationABOTypes;
 	private List<DataCode> donationDTypes;
 	private List<DataDonationEvent> donationEvents;
-	
-	/**
-	 * Se cambio por severities
-	 */
-//	private List<DataEventSeverityEnum> eventSeverities;
-	
-	/**
-	 * Donation Codes END
-	 */
-	
-	/**
-	 * Event codes BEGIN
-	 */
-	
-
-	/**
-	 * Event codes END
-	 */
-	
-	/**
-	 * Institutions BEGIN
-	 */
 	private List<DataBank> banks;
 	private List<DataInstitution> institutions;
-	/**
-	 * Institutions END
-	 */
+
 	
 	@PostConstruct
 	public void init(){

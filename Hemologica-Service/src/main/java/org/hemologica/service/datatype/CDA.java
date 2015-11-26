@@ -55,26 +55,28 @@ public class CDA{
 		Element patientName = (Element) patientElem.getElementsByTagName("name").item(0);
 
 		NodeList nodes = patientName.getElementsByTagName("given");
-		userData.put("primerNombre", nodes.item(0).getTextContent());
+		userData.put("name", nodes.item(0).getTextContent());
 		if (nodes.getLength() > 1) {
-			userData.put("segundoNombre", nodes.item(1).getTextContent());
+			userData.put("secondName", nodes.item(1).getTextContent());
 		}
 		nodes = patientName.getElementsByTagName("family");
-		userData.put("primerApellido", nodes.item(0).getTextContent());
+		userData.put("surname", nodes.item(0).getTextContent());
 		if (nodes.getLength() > 1) {
-			userData.put("segundoApellido", nodes.item(1).getTextContent());
+			userData.put("secondSurname", nodes.item(1).getTextContent());
 		}
 
 		// obtener identificador
 		nodes = patientElem.getElementsByTagName("id");
 		if (nodes != null && nodes.getLength() > 0) {
-			userData.put("patientIdentifier", nodes.item(0).getTextContent());
+			@SuppressWarnings("unused")
+			String id = nodes.item(0).getAttributes().getNamedItem("root").getTextContent();
+			userData.put("patientIdentifier", id);
 		}
 
 		// obtener fecha de nacimiento
 		nodes = patientElem.getElementsByTagName("birthTime");
 		if (nodes != null && nodes.getLength() > 0) {
-			userData.put("birthday", nodes.item(0).getTextContent());
+			userData.put("birthday", nodes.item(0).getAttributes().getNamedItem("value").getTextContent());
 		}
 
 		// obtener sexo

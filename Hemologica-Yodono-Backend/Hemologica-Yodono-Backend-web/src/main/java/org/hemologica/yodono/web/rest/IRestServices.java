@@ -1,7 +1,6 @@
 package org.hemologica.yodono.web.rest;
 
 import java.util.List;
-
 import javax.enterprise.context.RequestScoped;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -11,22 +10,19 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
-
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCampaign;
-import org.hemologica.datatypes.DataCity;
+import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataResponse;
-import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
-import org.hemologica.datatypes.DataUser;
 import org.hemologica.datatypes.LoginData;
 import org.hemologica.constants.ConstansJson;
 import org.hemologica.constants.ConstantsRest;
 
-@RequestScoped
 @Path("/services")
+@RequestScoped
 public interface IRestServices {
 	
 	@POST
@@ -66,19 +62,19 @@ public interface IRestServices {
 	public List<DataBank> getBanks();
 	
 	@GET
-	@Path("/"+ConstantsRest.PATH_STATES)
+	@Path("/"+ConstantsRest.PATH_CODES +"/"+ ConstantsRest.PATH_STATES)
 	@Produces("application/json")
-	public List<DataState> getStates();
+	public List<DataCode> getStates();
 	
 	@GET
-	@Path("/"+ConstantsRest.PATH_CITIES)
+	@Path("/"+ ConstantsRest.PATH_CODES +"/"+ConstantsRest.PATH_CITIES)
 	@Produces("application/json")
-	public List<DataCity> getCities();
+	public List<DataCode> getCities();
 	
 	@GET
 	@Path("/"+ConstantsRest.PATH_CITIES_STATE)
 	@Produces("application/json")
-	public List<DataCity> getCities(@QueryParam(ConstansJson.JSON_STATE) String stateCode);
+	public List<DataCode> getCities(@QueryParam(ConstansJson.JSON_STATE) String stateCode);
 	
 	@GET
 	@Path("/"+ConstantsRest.PATH_CAMPAIGNS)
