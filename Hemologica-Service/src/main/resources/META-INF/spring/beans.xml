@@ -31,10 +31,28 @@
 			<value>${jms.queue.cda.discard}</value>
 		</constructor-arg>
 	</bean>
+	
+	
+	<bean id="cdaToXDSQueue" class="${jms.queue}">
+		<constructor-arg index="0">
+			<value>CDA_TO_XDS_QUEUE</value>
+		</constructor-arg>
+	</bean>
 
 
-	<bean id="messageListenerContainer"
-		class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+	<bean id="messageListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destination" ref="receiveQueue" />
+		<property name="sessionTransacted" value="true" />
+		<property name="maxConcurrentConsumers" value="1" />
+		<property name="concurrentConsumers" value="1" />
+		<property name="receiveTimeout" value="5000" />
+		<property name="recoveryInterval" value="60000" />
+		<property name="autoStartup" value="true" />
+	</bean>
+
+
+	<bean id="messageListenerContainer2" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="destination" ref="receiveQueue" />
 		<property name="sessionTransacted" value="true" />
@@ -46,19 +64,17 @@
 	</bean>
 
 	<!-- Activators -->
-	<bean id="activator"
-		class="org.hemologica.service.activator.DefaultServiceActivator" />
+	<bean id="activator" class="org.hemologica.service.activator.DefaultServiceActivator" />
 
-	<bean id="cdaHeaderProcessActivator"
-		class="org.hemologica.service.activator.CDAHeaderProcessActivator" />
 
-	<bean id="cdaEMPIProcessActivator"
-		class="org.hemologica.service.activator.CDAEMPIProcessActivator">
+	<bean id="cdaEMPIProcessActivator" class="org.hemologica.service.activator.CDAEMPIProcessActivator">
 		<property name="personBean" ref="personBean" />
 	</bean>
+	
+	<bean id="cdaXDSProcessActivator" class="org.hemologica.service.activator.CDAtoXDSProcessActivator" >
+		<property name="xdsRepositoryAdapter" ref="xdsRepositoryAdapter" />
+	</bean>
 
-	<bean id="cdaLocalProcessActivator"
-		class="org.hemologica.service.activator.CDALocalProcessActivator" />
 
 	<!-- EMPI -->
 	<bean id="pixConnection" class="org.hemologica.empi.adapter.connection.MLLPConnection">
@@ -90,45 +106,19 @@
 		</constructor-arg>
 	</bean>
 
+	<!-- XDS Repository Adapter -->
+	<bean id="xdsRepositoryAdapter" class="org.hemologica.xds.respository.adapter.client.RepositoryXDSImpl">
+		<property name="SOAP_ACTION" value="${xds.repository.service.url}" />
+	</bean>
+
 
 	<!-- Business -->
 
 	<bean id="personBean" class="org.hemologica.service.business.impl.PersonBean">
-		<!-- <property name="personDAO" ref="personDao" /> -->
+		<property name="xdsRepository" ref="xdsRepositoryAdapter" />
 		<property name="empi" ref="empiAdapter" />
 	</bean>
 
-	<!-- Data Access Objet -->
-
-	<!-- <bean id="personDao" class="org.hemologica.service.dao.PersonDAOSpringImpl"> -->
-	<!-- <property name="hibernateTemplate" ref="hibernateTemplate" /> -->
-	<!-- </bean> -->
-
-	<!-- <bean id="personRecordDao" class="org.hemologica.service.dao.PersonRecordDAOSpringImpl"> -->
-	<!-- <property name="hibernateTemplate" ref="hibernateTemplate" /> -->
-	<!-- </bean> -->
-
-	<!-- <bean id="identificationDao" class="org.hemologica.service.dao.PersonRecordDAOSpringImpl"> -->
-	<!-- <property name="hibernateTemplate" ref="hibernateTemplate" /> -->
-	<!-- </bean> -->
-
-	<!-- Database -->
-
-	<!-- <bean id="hibernateTemplate" class="org.springframework.orm.hibernate4.HibernateTemplate"> -->
-	<!-- <property name="sessionFactory" ref="sessionFactory" /> -->
-	<!-- </bean> -->
-
-	<!-- <bean id="sessionFactory" -->
-	<!-- class="org.springframework.orm.hibernate4.LocalSessionFactoryBean"> -->
-	<!-- <property name="jtaTransactionManager" ref="transactionManager" /> -->
-	<!-- <property name="dataSource" ref="dataSource" /> -->
-	<!-- <property name="hibernateProperties"> -->
-	<!-- <props> -->
-	<!-- <prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop> -->
-	<!-- <prop key="hibernate.current_session_context_class">thread</prop> -->
-	<!-- </props> -->
-	<!-- </property> -->
-	<!-- </bean> -->
 
 	<context:annotation-config />
 

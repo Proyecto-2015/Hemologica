@@ -2,9 +2,7 @@ package org.hemologica.service.utils.xml;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.StringReader;
 import java.io.StringWriter;
-
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
@@ -12,8 +10,17 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpressionException;
+import javax.xml.xpath.XPathFactory;
 
-import org.w3c.dom.*;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.w3c.dom.xpath.XPathEvaluator;
+import org.w3c.dom.xpath.XPathExpression;
+import org.w3c.dom.xpath.XPathResult;
 import org.xml.sax.SAXException;
 
 public class XMLUtils {
@@ -42,12 +49,16 @@ public class XMLUtils {
 	}
 	
 	
-//	public static NodeList executeXPath(Document doc, String xpath){
-//		
-//	}
-//	
-//	public static NodeList executeXPath(Element doc, String xpath){
-//		
-//	}
+	
+	public static String executeXPathString(Document doc, String xpath) throws XPathExpressionException{
+		return executeXPathString(doc.getDocumentElement(), xpath);
+	}
+	
+	public static String executeXPathString(Element doc, String xpath) throws XPathExpressionException{
+		
+		XPathFactory factory = XPathFactory.newInstance();
+		return (String) factory.newXPath().compile(xpath).evaluate(doc, XPathConstants.STRING);
+		
+	}
 	
 }

@@ -1,16 +1,14 @@
 package org.hemologica.service.datatype;
 
 import java.io.IOException;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
+import javax.xml.xpath.XPathExpressionException;
 
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.hemologica.empi.datatypes.Identifier;
 import org.hemologica.service.utils.xml.XMLUtils;
@@ -19,37 +17,43 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
-public class CDA{
+public class CDA {
 
 	private static final Logger logger = Logger.getLogger(CDA.class.getName());
 
 	private Document document;
-	private Element documentHeader;
-	private Element documentBody;
 	private Map<String, String> userData;
 	private List<Identifier> identifiers;
 	private Identifier identifier;
 
-	public CDA(Document document) throws ParserConfigurationException, SAXException, IOException, TransformerException {
+	private String authorPerson;
+	private String authorInstitution;
+	private String authorRole;
+	private String codingSchemeLOINCId;
+	private String codingSchemeLOINCname;
+	private String codingSchemeSNOMEDCTId;
+	private String codingSchemeSNOMEDCTName;
+	private String languageCode;
+	private String PID5;
+	private String PID7;
+	private String PID8;
+	private String cdaID;
+	private String cdaDocumentType;
+	private String cda;
+	private String submissionTime;
+
+	public CDA(Document document) throws ParserConfigurationException, SAXException, IOException, TransformerException,
+			XPathExpressionException {
 		this.document = document;
-		splitHeaderBody();
 		loadUserData();
-	}
-
-	public void splitHeaderBody() throws ParserConfigurationException, SAXException, IOException, TransformerException {
-
-		documentHeader = XMLUtils.cloneDocument(document).getDocumentElement();
-		NodeList nodes = documentHeader.getElementsByTagName("component");
-		documentBody = (Element) nodes.item(0);
-		documentHeader.removeChild(documentBody);
-
+		loadXDSData();
 	}
 
 	public void loadUserData() {
 
 		userData = new HashMap<String, String>();
 
-		Element patientElem = (Element) documentHeader.getElementsByTagName("patient").item(0);
+		Element patientElem = (Element) document.getElementsByTagName("patient").item(0);
 
 		// obtener los nombres y apellidos
 		Element patientName = (Element) patientElem.getElementsByTagName("name").item(0);
@@ -68,7 +72,6 @@ public class CDA{
 		// obtener identificador
 		nodes = patientElem.getElementsByTagName("id");
 		if (nodes != null && nodes.getLength() > 0) {
-			@SuppressWarnings("unused")
 			String id = nodes.item(0).getAttributes().getNamedItem("root").getTextContent();
 			userData.put("patientIdentifier", id);
 		}
@@ -90,24 +93,75 @@ public class CDA{
 		if (nodes != null && nodes.getLength() > 0) {
 			userData.put("birthdayPlace", nodes.item(0).getTextContent());
 		}
-		
-		
+
 		// obtener datos de contacto
 		nodes = patientElem.getElementsByTagName("telecom");
 		Element elem;
-		for(int i = 0; i < nodes.getLength(); ++i){
+		for (int i = 0; i < nodes.getLength(); ++i) {
 			elem = (Element) nodes.item(i);
-			
-			//obtener telefono
-			if(elem.getAttribute("value").startsWith("tel:")){
+
+			// obtener telefono
+			if (elem.getAttribute("value").startsWith("tel:")) {
 				userData.put("phone", elem.getAttribute("value").replaceAll("tel:", ""));
-			
-			} //obtener mail
-			else if(elem.getAttribute("value").startsWith("mailto:")){
+
+			} // obtener mail
+			else if (elem.getAttribute("value").startsWith("mailto:")) {
 
 				userData.put("email", elem.getAttribute("value").replaceAll("mailto:", ""));
 			}
 		}
+
+	}
+
+	public void loadXDSData() throws TransformerException, XPathExpressionException {
+
+		// author
+		String inst = "/ClinicalDocument/author/assignedAuthor/representedOrganization/";
+		authorInstitution = XMLUtils.executeXPathString(document, inst + "name");
+		String person = "/ClinicalDocument/author/";
+		authorPerson = XMLUtils.executeXPathString(document, person + "id/@extension") + "^"
+				+ XMLUtils.executeXPathString(document, person + "assignedPerson/name/family[1]") + "^"
+				+ XMLUtils.executeXPathString(document, person + "assignedPerson/name/family[2]") + "^"
+				+ XMLUtils.executeXPathString(document, person + "assignedPerson/name/given[1]") + "^"
+				+ XMLUtils.executeXPathString(document, person + "assignedPerson/name/given[2]") + "^"
+				+ XMLUtils.executeXPathString(document, person + "assignedPerson/name/suffix") + "^"
+				+ XMLUtils.executeXPathString(document, person + "assignedPerson/name/prefix") + "^^^^&"
+				+ XMLUtils.executeXPathString(document, person + "id/@root") + "&ISO";
+
+		authorRole = XMLUtils.executeXPathString(document, "/ClincicalDocument/author/participationFunction");
+
+		// coding LOINC
+		codingSchemeLOINCId = XMLUtils.executeXPathString(document, "/ClinicalDocument/code/@code");
+		codingSchemeLOINCname = XMLUtils.executeXPathString(document, "/ClinicalDocument/code/@displayName");
+
+		// coding SNOMED
+		codingSchemeSNOMEDCTId = XMLUtils.executeXPathString(document,
+				"/ClinicalDocument/component/structuredBody/component@code/section/entry/procedure/code/@code");
+		codingSchemeSNOMEDCTName = XMLUtils.executeXPathString(document,
+				"/ClinicalDocument/component/structuredBody/component@code/section/entry/procedure/code/@displayName");
+
+		// pid
+		person = "/ClinicalDocument/recordTarget/patientRole/patient/name/";
+		PID5 = XMLUtils.executeXPathString(document, person + "family[1]") + "^"
+				+ XMLUtils.executeXPathString(document, person + "family[2]") + "^"
+				+ XMLUtils.executeXPathString(document, person + "given[1]") + "^"
+				+ XMLUtils.executeXPathString(document, person + "given[2]") + "^"
+				+ XMLUtils.executeXPathString(document, person + "suffix") + "^"
+				+ XMLUtils.executeXPathString(document, person + "prefix");
+
+		PID7 = XMLUtils.executeXPathString(document,
+				"/ClinicalDocument/recordTarget/patientRole/patient/birthTime/@value");
+		PID8 = XMLUtils.executeXPathString(document,
+				"/ClinicalDocument/recordTarget/patientRole/patient/administrativeGenderCode/@code");
+
+		// language
+		languageCode = XMLUtils.executeXPathString(document, "/ClinicalDocument/languageCode/@code");
+
+		// submissionTime
+		submissionTime = XMLUtils.executeXPathString(document, "/ClinicalDocument/effectiveTime/@value");
+
+		// cda
+		cda = XMLUtils.documentToString(document);
 
 	}
 
@@ -120,19 +174,33 @@ public class CDA{
 	}
 
 	public Element getDocumentHeader() {
-		return documentHeader;
-	}
 
-	public void setDocumentHeader(Element documentHeader) {
-		this.documentHeader = documentHeader;
+		Element documentHeader;
+		try {
+			documentHeader = XMLUtils.cloneDocument(document).getDocumentElement();
+			NodeList nodes = documentHeader.getElementsByTagName("component");
+			Element documentBody = (Element) nodes.item(0);
+			documentHeader.removeChild(documentBody);
+			return documentHeader;
+
+		} catch (SAXException e) {
+			logger.log(Level.SEVERE, e.getMessage(), e);
+			e.printStackTrace();
+		} catch (IOException e) {
+			logger.log(Level.SEVERE, e.getMessage(), e);
+		} catch (ParserConfigurationException e) {
+			logger.log(Level.SEVERE, e.getMessage(), e);
+		} catch (TransformerException e) {
+			logger.log(Level.SEVERE, e.getMessage(), e);
+		}
+		return null;
+
 	}
 
 	public Element getDocumentBody() {
-		return documentBody;
-	}
+		NodeList nodes = document.getElementsByTagName("component");
+		return (Element) nodes.item(0);
 
-	public void setDocumentBody(Element documentBody) {
-		this.documentBody = documentBody;
 	}
 
 	public Map<String, String> getUserData() {
@@ -159,4 +227,123 @@ public class CDA{
 		this.identifier = identifier;
 	}
 
+	public String getAuthorPerson() {
+		return authorPerson;
+	}
+
+	public void setAuthorPerson(String authorPerson) {
+		this.authorPerson = authorPerson;
+	}
+
+	public String getAuthorInstitution() {
+		return authorInstitution;
+	}
+
+	public void setAuthorInstitution(String authorInstitution) {
+		this.authorInstitution = authorInstitution;
+	}
+
+	public String getAuthorRole() {
+		return authorRole;
+	}
+
+	public void setAuthorRole(String authorRole) {
+		this.authorRole = authorRole;
+	}
+
+	public String getCodingSchemeLOINCId() {
+		return codingSchemeLOINCId;
+	}
+
+	public void setCodingSchemeLOINCId(String codingSchemeLOINCId) {
+		this.codingSchemeLOINCId = codingSchemeLOINCId;
+	}
+
+	public String getCodingSchemeLOINCname() {
+		return codingSchemeLOINCname;
+	}
+
+	public void setCodingSchemeLOINCname(String codingSchemeLOINCname) {
+		this.codingSchemeLOINCname = codingSchemeLOINCname;
+	}
+
+	public String getCodingSchemeSNOMEDCTId() {
+		return codingSchemeSNOMEDCTId;
+	}
+
+	public void setCodingSchemeSNOMEDCTId(String codingSchemeSNOMEDCTId) {
+		this.codingSchemeSNOMEDCTId = codingSchemeSNOMEDCTId;
+	}
+
+	public String getCodingSchemeSNOMEDCTName() {
+		return codingSchemeSNOMEDCTName;
+	}
+
+	public void setCodingSchemeSNOMEDCTName(String codingSchemeSNOMEDCTName) {
+		this.codingSchemeSNOMEDCTName = codingSchemeSNOMEDCTName;
+	}
+
+	public String getLanguageCode() {
+		return languageCode;
+	}
+
+	public void setLanguageCode(String languageCode) {
+		this.languageCode = languageCode;
+	}
+
+	public String getPID5() {
+		return PID5;
+	}
+
+	public void setPID5(String pID5) {
+		PID5 = pID5;
+	}
+
+	public String getPID7() {
+		return PID7;
+	}
+
+	public void setPID7(String pID7) {
+		PID7 = pID7;
+	}
+
+	public String getPID8() {
+		return PID8;
+	}
+
+	public void setPID8(String pID8) {
+		PID8 = pID8;
+	}
+
+	public String getCdaID() {
+		return cdaID;
+	}
+
+	public void setCdaID(String cdaID) {
+		this.cdaID = cdaID;
+	}
+
+	public String getCdaDocumentType() {
+		return cdaDocumentType;
+	}
+
+	public void setCdaDocumentType(String cdaDocumentType) {
+		this.cdaDocumentType = cdaDocumentType;
+	}
+
+	public String getCda() {
+		return cda;
+	}
+
+	public void setCda(String cda) {
+		this.cda = cda;
+	}
+
+	public String getSubmissionTime() {
+		return submissionTime;
+	}
+
+	public void setSubmissionTime(String submissionTime) {
+		this.submissionTime = submissionTime;
+	}
 }
