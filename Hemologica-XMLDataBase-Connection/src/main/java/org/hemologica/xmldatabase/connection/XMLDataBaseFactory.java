@@ -12,8 +12,6 @@ public class XMLDataBaseFactory {
 	private static Logger logger = Logger.getLogger(XMLDataBaseFactory.class);
 	private static IXMLDataBase iXmlDataBase = null;
 	
-	
-	
 	public XMLDataBaseFactory() {
 		
 	}
@@ -27,6 +25,7 @@ public class XMLDataBaseFactory {
 				iXmlDataBase = new BaseXConnection();
 			
 		} catch (XMLDataBaseException e) {
+			
 			logger.error("Error al crear  la coneccion con la base de datos", e);
 			// TODO excepciones
 			throw new XMLDataBaseException();

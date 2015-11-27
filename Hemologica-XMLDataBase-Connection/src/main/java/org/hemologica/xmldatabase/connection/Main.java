@@ -14,15 +14,23 @@ public class Main {
 				try {
 					IXMLDataBase xbase = XMLDataBaseFactory.getIXMLDataBase();
 					
+					int i = 0;
+					
+					System.out.println(xbase.getElementCDAId("2.16.858.0.0.1.10.2.3.1.1.1", "2"));
 					
 //					for(String cda : xbase.getElementPatientId("46714299")){
 //						
+//						System.out.println(i++);
 //						System.out.println(cda);
 //						
 //					}
 					
-					xbase.addElement("/home/bruno/Desarrollo/CDA.xml");
-					System.out.println(xbase.getElement("CDA.xml"));
+					System.out.println("******* "+ i + " ********");
+					
+					
+//					xbase.getElementPatientId("46714299");
+//					xbase.addElement("/home/bruno/Desarrollo/CDA.xml");
+//					System.out.println(xbase.getElement("CDA.xml"));
 
 					
 					//xbase.updateElement("1.xml","/Users/paularoche/Documents/Proyecto/xml-database/1.xml");

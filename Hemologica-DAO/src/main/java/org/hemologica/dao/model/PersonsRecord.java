@@ -22,8 +22,11 @@ public class PersonsRecord implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private String id;
 
-	@Column(name="persons_record_cda_id")
-	private String personsRecordCdaId;
+	@Column(name="persons_record_cda_root")
+	private String personsRecordCdaRoot;
+	
+	@Column(name="persons_record_cda_extension")
+	private String personsRecordCdaExtension;
 
 	//bi-directional many-to-one association to Identification
 	@ManyToOne
@@ -41,12 +44,20 @@ public class PersonsRecord implements Serializable {
 		this.id = id;
 	}
 
-	public String getPersonsRecordCdaId() {
-		return this.personsRecordCdaId;
+	public String getPersonsRecordCdaRoot() {
+		return personsRecordCdaRoot;
 	}
 
-	public void setPersonsRecordCdaId(String personsRecordCdaId) {
-		this.personsRecordCdaId = personsRecordCdaId;
+	public void setPersonsRecordCdaRoot(String personsRecordCdaRoot) {
+		this.personsRecordCdaRoot = personsRecordCdaRoot;
+	}
+
+	public String getPersonsRecordCdaExtension() {
+		return personsRecordCdaExtension;
+	}
+
+	public void setPersonsRecordCdaExtension(String personsRecordCdaExtension) {
+		this.personsRecordCdaExtension = personsRecordCdaExtension;
 	}
 
 	public Identification getIdentification() {
