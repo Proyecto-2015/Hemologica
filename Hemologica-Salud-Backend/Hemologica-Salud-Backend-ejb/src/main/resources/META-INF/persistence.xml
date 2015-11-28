@@ -61,6 +61,7 @@
 		<class>org.hemologica.dao.model.UsersRoleService</class>
 		<class>org.hemologica.dao.model.MessageSendOption</class>
 		<class>org.hemologica.dao.model.ResponsibleTransfusionPerson</class>
+		<class>org.hemologica.dao.model.BloodTypes</class>
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.show_sql" value="false" />

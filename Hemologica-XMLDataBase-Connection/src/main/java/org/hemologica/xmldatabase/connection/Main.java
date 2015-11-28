@@ -1,6 +1,6 @@
 package org.hemologica.xmldatabase.connection;
 
-
+import org.hemologica.xmldatabase.factories.XMLDataBaseFactory;
 
 public class Main {
 	

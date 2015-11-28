@@ -9,6 +9,7 @@ import org.hemologica.dao.ICodesDAO;
 import org.hemologica.dao.IInstitutionDAO;
 import org.hemologica.dao.INotificationDAO;
 import org.hemologica.dao.IPersonDAO;
+import org.hemologica.dao.IPersonRecordDAO;
 import org.hemologica.dao.impl.AdvertismentDAOImpl;
 import org.hemologica.dao.impl.BloodDAOImpl;
 import org.hemologica.dao.impl.CenterDAOImpl;
@@ -16,11 +17,13 @@ import org.hemologica.dao.impl.CodesDAOImpl;
 import org.hemologica.dao.impl.InstitutionDAOImpl;
 import org.hemologica.dao.impl.NotificationDAOImpl;
 import org.hemologica.dao.impl.PersonDAOImpl;
+import org.hemologica.dao.impl.PersonRecordDAOImpl;
 
 public class FactoryDAO {
 	
 	private static IInstitutionDAO institutionDAO;
 	private static IPersonDAO personDAO;
+	private static IPersonRecordDAO personRecordDAO;
 	private static IBloodDAO bloodDAO;
 	private static ICodesDAO codesDAO;
 	private static ICenterDAO centerDAO;
@@ -106,5 +109,15 @@ public class FactoryDAO {
 			
 		}
 		return notificationDAO;
+	}
+	
+	public static IPersonRecordDAO getPersonRecordDAO(EntityManager em) {
+		
+		if(personRecordDAO == null){
+			
+			return new PersonRecordDAOImpl(em);
+			
+		}
+		return personRecordDAO;
 	}
 }

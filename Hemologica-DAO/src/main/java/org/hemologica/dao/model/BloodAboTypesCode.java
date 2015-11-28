@@ -32,7 +32,7 @@ public class BloodAboTypesCode implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="blood_abo_type_code_snomed")
 	private Concept concept;
-
+	
 	public BloodAboTypesCode() {
 	}
 
@@ -67,5 +67,5 @@ public class BloodAboTypesCode implements Serializable {
 	public void setConcept(Concept concept) {
 		this.concept = concept;
 	}
-
+	
 }

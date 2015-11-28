@@ -33,4 +33,10 @@ INSERT INTO `hemologica`.`cities_codes` (`city_id`, `city_state_id`, `city_code`
 INSERT INTO `hemologica`.`donation_fail_type_codes` (`donation_fail_code_id`, `donation_fail_code_label`, `donation_fail_code_value`) VALUES ('1', 'label_permanent', '1');
 INSERT INTO `hemologica`.`donation_fail_type_codes` (`donation_fail_code_id`, `donation_fail_code_label`, `donation_fail_code_value`) VALUES ('2', 'label_temporary', '2');
 
+--  Severidad 
+INSERT INTO `hemologica`.`event_severity_code` (`event_severity_code_id`, `event_severity_code_label`, `event_severity_code_value`, `event_severity_code_snomed`) VALUES ('1', 'event_mild', '1', '42');
+INSERT INTO `hemologica`.`event_severity_code` (`event_severity_code_id`, `event_severity_code_label`, `event_severity_code_value`, `event_severity_code_snomed`) VALUES ('2', 'event_moderate', '2', '43');
+INSERT INTO `hemologica`.`event_severity_code` (`event_severity_code_id`, `event_severity_code_label`, `event_severity_code_value`, `event_severity_code_snomed`) VALUES ('3', 'event_severe', '3', '44');
+
+
 

@@ -16,4 +16,9 @@ INSERT INTO `hemologica`.`donation_events_codes` (`donation_event_code_id`, `don
 INSERT INTO `hemologica`.`donation_events_codes` (`donation_event_code_id`, `donation_event_code_value`, `donation_event_code_label`, `donation_event_code_snomed`) VALUES ('5', '5', 'label_hematoma', '21');
 INSERT INTO `hemologica`.`donation_events_codes` (`donation_event_code_id`, `donation_event_code_value`, `donation_event_code_label`, `donation_event_code_snomed`) VALUES ('6', '6', 'label_cardiac_arrhythmia', '22');
 
+-- Tipos de donacion
+
+INSERT INTO `hemologica`.`donation_types_codes` (`donation_type_code_id`, `donation_type_code_value`, `donation_type_code_label`, `donation_type_code_snomed`) VALUES ('1', '1', 'label_directed', '39');
+INSERT INTO `hemologica`.`donation_types_codes` (`donation_type_code_id`, `donation_type_code_value`, `donation_type_code_label`, `donation_type_code_snomed`) VALUES ('2', '2', 'label_autologous', '40');
+INSERT INTO `hemologica`.`donation_types_codes` (`donation_type_code_id`, `donation_type_code_value`, `donation_type_code_label`, `donation_type_code_snomed`) VALUES ('3', '3', 'label_common', '41');
 

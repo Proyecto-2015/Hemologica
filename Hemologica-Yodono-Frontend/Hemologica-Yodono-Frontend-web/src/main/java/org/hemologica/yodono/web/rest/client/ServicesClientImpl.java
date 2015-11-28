@@ -52,12 +52,12 @@ public class ServicesClientImpl implements IServicesClient {
 	}
 
 	@Override
-	public List<DataDonation> getMyDonations(String user) throws IOException {
+	public List<DataDonation> getMyDonations(String userId) throws IOException {
 		
 		String urlDonations = url + ConstantsRest.PATH_DONATIONS;
 		
 		HashMap<String , String> hash = new HashMap<String, String>();
-		hash.put(ConstansJson.JSON_USER, "hola");
+		hash.put(ConstansJson.JSON_USER, userId);
 		
 		String donacionesString = "";
 		try {
@@ -73,12 +73,12 @@ public class ServicesClientImpl implements IServicesClient {
 	}
 
 	@Override
-	public List<DataTransfusion> getMyTransfusions(String user) throws IOException {
+	public List<DataTransfusion> getMyTransfusions(String userId) throws IOException {
 		
 		String urlTransfusions = url + ConstantsRest.PATH_TRANSFUTIONS;
 		
 		HashMap<String , String> hash = new HashMap<String, String>();
-		hash.put(ConstansJson.JSON_USER, "hola");
+		hash.put(ConstansJson.JSON_USER, userId);
 		
 		String transfusionesString = "";
 		try {
