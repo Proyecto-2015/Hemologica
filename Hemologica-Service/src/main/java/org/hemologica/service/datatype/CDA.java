@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.xpath.XPathExpressionException;
@@ -46,7 +48,7 @@ public class CDA {
 			XPathExpressionException {
 		this.document = document;
 		loadUserData();
-		loadXDSData();
+//		loadXDSData();
 	}
 
 	public void loadUserData() {
@@ -117,7 +119,7 @@ public class CDA {
 
 		// author
 		String inst = "/ClinicalDocument/author/assignedAuthor/representedOrganization/";
-		authorInstitution = XMLUtils.executeXPathString(document, inst + "name");
+		authorInstitution = XMLUtils.executeXPathString(document, inst + "name") + "^^^^^^^^^" + XMLUtils.executeXPathString(document, inst + "id/@root");
 		String person = "/ClinicalDocument/author/";
 		authorPerson = XMLUtils.executeXPathString(document, person + "id/@extension") + "^"
 				+ XMLUtils.executeXPathString(document, person + "assignedPerson/name/family[1]") + "^"
@@ -136,9 +138,9 @@ public class CDA {
 
 		// coding SNOMED
 		codingSchemeSNOMEDCTId = XMLUtils.executeXPathString(document,
-				"/ClinicalDocument/component/structuredBody/component@code/section/entry/procedure/code/@code");
+				"/ClinicalDocument/component/structuredBody/component/section/entry/procedure/code/@code");
 		codingSchemeSNOMEDCTName = XMLUtils.executeXPathString(document,
-				"/ClinicalDocument/component/structuredBody/component@code/section/entry/procedure/code/@displayName");
+				"/ClinicalDocument/component/structuredBody/component/section/entry/procedure/code/@displayName");
 
 		// pid
 		person = "/ClinicalDocument/recordTarget/patientRole/patient/name/";
@@ -162,6 +164,8 @@ public class CDA {
 
 		// cda
 		cda = XMLUtils.documentToString(document);
+		cdaID = UUID.randomUUID().toString();
+		
 
 	}
 

@@ -20,7 +20,7 @@ import org.hemologica.empi.adapter.pixpdq.message.PDQQueryPatientResponse;
 import org.hemologica.empi.datatypes.Identifier;
 import org.hemologica.service.business.IPersonBean;
 import org.hemologica.service.datatype.CDA;
-import org.hemologica.xds.respository.adapter.client.IRepositoryXDS;
+import org.hemologica.xds.repository.adapter.client.IRepositoryXDS;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 

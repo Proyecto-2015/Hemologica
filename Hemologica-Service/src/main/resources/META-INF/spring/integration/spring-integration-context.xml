@@ -70,7 +70,6 @@
 	<int:service-activator  input-channel="cda_to_xds_inbound-channel-1"
                             ref="cdaXDSProcessActivator"
                             method="process" />
-	
-			          
+
 	
 </beans>

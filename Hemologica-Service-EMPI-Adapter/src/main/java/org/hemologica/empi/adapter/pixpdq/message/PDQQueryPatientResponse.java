@@ -36,7 +36,6 @@ public class PDQQueryPatientResponse extends AbstractResponse implements Seriali
 		/**
 		 * load identifiers map
 		 */
-		System.out.print("RSP_K21: "+ msg.getClass().getName());
 		RSP_K21 resp = (RSP_K21) msg;
 		CX[] cx = resp.getQUERY_RESPONSE().getPID().getPatientIdentifierList();
 		List<Identifier> ids_domain;
