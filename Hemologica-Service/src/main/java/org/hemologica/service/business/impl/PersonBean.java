@@ -7,9 +7,8 @@ import java.util.Map;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.hemologica.dao.IIdentificationDAO;
-import org.hemologica.dao.IPersonDAO;
-import org.hemologica.dao.IPersonRecordDAO;
 import org.hemologica.dao.model.Identification;
+import org.hemologica.dao.model.IdentificationsHistory;
 import org.hemologica.empi.adapter.IEMPIAdapter;
 import org.hemologica.empi.adapter.pixpdq.exception.PDQAdapterException;
 import org.hemologica.empi.adapter.pixpdq.exception.PIXAdapterException;
@@ -18,9 +17,9 @@ import org.hemologica.empi.adapter.pixpdq.message.CreatePatientResponse;
 import org.hemologica.empi.adapter.pixpdq.message.PDQQueryPatientRequest;
 import org.hemologica.empi.adapter.pixpdq.message.PDQQueryPatientResponse;
 import org.hemologica.empi.datatypes.Identifier;
+import org.hemologica.factories.FactoryDAO;
 import org.hemologica.service.business.IPersonBean;
-import org.hemologica.service.datatype.CDA;
-import org.hemologica.xds.respository.adapter.client.IRepositoryXDS;
+import org.hemologica.xds.repository.adapter.client.IRepositoryXDS;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,10 +36,6 @@ public class PersonBean implements IPersonBean, Serializable {
 	private IEMPIAdapter empi;
 	private IRepositoryXDS xdsRepository;
 
-	private IPersonDAO personDAO;
-	private IPersonRecordDAO personRecordDAO;
-	private IIdentificationDAO identificationDAO;
-
 	@PersistenceContext(unitName = "Hemologica-Service-PU")
 	private EntityManager em;
 
@@ -55,6 +50,9 @@ public class PersonBean implements IPersonBean, Serializable {
 			PDQQueryPatientResponse pdqQueryPatientResponse = empi.query(pdqQueryPatientRequest);
 			List<Identifier> identifiers = pdqQueryPatientResponse.getIdetifiers(empi.getMyDomain());
 			Identifier identifier = null;
+			
+//			List<Identification> identifiersDB = this.getIdentificationsFromDatabase();
+			
 
 			if (identifiers == null || identifiers.isEmpty()) {
 
@@ -71,7 +69,7 @@ public class PersonBean implements IPersonBean, Serializable {
 				identifier = identifiers.get(0);
 				if (identifiers.size() > 1) {
 					// send update to Hemologica Database to fix persons-records
-					// this.fixPersonIdentifier(identifier, identifiers);
+					 this.fixPersonIdentifier(identifier, identifiers);
 				}
 			}
 			
@@ -88,13 +86,6 @@ public class PersonBean implements IPersonBean, Serializable {
 		return null;
 	}
 
-	public IIdentificationDAO getIdentificationDAO() {
-		return identificationDAO;
-	}
-
-	public void setIdentificationDAO(IIdentificationDAO identificationDAO) {
-		this.identificationDAO = identificationDAO;
-	}
 
 	public EntityManager getEm() {
 		return em;
@@ -103,14 +94,14 @@ public class PersonBean implements IPersonBean, Serializable {
 	public void setEm(EntityManager em) {
 		this.em = em;
 	}
-
+	
 	private Identifier createPerson(Map<String, String> data) {
-		// TODO
 		return empi.createIdentifier();
 	}
 
 	private void fixPersonIdentifier(Identifier id, List<Identifier> ids) {
 
+		IIdentificationDAO identificationDAO = FactoryDAO.getIIdentificationDAO(em);
 		List<Identification> idsDB = new ArrayList<Identification>();
 		Identification idDB = identificationDAO.getIdentificationByCode(id.getId());
 		Identification idItem;
@@ -119,6 +110,7 @@ public class PersonBean implements IPersonBean, Serializable {
 			if (idItem != null) {
 				idsDB.add(idItem);
 			}
+			
 		}
 		identificationDAO.fix(idDB, idsDB);
 	}
@@ -133,22 +125,6 @@ public class PersonBean implements IPersonBean, Serializable {
 
 	public void setEmpi(IEMPIAdapter empi) {
 		this.empi = empi;
-	}
-
-	public IPersonDAO getPersonDAO() {
-		return personDAO;
-	}
-
-	public void setPersonDAO(IPersonDAO personDAO) {
-		this.personDAO = personDAO;
-	}
-
-	public IPersonRecordDAO getPersonRecordDAO() {
-		return personRecordDAO;
-	}
-
-	public void setPersonRecordDAO(IPersonRecordDAO personRecordDAO) {
-		this.personRecordDAO = personRecordDAO;
 	}
 
 	public IRepositoryXDS getXdsRepository() {

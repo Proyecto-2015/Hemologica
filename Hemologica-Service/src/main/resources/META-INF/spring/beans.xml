@@ -40,9 +40,9 @@
 	</bean>
 
 
-	<bean id="messageListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+	<bean id="messageListenerContainer2" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
 		<property name="connectionFactory" ref="connectionFactory" />
-		<property name="destination" ref="receiveQueue" />
+		<property name="destination" ref="cdaToXDSQueue" />
 		<property name="sessionTransacted" value="true" />
 		<property name="maxConcurrentConsumers" value="1" />
 		<property name="concurrentConsumers" value="1" />
@@ -52,7 +52,7 @@
 	</bean>
 
 
-	<bean id="messageListenerContainer2" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+	<bean id="messageListenerContainer" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="destination" ref="receiveQueue" />
 		<property name="sessionTransacted" value="true" />
@@ -107,8 +107,19 @@
 	</bean>
 
 	<!-- XDS Repository Adapter -->
-	<bean id="xdsRepositoryAdapter" class="org.hemologica.xds.respository.adapter.client.RepositoryXDSImpl">
-		<property name="SOAP_ACTION" value="${xds.repository.service.url}" />
+	<bean id="xdsRepositoryAdapter" class="org.hemologica.xds.repository.adapter.client.RepositoryXDSImpl">
+		<property name="SOAP_ACTION" value="${xds.repository.service.soapaction}" />
+		<property name="SOAP_URL">
+			<bean class="java.net.URL">
+				<constructor-arg index="0" value="${xds.repository.service.url}" />
+			</bean>
+		</property>
+		<property name="SOAP_QName">
+			<bean class="javax.xml.namespace.QName">
+				<constructor-arg name="namespaceURI" value="${xds.repository.service.qname.namespaceuri}"/>
+				<constructor-arg name="localPart" value="${xds.repository.service.qname.localpart}"/>
+			</bean>
+		</property>
 	</bean>
 
 

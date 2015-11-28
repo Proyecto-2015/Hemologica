@@ -3,20 +3,14 @@ package org.hemologica.service.activator;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.xpath.XPathExpressionException;
-
-import org.hemologica.empi.adapter.IEMPIAdapter;
-import org.hemologica.empi.adapter.pixpdq.message.CreatePatientRequest;
 import org.hemologica.service.business.IPersonBean;
 import org.hemologica.service.datatype.CDA;
+import org.hemologica.service.utils.xml.XMLUtils;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 
 public class CDAEMPIProcessActivator {
 	
@@ -44,7 +38,12 @@ public class CDAEMPIProcessActivator {
 		
 		cda.setIdentifier(personBean.getID(cda.getUserData()));
 		
-		return new Gson().toJson(cda);
+		try {
+			return XMLUtils.documentToString(doc);
+		} catch (TransformerException e) {
+			logger.log(Level.SEVERE, e.getMessage(), e);
+		}
+		return null;
 		
 	}
 	

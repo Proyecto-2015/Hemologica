@@ -19,20 +19,22 @@ public class CDASenderToActiveMQ {
 
 	
 	public static void main(String[] args) throws Exception {
-//		for(int i = 0 ; i < 10; ++i){
-//			thread(new HelloWorldProducer(), false);
-//	        Thread.sleep(1000);
-//		}
-		
 		
 		if(args.length == 0){
 			System.out.println("ingrese la url del archivo que desea enviar");
 			return;
 		}
+		
+		
 
 		String path = args[0];
+		String queue = "cdaReceiveQueue";
+		if(args.length == 2){
+			queue = args[1];
+		}
 		
-		 // Create a ConnectionFactory
+		
+		// Create a ConnectionFactory
         ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616");
 
         // Create a Connection
@@ -43,7 +45,8 @@ public class CDASenderToActiveMQ {
         Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
 
         // Create the destination (Topic or Queue)
-        Destination destination = session.createQueue("cdaReceiveQueue");
+        System.out.println("SEND QUEUE: "+ queue);
+        Destination destination = session.createQueue(queue);
 
         // Create a MessageProducer from the Session to the Topic or Queue
         MessageProducer producer = session.createProducer(destination);
@@ -106,7 +109,6 @@ public class CDASenderToActiveMQ {
                 connection.close();
             }
             catch (Exception e) {
-                System.out.println("Caught: " + e);
                 e.printStackTrace();
             }
         }
