@@ -1,36 +1,31 @@
 package org.hemologica.yodono.web.converters;
 
-import java.io.IOException;
 import java.util.List;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import org.apache.http.client.ClientProtocolException;
-import org.hemologica.datatypes.DataState;
-import org.hemologica.yodono.factories.RestFactory;
+import org.hemologica.datatypes.DataCode;
+import org.hemologica.yodono.web.beans.ApplicationBB;
 
 public class DataStateConverter implements Converter {
 
+	private ApplicationBB applicationBB;
+	
 	@Override
-	public Object getAsObject(FacesContext arg0, UIComponent arg1, String value) {
+	public Object getAsObject(FacesContext context, UIComponent component, String value) {
+		
 		if(value == null){
 			return null;
 		}
 		
-		List<DataState> statesList = null;
-		try {
-			statesList = RestFactory.getServicesClient().getStates();
-		} catch (ClientProtocolException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		List<DataCode> citiesList = applicationBB.getStates();
 		
-		if(statesList != null){
-			for(DataState state : statesList){
+		
+		if(citiesList != null){
+			for(DataCode city : citiesList){
 				
-				if(state.getCode() != null && state.getCode().equals(value)){
-					return state;
+				if(city.getCode() != null && city.getCode().equals(value)){
+					return city;
 				}
 			}
 		}
@@ -38,13 +33,21 @@ public class DataStateConverter implements Converter {
 	}
 
 	@Override
-	public String getAsString(FacesContext arg0, UIComponent arg1, Object value) {
-		
-		if(value instanceof DataState){
+	public String getAsString(FacesContext context, UIComponent component, Object value) {
+		if(value instanceof DataCode){
 			
-			return ((DataState)value).getCode();
+			return ((DataCode)value).getCode();
 		}
 		return null;
 	}
+
+	public ApplicationBB getApplicationBB() {
+		return applicationBB;
+	}
+
+	public void setApplicationBB(ApplicationBB applicationBB) {
+		this.applicationBB = applicationBB;
+	}
+
 
 }

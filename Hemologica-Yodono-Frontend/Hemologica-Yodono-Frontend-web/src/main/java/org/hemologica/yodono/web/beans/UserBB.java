@@ -19,11 +19,9 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import org.apache.http.client.ClientProtocolException;
-import org.hemologica.datatypes.DataCity;
+import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataResponse;
-import org.hemologica.datatypes.DataState;
-import org.hemologica.datatypes.DataUser;
 import org.hemologica.yodono.factories.RestFactory;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -33,12 +31,15 @@ public class UserBB implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
+	private ApplicationBB applicationBB;
+	private SessionBB sessionBB;
+	
 	private static final Logger logger = Logger.getLogger(UserBB.class.getName()); 
 	private DataPerson dataUser;
-	private List<DataState> states;
-	private DataState state;
-	private List<DataCity> cities;
-	private DataCity city;
+	private List<DataCode> states;
+	private DataCode state;
+	private List<DataCode> cities;
+	private DataCode city;
 	private Date birthdayDate;
 	
 	private UploadedFile uploadedPicture;
@@ -54,8 +55,8 @@ public class UserBB implements Serializable{
 		
 		try {
 			
-			dataUser = RestFactory.getServicesClient().getDataUser("");
-			states = RestFactory.getServicesClient().getStates();
+			dataUser = sessionBB.getDataUser();
+			states = applicationBB.getStates();
 			state = dataUser.getState();
 			city = dataUser.getCity();
 			
@@ -120,42 +121,39 @@ public class UserBB implements Serializable{
 		}
 		return birthdayDate;
 	}
-
-	public List<DataState> getStates() {
-		
+	
+	public List<DataCode> getStates() {
 		return states;
-	
 	}
-	
-	public void setStates(List<DataState> states) {
+
+	public void setStates(List<DataCode> states) {
 		this.states = states;
 	}
 
-	public List<DataCity> getCities() {
-		
-		return cities;
-	}
-
-	public void setCities(List<DataCity> cities) {
-		this.cities = cities;
-	}
-	
-	public DataState getState() {
+	public DataCode getState() {
 		return state;
 	}
 
-	public void setState(DataState state) {
+	public void setState(DataCode state) {
 		this.state = state;
 	}
 
-	public DataCity getCity() {
+	public List<DataCode> getCities() {
+		return cities;
+	}
+
+	public void setCities(List<DataCode> cities) {
+		this.cities = cities;
+	}
+
+	public DataCode getCity() {
 		return city;
 	}
 
-	public void setCity(DataCity city) {
+	public void setCity(DataCode city) {
 		this.city = city;
 	}
-	
+
 	public UploadedFile getUploadedPicture() {
 		return uploadedPicture;
 	}
@@ -192,7 +190,7 @@ public class UserBB implements Serializable{
 		this.imageByte = imageByte;
 	}
 
-	public List<DataCity> getCitiesState(String stateCode){
+	public List<DataCode> getCitiesState(String stateCode){
 		
 		try {
 			
@@ -243,7 +241,21 @@ public class UserBB implements Serializable{
 		
 		FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
-		
-	
+
+	public ApplicationBB getApplicationBB() {
+		return applicationBB;
+	}
+
+	public void setApplicationBB(ApplicationBB applicationBB) {
+		this.applicationBB = applicationBB;
+	}
+
+	public SessionBB getSessionBB() {
+		return sessionBB;
+	}
+
+	public void setSessionBB(SessionBB sessionBB) {
+		this.sessionBB = sessionBB;
+	}
 	
 }

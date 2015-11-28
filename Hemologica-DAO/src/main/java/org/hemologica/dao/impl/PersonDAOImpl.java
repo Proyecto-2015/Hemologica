@@ -43,7 +43,8 @@ public class PersonDAOImpl extends GenericDAOImpl<Person> implements IPersonDAO{
 	public Person getPersonsId(String id) {
 		
 		Query query = em.createNamedQuery("Person.findById");
-		return (Person) query.getResultList();
+		query.setParameter("id", id);
+		return (Person) query.getSingleResult();
 		
 	}
 

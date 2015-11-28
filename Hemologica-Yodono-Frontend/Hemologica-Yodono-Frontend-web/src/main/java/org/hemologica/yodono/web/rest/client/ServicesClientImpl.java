@@ -11,13 +11,11 @@ import org.hemologica.constants.ConstansJson;
 import org.hemologica.constants.ConstantsRest;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCampaign;
-import org.hemologica.datatypes.DataCity;
+import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataResponse;
-import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataTransfusion;
-import org.hemologica.datatypes.DataUser;
 import org.hemologica.datatypes.LoginData;
 import org.hemologica.yodono.factories.RestFactory;
 
@@ -27,7 +25,7 @@ import com.google.gson.reflect.TypeToken;
 
 public class ServicesClientImpl implements IServicesClient {
 
-	private Logger logger = Logger.getLogger(ServicesClientImpl.class);
+	private static final Logger logger = Logger.getLogger(ServicesClientImpl.class.getName());
 	private String url = ConstantsRest.PATH_SERVICES_YO_DONO;
 	
 	@Override
@@ -96,12 +94,12 @@ public class ServicesClientImpl implements IServicesClient {
 	}
 
 	@Override
-	public DataPerson getDataUser(String user) throws IOException {
+	public DataPerson getDataUser(String userId) throws IOException {
 		
 		String urlUsers = url + ConstantsRest.PATH_USERS;
 		
 		HashMap<String , String> hash = new HashMap<String, String>();
-		hash.put(ConstansJson.JSON_USER, "hola");
+		hash.put(ConstansJson.JSON_USER, userId);
 		
 		String userString = "";
 		try {
@@ -140,7 +138,7 @@ public class ServicesClientImpl implements IServicesClient {
 	
 
 	@Override
-	public List<DataCity> getCities() throws ClientProtocolException, IOException {
+	public List<DataCode> getCities() throws ClientProtocolException, IOException {
 		
 		String urlCities = url + ConstantsRest.PATH_CITIES;
 		
@@ -155,14 +153,14 @@ public class ServicesClientImpl implements IServicesClient {
 			logger.error("Error al llamar al servicio", e);
 		}
 		
-		Type listType = new TypeToken<List<DataCity>>(){}.getType();
-		List<DataCity> cities = new Gson().fromJson(citiesString, listType);
+		Type listType = new TypeToken<List<DataCode>>(){}.getType();
+		List<DataCode> cities = new Gson().fromJson(citiesString, listType);
 		
 		return cities;
 	}
 
 	@Override
-	public List<DataCity> getCities(String statesCode) throws ClientProtocolException, IOException {
+	public List<DataCode> getCities(String statesCode) throws ClientProtocolException, IOException {
 		
 		String urlCities = url + ConstantsRest.PATH_CITIES_STATE;
 		
@@ -180,15 +178,15 @@ public class ServicesClientImpl implements IServicesClient {
 			
 		}
 		
-		Type listType = new TypeToken<List<DataCity>>(){}.getType();
-		List<DataCity> cities = new Gson().fromJson(citiesString, listType);
+		Type listType = new TypeToken<List<DataCode>>(){}.getType();
+		List<DataCode> cities = new Gson().fromJson(citiesString, listType);
 		
 		return cities;
 	}
 	
 
 	@Override
-	public List<DataState> getStates() throws ClientProtocolException, IOException {
+	public List<DataCode> getStates() throws ClientProtocolException, IOException {
 		String urlStates = url + ConstantsRest.PATH_STATES;
 		
 		HashMap<String , String> hash = new HashMap<String, String>();
@@ -204,8 +202,8 @@ public class ServicesClientImpl implements IServicesClient {
 			
 		}
 		
-		Type listType = new TypeToken<List<DataState>>(){}.getType();
-		List<DataState> cities = new Gson().fromJson(statesString, listType);
+		Type listType = new TypeToken<List<DataCode>>(){}.getType();
+		List<DataCode> cities = new Gson().fromJson(statesString, listType);
 		
 		return cities;
 	}
@@ -271,6 +269,52 @@ public class ServicesClientImpl implements IServicesClient {
 		DataCampaign campaign = new Gson().fromJson(campaignString, DataCampaign.class);
 		
 		return campaign;
+	}
+	
+	@Override
+	public List<DataCode> getCitiesCodes() throws ClientProtocolException, IOException {
+		
+		String urlService = url + ConstantsRest.PATH_CODES +"/"+ ConstantsRest.PATH_CITIES;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		String responseString = "";
+		try {
+			
+			responseString = RestFactory.getRestServicesUtils().get(urlService, hash);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.error("Error al llamar al servicio", e);
+			
+		}
+		
+		Type listType = new TypeToken<List<DataCode>>(){}.getType();
+		List<DataCode> responseObject= new Gson().fromJson(responseString, listType);
+		
+		return responseObject;
+	}
+
+	@Override
+	public List<DataCode> getStatesCodes() throws ClientProtocolException, IOException {
+		
+		String urlService = url + ConstantsRest.PATH_CODES +"/"+ ConstantsRest.PATH_STATES;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		String responseString = "";
+		try {
+			
+			responseString = RestFactory.getRestServicesUtils().get(urlService, hash);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.error("Error al llamar al servicio", e);
+			
+		}
+		
+		Type listType = new TypeToken<List<DataCode>>(){}.getType();
+		List<DataCode> responseObject= new Gson().fromJson(responseString, listType);
+		
+		return responseObject;
 	}
 
 }

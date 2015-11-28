@@ -73,4 +73,12 @@ public interface IXMLDataBase {
 	 */
 	public List<String> getElementPatientId(String patientId) throws XMLDataBaseException;
 	
+	/**
+	 * Devulve el Cda con identificacion la pasa por parametro
+	 * @param patientId
+	 * @return
+	 * @throws XMLDataBaseException
+	 */
+	public String getElementCDAId(String root, String extention) throws XMLDataBaseException;
+	
 }

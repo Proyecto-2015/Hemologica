@@ -1,22 +1,15 @@
 package org.hemologica.salud.web.converters;
 
-import java.io.IOException;
 import java.util.List;
-
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-//import javax.faces.convert.FacesConverter;
-
-import org.apache.http.client.ClientProtocolException;
-import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataCode;
-import org.hemologica.salud.factories.RestFactory;
 import org.hemologica.salud.web.beans.ApplicationBB;
 
 public class DataCityConverter implements Converter {
 	
-private ApplicationBB applicationBB;
+	private ApplicationBB applicationBB;
 	
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {

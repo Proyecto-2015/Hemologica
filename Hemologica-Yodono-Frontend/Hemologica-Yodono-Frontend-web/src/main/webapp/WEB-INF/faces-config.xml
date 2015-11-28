@@ -27,15 +27,41 @@
 		<converter-id>dataCityConverter</converter-id>
 		<converter-class>org.hemologica.yodono.web.converters.DataCityConverter</converter-class>
      </converter>
+     <managed-bean>
+        <managed-bean-name>dataCityConverter</managed-bean-name>
+        <managed-bean-class>org.hemologica.yodono.web.converters.DataCityConverter</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>applicationBB</property-name>
+            <property-class>org.hemologica.yodono.web.beans.ApplicationBB</property-class>
+            <value>#{applicationBB}</value>
+        </managed-property>
+    </managed-bean>
+     
      <converter>
     	 <display-name>dataStateConverter</display-name>
 		<converter-id>dataStateConverter</converter-id>
 		<converter-class>org.hemologica.yodono.web.converters.DataStateConverter</converter-class>
      </converter> 
      <managed-bean>
+        <managed-bean-name>dataStateConverter</managed-bean-name>
+        <managed-bean-class>org.hemologica.yodono.web.converters.DataStateConverter</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>applicationBB</property-name>
+            <property-class>org.hemologica.yodono.web.beans.ApplicationBB</property-class>
+            <value>#{applicationBB}</value>
+        </managed-property>
+    </managed-bean>
+     <managed-bean>
      	<managed-bean-name>language</managed-bean-name>
      	<managed-bean-class>org.hemologica.yodono.web.beans.LanguageBB</managed-bean-class>
      	<managed-bean-scope>session</managed-bean-scope>
+     </managed-bean>
+     <managed-bean>
+    	<managed-bean-name>applicationBB</managed-bean-name>
+		<managed-bean-class>org.hemologica.yodono.web.beans.ApplicationBB</managed-bean-class>
+    	<managed-bean-scope>application</managed-bean-scope>
      </managed-bean>
      <managed-bean>
      	<managed-bean-name>sessionBB</managed-bean-name>
@@ -61,11 +87,26 @@
      	<managed-bean-name>userBB</managed-bean-name>
      	<managed-bean-class>org.hemologica.yodono.web.beans.UserBB</managed-bean-class>
      	<managed-bean-scope>view</managed-bean-scope>
+     	<managed-property>
+			<property-name>applicationBB</property-name>
+			<property-class>org.hemologica.yodono.web.beans.ApplicationBB</property-class>
+			<value>#{applicationBB}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>sessionBB</property-name>
+			<property-class>org.hemologica.yodono.web.beans.SessionBB</property-class>
+			<value>#{sessionBB}</value>
+		</managed-property>
      </managed-bean>
      <managed-bean>
      	<managed-bean-name>banksBB</managed-bean-name>
      	<managed-bean-class>org.hemologica.yodono.web.beans.BanksBB</managed-bean-class>
      	<managed-bean-scope>view</managed-bean-scope>
+     	<managed-property>
+			<property-name>applicationBB</property-name>
+			<property-class>org.hemologica.yodono.web.beans.ApplicationBB</property-class>
+			<value>#{applicationBB}</value>
+		</managed-property>
      </managed-bean>
      <managed-bean>
      	<managed-bean-name>campaignsBB</managed-bean-name>

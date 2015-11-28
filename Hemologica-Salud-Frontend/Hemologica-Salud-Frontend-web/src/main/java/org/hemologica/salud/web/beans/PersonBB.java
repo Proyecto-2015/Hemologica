@@ -3,20 +3,13 @@ package org.hemologica.salud.web.beans;
 import java.io.Serializable;
 import java.util.List;
 import java.util.logging.Logger;
-
 import javax.annotation.PostConstruct;
-import javax.faces.view.ViewScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataCountry;
 import org.hemologica.datatypes.DataDocumentType;
 import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataState;
 
-//@Named("personBB")
-//@ViewScoped
 public class PersonBB implements Serializable {
 
 	

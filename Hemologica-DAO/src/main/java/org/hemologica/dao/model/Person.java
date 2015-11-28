@@ -14,7 +14,7 @@ import java.util.List;
 @Table(name="persons")
 @NamedQueries({
 @NamedQuery(name="Person.findAll", query="SELECT p FROM Person p"),
-@NamedQuery(name="Person.findById", query="SELECT p FROM Person p where p.id = :id")
+@NamedQuery(name="Person.findById", query="SELECT p FROM Person p where p.id = :id"),
 })
 public class Person implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -45,6 +45,9 @@ public class Person implements Serializable {
 	@Column(name="person_telephone")
 	private String personTelephone;
 	
+	@Column(name="person_email")
+	private String personEmail;
+	
 	@Column(name="person_allow_notification_able")
 	private boolean allowNotificationAbleToDonate;
 	
@@ -67,6 +70,10 @@ public class Person implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="person_city")
 	private CitiesCode citiesCode;
+	
+	@ManyToOne
+	@JoinColumn(name="person_state")
+	private StatesCode stateCode;
 
 	//bi-directional many-to-one association to User
 	@OneToMany(mappedBy="person")
@@ -161,6 +168,22 @@ public class Person implements Serializable {
 
 	public void setAllowNotificationNeedDonor(boolean allowNotificationNeedDonor) {
 		this.allowNotificationNeedDonor = allowNotificationNeedDonor;
+	}
+	
+	public StatesCode getStateCode() {
+		return stateCode;
+	}
+
+	public void setStateCode(StatesCode stateCode) {
+		this.stateCode = stateCode;
+	}
+
+	public String getPersonEmail() {
+		return personEmail;
+	}
+
+	public void setPersonEmail(String personEmail) {
+		this.personEmail = personEmail;
 	}
 
 	public Document addDocument(Document document) {

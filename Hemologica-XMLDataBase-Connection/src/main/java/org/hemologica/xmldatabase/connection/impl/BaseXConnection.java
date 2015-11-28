@@ -39,6 +39,8 @@ public class BaseXConnection implements IXMLDataBase{
 			session = new BaseXClient(prop.getProperty("host"), Integer.valueOf(prop.getProperty("port")), 
 					prop.getProperty("user"), prop.getProperty("password"));
 			
+			
+			
 		} catch (IOException e) {
 			
 			logger.error("Error al conectarse a la base de datos.", e);
@@ -159,4 +161,31 @@ public class BaseXConnection implements IXMLDataBase{
 		return cdasList;
 	}
 
+	public String getElementCDAId(String root, String extention) throws XMLDataBaseException {
+		
+		ArrayList<String> cdasList = new ArrayList<String>();
+		
+		String input = "for $doc in collection('" + dataBase + "') "
+					+ "where  $doc//ClinicalDocument//id/@root='"+ root + "' and " + "$doc//ClinicalDocument//id/@extension='" + extention
+					+ "' return $doc";
+		BaseXClient.Query query;
+		try {
+			query = session.query(input);
+			query.execute();
+			
+			while (query.more()){
+				cdasList.add(query.next());
+			}
+			
+		} catch (IOException e) {
+			
+			logger.error("Error al intentar recuperarlos elementos en la base de datos.", e);
+			throw new XMLDataBaseException();
+		}
+		
+		if(cdasList != null && cdasList.size() != 0)
+			return cdasList.get(0);
+		else
+			return null;
+	}
 }
