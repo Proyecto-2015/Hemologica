@@ -13,7 +13,6 @@ public class NotificationDAOImpl extends GenericDAOImpl<Notification>   implemen
 
 	public NotificationDAOImpl(EntityManager em) {
 		super(em);
-		// TODO Auto-generated constructor stub
 	}
 
 }

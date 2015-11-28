@@ -1,18 +1,27 @@
 package org.hemologica.dao.impl;
 
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.persistence.EntityManager;
-
+import javax.persistence.Query;
 import org.hemologica.dao.IGenericDAO;
 import org.hemologica.dao.IIdentificationDAO;
+import org.hemologica.dao.INotificationPersonDAO;
 import org.hemologica.dao.IPersonDAO;
+import org.hemologica.dao.IUserDAO;
 import org.hemologica.dao.model.Identification;
 import org.hemologica.dao.model.IdentificationsHistory;
+import org.hemologica.dao.model.NotificationsPerson;
 import org.hemologica.dao.model.Person;
+import org.hemologica.dao.model.PersonsRecord;
+import org.hemologica.dao.model.User;
 
 public class IdentificationDAOImpl implements IIdentificationDAO {
 
+	private static final Logger logger = Logger.getLogger(IdentificationDAOImpl.class.getName());
+	
 	private EntityManager em;
 	private IGenericDAO<Identification> idDAO;
 	private IGenericDAO<IdentificationsHistory> idHistoryDAO;
@@ -69,26 +78,104 @@ public class IdentificationDAOImpl implements IIdentificationDAO {
 
 	public void fix(Identification id, List<Identification> ids) {
 
+		if(id == null){
+			logger.log(Level.SEVERE, "fix with id=null");
+			return;
+		}
+		
+		// Auxiliar para recorrer
+		IdentificationsHistory idH;
+
+		// Cargo para que quede en el contexto de persistencia
+		id = this.getIdentificationById(id.getId());
+		
+		Person person = id.getPerson();
+		Person personToDelete;
+		
+		INotificationPersonDAO notificationDAO = new NotificationPersonDAOImpl(em);
+		IUserDAO userDAO = new UserDAOImpl(em);
+		IPersonDAO personDAO = new PersonDAOImpl(em);
+
+		// Para cada id de los que tengo que arreglar
+		for (Identification idToFix : ids) {
+
+			// Si no es el id que elegi
+			if (id.getId() != idToFix.getId()) {
+
+				// Cargo para que quede en el contexto de persistencia
+				idToFix = this.getIdentificationById(idToFix.getId());
+
+				// Actualizo los personrecords asociados al id que elegi
+				for (PersonsRecord record : idToFix.getPersonsRecords()) {
+					record.setIdentification(id);
+				}
+				
+				// Actualizo los notificationsPersons asociados al id que elegi
+				for (NotificationsPerson np : idToFix.getPerson().getNotificationsPersons()) {
+					np.setPerson(person);
+					notificationDAO.update(np);
+				}
+				
+				// Actualizo los usuarios asociados al id que elegi
+				for (User u : idToFix.getPerson().getUsers()) {
+					u.setPerson(person);
+					userDAO.update(u);
+				}
+
+				// Obtengo el id historico
+				idH = this.getIdentificationsHistoryByCode(idToFix.getIdentificacionCode());
+
+				// si no esta, lo creo y lo guardo
+				if (idH == null) {
+					idH = new IdentificationsHistory();
+					idH.setIdentificationCode(idToFix.getIdentificacionCode());
+					idH.setIdentification(id);
+					this.create(idH);
+
+				// si esta, actualizo el id de referencia por las dudas
+				} else {
+					idH.setIdentification(id);
+					this.update(idH);
+				}
+
+				// borrar identification y persona
+				personToDelete = idToFix.getPerson();
+				if(person.getId() != personToDelete.getId()){
+					this.delete(idToFix);
+					personDAO.delete(personToDelete);
+				}else{
+					this.delete(idToFix);
+				}
+				
+
+			}
+
+		}
+
 	}
 
 	public Identification getIdentificationById(Integer id) {
-		// TODO
-		return null;
+		return em.find(Identification.class, id);
 	}
 
 	public Identification getIdentificationByCode(String code) {
-		// TODO
-		return null;
+
+		Query q = em.createNamedQuery("Identification.findByCode");
+		q.setParameter("code", code);
+		List<?> rest = q.getResultList();
+		return rest == null || rest.isEmpty() ? null : (Identification) rest.get(0);
+		
 	}
 
 	public IdentificationsHistory getIdentificationsHistoryById(Integer id) {
-		// TODO
-		return null;
+		return em.find(IdentificationsHistory.class, id);
 	}
 
 	public IdentificationsHistory getIdentificationsHistoryByCode(String code) {
-		// TODO
-		return null;
+		Query q = em.createNamedQuery("IdentificationsHistory.findByCode");
+		q.setParameter("code", code);
+		List<?> rest = q.getResultList();
+		return rest == null || rest.isEmpty() ? null : (IdentificationsHistory) rest.get(0);
 	}
 
 }

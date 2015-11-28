@@ -56,7 +56,7 @@
    
 	<int-jms:outbound-channel-adapter id="jmsOut"
 				channel="outbound-channel-2"
-				destination="sendQueue"/>
+				destination="cdaToXDSQueue"/>
 				
 				
 	

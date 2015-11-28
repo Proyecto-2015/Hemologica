@@ -8,6 +8,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.xpath.XPathExpressionException;
 import org.hemologica.service.business.IPersonBean;
 import org.hemologica.service.datatype.CDA;
+import org.hemologica.service.utils.xml.XMLUtils;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -37,6 +38,11 @@ public class CDAEMPIProcessActivator {
 		
 		cda.setIdentifier(personBean.getID(cda.getUserData()));
 		
+		try {
+			return XMLUtils.documentToString(doc);
+		} catch (TransformerException e) {
+			logger.log(Level.SEVERE, e.getMessage(), e);
+		}
 		return null;
 		
 	}

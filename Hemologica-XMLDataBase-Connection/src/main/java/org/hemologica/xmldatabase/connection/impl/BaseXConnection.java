@@ -40,6 +40,8 @@ public class BaseXConnection implements IXMLDataBase{
 					prop.getProperty("user"), prop.getProperty("password"));
 			
 			
+			session.close();
+			
 			
 		} catch (IOException e) {
 			
