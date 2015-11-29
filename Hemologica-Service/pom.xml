@@ -159,6 +159,8 @@
 			<artifactId>spring-integration-ws</artifactId>
 			<version>${spring.integration.version}</version>
 		</dependency>
+		
+		
 
 
 		<dependency>
@@ -278,11 +280,6 @@
 			<artifactId>Hemologica-DAO</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-
-
-
-
-
 
 		<dependency>
 			<groupId>org.hemologica</groupId>

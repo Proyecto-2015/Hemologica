@@ -124,18 +124,48 @@
 	
 	
 	<!-- Base X -->
-	<bean id="baseXAdapter" class="org.hemologica.xmldatabase.connection.impl.BaseXConnection" >
+	<bean id="baseXConnectionDonation" class="org.hemologica.xmldatabase.connection.impl.BaseXConnection" >
 		<property name="dataBase" 	value="${basex.dbname}"/>
 		<property name="host" 		value="${basex.host}"/>
 		<property name="port" 		value="${basex.port}"/>
 		<property name="user" 		value="${basex.user}"/>
 		<property name="password" 	value="${basex.password}"/>
 	</bean>
+	
+	<bean id="baseXConnectionTransfusion" class="org.hemologica.xmldatabase.connection.impl.BaseXConnection" >
+		<property name="dataBase" 	value="${basex.dbname}"/>
+		<property name="host" 		value="${basex.host}"/>
+		<property name="port" 		value="${basex.port}"/>
+		<property name="user" 		value="${basex.user}"/>
+		<property name="password" 	value="${basex.password}"/>
+	</bean>
+	
+	<bean id="baseXConnectionLaboratory" class="org.hemologica.xmldatabase.connection.impl.BaseXConnection" >
+		<property name="dataBase" 	value="${basex.dbname}"/>
+		<property name="host" 		value="${basex.host}"/>
+		<property name="port" 		value="${basex.port}"/>
+		<property name="user" 		value="${basex.user}"/>
+		<property name="password" 	value="${basex.password}"/>
+		</bean>
+
+	
+	<bean id="baseXAdapterDonation" class="org.hemologica.service.adapter.BaseXAdapter">
+		<property name="connection" ref="baseXConnectionDonation"/>
+	</bean>
+	
+	<bean id="baseXAdapterTransfusion" class="org.hemologica.service.adapter.BaseXAdapter">
+		<property name="connection" ref="baseXConnectionTransfusion"/>
+	</bean>
+	
+	<bean id="baseXAdapterLaboratory" class="org.hemologica.service.adapter.BaseXAdapter">
+		<property name="connection" ref="baseXConnectionLaboratory"/>
+	</bean>
+
+
 
 	<!-- Business -->
 
 	<bean id="personBean" class="org.hemologica.service.business.impl.PersonBean">
-		<property name="baseXConnection" ref="baseXAdapter" />
 		<property name="xdsRepository" ref="xdsRepositoryAdapter" />
 		<property name="empi" ref="empiAdapter" />
 	</bean>

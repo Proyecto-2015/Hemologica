@@ -19,6 +19,9 @@
         <dependent-module archiveName="Hemologica-DataTypes-1.0.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Hemologica-DataTypes/Hemologica-DataTypes">
             <dependency-type>uses</dependency-type>
         </dependent-module>
+        <dependent-module archiveName="Hemologica-XmlDataBase-Connection-0.0.1-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Hemologica-XMLDataBase-Connection/Hemologica-XMLDataBase-Connection">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="java-output-path" value="target/classes"/>
         <property name="context-root" value="Hemologica-Service"/>
     </wb-module>

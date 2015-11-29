@@ -2,6 +2,7 @@ package org.hemologica.xmldatabase.connection.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -55,6 +56,29 @@ public class BaseXConnection implements IXMLDataBase{
 	
 	public void addElement(File element) {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	public void addElement(InputStream input) throws XMLDataBaseException {
+		
+		BaseXClient session = null;
+		try {
+
+			session = this.getClient();
+			session.add(dataBase, input);
+			
+		} catch (IOException e) {
+			logger.log(Level.SEVERE, "Error al intentar agregar el elemento a la base de datos.", e);
+			throw new XMLDataBaseException();
+		} finally {
+			if(session != null){
+				try {
+					session.close();
+				} catch (IOException e) {
+					logger.log(Level.SEVERE, e.getMessage(), e);
+				}
+			}
+		}
 		
 	}
 	
