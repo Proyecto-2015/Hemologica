@@ -150,7 +150,7 @@ public class BaseXConnection implements IXMLDataBase{
 		String input = "db:open('" + dataBase + "','" + name +"')";
 		BaseXClient session = null;
 		try {
-
+			session = this.getClient();
 			BaseXClient.Query query = session.query(input);
 			query.execute();
 			
@@ -187,6 +187,7 @@ public class BaseXConnection implements IXMLDataBase{
 		BaseXClient.Query query;
 		BaseXClient session = null;
 		try {
+			session = this.getClient();
 			query = session.query(input);
 			query.execute();
 			
@@ -222,6 +223,7 @@ public class BaseXConnection implements IXMLDataBase{
 		BaseXClient.Query query;
 		BaseXClient session = null;
 		try {
+			session = this.getClient();
 			query = session.query(input);
 			query.execute();
 			
@@ -287,5 +289,43 @@ public class BaseXConnection implements IXMLDataBase{
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public List<String> getLaboratoryElementsBySpecimenId(String root, String extension) throws XMLDataBaseException {
+		
+		ArrayList<String> cdasList = new ArrayList<String>();
+		
+		String input = "for $doc in collection('" + dataBase + "') "
+					+ "where  $doc//ClinicalDocument//component//structuredBody//component//section//entry//organizer//specimen//specimenRole//@root='"+ root 
+					+ "' and " + "$doc//ClinicalDocument//component//structuredBody//component//section//entry//organizer//specimen//specimenRole//@extension='" + extension
+					+ "' return $doc";
+		BaseXClient.Query query;
+		BaseXClient session = null;
+		try {
+			session = this.getClient();
+			query = session.query(input);
+			query.execute();
+			
+			while (query.more()){
+				cdasList.add(query.next());
+			}
+			
+		} catch (IOException e) {
+			
+			logger.log(Level.SEVERE, "Error al intentar recuperarlos elementos en la base de datos.", e);
+			throw new XMLDataBaseException();
+		} finally {
+			if(session != null){
+				try {
+					session.close();
+				} catch (IOException e) {
+					logger.log(Level.SEVERE, e.getMessage(), e);
+				}
+			}
+		}
+		
+		
+		return cdasList;
+		
 	}
 }

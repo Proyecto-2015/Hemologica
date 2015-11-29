@@ -14,7 +14,9 @@ import org.hemologica.xmldatabase.exceptions.XMLDataBaseException;
 public class XMLDataBaseFactory {
 	
 	private static Logger logger = Logger.getLogger(XMLDataBaseFactory.class);
-	private static IXMLDataBase iXmlDataBase = null;
+	private static IXMLDataBase iXmlDataBaseDonations = null;
+	private static IXMLDataBase iXmlDataBaseTransfusions = null;
+	private static IXMLDataBase iXmlDataBaseLaboratory = null;
 	
 	public XMLDataBaseFactory() {
 		
@@ -27,8 +29,8 @@ public class XMLDataBaseFactory {
 			Properties prop = new Properties();
 			prop.load(BaseXConnection.class.getClassLoader().getResourceAsStream("db.properties"));
 			
-			if (iXmlDataBase == null)
-				iXmlDataBase = new BaseXConnection(prop, prop.getProperty("dbnameDonation"));
+			if (iXmlDataBaseDonations == null)
+				iXmlDataBaseDonations = new BaseXConnection(prop, prop.getProperty("dbnameDonation"));
 			
 		} catch (XMLDataBaseException e) {
 			
@@ -39,7 +41,7 @@ public class XMLDataBaseFactory {
 			throw new XMLDataBaseException();
 		}
 		
-		return iXmlDataBase;	
+		return iXmlDataBaseDonations;	
 	}
 	
 	public static IXMLDataBase getIXMLDataBaseTransfusions() throws XMLDataBaseException{
@@ -49,8 +51,8 @@ public class XMLDataBaseFactory {
 			Properties prop = new Properties();
 			prop.load(BaseXConnection.class.getClassLoader().getResourceAsStream("db.properties"));
 			
-			if (iXmlDataBase == null)
-				iXmlDataBase = new BaseXConnection(prop, prop.getProperty("dbnameTransfusion"));
+			if (iXmlDataBaseTransfusions == null)
+				iXmlDataBaseTransfusions = new BaseXConnection(prop, prop.getProperty("dbnameTransfusion"));
 			
 		} catch (XMLDataBaseException e) {
 			
@@ -61,7 +63,7 @@ public class XMLDataBaseFactory {
 			throw new XMLDataBaseException();
 		}
 		
-		return iXmlDataBase;	
+		return iXmlDataBaseTransfusions;	
 	}
 	
 	public static IXMLDataBase getIXMLDataBaseLaboratory() throws XMLDataBaseException{
@@ -71,8 +73,8 @@ public class XMLDataBaseFactory {
 			Properties prop = new Properties();
 			prop.load(BaseXConnection.class.getClassLoader().getResourceAsStream("db.properties"));
 			
-			if (iXmlDataBase == null)
-				iXmlDataBase = new BaseXConnection(prop, prop.getProperty("dbnameLaboratory"));
+			if (iXmlDataBaseLaboratory == null)
+				iXmlDataBaseLaboratory = new BaseXConnection(prop, prop.getProperty("dbnameLaboratory"));
 			
 		} catch (XMLDataBaseException e) {
 			
@@ -83,7 +85,7 @@ public class XMLDataBaseFactory {
 			throw new XMLDataBaseException();
 		}
 		
-		return iXmlDataBase;	
+		return iXmlDataBaseLaboratory;	
 	}
 
 }
