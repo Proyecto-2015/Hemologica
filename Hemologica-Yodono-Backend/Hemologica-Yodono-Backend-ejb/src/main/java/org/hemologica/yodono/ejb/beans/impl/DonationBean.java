@@ -59,7 +59,7 @@ public class DonationBean implements DonationBeanLocal {
 		
 		for(PersonsRecord personsRecord : cdasIds){
 			
-			String cda = XMLDataBaseFactory.getIXMLDataBase().getElementCDAId(personsRecord.getPersonsRecordCdaRoot(), personsRecord.getPersonsRecordCdaExtension());
+			String cda = XMLDataBaseFactory.getIXMLDataBaseDonations().getElementCDAId(personsRecord.getPersonsRecordCdaRoot(), personsRecord.getPersonsRecordCdaExtension());
 			
 			Document document= XMLUtils.stringToDocument(cda);
 			DataDonation dataDonacion = getDataDonation(document);
@@ -133,12 +133,20 @@ public class DonationBean implements DonationBeanLocal {
 				
 				DataDonationEvent dataDonationEvent = new DataDonationEvent();
 				dataDonationEvent.setEvent(dataEvent);
+				
+				String severity = XMLUtils.executeXPathString(d, "//ClinicalDocument//component//structuredBody//component//section//entry//procedure//entryRelationship//observation//interpretationCode//@code");
+				DataCode dataSeverity = FactoryBeans.getCodeBeans().getDonationSeverityBySnomedCode(severity);
+				
+				dataDonationEvent.setSeverity(dataSeverity);
+				
 			}
-			
 			data.setEvents(events);
 		}
-		
-		
+		/**
+		 * Resultados de laboratorio 
+		 */
+		String specimenRoot = XMLUtils.executeXPathString(document, "//ClinicalDocument//component//structuredBody//component//section//entry//procedure//specimen//specimenRole//@root");
+		String specimenExtension = XMLUtils.executeXPathString(document, "//ClinicalDocument//component//structuredBody//component//section//entry//procedure//specimen//specimenRole//@extension");
 		
 		return data;
 	}

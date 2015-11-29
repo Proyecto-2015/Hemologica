@@ -25,4 +25,6 @@ public interface CodesBeanLocal {
 	 public DataCode getDonationTypeBySnomedCode(String donationType);
 
 	 public DataCode getDonationEventBySnomedCode(String event);
+
+	 public DataCode getDonationSeverityBySnomedCode(String severity);
 }

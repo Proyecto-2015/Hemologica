@@ -182,7 +182,7 @@ public class CodesDAOImpl implements ICodesDAO{
 		return query.getResultList();
 	}
 	
-	public EventSeverityCode getgetSeverityBySnomedCode(String severityCode) {
+	public EventSeverityCode getSeverityBySnomedCode(String severityCode) {
 		
 		Query query = em.createNamedQuery("EventSeverityCode.findBySnomedCode");
 		query.setParameter("code", severityCode);

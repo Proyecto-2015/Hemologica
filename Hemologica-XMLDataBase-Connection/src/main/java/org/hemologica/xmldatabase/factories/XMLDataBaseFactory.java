@@ -20,7 +20,7 @@ public class XMLDataBaseFactory {
 		
 	}
 	
-	public static IXMLDataBase getIXMLDataBase() throws XMLDataBaseException{
+	public static IXMLDataBase getIXMLDataBaseDonations() throws XMLDataBaseException{
 		
 		
 		try {
@@ -28,7 +28,51 @@ public class XMLDataBaseFactory {
 			prop.load(BaseXConnection.class.getClassLoader().getResourceAsStream("db.properties"));
 			
 			if (iXmlDataBase == null)
-				iXmlDataBase = new BaseXConnection(prop);
+				iXmlDataBase = new BaseXConnection(prop, prop.getProperty("dbnameDonation"));
+			
+		} catch (XMLDataBaseException e) {
+			
+			logger.error("Error al crear  la coneccion con la base de datos", e);
+			throw new XMLDataBaseException();
+		} catch (IOException e) {
+			logger.error("Error al leer el archivo db.properties", e);
+			throw new XMLDataBaseException();
+		}
+		
+		return iXmlDataBase;	
+	}
+	
+	public static IXMLDataBase getIXMLDataBaseTransfusions() throws XMLDataBaseException{
+		
+		
+		try {
+			Properties prop = new Properties();
+			prop.load(BaseXConnection.class.getClassLoader().getResourceAsStream("db.properties"));
+			
+			if (iXmlDataBase == null)
+				iXmlDataBase = new BaseXConnection(prop, prop.getProperty("dbnameTransfusion"));
+			
+		} catch (XMLDataBaseException e) {
+			
+			logger.error("Error al crear  la coneccion con la base de datos", e);
+			throw new XMLDataBaseException();
+		} catch (IOException e) {
+			logger.error("Error al leer el archivo db.properties", e);
+			throw new XMLDataBaseException();
+		}
+		
+		return iXmlDataBase;	
+	}
+	
+	public static IXMLDataBase getIXMLDataBaseLaboratory() throws XMLDataBaseException{
+		
+		
+		try {
+			Properties prop = new Properties();
+			prop.load(BaseXConnection.class.getClassLoader().getResourceAsStream("db.properties"));
+			
+			if (iXmlDataBase == null)
+				iXmlDataBase = new BaseXConnection(prop, prop.getProperty("dbnameLaboratory"));
 			
 		} catch (XMLDataBaseException e) {
 			

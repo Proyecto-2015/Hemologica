@@ -26,7 +26,7 @@ public class BaseXConnection implements IXMLDataBase{
 	
 	public BaseXConnection(){}
 	
-	public BaseXConnection(Properties prop) throws XMLDataBaseException {
+	public BaseXConnection(Properties prop, String dbname) throws XMLDataBaseException {
 		
 		try {
 			
@@ -34,9 +34,8 @@ public class BaseXConnection implements IXMLDataBase{
 			port = Integer.valueOf(prop.getProperty("port"));
 			user = prop.getProperty("user");
 			password = prop.getProperty("password");
-			
-			
-			dataBase = prop.getProperty("bdname");
+			dataBase = dbname;
+//			dataBase = dbprop.getProperty("bdname");
 			BaseXClient session = new BaseXClient(host, port, user, password);
 			session.close();
 			
