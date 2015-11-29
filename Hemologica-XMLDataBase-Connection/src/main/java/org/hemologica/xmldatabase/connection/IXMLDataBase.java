@@ -81,4 +81,12 @@ public interface IXMLDataBase {
 	 */
 	public String getElementCDAId(String root, String extention) throws XMLDataBaseException;
 	
+	/**
+	 * Devuelve todos los elementos con extencion y root del especimen los pasado por parametro.
+	 * @param patientId
+	 * @return
+	 * @throws XMLDataBaseException
+	 */
+	public List<String> getLaboratoryElementsBySpecimenId(String root, String extension) throws XMLDataBaseException;
+	
 }

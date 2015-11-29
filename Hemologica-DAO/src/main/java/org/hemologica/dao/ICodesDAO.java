@@ -16,7 +16,6 @@ import org.hemologica.dao.model.StatesCode;
 import org.hemologica.dao.model.TransfusionEventsCode;
 import org.hemologica.dao.model.TransfusionLaboratoryCode;
 import org.hemologica.dao.model.UnitsType;
-import org.hemologica.datatypes.DataDonationEvent;
 
 public interface ICodesDAO {
 	
@@ -59,5 +58,7 @@ public interface ICodesDAO {
 	public List<EventSeverityCode> getSeverities();
 
 	public DonationEventsCode getDonationEventBySnomedCode(String event);
+
+	public EventSeverityCode getSeverityBySnomedCode(String severity);
 
 }

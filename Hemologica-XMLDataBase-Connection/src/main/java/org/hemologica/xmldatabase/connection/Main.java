@@ -12,7 +12,7 @@ public class Main {
 		 //XQDataSource xqs = new BaseXXQDataSource();
 		    
 				try {
-					IXMLDataBase xbase = XMLDataBaseFactory.getIXMLDataBase();
+					IXMLDataBase xbase = XMLDataBaseFactory.getIXMLDataBaseDonations();
 					
 					int i = 0;
 					

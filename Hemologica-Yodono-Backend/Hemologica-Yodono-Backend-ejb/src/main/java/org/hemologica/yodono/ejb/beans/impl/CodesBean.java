@@ -12,6 +12,7 @@ import org.hemologica.dao.model.BloodTypes;
 import org.hemologica.dao.model.CitiesCode;
 import org.hemologica.dao.model.DonationEventsCode;
 import org.hemologica.dao.model.DonationTypesCode;
+import org.hemologica.dao.model.EventSeverityCode;
 import org.hemologica.dao.model.StatesCode;
 import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataDonationEvent;
@@ -152,6 +153,18 @@ public class CodesBean implements CodesBeanLocal {
 		DataCode eventCode = new DataCode();
 		eventCode.setCode(donationEventsCode.getDonationEventCodeValue());
 		eventCode.setDisplayName(donationEventsCode.getDonationEventCodeLabel());
+
+		return eventCode;
+	}
+
+	@Override
+	public DataCode getDonationSeverityBySnomedCode(String severity) {
+		
+		EventSeverityCode severityCode = FactoryDAO.getCodesDAO(em).getSeverityBySnomedCode(severity);
+		
+		DataCode eventCode = new DataCode();
+		eventCode.setCode(severityCode.getEventSeverityCodeValue());
+		eventCode.setDisplayName(severityCode.getEventSeverityCodeLabel());
 
 		return eventCode;
 	}
