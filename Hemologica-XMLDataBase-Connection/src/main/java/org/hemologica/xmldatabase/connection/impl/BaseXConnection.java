@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import org.apache.log4j.Logger;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import org.hemologica.xmldatabase.connection.IXMLDataBase;
 import org.hemologica.xmldatabase.exceptions.XMLDataBaseException;
 
@@ -14,41 +16,41 @@ import org.hemologica.xmldatabase.exceptions.XMLDataBaseException;
  */
 public class BaseXConnection implements IXMLDataBase{
 	
-	private BaseXClient session;
-	private Logger logger = Logger.getLogger(BaseXConnection.class);
+//	private BaseXClient session;
+	private Logger logger = Logger.getLogger(BaseXConnection.class.getName());
 	private String dataBase;
+	private String host;
+	private Integer port;
+	private String user;
+	private String password;
 	
+	public BaseXConnection(){}
 	
-	public BaseXConnection() throws XMLDataBaseException {
-		
-		
-		Properties prop = new Properties();
-
-	    try {
-	    	
-			prop.load(BaseXConnection.class.getClassLoader().getResourceAsStream("db.properties"));
-			
-		} catch (IOException e) {
-			
-			logger.error("Error al leer el archivo db.properties", e);
-			throw new XMLDataBaseException();
-		}
+	public BaseXConnection(Properties prop) throws XMLDataBaseException {
 		
 		try {
+			
+			host = prop.getProperty("host");
+			port = Integer.valueOf(prop.getProperty("port"));
+			user = prop.getProperty("user");
+			password = prop.getProperty("password");
+			
+			
 			dataBase = prop.getProperty("bdname");
-			session = new BaseXClient(prop.getProperty("host"), Integer.valueOf(prop.getProperty("port")), 
-					prop.getProperty("user"), prop.getProperty("password"));
-			
-			
+			BaseXClient session = new BaseXClient(host, port, user, password);
 			session.close();
 			
 			
 		} catch (IOException e) {
 			
-			logger.error("Error al conectarse a la base de datos.", e);
+			logger.log(Level.SEVERE, "Error al conectarse a la base de datos.", e);
 			throw new XMLDataBaseException();
 			
 		}
+	}
+	
+	private BaseXClient getClient() throws IOException{
+		return new BaseXClient(host, port, user, password);
 	}
 	
 	public void addElement(File element) {
@@ -59,14 +61,24 @@ public class BaseXConnection implements IXMLDataBase{
 	public void addElement(String path) throws XMLDataBaseException {
 		
 		String input = "db:add('" + dataBase + "','" + path +"')";
+		BaseXClient session = null;
 		try {
 
+			session = this.getClient();
 			BaseXClient.Query query = session.query(input);
 			query.execute();
 			
 		} catch (IOException e) {
-			logger.error("Error al intentar agregar el elemnto a la base de datos.", e);
+			logger.log(Level.SEVERE, "Error al intentar agregar el elemento a la base de datos.", e);
 			throw new XMLDataBaseException();
+		} finally {
+			if(session != null){
+				try {
+					session.close();
+				} catch (IOException e) {
+					logger.log(Level.SEVERE, e.getMessage(), e);
+				}
+			}
 		}
 	}
 
@@ -78,14 +90,24 @@ public class BaseXConnection implements IXMLDataBase{
 	public void removeElement(String name) throws XMLDataBaseException {
 		
 		String input = "db:delete('" + dataBase + "','" + name +"')";
+		BaseXClient session = null;
 		try {
-
+			
+			session = this.getClient();
 			BaseXClient.Query query = session.query(input);
 			query.execute();
 			
 		} catch (IOException e) {
-			logger.error("Error al intentar eliminar el elemnto a la base de datos.", e);
+			logger.log(Level.SEVERE, "Error al intentar eliminar el elemnto a la base de datos.", e);
 			throw new XMLDataBaseException();
+		} finally {
+			if(session != null){
+				try {
+					session.close();
+				} catch (IOException e) {
+					logger.log(Level.SEVERE, e.getMessage(), e);
+				}
+			}
 		}
 		
 	}
@@ -98,14 +120,23 @@ public class BaseXConnection implements IXMLDataBase{
 	public void updateElement(String nameOldElement, String pathNewElement) throws XMLDataBaseException {
 		
 		String input = "db:replace(\"" + dataBase + "\",'" + nameOldElement +"',' "+pathNewElement+"')";
+		BaseXClient session = null;
 		try {
-
+			session = this.getClient();
 			BaseXClient.Query query = session.query(input);
 			query.execute();
 			
 		} catch (IOException e) {
-			logger.error("Error al intentar eliminar el elemnto a la base de datos.", e);
+			logger.log(Level.SEVERE, "Error al intentar eliminar el elemnto a la base de datos.", e);
 			throw new XMLDataBaseException();
+		} finally {
+			if(session != null){
+				try {
+					session.close();
+				} catch (IOException e) {
+					logger.log(Level.SEVERE, e.getMessage(), e);
+				}
+			}
 		}
 		
 	}
@@ -118,6 +149,7 @@ public class BaseXConnection implements IXMLDataBase{
 	public String getElement(String name) throws XMLDataBaseException {
 		
 		String input = "db:open('" + dataBase + "','" + name +"')";
+		BaseXClient session = null;
 		try {
 
 			BaseXClient.Query query = session.query(input);
@@ -129,9 +161,18 @@ public class BaseXConnection implements IXMLDataBase{
 			
 		} catch (IOException e) {
 			
-			logger.error("Error al intentar recuperar el elemnto en la base de datos.", e);
+			logger.log(Level.SEVERE, "Error al intentar recuperar el elemnto en la base de datos.", e);
 			throw new XMLDataBaseException();
+		} finally {
+			if(session != null){
+				try {
+					session.close();
+				} catch (IOException e) {
+					logger.log(Level.SEVERE, e.getMessage(), e);
+				}
+			}
 		}
+		
 		return null;
 	}
 
@@ -145,6 +186,7 @@ public class BaseXConnection implements IXMLDataBase{
 					+ "return $doc";
 			
 		BaseXClient.Query query;
+		BaseXClient session = null;
 		try {
 			query = session.query(input);
 			query.execute();
@@ -155,8 +197,16 @@ public class BaseXConnection implements IXMLDataBase{
 			
 		} catch (IOException e) {
 			
-			logger.error("Error al intentar recuperarlos elementos en la base de datos.", e);
+			logger.log(Level.SEVERE, "Error al intentar recuperarlos elementos en la base de datos.", e);
 			throw new XMLDataBaseException();
+		} finally {
+			if(session != null){
+				try {
+					session.close();
+				} catch (IOException e) {
+					logger.log(Level.SEVERE, e.getMessage(), e);
+				}
+			}
 		}
 		
 		
@@ -171,6 +221,7 @@ public class BaseXConnection implements IXMLDataBase{
 					+ "where  $doc//ClinicalDocument//id/@root='"+ root + "' and " + "$doc//ClinicalDocument//id/@extension='" + extention
 					+ "' return $doc";
 		BaseXClient.Query query;
+		BaseXClient session = null;
 		try {
 			query = session.query(input);
 			query.execute();
@@ -181,13 +232,61 @@ public class BaseXConnection implements IXMLDataBase{
 			
 		} catch (IOException e) {
 			
-			logger.error("Error al intentar recuperarlos elementos en la base de datos.", e);
+			logger.log(Level.SEVERE, "Error al intentar recuperarlos elementos en la base de datos.", e);
 			throw new XMLDataBaseException();
+		} finally {
+			if(session != null){
+				try {
+					session.close();
+				} catch (IOException e) {
+					logger.log(Level.SEVERE, e.getMessage(), e);
+				}
+			}
 		}
 		
 		if(cdasList != null && cdasList.size() != 0)
 			return cdasList.get(0);
 		else
 			return null;
+	}
+
+	public String getDataBase() {
+		return dataBase;
+	}
+
+	public void setDataBase(String dataBase) {
+		this.dataBase = dataBase;
+	}
+
+	public String getHost() {
+		return host;
+	}
+
+	public void setHost(String host) {
+		this.host = host;
+	}
+
+	public Integer getPort() {
+		return port;
+	}
+
+	public void setPort(Integer port) {
+		this.port = port;
+	}
+
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

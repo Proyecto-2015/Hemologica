@@ -284,5 +284,10 @@
 
 
 
+		<dependency>
+			<groupId>org.hemologica</groupId>
+			<artifactId>Hemologica-XmlDataBase-Connection</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 </project>

@@ -10,6 +10,6 @@ import org.hemologica.service.datatype.CDA;
 public interface IPersonBean{
 	
 	
-	public Identifier getID(Map<String,String> data);
+	public Identifier getID(Map<String,String> data, String cda);
 	
 }

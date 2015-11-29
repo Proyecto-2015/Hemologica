@@ -101,9 +101,11 @@ public class IdentificationDAOImpl implements IIdentificationDAO {
 
 			// Si no es el id que elegi
 			if (id.getId() != idToFix.getId()) {
-
+				
 				// Cargo para que quede en el contexto de persistencia
 				idToFix = this.getIdentificationById(idToFix.getId());
+				
+				personToDelete = idToFix.getPerson();
 
 				// Actualizo los personrecords asociados al id que elegi
 				for (PersonsRecord record : idToFix.getPersonsRecords()) {
@@ -111,13 +113,13 @@ public class IdentificationDAOImpl implements IIdentificationDAO {
 				}
 				
 				// Actualizo los notificationsPersons asociados al id que elegi
-				for (NotificationsPerson np : idToFix.getPerson().getNotificationsPersons()) {
+				for (NotificationsPerson np : personToDelete.getNotificationsPersons()) {
 					np.setPerson(person);
 					notificationDAO.update(np);
 				}
 				
 				// Actualizo los usuarios asociados al id que elegi
-				for (User u : idToFix.getPerson().getUsers()) {
+				for (User u : personToDelete.getUsers()) {
 					u.setPerson(person);
 					userDAO.update(u);
 				}
@@ -139,7 +141,7 @@ public class IdentificationDAOImpl implements IIdentificationDAO {
 				}
 
 				// borrar identification y persona
-				personToDelete = idToFix.getPerson();
+				
 				if(person.getId() != personToDelete.getId()){
 					this.delete(idToFix);
 					personDAO.delete(personToDelete);

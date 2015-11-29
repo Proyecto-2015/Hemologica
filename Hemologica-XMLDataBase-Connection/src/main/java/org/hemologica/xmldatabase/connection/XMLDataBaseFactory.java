@@ -1,5 +1,8 @@
 package org.hemologica.xmldatabase.connection;
 
+import java.io.IOException;
+import java.util.Properties;
+
 import org.apache.log4j.Logger;
 import org.hemologica.xmldatabase.connection.impl.BaseXConnection;
 import org.hemologica.xmldatabase.exceptions.XMLDataBaseException;
@@ -20,14 +23,18 @@ public class XMLDataBaseFactory {
 		
 		
 		try {
+			Properties prop = new Properties();
+			prop.load(BaseXConnection.class.getClassLoader().getResourceAsStream("db.properties"));
 			
 			if (iXmlDataBase == null)
-				iXmlDataBase = new BaseXConnection();
+				iXmlDataBase = new BaseXConnection(prop);
 			
 		} catch (XMLDataBaseException e) {
 			
 			logger.error("Error al crear  la coneccion con la base de datos", e);
-			// TODO excepciones
+			throw new XMLDataBaseException();
+		} catch (IOException e) {
+			logger.error("Error al leer el archivo db.properties", e);
 			throw new XMLDataBaseException();
 		}
 		

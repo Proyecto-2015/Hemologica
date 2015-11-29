@@ -20,6 +20,7 @@ import org.hemologica.empi.datatypes.Identifier;
 import org.hemologica.factories.FactoryDAO;
 import org.hemologica.service.business.IPersonBean;
 import org.hemologica.xds.repository.adapter.client.IRepositoryXDS;
+import org.hemologica.xmldatabase.connection.impl.BaseXConnection;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,6 +34,7 @@ public class PersonBean implements IPersonBean, Serializable {
 	 */
 	private static final long serialVersionUID = -5105280976531369972L;
 
+	private BaseXConnection baseXConnection;
 	private IEMPIAdapter empi;
 	private IRepositoryXDS xdsRepository;
 
@@ -41,7 +43,7 @@ public class PersonBean implements IPersonBean, Serializable {
 
 	@Transactional
 	@Override
-	public Identifier getID(Map<String,String> data) {
+	public Identifier getID(Map<String,String> data, String cda) {
 
 		try {
 			
@@ -72,7 +74,6 @@ public class PersonBean implements IPersonBean, Serializable {
 					 this.fixPersonIdentifier(identifier, identifiers);
 				}
 			}
-			
 			
 			
 			return identifier;
@@ -133,6 +134,16 @@ public class PersonBean implements IPersonBean, Serializable {
 
 	public void setXdsRepository(IRepositoryXDS xdsRepository) {
 		this.xdsRepository = xdsRepository;
+	}
+
+
+	public BaseXConnection getBaseXConnection() {
+		return baseXConnection;
+	}
+
+
+	public void setBaseXConnection(BaseXConnection baseXConnection) {
+		this.baseXConnection = baseXConnection;
 	}
 
 }

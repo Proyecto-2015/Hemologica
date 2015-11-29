@@ -13,15 +13,15 @@ import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 public class CDAEMPIProcessActivator {
-	
+
 	private static Logger logger = Logger.getLogger(CDAEMPIProcessActivator.class.getName());
-	
+
 	private IPersonBean personBean;
-	
+
 	public String process(Document doc) {
-		
+
 		CDA cda = null;
-		
+
 		try {
 			cda = new CDA(doc);
 		} catch (ParserConfigurationException e) {
@@ -36,22 +36,18 @@ public class CDAEMPIProcessActivator {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		
-		cda.setIdentifier(personBean.getID(cda.getUserData()));
-		
 		try {
+
+			cda.setIdentifier(personBean.getID(cda.getUserData(), XMLUtils.documentToString(doc)));
 			return XMLUtils.documentToString(doc);
+			
 		} catch (TransformerException e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return null;
-		
+
 	}
-	
-	
-	
-	
-	
-	
+
 	public IPersonBean getPersonBean() {
 		return personBean;
 	}
@@ -60,5 +56,4 @@ public class CDAEMPIProcessActivator {
 		this.personBean = personBean;
 	}
 
-	
 }
