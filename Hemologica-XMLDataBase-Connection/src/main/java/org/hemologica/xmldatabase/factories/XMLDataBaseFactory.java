@@ -1,9 +1,10 @@
-package org.hemologica.xmldatabase.connection;
+package org.hemologica.xmldatabase.factories;
 
 import java.io.IOException;
 import java.util.Properties;
 
 import org.apache.log4j.Logger;
+import org.hemologica.xmldatabase.connection.IXMLDataBase;
 import org.hemologica.xmldatabase.connection.impl.BaseXConnection;
 import org.hemologica.xmldatabase.exceptions.XMLDataBaseException;
 

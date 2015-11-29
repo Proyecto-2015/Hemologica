@@ -47,6 +47,28 @@ INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('28', '889240
 INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('29', '73301000');
 INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('30', '361098001');
 
+-- tipos de sangre junto ab+ ab- ...
+INSERT INTO `concepts` (`id`,`concept_code`) VALUES (31,'278148006');
+INSERT INTO `concepts` (`id`,`concept_code`) VALUES (32,'278147001');
+INSERT INTO `concepts` (`id`,`concept_code`) VALUES (33,'278152006');
+INSERT INTO `concepts` (`id`,`concept_code`) VALUES (34,'278149003');
+INSERT INTO `concepts` (`id`,`concept_code`) VALUES (35,'278154007');
+INSERT INTO `concepts` (`id`,`concept_code`) VALUES (36,'278151004');
+INSERT INTO `concepts` (`id`,`concept_code`) VALUES (37,'278153001');
+INSERT INTO `concepts` (`id`,`concept_code`) VALUES (38,'278150003');
+
+-- Tipos de donacion
+INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('39', '1788001');
+INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('40', '42736004');
+INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('41', '233555005');
+ 
+-- Severidad
+INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('42', '267008002');
+INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('43', '6736007');
+INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('44', '24484000');
+
+
+
 
 
 

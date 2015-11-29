@@ -7,7 +7,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.hemologica.dao.enums.DataDonationStateEnum;
-import org.hemologica.dao.enums.DataEventSeverityEnum;
 import org.hemologica.dao.model.CitiesCode;
 import org.hemologica.dao.model.CountriesCode;
 import org.hemologica.dao.model.DocumentsTypesCode;
@@ -15,6 +14,7 @@ import org.hemologica.dao.model.DonationEventsCode;
 import org.hemologica.dao.model.DonationFailCausesCode;
 import org.hemologica.dao.model.DonationFailTypeCode;
 import org.hemologica.dao.model.DonationLaboratoyCode;
+import org.hemologica.dao.model.EventSeverityCode;
 import org.hemologica.dao.model.MessageSendOption;
 import org.hemologica.dao.model.StatesCode;
 import org.hemologica.dao.model.TransfusionEventsCode;
@@ -249,11 +249,11 @@ public class CodesBean implements CodesBeanLocal {
 	public List<DataCode> getSeverities() {
 		
 		List<DataCode> dataCodes = new ArrayList<>();
-		for(DataEventSeverityEnum a : DataEventSeverityEnum.getSeverities()){
+		for(EventSeverityCode a : FactoryDAO.getCodesDAO(em).getSeverities()){
 			
 			DataCode dataCode = new DataCode();
-			dataCode.setCode(a.getValue());
-			dataCode.setDisplayName(a.getLabel());
+			dataCode.setCode(a.getEventSeverityCodeValue());
+			dataCode.setDisplayName(a.getEventSeverityCodeLabel());
 			dataCodes.add(dataCode);
 			
 		}

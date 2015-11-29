@@ -18,9 +18,10 @@ public class DataDonation implements Serializable {
 	private DataInstitution institution;
 	private DataPerson person;
 	private DataDonationDonorType dataDonorType;
+	private DataCode donationType;
 	private DataCode state;
-	private DataBloodABOType bloodABOType;
-	private DataBloodType bloodDType;
+	private DataCode bloodABOType;
+	private DataCode bloodDType;
 	private DataDonationFail fail;
 	private List<DataLaboratoryResult> labResults;
 	private List<DataDonationEvent> events;
@@ -31,8 +32,8 @@ public class DataDonation implements Serializable {
 
 	public DataDonation() {
 		this.fail = new DataDonationFail();
-		this.bloodABOType = new DataBloodABOType();
-		this.bloodDType = new DataBloodType();
+		this.bloodABOType = new DataCode();
+		this.bloodDType = new DataCode();
 		this.dataDonorType = new DataDonationDonorType();
 		this.person = new DataPerson();
 		this.labResults = new ArrayList<DataLaboratoryResult>();
@@ -108,11 +109,11 @@ public class DataDonation implements Serializable {
 		this.fail = fail;
 	}
 
-	public DataBloodABOType getBloodABOType() {
+	public DataCode getBloodABOType() {
 		return bloodABOType;
 	}
 
-	public void setBloodABOType(DataBloodABOType bloodABOType) {
+	public void setBloodABOType(DataCode bloodABOType) {
 		this.bloodABOType = bloodABOType;
 	}
 
@@ -140,11 +141,11 @@ public class DataDonation implements Serializable {
 		this.extractionTimeEnd = extractionTimeEnd;
 	}
 
-	public DataBloodType getBloodDType() {
+	public DataCode getBloodDType() {
 		return bloodDType;
 	}
 
-	public void setBloodDType(DataBloodType bloodDType) {
+	public void setBloodDType(DataCode bloodDType) {
 		this.bloodDType = bloodDType;
 	}
 
@@ -162,6 +163,18 @@ public class DataDonation implements Serializable {
 
 	public void setState(DataCode state) {
 		this.state = state;
+	}
+
+	public DataCode getDonationType() {
+		return donationType;
+	}
+
+	public void setDonationType(DataCode donationType) {
+		this.donationType = donationType;
+	}
+
+	public void setApproved(boolean approved) {
+		this.approved = approved;
 	}
 
 }

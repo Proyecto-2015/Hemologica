@@ -6,6 +6,7 @@ import javax.persistence.Query;
 import org.hemologica.dao.IBloodDAO;
 import org.hemologica.dao.model.BloodAboTypesCode;
 import org.hemologica.dao.model.BloodDTypesCode;
+import org.hemologica.dao.model.BloodTypes;
 
 public class BloodDAOImpl implements IBloodDAO{
 	
@@ -44,9 +45,25 @@ public class BloodDAOImpl implements IBloodDAO{
 	public BloodDTypesCode findBloodDTypesCodeByCode(String code){
 		
 		Query query = em.createNamedQuery("BloodDTypesCode.getBloodDTypesCodeByCode");
-		query.setParameter("code", Integer.parseInt(code));
+		query.setParameter("code", code);
 		return (BloodDTypesCode) query.getSingleResult();
 		
 	}
 
+	public BloodTypes getBloodTypeCodeByCode(String code) {
+		
+		Query query = em.createNamedQuery("BloodTypes.findById");
+		query.setParameter("code", code);
+		return (BloodTypes) query.getSingleResult();
+		
+	}
+	
+	public BloodTypes getBloodTypeCodeBySnomedCodeId(String code) {
+		
+		Query query = em.createNamedQuery("BloodTypes.findBySnomedCodeId");
+		query.setParameter("code", code);
+		return (BloodTypes) query.getSingleResult();
+		
+	}
+	
 }

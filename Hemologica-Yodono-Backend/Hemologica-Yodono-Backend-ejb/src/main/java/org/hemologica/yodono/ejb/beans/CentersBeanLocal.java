@@ -11,4 +11,6 @@ public interface CentersBeanLocal {
 
 	public List<DataBank> getBanks();
 	
+	public DataBank getBankById(String bankId);
+	
 }

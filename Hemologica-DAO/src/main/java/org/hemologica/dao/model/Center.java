@@ -17,6 +17,7 @@ import java.util.List;
 @NamedQueries({
 @NamedQuery(name="Center.findAll", query="SELECT c FROM Center c"),
 @NamedQuery(name="Center.findAllBanks", query="SELECT c FROM Center c WHERE c.centerType = 'bank' "),
+@NamedQuery(name="Center.findBankById", query="SELECT c FROM Center c WHERE c.centerType = 'bank' AND c.centerCode = :code"),
 @NamedQuery(name="Center.findAllTransfusionCenters", query="SELECT c FROM Center c WHERE c.centerType = 'transfusionCenter' ")
 })
 public class Center implements Serializable {

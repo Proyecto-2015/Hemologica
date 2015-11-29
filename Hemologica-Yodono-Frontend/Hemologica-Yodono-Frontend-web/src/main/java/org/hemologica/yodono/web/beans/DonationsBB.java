@@ -38,7 +38,8 @@ public class DonationsBB implements Serializable{
 	public void init(){
 		
 		try {
-				myDonations = RestFactory.getServicesClient().getMyDonations("");
+			
+			myDonations = RestFactory.getServicesClient().getMyDonations("1");
 			
 		} catch (IOException e) {
 			

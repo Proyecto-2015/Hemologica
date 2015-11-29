@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hemologica.dao.model.BloodAboTypesCode;
 import org.hemologica.dao.model.BloodDTypesCode;
+import org.hemologica.dao.model.BloodTypes;
 
 public interface IBloodDAO {
 	
@@ -14,5 +15,9 @@ public interface IBloodDAO {
 	public List<BloodDTypesCode> getBloodDTypesCode();
 	
 	public BloodDTypesCode findBloodDTypesCodeByCode(String code);
+	
+	public BloodTypes getBloodTypeCodeByCode(String code);
+	
+	public BloodTypes getBloodTypeCodeBySnomedCodeId(String code);
 
 }

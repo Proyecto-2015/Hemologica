@@ -10,7 +10,10 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="donation_events_codes")
-@NamedQuery(name="DonationEventsCode.findAll", query="SELECT d FROM DonationEventsCode d")
+@NamedQueries({
+@NamedQuery(name="DonationEventsCode.findAll", query="SELECT d FROM DonationEventsCode d"),
+@NamedQuery(name="DonationEventsCode.findBySnomedCode", query="SELECT d FROM DonationEventsCode d WHERE d.concept.conceptCode = :code")
+})
 public class DonationEventsCode implements Serializable {
 	private static final long serialVersionUID = 1L;
 

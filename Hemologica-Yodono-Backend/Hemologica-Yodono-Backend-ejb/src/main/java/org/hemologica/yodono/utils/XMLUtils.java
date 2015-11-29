@@ -1,8 +1,10 @@
-package org.hemologica.service.utils.xml;
+package org.hemologica.yodono.utils;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
@@ -15,10 +17,12 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 public class XMLUtils {
-
+	
 	public static String documentToString(Document doc) throws TransformerException{
 		
 		DOMSource domSource = new DOMSource(doc);
@@ -53,4 +57,21 @@ public class XMLUtils {
 		
 	}
 	
+	public static List<Document> executeXPathStringList(Document doc, String xpath) throws XPathExpressionException{
+		
+		XPathFactory factory = XPathFactory.newInstance();
+		NodeList listNodes = (NodeList) factory.newXPath().compile(xpath).evaluate(doc, XPathConstants.NODESET);
+
+		List<Document> listReturn = new ArrayList<>();
+		
+		if(listNodes != null){
+			for (int i = 0; i < listNodes.getLength(); i++) {
+				
+				Node n = (Node) listNodes.item(i);
+				listReturn.add(n.getOwnerDocument());
+				
+			}
+		}
+		return listReturn;
+	}
 }

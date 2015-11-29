@@ -71,4 +71,9 @@ public class FactoryDAO {
 		return new NotificationDAOImpl(em);
 
 	}
+	
+	public static IPersonRecordDAO getPersonRecordDAO(EntityManager em) {
+		return new PersonRecordDAOImpl(em);
+
+	}
 }

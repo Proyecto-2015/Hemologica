@@ -12,6 +12,8 @@ import org.hemologica.dao.model.DonationEventsCode;
 import org.hemologica.dao.model.DonationFailCausesCode;
 import org.hemologica.dao.model.DonationFailTypeCode;
 import org.hemologica.dao.model.DonationLaboratoyCode;
+import org.hemologica.dao.model.DonationTypesCode;
+import org.hemologica.dao.model.EventSeverityCode;
 import org.hemologica.dao.model.MessageSendOption;
 import org.hemologica.dao.model.ResponsibleTransfusionPerson;
 import org.hemologica.dao.model.StatesCode;
@@ -157,6 +159,41 @@ public class CodesDAOImpl implements ICodesDAO{
 		Query query = em.createNamedQuery("StatesCode.findByCode");
 		query.setParameter("code", code);
 		return (StatesCode) query.getSingleResult();
+	}
+
+	public DonationTypesCode getDonationTypeByCode(String donationCode) {
+		
+		Query query = em.createNamedQuery("DonationTypesCode.findById");
+		query.setParameter("code", donationCode);
+		return (DonationTypesCode) query.getSingleResult();
+	}
+
+	public DonationTypesCode getDonationTypeBySnomedCode(String donationCode) {
+		
+		Query query = em.createNamedQuery("DonationTypesCode.findBySnomedCode");
+		query.setParameter("code", donationCode);
+		return (DonationTypesCode) query.getSingleResult();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<EventSeverityCode> getSeverities() {
+		
+		Query query = em.createNamedQuery("EventSeverityCode.findById");
+		return query.getResultList();
+	}
+	
+	public EventSeverityCode getgetSeverityBySnomedCode(String severityCode) {
+		
+		Query query = em.createNamedQuery("EventSeverityCode.findBySnomedCode");
+		query.setParameter("code", severityCode);
+		return (EventSeverityCode) query.getSingleResult();
+	}
+
+	public DonationEventsCode getDonationEventBySnomedCode(String event) {
+		
+		Query query = em.createNamedQuery("DonationEventsCode.findBySnomedCode");
+		query.setParameter("code", event);
+		return (DonationEventsCode) query.getSingleResult();
 	}
 
 }

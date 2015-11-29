@@ -8,9 +8,13 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.hemologica.dao.model.BloodTypes;
 import org.hemologica.dao.model.CitiesCode;
+import org.hemologica.dao.model.DonationEventsCode;
+import org.hemologica.dao.model.DonationTypesCode;
 import org.hemologica.dao.model.StatesCode;
 import org.hemologica.datatypes.DataCode;
+import org.hemologica.datatypes.DataDonationEvent;
 import org.hemologica.factories.FactoryDAO;
 import org.hemologica.yodono.ejb.beans.CodesBeanLocal;
 
@@ -77,6 +81,79 @@ public class CodesBean implements CodesBeanLocal {
 			
 		}
 		return listReturn;
+	}
+
+	@Override
+	public DataCode getBloodTypeCodeByCode(String code) {
+		
+		BloodTypes blood = FactoryDAO.getbloodDAO(em).getBloodTypeCodeByCode(code);
+	
+		DataCode data = new DataCode();
+		data.setCode(blood.getBloodTypeCodeValue());
+		data.setDisplayName(blood.getBloodTypeCodeLabel());
+			
+		return data;
+	}
+
+	@Override
+	public DataCode getABOBloodTypeCodeByBloodSnomedCode(String code) {
+
+		BloodTypes blood = FactoryDAO.getbloodDAO(em).getBloodTypeCodeBySnomedCodeId(code);
+		
+		DataCode data = new DataCode();
+		data.setCode(blood.getBloodAboTypesCode().getBloodAboTypeCodeValue());
+		data.setDisplayName(blood.getBloodAboTypesCode().getBloodAboTypeCodeLabel());
+			
+		return data;
+		
+	}
+
+	@Override
+	public DataCode getRHBloodTypeCodeByBloodSnomedCode(String code) {
+		
+		BloodTypes blood = FactoryDAO.getbloodDAO(em).getBloodTypeCodeBySnomedCodeId(code);
+		
+		DataCode data = new DataCode();
+		data.setCode(blood.getBloodDTypesCode().getBloodDTypeCodeValue());
+		data.setDisplayName(blood.getBloodDTypesCode().getBloodDTypeCodeLabel());
+			
+		return data;
+	}
+
+	@Override
+	public DataCode getDonationTypeByCode(String donationType) {
+		
+		DonationTypesCode d = FactoryDAO.getCodesDAO(em).getDonationTypeByCode(donationType);
+		
+		DataCode data = new DataCode();
+		data.setCode(d.getDonationTypeCodeValue());
+		data.setDisplayName(d.getDonationTypeCodeLabel());
+		
+		return data;
+	}
+
+	@Override
+	public DataCode getDonationTypeBySnomedCode(String donationType) {
+		
+		DonationTypesCode d = FactoryDAO.getCodesDAO(em).getDonationTypeBySnomedCode(donationType);
+		
+		DataCode data = new DataCode();
+		data.setCode(d.getDonationTypeCodeValue());
+		data.setDisplayName(d.getDonationTypeCodeLabel());
+		
+		return data;
+	}
+
+	@Override
+	public DataCode getDonationEventBySnomedCode(String event) {
+		
+		DonationEventsCode donationEventsCode = FactoryDAO.getCodesDAO(em).getDonationEventBySnomedCode(event);
+		
+		DataCode eventCode = new DataCode();
+		eventCode.setCode(donationEventsCode.getDonationEventCodeValue());
+		eventCode.setDisplayName(donationEventsCode.getDonationEventCodeLabel());
+
+		return eventCode;
 	}
 
 }
