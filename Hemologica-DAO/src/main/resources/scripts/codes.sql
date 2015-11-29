@@ -30,13 +30,18 @@ INSERT INTO `hemologica`.`cities_codes` (`city_id`, `city_state_id`, `city_code`
 INSERT INTO `hemologica`.`cities_codes` (`city_id`, `city_state_id`, `city_code`, `city_display_name`) VALUES ('7', '3', '7', 'label_maldonado');
 
 -- Tipos de rechazo
-INSERT INTO `hemologica`.`donation_fail_type_codes` (`donation_fail_code_id`, `donation_fail_code_label`, `donation_fail_code_value`) VALUES ('1', 'label_permanent', '1');
-INSERT INTO `hemologica`.`donation_fail_type_codes` (`donation_fail_code_id`, `donation_fail_code_label`, `donation_fail_code_value`) VALUES ('2', 'label_temporary', '2');
+INSERT INTO `donation_fail_type_codes` (`donation_fail_code_id`,`donation_fail_code_label`,`donation_fail_code_value`,`donation_fail_code_snomed`) VALUES (1,'label_permanent','1',47);
+INSERT INTO `donation_fail_type_codes` (`donation_fail_code_id`,`donation_fail_code_label`,`donation_fail_code_value`,`donation_fail_code_snomed`) VALUES (2,'label_temporary','2',48);
 
 --  Severidad 
 INSERT INTO `hemologica`.`event_severity_code` (`event_severity_code_id`, `event_severity_code_label`, `event_severity_code_value`, `event_severity_code_snomed`) VALUES ('1', 'event_mild', '1', '42');
 INSERT INTO `hemologica`.`event_severity_code` (`event_severity_code_id`, `event_severity_code_label`, `event_severity_code_value`, `event_severity_code_snomed`) VALUES ('2', 'event_moderate', '2', '43');
 INSERT INTO `hemologica`.`event_severity_code` (`event_severity_code_id`, `event_severity_code_label`, `event_severity_code_value`, `event_severity_code_snomed`) VALUES ('3', 'event_severe', '3', '44');
+
+-- Resultados
+INSERT INTO `hemologica`.`results_code` (`results_code_id`, `boolean_results_code_value`, `results_code_label`, `results_code_value`, `results_code_snomed`) VALUES ('1', 1, 'label_positive', '1', '45');
+INSERT INTO `hemologica`.`results_code` (`results_code_id`, `boolean_results_code_value`, `results_code_label`, `results_code_value`, `results_code_snomed`) VALUES ('2', 0, 'label_negative', '2', '46');
+
 
 
 

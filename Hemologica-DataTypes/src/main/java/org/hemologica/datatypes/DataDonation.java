@@ -74,11 +74,11 @@ public class DataDonation implements Serializable {
 
 	public boolean isApproved() {
 			
-//		return approved;
-		if(this.state != null)
-			return this.state.getCode() != null && this.state.getCode().equals("made");
-		else
-			return false;
+		return approved;
+//		if(this.state != null)
+//			return this.state.getCode() != null && this.state.getCode().equals("made");
+//		else
+//			return false;
 	}
 	
 	public Boolean isStateDefined(){

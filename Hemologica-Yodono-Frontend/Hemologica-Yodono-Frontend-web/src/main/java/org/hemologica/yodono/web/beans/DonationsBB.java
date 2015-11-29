@@ -5,6 +5,8 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -40,6 +42,17 @@ public class DonationsBB implements Serializable{
 		try {
 			
 			myDonations = RestFactory.getServicesClient().getMyDonations("1");
+			
+			Collections.sort(myDonations, new Comparator<DataDonation>() {
+				  
+				@Override public int compare( DataDonation d1, DataDonation d2) {
+					
+				    return d2.getDate().compareTo(d1.getDate());
+				    
+				  }
+			});
+			
+
 			
 		} catch (IOException e) {
 			

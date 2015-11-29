@@ -22,7 +22,7 @@ public class TransfusionBB  implements Serializable{
 	public void init(){
 		
 		try {
-				myTransfusions = RestFactory.getServicesClient().getMyTransfusions("");
+				myTransfusions = RestFactory.getServicesClient().getMyTransfusions("1");
 			
 		} catch (IOException e) {
 			

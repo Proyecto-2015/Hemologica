@@ -11,8 +11,8 @@ public class DataLaboratoryResult implements Serializable {
 	private static final long serialVersionUID = 7214257230098571156L;
 
 	private DataCode analysis;
-	private String bank; /* Pueden ser en otro lugar que el de la donación???? */
-	private Date date;
+	private DataBank bank; /* Pueden ser en otro lugar que el de la donación???? */
+	private String date;
 	private DataResponsiblePerson responsiblePerson;
 	private Boolean result;
 	
@@ -23,10 +23,10 @@ public class DataLaboratoryResult implements Serializable {
 	public void setAnalysis(DataCode analysis) {
 		this.analysis = analysis;
 	}
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	public Boolean getResult() {
@@ -35,10 +35,10 @@ public class DataLaboratoryResult implements Serializable {
 	public void setResult(Boolean result) {
 		this.result = result;
 	}
-	public String getBank() {
+	public DataBank getBank() {
 		return bank;
 	}
-	public void setBank(String bank) {
+	public void setBank(DataBank bank) {
 		this.bank = bank;
 	}
 	public DataResponsiblePerson getResponsiblePerson() {

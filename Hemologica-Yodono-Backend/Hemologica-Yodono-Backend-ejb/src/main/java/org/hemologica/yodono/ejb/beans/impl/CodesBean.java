@@ -2,20 +2,25 @@ package org.hemologica.yodono.ejb.beans.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
 import org.hemologica.dao.model.BloodTypes;
 import org.hemologica.dao.model.CitiesCode;
 import org.hemologica.dao.model.DonationEventsCode;
+import org.hemologica.dao.model.DonationFailCausesCode;
+import org.hemologica.dao.model.DonationFailTypeCode;
+import org.hemologica.dao.model.DonationLaboratoyCode;
 import org.hemologica.dao.model.DonationTypesCode;
 import org.hemologica.dao.model.EventSeverityCode;
+import org.hemologica.dao.model.ResultsCode;
 import org.hemologica.dao.model.StatesCode;
+import org.hemologica.dao.model.TransfusionEventsCode;
+import org.hemologica.dao.model.TransfusionLaboratoryCode;
+import org.hemologica.dao.model.UnitsType;
 import org.hemologica.datatypes.DataCode;
-import org.hemologica.datatypes.DataDonationEvent;
+import org.hemologica.datatypes.DataProductType;
 import org.hemologica.factories.FactoryDAO;
 import org.hemologica.yodono.ejb.beans.CodesBeanLocal;
 
@@ -158,13 +163,97 @@ public class CodesBean implements CodesBeanLocal {
 	}
 
 	@Override
-	public DataCode getDonationSeverityBySnomedCode(String severity) {
+	public DataCode getSeverityBySnomedCode(String severity) {
 		
 		EventSeverityCode severityCode = FactoryDAO.getCodesDAO(em).getSeverityBySnomedCode(severity);
 		
 		DataCode eventCode = new DataCode();
 		eventCode.setCode(severityCode.getEventSeverityCodeValue());
 		eventCode.setDisplayName(severityCode.getEventSeverityCodeLabel());
+
+		return eventCode;
+	}
+
+	@Override
+	public DataCode getDonationsAnalysisBySnomedCode(String analisisCode) {
+		
+		DonationLaboratoyCode severityCode = FactoryDAO.getCodesDAO(em).getDonationsAnalysisBySnomedCode(analisisCode);
+		
+		DataCode eventCode = new DataCode();
+		eventCode.setCode(severityCode.getDonationLaboratoyCodeValue());
+		eventCode.setDisplayName(severityCode.getDonationLaboratoyCodeLabel());
+
+		return eventCode;
+	}
+
+	@Override
+	public boolean getBooleanResultBySnomedCode(String resultCode) {
+		
+		ResultsCode severityCode = FactoryDAO.getCodesDAO(em).getBooleanResultBySnomedCode(resultCode);
+
+		return severityCode.isBooleanValue();
+	}
+
+	@Override
+	public DataCode getRejectionCauseBySnomedCode(String rejectionCode) {
+		
+		DonationFailCausesCode failCauses = FactoryDAO.getCodesDAO(em).getRejectionCauseBySnomedCode(rejectionCode);
+		
+		DataCode eventCode = new DataCode();
+		eventCode.setCode(failCauses.getDonationFailCauseCodeValue());
+		eventCode.setDisplayName(failCauses.getDonationFailCauseCodeLabel());
+
+		return eventCode;
+	}
+
+	@Override
+	public DataCode getRejectionTypesBySnomedCode(String rejectionType) {
+		
+		DonationFailTypeCode failCauses = FactoryDAO.getCodesDAO(em).getRejectionTypesBySnomedCode(rejectionType);
+		
+		DataCode eventCode = new DataCode();
+		eventCode.setCode(failCauses.getDonationFailCodeValue());
+		eventCode.setDisplayName(failCauses.getDonationFailCodeLabel());
+
+		return eventCode;
+	}
+
+	@Override
+	public DataProductType getProductBySnomedCode(String componentCode) {
+		
+		UnitsType failCauses = FactoryDAO.getCodesDAO(em).getProductBySnomedCode(componentCode);
+		
+		if(failCauses != null){
+		
+			DataProductType eventCode = new DataProductType();
+			eventCode.setCode(failCauses.getUnitTypeCodeValue());
+			eventCode.setDisplay(failCauses.getUnitTypeCodeLabel());
+			return eventCode;
+		}
+		return null;
+		
+	}
+
+	@Override
+	public DataCode getTransfusionEventBySnomedCode(String event) {
+		
+		TransfusionEventsCode donationEventsCode = FactoryDAO.getCodesDAO(em).getTransfusionEventBySnomedCode(event);
+		
+		DataCode eventCode = new DataCode();
+		eventCode.setCode(donationEventsCode.getTransfusionEventCodeValue());
+		eventCode.setDisplayName(donationEventsCode.getTransfusionEventCodeLabel());
+
+		return eventCode;
+	}
+
+	@Override
+	public DataCode getTransfusionAnalysisBySnomedCode(String executeXPathString) {
+		
+		TransfusionLaboratoryCode donationEventsCode = FactoryDAO.getCodesDAO(em).getTransfusionAnalysisBySnomedCode(executeXPathString);
+		
+		DataCode eventCode = new DataCode();
+		eventCode.setCode(donationEventsCode.getTransfusionLaboratoryCodeValue());
+		eventCode.setDisplayName(donationEventsCode.getTransfusionLaboratoryCodeLabel());
 
 		return eventCode;
 	}

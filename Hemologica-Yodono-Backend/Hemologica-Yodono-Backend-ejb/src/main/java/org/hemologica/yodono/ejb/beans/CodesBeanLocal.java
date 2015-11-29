@@ -3,7 +3,7 @@ package org.hemologica.yodono.ejb.beans;
 import java.util.List;
 import javax.ejb.Local;
 import org.hemologica.datatypes.DataCode;
-import org.hemologica.datatypes.DataDonationEvent;
+import org.hemologica.datatypes.DataProductType;
 
 @Local
 public interface CodesBeanLocal {
@@ -26,5 +26,19 @@ public interface CodesBeanLocal {
 
 	 public DataCode getDonationEventBySnomedCode(String event);
 
-	 public DataCode getDonationSeverityBySnomedCode(String severity);
+	 public DataCode getSeverityBySnomedCode(String severity);
+
+	 public DataCode getDonationsAnalysisBySnomedCode(String analisisCode);
+
+	 public boolean getBooleanResultBySnomedCode(String executeXPathString);
+
+	 public DataCode getRejectionCauseBySnomedCode(String executeXPathString);
+
+	 public DataCode getRejectionTypesBySnomedCode(String executeXPathString);
+
+	 public DataProductType getProductBySnomedCode(String componentCode);
+
+	 public DataCode getTransfusionEventBySnomedCode(String event);
+
+	 public DataCode getTransfusionAnalysisBySnomedCode(String executeXPathString);
 }

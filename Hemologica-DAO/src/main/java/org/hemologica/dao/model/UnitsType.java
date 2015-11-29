@@ -11,7 +11,10 @@ import java.util.List;
  */
 @Entity
 @Table(name="units_types")
-@NamedQuery(name="UnitsType.findAll", query="SELECT u FROM UnitsType u")
+@NamedQueries({
+@NamedQuery(name="UnitsType.findAll", query="SELECT u FROM UnitsType u"),
+@NamedQuery(name="UnitsType.findBySnomedCode", query="SELECT d FROM UnitsType d WHERE d.concept.conceptCode = :code")
+})
 public class UnitsType implements Serializable {
 	private static final long serialVersionUID = 1L;
 

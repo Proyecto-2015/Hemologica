@@ -9,25 +9,11 @@ import org.hemologica.yodono.ejb.beans.CentersBeanLocal;
 import org.hemologica.yodono.ejb.beans.CodesBeanLocal;
 import org.hemologica.yodono.ejb.beans.DonationBeanLocal;
 import org.hemologica.yodono.ejb.beans.PersonBeanLocal;
+import org.hemologica.yodono.ejb.beans.TransfusionBeanLocal;
 
 public class FactoryBeans {
 	
 	private static final Logger logger = Logger.getLogger(FactoryBeans.class.getName()); 
-	
-//	@Inject
-//	private DonationBean donationBean;
-//	
-//	@Inject
-//	private CentersBeanLocal centerBeans;
-//	
-//	@Inject
-//	private PersonBeanLocal personBeans;
-//	
-//	@Inject
-//	private AdvertismentBeanLocal advertismentBean;
-//	
-//	@Inject
-//	private CodesBeanLocal codeBeans;
 	
 	public static AdvertismentBeanLocal getAdvertismentBean() {
 		
@@ -101,4 +87,19 @@ public class FactoryBeans {
 		
 		return null;
 	}
+	
+	public static TransfusionBeanLocal getTransfusionBean() {
+		
+		try {
+			
+			return InitialContext.doLookup("java:global/Hemologica-Yodono-Backend-ear/Hemologica-Yodono-Backend-ejb/TransfusionBean!org.hemologica.yodono.ejb.beans.TransfusionBeanLocal");
+			
+		} catch (NamingException e) {
+			
+			logger.log(Level.SEVERE,  "Error al obtener el Bean AdvertismentBeanLocal", e);
+			
+		}
+		return null;
+	}
+	
 }

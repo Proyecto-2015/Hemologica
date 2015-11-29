@@ -12,6 +12,7 @@ import org.hemologica.dao.model.DonationTypesCode;
 import org.hemologica.dao.model.EventSeverityCode;
 import org.hemologica.dao.model.MessageSendOption;
 import org.hemologica.dao.model.ResponsibleTransfusionPerson;
+import org.hemologica.dao.model.ResultsCode;
 import org.hemologica.dao.model.StatesCode;
 import org.hemologica.dao.model.TransfusionEventsCode;
 import org.hemologica.dao.model.TransfusionLaboratoryCode;
@@ -60,5 +61,19 @@ public interface ICodesDAO {
 	public DonationEventsCode getDonationEventBySnomedCode(String event);
 
 	public EventSeverityCode getSeverityBySnomedCode(String severity);
+
+	public DonationLaboratoyCode getDonationsAnalysisBySnomedCode(String analisisCode);
+
+	public ResultsCode getBooleanResultBySnomedCode(String resultCode);
+
+	public DonationFailCausesCode getRejectionCauseBySnomedCode(String rejectionCode);
+
+	public DonationFailTypeCode getRejectionTypesBySnomedCode(String rejectionType);
+
+	public UnitsType getProductBySnomedCode(String componentCode);
+
+	public TransfusionEventsCode getTransfusionEventBySnomedCode(String event);
+
+	public TransfusionLaboratoryCode getTransfusionAnalysisBySnomedCode(String executeXPathString);
 
 }
