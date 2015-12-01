@@ -29,6 +29,7 @@ public class DataPerson implements Serializable{
 	private byte[] image;
 	private boolean allowNotificationNeedDonor;
 	private boolean allowNotificationAbleToDonate;
+	private String zipCode;
 	
 	public String getDocumentCountry() {
 		return documentCountry;
@@ -149,4 +150,11 @@ public class DataPerson implements Serializable{
 	public void setAllowNotificationAbleToDonate(boolean allowNotificationAbleToDonate) {
 		this.allowNotificationAbleToDonate = allowNotificationAbleToDonate;
 	}
+	public String getZipCode() {
+		return zipCode;
+	}
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
+	}
+
 }

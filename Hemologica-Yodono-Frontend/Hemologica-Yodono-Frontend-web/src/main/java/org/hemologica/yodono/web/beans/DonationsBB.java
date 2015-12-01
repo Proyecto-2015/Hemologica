@@ -129,12 +129,17 @@ public class DonationsBB implements Serializable{
 				
 		}
 		
-		if(languageBB != null && languageBB.getLanguage() != null && languageBB.getLanguage().equals("en"))
-			
-			result += " " + bundle.getString("label_ago");
-			
-		else
-			result= bundle.getString("label_ago") +" " + result;
+		result += " " + bundle.getString("label_ago");
+		/**
+		 * cambio porque franco pidio 
+		 */
+		
+//		if(languageBB != null && languageBB.getLanguage() != null && languageBB.getLanguage().equals("en"))
+//			
+//			result += " " + bundle.getString("label_ago");
+//			
+//		else
+//			result= bundle.getString("label_ago") +" " + result;
 		
 		return result;
 	}
