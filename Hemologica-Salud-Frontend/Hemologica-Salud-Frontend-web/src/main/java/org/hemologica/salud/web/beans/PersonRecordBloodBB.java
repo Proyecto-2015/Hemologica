@@ -2,11 +2,17 @@ package org.hemologica.salud.web.beans;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
+import org.hemologica.constants.Constants;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataTransfusion;
@@ -30,13 +36,91 @@ public class PersonRecordBloodBB implements Serializable{
 		
 		FacesContext context = FacesContext.getCurrentInstance();
 		person = (DataPerson) context.getExternalContext().getSessionMap().get("person");
-		
-		//TODO hay que cambiarlo para que llame al servicio que busque donaciones por id de persona o que tengo el usuario. 
 
 		try {
+			boolean able = true;
 			donations = RestFactory.getServicesClient().getMyDonations(person.getId());
-			transfusions = RestFactory.getServicesClient().getMyTransfusions(person.getId());
+			if(donations != null){
+				Collections.sort(donations, new Comparator<DataDonation>() {
+					  
+					@Override public int compare( DataDonation d1, DataDonation d2) {
+						
+					    return d2.getDate().compareTo(d1.getDate());
+					    
+					  }
+				});
+				
+				SimpleDateFormat sdf2 = new SimpleDateFormat("dd/MM/yyyy");
+				
+				for(DataDonation d : donations){	
+					
+					if(d.isApproved()){
+						
+						if(d.getDate() != null && !d.getDate().equals("")){
+							
+							Calendar dateDonation = Calendar.getInstance();
+							
+							try {
+								
+								dateDonation.setTime(sdf2.parse(d.getDate()));
+								if(person.getGender().equals("label_male")){
+									
+									dateDonation.add(Calendar.MONTH, Constants.MONTHS_MALE);
+									
+								}else if(person.getGender().equals("label_male")){
+									
+									dateDonation.add(Calendar.MONTH, Constants.MONTHS_FEMALE);
+									
+								}
+								if(dateDonation.compareTo(Calendar.getInstance()) >= 0){
+									
+									able = false;
+								}
+								
+							} catch (ParseException e) {
+								
+								logger.log(Level.SEVERE, "Error al parsear la fecha: " + d.getDate(), e);
+								
+							}
+						}
+					}else if(d.getFail() != null && d.getFail().getDate() != null && !d.getFail().getDate().equals("")){
+						
+						if(d.getFail().getDate() != null && !d.getFail().getDate().equals("")){
+							
+							Calendar dateDonation = Calendar.getInstance();
+							
+							try {
+								
+								dateDonation.setTime(sdf2.parse(d.getFail().getDate()));
+								
+								if(dateDonation.compareTo(Calendar.getInstance()) >= 0){
+									
+									able = false;
+								}
+								
+							} catch (ParseException e) {
+								
+								logger.log(Level.SEVERE, "Error al parsear la fecha: " + d.getDate(), e);
+								
+							}
+						}
+					}	
+				}	
+			}
 			
+			person.setAbleToDonate(able);
+			
+			transfusions = RestFactory.getServicesClient().getMyTransfusions(person.getId());
+			if(transfusions != null){
+				Collections.sort(transfusions, new Comparator<DataTransfusion>() {
+					  
+					@Override public int compare( DataTransfusion t1, DataTransfusion t2) {
+						
+					    return t2.getDate().compareTo(t1.getDate());
+					    
+					  }
+				});
+			}
 			
 		} catch (IOException e) {
 			

@@ -3,6 +3,7 @@ package org.hemologica.salud.ejb.beans.impl;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import javax.ejb.LocalBean;
@@ -15,6 +16,8 @@ import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataPerson;
 import org.hemologica.factories.FactoryDAO;
 import org.hemologica.salud.ejb.beans.PersonBeanLocal;
+import org.joda.time.LocalDate;
+import org.joda.time.Years;
 
 /**
  * Session Bean implementation class PersonBean
@@ -47,6 +50,17 @@ public class PersonBean implements PersonBeanLocal {
 			data.setSecondLastName((p.getPersonSecondLastname() == null) ? "" :p.getPersonSecondLastname());
 			data.setAddress((p.getPersonAddress() == null) ? "" :p.getPersonAddress());
 			data.setEmail((p.getPersonEmail() == null) ? "" :p.getPersonEmail());
+			data.setGender(p.getGenderCode().getGenderCodeLabel());
+			
+			
+			Calendar date = Calendar.getInstance();
+			date.setTime(p.getPersonBirthday());
+			
+			LocalDate birthdate = new LocalDate(date.get(Calendar.YEAR),date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH));
+			LocalDate now = new LocalDate();
+			Years age = Years.yearsBetween(birthdate, now);
+			data.setAge(String.valueOf(age.getYears()));
+			
 			
 			if(p.getDocuments() != null && p.getDocuments().size() != 0){
 				
@@ -108,6 +122,18 @@ public class PersonBean implements PersonBeanLocal {
 			data.setSecondLastName((p.getPersonSecondLastname() == null) ? "" :p.getPersonSecondLastname());
 			data.setAddress((p.getPersonAddress() == null) ? "" :p.getPersonAddress());
 			data.setEmail((p.getPersonEmail() == null) ? "" :p.getPersonEmail());
+			data.setGender(p.getGenderCode().getGenderCodeLabel());
+			
+			
+			Calendar date = Calendar.getInstance();
+			date.setTime(p.getPersonBirthday());
+			
+			LocalDate birthdate = new LocalDate(date.get(Calendar.YEAR),date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH));
+			
+			LocalDate now = new LocalDate();
+			Years age = Years.yearsBetween(birthdate, now);
+			data.setAge(String.valueOf(age.getYears()));
+			
 			
 			if(p.getDocuments() != null && p.getDocuments().size() != 0){
 				
@@ -115,6 +141,8 @@ public class PersonBean implements PersonBeanLocal {
 				data.setDocumentNumber((p.getDocuments().get(0).getDocumentNumber() == null) ? "" :p.getDocuments().get(0).getDocumentNumber());
 				
 			}
+			
+			
 			
 			//TODO cambiar esto
 			data.setAbleToDonate(true);

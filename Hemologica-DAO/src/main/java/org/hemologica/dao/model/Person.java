@@ -41,6 +41,10 @@ public class Person implements Serializable {
 
 	@Column(name="person_second_name")
 	private String personSecondName;
+	
+	@ManyToOne
+	@JoinColumn(name="person_gender")
+	private GenderCode genderCode;
 
 	@Column(name="person_telephone")
 	private String personTelephone;
@@ -270,5 +274,14 @@ public class Person implements Serializable {
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
+
+	public GenderCode getGenderCode() {
+		return genderCode;
+	}
+
+	public void setGenderCode(GenderCode genderCode) {
+		this.genderCode = genderCode;
+	}
+	
 
 }

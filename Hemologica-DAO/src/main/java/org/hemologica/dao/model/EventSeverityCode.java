@@ -16,6 +16,7 @@ import javax.persistence.Table;
 @NamedQueries({
 @NamedQuery(name="EventSeverityCode.findAll", query="SELECT d FROM EventSeverityCode d"),
 @NamedQuery(name="EventSeverityCode.findBySnomedCode", query="SELECT c FROM EventSeverityCode c WHERE c.concept.conceptCode = :code "),
+@NamedQuery(name="EventSeverityCode.findById", query="SELECT c FROM EventSeverityCode c WHERE c.eventSeverityCodeValue = :code ")
 })
 public class EventSeverityCode {
 	

@@ -51,9 +51,7 @@ public class DonationsBB implements Serializable{
 				    
 				  }
 			});
-			
 
-			
 		} catch (IOException e) {
 			
 			logger.log(Level.SEVERE, "Error al llamar al servicio web", e);

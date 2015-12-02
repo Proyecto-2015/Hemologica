@@ -179,7 +179,7 @@ public class CodesDAOImpl implements ICodesDAO{
 	@SuppressWarnings("unchecked")
 	public List<EventSeverityCode> getSeverities() {
 		
-		Query query = em.createNamedQuery("EventSeverityCode.findById");
+		Query query = em.createNamedQuery("EventSeverityCode.findAll");
 		return query.getResultList();
 	}
 	
@@ -201,7 +201,11 @@ public class CodesDAOImpl implements ICodesDAO{
 		
 		Query query = em.createNamedQuery("DonationLaboratoyCode.findBySnomedCode");
 		query.setParameter("code", analisisCode);
-		return (DonationLaboratoyCode) query.getSingleResult();
+		
+		Object o = query.getSingleResult();
+		
+		return (o != null) ? (DonationLaboratoyCode) o : null;
+		
 	}
 
 	public ResultsCode getBooleanResultBySnomedCode(String resultCode) {
