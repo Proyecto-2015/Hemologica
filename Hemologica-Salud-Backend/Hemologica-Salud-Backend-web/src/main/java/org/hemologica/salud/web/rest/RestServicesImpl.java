@@ -1,5 +1,6 @@
 package org.hemologica.salud.web.rest;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,6 +12,9 @@ import javax.inject.Inject;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.ws.rs.core.Response;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
+
 import org.hemologica.dao.enums.DataDonationStateEnum;
 import org.hemologica.dao.enums.DataEventSeverityEnum;
 import org.hemologica.datatypes.DataBloodType;
@@ -43,6 +47,9 @@ import org.hemologica.salud.ejb.beans.CodesBeanLocal;
 import org.hemologica.salud.ejb.beans.IBloodLocal;
 import org.hemologica.salud.ejb.beans.IInstitutionBeanLocal;
 import org.hemologica.salud.ejb.beans.PersonBeanLocal;
+import org.hemologica.salud.ejb.utils.FactoryBeans;
+import org.hemologica.xmldatabase.exceptions.XMLDataBaseException;
+import org.xml.sax.SAXException;
 
 
 public class RestServicesImpl implements IRestServices{
@@ -84,195 +91,142 @@ public class RestServicesImpl implements IRestServices{
 
 	@Override
 	public List<DataDonation> getDonations(String user) {
-
-		List<DataDonation> donaciones = new ArrayList<DataDonation>();
-
-		DataDonation d = new DataDonation();
-
 		
-		DataCode dc222 = new DataCode();
-		dc222.setCode(DataDonationStateEnum.MADE.label);
-		dc222.setDisplayName(DataDonationStateEnum.MADE.label);
+		try {
+			
+			return FactoryBeans.getDonationBean().getDonationsUserId(user);
+			
+		} catch (XMLDataBaseException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener los cdas XMLDataBaseException", e);
+			
+		} catch (SAXException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener los cdas SAXException", e);
+			
+		} catch (IOException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener los cdas IOException", e);
+			
+		} catch (ParserConfigurationException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener los cdas ParserConfigurationException", e);
+			
+		} catch (XPathExpressionException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener los cdas XPathExpressionException", e);
+			
+		}
 		
-		d.setState(dc222);
-
-		DataBank b1 = new DataBank();
-		b1.setName("Banco de Sangre X");
-
-		d.setBank(b1);
-
-		DataInstitution di = new DataInstitution();
-		di.setName("Hospital de clinicas");
-
-		d.setInstitution(di);
-		d.setName("Pedro");
-
-		DataDonationDonorType a = new DataDonationDonorType();
-		a.setDisplayName("Voluntario");
-		d.setDataDonorType(a);
-		d.setDate("10/02/2015");
-		donaciones.add(d);
-
-		DataDonation d3 = new DataDonation();
+		return new ArrayList<DataDonation>();
 		
-		DataCode dc = new DataCode();
-		dc.setCode(DataDonationStateEnum.REJECTED.label);
-		dc.setDisplayName(DataDonationStateEnum.REJECTED.label);
-		d3.setState(dc);
-		// d3.setApproved(true);
-
-		DataBank b13 = new DataBank();
-		b13.setName("Banco de Sangre X");
-
-		d3.setBank(b13);
-
-		DataInstitution di3 = new DataInstitution();
-		di3.setName("Hospital de clinicas");
-
-		d3.setInstitution(di);
-
-		d3.setName("Pedro");
-		DataDonationDonorType a3 = new DataDonationDonorType();
-		a3.setDisplayName("Reposicion");
-
-		d3.setDataDonorType(a3);
-		d3.setDate("10/02/2015");
-		donaciones.add(d3);
-
-		DataDonation d2 = new DataDonation();
-		
-		DataCode dc2 = new DataCode();
-		dc2.setCode(DataDonationStateEnum.MADE.label);
-		dc2.setDisplayName(DataDonationStateEnum.MADE.label);
-		
-		d2.setState(dc2);
-		// d2.setApproved(false);
-		DataBank b133 = new DataBank();
-		b133.setName("Banco de Sangre X");
-
-		d2.setBank(b13);
-
-		DataInstitution di33 = new DataInstitution();
-		di33.setName("Hospital de clinicas");
-
-		d2.setInstitution(di33);
-		d2.setName("Pedro2");
-
-		DataDonationDonorType a1 = new DataDonationDonorType();
-		a1.setDisplayName("Reposicion");
-
-		d2.setDataDonorType(a1);
-		d2.setDate("10/02/2014");
-		donaciones.add(d2);
-
-		DataDonation d4 = new DataDonation();
-		// d4.setApproved(false);
-		
-		
-		DataCode dc22 = new DataCode();
-		dc22.setCode(DataDonationStateEnum.REJECTED.label);
-		dc22.setDisplayName(DataDonationStateEnum.REJECTED.label);
-		
-		d4.setState(dc22);
-		// d2.setApproved(false);
-		DataBank b1333 = new DataBank();
-		b1333.setName("Banco de Sangre X");
-
-		d4.setBank(b133);
-
-		DataInstitution di333 = new DataInstitution();
-		di333.setName("Hospital de clinicas");
-
-		d4.setInstitution(di333);
-		d4.setName("Pedro2");
-
-		DataDonationDonorType a4 = new DataDonationDonorType();
-
-		a4.setDisplayName("Voluntario");
-
-		d4.setDataDonorType(a4);
-		d4.setDate("10/02/2014");
-		donaciones.add(d4);
-
-		return donaciones;
 	}
 
 	@Override
 	public List<DataTransfusion> getTransfusions(String user) {
-		List<DataTransfusion> transfusions = new ArrayList<DataTransfusion>();
-
-		DataTransfusion t1 = new DataTransfusion();
-		DataBank db = new DataBank();
-		db.setName("Banco X");
-
-		t1.setBank(db);
-
-		DataInstitution d2 = new DataInstitution();
-		d2.setName("Hospital de clinicas");
-
-		t1.setInstitution(d2);
-
-		t1.setName("Pedro");
-		t1.setDate("10/02/2015");
-
-		DataProductType dp1 = new DataProductType();
-		dp1.setDisplay("Plaquetas");
-		t1.setDataProduct(dp1);
-		transfusions.add(t1);
-
-		DataTransfusion t2 = new DataTransfusion();
-		DataBank db2 = new DataBank();
-		db2.setName("Banco X");
-
-		DataTransfusionEvent d1 = new DataTransfusionEvent();
-
-		DataCode dc1 = new DataCode();
-		dc1.setCode("0");
-		dc1.setDisplayName("Evento adverso 1");
-		d1.setEvent(dc1);
 		
+		try {
+			
+			return FactoryBeans.getTransfusionBean().getTransfusionsUserId(user);
 		
+		}catch (XMLDataBaseException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener los cdas XMLDataBaseException", e);
+			
+		} catch (SAXException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener los cdas SAXException", e);
+			
+		} catch (IOException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener los cdas IOException", e);
+			
+		} catch (ParserConfigurationException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener los cdas ParserConfigurationException", e);
+			
+		} catch (XPathExpressionException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener los cdas XPathExpressionException", e);
+			
+		} 
 		
-		DataCode dc13 = new DataCode();
+		return new ArrayList<DataTransfusion>();
 		
-		dc13.setCode(DataEventSeverityEnum.MODERATE.getValue());
-		dc13.setDisplayName(DataEventSeverityEnum.MODERATE.getLabel());
-		
-		d1.setSeverity(dc13);
-
-		DataCode dc2 = new DataCode();
-		dc2.setCode("1");
-
-		dc2.setDisplayName("Evento adverso 2");
-
-		DataTransfusionEvent d22 = new DataTransfusionEvent();
-		d22.setEvent(dc2);
-		DataCode dc133 = new DataCode();
-		dc133.setCode(DataEventSeverityEnum.SEVERE.getValue());
-		dc133.setDisplayName(DataEventSeverityEnum.SEVERE.getLabel());
-		
-		d1.setSeverity(dc133);		
-
-		List<DataTransfusionEvent> dteList = new ArrayList<>();
-		dteList.add(d1);
-		dteList.add(d22);
-
-		t2.setEvents(dteList);
-
-		t1.setBank(db2);
-
-		DataInstitution di = new DataInstitution();
-		di.setName("Hospital de clinicas");
-
-		t2.setInstitution(di);
-		t2.setName("Pedro");
-		t2.setDate("10/02/2015");
-		DataProductType dp2 = new DataProductType();
-		dp2.setDisplay("Plaquetas");
-		t2.setDataProduct(dp2);
-		transfusions.add(t2);
-
-		return transfusions;
+//		List<DataTransfusion> transfusions = new ArrayList<DataTransfusion>();
+//
+//		DataTransfusion t1 = new DataTransfusion();
+//		DataBank db = new DataBank();
+//		db.setName("Banco X");
+//
+//		t1.setBank(db);
+//
+//		DataInstitution d2 = new DataInstitution();
+//		d2.setName("Hospital de clinicas");
+//
+//		t1.setInstitution(d2);
+//
+//		t1.setName("Pedro");
+//		t1.setDate("10/02/2015");
+//
+//		DataProductType dp1 = new DataProductType();
+//		dp1.setDisplay("Plaquetas");
+//		t1.setDataProduct(dp1);
+//		transfusions.add(t1);
+//
+//		DataTransfusion t2 = new DataTransfusion();
+//		DataBank db2 = new DataBank();
+//		db2.setName("Banco X");
+//
+//		DataTransfusionEvent d1 = new DataTransfusionEvent();
+//
+//		DataCode dc1 = new DataCode();
+//		dc1.setCode("0");
+//		dc1.setDisplayName("Evento adverso 1");
+//		d1.setEvent(dc1);
+//		
+//		
+//		
+//		DataCode dc13 = new DataCode();
+//		
+//		dc13.setCode(DataEventSeverityEnum.MODERATE.getValue());
+//		dc13.setDisplayName(DataEventSeverityEnum.MODERATE.getLabel());
+//		
+//		d1.setSeverity(dc13);
+//
+//		DataCode dc2 = new DataCode();
+//		dc2.setCode("1");
+//
+//		dc2.setDisplayName("Evento adverso 2");
+//
+//		DataTransfusionEvent d22 = new DataTransfusionEvent();
+//		d22.setEvent(dc2);
+//		DataCode dc133 = new DataCode();
+//		dc133.setCode(DataEventSeverityEnum.SEVERE.getValue());
+//		dc133.setDisplayName(DataEventSeverityEnum.SEVERE.getLabel());
+//		
+//		d1.setSeverity(dc133);		
+//
+//		List<DataTransfusionEvent> dteList = new ArrayList<>();
+//		dteList.add(d1);
+//		dteList.add(d22);
+//
+//		t2.setEvents(dteList);
+//
+//		t1.setBank(db2);
+//
+//		DataInstitution di = new DataInstitution();
+//		di.setName("Hospital de clinicas");
+//
+//		t2.setInstitution(di);
+//		t2.setName("Pedro");
+//		t2.setDate("10/02/2015");
+//		DataProductType dp2 = new DataProductType();
+//		dp2.setDisplay("Plaquetas");
+//		t2.setDataProduct(dp2);
+//		transfusions.add(t2);
+//
+//		return transfusions;
 	}
 
 	@Override

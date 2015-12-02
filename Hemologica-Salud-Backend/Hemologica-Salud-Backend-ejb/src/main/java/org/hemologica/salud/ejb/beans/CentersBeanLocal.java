@@ -10,6 +10,8 @@ public interface CentersBeanLocal {
 	
 	public List<DataBank> getBanks();
 	
+	public DataBank getBankById(String bankId);
+	
 	public List<DataResponsiblePerson> getResponsibleTransfusionPersons(String centerCode);
 
 	public List<DataBank> getBanksUser(String user);

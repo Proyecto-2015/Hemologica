@@ -76,7 +76,7 @@ public class ServicesClientImpl implements IServicesClient {
 		String urlDonations = url + ConstantsRest.PATH_DONATIONS;
 
 		HashMap<String, String> hash = new HashMap<String, String>();
-		hash.put(ConstansJson.JSON_USER, "hola");
+		hash.put(ConstansJson.JSON_USER, user);
 
 		String donacionesString = "";
 		try {
@@ -98,7 +98,7 @@ public class ServicesClientImpl implements IServicesClient {
 		String urlTransfusions = url + ConstantsRest.PATH_TRANSFUTIONS;
 
 		HashMap<String, String> hash = new HashMap<String, String>();
-		hash.put(ConstansJson.JSON_USER, "hola");
+		hash.put(ConstansJson.JSON_USER, user);
 
 		String transfusionesString = "";
 		try {

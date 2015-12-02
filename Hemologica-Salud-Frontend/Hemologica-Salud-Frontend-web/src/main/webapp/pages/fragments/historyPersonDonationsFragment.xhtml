@@ -15,32 +15,25 @@
 
 	<div class="col-sm-6 col-md-6" style="margin-bottom: 10px;">
 		<h3>
-			<h:outputText value="#{messages.label_donations_history}" />
+			<h:outputText value="#{messages.title_donations}" />
 		</h3>
 	</div>
 
 	<div class="col-sm-6 col-md-6 " style="margin-bottom: 10px;">
 		<c:choose>
 			<c:when test="${personRecordBloodBB.person.ableToDonate}">
-
 				<h3>
 					<h:outputText class="pull-right able"
 						value="#{messages.label_able}" />
 				</h3>
-
 			</c:when>
 			<c:otherwise>
-
 				<h3>
 					<h:outputText class="pull-right disble"
 						value="#{messages.label_disable}" />
 				</h3>
-
 			</c:otherwise>
 		</c:choose>
-
-
-
 	</div>
 
 	<table
@@ -85,9 +78,9 @@
 							</c:otherwise>
 						</c:choose></td>
 
-					<!--         				<td data-title="#{messages.label_rejection_reason}"><h:outputText value="#{donationItem.fullName}"/></td> -->
-					<!--         				<td data-title="#{messages.label_rejection_type}"><h:outputText value="#{donationItem.fullName}"/></td> -->
-					<!--         				<td data-title="#{messages.label_rechazo_date_to}"><h:outputText value="#{donationItem.fullName}"/></td>	 -->
+       				<td data-title="#{messages.label_rejection_reason}"><h:outputText rendered="#{donationItem.fail != null}" value="#{messages[donationItem.fail.cause.displayName]}"/></td>
+       				<td data-title="#{messages.label_rejection_type}"><h:outputText rendered="#{donationItem.fail != null}" value="#{messages[donationItem.fail.rejectionType.displayName]}"/></td>
+       				<td data-title="#{messages.label_rechazo_date_to}"><h:outputText rendered="#{donationItem.fail != null}" value="#{donationItem.fail.date}"/></td>	
 				</tr>
 			</c:forEach>
 
@@ -116,9 +109,9 @@
 							var="eventItem" varStatus="counter">
 							<tr>
 								<td data-title="#{messages.label_reaccion_type}"><h:outputText
-										value="#{eventItem.display}" /></td>
+										value="#{messages[eventItem.event.displayName]}" /></td>
 								<td data-title="#{messages.label_severity}"><h:outputText
-										value="#{messages[eventItem.severity.label]}" /></td>
+										value="#{messages[eventItem.severity.displayName]}" /></td>
 							</tr>
 						</c:forEach>
 					</tbody>

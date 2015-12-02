@@ -145,4 +145,42 @@ public class CentersBean implements CentersBeanLocal {
 		return listReturn;
 	}
 	
+	@Override
+	public DataBank getBankById(String bankId) {
+    	
+    	Center bank = FactoryDAO.getCenterDAO(em).getBankById(bankId);
+    	return getDataBank(bank);
+    	
+	}
+	
+	private DataBank getDataBank(Center c) {
+		
+		DataBank dataBank = new DataBank();
+		dataBank.setCode(c.getCenterCode());
+		dataBank.setName(c.getCenterDisplayName());
+		dataBank.setAddress(c.getCenterAddress());
+		dataBank.setEmail(c.getCenterEmail());
+		dataBank.setHour(c.getCenterHour());
+		dataBank.setInformation(c.getCenterInformation());
+		dataBank.setTelephone(c.getCenterTelephone());
+		
+		if(c.getInstitution() != null){
+		
+			DataInstitution dataInstitution = new DataInstitution();
+			dataInstitution.setName(c.getInstitution().getInstitutionDisplayName());
+			dataInstitution.setCode(c.getInstitution().getInstitutionDisplayName());	
+			dataBank.setInstitution(dataInstitution);
+			
+		}
+		
+		if(c.getGeoLocation() != null){
+			
+			dataBank.setLatitude(c.getGeoLocation().getGeoLocationsX());
+			dataBank.setLongitude(c.getGeoLocation().getGeoLocationsY());
+			
+		}
+		
+		return dataBank;
+	}
+	
 }

@@ -22,15 +22,8 @@ public enum DataDonationStateEnum implements Serializable {
 		
 		ret.add(DataDonationStateEnum.MADE);
 		ret.add(DataDonationStateEnum.REJECTED);
-//		DataDonationStateEnum state = new DataDonationStateEnum();
-//		state.setCode(MADE.value);
-//		state.setDisplayName(MADE.label);
-//		ret.add(state);
-//		state = new DataDonationState();
-//		state.setCode(REJECTED.value);
-//		state.setDisplayName(REJECTED.label);
-//		ret.add(state);
 		return ret;
+		
 	}
 
 	public String getValue() {

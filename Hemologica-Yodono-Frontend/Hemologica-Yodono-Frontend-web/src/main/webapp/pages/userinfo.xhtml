@@ -1,25 +1,26 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
           "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:b="http://bootsfaces.net/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:pm="http://primefaces.org/mobile"
-	xmlns:pe="http://primefaces.org/ui/extensions" >
+	xmlns:pe="http://primefaces.org/ui/extensions">
 
 <ui:composition template="/template/template.xhtml">
 
 	<ui:define name="content">
-		<!--    	<div class="container-fluid"> -->
-		<div>
+		<div class="container-fluid">
 			<ol class="breadcrumb">
 				<li><a href="#"><h:outputText
 							value="#{messages.label_my_profile}" /></a></li>
 			</ol>
+		</div>
 
-			<h:form>
+		<h:form>
+			<div class="container">
 				<div class="col-xs-12 col-md-12 col-lg-2">
 <!-- 					<o:graphicImage value="#{userBB.imageByte}" /> -->
 					<p:graphicImage class="image-user center"  />
@@ -213,9 +214,8 @@
 					</div>
 
 				</div>
+				</div>
 			</h:form>
-		</div>
-
 	</ui:define>
 
 </ui:composition>

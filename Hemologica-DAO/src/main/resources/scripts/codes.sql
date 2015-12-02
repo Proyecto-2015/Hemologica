@@ -42,6 +42,10 @@ INSERT INTO `hemologica`.`event_severity_code` (`event_severity_code_id`, `event
 INSERT INTO `hemologica`.`results_code` (`results_code_id`, `boolean_results_code_value`, `results_code_label`, `results_code_value`, `results_code_snomed`) VALUES ('1', 1, 'label_positive', '1', '45');
 INSERT INTO `hemologica`.`results_code` (`results_code_id`, `boolean_results_code_value`, `results_code_label`, `results_code_value`, `results_code_snomed`) VALUES ('2', 0, 'label_negative', '2', '46');
 
+-- Genero
+INSERT INTO `hemologica`.`gender_code` (`gender_code_id`, `gender_code_label`, `gender_code_value`, `gender_hl7_code`) VALUES ('1', 'label_male', '1', 'M');
+INSERT INTO `hemologica`.`gender_code` (`gender_code_id`, `gender_code_label`, `gender_code_value`, `gender_hl7_code`) VALUES ('2', 'label_female', '2', 'F');
+INSERT INTO `hemologica`.`gender_code` (`gender_code_id`, `gender_code_label`, `gender_code_value`, `gender_hl7_code`) VALUES ('3', 'label_undefinded', '3', 'UN');
 
 
 

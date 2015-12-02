@@ -10,16 +10,14 @@ import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import org.hemologica.xmldatabase.connection.IXMLDataBase;
 import org.hemologica.xmldatabase.exceptions.XMLDataBaseException;
 
 /**
  * @author Paula Roche
  */
-public class BaseXConnection implements IXMLDataBase {
-
-	// private BaseXClient session;
+public class BaseXConnection implements IXMLDataBase{
+	
 	private Logger logger = Logger.getLogger(BaseXConnection.class.getName());
 	private String dataBase;
 	private String host;

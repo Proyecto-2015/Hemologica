@@ -66,6 +66,77 @@ h6 .h6 {
 	padding: 45px;
 }
 
+.logos{
+	
+    height: 40px;
+    width: 200px;
+    padding-right: 50px;
+
+}
+
+
+.logos-fing{
+	
+    height: 40px;
+    width: 70px;
+/*     padding-right: 50px; */
+
+}
+
+.logos-nib{
+	
+    height: 40px;
+    width: 200px;
+
+}
+
+.logos-udelar{
+	
+    height: 40px;
+    width: 150px;
+    padding-right: 50px;
+
+}
+
+.page-footer {
+	margin: 0 0 0 0;
+	border-bottom: none;
+	padding-bottom: 2px !important;
+}
+
+.page-footer>.row {
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+.footer-line{
+	
+	border-top: 1px solid #e3e3e3;
+    width: 100%;
+	float: right;
+	font-size: x-small;
+
+}
+
+#footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+/*   background-color: #efefef; */
+  text-align: center;
+  
+}
+
+.body {
+  position: relative;
+  margin: 0;
+  padding-bottom: 6rem;
+  min-height: 100%;
+}
+
+
 .container>* {
 	
 }

@@ -1,13 +1,15 @@
 package org.hemologica.salud.ejb.beans;
 
+import java.io.IOException;
 import java.util.List;
-
-import org.hemologica.datatypes.DonationResult;
-import org.hemologica.datatypes.DonationSearch;
-import org.hemologica.salud.ejb.exceptions.BusinessException;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
+import org.hemologica.datatypes.DataDonation;
+import org.hemologica.xmldatabase.exceptions.XMLDataBaseException;
+import org.xml.sax.SAXException;
 
 public interface DonationBeanLocal {
 	
-	public List<DonationResult> search(DonationSearch param) throws BusinessException;
+	List<DataDonation> getDonationsUserId(String userId) throws XMLDataBaseException, SAXException, IOException, ParserConfigurationException, XPathExpressionException;
 
 }
