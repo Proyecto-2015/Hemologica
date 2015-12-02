@@ -15,6 +15,7 @@ import ca.uhn.hl7v2.model.GenericComposite;
 import ca.uhn.hl7v2.model.GenericPrimitive;
 import ca.uhn.hl7v2.model.Type;
 import ca.uhn.hl7v2.model.Varies;
+import ca.uhn.hl7v2.model.v231.message.ACK;
 import ca.uhn.hl7v2.model.v231.message.ADT_A01;
 import ca.uhn.hl7v2.model.v231.message.ADT_A08;
 import ca.uhn.hl7v2.model.v231.message.ADT_A18;
@@ -61,11 +62,10 @@ public class MessageFactory implements Serializable {
 	public static String ADT_A40 = "ADT_A40";
 	public static String QBP_Q22 = "QBP_Q22";
 	public static String QBP_Q23 = "QBP_Q23";
-	
+
 	private static String QBP_Q23_MSG_STRING = "MSH|^~\\&|NIST_SENDER^^|NIST^^|NIST_RECEIVER^^|NIST^^|20101101161157||QBP^Q23^QBP_Q21|NIST-101101161157166|P|2.5\r\nQPD|IHE PIX Query||HEMO-111^^^HEMOLOGICA\r\nRCP|I";
 	private static String QBP_Q22_MSG_STRING = "MSH|^~\\&|NIST_SENDER^^|NIST^^|NIST_RECEIVER^^|NIST^^|20101101161157||QBP^Q22|NIST-101101161157166|P|2.5\r\nQPD|IHE PDQ Query||HEMO-111^^^HEMOLOGICA\r\nRCP|I";
 
-	
 	/**
 	 * Fixed values
 	 * 
@@ -88,6 +88,12 @@ public class MessageFactory implements Serializable {
 		this.context.putAll(context);
 
 	}
+	
+	
+	public Object create_ACK(String msg) throws HL7Exception{
+		PipeParser parser = new PipeParser();
+		return parser.parse(msg);
+	}
 
 	public ADT_A01 create_ADT_A01(Map<String, String> values) throws MessageFactoryException {
 		ADT_A01 msg = new ADT_A01();
@@ -98,7 +104,6 @@ public class MessageFactory implements Serializable {
 			msg.initQuickstart("ADT", "A01", context.get("processingId"));
 			MSH msh = msg.getMSH();
 			msh = this.processMSH(msh);
-			
 
 			// PID
 			PID pid = msg.getPID();
@@ -122,11 +127,17 @@ public class MessageFactory implements Serializable {
 			// MSH
 			msg.initQuickstart("ADT", "A04", context.get("processingId"));
 			MSH msh = msg.getMSH();
+			
 			msh = this.processMSH(msh);
 
 			// PID
 			PID pid = msg.getPID();
 			pid = this.processPID(values, pid);
+		
+			
+//			Terser terser = new Terser(msg);
+//			this.processPIDTerser(values, terser);
+			
 
 		} catch (DataTypeException e) {
 			throw new MessageFactoryException(e);
@@ -181,7 +192,7 @@ public class MessageFactory implements Serializable {
 		}
 		return msg;
 	}
-	
+
 	public ADT_A18 create_ADT_A18(Map<String, String> values) throws MessageFactoryException {
 		ADT_A18 msg = new ADT_A18();
 		try {
@@ -203,8 +214,7 @@ public class MessageFactory implements Serializable {
 		}
 		return msg;
 	}
-	
-	
+
 	public ADT_A40 create_ADT_A40(Map<String, String> values) throws MessageFactoryException {
 		ADT_A40 msg = new ADT_A40();
 		try {
@@ -228,18 +238,17 @@ public class MessageFactory implements Serializable {
 	}
 
 	public QBP_Q21 create_QBP_Q21(Map<String, String> values) throws MessageFactoryException {
-		
-		
+
 		try {
-			
+
 			PipeParser parser = new PipeParser();
 			QBP_Q21 msg = (QBP_Q21) parser.parse(QBP_Q23_MSG_STRING);
-			
+
 			// MSH
 			msg.initQuickstart("QBP", "Q23", context.get("processingId"));
 			ca.uhn.hl7v2.model.v25.segment.MSH msh = msg.getMSH();
 			msh = processMSH(msh);
-			
+
 			// QPD
 			QPD qpd = msg.getQPD();
 			Varies varies = qpd.getQpd3_UserParametersInsuccessivefields();
@@ -251,9 +260,8 @@ public class MessageFactory implements Serializable {
 			identifierData.setValue(values.get("identifier"));
 			GenericPrimitive domainData = (GenericPrimitive) domainVaries.getData();
 			domainData.setValue(values.get("domain"));
-			
+
 			return msg;
-			
 
 		} catch (DataTypeException e) {
 			throw new MessageFactoryException(e);
@@ -262,62 +270,61 @@ public class MessageFactory implements Serializable {
 		} catch (IOException e) {
 			throw new MessageFactoryException(e);
 		}
-		
+
 	}
-	
+
 	public QBP_Q21 create_QBP_Q22(Map<String, String> values) throws MessageFactoryException {
-		
-		
+
 		try {
-			
+
 			PipeParser parser = new PipeParser();
 			QBP_Q21 msg = (QBP_Q21) parser.parse(QBP_Q22_MSG_STRING);
-			
+
 			// MSH
 			msg.initQuickstart("QBP", "Q22", context.get("processingId"));
 			ca.uhn.hl7v2.model.v25.segment.MSH msh = msg.getMSH();
 			msh = processMSH(msh);
-			
+
 			Terser terser = new Terser(msg);
-			terser.set("/QPD-3(0)-1", "@PID.5.1.1");
+//			terser.set("/QPD-3(0)-1", "@PID.5.1.1");
+			terser.set("/QPD-3(0)-1", "@PID.5.1");
 			terser.set("/QPD-3(0)-2", values.get("surname").toUpperCase());
-			terser.set("/QPD-3(1)-1", "@PID.5.2.1");
+//			terser.set("/QPD-3(1)-1", "@PID.5.2.1");
+			terser.set("/QPD-3(1)-1", "@PID.5.2");
 			terser.set("/QPD-3(1)-2", values.get("name").toUpperCase());
-			
-			
-			if(values.containsKey("secondSurname")){ 
-				terser.set("/QPD-3(2)-1", "@PID.5.1.2");
-				terser.set("/QPD-3(2)-2", values.get("secondSurname").toUpperCase());
-			}
-			
-			if(values.containsKey("secondName")){ 
-				terser.set("/QPD-3(3)-1", "@PID.5.2.2");
-				terser.set("/QPD-3(3)-2", values.get("secondName").toUpperCase());
-			}
-//			if(values.containsKey("birthday")){ 
-//				terser.set("/QPD-3(4)-1", "@PID.7");
-//				terser.set("/QPD-3(4)-2", values.get("birthday"));
+
+//			if (values.containsKey("secondSurname")) {
+//				terser.set("/QPD-3(2)-1", "@PID.5.1.2");
+//				terser.set("/QPD-3(2)-2", values.get("secondSurname").toUpperCase());
 //			}
-			if(values.containsKey("birthdayPlace")){ 
+
+//			if (values.containsKey("secondName")) {
+//				terser.set("/QPD-3(3)-1", "@PID.5.2.2");
+//				terser.set("/QPD-3(3)-2", values.get("secondName").toUpperCase());
+//			}
+			// if(values.containsKey("birthday")){
+			// terser.set("/QPD-3(4)-1", "@PID.7");
+			// terser.set("/QPD-3(4)-2", values.get("birthday"));
+			// }
+			if (values.containsKey("birthdayPlace")) {
 				terser.set("/QPD-3(5)-1", "@PID.23");
 				terser.set("/QPD-3(5)-2", values.get("birthdayPlace"));
 			}
-//			if(values.containsKey("sex")){ 
-//				terser.set("/QPD-3(6)-1", "@PID.8");
-//				terser.set("/QPD-3(6)-2", values.get("sex"));
+			// if(values.containsKey("sex")){
+			// terser.set("/QPD-3(6)-1", "@PID.8");
+			// terser.set("/QPD-3(6)-2", values.get("sex"));
+			// }
+//			if (values.containsKey("addressStreet")) {
+//				terser.set("/QPD-3(7)-1", "@PID.11");
+//				terser.set("/QPD-3(7)-2", values.get("addressStreet"));
 //			}
-			if(values.containsKey("addressStreet")){ 
-				terser.set("/QPD-3(7)-1", "@PID.11");
-				terser.set("/QPD-3(7)-2", values.get("addressStreet"));
-			}
-//			if(values.containsKey("phone")){ 
-//				terser.set("/QPD-3(8)-1", "@PID.13");
-//				terser.set("/QPD-3(8)-2", values.get("phone"));
-//			}
+			// if(values.containsKey("phone")){
+			// terser.set("/QPD-3(8)-1", "@PID.13");
+			// terser.set("/QPD-3(8)-2", values.get("phone"));
+			// }
 			terser.set("/QPD-8-4", this.getMyDomain());
 
 			return msg;
-			
 
 		} catch (DataTypeException e) {
 			throw new MessageFactoryException(e);
@@ -326,12 +333,11 @@ public class MessageFactory implements Serializable {
 		} catch (IOException e) {
 			throw new MessageFactoryException(e);
 		}
-		
+
 	}
 
-	
-
-	private ca.uhn.hl7v2.model.v25.segment.MSH processMSH(ca.uhn.hl7v2.model.v25.segment.MSH msh) throws DataTypeException {
+	private ca.uhn.hl7v2.model.v25.segment.MSH processMSH(ca.uhn.hl7v2.model.v25.segment.MSH msh)
+			throws DataTypeException {
 		msh.getMsh3_SendingApplication().getNamespaceID().setValue(context.get("sendingApplication"));
 		msh.getMsh4_SendingFacility().getNamespaceID().setValue(context.get("sendingFacility"));
 		msh.getMsh5_ReceivingApplication().getNamespaceID().setValue(context.get("receivingApplication"));
@@ -339,7 +345,7 @@ public class MessageFactory implements Serializable {
 		msh.getMsh13_SequenceNumber().setValue("123");
 		return msh;
 	}
-	
+
 	private MSH processMSH(MSH msh) throws DataTypeException {
 		msh.getMsh3_SendingApplication().getNamespaceID().setValue(context.get("sendingApplication"));
 		msh.getMsh4_SendingFacility().getNamespaceID().setValue(context.get("sendingFacility"));
@@ -347,6 +353,34 @@ public class MessageFactory implements Serializable {
 		msh.getMsh6_ReceivingFacility().getNamespaceID().setValue(context.get("receivingFacility"));
 		msh.getMsh13_SequenceNumber().setValue("123");
 		return msh;
+	}
+
+	private void processPIDTerser(Map<String, String> values, Terser terser) throws DataTypeException {
+
+		try {
+			
+			terser.set("/PID-2", values.get("patientIdentifier"));
+			terser.set("/PID-5-1-1", values.get("surname").toUpperCase());
+			terser.set("/PID-5-1-2", values.get("secondSurname").toUpperCase());
+			terser.set("/PID-5-2-1", values.get("name").toUpperCase());
+			terser.set("/PID-5-2-2", values.get("secondName").toUpperCase());
+			if (values.containsKey("birthdayPlace")) {
+				terser.set("/PID-23", values.get("birthdayPlace"));
+			}
+			if(values.containsKey("sex")){
+				terser.set("/PID-8", values.get("sex"));
+			}
+			if (values.containsKey("addressStreet")) {
+				terser.set("/PID-11", values.get("addressStreet"));
+			}
+			 if(values.containsKey("phone")){
+				 terser.set("/PID-13", values.get("phone"));
+			 }
+			 
+		} catch (HL7Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private PID processPID(Map<String, String> values, PID pid) throws DataTypeException {
@@ -361,17 +395,17 @@ public class MessageFactory implements Serializable {
 		;
 		pid.getPatientIdentifierList(0).getAssigningAuthority().getHd3_UniversalIDType()
 				.setValue(context.get("aa_universal_id_type"));
-		
+
 		pid.getPatientName(0).getGivenName().setValue(values.get("name"));
-		pid.getPatientName(0).getFamilyLastName().getFamilyName().setValue(values.get("surname"));
+		pid.getPatientName(0).getFamilyLastName().getFn1_FamilyName().setValue(values.get("surname"));
 
 		// optional information
-		if (values.containsKey("secondName")) {
-			pid.getPatientName(0).getMiddleInitialOrName().setValue(values.get("secondName"));
-		}
-		if (values.containsKey("secondSurname")) {
-			pid.getPatientName(0).getFamilyLastName().getFn1_FamilyName().setValue(values.get("secondSurname"));
-		}
+//		if (values.containsKey("secondName")) {
+//			pid.getPatientName(0).getMiddleInitialOrName().setValue(values.get("secondName"));
+//		}
+//		if (values.containsKey("secondSurname")) {
+//			pid.getPatientName(0).getFamilyLastName().getFn1_FamilyName().setValue(values.get("secondSurname"));
+//		}
 		if (values.containsKey("addressCountry")) {
 			pid.getPatientAddress(0).getCountry().setValue(values.get("addressCountry"));
 		}
@@ -406,18 +440,18 @@ public class MessageFactory implements Serializable {
 		return pid;
 	}
 
-	public QPD getQPDFromTemplate(Map<String, String> values) throws HL7Exception{
-		
+	public QPD getQPDFromTemplate(Map<String, String> values) throws HL7Exception {
+
 		PipeParser parser = new PipeParser();
 		QBP_Q21 msg = (QBP_Q21) parser.parse(QBP_Q23_MSG_STRING);
 		QPD qpd = msg.getQPD();
 		qpd = this.processQPD(qpd, values);
 		return qpd;
-		
+
 	}
-	
-	public QPD processQPD(QPD qpd, Map<String,String> values) throws DataTypeException{
-		
+
+	public QPD processQPD(QPD qpd, Map<String, String> values) throws DataTypeException {
+
 		Varies varies = qpd.getQpd3_UserParametersInsuccessivefields();
 		GenericComposite elem = (GenericComposite) varies.getData();
 		Type[] items = elem.getComponents();
@@ -440,5 +474,5 @@ public class MessageFactory implements Serializable {
 	public String getMyDomain() {
 		return context.get("aa_namespace");
 	}
-	
+
 }

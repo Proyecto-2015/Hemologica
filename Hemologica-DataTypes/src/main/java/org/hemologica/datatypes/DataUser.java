@@ -6,10 +6,6 @@ public class DataUser {
 
 	private String personId;
 	
-	/**
-	 * TODO 
-	 * Permisos y roles
-	 */
 //	List<DataRole> roles;
 //	List<DataPermision> roles;
 	

@@ -24,7 +24,7 @@
         
         
     <!-- Código que identifica de forma unica el documento - OID es HEMOLOGICA-CDA y extension un numero generado por hemologica -->
-    <id root="2.16.858.0.0.1.10.2.3.1.1.1" extension="2"/>
+    <id root="2.16.858.0.0.1.10.2.3.1.1.1" extension="4"/>
         
     <!-- Identificación del tipo de documento -->
     <!-- El código que se encuentra en esta etiqueta, corresponde a un procedimiento. Hay que ver si es correcto utilizarlo --> 

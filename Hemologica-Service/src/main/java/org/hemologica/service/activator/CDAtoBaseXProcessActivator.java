@@ -7,7 +7,6 @@ public class CDAtoBaseXProcessActivator {
 	private BaseXConnection connectionDonation;
 	private BaseXConnection connectionTransfusion;
 	private BaseXConnection connectionLaboratory;
-	
 
 	public String process(String cdaString) {
 

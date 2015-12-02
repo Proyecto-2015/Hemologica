@@ -5,13 +5,13 @@
 	xmlns:int-jms="http://www.springframework.org/schema/integration/jms"
 	xmlns:int-jdbc="http://www.springframework.org/schema/integration/jdbc"
 	xmlns:int-xml="http://www.springframework.org/schema/integration/xml"
-	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
-		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration.xsd
-		http://www.springframework.org/schema/beans	http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/integration/jms http://www.springframework.org/schema/integration/jms/spring-integration-jms.xsd
-		http://www.springframework.org/schema/integration/jdbc http://www.springframework.org/schema/integration/jdbc/spring-integration-jdbc.xsd
-		http://www.springframework.org/schema/integration/xml http://www.springframework.org/schema/integration/xml/spring-integration-xml.xsd">
+	xsi:schemaLocation="http://www.springframework.org/schema/beans	http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+		http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.2.xsd
+		http://www.springframework.org/schema/integration http://www.springframework.org/schema/integration/spring-integration-4.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/integration/jms http://www.springframework.org/schema/integration/jms/spring-integration-jms-4.2.xsd
+		http://www.springframework.org/schema/integration/jdbc http://www.springframework.org/schema/integration/jdbc/spring-integration-jdbc-4.2.xsd
+		http://www.springframework.org/schema/integration/xml http://www.springframework.org/schema/integration/xml/spring-integration-xml-4.2.xsd">
 
 	<!-- <context:component-scan base-package="org.hemologica.service" /> -->
 
@@ -24,13 +24,13 @@
 	<!-- flow -->
 
 	<int-jms:message-driven-channel-adapter
-		id="jmsIn" channel="inbound-channel-1" container="messageListenerContainer" />
+		id="jmsIn" channel="outbound-channel-1" container="messageListenerContainer" />
 
-	<int:channel id="inbound-channel-1" />
+<!-- 	<int:channel id="inbound-channel-1" /> -->
 
 
-	<int:service-activator input-channel="inbound-channel-1"
-		output-channel="outbound-channel-1" ref="activator" method="process" />
+<!-- 	<int:service-activator input-channel="inbound-channel-1" -->
+<!-- 		output-channel="outbound-channel-1" ref="activator" method="process" /> -->
 
 	<int:channel id="outbound-channel-1" />
 
@@ -54,36 +54,74 @@
 		channel="outbound-channel-2" destination="cdaToXDSQueue" />
 
 
-	<int-jms:message-driven-channel-adapter id="cdaToXDSjmsIn" channel="cda_to_xds_inbound-channel-1" container="messageListenerContainer2" />
+	<int-jms:message-driven-channel-adapter
+		id="cdaToXDSjmsIn" channel="cda_to_xds_inbound-channel-1" container="messageListenerContainer2" />
 
 	<int:channel id="cda_to_xds_inbound-channel-1" />
 	<int:service-activator input-channel="cda_to_xds_inbound-channel-1"
-		ref="cdaXDSProcessActivator" method="process" />
+		output-channel="cda_to_xds_outbound-channel-1" ref="cdaXDSProcessActivator"
+		method="process" />
+
+<!-- 	<int:channel id="cda_to_xds_outbound-channel-1" /> -->
+<!-- 	<int-jms:outbound-channel-adapter id="jmsOut2" -->
+<!-- 		channel="cda_to_xds_outbound-channel-1" destination="cdaToBaseXQueue" /> -->
+<!-- 	<int-jms:message-driven-channel-adapter -->
+<!-- 		id="cdaToBaseXjmsIn" channel="cda_to_basex_inbound-channel-1" -->
+<!-- 		container="messageListenerContainer3" /> -->
 
 
 
+	<!-- <int:channel id="cda_to_basex_inbound-channel-1" /> -->
+	<!-- <int:router id="cdaXMLRouter" input-channel="cda_to_basex_inbound-channel-1" 
+		default-output-channel="discardCDA" -->
+	<!-- expression="xpath(payload, '/ClinicalDocument/code/@code', 'string')" 
+		> -->
+	<!-- <int:mapping value="4321000179102" channel="inBasexTransfusionOut" 
+		/> -->
+	<!-- <int:mapping value="4321000179103" channel="inBasexLaboratoryOut" /> -->
+	<!-- <int:mapping value="4321000179101" channel="inBasexDonationOut" /> -->
+	<!-- </int:router> -->
 
-	<int-jms:message-driven-channel-adapter id="cdaToBaseXjmsIn" channel="cda_to_basex_inbound-channel-1" container="messageListenerContainer3" />
+
+<!-- 	<int:channel id="cda_to_basex_inbound-channel-1" /> -->
+<!-- 	<int-xml:xpath-router id="cdaXMLRouter" input-channel="cda_to_basex_inbound-channel-1"  -->
+<!-- 							evaluate-as-string="true"> -->
+<!-- 		<int-xml:xpath-expression expression="/ClinicalDocument/title" /> -->
+<!-- 		<int-xml:mapping value="4321000179102" channel="inBasexTransfusionOut" /> -->
+<!-- 		<int-xml:mapping value="4321000179103" channel="inBasexLaboratoryOut" /> -->
+<!-- 		<int-xml:mapping value="4321000179101" channel="inBasexDonationOut" /> -->
+<!-- 	</int-xml:xpath-router> -->
+
+
+<!-- 	<int:router expression="#xpath(payload, '/ClinicalDocument/code/@code', 'string')" -->
+<!-- 				input-channel="cda_to_basex_inbound-channel-1" -->
+<!-- 				default-output-channel="discardCDA"> -->
+<!-- 		<int:mapping value="4321000179102" channel="inBasexTransfusionOut" /> -->
+<!-- 		<int:mapping value="4321000179103" channel="inBasexLaboratoryOut" /> -->
+<!-- 		<int:mapping value="4321000179101" channel="inBasexDonationOut" /> -->
+<!-- 	</int:router> -->
 	
 	
-	<int-xml:xpath-expression id="cdaRouterExpression" expression="/ClinicalDocument/code/@code" />
-	<int:channel id="cda_to_basex_inbound-channel-1" />
-	<int-xml:xpath-router 	id="cdaXMLRouter" input-channel="cda_to_basex_inbound-channel-1" 
-							xpath-expression-ref="cdaRouterExpression"> 
-		<int-xml:mapping value="4321000179101" channel="inBasexDonationOut"/>
-		<int-xml:mapping value="4321000179102" channel="inBasexTransfusionOut"/>
-		<int-xml:mapping value="4321000179103" channel="inBasexLaboratoryOut"/>
-	</int-xml:xpath-router>
+<!-- 	<bean id="routerCDAtoBaseX" class="org.hemologica.service.router.CDAToBaseXRouter"/> -->
+<!-- 	<int:router ref="routerCDAtoBaseX" input-channel="cda_to_basex_inbound-channel-1" /> -->
 
 
-	<int:channel id="inBasexDonationOut" />
-	<int:outbound-channel-adapter id="basexDonationOut" ref="baseXAdapterDonation" method="persist" channel="inBasexDonationOut" />
+<!-- 	<int:channel id="discardCDA" /> -->
+<!-- 	<int:logging-channel-adapter channel="discardCDA" auto-startup="true" level="INFO" log-full-message="true" /> -->
 
-	<int:channel id="inBasexTransfusionOut" />
-	<int:outbound-channel-adapter id="basexTransfusionOut" ref="baseXAdapterTransfusion" method="persist" channel="inBasexTransfusionOut" />
+<!-- 	<int:channel id="inBasexDonationOut" /> -->
+<!-- 	<int:outbound-channel-adapter id="basexDonationOut" -->
+<!-- 		ref="baseXAdapterDonation" method="persist" channel="inBasexDonationOut" /> -->
 
-	<int:channel id="inBasexLaboratoryOut" />
-	<int:outbound-channel-adapter id="basexLaboratoryOut" ref="baseXAdapterLaboratory" method="persist" channel="inBasexLaboratoryOut" />
+<!-- 	<int:channel id="inBasexTransfusionOut" /> -->
+<!-- 	<int:outbound-channel-adapter id="basexTransfusionOut" -->
+<!-- 		ref="baseXAdapterTransfusion" method="persist" channel="inBasexTransfusionOut" /> -->
+
+<!-- 	<int:channel id="inBasexLaboratoryOut" /> -->
+<!-- 	<int:outbound-channel-adapter id="basexLaboratoryOut" -->
+<!-- 		ref="baseXAdapterLaboratory" method="persist" channel="inBasexLaboratoryOut" /> -->
+
+
 
 
 </beans>
