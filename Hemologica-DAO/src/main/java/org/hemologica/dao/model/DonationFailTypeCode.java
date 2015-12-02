@@ -10,7 +10,10 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="donation_fail_type_codes")
-@NamedQuery(name="DonationFailTypeCode.findAll", query="SELECT d FROM DonationFailTypeCode d")
+@NamedQueries({
+@NamedQuery(name="DonationFailTypeCode.findAll", query="SELECT d FROM DonationFailTypeCode d"),
+@NamedQuery(name="DonationFailTypeCode.findBySnomedCode", query="SELECT d FROM DonationFailTypeCode d WHERE d.concept.conceptCode = :code")
+})
 public class DonationFailTypeCode implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -24,6 +27,11 @@ public class DonationFailTypeCode implements Serializable {
 
 	@Column(name="donation_fail_code_value")
 	private String donationFailCodeValue;
+	
+	@ManyToOne
+	@JoinColumn(name="donation_fail_code_snomed")
+	private Concept concept;
+	
 
 	public DonationFailTypeCode() {
 	}
@@ -52,4 +60,12 @@ public class DonationFailTypeCode implements Serializable {
 		this.donationFailCodeValue = donationFailCodeValue;
 	}
 
+	public Concept getConcept() {
+		return concept;
+	}
+
+	public void setConcept(Concept concept) {
+		this.concept = concept;
+	}
+	
 }

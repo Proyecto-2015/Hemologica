@@ -67,6 +67,16 @@ INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('42', '267008
 INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('43', '6736007');
 INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('44', '24484000');
 
+-- Resultados positivo - negativo
+INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('45', '10828004');
+INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('46', '260385009');
+
+-- Permanente y temporal 
+INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('47', '6934004');
+INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('48', '14803004');
+
+
+
 
 
 

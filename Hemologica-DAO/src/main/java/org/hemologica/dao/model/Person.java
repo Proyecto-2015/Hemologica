@@ -74,6 +74,9 @@ public class Person implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="person_state")
 	private StatesCode stateCode;
+	
+	@Column(name="person_zip_code")
+	private String zipCode;
 
 	//bi-directional many-to-one association to User
 	@OneToMany(mappedBy="person")
@@ -258,6 +261,14 @@ public class Person implements Serializable {
 
 	public void setUsers(List<User> users) {
 		this.users = users;
+	}
+
+	public String getZipCode() {
+		return zipCode;
+	}
+
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
 	}
 
 }

@@ -49,6 +49,7 @@ public class PersonBean implements PersonBeanLocal {
 			data.setSecondLastName((p.getPersonSecondLastname() == null) ? "" :p.getPersonSecondLastname());
 			data.setAddress((p.getPersonAddress() == null) ? "" :p.getPersonAddress());
 			data.setEmail((p.getPersonEmail() == null) ? "" :p.getPersonEmail());
+			data.setZipCode(p.getZipCode());
 			
 			if(p.getDocuments() != null && p.getDocuments().size() != 0){
 				

@@ -12,9 +12,7 @@ import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataDonation;
-import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.DataPerson;
-import org.hemologica.datatypes.DataProductType;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.LoginData;
@@ -30,9 +28,6 @@ public class RestServicesImpl implements IRestServices {
 	@Override
 	public Response login(LoginData datos) {
 		
-		System.out.println("holaaaa" + datos);
-		System.out.println(datos.getUser());
-		System.out.println(datos.getPassword());
 		return null;
 	}
 
@@ -76,50 +71,79 @@ public class RestServicesImpl implements IRestServices {
 	}
 	
 	@Override
-	public List<DataTransfusion> getTransfusions(String user) {
-		List<DataTransfusion> transfusions = new ArrayList<DataTransfusion>();
+	public List<DataTransfusion> getTransfusions(String userId) {
 		
-		DataTransfusion t1 = new DataTransfusion();
-		DataBank db = new DataBank();
-		db.setName("Banco X");
+		try {
+			
+			return FactoryBeans.getTransfusionBean().getTransfusionsUserId(userId);
 		
+		}catch (XMLDataBaseException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener los cdas XMLDataBaseException", e);
+			
+		} catch (SAXException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener los cdas SAXException", e);
+			
+		} catch (IOException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener los cdas IOException", e);
+			
+		} catch (ParserConfigurationException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener los cdas ParserConfigurationException", e);
+			
+		} catch (XPathExpressionException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener los cdas XPathExpressionException", e);
+			
+		} 
 		
-		t1.setBank(db);
+		return new ArrayList<DataTransfusion>();
 		
-		DataInstitution d2 = new DataInstitution();
-		d2.setName("Hospital de clinicas");
-		
-		t1.setInstitution(d2);
-		
-		t1.setName("Pedro");
-		t1.setDate("10/02/2015");
-		
-		DataProductType dp1 = new DataProductType();
-		dp1.setCode("0");
-		dp1.setDisplay("Plaquetas");
-		t1.setDataProduct(dp1);
-		transfusions.add(t1);
-		
-		DataTransfusion t2 = new DataTransfusion();
-		DataBank db2 = new DataBank();
-		db2.setName("Banco X");
-		
-		
-		t1.setBank(db2);
-		
-		DataInstitution di = new DataInstitution();
-		di.setName("Hospital de clinicas");
-		
-		t2.setInstitution(di);
-		t2.setName("Pedro");
-		t2.setDate("10/02/2015");
-		DataProductType dp2 = new DataProductType();
-		dp2.setCode("0");
-		dp2.setDisplay("Plasma");
-		t1.setDataProduct(dp2);
-		transfusions.add(t2);
-		
-		return transfusions;
+//		List<DataTransfusion> transfusions = new ArrayList<DataTransfusion>();
+//		
+//		DataTransfusion t1 = new DataTransfusion();
+//		DataBank db = new DataBank();
+//		db.setName("Banco X");
+//		
+//		
+//		t1.setBank(db);
+//		
+//		DataInstitution d2 = new DataInstitution();
+//		d2.setName("Hospital de clinicas");
+//		
+//		t1.setInstitution(d2);
+//		
+//		t1.setName("Pedro");
+//		t1.setDate("10/02/2015");
+//		
+//		DataProductType dp1 = new DataProductType();
+//		dp1.setCode("0");
+//		dp1.setDisplay("Plaquetas");
+//		t1.setDataProduct(dp1);
+//		transfusions.add(t1);
+//		
+//		DataTransfusion t2 = new DataTransfusion();
+//		DataBank db2 = new DataBank();
+//		db2.setName("Banco X");
+//		
+//		
+//		t1.setBank(db2);
+//		
+//		DataInstitution di = new DataInstitution();
+//		di.setName("Hospital de clinicas");
+//		
+//		t2.setInstitution(di);
+//		t2.setName("Pedro");
+//		t2.setDate("10/02/2015");
+//		DataProductType dp2 = new DataProductType();
+//		dp2.setCode("0");
+//		dp2.setDisplay("Plasma");
+//		t1.setDataProduct(dp2);
+//		transfusions.add(t2);
+//		
+//		return transfusions;
 	}
 
 	@Override

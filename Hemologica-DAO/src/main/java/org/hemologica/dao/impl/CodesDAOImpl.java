@@ -16,6 +16,7 @@ import org.hemologica.dao.model.DonationTypesCode;
 import org.hemologica.dao.model.EventSeverityCode;
 import org.hemologica.dao.model.MessageSendOption;
 import org.hemologica.dao.model.ResponsibleTransfusionPerson;
+import org.hemologica.dao.model.ResultsCode;
 import org.hemologica.dao.model.StatesCode;
 import org.hemologica.dao.model.TransfusionEventsCode;
 import org.hemologica.dao.model.TransfusionLaboratoryCode;
@@ -194,6 +195,62 @@ public class CodesDAOImpl implements ICodesDAO{
 		Query query = em.createNamedQuery("DonationEventsCode.findBySnomedCode");
 		query.setParameter("code", event);
 		return (DonationEventsCode) query.getSingleResult();
+	}
+
+	public DonationLaboratoyCode getDonationsAnalysisBySnomedCode(String analisisCode) {
+		
+		Query query = em.createNamedQuery("DonationLaboratoyCode.findBySnomedCode");
+		query.setParameter("code", analisisCode);
+		return (DonationLaboratoyCode) query.getSingleResult();
+	}
+
+	public ResultsCode getBooleanResultBySnomedCode(String resultCode) {
+		
+		Query query = em.createNamedQuery("ResultsCode.findBySnomedCode");
+		query.setParameter("code", resultCode);
+		return (ResultsCode) query.getSingleResult();
+	}
+
+	public DonationFailCausesCode getRejectionCauseBySnomedCode(String rejectionCode) {
+		
+		Query query = em.createNamedQuery("DonationFailCausesCode.findBySnomedCode");
+		query.setParameter("code", rejectionCode);
+		return (DonationFailCausesCode) query.getSingleResult();
+	}
+
+	public DonationFailTypeCode getRejectionTypesBySnomedCode(String rejectionType) {
+		
+		Query query = em.createNamedQuery("DonationFailTypeCode.findBySnomedCode");
+		query.setParameter("code", rejectionType);
+		return (DonationFailTypeCode) query.getSingleResult();
+	}
+
+	public UnitsType getProductBySnomedCode(String componentCode) {
+		
+		Query query = em.createNamedQuery("UnitsType.findBySnomedCode");
+		query.setParameter("code", componentCode);
+		
+		Object o = query.getSingleResult();
+		
+		return (o != null) ? (UnitsType) o : null;
+	}
+
+	public TransfusionEventsCode getTransfusionEventBySnomedCode(String event) {
+		
+		Query query = em.createNamedQuery("TransfusionEventsCode.findBySnomedCode");
+		query.setParameter("code", event);
+		Object o = query.getSingleResult();
+		
+		return (o != null) ? (TransfusionEventsCode) o : null;
+	}
+
+	public TransfusionLaboratoryCode getTransfusionAnalysisBySnomedCode(String executeXPathString) {
+		
+		Query query = em.createNamedQuery("TransfusionLaboratoryCode.findBySnomedCode");
+		query.setParameter("code", executeXPathString);
+		Object o = query.getSingleResult();
+		
+		return (o != null) ? (TransfusionLaboratoryCode) o : null;
 	}
 
 }
