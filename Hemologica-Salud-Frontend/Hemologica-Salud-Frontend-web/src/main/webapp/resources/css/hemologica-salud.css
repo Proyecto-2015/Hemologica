@@ -74,6 +74,30 @@ h6 .h6 {
 
 }
 
+
+.logos-fing{
+	
+    height: 40px;
+    width: 70px;
+/*     padding-right: 50px; */
+
+}
+
+.logos-nib{
+	
+    height: 40px;
+    width: 200px;
+
+}
+
+.logos-udelar{
+	
+    height: 40px;
+    width: 150px;
+    padding-right: 50px;
+
+}
+
 .page-footer {
 	margin: 0 0 0 0;
 	border-bottom: none;
