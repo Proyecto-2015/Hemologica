@@ -53,7 +53,7 @@ public class UserBB implements Serializable{
 	@PostConstruct
 	public void init(){
 		
-		try {
+//		try {
 			
 			dataUser = sessionBB.getDataUser();
 			states = applicationBB.getStates();
@@ -66,27 +66,21 @@ public class UserBB implements Serializable{
 				
 			}else{
 
-				File file = new File("/Users/paularoche/Desktop/img.png");
-				
-				
-				byte[] bFile = new byte[(int) file.length()];
-//			        
-				FileInputStream fileInputStream = new FileInputStream(file);
-				fileInputStream.read(bFile);
-				fileInputStream.close();
-				imageByte = bFile;
-//				image =  new DefaultStreamedContent(new FileInputStream(file), "image/png");
-				
-
-				//imageByte = imgBytes;
-				
-				image = new DefaultStreamedContent(new ByteArrayInputStream(bFile), "image/png"); 
+//				File file = new File("/Users/paularoche/Desktop/img.png");
+//				
+//				byte[] bFile = new byte[(int) file.length()];    
+//				FileInputStream fileInputStream = new FileInputStream(file);
+//				fileInputStream.read(bFile);
+//				fileInputStream.close();
+//				imageByte = bFile;
+//				
+//				image = new DefaultStreamedContent(new ByteArrayInputStream(bFile), "image/png"); 
 				
 			}
-		} catch (IOException e) {
-			
-			logger.log(Level.SEVERE, "Error al llamar al servicio web", e);
-		}
+//		} catch (IOException e) {
+//			
+//			logger.log(Level.SEVERE, "Error al llamar al servicio web", e);
+//		}
 	}
 	
 	public DataPerson getDataUser() {
