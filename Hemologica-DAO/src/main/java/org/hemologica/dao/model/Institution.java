@@ -104,18 +104,5 @@ public class Institution implements Serializable {
 		this.units = units;
 	}
 
-	public Unit addUnit(Unit unit) {
-		getUnits().add(unit);
-		unit.setInstitution(this);
-
-		return unit;
-	}
-
-	public Unit removeUnit(Unit unit) {
-		getUnits().remove(unit);
-		unit.setInstitution(null);
-
-		return unit;
-	}
 
 }

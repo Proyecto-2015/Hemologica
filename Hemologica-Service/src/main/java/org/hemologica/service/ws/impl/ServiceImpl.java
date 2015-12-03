@@ -2,6 +2,8 @@ package org.hemologica.service.ws.impl;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,7 +16,12 @@ import javax.jms.Session;
 import javax.jms.TextMessage;
 import javax.jws.WebService;
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.hemologica.dao.model.Movement;
+import org.hemologica.service.business.IMovementBean;
+import org.hemologica.service.datatype.MovementData;
 import org.hemologica.service.ws.Service;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 @WebService(endpointInterface = "org.hemologica.service.ws.Service")
 public class ServiceImpl implements Service {
@@ -62,6 +69,15 @@ public class ServiceImpl implements Service {
 			logger.log(Level.SEVERE, null, e);
 		}
 
+	}
+
+
+	@Override
+	public void importMovements(List<MovementData> movements) throws ParseException {
+		ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring/beans.xml");
+		IMovementBean movementBean = (IMovementBean) context.getBean("movementBean");
+		movementBean.save(movements);
+		
 	}
 
 }

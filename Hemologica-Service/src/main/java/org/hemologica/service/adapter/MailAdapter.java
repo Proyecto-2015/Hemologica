@@ -24,8 +24,10 @@ public class MailAdapter {
 	private String username;
 	private String password;
 
-	public void send(MailData data) {
+	public void process(String mailDataJson) {
 
+		MailData data = new Gson().fromJson(mailDataJson, MailData.class);
+		
 		Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication(username, password);
@@ -53,9 +55,33 @@ public class MailAdapter {
 			logger.log(Level.INFO, "Send mail: "+ new Gson().toJson(data));
 
 		} catch (MessagingException e) {
-			throw new RuntimeException(e);
+			logger.log(Level.SEVERE, "Cannot send mail to: "+ new Gson().toJson(data), e);
 		}
 
+	}
+
+	public Properties getProperties() {
+		return properties;
+	}
+
+	public void setProperties(Properties properties) {
+		this.properties = properties;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }

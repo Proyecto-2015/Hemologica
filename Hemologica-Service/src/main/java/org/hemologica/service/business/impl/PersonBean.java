@@ -1,6 +1,5 @@
 package org.hemologica.service.business.impl;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,9 +11,6 @@ import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPathExpressionException;
-
 import org.hemologica.dao.IIdentificationDAO;
 import org.hemologica.dao.IPersonDAO;
 import org.hemologica.dao.IPersonRecordDAO;
@@ -25,8 +21,6 @@ import org.hemologica.dao.model.Identification;
 import org.hemologica.dao.model.Person;
 import org.hemologica.dao.model.PersonsRecord;
 import org.hemologica.empi.adapter.IEMPIAdapter;
-import org.hemologica.empi.adapter.pixpdq.exception.PDQAdapterException;
-import org.hemologica.empi.adapter.pixpdq.exception.PIXAdapterException;
 import org.hemologica.empi.adapter.pixpdq.message.CreatePatientRequest;
 import org.hemologica.empi.adapter.pixpdq.message.CreatePatientResponse;
 import org.hemologica.empi.adapter.pixpdq.message.PDQQueryPatientRequest;
@@ -38,8 +32,7 @@ import org.hemologica.service.utils.xml.XMLUtils;
 import org.hemologica.xds.repository.adapter.client.IRepositoryXDS;
 import org.hemologica.xmldatabase.connection.impl.BaseXConnection;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
-import org.xml.sax.SAXException;
+
 
 @Component
 public class PersonBean implements IPersonBean, Serializable {

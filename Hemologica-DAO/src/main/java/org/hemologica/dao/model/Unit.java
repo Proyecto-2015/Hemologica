@@ -11,7 +11,11 @@ import java.util.List;
  */
 @Entity
 @Table(name="units")
-@NamedQuery(name="Unit.findAll", query="SELECT u FROM Unit u")
+@NamedQueries(value={
+	@NamedQuery(name="Unit.findAll", query="SELECT u FROM Unit u"),
+	@NamedQuery(name="Unit.findByInstitutionCode", query="SELECT u FROM Unit u WHERE u.unitInstitutionCode = :code"),
+	@NamedQuery(name="Unit.findByUUID", query="SELECT u FROM Unit u WHERE u.UUID = :uuid")
+})
 public class Unit implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -28,11 +32,6 @@ public class Unit implements Serializable {
 	//bi-directional many-to-one association to Movement
 	@OneToMany(mappedBy="unit")
 	private List<Movement> movements;
-
-	//bi-directional many-to-one association to Institution
-	@ManyToOne
-	@JoinColumn(name="unit_institution_id")
-	private Institution institution;
 
 	//bi-directional many-to-one association to Center
 	@ManyToOne
@@ -91,14 +90,6 @@ public class Unit implements Serializable {
 		movement.setUnit(null);
 
 		return movement;
-	}
-
-	public Institution getInstitution() {
-		return this.institution;
-	}
-
-	public void setInstitution(Institution institution) {
-		this.institution = institution;
 	}
 
 	public Center getCenter() {

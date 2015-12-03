@@ -14,13 +14,8 @@ public class CDAtoUserProcessActivator {
 	public String process(String userData){
 		
 			UserData data = new Gson().fromJson(userData, UserData.class);
-			
-			
-			
-			
-			MailData mailData = new MailData();
-			//TODO load mailData...
-			return new Gson().toJson(mailData);
+			MailData mailData = userBean.createUser(data);
+			return mailData != null ? new Gson().toJson(mailData) : null;
 			
 	}
 

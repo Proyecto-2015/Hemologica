@@ -24,7 +24,7 @@
 	<!-- flow -->
 
 	<int-jms:message-driven-channel-adapter
-		id="jmsIn" channel="outbound-channel-1" container="messageListenerContainer" />
+		id="jmsIn" channel="outbound-channel-1" container="messageListenerContainer1" />
 
 <!-- 	<int:channel id="inbound-channel-1" /> -->
 
@@ -50,17 +50,25 @@
 
 	<int:channel id="outbound-channel-2" />
 
-	<int-jms:outbound-channel-adapter id="jmsOut"
-		channel="outbound-channel-2" destination="cdaToXDSQueue" />
+	<int-jms:outbound-channel-adapter id="jmsOut" channel="outbound-channel-2" destination="cdaToXDSAndUserQueue" />
+	
+	<int:channel id="cda_to_xds_and_user_inbound-channel-1"/>
+	<int:recipient-list-router auto-startup="true" input-channel="cda_to_xds_and_user_inbound-channel-1">
+		<int:recipient channel="cda_to_xds_inbound-channel-1" />
+		<int:recipient channel="cda_to_user_inbound-channel-1" />
+	</int:recipient-list-router>
 
 
-	<int-jms:message-driven-channel-adapter
-		id="cdaToXDSjmsIn" channel="cda_to_xds_inbound-channel-1" container="messageListenerContainer2" />
+	<int-jms:message-driven-channel-adapter id="cdaToXDSandUserjmsIn" channel="cda_to_xds_and_user_inbound-channel-1" container="messageListenerContainer2" />
 
-	<int:channel id="cda_to_xds_inbound-channel-1" />
-	<int:service-activator input-channel="cda_to_xds_inbound-channel-1"
-		output-channel="cda_to_xds_outbound-channel-1" ref="cdaXDSProcessActivator"
-		method="process" />
+	<int:channel id="cda_to_user_inbound-channel-1" />
+	<int:service-activator ref="cdaToUserProcessActivator" input-channel="cda_to_user_inbound-channel-1" output-channel="user_to_mail_inbound-channel-1"/>
+	
+	<int:channel id="user_to_mail_inbound-channel-1" />
+	<int:outbound-channel-adapter id="user_to_mail_adapter" channel="user_to_mail_inbound-channel-1" ref="mailAdapter" method="process" />
+	
+	<int:channel id="cda_to_xds_inbound-channel-1"/>
+	<int:outbound-channel-adapter id="cda_to_xds_adapter" channel="cda_to_xds_inbound-channel-1" ref="cdaXDSProcessActivator" method="process" />
 
 <!-- 	<int:channel id="cda_to_xds_outbound-channel-1" /> -->
 <!-- 	<int-jms:outbound-channel-adapter id="jmsOut2" -->
@@ -121,7 +129,7 @@
 <!-- 	<int:outbound-channel-adapter id="basexLaboratoryOut" -->
 <!-- 		ref="baseXAdapterLaboratory" method="persist" channel="inBasexLaboratoryOut" /> -->
 
-
+	
 
 
 </beans>

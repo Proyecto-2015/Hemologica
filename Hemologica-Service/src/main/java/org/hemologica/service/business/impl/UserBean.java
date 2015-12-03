@@ -1,15 +1,12 @@
 package org.hemologica.service.business.impl;
 
-import java.net.InetAddress;
-import javax.mail.Address;
+import java.io.IOException;
 import java.security.SecureRandom;
-import java.security.Timestamp;
 import java.util.Date;
-
+import java.util.Properties;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
-
 import org.hemologica.dao.IPersonDAO;
 import org.hemologica.dao.IUserDAO;
 import org.hemologica.dao.impl.PersonDAOImpl;
@@ -20,8 +17,6 @@ import org.hemologica.service.business.IUserBean;
 import org.hemologica.service.datatype.MailData;
 import org.hemologica.service.datatype.UserData;
 import org.springframework.stereotype.Component;
-
-import com.fasterxml.jackson.databind.ser.std.InetAddressSerializer;
 
 
 @Component
@@ -50,17 +45,20 @@ public class UserBean implements IUserBean {
 			User user = new User();
 			user.setPerson(person);
 			user.setActiveAccount(true);
-			user.setActiveAccountToken(this.generateToken());
+			String token = this.generateToken();
+			user.setActiveAccountToken(token);
 			user.setActiveAccountTokenTime(new Date());
 			user.setPasswordReset(false);
 			userDAO.create(user);
-		
+			
+			tx.commit();
+			
 			if(person.getPersonEmail() != null){
 				MailData mail = new MailData();
 				mail.setAddressTO(mail.getAddressTO());
+				mail.setContent(this.buildMailContent(token));
+				return mail;
 			}
-			
-			tx.commit();
 			
 		} catch (Exception ex) {
 			if (tx.isActive()) {
@@ -77,6 +75,18 @@ public class UserBean implements IUserBean {
 		random.nextBytes(bytes);
 		String token = bytes.toString();
 		return token;
+	}
+	
+	private String buildMailContent(String token) throws IOException{
+		
+		Properties prop = new Properties();
+		prop.load(UserBean.class.getClassLoader().getResourceAsStream("hemologica.properties"));
+		String firstAccessContent = prop.getProperty("user.account.active.content");
+		String firstAccessURL = prop.getProperty("user.account.active.url");
+		firstAccessURL = firstAccessURL.replaceAll("{token}", token);
+		firstAccessContent = firstAccessContent.replaceAll("{url}", firstAccessURL);
+		return firstAccessContent;
+		
 	}
 
 }

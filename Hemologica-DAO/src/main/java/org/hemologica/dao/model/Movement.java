@@ -1,7 +1,10 @@
 package org.hemologica.dao.model;
 
 import java.io.Serializable;
+import java.util.Date;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 
 /**
@@ -17,6 +20,13 @@ public class Movement implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private String id;
+	
+	
+	@NotNull
+	@Column(columnDefinition="movement_date", nullable=false)
+	private Date date;
+
+
 
 	//bi-directional many-to-one association to MovementsType
 	@ManyToOne
@@ -67,6 +77,15 @@ public class Movement implements Serializable {
 
 	public void setUnit(Unit unit) {
 		this.unit = unit;
+	}
+	
+	
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 }

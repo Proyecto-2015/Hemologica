@@ -32,7 +32,7 @@
 		<class>org.hemologica.dao.model.DonationFailCausesCode</class>
 		<class>org.hemologica.dao.model.DonationFailTypeCode</class>
 		<class>org.hemologica.dao.model.DonationLaboratoyCode</class>
-		<class>org.hemologica.dao.model.DonationStatesCode</class>
+		<class>org.hemologica.dao.model.DonationStateCode</class>
 		<class>org.hemologica.dao.model.DonationTypesCode</class>
 		<class>org.hemologica.dao.model.GeoLocation</class>
 		<class>org.hemologica.dao.model.Identification</class>
@@ -47,7 +47,6 @@
 		<class>org.hemologica.dao.model.PersonsRecord</class>
 		<class>org.hemologica.dao.model.Role</class>
 		<class>org.hemologica.dao.model.RolePermission</class>
-		<class>org.hemologica.dao.model.Service</class>
 		<class>org.hemologica.dao.model.StatesCode</class>
 		<class>org.hemologica.dao.model.TransfusionEventsCode</class>
 		<class>org.hemologica.dao.model.TransfusionLaboratoryCode</class>
