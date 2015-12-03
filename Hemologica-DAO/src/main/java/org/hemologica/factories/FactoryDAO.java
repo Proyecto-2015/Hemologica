@@ -23,13 +23,6 @@ import org.hemologica.dao.impl.PersonRecordDAOImpl;
 
 public class FactoryDAO {
 
-	// private static IInstitutionDAO institutionDAO;
-	// private static IPersonDAO personDAO;
-	// private static IBloodDAO bloodDAO;
-	// private static ICodesDAO codesDAO;
-	// private static ICenterDAO centerDAO;
-	// private static IAdvertismentDAO advertismentDAO;
-	// private static INotificationDAO notificationDAO;
 
 	public static IPersonDAO getRestServicesUtils(EntityManager em) {
 		return new PersonDAOImpl(em);

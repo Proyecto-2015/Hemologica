@@ -2,20 +2,18 @@ package org.hemologica.salud.web.rest;
 
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.Response;
 import org.hemologica.constants.ConstansJson;
 import org.hemologica.constants.ConstantsRest;
 import org.hemologica.datatypes.DataBank;
-import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataDonation;
+import org.hemologica.datatypes.DataDonationsStatisticsResults;
 import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataProductType;
 import org.hemologica.datatypes.DataResponse;
@@ -26,8 +24,8 @@ import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataUnit;
 import org.hemologica.datatypes.DataUnitInfo;
 import org.hemologica.datatypes.DonationFilterData;
+import org.hemologica.datatypes.DataDonationsStatistics;
 import org.hemologica.datatypes.DataInstitution;
-import org.hemologica.datatypes.LoginData;
 import org.hemologica.datatypes.MailData;
 import org.hemologica.datatypes.DataMessageOption;
 import org.hemologica.datatypes.TransfusionFilterData;
@@ -36,16 +34,16 @@ import org.hemologica.datatypes.TransfusionFilterData;
 @RequestScoped
 public interface IRestServices {
 	
-	@POST
-	@Path("/login")
-	@Consumes("application/json")
-	public Response login(LoginData datos);
-	
-	
-	@GET
-	@Path("/login")
-	@Produces("application/json")
-	public void getProductInJSON();
+//	@POST
+//	@Path("/login")
+//	@Consumes("application/json")
+//	public Response login(LoginData datos);
+//	
+//	
+//	@GET
+//	@Path("/login")
+//	@Produces("application/json")
+//	public void getProductInJSON();
 	
 	@GET
 	@Path("/donations")
@@ -115,7 +113,7 @@ public interface IRestServices {
 	@GET
 	@Path("/"+ConstantsRest.PATH_CODES + "/" + ConstantsRest.PATH_BLOOD_TYPES)
 	@Produces("application/json")
-	public List<DataBloodType> getBloodTypes();
+	public List<DataCode> getBloodTypes();
 	
 	@GET
 	@Path("/"+ConstantsRest.PATH_CODES + "/" + ConstantsRest.PATH_PRODUCTS)
@@ -246,6 +244,11 @@ public interface IRestServices {
 	@Path("/" + ConstantsRest.PATH_CODES +"/"+ ConstantsRest.PATH_DONATION_STATES)
 	@Produces("application/json")
 	public List<DataCode> getDonationState();
+	
+	@POST
+	@Path("/"+ConstantsRest.PATH_STATISTICS)
+	@Produces("application/json")
+	public DataDonationsStatisticsResults getDonationsStatistics(DataDonationsStatistics donationsStatisticsData);
 
 	
 }

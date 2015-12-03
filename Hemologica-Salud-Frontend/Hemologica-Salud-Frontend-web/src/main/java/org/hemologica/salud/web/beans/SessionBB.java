@@ -15,9 +15,6 @@ import org.hemologica.salud.factories.RestFactory;
 
 public class SessionBB implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2534391148649719007L;
 	private static final Logger logger = Logger.getLogger(SessionBB.class.getName());
 	
@@ -40,7 +37,7 @@ public class SessionBB implements Serializable {
 			this.responsibleTransfusionPersons = RestFactory.getServicesClient().getResponsibleTransfusionPersons(bank);
 			
 			person = new DataPerson();
-			person.setId("unId");
+			person.setId("1");
 			this.userInstitutions = RestFactory.getServicesClient().getInstitution(person.getId());
 			this.userBanks = RestFactory.getServicesClient().getBanks(person.getId());
 			

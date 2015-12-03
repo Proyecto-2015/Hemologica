@@ -73,8 +73,11 @@ public class DataDonation implements Serializable {
 	}
 
 	public boolean isApproved() {
-			
-		return approved;
+		
+		if(state != null && state.getCode().equals("1"))
+			return true;
+		else 
+			return false;
 
 	}
 	

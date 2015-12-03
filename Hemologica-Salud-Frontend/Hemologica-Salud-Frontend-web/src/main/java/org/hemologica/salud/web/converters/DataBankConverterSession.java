@@ -9,7 +9,7 @@ import org.hemologica.datatypes.DataBank;
 import org.hemologica.salud.web.beans.ApplicationBB;
 import org.hemologica.salud.web.beans.SessionBB;;
 
-public class DataBankConverter implements Converter{
+public class DataBankConverterSession implements Converter{
 
 	
 	private ApplicationBB applicationBB;
@@ -21,7 +21,7 @@ public class DataBankConverter implements Converter{
 			return null;
 		}
 
-		List<DataBank> typesList = applicationBB.getBanks();
+		List<DataBank> typesList = sessionBB.getUserBanks();
 		
 		if (typesList != null) {
 			for (DataBank type : typesList) {

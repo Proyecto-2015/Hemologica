@@ -67,6 +67,15 @@ public class Center implements Serializable {
 	//bi-directional many-to-one association to Unit
 	@OneToMany(mappedBy="center")
 	private List<Unit> units;
+	
+	//bi-directional many-to-one association to Movement
+	@OneToMany(mappedBy="center")
+	private List<Movement> movements;
+
+	//bi-directional many-to-one association to UsersRoleService
+	@OneToMany(mappedBy="center")
+	private List<UsersRoleService> usersRoleServices;
+
 
 	public Center() {
 	}
@@ -187,6 +196,50 @@ public class Center implements Serializable {
 		unit.setCenter(null);
 
 		return unit;
+	}
+	
+	public List<Movement> getMovements() {
+		return this.movements;
+	}
+
+	public void setMovements(List<Movement> movements) {
+		this.movements = movements;
+	}
+
+	public Movement addMovement(Movement movement) {
+		getMovements().add(movement);
+		movement.setCenter(this);
+
+		return movement;
+	}
+
+	public Movement removeMovement(Movement movement) {
+		getMovements().remove(movement);
+		movement.setCenter(null);
+
+		return movement;
+	}
+
+	public List<UsersRoleService> getUsersRoleServices() {
+		return this.usersRoleServices;
+	}
+
+	public void setUsersRoleServices(List<UsersRoleService> usersRoleServices) {
+		this.usersRoleServices = usersRoleServices;
+	}
+
+	public UsersRoleService addUsersRoleService(UsersRoleService usersRoleService) {
+		getUsersRoleServices().add(usersRoleService);
+		usersRoleService.setCenter(this);
+
+		return usersRoleService;
+	}
+
+	public UsersRoleService removeUsersRoleService(UsersRoleService usersRoleService) {
+		getUsersRoleServices().remove(usersRoleService);
+		usersRoleService.setCenter(null);
+
+		return usersRoleService;
 	}
 
 }

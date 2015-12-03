@@ -31,7 +31,7 @@
 								<tr>
 									<th><h:outputText value="#{messages.label_product}" /></th>
 									<c:forEach items="#{applicationBB.bloodTypes}" var="bloodType">
-										<th><h:outputText value="#{bloodType.displayName}" /></th>
+										<th><h:outputText value="#{messages[bloodType.displayName]}" /></th>
 									</c:forEach>
 								</tr>
 							</thead>
@@ -84,7 +84,7 @@
 										</label>
 										
 										<div class="col-md-9 col-lg-2">
-											<h:selectOneMenu  class="form-control" id="stock_bank_filter"
+											<h:selectOneMenu style="height: 34px;"  class="form-control" id="stock_bank_filter"
 												value="#{stockBB.banksItemsSelected}">
 												<f:selectItem itemLabel="" itemValue="" />
 												<f:selectItems value="#{stockBB.banksItems}" />
@@ -98,7 +98,7 @@
 										</label>
 											
 										<div class="col-md-9 col-lg-2">	
-											<h:selectOneMenu  class="form-control" id="stock_product_type_filter"
+											<h:selectOneMenu  style="height: 34px;" class="form-control" id="stock_product_type_filter"
 												value="#{stockBB.productTypeCode}"
 												converter="#{dataProductTypeConverter}">
 												<f:selectItem itemLabel="" itemValue="" />
@@ -116,7 +116,7 @@
 										</label>
 										
 										<div class="col-md-9 col-lg-2">
-											<h:selectOneMenu  class="form-control" id="stock_blood_type_filter_abo"
+											<h:selectOneMenu  style="height: 34px;" class="form-control" id="stock_blood_type_filter_abo"
 												value="#{stockBB.bloodTypeABO}"
 												converter="#{dataBloodTypeConverterABO}">
 												<f:selectItem itemLabel="" itemValue="" />
@@ -127,7 +127,7 @@
 										</div>
 										
 										<div class="col-md-9 col-lg-2">
-											<h:selectOneMenu  class="form-control" id="stock_blood_type_filter_rh"
+											<h:selectOneMenu style="height: 34px;" class="form-control" id="stock_blood_type_filter_rh"
 												value="#{stockBB.bloodTypeRH}"
 												converter="#{dataBloodTypeConverterRH}">
 												<f:selectItem itemLabel="" itemValue="" />
@@ -197,7 +197,7 @@
 									<tr>
 										<th><h:outputText value="#{messages.label_product}" /></th>
 										<c:forEach items="#{applicationBB.bloodTypes}" var="bloodType">
-											<th><h:outputText value="#{bloodType.displayName}" /></th>
+											<th><h:outputText value="#{messages[bloodType.displayName]}" /></th>
 										</c:forEach>
 									</tr>
 								</thead>

@@ -10,20 +10,14 @@ import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.annotation.PostConstruct;
 import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import org.apache.http.client.ClientProtocolException;
 import org.hemologica.datatypes.DataBank;
-import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataProductType;
 import org.hemologica.datatypes.DataStock;
@@ -45,8 +39,6 @@ import org.primefaces.model.map.LatLng;
 import org.primefaces.model.map.MapModel;
 import org.primefaces.model.map.Marker;
 
-//@Named("stockBB")
-//@ViewScoped
 public class StockBB implements Serializable {
 
 	/**

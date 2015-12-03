@@ -6,10 +6,11 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import org.hemologica.datatypes.DataBank;
+import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.salud.web.beans.ApplicationBB;
 import org.hemologica.salud.web.beans.SessionBB;;
 
-public class DataBankConverter implements Converter{
+public class DataFilterConverter implements Converter{
 
 	
 	private ApplicationBB applicationBB;
@@ -17,14 +18,17 @@ public class DataBankConverter implements Converter{
 	
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
+		
 		if (value == null) {
 			return null;
 		}
+		
+		DonationFilterData donationFIlterData = (DonationFilterData) component.getAttributes().get("filterItem");
 
-		List<DataBank> typesList = applicationBB.getBanks();
+		List<DonationFilterData> typesList = donationFIlterData.getOptions();
 		
 		if (typesList != null) {
-			for (DataBank type : typesList) {
+			for (DonationFilterData type : typesList) {
 
 				if (type.getCode() != null && type.getCode().equals(value)) {
 					return type;
@@ -37,9 +41,9 @@ public class DataBankConverter implements Converter{
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		
-		if(value instanceof DataBank){
+		if(value instanceof DonationFilterData){
 			
-			return ((DataBank)value).getCode();
+			return ((DonationFilterData)value).getCode();
 		}
 		return null;
 	}

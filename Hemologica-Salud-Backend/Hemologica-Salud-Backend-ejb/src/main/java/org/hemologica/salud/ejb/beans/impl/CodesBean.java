@@ -6,7 +6,6 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import org.hemologica.dao.enums.DataDonationStateEnum;
 import org.hemologica.dao.model.BloodTypes;
 import org.hemologica.dao.model.CitiesCode;
 import org.hemologica.dao.model.CountriesCode;
@@ -14,7 +13,9 @@ import org.hemologica.dao.model.DocumentsTypesCode;
 import org.hemologica.dao.model.DonationEventsCode;
 import org.hemologica.dao.model.DonationFailCausesCode;
 import org.hemologica.dao.model.DonationFailTypeCode;
+import org.hemologica.dao.model.DonationFilterCode;
 import org.hemologica.dao.model.DonationLaboratoyCode;
+import org.hemologica.dao.model.DonationStateCode;
 import org.hemologica.dao.model.DonationTypesCode;
 import org.hemologica.dao.model.EventSeverityCode;
 import org.hemologica.dao.model.MessageSendOption;
@@ -26,6 +27,7 @@ import org.hemologica.dao.model.UnitsType;
 import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataMessageOption;
 import org.hemologica.datatypes.DataProductType;
+import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.factories.FactoryDAO;
 import org.hemologica.salud.ejb.beans.CodesBeanLocal;
 
@@ -167,12 +169,14 @@ public class CodesBean implements CodesBeanLocal {
 	public List<DataCode> getDonationsStates() {
 		
 		List<DataCode> dataCodes = new ArrayList<>();
+		
+		List<DonationStateCode> list = FactoryDAO.getCodesDAO(em).getDonationsStates();
 
-		for(DataDonationStateEnum a : DataDonationStateEnum.getStates()){
+		for(DonationStateCode a : list){
 			
 			DataCode dataCode = new DataCode();
-			dataCode.setCode(a.getValue());
-			dataCode.setDisplayName(a.getLabel());
+			dataCode.setCode(a.getDonationStateCodeValue());
+			dataCode.setDisplayName(a.getDonationStateCodeLabel());
 			dataCodes.add(dataCode);
 			
 		}
@@ -464,5 +468,62 @@ public class CodesBean implements CodesBeanLocal {
 		eventCode.setDisplayName(donationEventsCode.getTransfusionLaboratoryCodeLabel());
 
 		return eventCode;
+	}
+
+	@Override
+	public List<DataCode> getBloodTypes() {
+
+		List<DataCode> listReturn = new ArrayList<>();
+		List<BloodTypes> list = FactoryDAO.getCodesDAO(em).getBloodTypes();
+		
+		for(BloodTypes bloodType :list){
+			
+			DataCode data = new DataCode();
+			data.setCode(bloodType.getBloodTypeCodeValue());
+			data.setDisplayName(bloodType.getBloodTypeCodeLabel());
+			listReturn.add(data);
+			
+		}
+		return listReturn;
+
+	}
+
+	@Override
+	public List<DonationFilterData> getDonationsFilters() {
+		
+		List<DonationFilterData> listReturn = new ArrayList<>();
+		List<DonationFilterCode> list = FactoryDAO.getCodesDAO(em).getDonationsFilters();
+		
+		for(DonationFilterCode filter :list){
+			
+			DonationFilterData data = new DonationFilterData();
+			data.setCode(filter.getDonationFilterCodesValue());
+			data.setDisplayName(filter.getDonationFilterCodesLabel());
+			
+			List<DonationFilterData> listOptions = new ArrayList<>();
+			
+			if(filter.getDonationFilterCodesSql()!= null && !filter.getDonationFilterCodesSql().equals("")){
+				
+				List<Object[]> options = FactoryDAO.getCodesDAO(em).executeSQL(filter.getDonationFilterCodesSql());
+				for(Object[] optionItem : options){
+					
+					String value = null,label = null;
+					if(optionItem[0] != null){
+						value = (String) optionItem[0];
+					}
+					if(optionItem[1]  != null){
+						label = (String) optionItem[1];
+					}
+					DonationFilterData dataCode = new DonationFilterData();
+					dataCode.setCode(value);
+					dataCode.setDisplayName(label);
+					listOptions.add(dataCode);	
+				}
+			}
+			data.setOptions(listOptions);
+			listReturn.add(data);
+			
+		}
+		return listReturn;
 	}
 }

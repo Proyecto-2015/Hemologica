@@ -12,163 +12,145 @@
 	xmlns:pe="http://primefaces.org/ui/extensions">
 	
 <h:head>
-	
-	<script type="text/javascript">
-    function pieExtender() {
-        this.cfg.highlighter = {
-            show: true,
-            tooltipLocation: 'w',
-            useAxesFormatters: false,
-            formatString: '%s = %d'
-        };
-    }
-	</script>
 
 </h:head>
 <h:body>
 	<h:form>
 		<div class="form-group">
 		
-		<p:messages></p:messages>
+			<p:messages></p:messages>
+			<fieldset>
+				<div class="form-group div-center col-md-12 col-lg-12">
+					<legend>
+						<h:outputText value="#{messages.label_filter_insitution}"/>	
+					</legend>
+				
+					<div class="col-md-9 col-lg-6">
+					
+						<label class="col-md-2 col-lg-4 control-label" for="name"><h:outputText
+								value="#{messages.label_insitution}" /></label>
+						<div class="col-md-9 col-lg-8">
+							<h:selectOneMenu id="options" class="form-control" value="#{donationsStatisticsBB.statictic.institution}"
+								style="height: 34px;" converter="#{dataInstitutionConverterSession}">
+								
+								
+								<f:selectItem itemLabel="#{messages.label_all}" itemValue="#{null}"/>
+								<f:selectItems value="#{sessionBB.userInstitutions}" var="institution"
+									itemValue="#{institution}" itemLabel="#{institution.name}"  noSelectionOption="true"/>
+								
+							</h:selectOneMenu>
+						</div>
+					</div>
+					
+<!-- 					<div class="col-md-9 col-lg-6"> -->
+<!-- 						<label class="col-md-2  col-lg-4 control-label" for="name"><h:outputText -->
+<!-- 								value="#{messages.label_bank}" /></label> -->
+<!-- 						<div class="col-md-9 col-lg-8"> -->
+<!-- 							<h:selectOneMenu id="bankOption" class="form-control" value="#{donationsStatisticsBB.statictic.bloodBank}" -->
+<!-- 								style="height: 34px;" converter="#{dataBankConverterSession}"> -->
+								
+<!-- 								<f:selectItems value="#{sessionBB.userBanks}" var="bank" -->
+<!-- 									itemValue="#{bank}" itemLabel="#{bank.name}" /> -->
+<!-- 							</h:selectOneMenu> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
+					
+					<div class="col-md-9 col-lg-6" style="padding-top: 12px;">
+						<label class="col-md-2 col-lg-4 control-label" for="name"><h:outputText
+									value="#{messages.label_date_from}" /></label>
+									
+						<div class="col-md-9 col-lg-8">
+							<p:calendar pattern="dd/MM/yyyy"
+									mode="popup" value="#{donationsStatisticsBB.dateFrom}" />
+						</div>
+					</div>
+					<div class="col-md-9 col-lg-6" style="padding-top: 12px;">
+						<label class="col-md-2 col-lg-4 control-label" for="name"><h:outputText
+									value="#{messages.label_date_to}" /></label>
+									
+						<div class="col-md-9 col-lg-8">							
+							<p:calendar  pattern="dd/MM/yyyy"
+									mode="popup" value="#{donationsStatisticsBB.dateTo}" />
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		
 			<fieldset>
 				<div class="form-group div-center col-md-12 col-lg-12">
 				<legend>
-					<h:outputText value="#{messages.label_filter_insitution}"/>	
+					<h:outputText value="#{messages.label_refine}"/>	
 				</legend>
-				
-			
-					<label class="col-md-2 col-lg-1 control-label" for="name"><h:outputText
-							value="#{messages.label_insitution}" /></label>
-					<div class="col-md-9 col-lg-2">
-						<h:selectOneMenu id="options" class="form-control" value="#{donationsStatisticsBB.statictic.institution}"
-							style="height: 34px;" converter="#{datainstitutionConverter}">
-							
-							<f:selectItems value="#{sessionBB.userInstitutions}" var="institution"
-								itemValue="#{institution.code}" itemLabel="#{institution.name}" />
-							
-						</h:selectOneMenu>
-					</div>
-			
-					<label class="col-md-2  col-lg-1 control-label" for="name"><h:outputText
-							value="#{messages.label_bank}" /></label>
-					<div class="col-md-9 col-lg-2">
-						<h:selectOneMenu class="form-control" value="#{donationsStatisticsBB.statictic.bloodBank}"
-							style="height: 34px;" converter="#{databankconverter}">
-							<f:selectItems value="#{sessionBB.userBanks}" var="bank"
-								itemValue="#{bank.code}" itemLabel="#{bank.name}" />
-						</h:selectOneMenu>
-					</div>
-
-					<label class="col-md-1 col-lg-1 control-label" for="name"><h:outputText
-								value="#{messages.label_date_from}" /></label>
 								
-					<div class="col-md-9 col-lg-2">
-						<p:calendar pattern="dd/MM/yyyy"
-								mode="popup" value="#{donationsStatisticsBB.statictic.fromDate}" />
-					</div>
-					
-					<label class="col-md-1 col-lg-1 control-label" for="name"><h:outputText
-								value="#{messages.label_date_to}" /></label>
-								
-					<div class="col-md-9 col-lg-2">							
-						<p:calendar  pattern="dd/MM/yyyy"
-								mode="popup" value="#{donationsStatisticsBB.statictic.toDate}" />
-					</div>
+					<c:forEach items="#{donationsStatisticsBB.allFilters}"
+						var="filterItem" >
+						
+						<div class="col-md-9 col-lg-4 form-group"  style="padding-top: 12px;">
+							<label class="col-md-2  col-lg-6 control-label" for="name"><h:outputText
+									value="#{messages[filterItem.displayName]}" /></label>
+									
+								<div class="col-md-9 col-lg-6">
+									<c:choose>
+										<c:when test="${filterItem.options.size() != 0}">
+											<h:selectOneMenu class="form-control" 
+												style="height: 34px; padding: 0 !important;" value="#{filterItem.value}"
+												
+												converter="#{dataFilterConverter}">
+												
+												 <f:attribute name="filterItem" id="filterItem" value="#{filterItem}"/>
+												<f:selectItem itemLabel="#{messages.label_all}" itemValue="#{null}"/>
+												<f:selectItems value="#{filterItem.options}" var="option"
+													itemValue="#{option}" itemLabel="#{messages[option.displayName]}" />
+											</h:selectOneMenu>
+										</c:when>
+										<c:otherwise>
+											<h:inputText style="height: 34px;" />
+										</c:otherwise>
+									</c:choose>
+								</div>
+						</div>		
+					</c:forEach>
+	
+					<p:commandButton action="#{donationsStatisticsBB.find()}" style="height: 42px; width: 100px;" class="pull-right"
+											value="#{messages.generic_search}" process="@form" update="@form" />
+	
 				</div>
 			</fieldset>
 			
-			<fieldset  style="padding: 0;">
-				<div class=" col-xs-12 col-md-12 col-lg-3">
-					<legend>
-						<h:outputText value="#{messages.label_refine}"/>			
-					</legend>
-					
-						<label class="col-md-12 col-lg-12 control-label" for="name"><h:outputText
-								value="#{messages.donation_situation}" /></label>
-						<div class="col-md-9 col-lg-11">
-							<h:selectOneMenu id="options2" class="form-control" value="#{messageBB.mailData.messageOption}"
-								style="height: 34px;" converter="dataMessageOptionsConverter">
-								
-								<f:selectItems value="#{applicationBB.messageOptions}" var="messageOption"
-									itemValue="messageOption" itemLabel="#{messageOption.displayName}" />
-								
-							</h:selectOneMenu>
-						</div>
-				
-						<label class="col-md-12  col-lg-12 control-label" for="name"><h:outputText
-								value="#{messages.donation_blood_type}" /></label>
-						<div class="col-md-9 col-lg-11">
-							<h:selectOneMenu class="form-control" value="#{messageBB.mailData.bloodTypeRH}"
-								style="height: 34px;">
-								<f:selectItems value="#{applicationBB.donationABOTypes}" var="bloodType"
-									itemValue="bloodType" itemLabel="#{bloodType.displayName}" />
-<!-- 								<f:converter converterId="dataBloodTypeConverter" /> -->
-							</h:selectOneMenu>
-						</div>
-						
-						<label class="col-md-12 col-lg-12 control-label" for="name"><h:outputText
-								value="#{messages.donation_situation}" /></label>
-						<div class="col-md-9 col-lg-11">
-							<h:selectOneMenu id="options4" class="form-control" value="#{messageBB.mailData.messageOption}"
-								style="height: 34px;" converter="dataMessageOptionsConverter">
-								
-								<f:selectItems value="#{applicationBB.messageOptions}" var="messageOption"
-									itemValue="messageOption" itemLabel="#{messageOption.displayName}" />
-								
-							</h:selectOneMenu>
-						</div>
-				
-						<label class="col-md-12  col-lg-12 control-label" for="name"><h:outputText
-								value="#{messages.donation_blood_type}" /></label>
-						<div class="col-md-9 col-lg-11">
-							<h:selectOneMenu class="form-control" value="#{messageBB.mailData.bloodTypeRH}"
-								style="height: 34px;">
-								<f:selectItems value="#{applicationBB.bloodTypes}" var="bloodType"
-									itemValue="bloodType" itemLabel="#{bloodType.displayName}" />
-<!-- 								<f:converter converterId="dataBloodTypeConverter" /> -->
-							</h:selectOneMenu>
-						</div>
-				</div>		
-			
-				<div class="col-xs-12 col-md-12 col-lg-8">
+			<fieldset>
+				<div class="form-group div-center col-md-12 col-lg-12">
 					<legend>
 						<h:outputText value="#{messages.label_result}"/>	
-						
-<!-- 						 <p:commandButton value="#{messages.label_send}"  icon="ui-icon-disk" class="pull-right col-md-3" -->
-<!-- 				        	action="#{donationsStatisticsBB.find()}" process="@form" update="@form"/> -->
-						<p:commandButton  ajax="true" class=" pull-right" value="#{messages.label_search}"
-					title="#{messages.label_preview}" action="#{donationsStatisticsBB.find()}" style="font-size: initial;
-    							margin-right: 19px;" >
-						<f:ajax  execute="@form"  /> 
-<!-- 					<h:outputText value="#{messages.label_result}"/> -->
-					</p:commandButton>
-								
 					</legend>
+			
+					<div class="col-md-9 col-lg-12" style="padding-top: 12px;">
+						<label class="col-md-2 col-lg-4 control-label">
+							<h:outputText value="#{messages.label_donations_count}" />
+						</label>
+												
+						<div class="col-md-9 col-lg-8">							
+							<label class="col-md-2 col-lg-4 control-label" >
+								<h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null and donationsStatisticsBB.statisticsResults.donationsCount != null}" 
+								 value="#{donationsStatisticsBB.statisticsResults.donationsCount.count}" />
+							</label>
+						</div>
+					</div>
 					
-					<p:chart type="pie" model="#{donationsStatisticsBB.pieModel1}" style="width:100%;height:100%"
-					/>
-			          
-<!-- 					<div id="piechart" style="width: 100%; height: 100%;"></div> -->
+					<div class="col-md-9 col-lg-12" style="padding-top: 12px;">
+						<label class="col-md-2 col-lg-4 control-label" >
+							<h:outputText value="#{messages.label_donors_count}" />
+						</label>
+												
+						<div class="col-md-9 col-lg-8">							
+							<label class="col-md-2 col-lg-4 control-label">
+								<h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null and donationsStatisticsBB.statisticsResults.donorsCount != null}" 
+									value="#{donationsStatisticsBB.statisticsResults.donorsCount.count}" />
+							</label>
+						</div>
+					</div>
 				</div>
 			</fieldset>
-			
-<!-- 			<fieldset  style="padding: 0;"> -->
-<!-- 				<div class=" col-xs-12 col-md-12 col-lg-6"> -->
-<!-- 					<legend> -->
-<!-- 						<h:outputText value="#{messages.label_refine}"/>			 -->
-<!-- 					</legend> -->
-					
-<!-- 				</div>		 -->
-			
-<!-- 				<div class="col-xs-12 col-md-12 col-lg-6"> -->
-<!-- 					<legend> -->
-<!-- 						<h:outputText value="#{messages.label_result}"/>			 -->
-<!-- 					</legend> -->
-<!-- 				</div> -->
-<!-- 			</fieldset> -->
-			
 		</div>
 	</h:form>	
-	
 </h:body>
 </html>

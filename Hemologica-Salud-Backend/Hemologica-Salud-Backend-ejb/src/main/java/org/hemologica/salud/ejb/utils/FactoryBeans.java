@@ -9,7 +9,10 @@ import org.hemologica.salud.ejb.beans.AdvertismentBeanLocal;
 import org.hemologica.salud.ejb.beans.CentersBeanLocal;
 import org.hemologica.salud.ejb.beans.CodesBeanLocal;
 import org.hemologica.salud.ejb.beans.DonationBeanLocal;
+import org.hemologica.salud.ejb.beans.IBloodLocal;
+import org.hemologica.salud.ejb.beans.IInstitutionBeanLocal;
 import org.hemologica.salud.ejb.beans.PersonBeanLocal;
+import org.hemologica.salud.ejb.beans.StatisticsBeanLocal;
 import org.hemologica.salud.ejb.beans.TransfusionBeanLocal;
 
 public class FactoryBeans {
@@ -94,6 +97,48 @@ public class FactoryBeans {
 		try {
 			
 			return InitialContext.doLookup("java:global/Hemologica-Salud-Backend-ear/Hemologica-Salud-Backend-ejb/TransfusionBean!org.hemologica.salud.ejb.beans.impl.TransfusionBean");
+			
+		} catch (NamingException e) {
+			
+			logger.log(Level.SEVERE,  "Error al obtener el Bean AdvertismentBeanLocal", e);
+			
+		}
+		return null;
+	}
+
+	public static IBloodLocal getBloodLocal() {
+		
+		try {
+			
+			return InitialContext.doLookup("java:global/Hemologica-Salud-Backend-ear/Hemologica-Salud-Backend-ejb/BloodBean!org.hemologica.salud.ejb.beans.IBloodLocal");
+			
+		} catch (NamingException e) {
+			
+			logger.log(Level.SEVERE,  "Error al obtener el Bean AdvertismentBeanLocal", e);
+			
+		}
+		return null;
+	}
+
+	public static IInstitutionBeanLocal getInstitutionBean() {
+		
+		try {
+			
+			return InitialContext.doLookup("java:global/Hemologica-Salud-Backend-ear/Hemologica-Salud-Backend-ejb/InstitutionBean!org.hemologica.salud.ejb.beans.impl.InstitutionBean");
+			
+		} catch (NamingException e) {
+			
+			logger.log(Level.SEVERE,  "Error al obtener el Bean AdvertismentBeanLocal", e);
+			
+		}
+		return null;
+	}
+	
+	public static StatisticsBeanLocal getStatisticsBeanLocal() {
+		
+		try {
+			
+			return InitialContext.doLookup("java:global/Hemologica-Salud-Backend-ear/Hemologica-Salud-Backend-ejb/InstitutionBean!org.hemologica.salud.ejb.beans.impl.InstitutionBean");
 			
 		} catch (NamingException e) {
 			

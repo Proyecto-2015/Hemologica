@@ -1,13 +1,16 @@
 package org.hemologica.dao;
 
 import java.util.List;
+import org.hemologica.dao.model.BloodTypes;
 import org.hemologica.dao.model.CitiesCode;
 import org.hemologica.dao.model.CountriesCode;
 import org.hemologica.dao.model.DocumentsTypesCode;
 import org.hemologica.dao.model.DonationEventsCode;
 import org.hemologica.dao.model.DonationFailCausesCode;
 import org.hemologica.dao.model.DonationFailTypeCode;
+import org.hemologica.dao.model.DonationFilterCode;
 import org.hemologica.dao.model.DonationLaboratoyCode;
+import org.hemologica.dao.model.DonationStateCode;
 import org.hemologica.dao.model.DonationTypesCode;
 import org.hemologica.dao.model.EventSeverityCode;
 import org.hemologica.dao.model.MessageSendOption;
@@ -19,6 +22,8 @@ import org.hemologica.dao.model.TransfusionLaboratoryCode;
 import org.hemologica.dao.model.UnitsType;
 
 public interface ICodesDAO {
+	
+	public List<Object[]> executeSQL(String sql);
 	
 	public List<MessageSendOption> getMessageOptions();
 	
@@ -75,5 +80,13 @@ public interface ICodesDAO {
 	public TransfusionEventsCode getTransfusionEventBySnomedCode(String event);
 
 	public TransfusionLaboratoryCode getTransfusionAnalysisBySnomedCode(String executeXPathString);
+
+	public List<BloodTypes> getBloodTypes();
+
+	public List<DonationStateCode> getDonationsStates();
+
+	public List<DonationFilterCode> getDonationsFilters();
+
+	public DonationFilterCode getDonationsFilterById(String code);
 
 }

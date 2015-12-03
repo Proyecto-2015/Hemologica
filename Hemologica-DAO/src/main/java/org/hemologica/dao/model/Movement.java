@@ -24,9 +24,10 @@ public class Movement implements Serializable {
 	private MovementsType movementsType;
 
 	//bi-directional many-to-one association to Service
+	
 	@ManyToOne
-	@JoinColumn(name="services_id")
-	private Service service;
+	@JoinColumn(name="movement_id")
+	private Center center;
 
 	//bi-directional many-to-one association to Unit
 	@ManyToOne
@@ -52,12 +53,12 @@ public class Movement implements Serializable {
 		this.movementsType = movementsType;
 	}
 
-	public Service getService() {
-		return this.service;
+	public Center getCenter() {
+		return center;
 	}
 
-	public void setService(Service service) {
-		this.service = service;
+	public void setCenter(Center center) {
+		this.center = center;
 	}
 
 	public Unit getUnit() {

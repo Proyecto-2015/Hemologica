@@ -7,10 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.Path;
-
 import org.apache.http.client.ClientProtocolException;
 import org.hemologica.constants.ConstansJson;
 import org.hemologica.constants.ConstantsRest;
@@ -31,16 +27,15 @@ import org.hemologica.datatypes.DataUnit;
 import org.hemologica.datatypes.DataUnitInfo;
 import org.hemologica.datatypes.DataUser;
 import org.hemologica.datatypes.DonationFilterData;
+import org.hemologica.datatypes.DataDonationsStatistics;
+import org.hemologica.datatypes.DataDonationsStatisticsResults;
 import org.hemologica.datatypes.DataInstitution;
-import org.hemologica.datatypes.LoginData;
 import org.hemologica.datatypes.MailData;
 import org.hemologica.datatypes.DataMessageOption;
 import org.hemologica.datatypes.DataResponsiblePerson;
 import org.hemologica.datatypes.TransfusionFilterData;
 import org.hemologica.salud.factories.RestFactory;
-
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 
 
@@ -48,27 +43,6 @@ public class ServicesClientImpl implements IServicesClient {
 
 	private static final Logger logger = Logger.getLogger(ServicesClientImpl.class.getName());
 	private String url = ConstantsRest.PATH_SERVICES_HEMOSALUD;
-
-	@Override
-	public int login(String user, String password) throws IOException {
-
-		LoginData loginData = new LoginData();
-		loginData.setUser(user);
-		loginData.setPassword(password);
-
-		String response = RestFactory.getRestServicesUtils().post(url, loginData);
-
-		HashMap<String, String> hash = new HashMap<String, String>();
-		hash.put("primero", "primerovalor");
-		hash.put("segundo", "segundovalor");
-		try {
-			String respnse = (String) RestFactory.getRestServicesUtils().get(url, hash);
-		} catch (URISyntaxException e) {
-			e.printStackTrace();
-		}
-
-		return 0;
-	}
 
 	@Override
 	public List<DataDonation> getMyDonations(String user) throws IOException {
@@ -1010,6 +984,26 @@ public class ServicesClientImpl implements IServicesClient {
 		List<DataCode> responseObject = new Gson().fromJson(responseString, listType);
 		
 		return responseObject;
+	}
+
+	@Override
+	public DataDonationsStatisticsResults getDonationsStatistics(DataDonationsStatistics statictic) {
+		
+		String urlSendMessage = url + ConstantsRest.PATH_STATISTICS ;
+
+		String sendMessageString = "";
+		try {
+
+			sendMessageString = RestFactory.getRestServicesUtils().post(urlSendMessage, statictic);
+
+		} catch (IOException e) {
+
+			logger.log(Level.SEVERE, "Error al llamar al servicio", e);
+		}
+
+		DataDonationsStatisticsResults response = new Gson().fromJson(sendMessageString, DataDonationsStatisticsResults.class);
+
+		return response;
 	}
 
 }
