@@ -16,7 +16,7 @@ public class DataUnit implements Serializable {
 	private String institution;
 	private String institutionCode;
 	private DataProductType productType;
-	private DataBloodType bloodType;
+	private DataCode bloodType;
 	private String dueDate;
 	private Boolean active;
 	
@@ -57,10 +57,10 @@ public class DataUnit implements Serializable {
 	public void setProductType(DataProductType productType) {
 		this.productType = productType;
 	}
-	public DataBloodType getBloodType() {
+	public DataCode getBloodType() {
 		return bloodType;
 	}
-	public void setBloodType(DataBloodType bloodType) {
+	public void setBloodType(DataCode bloodType) {
 		this.bloodType = bloodType;
 	}
 	public String getDueDate() {

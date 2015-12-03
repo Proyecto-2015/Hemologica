@@ -1,15 +1,4 @@
 <?xml version="1.0"?>
-<!-- JBoss, Home of Professional Open Source Copyright 2013, Red Hat, Inc. 
-	and/or its affiliates, and individual contributors by the @authors tag. See 
-	the copyright.txt in the distribution for a full listing of individual contributors. 
-	Licensed under the Apache License, Version 2.0 (the "License"); you may not 
-	use this file except in compliance with the License. You may obtain a copy 
-	of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required 
-	by applicable law or agreed to in writing, software distributed under the 
-	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
-	OF ANY KIND, either express or implied. See the License for the specific 
-	language governing permissions and limitations under the License. -->
-<!-- Marker file indicating JSF 2.2 should be enabled in the application -->
 <faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation=" http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
@@ -51,6 +40,50 @@
 		</managed-property>
 	</managed-bean>
 	
+	<converter>
+		<display-name>dataFilterConverter</display-name>
+		<converter-id>dataFilterConverter</converter-id>
+		<converter-class>org.hemologica.salud.web.converters.DataFilterConverter</converter-class>
+	</converter>
+	<managed-bean>
+		<managed-bean-name>dataFilterConverter</managed-bean-name>
+		<managed-bean-class>org.hemologica.salud.web.converters.DataFilterConverter</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>applicationBB</property-name>
+			<property-class>org.hemologica.salud.web.beans.ApplicationBB</property-class>
+			<value>#{applicationBB}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>sessionBB</property-name>
+			<property-class>org.hemologica.salud.web.beans.SessionBB</property-class>
+			<value>#{sessionBB}</value>
+		</managed-property>
+	</managed-bean>
+	
+	
+	
+	<converter>
+		<display-name>dataInstitutionConverterSession</display-name>
+		<converter-id>dataInstitutionConverterSession</converter-id>
+		<converter-class>org.hemologica.salud.web.converters.DataInstitutionConverterSession</converter-class>
+	</converter>
+	<managed-bean>
+		<managed-bean-name>dataInstitutionConverterSession</managed-bean-name>
+		<managed-bean-class>org.hemologica.salud.web.converters.DataInstitutionConverterSession</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>applicationBB</property-name>
+			<property-class>org.hemologica.salud.web.beans.ApplicationBB</property-class>
+			<value>#{applicationBB}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>sessionBB</property-name>
+			<property-class>org.hemologica.salud.web.beans.SessionBB</property-class>
+			<value>#{sessionBB}</value>
+		</managed-property>
+	</managed-bean>
+	
 	
 	<converter>
 		<display-name>dataBankConverter</display-name>
@@ -60,6 +93,21 @@
 	<managed-bean>
 		<managed-bean-name>dataBankConverter</managed-bean-name>
 		<managed-bean-class>org.hemologica.salud.web.converters.DataBankConverter</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>applicationBB</property-name>
+			<property-class>org.hemologica.salud.web.beans.ApplicationBB</property-class>
+			<value>#{applicationBB}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>sessionBB</property-name>
+			<property-class>org.hemologica.salud.web.beans.SessionBB</property-class>
+			<value>#{sessionBB}</value>
+		</managed-property>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>dataBankConverterSession</managed-bean-name>
+		<managed-bean-class>org.hemologica.salud.web.converters.DataBankConverterSession</managed-bean-class>
 		<managed-bean-scope>request</managed-bean-scope>
 		<managed-property>
 			<property-name>applicationBB</property-name>
@@ -510,6 +558,12 @@
 		<managed-bean-name>donationsStatisticsBB</managed-bean-name>
 		<managed-bean-class>org.hemologica.salud.web.beans.DonationsStatisticsBB</managed-bean-class>
 		<managed-bean-scope>view</managed-bean-scope>
+		<managed-property>
+			<property-name>applicationBB</property-name>
+			<property-class>org.hemologica.salud.web.beans.ApplicationBB</property-class>
+			<value>#{applicationBB}</value>
+		</managed-property>
+		
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>TransfusionsStatisticsBB</managed-bean-name>

@@ -47,5 +47,10 @@ INSERT INTO `hemologica`.`gender_code` (`gender_code_id`, `gender_code_label`, `
 INSERT INTO `hemologica`.`gender_code` (`gender_code_id`, `gender_code_label`, `gender_code_value`, `gender_hl7_code`) VALUES ('2', 'label_female', '2', 'F');
 INSERT INTO `hemologica`.`gender_code` (`gender_code_id`, `gender_code_label`, `gender_code_value`, `gender_hl7_code`) VALUES ('3', 'label_undefinded', '3', 'UN');
 
+-- Estado de la donacion
+INSERT INTO `hemologica`.`donation_state_code` (`donation_state_code_id`, `donation_laboratoy_code_label`, `donation_laboratoy_code_value`) VALUES ('1', 'donation_state_made', '1');
+INSERT INTO `hemologica`.`donation_state_code` (`donation_state_code_id`, `donation_laboratoy_code_label`, `donation_laboratoy_code_value`) VALUES ('2', 'donation_state_rejected', '2');
+
+
 
 

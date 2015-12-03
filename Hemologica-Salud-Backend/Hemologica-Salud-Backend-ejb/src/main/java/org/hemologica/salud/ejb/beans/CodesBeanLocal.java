@@ -5,6 +5,7 @@ import javax.ejb.Local;
 import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataMessageOption;
 import org.hemologica.datatypes.DataProductType;
+import org.hemologica.datatypes.DonationFilterData;
 
 @Local
 public interface CodesBeanLocal {
@@ -66,5 +67,9 @@ public interface CodesBeanLocal {
 	 public DataCode getTransfusionEventBySnomedCode(String event);
 
 	 public DataCode getTransfusionAnalysisBySnomedCode(String executeXPathString);
+
+	public List<DataCode> getBloodTypes();
+
+	public List<DonationFilterData> getDonationsFilters();
 
 }

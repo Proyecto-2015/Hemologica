@@ -44,6 +44,8 @@ public class DonationBB implements Serializable {
 		this.labResult = new DataLaboratoryResult();
 		this.event = new DataDonationEvent();
 		this.ctx = FacesContext.getCurrentInstance();
+		
+		this.dataDonacion.setState(applicationBB.getStates().get(0));
 	}
 
 	public void addLabResult(){
@@ -95,7 +97,9 @@ public class DonationBB implements Serializable {
 	}
 
 	public void dataDonationStateChange(ValueChangeEvent ev){
+		
 		dataDonacion.setState((DataCode) ev.getNewValue());
+		
 	}
 
 	public DataDonation getDataDonacion() {

@@ -1,6 +1,7 @@
 package org.hemologica.salud.ejb.beans.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -8,7 +9,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.hemologica.dao.model.Center;
 import org.hemologica.dao.model.Document;
+import org.hemologica.dao.model.Person;
 import org.hemologica.dao.model.ResponsibleTransfusionPerson;
+import org.hemologica.dao.model.User;
+import org.hemologica.dao.model.UsersRoleService;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataDocument;
 import org.hemologica.datatypes.DataInstitution;
@@ -42,7 +46,7 @@ public class CentersBean implements CentersBeanLocal {
 		for(Center c : list){
 			
 			DataBank dataBank = new DataBank();
-			dataBank.setCode(c.getCenterCode());
+			dataBank.setCode(String.valueOf(c.getId()));
 			dataBank.setName(c.getCenterDisplayName());
 			dataBank.setAddress(c.getCenterAddress());
 			dataBank.setEmail(c.getCenterEmail());
@@ -109,37 +113,51 @@ public class CentersBean implements CentersBeanLocal {
 	public List<DataBank> getBanksUser(String user) {
 		
 		List<DataBank> listReturn = new ArrayList<>();
-		List<Center> list = FactoryDAO.getCenterDAO(em).getBanksUser(user);
-		if(list != null){
-			for(Center c : list){
+		
+		Person person = FactoryDAO.getPeronDAO(em).getPersonsId(user);
+		
+		HashMap<String, Center> centers = new HashMap<>();
+		
+		for(User u :person.getUsers()){
+			
+			for(UsersRoleService userRole : u.getUsersRoleServices()){
 				
-				DataBank dataBank = new DataBank();
-				dataBank.setCode(c.getCenterCode());
-				dataBank.setName(c.getCenterDisplayName());
-				dataBank.setAddress(c.getCenterAddress());
-				dataBank.setEmail(c.getCenterEmail());
-				dataBank.setHour(c.getCenterHour());
-				dataBank.setInformation(c.getCenterInformation());
-				dataBank.setTelephone(c.getCenterTelephone());
-				
-				if(c.getInstitution() != null){
-				
-					DataInstitution dataInstitution = new DataInstitution();
-					dataInstitution.setName(c.getInstitution().getInstitutionDisplayName());
-					dataInstitution.setCode(c.getInstitution().getInstitutionDisplayName());	
-					dataBank.setInstitution(dataInstitution);
+				if(!centers.containsKey(userRole.getCenter().getCenterCode())){
 					
-				}
-				
-				if(c.getGeoLocation() != null){
+					centers.put(userRole.getCenter().getCenterCode(), userRole.getCenter());
 					
-					dataBank.setLatitude(c.getGeoLocation().getGeoLocationsX());
-					dataBank.setLongitude(c.getGeoLocation().getGeoLocationsY());
-					
-				}
-				
-				listReturn.add(dataBank);
+				}	
 			}
+		}
+			
+		for(Center c : centers.values()){
+			
+			DataBank dataBank = new DataBank();
+			dataBank.setCode(String.valueOf(c.getId()));
+			dataBank.setName(c.getCenterDisplayName());
+			dataBank.setAddress(c.getCenterAddress());
+			dataBank.setEmail(c.getCenterEmail());
+			dataBank.setHour(c.getCenterHour());
+			dataBank.setInformation(c.getCenterInformation());
+			dataBank.setTelephone(c.getCenterTelephone());
+			
+			if(c.getInstitution() != null){
+			
+				DataInstitution dataInstitution = new DataInstitution();
+				dataInstitution.setName(c.getInstitution().getInstitutionDisplayName());
+				dataInstitution.setCode(c.getInstitution().getInstitutionCode());	
+				dataBank.setInstitution(dataInstitution);
+				
+			}
+			
+			if(c.getGeoLocation() != null){
+				
+				dataBank.setLatitude(c.getGeoLocation().getGeoLocationsX());
+				dataBank.setLongitude(c.getGeoLocation().getGeoLocationsY());
+				
+			}
+			
+			listReturn.add(dataBank);
 		}
 		
 		return listReturn;

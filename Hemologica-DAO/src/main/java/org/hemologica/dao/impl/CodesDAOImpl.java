@@ -1,17 +1,19 @@
 package org.hemologica.dao.impl;
 
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import org.hemologica.dao.ICodesDAO;
+import org.hemologica.dao.model.BloodTypes;
 import org.hemologica.dao.model.CitiesCode;
 import org.hemologica.dao.model.CountriesCode;
 import org.hemologica.dao.model.DocumentsTypesCode;
 import org.hemologica.dao.model.DonationEventsCode;
 import org.hemologica.dao.model.DonationFailCausesCode;
 import org.hemologica.dao.model.DonationFailTypeCode;
+import org.hemologica.dao.model.DonationFilterCode;
 import org.hemologica.dao.model.DonationLaboratoyCode;
+import org.hemologica.dao.model.DonationStateCode;
 import org.hemologica.dao.model.DonationTypesCode;
 import org.hemologica.dao.model.EventSeverityCode;
 import org.hemologica.dao.model.MessageSendOption;
@@ -255,6 +257,42 @@ public class CodesDAOImpl implements ICodesDAO{
 		Object o = query.getSingleResult();
 		
 		return (o != null) ? (TransfusionLaboratoryCode) o : null;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<BloodTypes> getBloodTypes() {
+		
+		Query query = em.createNamedQuery("BloodTypes.findAll");
+		return query.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<DonationStateCode> getDonationsStates() {
+		
+		Query query = em.createNamedQuery("DonationStateCode.findAll");
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<DonationFilterCode> getDonationsFilters() {
+		
+		Query query = em.createNamedQuery("DonationFilterCode.findAll");
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<Object[]> executeSQL(String sql) {
+		
+		Query query = em.createNativeQuery(sql);
+		return query.getResultList();
+	}
+
+	public DonationFilterCode getDonationsFilterById(String code) {
+		
+		Query query = em.createNamedQuery("DonationFilterCode.findById");
+		query.setParameter("code", code);
+		return (DonationFilterCode) query.getSingleResult();
+		
 	}
 
 }

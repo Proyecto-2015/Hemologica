@@ -1,19 +1,22 @@
 package org.hemologica.dao.model;
 
-import java.io.Serializable;
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
-
-/**
- * The persistent class for the donation_states_codes database table.
- * 
- */
 @Entity
-@Table(name="donation_states_codes")
-@NamedQuery(name="DonationStatesCode.findAll", query="SELECT d FROM DonationStatesCode d")
-public class DonationStatesCode implements Serializable {
-	private static final long serialVersionUID = 1L;
-
+@Table(name="donation_state_code")
+@NamedQueries({
+@NamedQuery(name="DonationStateCode.findAll", query="SELECT d FROM DonationStateCode d"),
+@NamedQuery(name="DonationStateCode.findById", query="SELECT d FROM DonationStateCode d WHERE d.id = :code")
+})
+public class DonationStateCode {
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="donation_state_code_id")
@@ -25,11 +28,8 @@ public class DonationStatesCode implements Serializable {
 	@Column(name="donation_state_code_value")
 	private String donationStateCodeValue;
 
-	public DonationStatesCode() {
-	}
-
 	public int getDonationStateCodeId() {
-		return this.donationStateCodeId;
+		return donationStateCodeId;
 	}
 
 	public void setDonationStateCodeId(int donationStateCodeId) {
@@ -37,7 +37,7 @@ public class DonationStatesCode implements Serializable {
 	}
 
 	public String getDonationStateCodeLabel() {
-		return this.donationStateCodeLabel;
+		return donationStateCodeLabel;
 	}
 
 	public void setDonationStateCodeLabel(String donationStateCodeLabel) {
@@ -45,7 +45,7 @@ public class DonationStatesCode implements Serializable {
 	}
 
 	public String getDonationStateCodeValue() {
-		return this.donationStateCodeValue;
+		return donationStateCodeValue;
 	}
 
 	public void setDonationStateCodeValue(String donationStateCodeValue) {

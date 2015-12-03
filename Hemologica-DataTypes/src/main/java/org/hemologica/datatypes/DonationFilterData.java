@@ -2,10 +2,11 @@ package org.hemologica.datatypes;
 
 import java.util.List;
 
-public class DonationFilterData {
+public class DonationFilterData implements Cloneable{
 	
 	private String code;
 	private String displayName;
+	private DonationFilterData value;
 	private List<DonationFilterData> options;
 	
 	
@@ -26,6 +27,18 @@ public class DonationFilterData {
 	}
 	public void setOptions(List<DonationFilterData> options) {
 		this.options = options;
+	}
+	public DonationFilterData getValue() {
+		return value;
+	}
+	public void setValue(DonationFilterData value) {
+		this.value = value;
+	}
+	
+	@Override
+	public Object clone() throws CloneNotSupportedException {
+		// TODO Auto-generated method stub
+		return super.clone();
 	}
 	
 }

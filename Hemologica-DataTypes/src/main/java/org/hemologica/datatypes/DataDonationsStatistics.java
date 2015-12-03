@@ -2,25 +2,20 @@ package org.hemologica.datatypes;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Logger;
 
-public class DonationsStatisticsData implements Serializable{
+public class DataDonationsStatistics implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	private static final Logger logger = Logger.getLogger(DataDonationsStatistics.class.getName());
 	
-	private String type;
 	private String fromDate;
 	private String toDate;
-	private DataCode institution;
-	private DataCode bloodBank;
+	private DataInstitution institution;
+	private DataBank bloodBank;
 	private List<DonationFilterData> filters;
-	private List<DonationFilterData> distinguish;
+
 	
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
 	public String getFromDate() {
 		return fromDate;
 	}
@@ -33,16 +28,16 @@ public class DonationsStatisticsData implements Serializable{
 	public void setToDate(String toDate) {
 		this.toDate = toDate;
 	}
-	public DataCode getInstitution() {
+	public DataInstitution getInstitution() {
 		return institution;
 	}
-	public void setInstitution(DataCode institution) {
+	public void setInstitution(DataInstitution institution) {
 		this.institution = institution;
 	}
-	public DataCode getBloodBank() {
+	public DataBank getBloodBank() {
 		return bloodBank;
 	}
-	public void setBloodBank(DataCode bloodBank) {
+	public void setBloodBank(DataBank bloodBank) {
 		this.bloodBank = bloodBank;
 	}
 	public List<DonationFilterData> getFilters() {
@@ -50,12 +45,6 @@ public class DonationsStatisticsData implements Serializable{
 	}
 	public void setFilters(List<DonationFilterData> filters) {
 		this.filters = filters;
-	}
-	public List<DonationFilterData> getDistinguish() {
-		return distinguish;
-	}
-	public void setDistinguish(List<DonationFilterData> distinguish) {
-		this.distinguish = distinguish;
 	}
 
 }

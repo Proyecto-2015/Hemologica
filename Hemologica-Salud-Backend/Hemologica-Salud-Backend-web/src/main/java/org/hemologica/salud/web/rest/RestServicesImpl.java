@@ -8,21 +8,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.inject.Inject;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.ws.rs.core.Response;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
-
 import org.hemologica.dao.enums.DataDonationStateEnum;
-import org.hemologica.dao.enums.DataEventSeverityEnum;
 import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataDonationDonorType;
+import org.hemologica.datatypes.DataDonationsStatisticsResults;
 import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataProductType;
 import org.hemologica.datatypes.DataResponse;
@@ -31,22 +26,15 @@ import org.hemologica.datatypes.DataStock;
 import org.hemologica.datatypes.DataStockProductType;
 import org.hemologica.datatypes.DataStockProductTypeBloodType;
 import org.hemologica.datatypes.DataTransfusion;
-import org.hemologica.datatypes.DataTransfusionEvent;
 import org.hemologica.datatypes.DataUnit;
 import org.hemologica.datatypes.DataUnitInfo;
 import org.hemologica.datatypes.DonationFilterData;
+import org.hemologica.datatypes.DataDonationsStatistics;
 import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.DataMovement;
-import org.hemologica.datatypes.LoginData;
 import org.hemologica.datatypes.MailData;
 import org.hemologica.datatypes.DataMessageOption;
 import org.hemologica.datatypes.TransfusionFilterData;
-import org.hemologica.salud.ejb.beans.AdvertismentBeanLocal;
-import org.hemologica.salud.ejb.beans.CentersBeanLocal;
-import org.hemologica.salud.ejb.beans.CodesBeanLocal;
-import org.hemologica.salud.ejb.beans.IBloodLocal;
-import org.hemologica.salud.ejb.beans.IInstitutionBeanLocal;
-import org.hemologica.salud.ejb.beans.PersonBeanLocal;
 import org.hemologica.salud.ejb.utils.FactoryBeans;
 import org.hemologica.xmldatabase.exceptions.XMLDataBaseException;
 import org.xml.sax.SAXException;
@@ -55,39 +43,6 @@ import org.xml.sax.SAXException;
 public class RestServicesImpl implements IRestServices{
 
 	private Logger logger = Logger.getLogger(RestServicesImpl.class.getName());
-
-	@Inject
-	private IInstitutionBeanLocal institutionBean;
-	
-	@Inject
-	private IBloodLocal bloodLocal;
-	
-	@Inject
-	private CodesBeanLocal codeBeans;
-	
-	@Inject
-	private CentersBeanLocal centerBeans;
-	
-	@Inject
-	private PersonBeanLocal personBeans;
-	
-	@Inject
-	private AdvertismentBeanLocal advertismentBean;
-	
-	@Override
-	public Response login(LoginData datos) {
-
-		System.out.println("holaaaa" + datos);
-		System.out.println(datos.getUser());
-		System.out.println(datos.getPassword());
-		return null;
-	}
-
-	@Override
-	public void getProductInJSON() {
-		System.out.println("GET");
-
-	}
 
 	@Override
 	public List<DataDonation> getDonations(String user) {
@@ -153,100 +108,26 @@ public class RestServicesImpl implements IRestServices{
 		
 		return new ArrayList<DataTransfusion>();
 		
-//		List<DataTransfusion> transfusions = new ArrayList<DataTransfusion>();
-//
-//		DataTransfusion t1 = new DataTransfusion();
-//		DataBank db = new DataBank();
-//		db.setName("Banco X");
-//
-//		t1.setBank(db);
-//
-//		DataInstitution d2 = new DataInstitution();
-//		d2.setName("Hospital de clinicas");
-//
-//		t1.setInstitution(d2);
-//
-//		t1.setName("Pedro");
-//		t1.setDate("10/02/2015");
-//
-//		DataProductType dp1 = new DataProductType();
-//		dp1.setDisplay("Plaquetas");
-//		t1.setDataProduct(dp1);
-//		transfusions.add(t1);
-//
-//		DataTransfusion t2 = new DataTransfusion();
-//		DataBank db2 = new DataBank();
-//		db2.setName("Banco X");
-//
-//		DataTransfusionEvent d1 = new DataTransfusionEvent();
-//
-//		DataCode dc1 = new DataCode();
-//		dc1.setCode("0");
-//		dc1.setDisplayName("Evento adverso 1");
-//		d1.setEvent(dc1);
-//		
-//		
-//		
-//		DataCode dc13 = new DataCode();
-//		
-//		dc13.setCode(DataEventSeverityEnum.MODERATE.getValue());
-//		dc13.setDisplayName(DataEventSeverityEnum.MODERATE.getLabel());
-//		
-//		d1.setSeverity(dc13);
-//
-//		DataCode dc2 = new DataCode();
-//		dc2.setCode("1");
-//
-//		dc2.setDisplayName("Evento adverso 2");
-//
-//		DataTransfusionEvent d22 = new DataTransfusionEvent();
-//		d22.setEvent(dc2);
-//		DataCode dc133 = new DataCode();
-//		dc133.setCode(DataEventSeverityEnum.SEVERE.getValue());
-//		dc133.setDisplayName(DataEventSeverityEnum.SEVERE.getLabel());
-//		
-//		d1.setSeverity(dc133);		
-//
-//		List<DataTransfusionEvent> dteList = new ArrayList<>();
-//		dteList.add(d1);
-//		dteList.add(d22);
-//
-//		t2.setEvents(dteList);
-//
-//		t1.setBank(db2);
-//
-//		DataInstitution di = new DataInstitution();
-//		di.setName("Hospital de clinicas");
-//
-//		t2.setInstitution(di);
-//		t2.setName("Pedro");
-//		t2.setDate("10/02/2015");
-//		DataProductType dp2 = new DataProductType();
-//		dp2.setDisplay("Plaquetas");
-//		t2.setDataProduct(dp2);
-//		transfusions.add(t2);
-//
-//		return transfusions;
 	}
 
 	@Override
 	public DataPerson getPerson(String id) {
 				
-		return getPersonBean().getPersonId(id);
+		return FactoryBeans.getPersonBean().getPersonId(id);
 
 	}
 
 	@Override
 	public List<DataBank> getBanks() {
 		
-		return getCenterBean().getBanks();
+		return FactoryBeans.getCenterBean().getBanks();
 		
 	}
 
 	@Override
 	public List<DataCode> getCities() {
 
-		return getCodeBeans().getCities();
+		return FactoryBeans.getCodeBeans().getCities();
 	}
 
 	@Override
@@ -256,103 +137,56 @@ public class RestServicesImpl implements IRestServices{
 			return this.getCities();
 		}
 
-		return  getCodeBeans().getCitiesByState(stateCode);
+		return  FactoryBeans.getCodeBeans().getCitiesByState(stateCode);
 	}
 
 	@Override
 	public List<DataMessageOption> getMessageOptions() {
 
-		return getCodeBeans().getMessageOptions();
+		return FactoryBeans.getCodeBeans().getMessageOptions();
 		
 	}
 
 	@Override
-	public List<DataBloodType> getBloodTypes() {
-		// Este metodo no deberia usarse mas
-		List<DataBloodType> listResult = new ArrayList<>();
+	public List<DataCode> getBloodTypes() {
 		
-//		for(DataCode dataCode : getBloodLocal().getDonationABOTypes()){
-//			
-//			DataBloodType data = new DataBloodType();
-//			data.setCode(dataCode.getCode());
-//			data.setDisplayName(dataCode.getDisplayName());
-//			listResult.add(data);
-//			
-//		}
-		return listResult;
+		return FactoryBeans.getCodeBeans().getBloodTypes();
+
 	}
 
 	@Override
 	public DataResponse sendMessage(MailData mailData) {
 		
-		return getAdvertismentBean().sendMessage(mailData); 
+		return FactoryBeans.getAdvertismentBean().sendMessage(mailData); 
 		
 	}
 
 	@Override
 	public DataResponse sendCampaign(DataCampaign dataCampaign) {
 		
-		return getAdvertismentBean().sendCampaign(dataCampaign);
+		return FactoryBeans.getAdvertismentBean().sendCampaign(dataCampaign);
 
 	}
 
 	@Override
 	public List<DataCampaign> getCampaigns(String cant) {
 		
-		return getAdvertismentBean().getCampaigns(cant);
+		return FactoryBeans.getAdvertismentBean().getCampaigns(cant);
 
 	}
 
 	@Override
 	public DataCampaign getCampaign(String campaignId) {
 		
-		return getAdvertismentBean().getCampaign(campaignId);
+		return FactoryBeans.getAdvertismentBean().getCampaign(campaignId);
 		
 	}
 
 	@Override
 	public List<DonationFilterData> getDonationsFilters() {
-		List<DonationFilterData> filters = new ArrayList<DonationFilterData>();
-
-		DonationFilterData f1 = new DonationFilterData();
-		f1.setCode("0");
-		f1.setDisplayName("Sexo");
-
-		List<DonationFilterData> f1Options = new ArrayList<DonationFilterData>();
-
-		DonationFilterData f11 = new DonationFilterData();
-		f11.setCode("01");
-		f11.setDisplayName("Hombre");
-		f1Options.add(f11);
-
-		DonationFilterData f12 = new DonationFilterData();
-		f12.setCode("02");
-		f12.setDisplayName("Mujer");
-		f1Options.add(f12);
-
-		f1.setOptions(f1Options);
-		filters.add(f1);
-
-		DonationFilterData f2 = new DonationFilterData();
-		f2.setCode("1");
-		f2.setDisplayName("Tipo Donante");
-
-		List<DonationFilterData> f1Options2 = new ArrayList<DonationFilterData>();
-
-		DonationFilterData f21 = new DonationFilterData();
-		f21.setCode("11");
-		f21.setDisplayName("Voluntario");
-		f1Options2.add(f21);
-
-		DonationFilterData f22 = new DonationFilterData();
-		f22.setCode("12");
-		f22.setDisplayName("Reposicion");
-		f1Options2.add(f22);
-
-		f2.setOptions(f1Options2);
-		filters.add(f2);
-
-		return filters;
+		
+		return FactoryBeans.getCodeBeans().getDonationsFilters();
+		
 	}
 
 	@Override
@@ -406,7 +240,7 @@ public class RestServicesImpl implements IRestServices{
 
 		if(user == null)
 			return null;
-		return getCenterBean().getBanksUser(user);
+		return FactoryBeans.getCenterBean().getBanksUser(user);
 	}
 
 	@Override
@@ -415,21 +249,21 @@ public class RestServicesImpl implements IRestServices{
 		if(user == null)
 			return null;
 		
-		return getInstitutionBean().getInstitutionsUser(user);
+		return FactoryBeans.getInstitutionBean().getInstitutionsUser(user);
 		
 	}
 
 	@Override
 	public List<DataPerson> getPersons() {
 		
-		return getPersonBean().getPersonsFilters(new HashMap<String,Object>());
+		return FactoryBeans.getPersonBean().getPersonsFilters(new HashMap<String,Object>());
 
 	}
 
 	@Override
 	public List<DataProductType> getProducts() {
 
-		return getCodeBeans().getProducts();
+		return FactoryBeans.getCodeBeans().getProducts();
 
 	}
 
@@ -526,26 +360,26 @@ public class RestServicesImpl implements IRestServices{
 		if(centerCode == null)
 			return null;
 		
-		return getCenterBean().getResponsibleTransfusionPersons(centerCode);
+		return FactoryBeans.getCenterBean().getResponsibleTransfusionPersons(centerCode);
 		
 	}
 
 	@Override
 	public List<DataCode> getTransfusionsAnalysis() {
 
-		return getCodeBeans().getTransfusionsAnalysis();
+		return FactoryBeans.getCodeBeans().getTransfusionsAnalysis();
 	}
 
 	@Override
 	public List<DataCode> getTransfusionsEvents() {
 
-		return getCodeBeans().getTransfusionsEvents();
+		return FactoryBeans.getCodeBeans().getTransfusionsEvents();
 	}
 
 	@Override
 	public List<DataCode> getSeverities() {
 
-		return getCodeBeans().getSeverities();
+		return FactoryBeans.getCodeBeans().getSeverities();
 	}
 
 	public List<DataStockProductType> getBankNationalStock() {
@@ -627,39 +461,39 @@ public class RestServicesImpl implements IRestServices{
 	@Override
 	public List<DataCode> getDonationsAnalysis() {
 		
-		return getCodeBeans().getDonationsAnalysis();
+		return FactoryBeans.getCodeBeans().getDonationsAnalysis();
 		
 	}
 
 	@Override
 	public List<DataCode> getDonationsEvents() {
 		
-		return getCodeBeans().getDonationsEvents();
+		return FactoryBeans.getCodeBeans().getDonationsEvents();
 	}
 
 	@Override
 	public List<DataCode> getDonationABOTypes() {
 		
-		return getBloodLocal().getDonationABOTypes();
+		return FactoryBeans.getBloodLocal().getDonationABOTypes();
 	}
 
 	@Override
 	public List<DataCode> getDonationDTTypes() {
 		
-		return getBloodLocal().getDonationDTTypes();
+		return FactoryBeans.getBloodLocal().getDonationDTTypes();
 		
 	}
 
 	@Override
 	public List<DataCode> getRejectionReasons() {
 		
-		return getCodeBeans().getRejectionReasons();
+		return FactoryBeans.getCodeBeans().getRejectionReasons();
 	}
 
 	@Override
 	public List<DataCode> getRejectionTypes() {
 	
-		return getCodeBeans().getRejectionTypes();
+		return FactoryBeans.getCodeBeans().getRejectionTypes();
 		
 	}
 	
@@ -708,16 +542,15 @@ public class RestServicesImpl implements IRestServices{
 		db2.setLongitude(-56.188868);
 
 		List<DataProductType> productTypes = this.getProducts();
-		List<DataBloodType> bloodTypes = this.getBloodTypes();
+		List<DataCode> bloodTypes = this.getBloodTypes();
 		
-//		List<DataUnit> ret = new ArrayList<>();
 		DataUnit d = null;
 		
 		
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 
-		for (DataBloodType bt : bloodTypes) {
+		for (DataCode bt : bloodTypes) {
 			for (DataProductType pt : productTypes) {
 				for (int i = 0; i < 1; ++i) {
 					d = new DataUnit();
@@ -741,34 +574,34 @@ public class RestServicesImpl implements IRestServices{
 	@Override
 	public List<DataCode> getDocumentsTypes() {
 		
-		return getCodeBeans().getDocumentsTypes();
+		return FactoryBeans.getCodeBeans().getDocumentsTypes();
 		
 	}
 
 	@Override
 	public List<DataCode> getCountries() {
 		
-		return getCodeBeans().getCountries();
+		return FactoryBeans.getCodeBeans().getCountries();
 		
 	}
 
 	@Override
 	public List<DataCode> getStatesCodes() {
 		
-		return getCodeBeans().getStates();
+		return FactoryBeans.getCodeBeans().getStates();
 	}
 
 	@Override
 	public List<DataCode> getCitiesCodes() {
 		
-		return getCodeBeans().getCities();
+		return FactoryBeans.getCodeBeans().getCities();
 		
 	}
 
 	@Override
 	public List<DataInstitution> getInstitutions() {
 		
-		return getInstitutionBean().getInstitutions();
+		return FactoryBeans.getInstitutionBean().getInstitutions();
 		
 	}
 
@@ -852,112 +685,15 @@ public class RestServicesImpl implements IRestServices{
 	@Override
 	public List<DataCode> getDonationState() {
 		
-		return getCodeBeans().getDonationsStates();
+		return FactoryBeans.getCodeBeans().getDonationsStates();
 		
 	}
 
-	public IInstitutionBeanLocal getInstitutionBean() {
+	@Override
+	public DataDonationsStatisticsResults getDonationsStatistics(DataDonationsStatistics donationsStatisticsData) {
 		
-		if(institutionBean == null){
-			
-			try {
-				
-				institutionBean = InitialContext.doLookup("java:global/Hemologica-Salud-Backend-ear/Hemologica-Salud-Backend-ejb/InstitutionBean!org.hemologica.salud.ejb.beans.impl.InstitutionBean");
-				
-			} catch (NamingException e) {
-				
-				logger.log(Level.SEVERE, e.getMessage(), e);
-				
-			}
-		}
-		return institutionBean;
-	}
-
-	public IBloodLocal getBloodLocal() {
-			
-		if(bloodLocal == null){
-			
-			try {
-				
-				bloodLocal = InitialContext.doLookup("java:global/Hemologica-Salud-Backend-ear/Hemologica-Salud-Backend-ejb/BloodBean!org.hemologica.salud.ejb.beans.IBloodLocal");
-				
-			} catch (NamingException e) {
-				
-				logger.log(Level.SEVERE, e.getMessage(), e);
-				
-			}
-		}
-		return bloodLocal;
+		return FactoryBeans.getStatisticsBeanLocal().getDonationsStatistics(donationsStatisticsData);
 		
-	}
-
-	public CodesBeanLocal getCodeBeans() {
-		
-		if(codeBeans == null){
-			
-			try {
-				
-				codeBeans = InitialContext.doLookup("java:global/Hemologica-Salud-Backend-ear/Hemologica-Salud-Backend-ejb/CodesBean!org.hemologica.salud.ejb.beans.impl.CodesBean");
-				
-			} catch (NamingException e) {
-
-				logger.log(Level.SEVERE, e.getMessage(), e);
-
-			}
-		}
-		return codeBeans;
-	}
-	
-	public CentersBeanLocal getCenterBean() {
-		
-		if(centerBeans == null){
-			
-			try {
-				
-				centerBeans = InitialContext.doLookup("java:global/Hemologica-Salud-Backend-ear/Hemologica-Salud-Backend-ejb/CentersBean!org.hemologica.salud.ejb.beans.CentersBeanLocal");
-				
-			} catch (NamingException e) {
-				
-				logger.log(Level.SEVERE, e.getMessage(), e);
-				
-			}
-		}
-		return centerBeans;
-	}
-
-	
-	public PersonBeanLocal getPersonBean() {
-		
-		if(personBeans == null){
-			
-			try {
-				
-				personBeans = InitialContext.doLookup("java:global/Hemologica-Salud-Backend-ear/Hemologica-Salud-Backend-ejb/PersonBean!org.hemologica.salud.ejb.beans.PersonBeanLocal");
-				
-			} catch (NamingException e) {
-				
-				logger.log(Level.SEVERE, e.getMessage(), e);
-				
-			}
-		}
-		return personBeans;
-	}
-	
-	public AdvertismentBeanLocal getAdvertismentBean() {
-		
-		if(advertismentBean == null){
-			
-			try {
-				
-				advertismentBean = InitialContext.doLookup("java:global/Hemologica-Salud-Backend-ear/Hemologica-Salud-Backend-ejb/AdvertismentBean!org.hemologica.salud.ejb.beans.impl.AdvertismentBean");
-				
-			} catch (NamingException e) {
-				
-				logger.log(Level.SEVERE, e.getMessage(), e);
-				
-			}
-		}
-		return advertismentBean;
 	}
 
 	

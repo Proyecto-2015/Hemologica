@@ -24,12 +24,12 @@ public class UsersRoleService implements Serializable {
 
 	//bi-directional many-to-one association to Service
 	@ManyToOne
-	@JoinColumn(name="services_id")
-	private Service service;
+	@JoinColumn(name="center_id")
+	private Center center;
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
-	@JoinColumn(name="users_id")
+	@JoinColumn(name="user_id")
 	private User user;
 
 	public UsersRoleService() {
@@ -51,12 +51,12 @@ public class UsersRoleService implements Serializable {
 		this.role = role;
 	}
 
-	public Service getService() {
-		return this.service;
+	public Center getCenter() {
+		return center;
 	}
 
-	public void setService(Service service) {
-		this.service = service;
+	public void setCenter(Center center) {
+		this.center = center;
 	}
 
 	public User getUser() {

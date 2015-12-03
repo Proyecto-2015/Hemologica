@@ -22,3 +22,21 @@ INSERT INTO `hemologica`.`donation_types_codes` (`donation_type_code_id`, `donat
 INSERT INTO `hemologica`.`donation_types_codes` (`donation_type_code_id`, `donation_type_code_value`, `donation_type_code_label`, `donation_type_code_snomed`) VALUES ('2', '2', 'label_autologous', '40');
 INSERT INTO `hemologica`.`donation_types_codes` (`donation_type_code_id`, `donation_type_code_value`, `donation_type_code_label`, `donation_type_code_snomed`) VALUES ('3', '3', 'label_common', '41');
 
+-- Filtros estadisticas
+
+INSERT INTO `hemologica`.`donation_filter_codes` (`donation_filter_codes_id`, `donation_filter_codes_label`, `donation_filter_codes_path`, `donation_filter_codes_value`) VALUES ('1', 'label_gender', '/ClinicalDocument/recordTarget/patientRole/patient/administrativeGenderCode/@code', '1');
+INSERT INTO `hemologica`.`donation_filter_codes` (`donation_filter_codes_id`, `donation_filter_codes_label`, `donation_filter_codes_path`, `donation_filter_codes_value`) VALUES ('2', 'label_age_from', '/ClinicalDocument/recordTarget/patientRole/patient/birthTime/@value', '2');
+INSERT INTO `hemologica`.`donation_filter_codes` (`donation_filter_codes_id`, `donation_filter_codes_label`, `donation_filter_codes_path`, `donation_filter_codes_value`) VALUES ('3', 'label_age_to', '/ClinicalDocument/recordTarget/patientRole/patient/birthTime/@value', '3');
+INSERT INTO `hemologica`.`donation_filter_codes` (`donation_filter_codes_id`, `donation_filter_codes_label`, `donation_filter_codes_path`, `donation_filter_codes_value`) VALUES ('4', 'donation_state_made', '/ClinicalDocument/component/structuredBody/component/section/entry/statusCode/@code', '4');
+INSERT INTO `hemologica`.`donation_filter_codes` (`donation_filter_codes_id`, `donation_filter_codes_label`, `donation_filter_codes_path`, `donation_filter_codes_value`) VALUES ('5', 'donation_failed_type', '//ClinicalDocument//component//structuredBody//component//section//entry//procedure//entryRelationship//observation//value//@code', '5');
+INSERT INTO `hemologica`.`donation_filter_codes` (`donation_filter_codes_id`, `donation_filter_codes_label`, `donation_filter_codes_path`, `donation_filter_codes_value`) VALUES ('6', 'donation_failed_cause', '/ClinicalDocument/component/structuredBody/component/section/entry/procedure/entryRelationship/observation/code/@code', '6');
+INSERT INTO `hemologica`.`donation_filter_codes` (`donation_filter_codes_id`, `donation_filter_codes_label`, `donation_filter_codes_path`, `donation_filter_codes_value`) VALUES ('7', 'donation_blood_type', '//ClinicalDocument//component//structuredBody//component//section//entry//procedure//entryRelationship[descendant-or-self::node()/@typeCode = \\\"COMP\\\"]//observation//code/@code', '7');
+
+UPDATE `hemologica`.`donation_filter_codes` SET `donation_filter_codes_sql`='select gender_code_value, gender_code_label from gender_code;' WHERE `donation_filter_codes_id`='1';
+UPDATE `hemologica`.`donation_filter_codes` SET `donation_filter_codes_sql`='select donation_state_code_value, donation_state_code_label from donation_state_code;' WHERE `donation_filter_codes_id`='4';
+UPDATE `hemologica`.`donation_filter_codes` SET `donation_filter_codes_sql`='select a.donation_fail_code_value, b.concept_code from donation_fail_type_codes as a join concepts as b on a.donation_fail_code_snomed = b.id;' WHERE `donation_filter_codes_id`='5';
+UPDATE `hemologica`.`donation_filter_codes` SET `donation_filter_codes_sql`='select a.donation_fail_cause_code_value, b.concept_code from donation_fail_causes_codes as a join concepts as b on a.donation_fail_cause_code_snomed = b.id;' WHERE `donation_filter_codes_id`='6';
+UPDATE `hemologica`.`donation_filter_codes` SET `donation_filter_codes_sql`='select a.blood_type_code_value, b.concept_code from blood_types_codes as a join concepts as b on a.blood_type_code_snomed = b.id;' WHERE `donation_filter_codes_id`='7';
+
+
+

@@ -13,6 +13,7 @@ import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataDonationEvent;
 import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.DataProductType;
+import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.datatypes.DataMessageOption;
 import org.hemologica.salud.factories.RestFactory;
 import javax.annotation.PostConstruct;
@@ -54,6 +55,7 @@ public class ApplicationBB implements Serializable {
 	private List<DataDonationEvent> donationEvents;
 	private List<DataBank> banks;
 	private List<DataInstitution> institutions;
+	private List<DonationFilterData> donationsFilters;
 
 	
 	@PostConstruct
@@ -61,6 +63,7 @@ public class ApplicationBB implements Serializable {
 		
 		try {
 			
+			this.donationsFilters = RestFactory.getServicesClient().getDonationsFilters();
 			this.donationStates = RestFactory.getServicesClient().getDonationState();
 			this.institutions = RestFactory.getServicesClient().getInstitutions();
 			this.products = RestFactory.getServicesClient().getProducts();
@@ -262,6 +265,14 @@ public class ApplicationBB implements Serializable {
 
 	public void setMessageOptions(List<DataMessageOption> messageOptions) {
 		this.messageOptions = messageOptions;
+	}
+
+	public List<DonationFilterData> getDonationsFilters() {
+		return donationsFilters;
+	}
+
+	public void setDonationsFilters(List<DonationFilterData> donationsFilters) {
+		this.donationsFilters = donationsFilters;
 	}
 
 }

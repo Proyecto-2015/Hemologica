@@ -9,6 +9,6 @@ public interface ICenterDAO extends IGenericDAO<Center>{
 	
 	public Center getBankById(String bankId);
 
-	public List<Center> getBanksUser(String user);
+//	public List<Center> getBanksUser(String user);
 
 }

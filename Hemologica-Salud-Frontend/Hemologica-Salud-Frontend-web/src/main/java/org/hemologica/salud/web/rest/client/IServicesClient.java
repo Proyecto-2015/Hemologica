@@ -22,6 +22,8 @@ import org.hemologica.datatypes.DataUnit;
 import org.hemologica.datatypes.DataUnitInfo;
 import org.hemologica.datatypes.DataUser;
 import org.hemologica.datatypes.DonationFilterData;
+import org.hemologica.datatypes.DataDonationsStatistics;
+import org.hemologica.datatypes.DataDonationsStatisticsResults;
 import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.MailData;
 import org.hemologica.datatypes.DataMessageOption;
@@ -30,15 +32,6 @@ import org.hemologica.datatypes.TransfusionFilterData;
 
 @RequestScoped
 public interface IServicesClient {
-	
-	/**
-	 * Intenta hacer login - Creo que esto se va con lo de JasigCas
-	 * @param user
-	 * @param password
-	 * @return
-	 * @throws IOException 
-	 */
-	public int login(String user, String password) throws IOException;
 	
 	/**
 	 * Devuelve la lista de donaciones del usuario pasado como parametro.
@@ -372,4 +365,11 @@ public interface IServicesClient {
 	 * @throws ClientProtocolException 
 	 */
 	public List<DataCode> getDonationState() throws ClientProtocolException, IOException;
+
+	/**
+	 * Devuelve las estadisticas para los filtros pasado por parametros.
+	 * @param statictic
+	 * @return
+	 */
+	public DataDonationsStatisticsResults getDonationsStatistics(DataDonationsStatistics statictic);
 }
