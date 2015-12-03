@@ -1,15 +1,18 @@
 package org.hemologica.service.datatype;
 
-import javax.mail.Address;
+import java.net.InetAddress;
+import java.util.ArrayList;
+
 
 public class MailData {
 
+	
 	private String from;
 	private String subjet;
 	private String content;
-	private Address[] addressTO;
-	private Address[] addressCC;
-	private Address[] addressCCO;
+	private ArrayList<InetAddress> addressTO;
+	private ArrayList<InetAddress> addressCC;
+	private ArrayList<InetAddress> addressBCC;
 	
 	public String getFrom() {
 		return from;
@@ -29,25 +32,23 @@ public class MailData {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public Address[] getAddressTO() {
+	public ArrayList<InetAddress> getAddressTO() {
 		return addressTO;
 	}
-	public void setAddressTO(Address[] addressTO) {
+	public void setAddressTO(ArrayList<InetAddress> addressTO) {
 		this.addressTO = addressTO;
 	}
-	public Address[] getAddressCC() {
+	public ArrayList<InetAddress> getAddressCC() {
 		return addressCC;
 	}
-	public void setAddressCC(Address[] addressCC) {
+	public void setAddressCC(ArrayList<InetAddress> addressCC) {
 		this.addressCC = addressCC;
 	}
-	public Address[] getAddressCCO() {
-		return addressCCO;
+	public ArrayList<InetAddress> getAddressBCC() {
+		return addressBCC;
 	}
-	public void setAddressCCO(Address[] addressCCO) {
-		this.addressCCO = addressCCO;
+	public void setAddressBCC(ArrayList<InetAddress> addressBCC) {
+		this.addressBCC = addressBCC;
 	}
-	
-	
 	
 }

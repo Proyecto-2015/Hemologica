@@ -8,5 +8,5 @@ public interface IPersonBean{
 	
 	
 	public void processCDAwithEMPIandDatabases(Map<String,String> data, String cda) throws Exception;
-	
+
 }

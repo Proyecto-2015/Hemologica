@@ -4,6 +4,7 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
@@ -35,14 +36,14 @@ public class MailAdapter {
 
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(data.getFrom()));
-			if(data.getAddressTO() != null && data.getAddressTO().length > 0){
-				message.setRecipients(RecipientType.TO, data.getAddressTO());
+			if(data.getAddressTO() != null && data.getAddressTO().size() > 0){
+				message.setRecipients(RecipientType.TO, (Address[]) data.getAddressTO().toArray());
 			}
-			if(data.getAddressCC() != null && data.getAddressCC().length > 0){
-				message.setRecipients(RecipientType.CC, data.getAddressCC());
+			if(data.getAddressCC() != null && data.getAddressCC().size() > 0){
+				message.setRecipients(RecipientType.CC, (Address[]) data.getAddressCC().toArray());
 			}
-			if(data.getAddressCCO() != null && data.getAddressCCO().length > 0){
-				message.setRecipients(RecipientType.BCC, data.getAddressCCO());
+			if(data.getAddressBCC() != null && data.getAddressBCC().size() > 0){
+				message.setRecipients(RecipientType.BCC, (Address[]) data.getAddressBCC().toArray());
 			}
 			message.setSubject(data.getSubjet());
 			message.setText(data.getContent());
