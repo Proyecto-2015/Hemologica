@@ -12,18 +12,19 @@ import org.hemologica.service.utils.xml.XMLUtils;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
-public class CDAEMPIProcessActivator {
+public class CDAProcessActivator {
 
-	private static Logger logger = Logger.getLogger(CDAEMPIProcessActivator.class.getName());
+	private static Logger logger = Logger.getLogger(CDAProcessActivator.class.getName());
 
 	private IPersonBean personBean;
 
-	public String process(Document doc) {
+	public String process(String doc) throws Exception {
 
+		
 		CDA cda = null;
 
 		try {
-			cda = new CDA(doc);
+			cda = new CDA(XMLUtils.stringToDocument(doc));
 		} catch (ParserConfigurationException e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		} catch (SAXException e) {
@@ -36,15 +37,8 @@ public class CDAEMPIProcessActivator {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		
-		try {
-
-			cda.setIdentifier(personBean.getID(cda.getUserData(), XMLUtils.documentToString(doc)));
-			return XMLUtils.documentToString(doc);
-			
-		} catch (TransformerException e) {
-			logger.log(Level.SEVERE, e.getMessage(), e);
-		}
-		return null;
+		personBean.processCDAwithEMPIandDatabases(cda.getUserData(), doc);
+		return doc;
 
 	}
 

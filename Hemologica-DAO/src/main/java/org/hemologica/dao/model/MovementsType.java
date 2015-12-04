@@ -11,13 +11,28 @@ import java.util.List;
  */
 @Entity
 @Table(name="movements_types")
-@NamedQuery(name="MovementsType.findAll", query="SELECT m FROM MovementsType m")
+@NamedQueries(value={
+		@NamedQuery(name="MovementsType.findAll", query="SELECT m FROM MovementsType m"),
+		@NamedQuery(name="MovementsType.findByCode", query="SELECT m FROM MovementsType m WHERE m.code = :code")
+})
+
 public class MovementsType implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
+	
+	@Column(columnDefinition="movement_type_code")
+	private String code;
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
 
 	//bi-directional many-to-one association to Movement
 	@OneToMany(mappedBy="movementsType")

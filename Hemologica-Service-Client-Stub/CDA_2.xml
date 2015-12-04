@@ -24,7 +24,7 @@
         
         
     <!-- Código que identifica de forma unica el documento - OID es HEMOLOGICA-CDA y extension un numero generado por hemologica -->
-    <id root="2.16.858.0.0.1.10.2.3.1.1.1" extension="1"/>
+    <id root="2.16.858.0.0.1.10.2.3.1.1.1" extension="2"/>
         
     <!-- Identificación del tipo de documento -->
     <!-- El código que se encuentra en esta etiqueta, corresponde a un procedimiento. Hay que ver si es correcto utilizarlo --> 
@@ -54,7 +54,7 @@
                 
                 <!-- Identificador del paciente  El root 2.16.858.1.858.68909.12345678 - Código CI = 68909 - CI = 12345678  -->
                 <!-- asocia el identificador de persona definido por la UNAOID, no es necesario incorporar la extensión.  -->  
-                <id  root="2.16.858.1.858.68909.48719360"/>
+                <id  root="2.16.858.68909.48719360"/>
            
                 <!-- Telefono y MAil -->
                 <!-- HP: Primary home WP: Work Place -->

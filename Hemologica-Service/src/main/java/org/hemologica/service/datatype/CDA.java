@@ -27,7 +27,7 @@ public class CDA {
 	private Map<String, String> userData;
 	private List<Identifier> identifiers;
 	private Identifier identifier;
-
+	private String patientIdentifier;
 	private String authorPerson;
 	private String authorInstitution;
 	private String authorRole;
@@ -43,74 +43,90 @@ public class CDA {
 	private String cdaDocumentType;
 	private String cda;
 	private String submissionTime;
+	private String root;
+	private String extension;
 
 	public CDA(Document document) throws ParserConfigurationException, SAXException, IOException, TransformerException,
 			XPathExpressionException {
 		this.document = document;
+		
+		this.setRoot(XMLUtils.executeXPathString(this.document, "/ClinicalDocument/id/@root"));
+		this.setExtension(XMLUtils.executeXPathString(this.document, "/ClinicalDocument/id/@extension"));
 		loadUserData();
-//		loadXDSData();
+		// loadXDSData();
 	}
 
 	public void loadUserData() {
 
 		userData = new HashMap<String, String>();
 
-		Element patientElem = (Element) document.getElementsByTagName("patient").item(0);
+		try {
+			
+			 
+			patientIdentifier = XMLUtils.executeXPathString(this.document, "/ClinicalDocument/recordTarget/patientRole/patient/@id");
+						
+			userData.put("patientIdentifier", patientIdentifier);
+			
+			Element patientElem = (Element) document.getElementsByTagName("patient").item(0);
 
-		// obtener los nombres y apellidos
-		Element patientName = (Element) patientElem.getElementsByTagName("name").item(0);
+			// obtener los nombres y apellidos
+			Element patientName = (Element) patientElem.getElementsByTagName("name").item(0);
 
-		NodeList nodes = patientName.getElementsByTagName("given");
-		userData.put("name", nodes.item(0).getTextContent());
-		if (nodes.getLength() > 1) {
-			userData.put("secondName", nodes.item(1).getTextContent());
-		}
-		nodes = patientName.getElementsByTagName("family");
-		userData.put("surname", nodes.item(0).getTextContent());
-		if (nodes.getLength() > 1) {
-			userData.put("secondSurname", nodes.item(1).getTextContent());
-		}
-
-		// obtener identificador
-		nodes = patientElem.getElementsByTagName("id");
-		if (nodes != null && nodes.getLength() > 0) {
-			String id = nodes.item(0).getAttributes().getNamedItem("root").getTextContent();
-			userData.put("patientIdentifier", id);
-		}
-
-		// obtener fecha de nacimiento
-		nodes = patientElem.getElementsByTagName("birthTime");
-		if (nodes != null && nodes.getLength() > 0) {
-			userData.put("birthday", nodes.item(0).getAttributes().getNamedItem("value").getTextContent());
-		}
-
-		// obtener sexo
-		nodes = patientElem.getElementsByTagName("administrativeGenderCode");
-		if (nodes != null && nodes.getLength() > 0) {
-			userData.put("sex", nodes.item(0).getAttributes().getNamedItem("code").getTextContent());
-		}
-
-		// obtener lugar de nacimiento
-		nodes = patientElem.getElementsByTagName("birthPlace");
-		if (nodes != null && nodes.getLength() > 0) {
-			userData.put("birthdayPlace", nodes.item(0).getTextContent());
-		}
-
-		// obtener datos de contacto
-		nodes = patientElem.getElementsByTagName("telecom");
-		Element elem;
-		for (int i = 0; i < nodes.getLength(); ++i) {
-			elem = (Element) nodes.item(i);
-
-			// obtener telefono
-			if (elem.getAttribute("value").startsWith("tel:")) {
-				userData.put("phone", elem.getAttribute("value").replaceAll("tel:", ""));
-
-			} // obtener mail
-			else if (elem.getAttribute("value").startsWith("mailto:")) {
-
-				userData.put("email", elem.getAttribute("value").replaceAll("mailto:", ""));
+			NodeList nodes = patientName.getElementsByTagName("given");
+			userData.put("name", nodes.item(0).getTextContent());
+			if (nodes.getLength() > 1) {
+				userData.put("secondName", nodes.item(1).getTextContent());
 			}
+			nodes = patientName.getElementsByTagName("family");
+			userData.put("surname", nodes.item(0).getTextContent());
+			if (nodes.getLength() > 1) {
+				userData.put("secondSurname", nodes.item(1).getTextContent());
+			}
+
+			// obtener identificador
+			nodes = patientElem.getElementsByTagName("id");
+			if (nodes != null && nodes.getLength() > 0) {
+				String id = nodes.item(0).getAttributes().getNamedItem("root").getTextContent();
+				userData.put("patientIdentifier", id);
+			}
+
+			// obtener fecha de nacimiento
+			nodes = patientElem.getElementsByTagName("birthTime");
+			if (nodes != null && nodes.getLength() > 0) {
+				userData.put("birthday", nodes.item(0).getAttributes().getNamedItem("value").getTextContent());
+			}
+
+			// obtener sexo
+			nodes = patientElem.getElementsByTagName("administrativeGenderCode");
+			if (nodes != null && nodes.getLength() > 0) {
+				userData.put("sex", nodes.item(0).getAttributes().getNamedItem("code").getTextContent());
+			}
+
+			// obtener lugar de nacimiento
+			nodes = patientElem.getElementsByTagName("birthPlace");
+			if (nodes != null && nodes.getLength() > 0) {
+				userData.put("birthdayPlace", nodes.item(0).getTextContent());
+			}
+
+			// obtener datos de contacto
+			nodes = patientElem.getElementsByTagName("telecom");
+			Element elem;
+			for (int i = 0; i < nodes.getLength(); ++i) {
+				elem = (Element) nodes.item(i);
+
+				// obtener telefono
+				if (elem.getAttribute("value").startsWith("tel:")) {
+					userData.put("phone", elem.getAttribute("value").replaceAll("tel:", ""));
+
+				} // obtener mail
+				else if (elem.getAttribute("value").startsWith("mailto:")) {
+
+					userData.put("email", elem.getAttribute("value").replaceAll("mailto:", ""));
+				}
+			}
+
+		} catch (XPathExpressionException e) {
+			e.printStackTrace();
 		}
 
 	}
@@ -119,7 +135,8 @@ public class CDA {
 
 		// author
 		String inst = "/ClinicalDocument/author/assignedAuthor/representedOrganization/";
-		authorInstitution = XMLUtils.executeXPathString(document, inst + "name") + "^^^^^^^^^" + XMLUtils.executeXPathString(document, inst + "id/@root");
+		authorInstitution = XMLUtils.executeXPathString(document, inst + "name") + "^^^^^^^^^"
+				+ XMLUtils.executeXPathString(document, inst + "id/@root");
 		String person = "/ClinicalDocument/author/";
 		authorPerson = XMLUtils.executeXPathString(document, person + "id/@extension") + "^"
 				+ XMLUtils.executeXPathString(document, person + "assignedPerson/name/family[1]") + "^"
@@ -165,7 +182,6 @@ public class CDA {
 		// cda
 		cda = XMLUtils.documentToString(document);
 		cdaID = UUID.randomUUID().toString();
-		
 
 	}
 
@@ -349,5 +365,29 @@ public class CDA {
 
 	public void setSubmissionTime(String submissionTime) {
 		this.submissionTime = submissionTime;
+	}
+
+	public String getPatientIdentifier() {
+		return patientIdentifier;
+	}
+
+	public void setPatientIdentifier(String patientIdentifier) {
+		this.patientIdentifier = patientIdentifier;
+	}
+
+	public String getRoot() {
+		return root;
+	}
+
+	public void setRoot(String root) {
+		this.root = root;
+	}
+
+	public String getExtension() {
+		return extension;
+	}
+
+	public void setExtension(String extension) {
+		this.extension = extension;
 	}
 }

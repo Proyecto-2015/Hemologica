@@ -4,7 +4,6 @@ import org.hemologica.service.datatype.CDA;
 import org.hemologica.service.utils.xml.XMLUtils;
 import org.hemologica.xds.repository.adapter.client.IRepositoryXDS;
 
-import com.google.gson.Gson;
 
 public class CDAtoXDSProcessActivator {
 
@@ -24,6 +23,9 @@ public class CDAtoXDSProcessActivator {
 					cda.getCodingSchemeLOINCId(), cda.getCodingSchemeLOINCname(), cda.getCodingSchemeSNOMEDCTId(),
 					cda.getCodingSchemeSNOMEDCTName(), cda.getLanguageCode(), cda.getPID5(), cda.getPID7(),
 					cda.getPID8(), cda.getCdaID(), cda.getCdaDocumentType(), cda.getCda(), cda.getSubmissionTime());
+			
+			return cdaString;
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();

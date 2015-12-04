@@ -46,11 +46,13 @@ public class XMLUtils {
 		return executeXPathString(doc.getDocumentElement(), xpath);
 	}
 	
+	public static String executeXPathString(String doc, String xpath) throws XPathExpressionException, SAXException, IOException, ParserConfigurationException{
+		return executeXPathString(XMLUtils.stringToDocument(doc), xpath);
+	}
+	
 	public static String executeXPathString(Element doc, String xpath) throws XPathExpressionException{
-		
 		XPathFactory factory = XPathFactory.newInstance();
 		return (String) factory.newXPath().compile(xpath).evaluate(doc, XPathConstants.STRING);
-		
 	}
 	
 }
