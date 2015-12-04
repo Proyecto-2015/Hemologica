@@ -18,7 +18,8 @@ import java.util.List;
 @NamedQuery(name="Center.findAll", query="SELECT c FROM Center c"),
 @NamedQuery(name="Center.findAllBanks", query="SELECT c FROM Center c WHERE c.centerType = 'bank' "),
 @NamedQuery(name="Center.findBankById", query="SELECT c FROM Center c WHERE c.centerType = 'bank' AND c.centerCode = :code"),
-@NamedQuery(name="Center.findAllTransfusionCenters", query="SELECT c FROM Center c WHERE c.centerType = 'transfusionCenter' ")
+@NamedQuery(name="Center.findAllTransfusionCenters", query="SELECT c FROM Center c WHERE c.centerType = 'transfusionCenter' "),
+@NamedQuery(name="Center.findBankByInstitutionId", query="SELECT c FROM Center c WHERE c.centerType = 'bank'AND c.institution.institutionCode = :code")
 })
 public class Center implements Serializable {
 	private static final long serialVersionUID = 1L;

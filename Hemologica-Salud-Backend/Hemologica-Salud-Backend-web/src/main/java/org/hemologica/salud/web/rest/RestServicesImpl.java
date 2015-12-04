@@ -692,7 +692,16 @@ public class RestServicesImpl implements IRestServices{
 	@Override
 	public DataDonationsStatisticsResults getDonationsStatistics(DataDonationsStatistics donationsStatisticsData) {
 		
-		return FactoryBeans.getStatisticsBeanLocal().getDonationsStatistics(donationsStatisticsData);
+		try {
+			
+			return FactoryBeans.getStatisticsBeanLocal().getDonationsStatistics(donationsStatisticsData);
+			
+		} catch (XMLDataBaseException e) {
+			
+			logger.log(Level.SEVERE, "Error al realizar la consulta", e);
+		}
+		
+		return new DataDonationsStatisticsResults();
 		
 	}
 

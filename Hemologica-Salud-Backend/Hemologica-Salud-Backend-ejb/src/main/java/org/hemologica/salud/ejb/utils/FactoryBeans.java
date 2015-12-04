@@ -138,7 +138,7 @@ public class FactoryBeans {
 		
 		try {
 			
-			return InitialContext.doLookup("java:global/Hemologica-Salud-Backend-ear/Hemologica-Salud-Backend-ejb/InstitutionBean!org.hemologica.salud.ejb.beans.impl.InstitutionBean");
+			return InitialContext.doLookup("java:global/Hemologica-Salud-Backend-ear/Hemologica-Salud-Backend-ejb/StatisticsBean!org.hemologica.salud.ejb.beans.StatisticsBeanLocal");
 			
 		} catch (NamingException e) {
 			
