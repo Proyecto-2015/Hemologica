@@ -14,7 +14,7 @@ import java.util.List;
 @NamedQueries(value={
 	@NamedQuery(name="Unit.findAll", query="SELECT u FROM Unit u"),
 	@NamedQuery(name="Unit.findByInstitutionCode", query="SELECT u FROM Unit u WHERE u.unitInstitutionCode = :code"),
-	@NamedQuery(name="Unit.findByUUID", query="SELECT u FROM Unit u WHERE u.UUID = :uuid")
+	@NamedQuery(name="Unit.findByUUID", query="SELECT u FROM Unit u WHERE u.unitUuid = :uuid")
 })
 public class Unit implements Serializable {
 	private static final long serialVersionUID = 1L;
