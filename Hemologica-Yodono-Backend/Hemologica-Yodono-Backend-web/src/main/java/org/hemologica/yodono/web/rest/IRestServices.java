@@ -10,6 +10,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
+import org.hemologica.datatypes.DataUser;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCode;
@@ -85,4 +86,15 @@ public interface IRestServices {
 	@Path("/"+ConstantsRest.PATH_CAMPAIGN)
 	@Produces("application/json")
 	public DataCampaign getCampaign(@QueryParam(ConstansJson.JSON_CAMPAIGN_ID) String campaignId);
+	
+	@GET
+	@Path("/"+ConstantsRest.PATH_ACCOUNT_ENABLE)
+	@Produces("application/json")
+	public DataUser getUserFirstAccess(@QueryParam(ConstansJson.JSON_ACCOUNT_TOKEN) String token);
+	
+	@POST
+	@Path("/"+ConstantsRest.PATH_ACCOUNT_ENABLE)
+	@Consumes("application/json")
+	public void updateUserFirstAccess(DataUser data);
+	
 }

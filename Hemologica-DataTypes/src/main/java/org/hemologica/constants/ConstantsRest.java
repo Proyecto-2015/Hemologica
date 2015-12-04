@@ -54,5 +54,10 @@ public class ConstantsRest {
 	public static final String PATH_DOCUMENTS_TYPE = "documentstypes";
 	public static final String PATH_DONATION_STATES = "donationstates";
 	
+	
+	/**
+	 * Account to enable from token
+	 */
+	public static final String PATH_ACCOUNT_ENABLE = "account";
 
 }

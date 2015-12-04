@@ -35,10 +35,6 @@ public class Institution implements Serializable {
 	@OneToMany(mappedBy="institution")
 	private List<Center> centers;
 
-	//bi-directional many-to-one association to Unit
-	@OneToMany(mappedBy="institution")
-	private List<Unit> units;
-
 	public Institution() {
 	}
 
@@ -96,13 +92,5 @@ public class Institution implements Serializable {
 		return center;
 	}
 
-	public List<Unit> getUnits() {
-		return this.units;
-	}
-
-	public void setUnits(List<Unit> units) {
-		this.units = units;
-	}
-
-
+	
 }

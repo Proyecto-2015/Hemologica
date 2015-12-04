@@ -15,6 +15,7 @@ import javax.validation.constraints.NotNull;
 @Table(name="movements")
 @NamedQuery(name="Movement.findAll", query="SELECT m FROM Movement m")
 public class Movement implements Serializable {
+	
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -23,7 +24,7 @@ public class Movement implements Serializable {
 	
 	
 	@NotNull
-	@Column(columnDefinition="movement_date", nullable=false)
+	@Column(name="movement_date", nullable=false)
 	private Date date;
 
 

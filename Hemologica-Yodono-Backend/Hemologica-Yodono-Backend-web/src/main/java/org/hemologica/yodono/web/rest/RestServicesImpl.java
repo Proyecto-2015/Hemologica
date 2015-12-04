@@ -15,6 +15,7 @@ import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataTransfusion;
+import org.hemologica.datatypes.DataUser;
 import org.hemologica.datatypes.LoginData;
 import org.hemologica.xmldatabase.exceptions.XMLDataBaseException;
 import org.hemologica.yodono.utils.FactoryBeans;
@@ -201,5 +202,15 @@ public class RestServicesImpl implements IRestServices {
 		
 		return FactoryBeans.getAdvertismentBean().getCampaign(campaignId);
 		
+	}
+
+	@Override
+	public DataUser getUserFirstAccess(String token) {
+		return FactoryBeans.getUserBean().getDataUserFirstAccess(token);
+	}
+
+	@Override
+	public void updateUserFirstAccess(DataUser data) {
+		FactoryBeans.getUserBean().updateUserFirstAccess(data);
 	}
 }

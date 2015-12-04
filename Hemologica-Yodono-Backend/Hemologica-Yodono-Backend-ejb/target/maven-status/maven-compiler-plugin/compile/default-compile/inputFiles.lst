@@ -1,10 +1,16 @@
-/Users/paularoche/Documents/Git/Hemologica/Hemologica-Yodono-Backend/Hemologica-Yodono-Backend-ejb/src/main/java/org/hemologica/yodono/ejb/beans/DonationBeanLocal.java
-/Users/paularoche/Documents/Git/Hemologica/Hemologica-Yodono-Backend/Hemologica-Yodono-Backend-ejb/src/main/java/org/hemologica/yodono/ejb/beans/impl/DonationBean.java
-/Users/paularoche/Documents/Git/Hemologica/Hemologica-Yodono-Backend/Hemologica-Yodono-Backend-ejb/src/main/java/org/hemologica/yodono/ejb/beans/impl/AdvertismentBean.java
-/Users/paularoche/Documents/Git/Hemologica/Hemologica-Yodono-Backend/Hemologica-Yodono-Backend-ejb/src/main/java/org/hemologica/yodono/ejb/beans/impl/CodesBean.java
-/Users/paularoche/Documents/Git/Hemologica/Hemologica-Yodono-Backend/Hemologica-Yodono-Backend-ejb/src/main/java/org/hemologica/yodono/ejb/beans/PersonBeanLocal.java
-/Users/paularoche/Documents/Git/Hemologica/Hemologica-Yodono-Backend/Hemologica-Yodono-Backend-ejb/src/main/java/org/hemologica/yodono/ejb/beans/impl/CentersBean.java
-/Users/paularoche/Documents/Git/Hemologica/Hemologica-Yodono-Backend/Hemologica-Yodono-Backend-ejb/src/main/java/org/hemologica/yodono/ejb/beans/CentersBeanLocal.java
-/Users/paularoche/Documents/Git/Hemologica/Hemologica-Yodono-Backend/Hemologica-Yodono-Backend-ejb/src/main/java/org/hemologica/yodono/ejb/beans/impl/PersonBean.java
-/Users/paularoche/Documents/Git/Hemologica/Hemologica-Yodono-Backend/Hemologica-Yodono-Backend-ejb/src/main/java/org/hemologica/yodono/ejb/beans/CodesBeanLocal.java
-/Users/paularoche/Documents/Git/Hemologica/Hemologica-Yodono-Backend/Hemologica-Yodono-Backend-ejb/src/main/java/org/hemologica/yodono/ejb/beans/AdvertismentBeanLocal.java
+/home/bruno/Desarrollo/Proyectos/Prueba Paula/Hemologica/Hemologica-Yodono-Backend/Hemologica-Yodono-Backend-ejb/src/main/java/org/hemologica/yodono/ejb/beans/impl/PersonBean.java
+/home/bruno/Desarrollo/Proyectos/Prueba Paula/Hemologica/Hemologica-Yodono-Backend/Hemologica-Yodono-Backend-ejb/src/main/java/org/hemologica/yodono/ejb/beans/impl/TransfusionBean.java
+/home/bruno/Desarrollo/Proyectos/Prueba Paula/Hemologica/Hemologica-Yodono-Backend/Hemologica-Yodono-Backend-ejb/src/main/java/org/hemologica/yodono/ejb/beans/DonationBeanLocal.java
+/home/bruno/Desarrollo/Proyectos/Prueba Paula/Hemologica/Hemologica-Yodono-Backend/Hemologica-Yodono-Backend-ejb/src/main/java/org/hemologica/yodono/ejb/beans/impl/DonationBean.java
+/home/bruno/Desarrollo/Proyectos/Prueba Paula/Hemologica/Hemologica-Yodono-Backend/Hemologica-Yodono-Backend-ejb/src/main/java/org/hemologica/yodono/ejb/beans/impl/CentersBean.java
+/home/bruno/Desarrollo/Proyectos/Prueba Paula/Hemologica/Hemologica-Yodono-Backend/Hemologica-Yodono-Backend-ejb/src/main/java/org/hemologica/yodono/utils/XMLUtils.java
+/home/bruno/Desarrollo/Proyectos/Prueba Paula/Hemologica/Hemologica-Yodono-Backend/Hemologica-Yodono-Backend-ejb/src/main/java/org/hemologica/yodono/ejb/beans/UserBeanLocal.java
+/home/bruno/Desarrollo/Proyectos/Prueba Paula/Hemologica/Hemologica-Yodono-Backend/Hemologica-Yodono-Backend-ejb/src/main/java/org/hemologica/yodono/ejb/beans/TransfusionBeanLocal.java
+/home/bruno/Desarrollo/Proyectos/Prueba Paula/Hemologica/Hemologica-Yodono-Backend/Hemologica-Yodono-Backend-ejb/src/main/java/org/hemologica/yodono/ejb/beans/impl/AdvertismentBean.java
+/home/bruno/Desarrollo/Proyectos/Prueba Paula/Hemologica/Hemologica-Yodono-Backend/Hemologica-Yodono-Backend-ejb/src/main/java/org/hemologica/yodono/ejb/beans/AdvertismentBeanLocal.java
+/home/bruno/Desarrollo/Proyectos/Prueba Paula/Hemologica/Hemologica-Yodono-Backend/Hemologica-Yodono-Backend-ejb/src/main/java/org/hemologica/yodono/ejb/beans/impl/UserBean.java
+/home/bruno/Desarrollo/Proyectos/Prueba Paula/Hemologica/Hemologica-Yodono-Backend/Hemologica-Yodono-Backend-ejb/src/main/java/org/hemologica/yodono/ejb/beans/PersonBeanLocal.java
+/home/bruno/Desarrollo/Proyectos/Prueba Paula/Hemologica/Hemologica-Yodono-Backend/Hemologica-Yodono-Backend-ejb/src/main/java/org/hemologica/yodono/ejb/beans/impl/CodesBean.java
+/home/bruno/Desarrollo/Proyectos/Prueba Paula/Hemologica/Hemologica-Yodono-Backend/Hemologica-Yodono-Backend-ejb/src/main/java/org/hemologica/yodono/ejb/beans/CodesBeanLocal.java
+/home/bruno/Desarrollo/Proyectos/Prueba Paula/Hemologica/Hemologica-Yodono-Backend/Hemologica-Yodono-Backend-ejb/src/main/java/org/hemologica/yodono/ejb/beans/CentersBeanLocal.java
+/home/bruno/Desarrollo/Proyectos/Prueba Paula/Hemologica/Hemologica-Yodono-Backend/Hemologica-Yodono-Backend-ejb/src/main/java/org/hemologica/yodono/utils/FactoryBeans.java
