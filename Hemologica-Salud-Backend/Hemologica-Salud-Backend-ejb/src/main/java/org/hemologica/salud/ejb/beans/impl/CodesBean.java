@@ -22,12 +22,14 @@ import org.hemologica.dao.model.MessageSendOption;
 import org.hemologica.dao.model.ResultsCode;
 import org.hemologica.dao.model.StatesCode;
 import org.hemologica.dao.model.TransfusionEventsCode;
+import org.hemologica.dao.model.TransfusionFilterCode;
 import org.hemologica.dao.model.TransfusionLaboratoryCode;
 import org.hemologica.dao.model.UnitsType;
 import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataMessageOption;
 import org.hemologica.datatypes.DataProductType;
 import org.hemologica.datatypes.DonationFilterData;
+import org.hemologica.datatypes.TransfusionFilterData;
 import org.hemologica.factories.FactoryDAO;
 import org.hemologica.salud.ejb.beans.CodesBeanLocal;
 
@@ -515,6 +517,45 @@ public class CodesBean implements CodesBeanLocal {
 						label = (String) optionItem[1];
 					}
 					DonationFilterData dataCode = new DonationFilterData();
+					dataCode.setCode(value);
+					dataCode.setDisplayName(label);
+					listOptions.add(dataCode);	
+				}
+			}
+			data.setOptions(listOptions);
+			listReturn.add(data);
+			
+		}
+		return listReturn;
+	}
+
+	@Override
+	public List<TransfusionFilterData> getTransfusionsFilters() {
+		
+		List<TransfusionFilterData> listReturn = new ArrayList<>();
+		List<TransfusionFilterCode> list = FactoryDAO.getCodesDAO(em).getTransfusionsFilters();
+		
+		for(TransfusionFilterCode filter :list){
+			
+			TransfusionFilterData data = new TransfusionFilterData();
+			data.setCode(filter.getTransfusionFilterCodesValue());
+			data.setDisplayName(filter.getTransfusionFilterCodesLabel());
+			
+			List<TransfusionFilterData> listOptions = new ArrayList<>();
+			
+			if(filter.getTransfusionFilterCodesSql()!= null && !filter.getTransfusionFilterCodesSql().equals("")){
+				
+				List<Object[]> options = FactoryDAO.getCodesDAO(em).executeSQL(filter.getTransfusionFilterCodesSql());
+				for(Object[] optionItem : options){
+					
+					String value = null,label = null;
+					if(optionItem[0] != null){
+						value = (String) optionItem[0];
+					}
+					if(optionItem[1]  != null){
+						label = (String) optionItem[1];
+					}
+					TransfusionFilterData dataCode = new TransfusionFilterData();
 					dataCode.setCode(value);
 					dataCode.setDisplayName(label);
 					listOptions.add(dataCode);	

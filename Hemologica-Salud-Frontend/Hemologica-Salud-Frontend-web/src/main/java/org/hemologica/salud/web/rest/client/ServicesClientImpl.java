@@ -23,6 +23,8 @@ import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataStock;
 import org.hemologica.datatypes.DataStockProductType;
 import org.hemologica.datatypes.DataTransfusion;
+import org.hemologica.datatypes.DataTransfusionsStatistics;
+import org.hemologica.datatypes.DataTransfusionsStatisticsResults;
 import org.hemologica.datatypes.DataUnit;
 import org.hemologica.datatypes.DataUnitInfo;
 import org.hemologica.datatypes.DataUser;
@@ -438,8 +440,8 @@ public class ServicesClientImpl implements IServicesClient {
 	@Override
 	public List<TransfusionFilterData> getTransfusionsFilters() throws ClientProtocolException, IOException {
 
-		String urlService = url + ConstantsRest.PATH_USERS + ConstantsRest.PATH_DONATIONS_FILTERS;
-
+		String urlService = url + ConstantsRest.PATH_CODES + "/" + ConstantsRest.PATH_TRANSFUSIONS_FILTERS;
+		
 		HashMap<String, String> hash = new HashMap<String, String>();
 
 		String responseString = "";
@@ -989,7 +991,7 @@ public class ServicesClientImpl implements IServicesClient {
 	@Override
 	public DataDonationsStatisticsResults getDonationsStatistics(DataDonationsStatistics statictic) {
 		
-		String urlSendMessage = url + ConstantsRest.PATH_STATISTICS ;
+		String urlSendMessage = url + ConstantsRest.PATH_DONATIONS_STATISTICS ;
 
 		String sendMessageString = "";
 		try {
@@ -1002,6 +1004,26 @@ public class ServicesClientImpl implements IServicesClient {
 		}
 
 		DataDonationsStatisticsResults response = new Gson().fromJson(sendMessageString, DataDonationsStatisticsResults.class);
+
+		return response;
+	}
+
+	@Override
+	public DataTransfusionsStatisticsResults getTransfusionsStatistics(DataTransfusionsStatistics statictic) {
+		
+		String urlSendMessage = url + ConstantsRest.PATH_TRANSFUSION_STATISTICS ;
+
+		String sendMessageString = "";
+		try {
+
+			sendMessageString = RestFactory.getRestServicesUtils().post(urlSendMessage, statictic);
+
+		} catch (IOException e) {
+
+			logger.log(Level.SEVERE, "Error al llamar al servicio", e);
+		}
+
+		DataTransfusionsStatisticsResults response = new Gson().fromJson(sendMessageString, DataTransfusionsStatisticsResults.class);
 
 		return response;
 	}

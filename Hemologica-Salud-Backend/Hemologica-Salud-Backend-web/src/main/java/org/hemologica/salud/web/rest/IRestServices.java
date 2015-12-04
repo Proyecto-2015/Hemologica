@@ -21,6 +21,8 @@ import org.hemologica.datatypes.DataResponsiblePerson;
 import org.hemologica.datatypes.DataStock;
 import org.hemologica.datatypes.DataStockProductType;
 import org.hemologica.datatypes.DataTransfusion;
+import org.hemologica.datatypes.DataTransfusionsStatistics;
+import org.hemologica.datatypes.DataTransfusionsStatisticsResults;
 import org.hemologica.datatypes.DataUnit;
 import org.hemologica.datatypes.DataUnitInfo;
 import org.hemologica.datatypes.DonationFilterData;
@@ -33,17 +35,6 @@ import org.hemologica.datatypes.TransfusionFilterData;
 @Path("/services")
 @RequestScoped
 public interface IRestServices {
-	
-//	@POST
-//	@Path("/login")
-//	@Consumes("application/json")
-//	public Response login(LoginData datos);
-//	
-//	
-//	@GET
-//	@Path("/login")
-//	@Produces("application/json")
-//	public void getProductInJSON();
 	
 	@GET
 	@Path("/donations")
@@ -246,9 +237,13 @@ public interface IRestServices {
 	public List<DataCode> getDonationState();
 	
 	@POST
-	@Path("/"+ConstantsRest.PATH_STATISTICS)
+	@Path("/"+ConstantsRest.PATH_DONATIONS_STATISTICS)
 	@Produces("application/json")
 	public DataDonationsStatisticsResults getDonationsStatistics(DataDonationsStatistics donationsStatisticsData);
-
+	
+	@POST
+	@Path("/"+ConstantsRest.PATH_TRANSFUSION_STATISTICS)
+	@Produces("application/json")
+	public DataTransfusionsStatisticsResults getTransfusionsStatistics(DataTransfusionsStatistics donationsStatisticsData);
 	
 }

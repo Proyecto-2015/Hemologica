@@ -1,80 +1,68 @@
 package org.hemologica.salud.web.beans;
 
-import java.io.IOException;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
-import org.apache.http.client.ClientProtocolException;
 import org.hemologica.datatypes.DataTransfusionsStatistics;
+import org.hemologica.datatypes.DataTransfusionsStatisticsResults;
 import org.hemologica.datatypes.TransfusionFilterData;
 import org.hemologica.salud.factories.RestFactory;
 import org.primefaces.event.ItemSelectEvent;
-import org.primefaces.model.chart.PieChartModel;
 
 public class TransfusionsStatisticsBB implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-	private static final Logger logger = Logger.getLogger(DonationsStatisticsBB.class.getName());
+	private static final Logger logger = Logger.getLogger(TransfusionsStatisticsBB.class.getName());
 	
+	private ApplicationBB applicationBB;
 	private DataTransfusionsStatistics statictic;
-	private List<TransfusionFilterData> filters;
-	private List<TransfusionFilterData> distinguish;
 	private List<TransfusionFilterData> allFilters;
-	
-	private PieChartModel pieModel1;
+	private Date dateFrom;
+	private Date dateTo;
+	private DataTransfusionsStatisticsResults statisticsResults;
 
 	@PostConstruct
 	private void init(){
 		
-		try {
+		allFilters = new ArrayList<TransfusionFilterData>(applicationBB.getTransfusionsFilters().size());
+	    for(TransfusionFilterData item: applicationBB.getTransfusionsFilters()){
+			try {
+				
+				allFilters.add((TransfusionFilterData) item.clone());
+				
+			} catch (CloneNotSupportedException e) {
+				
+				logger.log(Level.SEVERE, "Error al clonar el objeto", e);
+				
+			}
+		}
 			
-			allFilters = RestFactory.getServicesClient().getTransfusionsFilters();
-			statictic = new DataTransfusionsStatistics();
-			createPieModels();
+		statictic = new DataTransfusionsStatistics();
 			
-		} catch (ClientProtocolException e) {
-			
-			logger.log(Level.SEVERE, "Error al llamar al servicio web ClientProtocolException", e);
-			
-		} catch (IOException e) {
-			
-			logger.log(Level.SEVERE, "Error al llamar al servicio web IOException", e);
-		}	
 	}
-	
-	private void createPieModels() {
-        createPieModel1();
-    }
-     
-    private void createPieModel1() {
-        pieModel1 = new PieChartModel();
-         
-        pieModel1.set("Brand 1", 540);
-        pieModel1.set("Brand 2", 325);
-        pieModel1.set("Brand 3", 702);
-        pieModel1.set("Brand 4", 421);
-        pieModel1.setExtender("pieExtender");
-        pieModel1.setShowDataLabels(true);
-        pieModel1.setLegendPosition("w");
-    }
     
     public void find(){
     	
     	
     	logger.info("IR a buscar la infoooo");
+    	
+    	statictic.setFilters(allFilters);
+    	
+    	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		if(dateFrom != null)
+			statictic.setFromDate(sdf.format(dateFrom));
+		if(dateTo != null)
+			statictic.setToDate(sdf.format(dateTo));
+    	
+		statisticsResults = RestFactory.getServicesClient().getTransfusionsStatistics(statictic);
     }
-	
-	public PieChartModel getPieModel1() {
-		return pieModel1;
-	}
-
-	public void setPieModel1(PieChartModel pieModel1) {
-		this.pieModel1 = pieModel1;
-	}
 
 	public DataTransfusionsStatistics getStatictic() {
 		return statictic;
@@ -83,21 +71,29 @@ public class TransfusionsStatisticsBB implements Serializable{
 	public void setStatictic(DataTransfusionsStatistics statictic) {
 		this.statictic = statictic;
 	}
-	
-	public List<TransfusionFilterData> getFilters() {
-		return filters;
+
+	public ApplicationBB getApplicationBB() {
+		return applicationBB;
 	}
 
-	public void setFilters(List<TransfusionFilterData> filters) {
-		this.filters = filters;
+	public void setApplicationBB(ApplicationBB applicationBB) {
+		this.applicationBB = applicationBB;
 	}
 
-	public List<TransfusionFilterData> getDistinguish() {
-		return distinguish;
+	public Date getDateFrom() {
+		return dateFrom;
 	}
 
-	public void setDistinguish(List<TransfusionFilterData> distinguish) {
-		this.distinguish = distinguish;
+	public void setDateFrom(Date dateFrom) {
+		this.dateFrom = dateFrom;
+	}
+
+	public Date getDateTo() {
+		return dateTo;
+	}
+
+	public void setDateTo(Date dateTo) {
+		this.dateTo = dateTo;
 	}
 
 	public List<TransfusionFilterData> getAllFilters() {
@@ -107,6 +103,14 @@ public class TransfusionsStatisticsBB implements Serializable{
 	public void setAllFilters(List<TransfusionFilterData> allFilters) {
 		this.allFilters = allFilters;
 	}
+	
+	public DataTransfusionsStatisticsResults getStatisticsResults() {
+		return statisticsResults;
+	}
+
+	public void setStatisticsResults(DataTransfusionsStatisticsResults statisticsResults) {
+		this.statisticsResults = statisticsResults;
+	}
 
 	public void itemSelect(ItemSelectEvent event) {
 	        FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Item selected",
@@ -114,5 +118,7 @@ public class TransfusionsStatisticsBB implements Serializable{
 	     
 	    FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
+	
+	
 
 }

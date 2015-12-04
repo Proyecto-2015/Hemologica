@@ -31,7 +31,8 @@ public class ConstantsRest {
 	public static final String PATH_UNITS_QUERY = "units/query";
 	public static final String PATH_UNIT_INFO = "unitinfo";
 	
-	public static final String PATH_STATISTICS = "statistics";
+	public static final String PATH_DONATIONS_STATISTICS = "donationsstatistics";
+	public static final String PATH_TRANSFUSION_STATISTICS = "transfusionsstatistics";
 	
 	/**
 	 * Bajo esta url podemos meter todos las "codigueras" que tenemos agregandole /option a la url ej: codes/bloodtypes

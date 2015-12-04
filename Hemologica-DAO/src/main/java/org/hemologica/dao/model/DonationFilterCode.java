@@ -34,10 +34,6 @@ public class DonationFilterCode implements Serializable{
 	@Column(name="donation_filter_codes_path")
 	private String donationFilterCodesPath;
 	
-	//bi-directional many-to-one association to Document
-//	@OneToMany(mappedBy="donationFilterCode")
-//	private List<DonationFilterOptionCode> options;
-	
 	@Column(name="donation_filter_codes_sql")
 	private String donationFilterCodesSql;
 

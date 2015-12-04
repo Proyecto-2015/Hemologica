@@ -61,6 +61,27 @@
 		</managed-property>
 	</managed-bean>
 	
+	<converter>
+		<display-name>dataTransfusionFilterConverter</display-name>
+		<converter-id>dataTransfusionFilterConverter</converter-id>
+		<converter-class>org.hemologica.salud.web.converters.DataTransfusionFilterConverter</converter-class>
+	</converter>
+	<managed-bean>
+		<managed-bean-name>dataTransfusionFilterConverter</managed-bean-name>
+		<managed-bean-class>org.hemologica.salud.web.converters.DataTransfusionFilterConverter</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>applicationBB</property-name>
+			<property-class>org.hemologica.salud.web.beans.ApplicationBB</property-class>
+			<value>#{applicationBB}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>sessionBB</property-name>
+			<property-class>org.hemologica.salud.web.beans.SessionBB</property-class>
+			<value>#{sessionBB}</value>
+		</managed-property>
+	</managed-bean>
+	
 	
 	
 	<converter>
@@ -566,9 +587,14 @@
 		
 	</managed-bean>
 	<managed-bean>
-		<managed-bean-name>TransfusionsStatisticsBB</managed-bean-name>
+		<managed-bean-name>transfusionsStatisticsBB</managed-bean-name>
 		<managed-bean-class>org.hemologica.salud.web.beans.TransfusionsStatisticsBB</managed-bean-class>
 		<managed-bean-scope>view</managed-bean-scope>
+		<managed-property>
+			<property-name>applicationBB</property-name>
+			<property-class>org.hemologica.salud.web.beans.ApplicationBB</property-class>
+			<value>#{applicationBB}</value>
+		</managed-property>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>personRecordBB</managed-bean-name>

@@ -66,8 +66,8 @@ public class Center implements Serializable {
 	private Institution institution;
 
 	//bi-directional many-to-one association to Unit
-	@OneToMany(mappedBy="center")
-	private List<Unit> units;
+//	@OneToMany(mappedBy="center")
+//	private List<Unit> units;
 	
 	//bi-directional many-to-one association to Movement
 	@OneToMany(mappedBy="center")
@@ -137,13 +137,13 @@ public class Center implements Serializable {
 		this.centerType = centerType;
 	}
 
-	public List<Unit> getUnits() {
-		return this.units;
-	}
-
-	public void setUnits(List<Unit> units) {
-		this.units = units;
-	}
+//	public List<Unit> getUnits() {
+//		return this.units;
+//	}
+//
+//	public void setUnits(List<Unit> units) {
+//		this.units = units;
+//	}
 	
 	public String getCenterAddress() {
 		return centerAddress;
@@ -185,19 +185,19 @@ public class Center implements Serializable {
 		this.centerInformation = centerInformation;
 	}
 	
-	public Unit addUnit(Unit unit) {
-		getUnits().add(unit);
-		unit.setCenter(this);
-
-		return unit;
-	}
-
-	public Unit removeUnit(Unit unit) {
-		getUnits().remove(unit);
-		unit.setCenter(null);
-
-		return unit;
-	}
+//	public Unit addUnit(Unit unit) {
+//		getUnits().add(unit);
+//		unit.setCenter(this);
+//
+//		return unit;
+//	}
+//
+//	public Unit removeUnit(Unit unit) {
+//		getUnits().remove(unit);
+//		unit.setCenter(null);
+//
+//		return unit;
+//	}
 	
 	public List<Movement> getMovements() {
 		return this.movements;

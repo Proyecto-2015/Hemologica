@@ -4,11 +4,11 @@ import java.util.List;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import org.hemologica.datatypes.DonationFilterData;
+import org.hemologica.datatypes.TransfusionFilterData;
 import org.hemologica.salud.web.beans.ApplicationBB;
 import org.hemologica.salud.web.beans.SessionBB;;
 
-public class DataFilterConverter implements Converter{
+public class DataTransfusionFilterConverter implements Converter{
 
 	
 	private ApplicationBB applicationBB;
@@ -21,12 +21,12 @@ public class DataFilterConverter implements Converter{
 			return null;
 		}
 		
-		DonationFilterData donationFIlterData = (DonationFilterData) component.getAttributes().get("filterItem");
+		TransfusionFilterData donationFIlterData = (TransfusionFilterData) component.getAttributes().get("filterItem");
 
-		List<DonationFilterData> typesList = donationFIlterData.getOptions();
+		List<TransfusionFilterData> typesList = donationFIlterData.getOptions();
 		
 		if (typesList != null) {
-			for (DonationFilterData type : typesList) {
+			for (TransfusionFilterData type : typesList) {
 
 				if (type.getCode() != null && type.getCode().equals(value)) {
 					return type;
@@ -39,9 +39,9 @@ public class DataFilterConverter implements Converter{
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		
-		if(value instanceof DonationFilterData){
+		if(value instanceof TransfusionFilterData){
 			
-			return ((DonationFilterData)value).getCode();
+			return ((TransfusionFilterData)value).getCode();
 		}
 		return null;
 	}

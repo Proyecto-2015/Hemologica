@@ -23,6 +23,11 @@ INSERT INTO `hemologica`.`units_types` (`unit_type_id`, `unit_type_code_label`, 
 INSERT INTO `hemologica`.`units_types` (`unit_type_id`, `unit_type_code_label`, `unit_type_code_value`, `unit_type_code_snomed`) VALUES ('3', 'Plasma', '3', '9');
 INSERT INTO `hemologica`.`units_types` (`unit_type_id`, `unit_type_code_label`, `unit_type_code_value`, `unit_type_code_snomed`) VALUES ('4', 'Eritrocitos', '4', '10');
 
+UPDATE `hemologica`.`units_types` SET `unit_type_code_label`='label_plaquetas' WHERE `unit_type_id`='1';
+UPDATE `hemologica`.`units_types` SET `unit_type_code_label`='label_crioprecipitado' WHERE `unit_type_id`='2';
+UPDATE `hemologica`.`units_types` SET `unit_type_code_label`='label_plasma' WHERE `unit_type_id`='3';
+UPDATE `hemologica`.`units_types` SET `unit_type_code_label`='label_eritrocitos' WHERE `unit_type_id`='4';
+
 
 
 -- INSERT INTO `hemologica`.`units_types` (`unit_type_id`, `unit_type_code_label`, `unit_type_code_value`, `unit_type_code_snomed`) VALUES ('1', 'label_plaquetas', '1', '7');
