@@ -74,6 +74,8 @@ public class StatisticsBean implements StatisticsBeanLocal {
 			
 		}
 		
+		orClausesList.add(orClauses);
+		
 		/**
 		 * Fecha desde
 		 */
@@ -177,7 +179,7 @@ public class StatisticsBean implements StatisticsBeanLocal {
 		/**
 		 * Cantidad de donaciones
 		 */
-		orClausesList.add(orClauses);
+//		orClausesList.add(orClauses);
 		int count = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClauses,orClausesList,null);
 
 		DataStatistic donationsCount = new DataStatistic();
@@ -250,6 +252,8 @@ public class StatisticsBean implements StatisticsBeanLocal {
 			
 		}
 		
+		orClausesList.add(orClauses);
+		
 		/**
 		 * Fecha desde
 		 */
@@ -299,7 +303,7 @@ public class StatisticsBean implements StatisticsBeanLocal {
 		/**
 		 * Cantidad de transfusiones
 		 */
-		int countDonations = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClauses,orClausesList,null);
+		int countTransfusions = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClauses,orClausesList,null);
 		
 		/**
 		 * Cantidad de eventos adversos
@@ -381,12 +385,12 @@ public class StatisticsBean implements StatisticsBeanLocal {
 		/**
 		 * Cantidad de transfusiones
 		 */
-		orClausesList.add(orClauses);
+//		orClausesList.add(orClauses);
 		int count = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClauses,orClausesList,null);
 
 		DataStatistic donationsCount = new DataStatistic();
 		donationsCount.setCount(count);
-		donationsCount.setPercentage((countDonations != 0) ? count *100/countDonations : 0);
+		donationsCount.setPercentage((countTransfusions != 0) ? count *100/countTransfusions : 0);
 		
 		dataDonationsStatistics.setTransfusionsCount(donationsCount);
 		

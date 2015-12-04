@@ -9,8 +9,8 @@ public class DataTransfusionsStatistics {
 	private String type;
 	private String fromDate;
 	private String toDate;
-	private DataCode institution;
-	private DataCode bloodBank;
+	private DataInstitution institution;
+	private DataBank bloodBank;
 	private List<TransfusionFilterData> filters;
 	private List<TransfusionFilterData> distinguish;
 	
@@ -32,16 +32,17 @@ public class DataTransfusionsStatistics {
 	public void setToDate(String toDate) {
 		this.toDate = toDate;
 	}
-	public DataCode getInstitution() {
+	
+	public DataInstitution getInstitution() {
 		return institution;
 	}
-	public void setInstitution(DataCode institution) {
+	public void setInstitution(DataInstitution institution) {
 		this.institution = institution;
 	}
-	public DataCode getBloodBank() {
+	public DataBank getBloodBank() {
 		return bloodBank;
 	}
-	public void setBloodBank(DataCode bloodBank) {
+	public void setBloodBank(DataBank bloodBank) {
 		this.bloodBank = bloodBank;
 	}
 	public List<TransfusionFilterData> getFilters() {

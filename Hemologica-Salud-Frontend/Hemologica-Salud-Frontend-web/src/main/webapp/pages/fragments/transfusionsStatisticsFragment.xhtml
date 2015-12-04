@@ -132,6 +132,11 @@
 								<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.transfusionsCount != null}" 
 								 value="#{transfusionsStatisticsBB.statisticsResults.transfusionsCount.count}" />
 							</label>
+							<label class="col-md-2 col-lg-4 control-label" >
+								<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.transfusionsCount != null}" 
+								 value="#{transfusionsStatisticsBB.statisticsResults.transfusionsCount.percentage} %" />
+							</label>
+							
 						</div>
 					</div>
 					
@@ -144,6 +149,10 @@
 							<label class="col-md-2 col-lg-4 control-label" >
 								<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.personTransfusionsCount != null}" 
 								 value="#{transfusionsStatisticsBB.statisticsResults.personTransfusionsCount.count}" />
+							</label>
+							<label class="col-md-2 col-lg-4 control-label" >
+								<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.personTransfusionsCount != null}" 
+								 value="#{transfusionsStatisticsBB.statisticsResults.personTransfusionsCount.percentage} %" />
 							</label>
 						</div>
 					</div>
@@ -158,6 +167,11 @@
 								<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.adversEventsCount != null}" 
 									value="#{transfusionsStatisticsBB.statisticsResults.adversEventsCount.count}" />
 							</label>
+							<label class="col-md-2 col-lg-4 control-label">
+								<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.adversEventsCount != null}" 
+									value="#{transfusionsStatisticsBB.statisticsResults.adversEventsCount.percentage} %" />
+							</label>
+							
 						</div>
 					</div>
 				</div>
