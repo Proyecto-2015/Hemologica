@@ -1,10 +1,7 @@
 package org.hemologica.dao.model;
 
 import java.io.Serializable;
-import java.security.Timestamp;
-
 import javax.persistence.*;
-
 import java.util.Date;
 import java.util.List;
 

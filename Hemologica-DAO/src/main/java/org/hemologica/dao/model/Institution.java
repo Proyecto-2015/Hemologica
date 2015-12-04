@@ -91,6 +91,4 @@ public class Institution implements Serializable {
 
 		return center;
 	}
-
-	
 }
