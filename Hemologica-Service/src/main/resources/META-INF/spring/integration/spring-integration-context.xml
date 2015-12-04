@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:int="http://www.springframework.org/schema/integration"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:int="http://www.springframework.org/schema/integration"
 	xmlns:int-jms="http://www.springframework.org/schema/integration/jms"
 	xmlns:int-jdbc="http://www.springframework.org/schema/integration/jdbc"
 	xmlns:int-xml="http://www.springframework.org/schema/integration/xml"
@@ -23,8 +25,7 @@
 
 	<!-- flow -->
 
-	<int-jms:message-driven-channel-adapter
-		id="jmsIn" channel="outbound-channel-1" container="messageListenerContainer1" />
+	<int-jms:message-driven-channel-adapter id="cda_get" channel="outbound-channel-1" container="receiveListener" />
 
 <!-- 	<int:channel id="inbound-channel-1" /> -->
 
@@ -38,37 +39,51 @@
 	<!-- output-channel="outbound-channel-2" -->
 	<!-- ref="cdaHeaderProcessActivator" -->
 	<!-- method="process" /> -->
+	
+	<int:recipient-list-router auto-startup="true" input-channel="outbound-channel-1">
+		<int:recipient channel="cda_to_xds_inbound-channel-1" />
+		<int:recipient channel="outbound-channel-cda-process" />
+	</int:recipient-list-router>
+	
+	<int:channel id="cda_to_xds_inbound-channel-1"/>
+	<int:outbound-channel-adapter id="cda_to_xds_adapter" channel="cda_to_xds_inbound-channel-1" ref="cdaXDSProcessActivator" method="process" />
+	
 
-	<!-- <int:channel id="outbound-channel-2" /> -->
+	<int:channel id="outbound-channel-cda-process" />
 
 
-	<int:service-activator input-channel="outbound-channel-1"
-		output-channel="outbound-channel-2" ref="cdaEMPIProcessActivator"
+	<int:service-activator input-channel="outbound-channel-cda-process"
+		output-channel="outbound-channel-2" ref="cdaProcessActivator"
 		method="process" />
+
+
 
 
 
 	<int:channel id="outbound-channel-2" />
 
-	<int-jms:outbound-channel-adapter id="jmsOut" channel="outbound-channel-2" destination="cdaToXDSAndUserQueue" />
+	<int-jms:outbound-channel-adapter id="user_create_put" channel="outbound-channel-2" destination="userCreateQueue" />
 	
-	<int:channel id="cda_to_xds_and_user_inbound-channel-1"/>
-	<int:recipient-list-router auto-startup="true" input-channel="cda_to_xds_and_user_inbound-channel-1">
-		<int:recipient channel="cda_to_xds_inbound-channel-1" />
-		<int:recipient channel="cda_to_user_inbound-channel-1" />
-	</int:recipient-list-router>
+	
+<!-- 	<int:recipient-list-router auto-startup="true" input-channel="cda_to_xds_and_user_inbound-channel-1"> -->
+<!-- 		<int:recipient channel="cda_to_xds_inbound-channel-1" /> -->
+<!-- 		<int:recipient channel="cda_to_user_inbound-channel-1" /> -->
+<!-- 	</int:recipient-list-router> -->
 
 
-	<int-jms:message-driven-channel-adapter id="cdaToXDSandUserjmsIn" channel="cda_to_xds_and_user_inbound-channel-1" container="messageListenerContainer2" />
+	<int-jms:message-driven-channel-adapter id="user_create_get"
+		channel="cda_to_user_inbound-channel-1"
+		container="createUserListener" />
 
 	<int:channel id="cda_to_user_inbound-channel-1" />
-	<int:service-activator ref="cdaToUserProcessActivator" input-channel="cda_to_user_inbound-channel-1" output-channel="user_to_mail_inbound-channel-1"/>
+	<int:service-activator ref="cdaToUserProcessActivator" method="process" 
+				input-channel="cda_to_user_inbound-channel-1" 
+				output-channel="user_to_mail_inbound-channel-1"/>
 	
 	<int:channel id="user_to_mail_inbound-channel-1" />
 	<int:outbound-channel-adapter id="user_to_mail_adapter" channel="user_to_mail_inbound-channel-1" ref="mailAdapter" method="process" />
 	
-	<int:channel id="cda_to_xds_inbound-channel-1"/>
-	<int:outbound-channel-adapter id="cda_to_xds_adapter" channel="cda_to_xds_inbound-channel-1" ref="cdaXDSProcessActivator" method="process" />
+	
 
 <!-- 	<int:channel id="cda_to_xds_outbound-channel-1" /> -->
 <!-- 	<int-jms:outbound-channel-adapter id="jmsOut2" -->

@@ -17,6 +17,7 @@ import org.hemologica.service.business.IUserBean;
 import org.hemologica.service.datatype.MailData;
 import org.hemologica.service.datatype.UserData;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Component
@@ -30,14 +31,15 @@ public class UserBean implements IUserBean {
 	@PersistenceContext(unitName = "Hemologica-Service-PU")
 	private EntityManager em;
 
+	@Transactional
 	@Override
 	public MailData createUser(UserData data) {
 
-		EntityTransaction tx = em.getTransaction();
+//		EntityTransaction tx = em.getTransaction();
 
 		try {
 			
-			tx.begin();
+//			tx.begin();
 			
 			IUserDAO userDAO = new UserDAOImpl(em);
 			IPersonDAO personDAO = new PersonDAOImpl(em);
@@ -51,7 +53,7 @@ public class UserBean implements IUserBean {
 			user.setPasswordReset(false);
 			userDAO.create(user);
 			
-			tx.commit();
+//			tx.commit();
 			
 			if(person.getPersonEmail() != null){
 				MailData mail = new MailData();
@@ -61,9 +63,10 @@ public class UserBean implements IUserBean {
 			}
 			
 		} catch (Exception ex) {
-			if (tx.isActive()) {
-				tx.rollback();
-			}
+			ex.printStackTrace();
+//			if (tx.isActive()) {
+//				tx.rollback();
+//			}
 		}
 		
 		return null;

@@ -6,11 +6,15 @@ import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.xpath.XPathExpressionException;
+
+import org.hemologica.dao.model.Person;
 import org.hemologica.service.business.IPersonBean;
 import org.hemologica.service.datatype.CDA;
+import org.hemologica.service.datatype.UserData;
 import org.hemologica.service.utils.xml.XMLUtils;
-import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
+
+import com.google.gson.Gson;
 
 public class CDAProcessActivator {
 
@@ -37,8 +41,12 @@ public class CDAProcessActivator {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
 		
-		personBean.processCDAwithEMPIandDatabases(cda.getUserData(), doc);
-		return doc;
+		Person person = personBean.processCDAwithEMPIandDatabases(cda.getUserData(), doc);
+		if(person.getPersonEmail() != null){
+			UserData userData = new UserData(Long.parseLong(person.getId()), person.getPersonEmail());
+			return new Gson().toJson(userData);
+		}
+		return null;
 
 	}
 

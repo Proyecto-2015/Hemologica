@@ -32,7 +32,7 @@ import org.hemologica.service.utils.xml.XMLUtils;
 import org.hemologica.xds.repository.adapter.client.IRepositoryXDS;
 import org.hemologica.xmldatabase.connection.impl.BaseXConnection;
 import org.springframework.stereotype.Component;
-
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class PersonBean implements IPersonBean, Serializable {
@@ -49,29 +49,33 @@ public class PersonBean implements IPersonBean, Serializable {
 	private BaseXConnection baseXConnectionLaboratory;
 	private IEMPIAdapter empi;
 	private IRepositoryXDS xdsRepository;
+	private String cdaDonationCode; // 4321000179101
+	private String cdaTransfusionCode; // 4321000179102
+	private String cdaLaboratoryCode; // 4321000179103
 
 	@PersistenceContext(unitName = "Hemologica-Service-PU")
 	private EntityManager em;
 
+	@Transactional
 	@Override
-	public void processCDAwithEMPIandDatabases(Map<String, String> data, String cda) throws Exception {
+	public Person processCDAwithEMPIandDatabases(Map<String, String> data, String cda) throws Exception {
 
 		PDQQueryPatientRequest pdqQueryPatientRequest = new PDQQueryPatientRequest(data);
 		PDQQueryPatientResponse pdqQueryPatientResponse = empi.query(pdqQueryPatientRequest);
 		List<Identifier> identifiers = pdqQueryPatientResponse.getIdetifiers(empi.getMyDomain());
 		Identifier identifier = null;
 
-		EntityTransaction tx = this.em.getTransaction();
+		Person person = null;
+
+//		EntityTransaction tx = this.em.getTransaction();
 		try {
 
-			tx.begin();
-			
-			
+//			tx.begin();
+
 			org.w3c.dom.Document doc = XMLUtils.stringToDocument(cda);
 			String cdaRoot = XMLUtils.executeXPathString(doc, "/ClinicalDocument/id/@root");
 			String cdaExtension = XMLUtils.executeXPathString(doc, "/ClinicalDocument/id/@extension");
 			String cdaType = XMLUtils.executeXPathString(doc, "/ClinicalDocument/code/@code");
-			
 
 			if (identifiers == null || identifiers.isEmpty()) {
 
@@ -81,17 +85,17 @@ public class PersonBean implements IPersonBean, Serializable {
 				identifier.setDomain(data.get(empi.getMyDomain()));
 
 				// Create Person in database
-				this.createPersonAndRecord(data, cdaRoot, cdaExtension);
+				person = this.createPersonAndRecord(data, cdaRoot, cdaExtension).getPerson();
 
 				Map<String, String> values = this.getValuesFromData(data);
 				values.put("patientIdentifier", identifier.getId());
 				CreatePatientRequest createPatientRequest = new CreatePatientRequest(values);
 				CreatePatientResponse createPatientResponse = empi.create(createPatientRequest);
-				
-//				if(!createPatientResponse.getSuccess()){
-//					throw new Exception("TODO put message "); 
-//				}
-				
+
+				// if(!createPatientResponse.getSuccess()){
+				// throw new Exception("TODO put message ");
+				// }
+
 				logger.log(Level.INFO, "Process CDA EMPI" + data);
 
 			} else {
@@ -105,34 +109,33 @@ public class PersonBean implements IPersonBean, Serializable {
 				}
 				Identification identification = this.getPersonByEMPIIdentifier(identifier);
 				this.createRecord(identification, cdaRoot, cdaExtension);
+				person = identification.getPerson();
 
 			}
-			
-			switch (cdaType) {
-			case "4321000179102":
-				baseXConnectionTransfusion.addElement(cdaRoot +"."+ cdaExtension, cda);
-				break;
-			case "4321000179101":
-				baseXConnectionDonations.addElement(cdaRoot +"."+ cdaExtension, cda);
-				break;
-			case "4321000179103":
-				baseXConnectionLaboratory.addElement(cdaRoot +"."+ cdaExtension, cda);
-				break;
+
+			if (cdaType.equals(cdaDonationCode)) {
+				baseXConnectionTransfusion.addElement(cdaRoot + "." + cdaExtension, cda);
+			} else if (cdaType.equals(cdaTransfusionCode)) {
+				baseXConnectionLaboratory.addElement(cdaRoot + "." + cdaExtension, cda);
+			} else if (cdaType.equals(cdaLaboratoryCode)) {
+				baseXConnectionDonations.addElement(cdaRoot + "." + cdaExtension, cda);
 			}
 
-			tx.commit();
+//			tx.commit();
 
 		} catch (Exception ex) {
 
-			if (tx.isActive()) {
-				tx.rollback();
-			}
+//			if (tx.isActive()) {
+//				tx.rollback();
+//			}
 
 		}
 
+		return person;
+
 	}
 
-	private void createPersonAndRecord(Map<String, String> data, String cdaRoot, String cdaExtension) {
+	private Identification createPersonAndRecord(Map<String, String> data, String cdaRoot, String cdaExtension) {
 
 		Identification identification = this.createPerson(data);
 		PersonsRecord personsRecord = new PersonsRecord();
@@ -141,6 +144,7 @@ public class PersonBean implements IPersonBean, Serializable {
 		personsRecord.setPersonsRecordCdaRoot(cdaRoot);
 		IPersonRecordDAO personRecordDAO = new PersonRecordDAOImpl(em);
 		personRecordDAO.create(personsRecord);
+		return identification;
 
 	}
 
@@ -260,6 +264,30 @@ public class PersonBean implements IPersonBean, Serializable {
 
 	public void setEm(EntityManager em) {
 		this.em = em;
+	}
+
+	public String getCdaDonationCode() {
+		return cdaDonationCode;
+	}
+
+	public void setCdaDonationCode(String cdaDonationCode) {
+		this.cdaDonationCode = cdaDonationCode;
+	}
+
+	public String getCdaTransfusionCode() {
+		return cdaTransfusionCode;
+	}
+
+	public void setCdaTransfusionCode(String cdaTransfusionCode) {
+		this.cdaTransfusionCode = cdaTransfusionCode;
+	}
+
+	public String getCdaLaboratoryCode() {
+		return cdaLaboratoryCode;
+	}
+
+	public void setCdaLaboratoryCode(String cdaLaboratoryCode) {
+		this.cdaLaboratoryCode = cdaLaboratoryCode;
 	}
 
 }
