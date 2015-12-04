@@ -32,6 +32,17 @@
 							<legend>
 								<h:outputText value="#{messages.label_identification}" />
 							</legend>
+							
+							<div class="form-group">
+								<label class="col-md-3 control-label" for="username"> <h:outputText
+										value="#{messages.account_user}" />
+								</label>
+								<div class="col-md-9">
+									<label class="label-form-user control-label">
+										<h:outputText value="#{userAccountBB.user.userId}" />
+									</label>
+								</div>
+							</div>
 
 							<div class="form-group">
 								<label class="col-md-3 control-label" for="username"> <h:outputText
@@ -65,7 +76,7 @@
 							<div class="form-group">
 								<div class="col-md-12 text-right" style="margin-top: 15px;">
 									<p:commandButton class="btn btn-primary btn-lg center btnSave"
-										value="#{messages.label_save}" action="#{userBB.submit}"
+										value="#{messages.label_save}" action="#{userAccountBB.update}"
 										process="@form" update="@form" />
 								</div>
 							</div>

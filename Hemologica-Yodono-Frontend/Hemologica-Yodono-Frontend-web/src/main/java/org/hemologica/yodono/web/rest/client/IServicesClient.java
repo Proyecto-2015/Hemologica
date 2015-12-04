@@ -134,7 +134,7 @@ public interface IServicesClient {
 	 * Actualizar datos de la cuenta del primer acceso
 	 * @param data
 	 */
-	public void updateUserFirstAccess(DataUser data) throws ClientProtocolException, IOException ;
+	public DataResponse updateUserFirstAccess(DataUser data) throws ClientProtocolException, IOException ;
 	
 	
 }

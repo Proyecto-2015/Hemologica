@@ -2,6 +2,7 @@ package org.hemologica.yodono.web.beans;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -10,6 +11,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 
+import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataUser;
 import org.hemologica.yodono.factories.RestFactory;
 import org.hemologica.yodono.web.utils.JSFUtils;
@@ -31,10 +33,18 @@ public class UserAccountBB implements Serializable {
 	private DataUser user;
 	private String repeatPassword;
 
-	
+	private Properties prop;
 
 	@PostConstruct
 	public void init() {
+		
+		
+		prop = new Properties();
+		try {
+			prop.load(UserAccountBB.class.getClassLoader().getResourceAsStream("hemologica.properties"));
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 
 		String token = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("token");
 		logger.log(Level.INFO, "User account token: "+  token);
@@ -67,13 +77,19 @@ public class UserAccountBB implements Serializable {
 	
 	public void update(){
 		
-//		try {
-//
-//			RestFactory.getServicesClient().updateUserFirstAccess(user);
-//			
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+		try {
+
+			DataResponse resp = RestFactory.getServicesClient().updateUserFirstAccess(user);
+			if(resp.getCode() == 0){
+				JSFUtils.addGlobalInfoMessage("El usuario se ha guardado con éxtio");
+				JSFUtils.redirect(prop.getProperty("cas.login.url"));
+			}else{
+				JSFUtils.addGlobalErrorMessage("El nombre de usuario ya existe");
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 	}
 	

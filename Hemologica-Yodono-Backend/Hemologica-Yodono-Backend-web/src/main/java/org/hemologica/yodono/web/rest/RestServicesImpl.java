@@ -21,152 +21,151 @@ import org.hemologica.xmldatabase.exceptions.XMLDataBaseException;
 import org.hemologica.yodono.utils.FactoryBeans;
 import org.xml.sax.SAXException;
 
-
 public class RestServicesImpl implements IRestServices {
-	
-	private static final Logger logger = Logger.getLogger(RestServicesImpl.class.getName()); 
-	
+
+	private static final Logger logger = Logger.getLogger(RestServicesImpl.class.getName());
+
 	@Override
 	public Response login(LoginData datos) {
-		
+
 		return null;
 	}
 
 	@Override
 	public void getProductInJSON() {
 		System.out.println("GET");
-		
+
 	}
 
 	@Override
 	public List<DataDonation> getDonations(String userId) {
-		
+
 		try {
-			
+
 			return FactoryBeans.getDonationBean().getDonationsUserId(userId);
-			
+
 		} catch (XMLDataBaseException e) {
-			
+
 			logger.log(Level.SEVERE, "Error al obtener los cdas XMLDataBaseException", e);
-			
+
 		} catch (SAXException e) {
-			
+
 			logger.log(Level.SEVERE, "Error al obtener los cdas SAXException", e);
-			
+
 		} catch (IOException e) {
-			
+
 			logger.log(Level.SEVERE, "Error al obtener los cdas IOException", e);
-			
+
 		} catch (ParserConfigurationException e) {
-			
+
 			logger.log(Level.SEVERE, "Error al obtener los cdas ParserConfigurationException", e);
-			
+
 		} catch (XPathExpressionException e) {
-			
+
 			logger.log(Level.SEVERE, "Error al obtener los cdas XPathExpressionException", e);
-			
+
 		}
-		
+
 		return new ArrayList<DataDonation>();
-		
+
 	}
-	
+
 	@Override
 	public List<DataTransfusion> getTransfusions(String userId) {
-		
+
 		try {
-			
+
 			return FactoryBeans.getTransfusionBean().getTransfusionsUserId(userId);
-		
-		}catch (XMLDataBaseException e) {
-			
+
+		} catch (XMLDataBaseException e) {
+
 			logger.log(Level.SEVERE, "Error al obtener los cdas XMLDataBaseException", e);
-			
+
 		} catch (SAXException e) {
-			
+
 			logger.log(Level.SEVERE, "Error al obtener los cdas SAXException", e);
-			
+
 		} catch (IOException e) {
-			
+
 			logger.log(Level.SEVERE, "Error al obtener los cdas IOException", e);
-			
+
 		} catch (ParserConfigurationException e) {
-			
+
 			logger.log(Level.SEVERE, "Error al obtener los cdas ParserConfigurationException", e);
-			
+
 		} catch (XPathExpressionException e) {
-			
+
 			logger.log(Level.SEVERE, "Error al obtener los cdas XPathExpressionException", e);
-			
-		} 
-		
+
+		}
+
 		return new ArrayList<DataTransfusion>();
-		
-//		List<DataTransfusion> transfusions = new ArrayList<DataTransfusion>();
-//		
-//		DataTransfusion t1 = new DataTransfusion();
-//		DataBank db = new DataBank();
-//		db.setName("Banco X");
-//		
-//		
-//		t1.setBank(db);
-//		
-//		DataInstitution d2 = new DataInstitution();
-//		d2.setName("Hospital de clinicas");
-//		
-//		t1.setInstitution(d2);
-//		
-//		t1.setName("Pedro");
-//		t1.setDate("10/02/2015");
-//		
-//		DataProductType dp1 = new DataProductType();
-//		dp1.setCode("0");
-//		dp1.setDisplay("Plaquetas");
-//		t1.setDataProduct(dp1);
-//		transfusions.add(t1);
-//		
-//		DataTransfusion t2 = new DataTransfusion();
-//		DataBank db2 = new DataBank();
-//		db2.setName("Banco X");
-//		
-//		
-//		t1.setBank(db2);
-//		
-//		DataInstitution di = new DataInstitution();
-//		di.setName("Hospital de clinicas");
-//		
-//		t2.setInstitution(di);
-//		t2.setName("Pedro");
-//		t2.setDate("10/02/2015");
-//		DataProductType dp2 = new DataProductType();
-//		dp2.setCode("0");
-//		dp2.setDisplay("Plasma");
-//		t1.setDataProduct(dp2);
-//		transfusions.add(t2);
-//		
-//		return transfusions;
+
+		// List<DataTransfusion> transfusions = new
+		// ArrayList<DataTransfusion>();
+		//
+		// DataTransfusion t1 = new DataTransfusion();
+		// DataBank db = new DataBank();
+		// db.setName("Banco X");
+		//
+		//
+		// t1.setBank(db);
+		//
+		// DataInstitution d2 = new DataInstitution();
+		// d2.setName("Hospital de clinicas");
+		//
+		// t1.setInstitution(d2);
+		//
+		// t1.setName("Pedro");
+		// t1.setDate("10/02/2015");
+		//
+		// DataProductType dp1 = new DataProductType();
+		// dp1.setCode("0");
+		// dp1.setDisplay("Plaquetas");
+		// t1.setDataProduct(dp1);
+		// transfusions.add(t1);
+		//
+		// DataTransfusion t2 = new DataTransfusion();
+		// DataBank db2 = new DataBank();
+		// db2.setName("Banco X");
+		//
+		//
+		// t1.setBank(db2);
+		//
+		// DataInstitution di = new DataInstitution();
+		// di.setName("Hospital de clinicas");
+		//
+		// t2.setInstitution(di);
+		// t2.setName("Pedro");
+		// t2.setDate("10/02/2015");
+		// DataProductType dp2 = new DataProductType();
+		// dp2.setCode("0");
+		// dp2.setDisplay("Plasma");
+		// t1.setDataProduct(dp2);
+		// transfusions.add(t2);
+		//
+		// return transfusions;
 	}
 
 	@Override
 	public DataPerson getUser(String userId) {
-		
+
 		return FactoryBeans.getPersonBean().getPerson(userId);
 
 	}
 
 	@Override
 	public List<DataBank> getBanks() {
-		
-		return FactoryBeans.getCenterBean().getBanks();
-		
-	}
 
+		return FactoryBeans.getCenterBean().getBanks();
+
+	}
 
 	@Override
 	public List<DataCode> getStates() {
-		
+
 		return FactoryBeans.getCodeBeans().getStates();
-		
+
 	}
 
 	@Override
@@ -182,26 +181,27 @@ public class RestServicesImpl implements IRestServices {
 			return this.getCities();
 		}
 
-		return  FactoryBeans.getCodeBeans().getCitiesByState(stateCode);
+		return FactoryBeans.getCodeBeans().getCitiesByState(stateCode);
 	}
+
 	@Override
 	public DataResponse updateUser(DataPerson dataUser) {
-		
+
 		return FactoryBeans.getPersonBean().updatePerson(dataUser);
 	}
 
 	@Override
 	public List<DataCampaign> getCampaigns(String cant) {
-		
+
 		return FactoryBeans.getAdvertismentBean().getCampaigns(cant);
-		
+
 	}
 
 	@Override
 	public DataCampaign getCampaign(String campaignId) {
-		
+
 		return FactoryBeans.getAdvertismentBean().getCampaign(campaignId);
-		
+
 	}
 
 	@Override
@@ -210,7 +210,23 @@ public class RestServicesImpl implements IRestServices {
 	}
 
 	@Override
-	public void updateUserFirstAccess(DataUser data) {
-		FactoryBeans.getUserBean().updateUserFirstAccess(data);
+	public DataResponse updateUserFirstAccess(DataUser data) {
+		
+		DataResponse resp;
+		
+		try {
+			
+			FactoryBeans.getUserBean().updateUserFirstAccess(data);
+			resp = new DataResponse();
+			resp.setCode(0);
+			return resp;
+			
+		} catch (Exception ex) {
+			resp = new DataResponse();
+			resp.setCode(-1);
+			resp.setErrorMessage(ex.getMessage());
+			return resp;
+			
+		}
 	}
 }

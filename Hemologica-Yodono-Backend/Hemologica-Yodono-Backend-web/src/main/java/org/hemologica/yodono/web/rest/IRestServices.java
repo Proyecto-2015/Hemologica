@@ -94,7 +94,8 @@ public interface IRestServices {
 	
 	@POST
 	@Path("/"+ConstantsRest.PATH_ACCOUNT_ENABLE)
+	@Produces("application/json")
 	@Consumes("application/json")
-	public void updateUserFirstAccess(DataUser data);
+	public DataResponse updateUserFirstAccess(DataUser data);
 	
 }

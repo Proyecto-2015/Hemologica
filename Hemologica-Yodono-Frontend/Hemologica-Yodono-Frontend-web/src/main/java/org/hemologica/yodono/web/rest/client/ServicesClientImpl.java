@@ -344,11 +344,14 @@ public class ServicesClientImpl implements IServicesClient {
 	}
 
 	@Override
-	public void updateUserFirstAccess(DataUser data) throws ClientProtocolException, IOException {
+	public DataResponse updateUserFirstAccess(DataUser data) throws ClientProtocolException, IOException {
 
 		String urlUsers = url + ConstantsRest.PATH_ACCOUNT_ENABLE;
-		RestFactory.getRestServicesUtils().post(urlUsers, data);
-
+		String responseString = "";
+		responseString = RestFactory.getRestServicesUtils().post(urlUsers, data);
+		DataResponse resp = new Gson().fromJson(responseString, DataResponse.class);
+		return resp;
+		
 	}
 
 }

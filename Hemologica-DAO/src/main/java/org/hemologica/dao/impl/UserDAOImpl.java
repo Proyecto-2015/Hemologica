@@ -30,7 +30,7 @@ public class UserDAOImpl extends GenericDAOImpl<User> implements IUserDAO {
 	}
 
 	public User findById(String id) {
-		return em.find(User.class, id);
+		return em.find(User.class, Integer.parseInt(id));
 	}
 
 	

@@ -137,16 +137,8 @@
 	<navigation-rule>
 	   <from-view-id>*</from-view-id>
 	   <navigation-case>
-			<from-outcome>logout</from-outcome>
+			<from-outcome>index</from-outcome>
 			<to-view-id>/template/index.xhtml</to-view-id>
-	   </navigation-case>
-	   <navigation-case>
-			<from-outcome>logout</from-outcome>
-			<to-view-id>/pages/myDonations.xhtml</to-view-id>
-	   </navigation-case>
-	   <navigation-case>
-			<from-outcome>logout</from-outcome>
-			<to-view-id>/pages/Indicadores.xhtml</to-view-id>
 	   </navigation-case>
 	</navigation-rule>
 	<navigation-rule>
@@ -177,7 +169,7 @@
 		<from-view-id>*</from-view-id>
 		<navigation-case>
 			<from-outcome>myDonations</from-outcome>
-			<to-view-id>/pages/myDonations.xhtml</to-view-id>
+			<to-view-id>/pages/private/myDonations.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
@@ -185,7 +177,7 @@
 		<from-view-id>*</from-view-id>
 		<navigation-case>
 			<from-outcome>myTransfusions</from-outcome>
-			<to-view-id>/pages/myTransfusions.xhtml</to-view-id>
+			<to-view-id>/pages/private/myTransfusions.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
@@ -193,7 +185,7 @@
 		<from-view-id>*</from-view-id>
 		<navigation-case>
 			<from-outcome>myProfile</from-outcome>
-			<to-view-id>/pages/userinfo.xhtml</to-view-id>
+			<to-view-id>/pages/private/userinfo.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
