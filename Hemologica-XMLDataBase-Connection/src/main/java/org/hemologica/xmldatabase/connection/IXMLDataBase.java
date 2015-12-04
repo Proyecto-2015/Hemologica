@@ -88,4 +88,12 @@ public interface IXMLDataBase {
 	 */
 	public List<String> getLaboratoryElementsBySpecimenId(String root, String extension) throws XMLDataBaseException;
 	
+	/**
+	 * Devuelve la cantidad de documentos que cumplen con la query pasada por parametro.
+	 * @param patientId
+	 * @return
+	 * @throws XMLDataBaseException
+	 */
+	public int countQuery(List<String> andClauses, List<List<String>> orClauses, List<String> orClausesCDAsIds) throws XMLDataBaseException;
+	
 }

@@ -51,6 +51,10 @@ INSERT INTO `hemologica`.`gender_code` (`gender_code_id`, `gender_code_label`, `
 INSERT INTO `hemologica`.`donation_state_code` (`donation_state_code_id`, `donation_laboratoy_code_label`, `donation_laboratoy_code_value`) VALUES ('1', 'donation_state_made', '1');
 INSERT INTO `hemologica`.`donation_state_code` (`donation_state_code_id`, `donation_laboratoy_code_label`, `donation_laboratoy_code_value`) VALUES ('2', 'donation_state_rejected', '2');
 
+UPDATE `hemologica`.`donation_state_code` SET `donation_state_code_value`='completed' WHERE `donation_state_code_id`='1';
+UPDATE `hemologica`.`donation_state_code` SET `donation_state_code_value`='cancelled' WHERE `donation_state_code_id`='2';
+
+
 
 
 

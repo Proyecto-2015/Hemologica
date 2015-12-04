@@ -7,6 +7,7 @@ public class DonationFilterData implements Cloneable{
 	private String code;
 	private String displayName;
 	private DonationFilterData value;
+	private String valueString;
 	private List<DonationFilterData> options;
 	
 	
@@ -35,6 +36,12 @@ public class DonationFilterData implements Cloneable{
 		this.value = value;
 	}
 	
+	public String getValueString() {
+		return valueString;
+	}
+	public void setValueString(String valueString) {
+		this.valueString = valueString;
+	}
 	@Override
 	public Object clone() throws CloneNotSupportedException {
 		// TODO Auto-generated method stub

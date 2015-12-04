@@ -405,4 +405,108 @@ public class BaseXConnection implements IXMLDataBase{
 		return cdasList;
 
 	}
+
+	public int countQuery(List<String> andClauses, List<List<String>> orClauses, List<String> orClausesCDAsIds) throws XMLDataBaseException {
+		
+		String input = "";
+		
+		if((andClauses != null && andClauses.size() != 0) || (orClauses != null && orClauses.size()!= 0) && 
+				(orClauses.size()==1 && orClauses.get(0).size() != 0)){
+			
+			input += "count(for $doc in collection('" + dataBase + "') "
+			+ "where ";
+			
+			boolean first = true;
+			for(String s : andClauses){
+				if(first){
+					input += "$doc" +s;
+					first = false;
+				}
+				else
+					input += " and $doc" +s;
+				
+			}
+			
+			for(List<String> orClausesList : orClauses){
+				String or = "";
+				for(String s : orClausesList){
+					
+					if(orClausesList.indexOf(s) == 0)
+						or += "$doc" +s;
+					else
+						or += " or $doc" +s;
+				}
+				if(or != ""){
+					if(first){
+						
+						input += "(" + or + ")";
+						first = false;
+						
+					}else{
+						
+						input += " and (" + or + ")";
+						
+					}
+				}
+			}
+			
+			if(orClausesCDAsIds != null){
+				String or = "";
+				for(String s : orClausesCDAsIds){
+					
+					if(orClausesCDAsIds.indexOf(s) == 0)
+						or +=  " (" +s + " )";
+					else
+						or += " or (" +s + " )";
+				}
+				if(or != ""){
+					if(first){
+						
+						input +=  or;
+						
+					}else{
+						
+						input += " and (" + or + ")";
+						
+					}
+				}
+			}
+			
+			input += " return $doc)";	
+			
+		}else{
+			
+			input = "count(collection('" +dataBase + "'))";
+			
+		}
+		
+		BaseXClient.Query query;
+		BaseXClient session = null;
+		try {
+			session = this.getClient();
+			
+			query = session.query(input);
+			query.execute();
+			
+			if(query.more()){
+				
+				return Integer.parseInt(query.next());
+			}
+			
+		} catch (IOException e) {
+			
+			logger.log(Level.SEVERE, "Error al intentar recuperarlos elementos en la base de datos.", e);
+			throw new XMLDataBaseException();
+		} finally {
+			if(session != null){
+				try {
+					session.close();
+				} catch (IOException e) {
+					logger.log(Level.SEVERE, e.getMessage(), e);
+				}
+			}
+		}
+		
+		return 0;		
+	}
 }

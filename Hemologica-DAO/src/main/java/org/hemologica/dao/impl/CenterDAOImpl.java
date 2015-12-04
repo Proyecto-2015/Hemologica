@@ -31,4 +31,12 @@ public class CenterDAOImpl extends GenericDAOImpl<Center> implements ICenterDAO 
 		return (Center) query.getSingleResult();
 		
 	}
+
+	@SuppressWarnings("unchecked")
+	public List<Center> getBanksByInstitutionId(String code) {
+		
+		Query query = em.createNamedQuery("Center.findBankByInstitutionId");
+		query.setParameter("code", code);
+		return query.getResultList();
+	}
 }
