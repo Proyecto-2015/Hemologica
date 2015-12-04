@@ -53,10 +53,10 @@ public class Person implements Serializable {
 	private String personEmail;
 	
 	@Column(name="person_allow_notification_able")
-	private boolean allowNotificationAbleToDonate;
+	private Boolean allowNotificationAbleToDonate;
 	
 	@Column(name="person_allow_notification_need_donor")
-	private boolean allowNotificationNeedDonor;
+	private Boolean allowNotificationNeedDonor;
 
 	//bi-directional many-to-one association to Document
 	@OneToMany(mappedBy="person")
@@ -161,19 +161,19 @@ public class Person implements Serializable {
 		this.documents = documents;
 	}
 	
-	public boolean getAllowNotificationAbleToDonate() {
+	public Boolean getAllowNotificationAbleToDonate() {
 		return allowNotificationAbleToDonate;
 	}
 
-	public void setAllowNotificationAbleToDonate(boolean allowNotificationAbleToDonate) {
+	public void setAllowNotificationAbleToDonate(Boolean allowNotificationAbleToDonate) {
 		this.allowNotificationAbleToDonate = allowNotificationAbleToDonate;
 	}
 
-	public boolean getAllowNotificationNeedDonor() {
+	public Boolean getAllowNotificationNeedDonor() {
 		return allowNotificationNeedDonor;
 	}
 
-	public void setAllowNotificationNeedDonor(boolean allowNotificationNeedDonor) {
+	public void setAllowNotificationNeedDonor(Boolean allowNotificationNeedDonor) {
 		this.allowNotificationNeedDonor = allowNotificationNeedDonor;
 	}
 	

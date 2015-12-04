@@ -8,18 +8,24 @@ import org.hemologica.dao.ICenterDAO;
 import org.hemologica.dao.ICodesDAO;
 import org.hemologica.dao.IIdentificationDAO;
 import org.hemologica.dao.IInstitutionDAO;
+import org.hemologica.dao.IMovementDAO;
 import org.hemologica.dao.INotificationDAO;
 import org.hemologica.dao.IPersonDAO;
 import org.hemologica.dao.IPersonRecordDAO;
+import org.hemologica.dao.IUnitDAO;
+import org.hemologica.dao.IUserDAO;
 import org.hemologica.dao.impl.AdvertismentDAOImpl;
 import org.hemologica.dao.impl.BloodDAOImpl;
 import org.hemologica.dao.impl.CenterDAOImpl;
 import org.hemologica.dao.impl.CodesDAOImpl;
 import org.hemologica.dao.impl.IdentificationDAOImpl;
 import org.hemologica.dao.impl.InstitutionDAOImpl;
+import org.hemologica.dao.impl.MovementDAOImpl;
 import org.hemologica.dao.impl.NotificationDAOImpl;
 import org.hemologica.dao.impl.PersonDAOImpl;
 import org.hemologica.dao.impl.PersonRecordDAOImpl;
+import org.hemologica.dao.impl.UnitDAOImpl;
+import org.hemologica.dao.impl.UserDAOImpl;
 
 public class FactoryDAO {
 
@@ -67,6 +73,17 @@ public class FactoryDAO {
 	
 	public static IPersonRecordDAO getPersonRecordDAO(EntityManager em) {
 		return new PersonRecordDAOImpl(em);
-
+	}
+	
+	public static IUserDAO getUserDAO(EntityManager em){
+		return new UserDAOImpl(em);
+	}
+	
+	public static IMovementDAO getMovementDAO(EntityManager em){
+		return new MovementDAOImpl(em);
+	}
+	
+	public static IUnitDAO getUnitDAO(EntityManager em){
+		return new UnitDAOImpl(em);
 	}
 }

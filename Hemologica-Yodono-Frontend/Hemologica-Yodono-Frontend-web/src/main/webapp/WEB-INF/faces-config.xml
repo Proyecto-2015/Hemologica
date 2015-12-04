@@ -99,6 +99,21 @@
 		</managed-property>
      </managed-bean>
      <managed-bean>
+     	<managed-bean-name>userAccountBB</managed-bean-name>
+     	<managed-bean-class>org.hemologica.yodono.web.beans.UserAccountBB</managed-bean-class>
+     	<managed-bean-scope>view</managed-bean-scope>
+     	<managed-property>
+			<property-name>applicationBB</property-name>
+			<property-class>org.hemologica.yodono.web.beans.ApplicationBB</property-class>
+			<value>#{applicationBB}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>sessionBB</property-name>
+			<property-class>org.hemologica.yodono.web.beans.SessionBB</property-class>
+			<value>#{sessionBB}</value>
+		</managed-property>
+     </managed-bean>
+     <managed-bean>
      	<managed-bean-name>banksBB</managed-bean-name>
      	<managed-bean-class>org.hemologica.yodono.web.beans.BanksBB</managed-bean-class>
      	<managed-bean-scope>view</managed-bean-scope>
@@ -179,6 +194,14 @@
 		<navigation-case>
 			<from-outcome>myProfile</from-outcome>
 			<to-view-id>/pages/userinfo.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+		<from-view-id>*</from-view-id>
+		<navigation-case>
+			<from-outcome>myFirstAccess</from-outcome>
+			<to-view-id>/pages/userFirstAccess.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>

@@ -11,6 +11,7 @@ import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataTransfusion;
+import org.hemologica.datatypes.DataUser;
 
 public interface IServicesClient {
 	
@@ -121,5 +122,19 @@ public interface IServicesClient {
 	 * @throws ClientProtocolException 
 	 */
 	public List<DataCode> getStatesCodes() throws ClientProtocolException, IOException;
+
+	/**
+	 * Obtengo la cuenta del usuario a partir del token para activar la cuenta
+	 * @param token
+	 * @return
+	 */
+	public DataUser getUserFirstAccess(String token) throws ClientProtocolException, IOException ;
+	
+	/**
+	 * Actualizar datos de la cuenta del primer acceso
+	 * @param data
+	 */
+	public void updateUserFirstAccess(DataUser data) throws ClientProtocolException, IOException ;
+	
 	
 }

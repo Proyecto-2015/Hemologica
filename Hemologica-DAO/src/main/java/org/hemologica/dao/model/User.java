@@ -11,7 +11,11 @@ import java.util.List;
  */
 @Entity
 @Table(name = "users")
-@NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
+@NamedQueries(value={
+		@NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
+		@NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id"),
+		@NamedQuery(name = "User.findByAccountToken", query = "SELECT u FROM User u WHERE u.activeAccountToken = :token")
+})
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -19,25 +23,28 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
-	@Column(columnDefinition = "code")
+	@Column(name = "code")
 	private String code;
 	
-	@Column(columnDefinition = "active_account")
+	@Column(name = "active_account")
 	private Boolean activeAccount;
 	
-	@Column(columnDefinition = "active_account_token")
+	@Column(name = "active_account_token")
 	private String activeAccountToken;
 	
-	@Column(columnDefinition = "active_account_token_time")
+	@Column(name = "active_account_token_time")
 	private Date activeAccountTokenTime;
 	
-	@Column(columnDefinition = "password_account")
+	@Column(name = "password")
+	private String password;
+	
+	@Column(name = "password_reset")
 	private Boolean passwordReset;
 	
-	@Column(columnDefinition = "password_account_token")
+	@Column(name = "password_reset_token")
 	private String passwordResetToken;
 	
-	@Column(columnDefinition = "password_account_token_time")
+	@Column(name = "password_reset_token_time")
 	private Date passwordResetTokenTime;
 
 	public Boolean getActiveAccount() {
@@ -145,5 +152,14 @@ public class User implements Serializable {
 
 		return usersRoleService;
 	}
+	
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 
 }
