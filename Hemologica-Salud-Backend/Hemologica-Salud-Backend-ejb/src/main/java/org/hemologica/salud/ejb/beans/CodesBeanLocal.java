@@ -6,6 +6,7 @@ import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataMessageOption;
 import org.hemologica.datatypes.DataProductType;
 import org.hemologica.datatypes.DonationFilterData;
+import org.hemologica.datatypes.TransfusionFilterData;
 
 @Local
 public interface CodesBeanLocal {
@@ -71,5 +72,7 @@ public interface CodesBeanLocal {
 	public List<DataCode> getBloodTypes();
 
 	public List<DonationFilterData> getDonationsFilters();
+
+	public List<TransfusionFilterData> getTransfusionsFilters();
 
 }

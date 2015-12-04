@@ -36,7 +36,7 @@
 		<class>org.hemologica.dao.model.DonationFailCausesCode</class>
 		<class>org.hemologica.dao.model.DonationFailTypeCode</class>
 		<class>org.hemologica.dao.model.DonationLaboratoyCode</class>
-		<class>org.hemologica.dao.model.DonationStatesCode</class>
+		<class>org.hemologica.dao.model.DonationStateCode</class>
 		<class>org.hemologica.dao.model.DonationTypesCode</class>
 		<class>org.hemologica.dao.model.GeoLocation</class>
 		<class>org.hemologica.dao.model.Identification</class>
@@ -64,9 +64,9 @@
 		<class>org.hemologica.dao.model.ResultsCode</class>
 		<class>org.hemologica.dao.model.BloodTypes</class>
 		<class>org.hemologica.dao.model.GenderCode</class>
-		<class>org.hemologica.dao.model.DonationFilterOptionCode</class>
 		<class>org.hemologica.dao.model.DonationFilterCode</class>
 		<class>org.hemologica.dao.model.DonationStateCode</class>
+		<class>org.hemologica.dao.model.TransfusionFilterCode</class>
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.show_sql" value="false" />

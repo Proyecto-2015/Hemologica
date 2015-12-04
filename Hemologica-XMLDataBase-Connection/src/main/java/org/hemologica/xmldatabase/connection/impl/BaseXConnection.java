@@ -509,4 +509,119 @@ public class BaseXConnection implements IXMLDataBase{
 		
 		return 0;		
 	}
+
+	public int countEvents(List<String> andClauses, List<List<String>> orClauses, List<String> orClausesCDAsIds)
+			throws XMLDataBaseException {
+		
+		String input = "";
+		
+//		if((andClauses != null && andClauses.size() != 0) || (orClauses != null && orClauses.size()!= 0) && 
+//				(orClauses.size()==1 && orClauses.get(0).size() != 0)){
+			
+			input += "sum(for $doc in collection('" + dataBase + "') ";
+			
+			
+			boolean first = true;
+			if(andClauses != null){
+				for(String s : andClauses){
+					if(first){
+						input += "where "+ "$doc" +s;
+						first = false;
+					}
+					else
+						input += " and $doc" +s;
+					
+				}
+			}
+			
+			if(orClauses != null){
+				for(List<String> orClausesList : orClauses){
+					String or = "";
+					for(String s : orClausesList){
+						
+						if(orClausesList.indexOf(s) == 0)
+							or += "$doc" +s;
+						else
+							or += " or $doc" +s;
+					}
+					if(or != ""){
+						if(first){
+							
+							input += "where "+ "(" + or + ")";
+							first = false;
+							
+						}else{
+							
+							input += " and (" + or + ")";
+							
+						}
+					}
+				}
+			}
+			
+			String returnString = "";
+			if(orClausesCDAsIds != null && orClausesCDAsIds.size()==1){
+				returnString = orClausesCDAsIds.get(0);
+				
+//				String returnString = "for $doc in collection('" + dataBase + "') "
+//										+ "where ";
+//				boolean firstReturn = true;
+//				for(String s : orClausesCDAsIds){
+//					
+//					if(first){
+//						returnString += "$doc" +s;
+//						firstReturn = false;
+//					}
+//					else
+//						returnString += " and $doc" +s;
+//					
+//				}
+//				returnString += " return $doc";
+				
+				
+			}else if(orClausesCDAsIds != null && orClausesCDAsIds.size()==2){
+				
+				returnString = orClausesCDAsIds.get(1);
+				
+			}else{
+				returnString = "$doc//ClinicalDocument//component//structuredBody//component//section[descendant-or-self::node()/@code = \"54790000\"]//entry//observation//entryRelationship";
+			}
+			
+			input += " return count("+ returnString + "))";	
+			
+//		}else{
+//			
+//			input = "count(//ClinicalDocument//component//structuredBody//component//section[descendant-or-self::node()/@code = \"54790000\"]//entry//observation//entryRelationship)";
+//			
+//		}
+		
+		BaseXClient.Query query;
+		BaseXClient session = null;
+		try {
+			session = this.getClient();
+			
+			query = session.query(input);
+			query.execute();
+			
+			if(query.more()){
+				
+				return Integer.parseInt(query.next());
+			}
+			
+		} catch (IOException e) {
+			
+			logger.log(Level.SEVERE, "Error al intentar recuperarlos elementos en la base de datos.", e);
+			throw new XMLDataBaseException();
+		} finally {
+			if(session != null){
+				try {
+					session.close();
+				} catch (IOException e) {
+					logger.log(Level.SEVERE, e.getMessage(), e);
+				}
+			}
+		}
+		
+		return 0;		
+	}
 }

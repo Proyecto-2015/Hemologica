@@ -18,6 +18,7 @@ import org.hemologica.dao.model.ResponsibleTransfusionPerson;
 import org.hemologica.dao.model.ResultsCode;
 import org.hemologica.dao.model.StatesCode;
 import org.hemologica.dao.model.TransfusionEventsCode;
+import org.hemologica.dao.model.TransfusionFilterCode;
 import org.hemologica.dao.model.TransfusionLaboratoryCode;
 import org.hemologica.dao.model.UnitsType;
 
@@ -88,5 +89,9 @@ public interface ICodesDAO {
 	public List<DonationFilterCode> getDonationsFilters();
 
 	public DonationFilterCode getDonationsFilterById(String code);
+
+	public List<TransfusionFilterCode> getTransfusionsFilters();
+	
+	public TransfusionFilterCode getTransfusionFilterById(String code);
 
 }

@@ -21,6 +21,7 @@ import org.hemologica.dao.model.ResponsibleTransfusionPerson;
 import org.hemologica.dao.model.ResultsCode;
 import org.hemologica.dao.model.StatesCode;
 import org.hemologica.dao.model.TransfusionEventsCode;
+import org.hemologica.dao.model.TransfusionFilterCode;
 import org.hemologica.dao.model.TransfusionLaboratoryCode;
 import org.hemologica.dao.model.UnitsType;
 
@@ -292,6 +293,21 @@ public class CodesDAOImpl implements ICodesDAO{
 		Query query = em.createNamedQuery("DonationFilterCode.findById");
 		query.setParameter("code", code);
 		return (DonationFilterCode) query.getSingleResult();
+		
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<TransfusionFilterCode> getTransfusionsFilters() {
+		
+		Query query = em.createNamedQuery("TransfusionFilterCode.findAll");
+		return query.getResultList();
+	}
+	
+	public TransfusionFilterCode getTransfusionFilterById(String code) {
+		
+		Query query = em.createNamedQuery("TransfusionFilterCode.findById");
+		query.setParameter("code", code);
+		return (TransfusionFilterCode) query.getSingleResult();
 		
 	}
 

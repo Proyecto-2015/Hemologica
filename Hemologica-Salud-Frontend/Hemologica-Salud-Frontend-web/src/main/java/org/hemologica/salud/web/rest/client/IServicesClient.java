@@ -18,6 +18,8 @@ import org.hemologica.datatypes.DataState;
 import org.hemologica.datatypes.DataStock;
 import org.hemologica.datatypes.DataStockProductType;
 import org.hemologica.datatypes.DataTransfusion;
+import org.hemologica.datatypes.DataTransfusionsStatistics;
+import org.hemologica.datatypes.DataTransfusionsStatisticsResults;
 import org.hemologica.datatypes.DataUnit;
 import org.hemologica.datatypes.DataUnitInfo;
 import org.hemologica.datatypes.DataUser;
@@ -372,4 +374,11 @@ public interface IServicesClient {
 	 * @return
 	 */
 	public DataDonationsStatisticsResults getDonationsStatistics(DataDonationsStatistics statictic);
+
+	/**
+	 * Devuelve las estadisticas para los filtros pasado por parametros.
+	 * @param statictic
+	 * @return
+	 */
+	public DataTransfusionsStatisticsResults getTransfusionsStatistics(DataTransfusionsStatistics statictic);
 }

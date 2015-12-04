@@ -26,6 +26,8 @@ import org.hemologica.datatypes.DataStock;
 import org.hemologica.datatypes.DataStockProductType;
 import org.hemologica.datatypes.DataStockProductTypeBloodType;
 import org.hemologica.datatypes.DataTransfusion;
+import org.hemologica.datatypes.DataTransfusionsStatistics;
+import org.hemologica.datatypes.DataTransfusionsStatisticsResults;
 import org.hemologica.datatypes.DataUnit;
 import org.hemologica.datatypes.DataUnitInfo;
 import org.hemologica.datatypes.DonationFilterData;
@@ -192,47 +194,7 @@ public class RestServicesImpl implements IRestServices{
 	@Override
 	public List<TransfusionFilterData> getTransfusionsFilters() {
 
-		List<TransfusionFilterData> filters = new ArrayList<TransfusionFilterData>();
-
-		TransfusionFilterData f1 = new TransfusionFilterData();
-		f1.setCode("0");
-		f1.setDisplayName("Sexo");
-
-		List<TransfusionFilterData> f1Options = new ArrayList<TransfusionFilterData>();
-
-		TransfusionFilterData f11 = new TransfusionFilterData();
-		f11.setCode("01");
-		f11.setDisplayName("Hombre");
-		f1Options.add(f11);
-
-		TransfusionFilterData f12 = new TransfusionFilterData();
-		f12.setCode("02");
-		f12.setDisplayName("Mujer");
-		f1Options.add(f12);
-
-		f1.setOptions(f1Options);
-		filters.add(f1);
-
-		TransfusionFilterData f2 = new TransfusionFilterData();
-		f2.setCode("1");
-		f2.setDisplayName("Producto");
-
-		List<TransfusionFilterData> f1Options2 = new ArrayList<TransfusionFilterData>();
-
-		TransfusionFilterData f21 = new TransfusionFilterData();
-		f21.setCode("11");
-		f21.setDisplayName("Plaquetas");
-		f1Options2.add(f21);
-
-		TransfusionFilterData f22 = new TransfusionFilterData();
-		f22.setCode("12");
-		f22.setDisplayName("Plasma");
-		f1Options2.add(f22);
-
-		f2.setOptions(f1Options2);
-		filters.add(f2);
-
-		return filters;
+		return FactoryBeans.getCodeBeans().getTransfusionsFilters();
 	}
 
 	@Override
@@ -703,6 +665,22 @@ public class RestServicesImpl implements IRestServices{
 		
 		return new DataDonationsStatisticsResults();
 		
+	}
+
+	@Override
+	public DataTransfusionsStatisticsResults getTransfusionsStatistics(
+			DataTransfusionsStatistics donationsStatisticsData) {
+		
+		try {
+			
+			return FactoryBeans.getStatisticsBeanLocal().getTransfusionsStatistics(donationsStatisticsData);
+			
+		} catch (XMLDataBaseException e) {
+			
+			logger.log(Level.SEVERE, "Error al realizar la consulta", e);
+		}
+		
+		return new DataTransfusionsStatisticsResults();
 	}
 
 	

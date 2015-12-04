@@ -48,7 +48,7 @@
 <!-- 						<div class="col-md-9 col-lg-8"> -->
 <!-- 							<h:selectOneMenu id="bankOption" class="form-control" value="#{donationsStatisticsBB.statictic.bloodBank}" -->
 <!-- 								style="height: 34px;" converter="#{dataBankConverterSession}"> -->
-								
+<!-- 								<f:selectItem itemLabel="#{messages.label_all}" itemValue="#{null}"/> -->
 <!-- 								<f:selectItems value="#{sessionBB.userBanks}" var="bank" -->
 <!-- 									itemValue="#{bank}" itemLabel="#{bank.name}" /> -->
 <!-- 							</h:selectOneMenu> -->
@@ -133,7 +133,14 @@
 								<h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null and donationsStatisticsBB.statisticsResults.donationsCount != null}" 
 								 value="#{donationsStatisticsBB.statisticsResults.donationsCount.count}" />
 							</label>
+							
+							<label class="col-md-2 col-lg-4 control-label" >
+								<h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null and donationsStatisticsBB.statisticsResults.donationsCount != null}" 
+								 value="#{donationsStatisticsBB.statisticsResults.donationsCount.percentage} %"  />
+							</label>
 						</div>
+						
+						
 					</div>
 					
 					<div class="col-md-9 col-lg-12" style="padding-top: 12px;">
@@ -141,10 +148,16 @@
 							<h:outputText value="#{messages.label_donors_count}" />
 						</label>
 												
-						<div class="col-md-9 col-lg-8">							
+						<div class="col-md-9 col-lg-8">	
+							
 							<label class="col-md-2 col-lg-4 control-label">
 								<h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null and donationsStatisticsBB.statisticsResults.donorsCount != null}" 
-									value="#{donationsStatisticsBB.statisticsResults.donorsCount.count}" />
+									value="#{donationsStatisticsBB.statisticsResults.donorsCount.count} " />
+							</label>
+												
+							<label class="col-md-2 col-lg-4 control-label">
+								<h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null and donationsStatisticsBB.statisticsResults.donorsCount != null}" 
+									value="#{donationsStatisticsBB.statisticsResults.donorsCount.percentage} %" />
 							</label>
 						</div>
 					</div>
