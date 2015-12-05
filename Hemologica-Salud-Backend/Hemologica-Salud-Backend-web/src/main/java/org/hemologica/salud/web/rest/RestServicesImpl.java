@@ -612,7 +612,7 @@ public class RestServicesImpl implements IRestServices{
 		d.setInstitution(di);
 		d.setName("Pedro");
 
-		DataDonationDonorType a = new DataDonationDonorType();
+		DataCode a = new DataCode();
 		a.setDisplayName("Voluntario");
 		d.setDataDonorType(a);
 		d.setDate("10/02/2015");
@@ -681,6 +681,32 @@ public class RestServicesImpl implements IRestServices{
 		}
 		
 		return new DataTransfusionsStatisticsResults();
+	}
+
+	@Override
+	public List<DataCode> getDonationTypes() {
+		
+		return FactoryBeans.getCodeBeans().getDonationTypes();
+	}
+
+	@Override
+	public List<DataCode> getDonorTypes() {
+		
+		return FactoryBeans.getCodeBeans().getDonorTypes();
+		
+	}
+
+	@Override
+	public DataResponse addDonation(DataDonation dataDonacion) {
+		
+		return FactoryBeans.getDonationBean().addDonation(dataDonacion);
+	}
+
+	@Override
+	public DataResponse addTransfusion(DataTransfusion dataTransfusion) {
+		
+		return FactoryBeans.getTransfusionBean().addTransfusion(dataTransfusion);
+		
 	}
 
 	

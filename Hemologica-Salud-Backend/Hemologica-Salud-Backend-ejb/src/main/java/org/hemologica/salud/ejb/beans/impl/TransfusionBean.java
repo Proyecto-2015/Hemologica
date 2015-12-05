@@ -19,6 +19,7 @@ import org.hemologica.dao.model.PersonsRecord;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataLaboratoryResult;
+import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataTransfusionEvent;
 import org.hemologica.factories.FactoryDAO;
@@ -173,6 +174,18 @@ public class TransfusionBean implements TransfusionBeanLocal, Serializable {
 		}
 		
 		return data;
+	}
+
+	@Override
+	public DataResponse addTransfusion(DataTransfusion dataTransfusion) {
+		
+		logger.info("Crear cda");
+		
+		DataResponse dataResponse = new DataResponse();
+		
+		dataResponse.setCode(0);
+		
+		return dataResponse;
 	}
 
 

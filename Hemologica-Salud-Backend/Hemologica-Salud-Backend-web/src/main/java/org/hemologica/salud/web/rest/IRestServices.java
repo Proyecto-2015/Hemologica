@@ -246,4 +246,23 @@ public interface IRestServices {
 	@Produces("application/json")
 	public DataTransfusionsStatisticsResults getTransfusionsStatistics(DataTransfusionsStatistics donationsStatisticsData);
 	
+	@GET
+	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_DONATION_TYPES)
+	@Produces("application/json")
+	public List<DataCode> getDonationTypes();
+	
+	@GET
+	@Path("/" +ConstantsRest.PATH_CODES +"/"+ ConstantsRest.PATH_DONOR_TYPES)
+	@Produces("application/json")
+	public List<DataCode> getDonorTypes();
+	
+	@POST
+	@Path("/" +ConstantsRest.PATH_ADD_DONATION)
+	@Produces("application/json")
+	public DataResponse addDonation(DataDonation dataDonacion);
+	
+	@POST
+	@Path("/" +ConstantsRest.PATH_ADD_TRANSFUSION)
+	@Produces("application/json")
+	public DataResponse addTransfusion(DataTransfusion dataTransfusion);
 }

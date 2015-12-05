@@ -9,6 +9,11 @@ import org.hemologica.xmldatabase.exceptions.XMLDataBaseException;
  */
 public interface IXMLDataBase {
 	
+	/**
+	 * Devuelve el nombre de la base de datos
+	 * @return
+	 */
+	public String getDataBaseName();
 	
 	/**
 	 * Agrega Elemento en la base de datos
@@ -94,7 +99,7 @@ public interface IXMLDataBase {
 	 * @return
 	 * @throws XMLDataBaseException
 	 */
-	public int countQuery(List<String> andClauses, List<List<String>> orClauses, List<String> orClausesCDAsIds) throws XMLDataBaseException;
+	public int countQuery(List<String> andClauses, List<List<String>> orClauses, List<String> orClausesCDAsIds, List<String> analysisIds) throws XMLDataBaseException;
 	
 	/**
 	 * Devuelve la cantidad de eventos adversos que cumplen con la query pasada por parametro.

@@ -10,6 +10,7 @@ import org.hemologica.dao.model.BloodTypes;
 import org.hemologica.dao.model.CitiesCode;
 import org.hemologica.dao.model.CountriesCode;
 import org.hemologica.dao.model.DocumentsTypesCode;
+import org.hemologica.dao.model.DonationDonorTypesCode;
 import org.hemologica.dao.model.DonationEventsCode;
 import org.hemologica.dao.model.DonationFailCausesCode;
 import org.hemologica.dao.model.DonationFailTypeCode;
@@ -562,6 +563,40 @@ public class CodesBean implements CodesBeanLocal {
 				}
 			}
 			data.setOptions(listOptions);
+			listReturn.add(data);
+			
+		}
+		return listReturn;
+	}
+
+	@Override
+	public List<DataCode> getDonationTypes() {
+		
+		List<DataCode> listReturn = new ArrayList<>();
+		List<DonationTypesCode> list = FactoryDAO.getCodesDAO(em).getDonationTypes();
+		
+		for(DonationTypesCode bloodType :list){
+			
+			DataCode data = new DataCode();
+			data.setCode(bloodType.getDonationTypeCodeValue());
+			data.setDisplayName(bloodType.getDonationTypeCodeLabel());
+			listReturn.add(data);
+			
+		}
+		return listReturn;
+	}
+
+	@Override
+	public List<DataCode> getDonorTypes() {
+		
+		List<DataCode> listReturn = new ArrayList<>();
+		List<DonationDonorTypesCode> list = FactoryDAO.getCodesDAO(em).getDonorTypes();
+		
+		for(DonationDonorTypesCode bloodType :list){
+			
+			DataCode data = new DataCode();
+			data.setCode(bloodType.getDonationDonorTypeCodeValue());
+			data.setDisplayName(bloodType.getDonationDonorTypeCodeLabel());
 			listReturn.add(data);
 			
 		}

@@ -3,8 +3,12 @@ package org.hemologica.salud.web.beans;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.faces.application.Application;
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
@@ -12,6 +16,8 @@ import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataDonationEvent;
 import org.hemologica.datatypes.DataLaboratoryResult;
+import org.hemologica.datatypes.DataResponse;
+import org.hemologica.salud.factories.RestFactory;
 import org.primefaces.event.FlowEvent;
 
 public class DonationBB implements Serializable {
@@ -23,18 +29,18 @@ public class DonationBB implements Serializable {
 	private ApplicationBB applicationBB;
 	private SessionBB sessionBB;
 	private PersonBB personBB;
-	
 	private DataDonation dataDonacion;
 	private DataLaboratoryResult labResult;
-	private DataDonationEvent event;
-	
+	private DataDonationEvent event;	
 	private List<SelectItem> donationEvents;
 	private String donationEventSelected;
-	
 	private List<SelectItem> severities;
 	private String severitySelected;
-	
 	private FacesContext ctx;
+	
+	@ManagedProperty("#{messages}")
+	private ResourceBundle bundle;
+	private String languageVarName = "messages";
 	
 
 	@PostConstruct
@@ -81,9 +87,7 @@ public class DonationBB implements Serializable {
 		this.event = new DataDonationEvent();
 		
 	}
-	
-	
-	
+		
 	public void setCtx(FacesContext ctx) {
 		this.ctx = ctx;
 	}
@@ -183,5 +187,25 @@ public class DonationBB implements Serializable {
 		return event.getNewStep();
         
     }
+	
+	public void submit(){
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		Application app = context.getApplication();
+		bundle = app.getResourceBundle(context, languageVarName);
+		
+		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, null, bundle.getString("add_donation_error"));
+		
+		DataResponse response = RestFactory.getServicesClient().addDonation(dataDonacion);
+
+		if(response != null && response.getCode() == 0){
+			
+			msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, bundle.getString("add_donation_success"));
+
+		}
+		
+		FacesContext.getCurrentInstance().addMessage(null, msg);
+
+	}
 
 }

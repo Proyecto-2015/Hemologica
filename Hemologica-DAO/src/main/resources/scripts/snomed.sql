@@ -75,6 +75,8 @@ INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('46', '260385
 INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('47', '6934004');
 INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('48', '14803004');
 
+-- aferesis
+INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('49', '127788007');
 
 
 

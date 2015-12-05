@@ -49,7 +49,8 @@ public class ApplicationBB implements Serializable {
 	private List<DataCode> rejectionReasons;
 	
 	private List<DataMessageOption> messageOptions;
-	
+	private List<DataCode> donorTypes;
+	private List<DataCode> donationTypes;
 	private List<DataCode> donationStates;
 	private List<DataCode> donationABOTypes;
 	private List<DataCode> donationDTypes;
@@ -78,6 +79,8 @@ public class ApplicationBB implements Serializable {
 			this.severities = RestFactory.getServicesClient().getSeverities();
 			this.transfusionEvents = RestFactory.getServicesClient().getTransfusionsEvents();
 			this.donationsEvents = RestFactory.getServicesClient().getDonationsEvents();
+			this.donationTypes = RestFactory.getServicesClient().getDonationTypes();
+			this.donorTypes = RestFactory.getServicesClient().getDonorTypes();
 			
 			this.donationABOTypes = RestFactory.getServicesClient().getDonationABOTypes();
 			this.donationDTypes = RestFactory.getServicesClient().getDonationDTTypes();
@@ -286,5 +289,23 @@ public class ApplicationBB implements Serializable {
 	public void setTransfusionsFilters(List<TransfusionFilterData> transfusionsFilters) {
 		this.transfusionsFilters = transfusionsFilters;
 	}
+
+	public List<DataCode> getDonorTypes() {
+		return donorTypes;
+	}
+
+	public void setDonorTypes(List<DataCode> donorTypes) {
+		this.donorTypes = donorTypes;
+	}
+
+	public List<DataCode> getDonationTypes() {
+		return donationTypes;
+	}
+
+	public void setDonationTypes(List<DataCode> donationTypes) {
+		this.donationTypes = donationTypes;
+	}
+	
+	
 
 }

@@ -381,4 +381,34 @@ public interface IServicesClient {
 	 * @return
 	 */
 	public DataTransfusionsStatisticsResults getTransfusionsStatistics(DataTransfusionsStatistics statictic);
+
+	/**
+	 * Devuelve los tipos de donaciones
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataCode> getDonationTypes() throws ClientProtocolException, IOException;
+
+	/**
+	 * Devuelve los tipos de donantes
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataCode> getDonorTypes() throws ClientProtocolException, IOException;
+	
+	/**
+	 * agrega la donacion
+	 * @param dataDonacion
+	 * @return
+	 */
+	public DataResponse addDonation(DataDonation dataDonacion);
+	
+	/**
+	 * agrega la transfusion
+	 * @param dataDonacion
+	 * @return
+	 */
+	public DataResponse addTransfusion(DataTransfusion dataTransfusion);
 }

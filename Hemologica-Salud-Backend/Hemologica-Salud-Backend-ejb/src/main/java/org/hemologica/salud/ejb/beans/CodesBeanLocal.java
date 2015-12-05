@@ -75,4 +75,8 @@ public interface CodesBeanLocal {
 
 	public List<TransfusionFilterData> getTransfusionsFilters();
 
+	public List<DataCode> getDonationTypes();
+
+	public List<DataCode> getDonorTypes();
+
 }

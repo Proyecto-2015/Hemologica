@@ -5,6 +5,7 @@ import org.hemologica.dao.model.BloodTypes;
 import org.hemologica.dao.model.CitiesCode;
 import org.hemologica.dao.model.CountriesCode;
 import org.hemologica.dao.model.DocumentsTypesCode;
+import org.hemologica.dao.model.DonationDonorTypesCode;
 import org.hemologica.dao.model.DonationEventsCode;
 import org.hemologica.dao.model.DonationFailCausesCode;
 import org.hemologica.dao.model.DonationFailTypeCode;
@@ -93,5 +94,9 @@ public interface ICodesDAO {
 	public List<TransfusionFilterCode> getTransfusionsFilters();
 	
 	public TransfusionFilterCode getTransfusionFilterById(String code);
+
+	public List<DonationDonorTypesCode> getDonorTypes();
+
+	public List<DonationTypesCode> getDonationTypes();
 
 }

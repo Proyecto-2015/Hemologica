@@ -4,16 +4,10 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ViewScoped;
-import javax.inject.Inject;
-import javax.inject.Named;
-
 import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.DataUnitInfo;
 import org.hemologica.salud.factories.RestFactory;
 
-//@Named("unitBB")
-//@ViewScoped
 public class UnitBB implements Serializable {
 
 	

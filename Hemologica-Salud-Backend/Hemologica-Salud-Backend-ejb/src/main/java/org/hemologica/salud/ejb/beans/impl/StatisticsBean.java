@@ -125,11 +125,13 @@ public class StatisticsBean implements StatisticsBeanLocal {
 		/**
 		 * Cantidad de donaciones
 		 */
-		int countDonations = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClauses,orClausesList,null);
+		int countDonations = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClauses,orClausesList,null,null);
 		
 		/**
 		 * Filtros
 		 */
+		List<String> filtersAnalysis = new ArrayList<>();
+		String analisisCode = "";
 		for(DonationFilterData filter :donationsStatisticsData.getFilters()){
 			
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
@@ -170,8 +172,37 @@ public class StatisticsBean implements StatisticsBeanLocal {
 				if(donationFilter != null){
 					
 					String query = donationFilter.getDonationFilterCodesPath() + "='" + filter.getValue().getCode() +"'";
-					andClauses.add(query);
 					
+					if(filter.getCode().equals(Constants.ANALYSIS) || filter.getCode().equals(Constants.RESULTS)){
+						/**
+						 * Analisis
+						 */
+						if(donationFilter.getDonationFilterCodesValue().equals(Constants.RESULTS)){
+							
+							if(analisisCode.equals(""))
+								
+								query = query.replace("/"+Constants.VAR_EVENT_FILTER.toString()+"/", "");
+							
+							else{
+								
+								String filterEvent = Constants.EVENT_FILTER + "'" + analisisCode + "']";
+								query = query.replace(Constants.VAR_EVENT_FILTER.toString(), filterEvent);
+								
+							}
+							
+							
+						}else if(donationFilter.getDonationFilterCodesValue().equals(Constants.ANALYSIS)){
+							
+							analisisCode = filter.getValue().getCode();
+							
+						}	
+						
+						filtersAnalysis.add(query);
+						
+					}else{
+					
+						andClauses.add(query);
+					}		
 				}
 			}	
 		}
@@ -179,8 +210,7 @@ public class StatisticsBean implements StatisticsBeanLocal {
 		/**
 		 * Cantidad de donaciones
 		 */
-//		orClausesList.add(orClauses);
-		int count = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClauses,orClausesList,null);
+		int count = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClauses,orClausesList,null,filtersAnalysis);
 
 		DataStatistic donationsCount = new DataStatistic();
 		donationsCount.setCount(count);
@@ -207,7 +237,7 @@ public class StatisticsBean implements StatisticsBeanLocal {
 				
 			}
 			
-			if(orClausesCDAsIds.size() != 0 && XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClauses,orClausesList,orClausesCDAsIds) > 0){
+			if(orClausesCDAsIds.size() != 0 && XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClauses,orClausesList,orClausesCDAsIds,filtersAnalysis) > 0){
 				
 				cant++;
 				
@@ -303,7 +333,7 @@ public class StatisticsBean implements StatisticsBeanLocal {
 		/**
 		 * Cantidad de transfusiones
 		 */
-		int countTransfusions = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClauses,orClausesList,null);
+		int countTransfusions = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClauses,orClausesList,null,null);
 		
 		/**
 		 * Cantidad de eventos adversos
@@ -373,12 +403,8 @@ public class StatisticsBean implements StatisticsBeanLocal {
 					if(donationFilter.getTransfusionFilterCodesValue().equals(Constants.ADVERSE_EVENT)){
 						edverseEventCode = filter.getValue().getCode();
 						adversEventsFilters.add(query);
-					}
-					
+					}	
 				}
-				
-				
-				
 			}	
 		}
 		
@@ -386,7 +412,7 @@ public class StatisticsBean implements StatisticsBeanLocal {
 		 * Cantidad de transfusiones
 		 */
 //		orClausesList.add(orClauses);
-		int count = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClauses,orClausesList,null);
+		int count = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClauses,orClausesList,null,null);
 
 		DataStatistic donationsCount = new DataStatistic();
 		donationsCount.setCount(count);
@@ -413,7 +439,7 @@ public class StatisticsBean implements StatisticsBeanLocal {
 				
 			}
 			
-			if(orClausesCDAsIds.size() != 0 && XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClauses,orClausesList,orClausesCDAsIds) > 0){
+			if(orClausesCDAsIds.size() != 0 && XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClauses,orClausesList,orClausesCDAsIds,null) > 0){
 				
 				cant++;
 				

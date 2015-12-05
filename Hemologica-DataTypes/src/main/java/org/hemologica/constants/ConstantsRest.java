@@ -31,6 +31,9 @@ public class ConstantsRest {
 	public static final String PATH_UNITS_QUERY = "units/query";
 	public static final String PATH_UNIT_INFO = "unitinfo";
 	
+	public static final String PATH_ADD_DONATION = "adddonation";
+	public static final String PATH_ADD_TRANSFUSION = "addtransfusion";
+	
 	public static final String PATH_DONATIONS_STATISTICS = "donationsstatistics";
 	public static final String PATH_TRANSFUSION_STATISTICS = "transfusionsstatistics";
 	
@@ -54,11 +57,13 @@ public class ConstantsRest {
 	public static final String PATH_COUNTRIES = "countries";
 	public static final String PATH_DOCUMENTS_TYPE = "documentstypes";
 	public static final String PATH_DONATION_STATES = "donationstates";
-	
+	public static final String PATH_DONATION_TYPES = "donationtypes";
+	public static final String PATH_DONOR_TYPES = "donortypes";
 	
 	/**
 	 * Account to enable from token
 	 */
 	public static final String PATH_ACCOUNT_ENABLE = "account";
+	
 
 }

@@ -12,6 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.hemologica.xmldatabase.connection.IXMLDataBase;
 import org.hemologica.xmldatabase.exceptions.XMLDataBaseException;
+import org.hemologica.xmldatabase.factories.XMLDataBaseFactory;
 
 /**
  * @author Paula Roche
@@ -27,6 +28,13 @@ public class BaseXConnection implements IXMLDataBase{
 
 	public BaseXConnection() {
 	}
+	
+	public String getDataBaseName(){
+		
+		return dataBase;
+		
+	}
+	
 
 	public BaseXConnection(Properties prop, String dbname) throws XMLDataBaseException {
 
@@ -406,12 +414,13 @@ public class BaseXConnection implements IXMLDataBase{
 
 	}
 
-	public int countQuery(List<String> andClauses, List<List<String>> orClauses, List<String> orClausesCDAsIds) throws XMLDataBaseException {
+	public int countQuery(List<String> andClauses, List<List<String>> orClauses, List<String> orClausesCDAsIds, List<String> analysisIds) throws XMLDataBaseException {
 		
 		String input = "";
 		
-		if((andClauses != null && andClauses.size() != 0) || (orClauses != null && orClauses.size()!= 0) && 
-				(orClauses.size()==1 && orClauses.get(0).size() != 0)){
+		if((andClauses != null && andClauses.size() != 0) || 
+				(analysisIds != null && analysisIds.size()!= 0) || (orClausesCDAsIds != null && orClausesCDAsIds.size()!= 0) || 
+				((orClauses != null && orClauses.size()!= 0) && orClauses.size()==1 && orClauses.get(0).size() != 0)){
 			
 			input += "count(for $doc in collection('" + dataBase + "') "
 			+ "where ";
@@ -462,13 +471,47 @@ public class BaseXConnection implements IXMLDataBase{
 				if(or != ""){
 					if(first){
 						
-						input +=  or;
+						input += "(" + or + ")";
+						first = false;
 						
 					}else{
 						
 						input += " and (" + or + ")";
 						
 					}
+				}
+			}
+			
+			String analysisQuery = "";
+			if(analysisIds != null && analysisIds.size() > 0){
+				
+				analysisQuery = "for $docLab in collection('" + XMLDataBaseFactory.getIXMLDataBaseLaboratory().getDataBaseName() + "') "
+							+ "where " + 
+							"$docLab//ClinicalDocument/component/structuredBody/component/section/entry/organizer/specimen/specimenRole/id/@root="
+							+ "$doc/ClinicalDocument/component/structuredBody/component/section/entry/procedure/specimen/specimenRole/id/@root   and "
+							+ "$docLab//ClinicalDocument/component/structuredBody/component/section/entry/organizer/specimen/specimenRole/id//@extension="
+							+ "$doc/ClinicalDocument/component/structuredBody/component/section/entry/procedure/specimen/specimenRole/id/@extension"; 
+				
+				if(analysisIds.size() == 1 ){
+					
+					analysisQuery += " and $docLab/" + analysisIds.get(0);
+					
+				}else if(analysisIds.size() == 2){
+					
+					analysisQuery += " and $docLab/" + analysisIds.get(1);
+					
+				}
+				
+				analysisQuery += " return $docLab ";
+				
+				if(first){
+					
+					input +=  "count(" + analysisQuery + ") > 0";
+					
+				}else{
+					
+					input += " and " + "count(" + analysisQuery + ") > 0";
+				
 				}
 			}
 			
@@ -514,86 +557,64 @@ public class BaseXConnection implements IXMLDataBase{
 			throws XMLDataBaseException {
 		
 		String input = "";
+			
+		input += "sum(for $doc in collection('" + dataBase + "') ";
 		
-//		if((andClauses != null && andClauses.size() != 0) || (orClauses != null && orClauses.size()!= 0) && 
-//				(orClauses.size()==1 && orClauses.get(0).size() != 0)){
-			
-			input += "sum(for $doc in collection('" + dataBase + "') ";
-			
-			
-			boolean first = true;
-			if(andClauses != null){
-				for(String s : andClauses){
-					if(first){
-						input += "where "+ "$doc" +s;
-						first = false;
-					}
-					else
-						input += " and $doc" +s;
+		
+		boolean first = true;
+		if(andClauses != null){
+			for(String s : andClauses){
+				if(first){
+					input += "where "+ "$doc" +s;
+					first = false;
+				}
+				else
+					input += " and $doc" +s;
+				
+			}
+		}
+		
+		if(orClauses != null){
+			for(List<String> orClausesList : orClauses){
+				String or = "";
+				for(String s : orClausesList){
 					
+					if(orClausesList.indexOf(s) == 0)
+						or += "$doc" +s;
+					else
+						or += " or $doc" +s;
 				}
-			}
-			
-			if(orClauses != null){
-				for(List<String> orClausesList : orClauses){
-					String or = "";
-					for(String s : orClausesList){
+				if(or != ""){
+					if(first){
 						
-						if(orClausesList.indexOf(s) == 0)
-							or += "$doc" +s;
-						else
-							or += " or $doc" +s;
-					}
-					if(or != ""){
-						if(first){
-							
-							input += "where "+ "(" + or + ")";
-							first = false;
-							
-						}else{
-							
-							input += " and (" + or + ")";
-							
-						}
+						input += "where "+ "(" + or + ")";
+						first = false;
+						
+					}else{
+						
+						input += " and (" + or + ")";
+						
 					}
 				}
 			}
+		}
+		
+		String returnString = "";
+		if(orClausesCDAsIds != null && orClausesCDAsIds.size()==1){
 			
-			String returnString = "";
-			if(orClausesCDAsIds != null && orClausesCDAsIds.size()==1){
-				returnString = orClausesCDAsIds.get(0);
-				
-//				String returnString = "for $doc in collection('" + dataBase + "') "
-//										+ "where ";
-//				boolean firstReturn = true;
-//				for(String s : orClausesCDAsIds){
-//					
-//					if(first){
-//						returnString += "$doc" +s;
-//						firstReturn = false;
-//					}
-//					else
-//						returnString += " and $doc" +s;
-//					
-//				}
-//				returnString += " return $doc";
-				
-				
-			}else if(orClausesCDAsIds != null && orClausesCDAsIds.size()==2){
-				
-				returnString = orClausesCDAsIds.get(1);
-				
-			}else{
-				returnString = "$doc//ClinicalDocument//component//structuredBody//component//section[descendant-or-self::node()/@code = \"54790000\"]//entry//observation//entryRelationship";
-			}
+			returnString = orClausesCDAsIds.get(0);
 			
-			input += " return count("+ returnString + "))";	
+		}else if(orClausesCDAsIds != null && orClausesCDAsIds.size()==2){
 			
-//		}else{
-//			
-//			input = "count(//ClinicalDocument//component//structuredBody//component//section[descendant-or-self::node()/@code = \"54790000\"]//entry//observation//entryRelationship)";
-//			
-//		}
+			returnString = orClausesCDAsIds.get(1);
+			
+		}else{
+			
+			returnString = "$doc//ClinicalDocument//component//structuredBody//component//section[descendant-or-self::node()/@code = \"54790000\"]//entry//observation//entryRelationship";
+		}
+		
+		input += " return count("+ returnString + "))";	
+			
 		
 		BaseXClient.Query query;
 		BaseXClient session = null;
@@ -624,4 +645,6 @@ public class BaseXConnection implements IXMLDataBase{
 		
 		return 0;		
 	}
+	
+	
 }

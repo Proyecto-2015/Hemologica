@@ -8,6 +8,7 @@ import org.hemologica.dao.model.BloodTypes;
 import org.hemologica.dao.model.CitiesCode;
 import org.hemologica.dao.model.CountriesCode;
 import org.hemologica.dao.model.DocumentsTypesCode;
+import org.hemologica.dao.model.DonationDonorTypesCode;
 import org.hemologica.dao.model.DonationEventsCode;
 import org.hemologica.dao.model.DonationFailCausesCode;
 import org.hemologica.dao.model.DonationFailTypeCode;
@@ -309,6 +310,20 @@ public class CodesDAOImpl implements ICodesDAO{
 		query.setParameter("code", code);
 		return (TransfusionFilterCode) query.getSingleResult();
 		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<DonationDonorTypesCode> getDonorTypes() {
+		
+		Query query = em.createNamedQuery("DonationDonorTypesCode.findAll");
+		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<DonationTypesCode> getDonationTypes() {
+		
+		Query query = em.createNamedQuery("DonationTypesCode.findAll");
+		return query.getResultList();
 	}
 
 }
