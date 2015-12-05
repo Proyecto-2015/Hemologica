@@ -19,7 +19,8 @@
 	<h:form>
 		<div class="container">
 			<p:wizard flowListener="#{donationBB.onFlowProcess}">
-		
+				<p:messages />
+				
 				<!-- Person -->
 				<p:tab title="#{messages.donation_create_edit_tab_person_title}">
 					<p:panel header="#{messages.donation_create_edit_tab_person_title}" style="background-color: whitesmoke;">
@@ -51,7 +52,6 @@
 								styleClass="btn btn-primary btn-lg center btnSave"
 								value="#{messages.label_save}" action="#{donationBB.submit()}"
 								process="@form" update="@form" />
-							<p:messages />
 						</div>
 					</p:panel>
 				</p:tab>

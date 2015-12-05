@@ -16,7 +16,10 @@
 		<div class="container">
 		
 			<p:wizard flowListener="#{transfusionBB.onFlowProcess}" >
-			
+				
+				<p:message id="messagesId" for="messagesId" showDetail="true" autoUpdate="true"
+								closable="true" />
+				
 				<p:tab id="donante" title="#{messages.label_personal_information}">
 					<p:panel header="#{messages.label_personal_information}" style="background-color: whitesmoke;">
 				
@@ -46,7 +49,7 @@
 								styleClass="btn btn-primary btn-lg center btnSave"
 								value="#{messages.label_save}" action="#{transfusionBB.submit()}"
 								process="@form" update="@form" />
-							<p:messages />
+							
 						</div>
 					</p:panel> 
 				</p:tab> 

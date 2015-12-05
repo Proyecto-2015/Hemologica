@@ -27,6 +27,7 @@ import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataDonationEvent;
 import org.hemologica.datatypes.DataDonationFail;
 import org.hemologica.datatypes.DataLaboratoryResult;
+import org.hemologica.datatypes.DataResponse;
 import org.hemologica.factories.FactoryDAO;
 import org.hemologica.salud.ejb.beans.DonationBeanLocal;
 import org.hemologica.salud.ejb.utils.FactoryBeans;
@@ -267,6 +268,19 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 						
 		}
 		return data;
+	}
+
+	@Override
+	public DataResponse addDonation(DataDonation dataDonacion) {
+		
+		logger.info("Crear cda");
+		
+		DataResponse dataResponse = new DataResponse();
+		
+		dataResponse.setCode(0);
+		
+		return dataResponse;
+		
 	}
 	
 }

@@ -17,7 +17,7 @@ public class DataDonation implements Serializable {
 	private DataBank bank;
 	private DataInstitution institution;
 	private DataPerson person;
-	private DataDonationDonorType dataDonorType;
+	private DataCode dataDonorType;
 	private DataCode donationType;
 	private DataCode state;
 	private DataCode bloodABOType;
@@ -34,7 +34,7 @@ public class DataDonation implements Serializable {
 		this.fail = new DataDonationFail();
 		this.bloodABOType = new DataCode();
 		this.bloodDType = new DataCode();
-		this.dataDonorType = new DataDonationDonorType();
+		this.dataDonorType = new DataCode();
 		this.person = new DataPerson();
 		this.labResults = new ArrayList<DataLaboratoryResult>();
 		this.events = new ArrayList<DataDonationEvent>();
@@ -117,11 +117,11 @@ public class DataDonation implements Serializable {
 		this.bloodABOType = bloodABOType;
 	}
 
-	public DataDonationDonorType getDataDonorType() {
+	public DataCode getDataDonorType() {
 		return dataDonorType;
 	}
 
-	public void setDataDonorType(DataDonationDonorType dataDonorType) {
+	public void setDataDonorType(DataCode dataDonorType) {
 		this.dataDonorType = dataDonorType;
 	}
 

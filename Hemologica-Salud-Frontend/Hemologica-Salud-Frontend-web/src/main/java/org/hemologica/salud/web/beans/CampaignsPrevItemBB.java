@@ -2,22 +2,15 @@ package org.hemologica.salud.web.beans;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.faces.view.ViewScoped;
-import javax.inject.Named;
-
 import org.apache.http.client.ClientProtocolException;
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.salud.factories.RestFactory;
 
 
-//@Named("campaignsPrevItemBB")
-//@ViewScoped
 public class CampaignsPrevItemBB implements Serializable{
 	
 	private static final long serialVersionUID = 1L;

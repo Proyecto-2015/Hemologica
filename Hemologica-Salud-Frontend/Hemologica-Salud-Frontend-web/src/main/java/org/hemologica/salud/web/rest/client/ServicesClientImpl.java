@@ -1028,4 +1028,90 @@ public class ServicesClientImpl implements IServicesClient {
 		return response;
 	}
 
+	@Override
+	public List<DataCode> getDonationTypes() throws ClientProtocolException, IOException {
+		
+		String urlService = url + ConstantsRest.PATH_CODES +"/"+ ConstantsRest.PATH_DONATION_TYPES;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		String responseString = "";
+		try {
+			
+			responseString = RestFactory.getRestServicesUtils().get(urlService, hash);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.log(Level.SEVERE,"Error al llamar al servicio", e);
+			
+		}
+		
+		Type listType = new TypeToken<List<DataCode>>(){}.getType();
+		List<DataCode> responseObject = new Gson().fromJson(responseString, listType);
+		
+		return responseObject;
+	}
+
+	@Override
+	public List<DataCode> getDonorTypes() throws ClientProtocolException, IOException {
+		
+		String urlService = url + ConstantsRest.PATH_CODES +"/"+ ConstantsRest.PATH_DONOR_TYPES;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		String responseString = "";
+		try {
+			
+			responseString = RestFactory.getRestServicesUtils().get(urlService, hash);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.log(Level.SEVERE,"Error al llamar al servicio", e);
+			
+		}
+		
+		Type listType = new TypeToken<List<DataCode>>(){}.getType();
+		List<DataCode> responseObject = new Gson().fromJson(responseString, listType);
+		
+		return responseObject;
+	}
+
+	@Override
+	public DataResponse addDonation(DataDonation dataDonacion) {
+		
+		String urlSendMessage = url + ConstantsRest.PATH_ADD_DONATION;
+
+		String sendMessageString = "";
+		try {
+
+			sendMessageString = RestFactory.getRestServicesUtils().post(urlSendMessage, dataDonacion);
+
+		} catch (IOException e) {
+
+			logger.log(Level.SEVERE, "Error al llamar al servicio", e);
+		}
+
+		DataResponse response = new Gson().fromJson(sendMessageString, DataResponse.class);
+
+		return response;
+	}
+
+	@Override
+	public DataResponse addTransfusion(DataTransfusion dataTransfusion) {
+		
+		String urlSendMessage = url + ConstantsRest.PATH_ADD_TRANSFUSION;
+
+		String sendMessageString = "";
+		try {
+
+			sendMessageString = RestFactory.getRestServicesUtils().post(urlSendMessage, dataTransfusion);
+
+		} catch (IOException e) {
+
+			logger.log(Level.SEVERE, "Error al llamar al servicio", e);
+		}
+
+		DataResponse response = new Gson().fromJson(sendMessageString, DataResponse.class);
+
+		return response;
+	}
+
 }

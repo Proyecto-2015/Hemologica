@@ -88,6 +88,39 @@
 
 						<h:panelGroup layout="block" styleClass="form-group" rendered="#{donationBB.dataDonacion.isStateDefined() and donationBB.dataDonacion.isApproved()}" >
 							<label class="col-md-4 control-label" for="donation_abo_type"><h:outputText
+									value="#{messages.donation_type}" /></label>
+							<div class="col-md-9 col-lg-6">
+								<h:selectOneMenu id="donation_type"
+									styleClass="form-control"
+									value="#{donationBB.dataDonacion.donationType}"
+									style="height: 34px;" converter="#{dataDonationTypeConverter}">
+									<f:selectItems value="#{applicationBB.donationTypes}"
+										var="type" itemValue="#{type.code}"
+										itemLabel="#{messages[type.displayName]}" />
+								</h:selectOneMenu>
+							</div>
+						</h:panelGroup>
+						
+						
+						<!-- Tipo de donante -->
+						
+<!-- 						<h:panelGroup layout="block" styleClass="form-group" rendered="#{donationBB.dataDonacion.isStateDefined() and donationBB.dataDonacion.isApproved()}" > -->
+<!-- 							<label class="col-md-4 control-label" for="donation_abo_type"><h:outputText -->
+<!-- 									value="#{messages.donor_type}" /></label> -->
+<!-- 							<div class="col-md-9 col-lg-6"> -->
+<!-- 								<h:selectOneMenu id="donor_type" -->
+<!-- 									styleClass="form-control" -->
+<!-- 									value="#{donationBB.dataDonacion.dataDonorType}" -->
+<!-- 									style="height: 34px;" converter="#{dataBloodABOTypeConverter}"> -->
+<!-- 									<f:selectItems value="#{applicationBB.donorTypes}" -->
+<!-- 										var="type" itemValue="#{type.code}" -->
+<!-- 										itemLabel="#{messages[type.displayName]}" /> -->
+<!-- 								</h:selectOneMenu> -->
+<!-- 							</div> -->
+<!-- 						</h:panelGroup> -->
+
+						<h:panelGroup layout="block" styleClass="form-group" rendered="#{donationBB.dataDonacion.isStateDefined() and donationBB.dataDonacion.isApproved()}" >
+							<label class="col-md-4 control-label" for="donation_abo_type"><h:outputText
 									value="#{messages.donation_abo_type}" /></label>
 							<div class="col-md-9 col-lg-6">
 								<h:selectOneMenu id="donation_abo_type"
