@@ -13,6 +13,9 @@ public class Constants {
 	public static final String ADVERSE_EVENT = "5";
 	public static final String SEVERITY_EVENT = "6";
 	
+	public static final String ANALYSIS = "9";
+	public static final String RESULTS = "10";
+	
 	public static final String EVENT_FILTER = "entryRelationship[descendant-or-self::node()/@code =";
 	public static final String VAR_EVENT_FILTER = "$1";
 

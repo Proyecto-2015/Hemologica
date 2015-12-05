@@ -21,6 +21,8 @@ INSERT INTO `hemologica`.`donation_events_codes` (`donation_event_code_id`, `don
 INSERT INTO `hemologica`.`donation_types_codes` (`donation_type_code_id`, `donation_type_code_value`, `donation_type_code_label`, `donation_type_code_snomed`) VALUES ('1', '1', 'label_directed', '39');
 INSERT INTO `hemologica`.`donation_types_codes` (`donation_type_code_id`, `donation_type_code_value`, `donation_type_code_label`, `donation_type_code_snomed`) VALUES ('2', '2', 'label_autologous', '40');
 INSERT INTO `hemologica`.`donation_types_codes` (`donation_type_code_id`, `donation_type_code_value`, `donation_type_code_label`, `donation_type_code_snomed`) VALUES ('3', '3', 'label_common', '41');
+INSERT INTO `hemologica`.`donation_types_codes` (`donation_type_code_id`, `donation_type_code_value`, `donation_type_code_label`, `donation_type_code_snomed`) VALUES ('4', '4', 'label_apheresis', '49');
+
 
 -- Filtros estadisticas
 
@@ -42,4 +44,11 @@ UPDATE `hemologica`.`donation_filter_codes` SET `donation_filter_codes_path`='//
 
 UPDATE `hemologica`.`donation_filter_codes` SET `donation_filter_codes_sql`='select gender_hl7_code, gender_code_label from gender_code;' WHERE `donation_filter_codes_id`='1';
 
+INSERT INTO `hemologica`.`donation_filter_codes` (`donation_filter_codes_id`, `donation_filter_codes_label`, `donation_filter_codes_path`, `donation_filter_codes_value`, `donation_filter_codes_sql`) VALUES ('8', 'donation_type', '/ClinicalDocument/component/structuredBody/component/section/code/@code', '8', 'SELECT b.concept_code, a.donation_type_code_label  FROM donation_types_codes as a join  concepts as b where a.donation_type_code_snomed = b.id;');
+
+INSERT INTO `hemologica`.`donation_filter_codes` (`donation_filter_codes_id`, `donation_filter_codes_label`, `donation_filter_codes_path`, `donation_filter_codes_value`, `donation_filter_codes_sql`) VALUES ('9', 'label_analysis', '/ClinicalDocument/component/structuredBody/component/section/entry/organizer/component/observation/code/@code', '9', 'SELECT b.concept_code, a.donation_laboratoy_code_label FROM donation_laboratoy_codes as a join concepts as b on a.donation_laboratoy_code_snomed = b.id ;');
+
+SELECT b.concept_code,a.results_code_label FROM hemologica.results_code as a join concepts as b on a.results_code_snomed = b.id;
+
+UPDATE `hemologica`.`donation_filter_codes` SET `donation_filter_codes_path`='//ClinicalDocument//component//structuredBody//component//section//entry//component//$1//value/@code' WHERE `donation_filter_codes_id`='10';
 
