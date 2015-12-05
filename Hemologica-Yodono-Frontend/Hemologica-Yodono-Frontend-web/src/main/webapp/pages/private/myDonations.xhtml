@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">   
+     
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<ui:composition template="/template/template.xhtml">
+	<ui:define name="content">
+			<div id="fb-root"></div>
+<!-- 			<meta property="fb:app_id"        content="956915034395251" /> -->
+<!-- 			<meta property="og:url"           content="http://yodono.salud.uy" /> -->
+<!-- 		    <meta property="og:type"          content="article" /> -->
+<!-- 		    <meta property="og:title"         content="YoDono" /> -->
+<!-- 		    <meta property="og:description"   content="Dona sangre, salva vidas" /> -->
+<!-- 		    <meta property="og:image"         content="http://www.noblefoundation.co.in/img/bld.jpg" /> -->
+		
+	
+		 <div class="container-fluid">
+			<ol class="breadcrumb">
+				<li><a href="#"><h:outputText value="#{messages.menu_item_mis_donaciones}"/></a></li> 
+			</ol>
+		 </div>
+		
+		<div class="container">
+			<div class="page-header">
+				<h1 id="timeline"><h:outputText value="#{messages.menu_item_mis_donaciones}"/></h1>
+			</div>
+			<ul class="timeline">
+				<c:forEach items="#{donationsBB.myDonations}" var="donationItem" varStatus="counter">	
+					<c:choose>
+				        <c:when test="${counter.count mod 2 == 0}">
+				        	<ui:param name="inverted" value="timeline-inverted" />
+				        </c:when>
+				        <c:otherwise>
+				            <ui:param name="inverted" value="timeline-no-inverted" />
+				        </c:otherwise>
+			    	</c:choose>
+    				
+    				<li class="#{inverted}">						
+    					<c:if test="#{donationItem.isApproved()}">
+						   <div class="timeline-badge success rojo"/>
+						</c:if>
+						<c:if test="#{!donationItem.isApproved()}">
+						   <div class="timeline-badge warning gris"/>
+						</c:if>
+						
+						<div class="timeline-panel">
+							<div class="timeline-heading">
+								<div id="container">
+									<h4 class="timeline-title" ><h:outputText value="#{donationItem.date}"/></h4>
+									<div class="fb-share-button facebook" data-href="https://developers.facebook.com/docs/plugins/" data-layout="icon"></div>
+									<div class="twitter">
+									<a href="https://twitter.com/share" class="twitter-share-button " data-url="www.yoDono.salud.uy" data-text="#{donationItem.name } #{messages.twitter_message}" data-via="yoDono" data-count="none" data-hashtags="SalvaVidas">Tweet</a>
+									</div>
+
+								</div>
+								<p>
+									<small class="text-muted" ><i
+										class="glyphicon glyphicon-time"></i>
+										<h:outputText value="#{donationsBB.getStringDifferencedDate(donationItem.date)}"/>
+										
+									</small>
+								</p>
+							</div>
+							<div class="timeline-body">
+								<p><h:outputText value="#{donationItem.institution.name}"/></p>
+								<p><h:outputText value="#{donationItem.bank.name}"/></p>
+								<p><h:outputText value="#{donationItem.dataDonorType.displayName}"/></p>
+							</div>
+						</div>
+					</li>
+					
+				</c:forEach>
+			</ul>
+		</div>
+		
+	</ui:define>
+
+</ui:composition>
+</html>

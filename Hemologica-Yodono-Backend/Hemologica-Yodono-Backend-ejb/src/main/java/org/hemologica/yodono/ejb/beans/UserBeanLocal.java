@@ -8,5 +8,5 @@ import org.hemologica.datatypes.DataUser;
 public interface UserBeanLocal {
 
 	public DataUser getDataUserFirstAccess(String token);
-	public void updateUserFirstAccess(DataUser data);
+	public void updateUserFirstAccess(DataUser data) throws Exception;
 }

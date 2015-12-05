@@ -9,7 +9,7 @@ public class CDAtoXDSProcessActivator {
 
 	private IRepositoryXDS xdsRepositoryAdapter;
 
-	public String process(String cdaString) {
+	public void process(String cdaString) {
 
 		try {
 			
@@ -24,14 +24,14 @@ public class CDAtoXDSProcessActivator {
 					cda.getCodingSchemeSNOMEDCTName(), cda.getLanguageCode(), cda.getPID5(), cda.getPID7(),
 					cda.getPID8(), cda.getCdaID(), cda.getCdaDocumentType(), cda.getCda(), cda.getSubmissionTime());
 			
-			return cdaString;
+//			return cdaString;
 			
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		return null;
+//		return null;
 	}
 
 	public IRepositoryXDS getXdsRepositoryAdapter() {

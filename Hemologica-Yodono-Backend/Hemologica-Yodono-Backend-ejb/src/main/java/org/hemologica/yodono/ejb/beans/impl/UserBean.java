@@ -37,10 +37,11 @@ private static final Logger logger = Logger.getLogger(TransfusionBean.class.getN
 	}
 
 	@Override
-	public void updateUserFirstAccess(DataUser data) {
+	public void updateUserFirstAccess(DataUser data) throws Exception {
 
 		IUserDAO userDAO = new UserDAOImpl(em);
 		User user = userDAO.findById(data.getUserId());
+		user.setCode(data.getUsername());
 		user.setPassword(data.getPassword());
 		user.setActiveAccount(true);
 		user.setActiveAccountToken(null);
