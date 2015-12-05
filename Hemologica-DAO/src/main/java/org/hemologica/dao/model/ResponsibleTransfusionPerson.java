@@ -20,7 +20,7 @@ public class ResponsibleTransfusionPerson implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private String id;
+	private Long id;
 	
 	@ManyToOne
 	@JoinColumn(name="person")
@@ -31,11 +31,11 @@ public class ResponsibleTransfusionPerson implements Serializable {
 	private Center center;
 	
 	
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

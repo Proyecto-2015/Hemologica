@@ -65,7 +65,6 @@
 		<class>org.hemologica.dao.model.BloodTypes</class>
 		<class>org.hemologica.dao.model.GenderCode</class>
 		<class>org.hemologica.dao.model.DonationFilterCode</class>
-		<class>org.hemologica.dao.model.DonationStateCode</class>
 		<class>org.hemologica.dao.model.TransfusionFilterCode</class>
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="update" />

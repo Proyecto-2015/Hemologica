@@ -38,7 +38,7 @@ public class RestServicesImpl implements IRestServices {
 	}
 
 	@Override
-	public List<DataDonation> getDonations(String userId) {
+	public List<DataDonation> getDonations(Long userId) {
 
 		try {
 
@@ -71,7 +71,7 @@ public class RestServicesImpl implements IRestServices {
 	}
 
 	@Override
-	public List<DataTransfusion> getTransfusions(String userId) {
+	public List<DataTransfusion> getTransfusions(Long userId) {
 
 		try {
 
@@ -148,7 +148,7 @@ public class RestServicesImpl implements IRestServices {
 	}
 
 	@Override
-	public DataPerson getUser(String userId) {
+	public DataPerson getUser(Long userId) {
 
 		return FactoryBeans.getPersonBean().getPerson(userId);
 

@@ -40,17 +40,17 @@ public interface IRestServices {
 	@GET
 	@Path("/"+ConstantsRest.PATH_DONATIONS)
 	@Produces("application/json")
-	public List<DataDonation> getDonations(@QueryParam(ConstansJson.JSON_USER) String user);
+	public List<DataDonation> getDonations(@QueryParam(ConstansJson.JSON_USER) Long user);
 	
 	@GET
 	@Path("/"+ConstantsRest.PATH_TRANSFUTIONS)
 	@Produces("application/json")
-	public List<DataTransfusion> getTransfusions(@QueryParam(ConstansJson.JSON_USER) String user);
+	public List<DataTransfusion> getTransfusions(@QueryParam(ConstansJson.JSON_USER) Long user);
 	
 	@GET
 	@Path("/"+ConstantsRest.PATH_USERS)
 	@Produces("application/json")
-	public DataPerson getUser(@QueryParam(ConstansJson.JSON_USER) String user);
+	public DataPerson getUser(@QueryParam(ConstansJson.JSON_USER) Long user);
 	
 	@PUT
 	@Path("/"+ ConstantsRest.PATH_USERS)

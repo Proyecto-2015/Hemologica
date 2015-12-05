@@ -23,7 +23,7 @@ public class EventSeverityCode {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="event_severity_code_id")
-	private int eventSeverityCodeId;
+	private Long eventSeverityCodeId;
 
 	@Column(name="event_severity_code_label")
 	private String eventSeverityCodeLabel;
@@ -36,11 +36,11 @@ public class EventSeverityCode {
 	@JoinColumn(name="event_severity_code_snomed")
 	private Concept concept;
 
-	public int getEventSeverityCodeId() {
+	public Long getEventSeverityCodeId() {
 		return eventSeverityCodeId;
 	}
 
-	public void setEventSeverityCodeId(int eventSeverityCodeId) {
+	public void setEventSeverityCodeId(Long eventSeverityCodeId) {
 		this.eventSeverityCodeId = eventSeverityCodeId;
 	}
 

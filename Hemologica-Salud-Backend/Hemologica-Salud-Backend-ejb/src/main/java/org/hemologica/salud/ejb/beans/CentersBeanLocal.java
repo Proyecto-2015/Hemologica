@@ -14,6 +14,6 @@ public interface CentersBeanLocal {
 	
 	public List<DataResponsiblePerson> getResponsibleTransfusionPersons(String centerCode);
 
-	public List<DataBank> getBanksUser(String user);
+	public List<DataBank> getBanksUser(Long user);
 	
 }

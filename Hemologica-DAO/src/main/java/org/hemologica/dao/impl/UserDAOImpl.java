@@ -29,8 +29,8 @@ public class UserDAOImpl extends GenericDAOImpl<User> implements IUserDAO {
 		return res != null && res.size() > 0 ? res.get(0) : null;
 	}
 
-	public User findById(String id) {
-		return em.find(User.class, Integer.parseInt(id));
+	public User findById(Long id) {
+		return em.find(User.class, id);
 	}
 
 	

@@ -20,7 +20,7 @@ public class TransfusionLaboratoryCode implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="transfusion_laboratory_code_id")
-	private int transfusionLaboratoryCodeId;
+	private Long transfusionLaboratoryCodeId;
 
 	@Column(name="transfusion_laboratory_code_label")
 	private String transfusionLaboratoryCodeLabel;
@@ -36,11 +36,11 @@ public class TransfusionLaboratoryCode implements Serializable {
 	public TransfusionLaboratoryCode() {
 	}
 
-	public int getTransfusionLaboratoryCodeId() {
+	public Long getTransfusionLaboratoryCodeId() {
 		return this.transfusionLaboratoryCodeId;
 	}
 
-	public void setTransfusionLaboratoryCodeId(int transfusionLaboratoryCodeId) {
+	public void setTransfusionLaboratoryCodeId(Long transfusionLaboratoryCodeId) {
 		this.transfusionLaboratoryCodeId = transfusionLaboratoryCodeId;
 	}
 

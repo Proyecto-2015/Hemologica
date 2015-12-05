@@ -10,7 +10,7 @@ public class DataPerson implements Serializable{
 	 */
 	private static final long serialVersionUID = 1221320030601695117L;
 	
-	private String id;
+	private Long id;
 	private String firstName;
 	private String secondName;
 	private String firstLastName;
@@ -116,10 +116,10 @@ public class DataPerson implements Serializable{
 		return firstName + " " + secondName + " " + firstLastName+ " " + secondLastName;
 		
 	}
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public DataBloodType getBloodType() {

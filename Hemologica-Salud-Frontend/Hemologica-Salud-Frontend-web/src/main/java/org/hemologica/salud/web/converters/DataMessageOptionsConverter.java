@@ -39,7 +39,7 @@ public class DataMessageOptionsConverter implements Converter {
 		
 		if(value instanceof DataMessageOption){
 			
-			return ((DataMessageOption)value).getCode();
+			return ((DataMessageOption)value).getCode().toString();
 		}
 		return null;
 	}

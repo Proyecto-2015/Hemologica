@@ -21,7 +21,7 @@ public class TransfusionEventsCode implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="transfusion_event_code_id")
-	private int transfusionEventCodeId;
+	private Long transfusionEventCodeId;
 
 	@Column(name="transfusion_event_code_label")
 	private String transfusionEventCodeLabel;
@@ -37,11 +37,11 @@ public class TransfusionEventsCode implements Serializable {
 	public TransfusionEventsCode() {
 	}
 
-	public int getTransfusionEventCodeId() {
+	public Long getTransfusionEventCodeId() {
 		return this.transfusionEventCodeId;
 	}
 
-	public void setTransfusionEventCodeId(int transfusionEventCodeId) {
+	public void setTransfusionEventCodeId(Long transfusionEventCodeId) {
 		this.transfusionEventCodeId = transfusionEventCodeId;
 	}
 

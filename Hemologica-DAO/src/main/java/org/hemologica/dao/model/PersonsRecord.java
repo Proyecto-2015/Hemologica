@@ -20,7 +20,7 @@ public class PersonsRecord implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private String id;
+	private Long id;
 
 	@Column(name="persons_record_cda_root")
 	private String personsRecordCdaRoot;
@@ -36,11 +36,11 @@ public class PersonsRecord implements Serializable {
 	public PersonsRecord() {
 	}
 
-	public String getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

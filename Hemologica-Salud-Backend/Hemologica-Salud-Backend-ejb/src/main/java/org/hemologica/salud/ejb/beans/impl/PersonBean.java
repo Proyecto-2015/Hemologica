@@ -42,8 +42,8 @@ public class PersonBean implements PersonBeanLocal {
 		for(Person p : list){
 			
 			DataPerson data = new DataPerson();
-			
-			data.setId((p.getId() == null) ? "" :p.getId());
+//			data.setId((p.getId() == null) ? "" :p.getId());
+			data.setId(p.getId());
 			data.setFirstName((p.getPersonFirstName() == null) ? "" :p.getPersonFirstName());
 			data.setSecondName((p.getPersonSecondName() == null) ? "" :p.getPersonSecondName());
 			data.setFirstLastName((p.getPersonFirstLastname() == null) ? "" :p.getPersonFirstLastname());
@@ -106,7 +106,7 @@ public class PersonBean implements PersonBeanLocal {
 	}
 
 	@Override
-	public DataPerson getPersonId(String id) {
+	public DataPerson getPersonId(Long id) {
 		
 		Person p = FactoryDAO.getPeronDAO(em).getPersonsId(id);
 		
@@ -115,7 +115,8 @@ public class PersonBean implements PersonBeanLocal {
 		if(p != null){
 			
 			data = new DataPerson();
-			data.setId((p.getId() == null) ? "" :p.getId());
+//			data.setId((p.getId() == null) ? "" :p.getId());
+			data.setId(p.getId());
 			data.setFirstName((p.getPersonFirstName() == null) ? "" :p.getPersonFirstName());
 			data.setSecondName((p.getPersonSecondName() == null) ? "" :p.getPersonSecondName());
 			data.setFirstLastName((p.getPersonFirstLastname() == null) ? "" :p.getPersonFirstLastname());

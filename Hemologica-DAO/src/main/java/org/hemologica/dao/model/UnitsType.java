@@ -21,7 +21,7 @@ public class UnitsType implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="unit_type_id")
-	private int unitTypeId;
+	private Long unitTypeId;
 
 	@Column(name="unit_type_code_label")
 	private String unitTypeCodeLabel;
@@ -40,11 +40,11 @@ public class UnitsType implements Serializable {
 	public UnitsType() {
 	}
 
-	public int getUnitTypeId() {
+	public Long getUnitTypeId() {
 		return this.unitTypeId;
 	}
 
-	public void setUnitTypeId(int unitTypeId) {
+	public void setUnitTypeId(Long unitTypeId) {
 		this.unitTypeId = unitTypeId;
 	}
 

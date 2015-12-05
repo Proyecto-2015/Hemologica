@@ -20,7 +20,7 @@ public class DonationStateCode {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="donation_state_code_id")
-	private int donationStateCodeId;
+	private Long donationStateCodeId;
 
 	@Column(name="donation_state_code_label")
 	private String donationStateCodeLabel;
@@ -28,11 +28,11 @@ public class DonationStateCode {
 	@Column(name="donation_state_code_value")
 	private String donationStateCodeValue;
 
-	public int getDonationStateCodeId() {
+	public Long getDonationStateCodeId() {
 		return donationStateCodeId;
 	}
 
-	public void setDonationStateCodeId(int donationStateCodeId) {
+	public void setDonationStateCodeId(Long donationStateCodeId) {
 		this.donationStateCodeId = donationStateCodeId;
 	}
 

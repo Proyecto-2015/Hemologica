@@ -10,7 +10,7 @@ public interface PersonBeanLocal {
 	
 	List<DataPerson> getPersonsFilters(HashMap<String, Object> whereFilters);
 
-	DataPerson getPersonId(String id);
+	DataPerson getPersonId(Long id);
 
 	
 }

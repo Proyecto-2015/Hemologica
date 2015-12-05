@@ -37,9 +37,10 @@ public class SessionBB implements Serializable {
 			this.responsibleTransfusionPersons = RestFactory.getServicesClient().getResponsibleTransfusionPersons(bank);
 			
 			person = new DataPerson();
-			person.setId("1");
-			this.userInstitutions = RestFactory.getServicesClient().getInstitution(person.getId());
-			this.userBanks = RestFactory.getServicesClient().getBanks(person.getId());
+//			person.setId("1"); Bruno 05-12-2015
+			person.setId(new Long(1));
+			this.userInstitutions = RestFactory.getServicesClient().getInstitution(person.getId().toString());
+			this.userBanks = RestFactory.getServicesClient().getBanks(person.getId().toString());
 			
 		} catch (ClientProtocolException e) {
 			

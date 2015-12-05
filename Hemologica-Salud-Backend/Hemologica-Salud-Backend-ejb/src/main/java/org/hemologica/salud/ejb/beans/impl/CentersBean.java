@@ -110,7 +110,7 @@ public class CentersBean implements CentersBeanLocal {
 	}
 
 	@Override
-	public List<DataBank> getBanksUser(String user) {
+	public List<DataBank> getBanksUser(Long user) {
 		
 		List<DataBank> listReturn = new ArrayList<>();
 		

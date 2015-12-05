@@ -21,7 +21,7 @@ public class Unit implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private String id;
+	private Long id;
 
 	@Column(name="unit_institution_code")
 	private String unitInstitutionCode;
@@ -46,11 +46,11 @@ public class Unit implements Serializable {
 	public Unit() {
 	}
 
-	public String getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

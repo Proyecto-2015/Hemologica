@@ -10,6 +10,6 @@ import org.xml.sax.SAXException;
 
 public interface DonationBeanLocal {
 	
-	List<DataDonation> getDonationsUserId(String userId) throws XMLDataBaseException, SAXException, IOException, ParserConfigurationException, XPathExpressionException;
+	List<DataDonation> getDonationsUserId(Long userId) throws XMLDataBaseException, SAXException, IOException, ParserConfigurationException, XPathExpressionException;
 
 }

@@ -33,7 +33,7 @@ public class PersonBean implements PersonBeanLocal {
     }
 
 	@Override
-	public DataPerson getPerson(String userId) {
+	public DataPerson getPerson(Long userId) {
 		
 		Person p = FactoryDAO.getPeronDAO(em).getPersonsId(userId);
 		
@@ -42,7 +42,8 @@ public class PersonBean implements PersonBeanLocal {
 		if(p != null){
 			
 			data = new DataPerson();
-			data.setId((p.getId() == null) ? "" :p.getId());
+//			data.setId((p.getId() == null) ? "" :p.getId()); Bruno 05-12-2015
+			data.setId(p.getId());
 			data.setFirstName((p.getPersonFirstName() == null) ? "" :p.getPersonFirstName());
 			data.setSecondName((p.getPersonSecondName() == null) ? "" :p.getPersonSecondName());
 			data.setFirstLastName((p.getPersonFirstLastname() == null) ? "" :p.getPersonFirstLastname());

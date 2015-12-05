@@ -43,7 +43,7 @@ public class UserBean implements IUserBean {
 			
 			IUserDAO userDAO = new UserDAOImpl(em);
 			IPersonDAO personDAO = new PersonDAOImpl(em);
-			Person person = personDAO.getPersonsId(data.getPersonId().toString());
+			Person person = personDAO.getPersonsId(data.getPersonId());
 			User user = new User();
 			user.setPerson(person);
 			user.setActiveAccount(true);

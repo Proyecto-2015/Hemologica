@@ -20,7 +20,7 @@ public class BloodAboTypesCode implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="blood_abo_type_code_id")
-	private int bloodAboTypeCodeId;
+	private Long bloodAboTypeCodeId;
 
 	@Column(name="blood_abo_type_code_label")
 	private String bloodAboTypeCodeLabel;
@@ -36,11 +36,11 @@ public class BloodAboTypesCode implements Serializable {
 	public BloodAboTypesCode() {
 	}
 
-	public int getBloodAboTypeCodeId() {
+	public Long getBloodAboTypeCodeId() {
 		return this.bloodAboTypeCodeId;
 	}
 
-	public void setBloodAboTypeCodeId(int bloodAboTypeCodeId) {
+	public void setBloodAboTypeCodeId(Long bloodAboTypeCodeId) {
 		this.bloodAboTypeCodeId = bloodAboTypeCodeId;
 	}
 

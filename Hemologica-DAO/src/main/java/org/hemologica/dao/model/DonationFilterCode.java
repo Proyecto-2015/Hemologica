@@ -23,7 +23,7 @@ public class DonationFilterCode implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="donation_filter_codes_id")
-	private int donationFilterCodes;
+	private Long donationFilterCodes;
 
 	@Column(name="donation_filter_codes_label")
 	private String donationFilterCodesLabel;
@@ -37,11 +37,11 @@ public class DonationFilterCode implements Serializable{
 	@Column(name="donation_filter_codes_sql")
 	private String donationFilterCodesSql;
 
-	public int getDonationFilterCodes() {
+	public Long getDonationFilterCodes() {
 		return donationFilterCodes;
 	}
 
-	public void setDonationFilterCodes(int donationFilterCodes) {
+	public void setDonationFilterCodes(Long donationFilterCodes) {
 		this.donationFilterCodes = donationFilterCodes;
 	}
 

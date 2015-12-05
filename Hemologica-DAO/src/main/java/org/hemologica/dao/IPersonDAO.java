@@ -13,6 +13,6 @@ public interface IPersonDAO extends IGenericDAO<Person>{
 	 */
 	List<Person> getPersonsFilters(HashMap<String, Object> whereFilters);
 
-	Person getPersonsId(String id);
+	Person getPersonsId(Long id);
 
 }

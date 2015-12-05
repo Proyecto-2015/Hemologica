@@ -17,7 +17,7 @@ public class Concept implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private Long id;
 
 	@Column(name="concept_code")
 	private String conceptCode;
@@ -61,11 +61,11 @@ public class Concept implements Serializable {
 	public Concept() {
 	}
 
-	public int getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

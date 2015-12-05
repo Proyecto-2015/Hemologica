@@ -4,8 +4,8 @@ import java.util.List;
 
 public class DataUser {
 
-	private String userId;
-	private String personId;
+	private Long userId;
+	private Long personId;
 	private String username;
 	private String password;
 	
@@ -14,11 +14,11 @@ public class DataUser {
 	
 	List<DataBank> banks;
 
-	public String getPersonId() {
+	public Long getPersonId() {
 		return personId;
 	}
 
-	public void setPersonId(String personId) {
+	public void setPersonId(Long personId) {
 		this.personId = personId;
 	}
 
@@ -38,11 +38,11 @@ public class DataUser {
 		this.password = password;
 	}
 
-	public String getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 	

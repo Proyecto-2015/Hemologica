@@ -44,7 +44,7 @@ public class InstitutionBean implements IInstitutionBeanLocal {
 	}
 
 	@Override
-	public List<DataInstitution> getInstitutionsUser(String user) {
+	public List<DataInstitution> getInstitutionsUser(Long user) {
 		
 		List<DataBank> banks = FactoryBeans.getCenterBean().getBanksUser(user);
 		

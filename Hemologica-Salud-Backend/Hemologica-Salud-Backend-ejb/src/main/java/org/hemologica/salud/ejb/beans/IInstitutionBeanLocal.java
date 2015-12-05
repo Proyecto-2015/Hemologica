@@ -11,6 +11,6 @@ public interface IInstitutionBeanLocal {
 	
 	public List<DataInstitution> getInstitutions();
 
-	public List<DataInstitution> getInstitutionsUser(String user);
+	public List<DataInstitution> getInstitutionsUser(Long user);
 
 }

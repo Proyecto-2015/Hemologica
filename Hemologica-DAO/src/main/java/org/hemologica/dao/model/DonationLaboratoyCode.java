@@ -20,7 +20,7 @@ public class DonationLaboratoyCode implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="donation_laboratoy_code_id")
-	private int donationLaboratoyCodeId;
+	private Long donationLaboratoyCodeId;
 
 	@Column(name="donation_laboratoy_code_label")
 	private String donationLaboratoyCodeLabel;
@@ -36,11 +36,11 @@ public class DonationLaboratoyCode implements Serializable {
 	public DonationLaboratoyCode() {
 	}
 
-	public int getDonationLaboratoyCodeId() {
+	public Long getDonationLaboratoyCodeId() {
 		return this.donationLaboratoyCodeId;
 	}
 
-	public void setDonationLaboratoyCodeId(int donationLaboratoyCodeId) {
+	public void setDonationLaboratoyCodeId(Long donationLaboratoyCodeId) {
 		this.donationLaboratoyCodeId = donationLaboratoyCodeId;
 	}
 

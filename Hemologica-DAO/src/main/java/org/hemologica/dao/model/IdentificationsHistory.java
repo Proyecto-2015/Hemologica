@@ -21,7 +21,7 @@ public class IdentificationsHistory implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private String id;
+	private Long id;
 
 	@Column(name="identification_code")
 	private String identificationCode;
@@ -33,11 +33,11 @@ public class IdentificationsHistory implements Serializable {
 	public IdentificationsHistory() {
 	}
 
-	public String getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
