@@ -20,7 +20,7 @@ public class Movement implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private String id;
+	private Long id;
 	
 	
 	@NotNull
@@ -48,11 +48,11 @@ public class Movement implements Serializable {
 	public Movement() {
 	}
 
-	public String getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

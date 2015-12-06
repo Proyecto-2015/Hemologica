@@ -21,7 +21,7 @@ public class GenderCode {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="gender_code_id")
-	private int genderCodeId;
+	private Long genderCodeId;
 
 	@Column(name="gender_code_label")
 	private String genderCodeLabel;
@@ -32,11 +32,11 @@ public class GenderCode {
 	@Column(name="gender_hl7_code")
 	private String hl7Code;
 
-	public int getGenderCodeId() {
+	public Long getGenderCodeId() {
 		return genderCodeId;
 	}
 
-	public void setGenderCodeId(int genderCodeId) {
+	public void setGenderCodeId(Long genderCodeId) {
 		this.genderCodeId = genderCodeId;
 	}
 

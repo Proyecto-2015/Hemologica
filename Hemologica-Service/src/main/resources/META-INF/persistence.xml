@@ -38,8 +38,8 @@
 		<class>org.hemologica.dao.model.Identification</class>
 		<class>org.hemologica.dao.model.IdentificationsHistory</class>
 		<class>org.hemologica.dao.model.Institution</class>
-		<class>org.hemologica.dao.model.Movement</class>
 		<class>org.hemologica.dao.model.MovementsType</class>
+		<class>org.hemologica.dao.model.Movement</class>
 		<class>org.hemologica.dao.model.Notification</class>
 		<class>org.hemologica.dao.model.NotificationsPerson</class>
 		<class>org.hemologica.dao.model.Permission</class>
@@ -57,8 +57,9 @@
 		<class>org.hemologica.dao.model.MessageSendOption</class>
 		<class>org.hemologica.dao.model.GenderCode</class>
 		<properties>
-			<property name="hibernate.hbm2ddl.auto" value="update" />
-			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.hbm2ddl.auto" value="none" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
 		</properties>
 	</persistence-unit>
 </persistence>

@@ -32,7 +32,7 @@ private static final Logger logger = Logger.getLogger(TransfusionBean.class.getN
 		User user = userDAO.findByToken(token);
 		DataUser data = new DataUser();
 		data.setPersonId(user.getPerson().getId());
-		data.setUserId(""+ user.getId());
+		data.setUserId(user.getId());
 		return data;
 	}
 

@@ -253,17 +253,14 @@
 	</bean>
 	
 	<bean id="mailAdapter" class="org.hemologica.service.adapter.MailAdapter" >
-		<property name="username" value="hemologica@gmail.com"/>
-		<property name="password" value=".pr0yect0"/>
 		<property name="properties">
 			<props>
-				<prop key="host">"${mail.host}</prop>
-				<prop key="port">${mail.port}</prop>
-				<prop key="username">${mail.username}"</prop>
-				<prop key="password">${mail.password}"</prop>
-				<prop key="transport.protocol">${mail.transport.protocol}</prop>
-				<prop key="smtp.auth">${mail.smtp.auth}</prop>
-				<prop key="smtp.starttls.enable">${mail.smtp.starttls.enable}</prop>
+				<prop key="mail.smtp.auth">${mail.smtp.auth}</prop>
+				<prop key="mail.smtp.starttls.enable">${mail.smtp.starttls.enable}</prop>
+				<prop key="mail.smtp.host">${mail.host}</prop>
+				<prop key="mail.smtp.port">${mail.port}</prop>
+				<prop key="username">${mail.username}</prop>
+				<prop key="password">${mail.password}</prop>
 				<prop key="debug">${mail.debug}</prop>
 			</props>
 		</property>

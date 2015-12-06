@@ -21,7 +21,7 @@ public class DonationTypesCode implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="donation_type_code_id")
-	private int donationTypeCodeId;
+	private Long donationTypeCodeId;
 
 	@Column(name="donation_type_code_label")
 	private String donationTypeCodeLabel;
@@ -37,11 +37,11 @@ public class DonationTypesCode implements Serializable {
 	public DonationTypesCode() {
 	}
 
-	public int getDonationTypeCodeId() {
+	public Long getDonationTypeCodeId() {
 		return this.donationTypeCodeId;
 	}
 
-	public void setDonationTypeCodeId(int donationTypeCodeId) {
+	public void setDonationTypeCodeId(Long donationTypeCodeId) {
 		this.donationTypeCodeId = donationTypeCodeId;
 	}
 

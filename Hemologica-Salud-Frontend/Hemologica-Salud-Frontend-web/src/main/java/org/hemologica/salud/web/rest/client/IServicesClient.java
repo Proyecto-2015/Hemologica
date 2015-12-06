@@ -41,7 +41,7 @@ public interface IServicesClient {
 	 * @return
 	 * @throws IOException 
 	 */
-	public List<DataDonation> getMyDonations(String user) throws IOException;
+	public List<DataDonation> getMyDonations(Long user) throws IOException;
 
 	/**
 	 * Devuelve la lista de transfusiones del usuario pasado como parametro.
@@ -49,14 +49,14 @@ public interface IServicesClient {
 	 * @return
 	 * @throws IOException 
 	 */
-	public List<DataTransfusion> getMyTransfusions(String user) throws IOException;
+	public List<DataTransfusion> getMyTransfusions(Long user) throws IOException;
 	
 	/**
 	 * Devuelve la informacion personal del usuario pasado por parametro 
 	 * @param string
 	 * @return
 	 */
-	public DataUser getDataUser(String string) throws IOException;
+	public DataUser getDataUser(Long string) throws IOException;
 
 	/**
 	 * Devuelve la informacion todos los bancos de sangre. 

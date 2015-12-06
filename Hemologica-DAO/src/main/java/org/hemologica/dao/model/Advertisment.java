@@ -22,8 +22,8 @@ public class Advertisment implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private Long id;
 
 	@Column(name="advertisment_title")
 	private String title;
@@ -51,11 +51,11 @@ public class Advertisment implements Serializable {
 	public Advertisment() {
 	}
 
-	public int getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

@@ -61,7 +61,7 @@ public class TransfusionBean implements TransfusionBeanLocal, Serializable {
     }
 
 	@Override
-	public List<DataTransfusion> getTransfusionsUserId(String userId) throws XMLDataBaseException, SAXException, IOException, ParserConfigurationException, XPathExpressionException {
+	public List<DataTransfusion> getTransfusionsUserId(Long userId) throws XMLDataBaseException, SAXException, IOException, ParserConfigurationException, XPathExpressionException {
 		
 		List<DataTransfusion> listReturn = new ArrayList<>();
 		

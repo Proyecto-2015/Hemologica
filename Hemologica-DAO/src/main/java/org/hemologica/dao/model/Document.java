@@ -17,7 +17,7 @@ public class Document implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="document_id")
-	private String documentId;
+	private Long documentId;
 
 	@Column(name="document_number")
 	private String documentNumber;
@@ -40,11 +40,11 @@ public class Document implements Serializable {
 	public Document() {
 	}
 
-	public String getDocumentId() {
+	public Long getDocumentId() {
 		return this.documentId;
 	}
 
-	public void setDocumentId(String documentId) {
+	public void setDocumentId(Long documentId) {
 		this.documentId = documentId;
 	}
 

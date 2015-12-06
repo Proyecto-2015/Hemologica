@@ -13,7 +13,7 @@ import org.xml.sax.SAXException;
 
 public interface TransfusionBeanLocal {
 	
-	List<DataTransfusion> getTransfusionsUserId(String userId) throws XMLDataBaseException, SAXException, IOException, ParserConfigurationException, XPathExpressionException;
+	List<DataTransfusion> getTransfusionsUserId(Long userId) throws XMLDataBaseException, SAXException, IOException, ParserConfigurationException, XPathExpressionException;
 
 	DataResponse addTransfusion(DataTransfusion dataTransfusion);
 

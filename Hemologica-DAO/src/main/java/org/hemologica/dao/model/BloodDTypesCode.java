@@ -20,7 +20,7 @@ public class BloodDTypesCode implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="blood_d_type_code_id")
-	private int bloodDTypeCodeId;
+	private Long bloodDTypeCodeId;
 
 	@Column(name="blood_d_type_code_label")
 	private String bloodDTypeCodeLabel;
@@ -36,11 +36,11 @@ public class BloodDTypesCode implements Serializable {
 	public BloodDTypesCode() {
 	}
 
-	public int getBloodDTypeCodeId() {
+	public Long getBloodDTypeCodeId() {
 		return this.bloodDTypeCodeId;
 	}
 
-	public void setBloodDTypeCodeId(int bloodDTypeCodeId) {
+	public void setBloodDTypeCodeId(Long bloodDTypeCodeId) {
 		this.bloodDTypeCodeId = bloodDTypeCodeId;
 	}
 

@@ -8,7 +8,7 @@ import org.hemologica.dao.model.IdentificationsHistory;
 
 public interface IIdentificationDAO{
 
-	public Identification getIdentificationById(Integer id);
+	public Identification getIdentificationById(Long id);
 	
 	public Identification getIdentificationByCode(String code);
 	
@@ -20,7 +20,7 @@ public interface IIdentificationDAO{
 	
 	public void refresh(Identification entity);
 	
-	public IdentificationsHistory getIdentificationsHistoryById(Integer id);
+	public IdentificationsHistory getIdentificationsHistoryById(Long id);
 	
 	public IdentificationsHistory getIdentificationsHistoryByCode(String code);
 	

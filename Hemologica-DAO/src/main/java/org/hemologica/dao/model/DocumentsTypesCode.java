@@ -17,7 +17,7 @@ public class DocumentsTypesCode implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private Long id;
 	
 	@Column(name="documents_type_code_label")
 	private String documentsTypeCodeLabel;
@@ -32,11 +32,11 @@ public class DocumentsTypesCode implements Serializable {
 	public DocumentsTypesCode() {
 	}
 
-	public int getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

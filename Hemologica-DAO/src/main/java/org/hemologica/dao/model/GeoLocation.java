@@ -18,13 +18,13 @@ public class GeoLocation implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="geo_location_id")
-	private String geoLocationId;
+	private Long geoLocationId;
 
 	@Column(name="geo_locations_x")
-	private double geoLocationsX;
+	private Double geoLocationsX;
 
 	@Column(name="geo_locations_y")
-	private double geoLocationsY;
+	private Double geoLocationsY;
 
 	//bi-directional many-to-one association to Center
 	@OneToMany(mappedBy="geoLocation")
@@ -33,11 +33,11 @@ public class GeoLocation implements Serializable {
 	public GeoLocation() {
 	}
 
-	public String getGeoLocationId() {
+	public Long getGeoLocationId() {
 		return this.geoLocationId;
 	}
 
-	public void setGeoLocationId(String geoLocationId) {
+	public void setGeoLocationId(Long geoLocationId) {
 		this.geoLocationId = geoLocationId;
 	}
 
@@ -45,7 +45,7 @@ public class GeoLocation implements Serializable {
 		return this.geoLocationsX;
 	}
 
-	public void setGeoLocationsX(int geoLocationsX) {
+	public void setGeoLocationsX(Double geoLocationsX) {
 		this.geoLocationsX = geoLocationsX;
 	}
 
@@ -53,7 +53,7 @@ public class GeoLocation implements Serializable {
 		return this.geoLocationsY;
 	}
 
-	public void setGeoLocationsY(int geoLocationsY) {
+	public void setGeoLocationsY(Double geoLocationsY) {
 		this.geoLocationsY = geoLocationsY;
 	}
 

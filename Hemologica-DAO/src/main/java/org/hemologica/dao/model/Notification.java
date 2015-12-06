@@ -17,7 +17,7 @@ public class Notification implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int id;
+	private Long id;
 	
 	@ManyToOne
 	@JoinColumn(name="notifications_bloodTypeABO")
@@ -45,11 +45,11 @@ public class Notification implements Serializable {
 	public Notification() {
 	}
 
-	public int getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

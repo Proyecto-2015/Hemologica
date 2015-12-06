@@ -34,7 +34,7 @@ public class DataResponsiblePersonConverter implements Converter {
 		
 		if(arg2 instanceof DataResponsiblePerson){
 			
-			return ((DataResponsiblePerson)arg2).getId();
+			return ((DataResponsiblePerson)arg2).getId().toString();
 		}
 		return null;
 	}

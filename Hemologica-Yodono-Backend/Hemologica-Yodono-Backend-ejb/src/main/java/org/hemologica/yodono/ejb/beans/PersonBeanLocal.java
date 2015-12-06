@@ -8,7 +8,7 @@ import org.hemologica.datatypes.DataResponse;
 @Local
 public interface PersonBeanLocal {
 
-	DataPerson getPerson(String userId);
+	DataPerson getPerson(Long userId);
 
 	DataResponse updatePerson(DataPerson dataUser);
 

@@ -22,7 +22,7 @@ public class CitiesCode implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="city_id")
-	private String cityId;
+	private Long cityId;
 
 	@Column(name="city_code")
 	private String cityCode;
@@ -42,11 +42,11 @@ public class CitiesCode implements Serializable {
 	public CitiesCode() {
 	}
 
-	public String getCityId() {
+	public Long getCityId() {
 		return this.cityId;
 	}
 
-	public void setCityId(String cityId) {
+	public void setCityId(Long cityId) {
 		this.cityId = cityId;
 	}
 

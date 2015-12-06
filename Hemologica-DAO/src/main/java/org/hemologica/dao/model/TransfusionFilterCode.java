@@ -23,7 +23,7 @@ public class TransfusionFilterCode implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="transfusion_filter_codes_id")
-	private int transfusionFilterCodes;
+	private Long transfusionFilterCodes;
 
 	@Column(name="transfusion_filter_codes_label")
 	private String transfusionFilterCodesLabel;
@@ -37,11 +37,11 @@ public class TransfusionFilterCode implements Serializable{
 	@Column(name="transfusion_filter_codes_sql")
 	private String transfusionFilterCodesSql;
 
-	public int getTransfusionFilterCodes() {
+	public Long getTransfusionFilterCodes() {
 		return transfusionFilterCodes;
 	}
 
-	public void setTransfusionFilterCodes(int transfusionFilterCodes) {
+	public void setTransfusionFilterCodes(Long transfusionFilterCodes) {
 		this.transfusionFilterCodes = transfusionFilterCodes;
 	}
 

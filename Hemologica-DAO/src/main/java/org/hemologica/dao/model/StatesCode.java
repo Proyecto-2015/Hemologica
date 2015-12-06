@@ -21,7 +21,7 @@ public class StatesCode implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="state_id")
-	private int stateId;
+	private Long stateId;
 
 	@Column(name="state_code")
 	private String stateCode;
@@ -41,11 +41,11 @@ public class StatesCode implements Serializable {
 	public StatesCode() {
 	}
 
-	public int getStateId() {
+	public Long getStateId() {
 		return this.stateId;
 	}
 
-	public void setStateId(int stateId) {
+	public void setStateId(Long stateId) {
 		this.stateId = stateId;
 	}
 

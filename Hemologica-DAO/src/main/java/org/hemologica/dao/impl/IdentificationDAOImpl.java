@@ -156,7 +156,7 @@ public class IdentificationDAOImpl implements IIdentificationDAO {
 
 	}
 
-	public Identification getIdentificationById(Integer id) {
+	public Identification getIdentificationById(Long id) {
 		return em.find(Identification.class, id);
 	}
 
@@ -169,7 +169,7 @@ public class IdentificationDAOImpl implements IIdentificationDAO {
 		
 	}
 
-	public IdentificationsHistory getIdentificationsHistoryById(Integer id) {
+	public IdentificationsHistory getIdentificationsHistoryById(Long id) {
 		return em.find(IdentificationsHistory.class, id);
 	}
 

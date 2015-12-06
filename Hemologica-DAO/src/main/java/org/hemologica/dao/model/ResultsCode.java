@@ -24,7 +24,7 @@ public class ResultsCode {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="results_code_id")
-	private int resultsCodeId;
+	private Long resultsCodeId;
 
 	@Column(name="results_code_label")
 	private String resultsCodeLabel;
@@ -40,11 +40,11 @@ public class ResultsCode {
 	@JoinColumn(name="results_code_snomed")
 	private Concept concept;
 
-	public int getResultsCodeId() {
+	public Long getResultsCodeId() {
 		return resultsCodeId;
 	}
 
-	public void setResultsCodeId(int resultsCodeId) {
+	public void setResultsCodeId(Long resultsCodeId) {
 		this.resultsCodeId = resultsCodeId;
 	}
 

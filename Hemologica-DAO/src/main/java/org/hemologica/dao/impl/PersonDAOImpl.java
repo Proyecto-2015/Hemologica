@@ -40,7 +40,7 @@ public class PersonDAOImpl extends GenericDAOImpl<Person> implements IPersonDAO{
 
 	}
 
-	public Person getPersonsId(String id) {
+	public Person getPersonsId(Long id) {
 		
 		Query query = em.createNamedQuery("Person.findById");
 		query.setParameter("id", id);

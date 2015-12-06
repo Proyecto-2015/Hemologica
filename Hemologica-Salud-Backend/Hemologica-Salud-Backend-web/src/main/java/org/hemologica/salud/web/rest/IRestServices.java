@@ -39,27 +39,27 @@ public interface IRestServices {
 	@GET
 	@Path("/donations")
 	@Produces("application/json")
-	public List<DataDonation> getDonations(@QueryParam(ConstansJson.JSON_USER) String user);
+	public List<DataDonation> getDonations(@QueryParam(ConstansJson.JSON_USER) Long user);
 	
 	@GET
 	@Path("/transfusions")
 	@Produces("application/json")
-	public List<DataTransfusion> getTransfusions(@QueryParam(ConstansJson.JSON_USER) String user);
+	public List<DataTransfusion> getTransfusions(@QueryParam(ConstansJson.JSON_USER) Long user);
 	
 	@GET
 	@Path("/users")
 	@Produces("application/json")
-	public DataPerson getPerson(@QueryParam(ConstansJson.JSON_USER) String user);
+	public DataPerson getPerson(@QueryParam(ConstansJson.JSON_USER) Long user);
 	
 	@GET
 	@Path("/" + ConstantsRest.PATH_USERS + "/" + ConstantsRest.PATH_BANKS)
 	@Produces("application/json")
-	public List<DataBank> getBanksUser(@QueryParam(ConstansJson.JSON_USER) String user);
+	public List<DataBank> getBanksUser(@QueryParam(ConstansJson.JSON_USER) Long user);
 	
 	@GET
 	@Path("/" + ConstantsRest.PATH_USERS + "/" + ConstantsRest.PATH_INSTITUTIONS)
 	@Produces("application/json")
-	public List<DataInstitution> getInstitutionsUser(@QueryParam(ConstansJson.JSON_USER) String user);
+	public List<DataInstitution> getInstitutionsUser(@QueryParam(ConstansJson.JSON_USER) Long user);
 	
 	@GET
 	@Path("/" + ConstantsRest.PATH_BANKS)

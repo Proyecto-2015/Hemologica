@@ -21,9 +21,9 @@ public class MovementsType implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private int id;
+	private Long id;
 	
-	@Column(columnDefinition="movement_type_code")
+	@Column(name="movement_type_code")
 	private String code;
 
 	public String getCode() {
@@ -41,11 +41,11 @@ public class MovementsType implements Serializable {
 	public MovementsType() {
 	}
 
-	public int getId() {
+	public Long getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

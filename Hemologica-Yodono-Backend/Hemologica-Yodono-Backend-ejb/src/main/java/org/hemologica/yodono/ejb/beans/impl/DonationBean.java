@@ -50,7 +50,7 @@ public class DonationBean implements DonationBeanLocal {
     }
 
 	@Override
-	public List<DataDonation> getDonationsUserId(String userId) throws XMLDataBaseException, SAXException, IOException, ParserConfigurationException, XPathExpressionException {
+	public List<DataDonation> getDonationsUserId(Long userId) throws XMLDataBaseException, SAXException, IOException, ParserConfigurationException, XPathExpressionException {
 		
 		List<DataDonation> listReturn = new ArrayList<>();
 		

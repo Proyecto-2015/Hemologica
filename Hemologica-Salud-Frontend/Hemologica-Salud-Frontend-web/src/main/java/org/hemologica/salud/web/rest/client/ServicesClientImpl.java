@@ -47,12 +47,12 @@ public class ServicesClientImpl implements IServicesClient {
 	private String url = ConstantsRest.PATH_SERVICES_HEMOSALUD;
 
 	@Override
-	public List<DataDonation> getMyDonations(String user) throws IOException {
+	public List<DataDonation> getMyDonations(Long user) throws IOException {
 
 		String urlDonations = url + ConstantsRest.PATH_DONATIONS;
 
 		HashMap<String, String> hash = new HashMap<String, String>();
-		hash.put(ConstansJson.JSON_USER, user);
+		hash.put(ConstansJson.JSON_USER, user.toString());
 
 		String donacionesString = "";
 		try {
@@ -69,12 +69,12 @@ public class ServicesClientImpl implements IServicesClient {
 	}
 
 	@Override
-	public List<DataTransfusion> getMyTransfusions(String user) throws IOException {
+	public List<DataTransfusion> getMyTransfusions(Long user) throws IOException {
 
 		String urlTransfusions = url + ConstantsRest.PATH_TRANSFUTIONS;
 
 		HashMap<String, String> hash = new HashMap<String, String>();
-		hash.put(ConstansJson.JSON_USER, user);
+		hash.put(ConstansJson.JSON_USER, user.toString());
 
 		String transfusionesString = "";
 		try {
@@ -91,7 +91,7 @@ public class ServicesClientImpl implements IServicesClient {
 	}
 
 	@Override
-	public DataUser getDataUser(String user) throws IOException {
+	public DataUser getDataUser(Long user) throws IOException {
 
 		String urlUsers = url + ConstantsRest.PATH_USERS;
 
