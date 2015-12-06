@@ -64,7 +64,7 @@
   <xs:complexType name="telecomType">
     <xs:simpleContent>
       <xs:extension base="xs:string">
-        <xs:attribute type="xs:string" name="value2" use="optional"/>
+        <xs:attribute type="xs:string" name="value" use="optional"/>
         <xs:attribute type="xs:string" name="use" use="optional"/>
       </xs:extension>
     </xs:simpleContent>
@@ -88,7 +88,7 @@
   <xs:complexType name="birthTimeType">
     <xs:simpleContent>
       <xs:extension base="xs:string">
-        <xs:attribute type="xs:int" name="value3"/>
+        <xs:attribute type="xs:int" name="value"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -136,7 +136,7 @@
   <xs:complexType name="timeType">
     <xs:simpleContent>
       <xs:extension base="xs:string">
-        <xs:attribute type="xs:long" name="value4"/>
+        <xs:attribute type="xs:long" name="value"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -236,14 +236,14 @@
   <xs:complexType name="lowType">
     <xs:simpleContent>
       <xs:extension base="xs:string">
-        <xs:attribute type="xs:long" name="value5"/>
+        <xs:attribute type="xs:long" name="value"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
   <xs:complexType name="highType">
     <xs:simpleContent>
       <xs:extension base="xs:string">
-        <xs:attribute type="xs:long" name="value6"/>
+        <xs:attribute type="xs:long" name="value"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
@@ -312,7 +312,7 @@
         <xs:attribute type="xs:string" name="codeSystem" use="optional"/>
         <xs:attribute type="xs:string" name="displayName" use="optional"/>
         <xs:attribute type="xs:string" name="codeSystemName" use="optional"/>
-        <xs:attribute type="xs:byte" name="value7" use="optional"/>
+        <xs:attribute type="xs:byte" name="value" use="optional"/>
         <xs:attribute type="xs:string" name="unit" use="optional"/>
       </xs:extension>
     </xs:simpleContent>

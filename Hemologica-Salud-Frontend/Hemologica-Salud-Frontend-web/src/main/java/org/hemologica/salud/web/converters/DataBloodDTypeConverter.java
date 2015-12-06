@@ -16,8 +16,7 @@ public class DataBloodDTypeConverter implements Converter {
 		if(value == null){
 			return null;
 		}
-		
-		
+				
 		if(applicationBB.getDonationDTypes() != null){
 			for(DataCode code : applicationBB.getDonationDTypes()){
 				

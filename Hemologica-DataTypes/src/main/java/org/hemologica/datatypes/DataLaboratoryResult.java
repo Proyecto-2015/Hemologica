@@ -14,7 +14,7 @@ public class DataLaboratoryResult implements Serializable {
 	private DataBank bank; /* Pueden ser en otro lugar que el de la donación???? */
 	private String date;
 	private DataResponsiblePerson responsiblePerson;
-	private Boolean result;
+	private DataCode result;
 	
 	
 	public DataCode getAnalysis() {
@@ -29,10 +29,10 @@ public class DataLaboratoryResult implements Serializable {
 	public void setDate(String date) {
 		this.date = date;
 	}
-	public Boolean getResult() {
+	public DataCode getResult() {
 		return result;
 	}
-	public void setResult(Boolean result) {
+	public void setResult(DataCode result) {
 		this.result = result;
 	}
 	public DataBank getBank() {

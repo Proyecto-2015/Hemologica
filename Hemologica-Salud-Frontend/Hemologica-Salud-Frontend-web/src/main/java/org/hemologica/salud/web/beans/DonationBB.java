@@ -1,7 +1,10 @@
 package org.hemologica.salud.web.beans;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
@@ -29,7 +32,16 @@ public class DonationBB implements Serializable {
 	private ApplicationBB applicationBB;
 	private SessionBB sessionBB;
 	private PersonBB personBB;
-	private DataDonation dataDonacion;
+	
+	private DataDonation dataDonation;
+	
+	private Date extractionTimeBegin;
+	private Date extractionTimeEnd;
+	private Date date;
+	private Date dateFail;
+	
+	private Date labDate;
+	
 	private DataLaboratoryResult labResult;
 	private DataDonationEvent event;	
 	private List<SelectItem> donationEvents;
@@ -46,25 +58,30 @@ public class DonationBB implements Serializable {
 	@PostConstruct
 	public void init(){
 		
-		this.dataDonacion = new DataDonation();
+		this.dataDonation = new DataDonation();
 		this.labResult = new DataLaboratoryResult();
 		this.event = new DataDonationEvent();
 		this.ctx = FacesContext.getCurrentInstance();
-		
-		this.dataDonacion.setState(applicationBB.getStates().get(0));
+		this.dataDonation.setState(applicationBB.getDonationStates().get(0));
 	}
 
 	public void addLabResult(){
 		
-		if(this.dataDonacion.getLabResults() != null)
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		if(labDate != null){
+			labResult.setDate(sdf.format(labDate));
+			labDate = null;
+		}
 		
-			this.dataDonacion.getLabResults().add(0,this.labResult);
+		if(this.dataDonation.getLabResults() != null)
+		
+			this.dataDonation.getLabResults().add(0,this.labResult);
 		
 		else{
 			
 			List<DataLaboratoryResult> list = new ArrayList<DataLaboratoryResult>();
 			list.add(this.labResult);
-			this.dataDonacion.setLabResults(list);
+			this.dataDonation.setLabResults(list);
 		}
 		
 		this.labResult = new DataLaboratoryResult();
@@ -72,15 +89,15 @@ public class DonationBB implements Serializable {
 	
 	public void addEvent(){
 		
-		if(this.dataDonacion.getEvents() != null){
+		if(this.dataDonation.getEvents() != null){
 			
-			this.dataDonacion.getEvents().add(0,this.event);
+			this.dataDonation.getEvents().add(0,this.event);
 				
 		}else{
 			
 			List<DataDonationEvent> events = new ArrayList<DataDonationEvent>();
 			events.add(this.event);
-			this.dataDonacion.setEvents(events);
+			this.dataDonation.setEvents(events);
 			
 		}
 		
@@ -102,17 +119,11 @@ public class DonationBB implements Serializable {
 
 	public void dataDonationStateChange(ValueChangeEvent ev){
 		
-		dataDonacion.setState((DataCode) ev.getNewValue());
+		dataDonation.setState((DataCode) ev.getNewValue());
 		
 	}
 
-	public DataDonation getDataDonacion() {
-		return dataDonacion;
-	}
 	
-	public void setDataDonacion(DataDonation dataDonacion) {
-		this.dataDonacion = dataDonacion;
-	}
 	
 	public SessionBB getSessionBB() {
 		return sessionBB;
@@ -182,13 +193,49 @@ public class DonationBB implements Serializable {
 		this.applicationBB = applicationBB;
 	}
 	
+	
+	
+	public DataDonation getDataDonation() {
+		return dataDonation;
+	}
+
+	public void setDataDonation(DataDonation dataDonation) {
+		this.dataDonation = dataDonation;
+	}
+
 	public String onFlowProcess(FlowEvent event) {
 	       
 		return event.getNewStep();
         
     }
 	
-	public void submit(){
+	
+	
+	public Date getExtractionTimeBegin() {
+		return extractionTimeBegin;
+	}
+
+	public void setExtractionTimeBegin(Date extractionTimeBegin) {
+		this.extractionTimeBegin = extractionTimeBegin;
+	}
+
+	public Date getExtractionTimeEnd() {
+		return extractionTimeEnd;
+	}
+
+	public void setExtractionTimeEnd(Date extractionTimeEnd) {
+		this.extractionTimeEnd = extractionTimeEnd;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public String submit(){
 		
 		FacesContext context = FacesContext.getCurrentInstance();
 		Application app = context.getApplication();
@@ -196,7 +243,26 @@ public class DonationBB implements Serializable {
 		
 		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, null, bundle.getString("add_donation_error"));
 		
-		DataResponse response = RestFactory.getServicesClient().addDonation(dataDonacion);
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		
+		SimpleDateFormat sdfDia = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat sdfHr = new SimpleDateFormat("HHmmss");
+		
+		if(date != null)
+			dataDonation.setDate(sdf.format(date));
+		if(date !=null && extractionTimeBegin != null)
+			dataDonation.setExtractionTimeBegin(sdfDia.format(date)+sdfHr.format(extractionTimeBegin));
+		if(date !=null && extractionTimeEnd != null)
+			dataDonation.setExtractionTimeEnd(sdfDia.format(date)+sdfHr.format(extractionTimeEnd));
+		if(dateFail != null && dataDonation.getFail()!=null)
+			dataDonation.getFail().setDate(sdf.format(dateFail));
+		
+		SimpleDateFormat sdfTime = new SimpleDateFormat("yyyyMMddHHmmss");
+		dataDonation.setTime(sdfTime.format(Calendar.getInstance().getTime()));
+		
+		dataDonation.setPerson(personBB.getDataPerson());
+		dataDonation.setBank(sessionBB.getBank());
+		DataResponse response = RestFactory.getServicesClient().addDonation(dataDonation);
 
 		if(response != null && response.getCode() == 0){
 			
@@ -205,7 +271,30 @@ public class DonationBB implements Serializable {
 		}
 		
 		FacesContext.getCurrentInstance().addMessage(null, msg);
+		
+		if(response.getCode() == 0){
+			
+			return "donationCreateEdit";
+		}
+		
+		return null;
+		
+	}
 
+	public Date getDateFail() {
+		return dateFail;
+	}
+
+	public void setDateFail(Date dateFail) {
+		this.dateFail = dateFail;
+	}
+
+	public Date getLabDate() {
+		return labDate;
+	}
+
+	public void setLabDate(Date labDate) {
+		this.labDate = labDate;
 	}
 
 }

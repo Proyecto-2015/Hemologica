@@ -51,4 +51,6 @@ INSERT INTO `hemologica`.`donation_filter_codes` (`donation_filter_codes_id`, `d
 SELECT b.concept_code,a.results_code_label FROM hemologica.results_code as a join concepts as b on a.results_code_snomed = b.id;
 
 UPDATE `hemologica`.`donation_filter_codes` SET `donation_filter_codes_path`='//ClinicalDocument//component//structuredBody//component//section//entry//component//$1//value/@code' WHERE `donation_filter_codes_id`='10';
+UPDATE `hemologica`.`donation_filter_codes` SET `donation_filter_codes_sql`='select gender_code_value, gender_code_label from gender_code;' WHERE `donation_filter_codes_id`='1';
+
 

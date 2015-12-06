@@ -76,6 +76,23 @@
 			<value>#{applicationBB}</value>
 		</managed-property>
 	</managed-bean>
+	
+	<converter>
+		<display-name>dataResultConverter</display-name>
+		<converter-id>dataResultConverter</converter-id>
+		<converter-class>org.hemologica.salud.web.converters.DataResultConverter</converter-class>
+	</converter>
+	<managed-bean>
+		<managed-bean-name>dataResultConverter</managed-bean-name>
+		<managed-bean-class>org.hemologica.salud.web.converters.DataResultConverter</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>applicationBB</property-name>
+			<property-class>org.hemologica.salud.web.beans.ApplicationBB</property-class>
+			<value>#{applicationBB}</value>
+		</managed-property>
+	</managed-bean>
+	
 	<converter>
 		<display-name>dataTransfusionFilterConverter</display-name>
 		<converter-id>dataTransfusionFilterConverter</converter-id>
@@ -297,6 +314,22 @@
 	<managed-bean>
         <managed-bean-name>dataDonationStateConverter</managed-bean-name>
         <managed-bean-class>org.hemologica.salud.web.converters.DataDonationStateConverter</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>applicationBB</property-name>
+            <property-class>org.hemologica.salud.web.beans.ApplicationBB</property-class>
+            <value>#{applicationBB}</value>
+        </managed-property>
+    </managed-bean>
+    
+    <converter>
+		<display-name>dataGenderConverter</display-name>
+		<converter-id>dataGenderConverter</converter-id>
+		<converter-class>org.hemologica.salud.web.converters.DataGenderConverter</converter-class>
+	</converter>
+	<managed-bean>
+        <managed-bean-name>dataGenderConverter</managed-bean-name>
+        <managed-bean-class>org.hemologica.salud.web.converters.DataGenderConverter</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
         <managed-property>
             <property-name>applicationBB</property-name>
@@ -569,6 +602,11 @@
 			<property-class>org.hemologica.salud.web.beans.SessionBB</property-class>
 			<value>#{sessionBB}</value>
 		</managed-property>
+		<managed-property>
+			<property-name>personBB</property-name>
+			<property-class>org.hemologica.salud.web.beans.PersonBB</property-class>
+			<value>#{personBB}</value>
+		</managed-property>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>transfusionBB</managed-bean-name>
@@ -583,6 +621,11 @@
 			<property-name>sessionBB</property-name>
 			<property-class>org.hemologica.salud.web.beans.SessionBB</property-class>
 			<value>#{sessionBB}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>personBB</property-name>
+			<property-class>org.hemologica.salud.web.beans.PersonBB</property-class>
+			<value>#{personBB}</value>
 		</managed-property>
 	</managed-bean>
 	<managed-bean>

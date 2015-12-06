@@ -14,11 +14,13 @@
 	
 	<h:form>
 		<div class="container">
-		
+			
+			<p:message id="messagesIdTransfusion" for="messagesIdTransfusion" showDetail="true" autoUpdate="true"
+								closable="true" />
 			<p:wizard flowListener="#{transfusionBB.onFlowProcess}" >
 				
-				<p:message id="messagesId" for="messagesId" showDetail="true" autoUpdate="true"
-								closable="true" />
+<!-- 				<p:message id="messagesId" for="messagesId" showDetail="true" autoUpdate="true" -->
+<!-- 								closable="true" /> -->
 				
 				<p:tab id="donante" title="#{messages.label_personal_information}">
 					<p:panel header="#{messages.label_personal_information}" style="background-color: whitesmoke;">

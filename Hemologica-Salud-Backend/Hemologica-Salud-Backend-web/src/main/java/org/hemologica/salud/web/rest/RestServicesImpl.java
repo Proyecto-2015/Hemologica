@@ -16,7 +16,6 @@ import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataDonation;
-import org.hemologica.datatypes.DataDonationDonorType;
 import org.hemologica.datatypes.DataDonationsStatisticsResults;
 import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataProductType;
@@ -615,7 +614,7 @@ public class RestServicesImpl implements IRestServices{
 		DataCode a = new DataCode();
 		a.setDisplayName("Voluntario");
 		d.setDataDonorType(a);
-		d.setDate("10/02/2015");
+//		d.setDate("10/02/2015");
 		
 		DataPerson dataPerson = new DataPerson();
 		DataBloodType dataBloodType = new DataBloodType();
@@ -706,6 +705,20 @@ public class RestServicesImpl implements IRestServices{
 	public DataResponse addTransfusion(DataTransfusion dataTransfusion) {
 		
 		return FactoryBeans.getTransfusionBean().addTransfusion(dataTransfusion);
+		
+	}
+
+	@Override
+	public List<DataCode> getGenderCodes() {
+		
+		return FactoryBeans.getCodeBeans().getGenderCodes();
+		
+	}
+
+	@Override
+	public List<DataCode> getResultsCodes() {
+		
+		return FactoryBeans.getCodeBeans().getResultsCodes();
 		
 	}
 

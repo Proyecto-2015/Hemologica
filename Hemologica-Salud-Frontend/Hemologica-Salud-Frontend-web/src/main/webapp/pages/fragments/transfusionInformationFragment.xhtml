@@ -13,17 +13,16 @@
 	<div class="container-fluid">
 
 		<div class="row">
-			<div class="col-md-6 col-md-offset-3">
+			<div class="col-md-6 col-md-offset-3 form-horizontal">
 
-				<h:form class="form-horizontal" id="donationInformationForm">
 					<fieldset>
 
 						<div class="form-group">
 							<label class="col-md-3 col-lg-5 control-label" for="donation_date"><h:outputText
 									value="#{messages.donation_date}" /></label>
 							<div class="col-md-9 col-lg-5">
-								<p:calendar id="donation_date" pattern="MM/dd/yyyy" mode="popup"
-									value="#{transfusionBB.dataTransfusion.date}" />
+								<p:calendar id="donation_date" pattern="dd/MM/yyyy" mode="popup"
+									value="#{transfusionBB.date}" />
 							</div>
 						</div>
 
@@ -45,29 +44,22 @@
 						
 						<div class="form-group">
 							<label class="col-md-3 col-lg-5 control-label" for="donation_date"><h:outputText
+									value="#{messages.label_product_code}" /></label>
+							<div class="col-md-9 col-lg-5">
+								<h:inputText class="label-form-user form-control"
+									value="#{transfusionBB.dataTransfusion.productCode}" />
+							</div>
+						</div>
+						
+						<div class="form-group">
+							<label class="col-md-3 col-lg-5 control-label" for="donation_date"><h:outputText
 									value="#{messages.label_donation_associated}" /></label>
 							<div class="col-md-9 col-lg-5">
 								<h:inputText class="label-form-user form-control"
-									value="#{transfusionBB.dataTransfusion.dataProduct}" />
+									value="#{transfusionBB.dataTransfusion.associatedDonation}" />
 							</div>
 						</div>
 
-						
-<!-- 						<div class="form-group"> -->
-<!-- 							<label class="col-md-3 col-lg-5  control-label" for="name"><h:outputText -->
-<!-- 						value="#{messages.donation_blood_type}" /></label> -->
-<!-- 							<div class="col-md-9 col-lg-5"> -->
-								
-<!-- 								<h:selectOneMenu class="form-control" value="#{ApplicationBB.bloodType}" -->
-<!-- 									style="height: 34px;"> -->
-<!-- 									<f:selectItems value="#{transfusionBB.dataTransfusion.bloodTypes}" var="bloodType" -->
-<!-- 										itemValue="bloodType" itemLabel="#{bloodType.displayName}" /> -->
-<!-- 									<f:converter converterId="dataBloodTypeConverter" /> -->
-<!-- 								</h:selectOneMenu> -->
-							
-							
-<!-- 							</div> -->
-<!-- 						</div> -->
 						<div class="form-group">
 							<label class="col-md-3 col-lg-5 control-label" for="donation_date"><h:outputText
 									value="#{messages.label_volume}" /></label>
@@ -80,12 +72,6 @@
 							<label class="col-md-3 col-lg-5  control-label" for="name"><h:outputText
 						value="#{messages.label_responsible_transfusion_person}" /></label>
 							<div class="col-md-9 col-lg-5">
-<!-- 								<h:selectOneMenu class="form-control" value="#{SessionBB.responsibleTransfusionPersons}" -->
-<!-- 									style="height: 34px;"> -->
-<!-- 								<f:selectItems value="#{transfusionBB.dataTransfusion.responsibleTransfusionPerson}" var="bloodType" -->
-<!-- 									itemValue="bloodType" itemLabel="#{bloodType.displayName}" /> -->
-<!-- 								<f:converter converterId="dataBloodTypeConverter" /> -->
-<!-- 								</h:selectOneMenu> -->
 								
 								<h:selectOneMenu class="form-control" value="#{transfusionBB.dataTransfusion.responsibleTransfusionPerson}"
 										style="height: 34px;" converter="#{dataResponsiblePersonConverter}">
@@ -98,7 +84,6 @@
 						</div>
 
 					</fieldset>
-				</h:form>
 			</div>
 		</div>
 	</div>

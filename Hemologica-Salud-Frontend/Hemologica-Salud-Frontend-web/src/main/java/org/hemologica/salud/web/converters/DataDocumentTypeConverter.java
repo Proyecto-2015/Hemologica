@@ -5,9 +5,7 @@ import java.util.List;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-
 import org.hemologica.datatypes.DataCode;
-import org.hemologica.datatypes.DataDocumentType;
 import org.hemologica.salud.web.beans.ApplicationBB;
 
 public class DataDocumentTypeConverter implements Converter {
@@ -40,7 +38,7 @@ public class DataDocumentTypeConverter implements Converter {
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if(value instanceof DataCode){
 			
-			return ((DataCode)value).getDisplayName();
+			return ((DataCode)value).getCode();
 		}
 		return null;
 	}

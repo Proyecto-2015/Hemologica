@@ -59,11 +59,15 @@ public class ConstantsRest {
 	public static final String PATH_DONATION_STATES = "donationstates";
 	public static final String PATH_DONATION_TYPES = "donationtypes";
 	public static final String PATH_DONOR_TYPES = "donortypes";
+	public static final String PATH_GENDER = "gender";
+	public static final String PATH_RESULTS = "results";
 	
 	/**
 	 * Account to enable from token
 	 */
 	public static final String PATH_ACCOUNT_ENABLE = "account";
+	
+	
 	
 
 }

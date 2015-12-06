@@ -11,9 +11,7 @@
 <h:body>
 
 	<div class="container-fluid">
-	  
-	  
-	  <p:messages/>
+
 		<div class="row">
 			<div class="col-md-6 col-md-offset-3">
 
@@ -34,7 +32,7 @@
 									value="#{personBB.dataPerson.documentCountry}" style="height: 34px;"
 									converter="#{dataCountryConverter}">
 									<f:selectItems value="#{applicationBB.countries}" var="country"
-										itemValue="#{country.code}" itemLabel="#{messages[country.displayName]}" />
+										itemValue="#{country}" itemLabel="#{messages[country.displayName]}" />
 								</h:selectOneMenu>
 							</div>
 						</div>
@@ -46,7 +44,7 @@
 									value="#{personBB.dataPerson.documentType}" style="height: 34px;"
 									converter="#{dataDocumentTypeConverter}">
 									<f:selectItems value="#{applicationBB.documentTypes}" var="documentType"
-										itemValue="#{documentType.code}" itemLabel="#{messages[documentType.displayName]}" />
+										itemValue="#{documentType}" itemLabel="#{messages[documentType.displayName]}" />
 								</h:selectOneMenu>
 							</div>
 						</div>
@@ -102,13 +100,27 @@
 
 					<fieldset>
 						<legend><h:outputText value="#{messages.label_contact}"/></legend>
+						
+						<div class="form-group">
+							<label class="col-md-5 control-label" for="name"><h:outputText
+									value="#{messages.label_gender}" /></label>
+							<div class="col-md-9 col-lg-5">
+								<h:selectOneMenu class="form-control" value="#{personBB.dataPerson.state}"
+									style="height: 34px;" converter="#{dataGenderConverter}">
+									<f:selectItems value="#{applicationBB.gender}" var="gender"
+										itemValue="#{gender}" itemLabel="#{messages[gender.displayName]}" />
+<!-- 								<f:ajax listener="#{personBB.changeState}" render="states" />  -->
+								</h:selectOneMenu>
+							</div>
+						</div>
+						
 						<div class="form-group">
 							<label class="col-md-5 control-label"
 								for="donations_input_search_date_from"><h:outputText
 									value="#{messages.person_birthday_date}" /></label>
 							<div class="col-md-9 col-lg-5">
-<!-- 								<p:calendar id="birthday_date" pattern="MM/dd/yyyy" mode="popup" -->
-<!-- 									value="#{personBB.dataPerson.birthdayDate}" /> -->
+								<p:calendar id="birthday_date" pattern="dd/MM/yyyy" mode="popup"
+									value="#{personBB.birthdayDate}" />
 									
 							</div>
 						</div>
@@ -116,10 +128,10 @@
 							<label class="col-md-5 control-label" for="name"><h:outputText
 									value="#{messages.person_state}" /></label>
 							<div class="col-md-9 col-lg-5">
-								<h:selectOneMenu class="form-control" value="#{personBB.states}"
+								<h:selectOneMenu class="form-control" value="#{personBB.dataPerson.gender}"
 									style="height: 34px;" converter="#{dataStateConverter}">
 									<f:selectItems value="#{applicationBB.states}" var="state"
-										itemValue="state" itemLabel="#{messages[state.displayName]}" />
+										itemValue="#{state}" itemLabel="#{messages[state.displayName]}" />
 <!-- 								<f:ajax listener="#{personBB.changeState}" render="states" />  -->
 								</h:selectOneMenu>
 							</div>
@@ -129,10 +141,10 @@
 									value="#{messages.person_city}" /></label>
 							<div class="col-md-9 col-lg-5">
 								<h:selectOneMenu class="form-control" id="cities"
-									value="#{personBB.city}" style="height: 34px;"
+									value="#{personBB.dataPerson.city}" style="height: 34px;"
 									converter="#{dataCityConverter}">
 									<f:selectItems value="#{applicationBB.cities}" var="city"
-										itemValue="#{city.code}" itemLabel="#{messages[city.displayName]}" />
+										itemValue="#{city}" itemLabel="#{messages[city.displayName]}" />
 								</h:selectOneMenu>
 							</div>
 						</div>

@@ -46,7 +46,7 @@ public class CentersBean implements CentersBeanLocal {
 		for(Center c : list){
 			
 			DataBank dataBank = new DataBank();
-			dataBank.setCode(String.valueOf(c.getId()));
+			dataBank.setCode(c.getCenterCode());
 			dataBank.setName(c.getCenterDisplayName());
 			dataBank.setAddress(c.getCenterAddress());
 			dataBank.setEmail(c.getCenterEmail());
@@ -96,9 +96,9 @@ public class CentersBean implements CentersBeanLocal {
 					
 					Document d = unit.getPerson().getDocuments().get(0);
 					DataDocument dataDoc = new DataDocument();
-					dataDoc.setDocumentCountry(d.getCountriesCode().getCountryCodeLabel());
+					dataDoc.setDocumentCountry(d.getCountriesCode().getCountryCodeValue());
 					dataDoc.setDocumentNumber(d.getDocumentNumber());
-					dataDoc.setDocumentType(d.getDocumentsTypesCode().getDocumentsTypeCodeLabel());
+					dataDoc.setDocumentType(d.getDocumentsTypesCode().getDocumentsTypeCodeValue());
 					data.setDocuments(dataDoc);
 				}
 				data.setId(unit.getId());

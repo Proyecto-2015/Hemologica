@@ -15,8 +15,8 @@ public class DataPerson implements Serializable{
 	private String secondName;
 	private String firstLastName;
 	private String secondLastName;
-	private String documentCountry;
-	private String documentType;
+	private DataCode documentCountry;
+	private DataCode documentType;
 	private String documentNumber;
 	private String birthdayDate;
 	private String age;
@@ -31,12 +31,12 @@ public class DataPerson implements Serializable{
 	private boolean allowNotificationNeedDonor;
 	private boolean allowNotificationAbleToDonate;
 	private String zipCode;
-	private String gender;
+	private DataCode gender;
 	
-	public String getDocumentCountry() {
+	public DataCode getDocumentCountry() {
 		return documentCountry;
 	}
-	public void setDocumentCountry(String documentCountry) {
+	public void setDocumentCountry(DataCode documentCountry) {
 		this.documentCountry = documentCountry;
 	}
 	public String getFirstName() {
@@ -63,10 +63,10 @@ public class DataPerson implements Serializable{
 	public void setSecondLastName(String secondLastName) {
 		this.secondLastName = secondLastName;
 	}
-	public String getDocumentType() {
+	public DataCode getDocumentType() {
 		return documentType;
 	}
-	public void setDocumentType(String documentType) {
+	public void setDocumentType(DataCode documentType) {
 		this.documentType = documentType;
 	}
 	public String getDocumentNumber() {
@@ -158,10 +158,10 @@ public class DataPerson implements Serializable{
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
-	public String getGender() {
+	public DataCode getGender() {
 		return gender;
 	}
-	public void setGender(String gender) {
+	public void setGender(DataCode gender) {
 		this.gender = gender;
 	}
 	public String getAge() {

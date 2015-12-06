@@ -265,4 +265,14 @@ public interface IRestServices {
 	@Path("/" +ConstantsRest.PATH_ADD_TRANSFUSION)
 	@Produces("application/json")
 	public DataResponse addTransfusion(DataTransfusion dataTransfusion);
+	
+	@GET
+	@Path("/" +ConstantsRest.PATH_CODES +"/"+ ConstantsRest.PATH_GENDER)
+	@Produces("application/json")
+	public List<DataCode> getGenderCodes();
+	
+	@GET
+	@Path("/" +ConstantsRest.PATH_CODES +"/"+ ConstantsRest.PATH_RESULTS)
+	@Produces("application/json")
+	public List<DataCode> getResultsCodes();
 }

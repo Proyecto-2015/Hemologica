@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.hemologica.constants.Constants;
+
 public class DataDonation implements Serializable {
 
 	/**
@@ -14,7 +16,10 @@ public class DataDonation implements Serializable {
 
 	private String name;
 	private String date;
+	private String time;
 	private DataBank bank;
+	
+	private String bloodCode;
 	private DataInstitution institution;
 	private DataPerson person;
 	private DataCode dataDonorType;
@@ -23,19 +28,20 @@ public class DataDonation implements Serializable {
 	private DataCode bloodABOType;
 	private DataCode bloodDType;
 	private DataDonationFail fail;
+	private DataResponsiblePerson responsiblePerson;
 	private List<DataLaboratoryResult> labResults;
 	private List<DataDonationEvent> events;
 	private boolean approved; 
 
-	private Date extractionTimeBegin;
-	private Date extractionTimeEnd;
+	private String extractionTimeBegin;
+	private String extractionTimeEnd;
 
 	public DataDonation() {
 		this.fail = new DataDonationFail();
-		this.bloodABOType = new DataCode();
-		this.bloodDType = new DataCode();
-		this.dataDonorType = new DataCode();
-		this.person = new DataPerson();
+//		this.bloodABOType = new DataCode();
+//		this.bloodDType = new DataCode();
+//		this.dataDonorType = new DataCode();
+//		this.person = new DataPerson();
 		this.labResults = new ArrayList<DataLaboratoryResult>();
 		this.events = new ArrayList<DataDonationEvent>();
 	}
@@ -74,7 +80,7 @@ public class DataDonation implements Serializable {
 
 	public boolean isApproved() {
 		
-		if(state != null && state.getCode().equals("1"))
+		if(state != null && state.getCode().equals(Constants.COMPLETED))
 			return true;
 		else 
 			return false;
@@ -125,19 +131,19 @@ public class DataDonation implements Serializable {
 		this.dataDonorType = dataDonorType;
 	}
 
-	public Date getExtractionTimeBegin() {
+	public String getExtractionTimeBegin() {
 		return extractionTimeBegin;
 	}
 
-	public void setExtractionTimeBegin(Date extractionTimeBegin) {
+	public void setExtractionTimeBegin(String extractionTimeBegin) {
 		this.extractionTimeBegin = extractionTimeBegin;
 	}
 
-	public Date getExtractionTimeEnd() {
+	public String getExtractionTimeEnd() {
 		return extractionTimeEnd;
 	}
 
-	public void setExtractionTimeEnd(Date extractionTimeEnd) {
+	public void setExtractionTimeEnd(String extractionTimeEnd) {
 		this.extractionTimeEnd = extractionTimeEnd;
 	}
 
@@ -176,6 +182,31 @@ public class DataDonation implements Serializable {
 	public void setApproved(boolean approved) {
 		this.approved = approved;
 	}
+
+	public String getBloodCode() {
+		return bloodCode;
+	}
+
+	public void setBloodCode(String bloodCode) {
+		this.bloodCode = bloodCode;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+	public DataResponsiblePerson getResponsiblePerson() {
+		return responsiblePerson;
+	}
+
+	public void setResponsiblePerson(DataResponsiblePerson responsiblePerson) {
+		this.responsiblePerson = responsiblePerson;
+	}
+	
 
 }
 

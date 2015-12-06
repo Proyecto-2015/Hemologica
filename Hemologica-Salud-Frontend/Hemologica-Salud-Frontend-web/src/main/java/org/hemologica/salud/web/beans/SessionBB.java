@@ -40,6 +40,9 @@ public class SessionBB implements Serializable {
 			person.setId("1");
 			this.userInstitutions = RestFactory.getServicesClient().getInstitution(person.getId());
 			this.userBanks = RestFactory.getServicesClient().getBanks(person.getId());
+			if(userBanks!= null && userBanks.size()!=0){
+				this.bank = userBanks.get(0);
+			}
 			
 		} catch (ClientProtocolException e) {
 			

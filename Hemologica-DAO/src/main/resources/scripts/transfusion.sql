@@ -24,4 +24,5 @@ INSERT INTO `hemologica`.`transfusion_filter_codes` (`transfusion_filter_codes_i
 UPDATE `hemologica`.`transfusion_filter_codes` SET `transfusion_filter_codes_path`='/ClinicalDocument/component/structuredBody/component/section/entry/observation/entryRelationship/observation/$1/interpretationCode/@code' WHERE `transfusion_filter_codes_id`='6';
 UPDATE `hemologica`.`transfusion_filter_codes` SET `transfusion_filter_codes_path`='//ClinicalDocument//component//structuredBody//component//section//entry//observation//$1//interpretationCode//@code' WHERE `transfusion_filter_codes_id`='6';
 
+UPDATE `hemologica`.`transfusion_filter_codes` SET `transfusion_filter_codes_sql`='select gender_code_value, gender_code_label from gender_code;' WHERE `transfusion_filter_codes_id`='4';
 

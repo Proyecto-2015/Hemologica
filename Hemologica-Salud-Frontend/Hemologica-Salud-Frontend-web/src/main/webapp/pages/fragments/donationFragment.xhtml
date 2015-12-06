@@ -18,8 +18,11 @@
 	
 	<h:form>
 		<div class="container">
+			<p:message id="messagesIdDonation" for="messagesIdDonation" showDetail="true" autoUpdate="true"
+								closable="true" />
+		
 			<p:wizard flowListener="#{donationBB.onFlowProcess}">
-				<p:messages />
+				
 				
 				<!-- Person -->
 				<p:tab title="#{messages.donation_create_edit_tab_person_title}">

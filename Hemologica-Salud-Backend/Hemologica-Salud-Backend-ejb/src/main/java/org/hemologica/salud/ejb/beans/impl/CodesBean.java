@@ -19,6 +19,7 @@ import org.hemologica.dao.model.DonationLaboratoyCode;
 import org.hemologica.dao.model.DonationStateCode;
 import org.hemologica.dao.model.DonationTypesCode;
 import org.hemologica.dao.model.EventSeverityCode;
+import org.hemologica.dao.model.GenderCode;
 import org.hemologica.dao.model.MessageSendOption;
 import org.hemologica.dao.model.ResultsCode;
 import org.hemologica.dao.model.StatesCode;
@@ -601,5 +602,69 @@ public class CodesBean implements CodesBeanLocal {
 			
 		}
 		return listReturn;
+	}
+
+	@Override
+	public List<DataCode> getGenderCodes() {
+		
+		List<DataCode> listReturn = new ArrayList<>();
+		List<GenderCode> list = FactoryDAO.getCodesDAO(em).getGenderCodes();
+		
+		for(GenderCode bloodType :list){
+			
+			DataCode data = new DataCode();
+			data.setCode(bloodType.getGenderCodeValue());
+			data.setDisplayName(bloodType.getGenderCodeLabel());
+			listReturn.add(data);
+			
+		}
+		return listReturn;
+	}
+
+	@Override
+	public List<DataCode> getResultsCodes() {
+		
+		List<DataCode> listReturn = new ArrayList<>();
+		List<ResultsCode> list = FactoryDAO.getCodesDAO(em).getResultsCodes();
+		
+		for(ResultsCode bloodType :list){
+			
+			DataCode data = new DataCode();
+			data.setCode(bloodType.getResultsCodeValue());
+			data.setDisplayName(bloodType.getResultsCodeLabel());
+			listReturn.add(data);
+			
+		}
+		return listReturn;
+	}
+
+	@Override
+	public DataCode getResultBySnomedCode(String executeXPathString) {
+		
+		List<DataCode> listReturn = new ArrayList<>();
+		ResultsCode result = FactoryDAO.getCodesDAO(em).getResultBySnomedCode(executeXPathString);
+
+		DataCode data = new DataCode();
+		data.setCode(result.getResultsCodeValue());
+		data.setDisplayName(result.getResultsCodeLabel());
+		
+		return data;
+	}
+
+	@Override
+	public String getNewCDAid() {
+		
+		Long cdaId = FactoryDAO.getCodesDAO(em).getNewCDAid();
+		
+		return String.valueOf(cdaId);
+		
+	}
+
+	@Override
+	public String getNewHcCDAid() {
+		
+		Long cdaId = FactoryDAO.getCodesDAO(em).getNewHcCDAid();
+		
+		return String.valueOf(cdaId);
 	}
 }

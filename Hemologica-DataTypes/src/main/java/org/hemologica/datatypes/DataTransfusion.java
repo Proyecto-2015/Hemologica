@@ -12,11 +12,13 @@ public class DataTransfusion implements Serializable {
 	
 	private String name;
 	private String date;
+	private String time;
 	private DataBank bank;
 	private DataInstitution institution;
 	private String volume;
 	private DataPerson person;
-	private DataDonation associatedDonation;
+	private String associatedDonation;
+	private String productCode;
 	private DataProductType dataProduct;
 	private List<DataLaboratoryResult> laboratoryResults;
 	private List<DataTransfusionEvent> events;
@@ -84,12 +86,23 @@ public class DataTransfusion implements Serializable {
 	public void setResponsibleTransfusionPerson(DataResponsiblePerson responsibleTransfusionPerson) {
 		this.responsibleTransfusionPerson = responsibleTransfusionPerson;
 	}
-	public DataDonation getAssociatedDonation() {
+	public String getAssociatedDonation() {
 		return associatedDonation;
 	}
-	public void setAssociatedDonation(DataDonation associatedDonation) {
+	public void setAssociatedDonation(String associatedDonation) {
 		this.associatedDonation = associatedDonation;
 	}
-	
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
+	}
+	public String getProductCode() {
+		return productCode;
+	}
+	public void setProductCode(String productCode) {
+		this.productCode = productCode;
+	}
 	
 }

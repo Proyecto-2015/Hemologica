@@ -1,6 +1,8 @@
 package org.hemologica.salud.web.beans;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
@@ -24,6 +26,7 @@ public class PersonBB implements Serializable {
 	private SessionBB sessionBB;
 	
 	private DataPerson dataPerson;
+	private Date birthdayDate;
 	
 	private List<DataState> states;
 	private DataState state;
@@ -68,6 +71,10 @@ public class PersonBB implements Serializable {
 	}
 
 	public DataPerson getDataPerson() {
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		if(birthdayDate != null)
+			dataPerson.setBirthdayDate(sdf.format(birthdayDate));
 		return dataPerson;
 	}
 
@@ -114,6 +121,14 @@ public class PersonBB implements Serializable {
 	public void setApplicationBB(ApplicationBB applicationBB) {
 		this.applicationBB = applicationBB;
 	}
-	
+
+
+	public Date getBirthdayDate() {
+		return birthdayDate;
+	}
+
+	public void setBirthdayDate(Date birthdayDate) {
+		this.birthdayDate = birthdayDate;
+	}
 	
 }

@@ -5,10 +5,7 @@ import java.util.List;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-
 import org.hemologica.datatypes.DataCode;
-import org.hemologica.datatypes.DataCountry;
-import org.hemologica.salud.factories.RestFactory;
 import org.hemologica.salud.web.beans.ApplicationBB;
 
 public class DataCountryConverter implements Converter {

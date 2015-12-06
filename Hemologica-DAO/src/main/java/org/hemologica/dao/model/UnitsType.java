@@ -13,7 +13,8 @@ import java.util.List;
 @Table(name="units_types")
 @NamedQueries({
 @NamedQuery(name="UnitsType.findAll", query="SELECT u FROM UnitsType u"),
-@NamedQuery(name="UnitsType.findBySnomedCode", query="SELECT d FROM UnitsType d WHERE d.concept.conceptCode = :code")
+@NamedQuery(name="UnitsType.findBySnomedCode", query="SELECT d FROM UnitsType d WHERE d.concept.conceptCode = :code"),
+@NamedQuery(name="UnitsType.findById", query="SELECT d FROM UnitsType d WHERE d.unitTypeCodeValue = :code")
 })
 public class UnitsType implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -72,6 +73,14 @@ public class UnitsType implements Serializable {
 		this.units = units;
 	}
 
+	public Concept getConcept() {
+		return concept;
+	}
+
+	public void setConcept(Concept concept) {
+		this.concept = concept;
+	}
+	
 //	public Unit addUnit(Unit unit) {
 //		getUnits().add(unit);
 //		unit.setUnitsType(this);

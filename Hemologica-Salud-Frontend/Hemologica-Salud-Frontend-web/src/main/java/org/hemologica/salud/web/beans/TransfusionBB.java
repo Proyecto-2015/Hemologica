@@ -1,7 +1,10 @@
 package org.hemologica.salud.web.beans;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Logger;
@@ -31,8 +34,12 @@ public class TransfusionBB implements Serializable {
 	private SessionBB sessionBB;
 	private PersonBB personBB;
 	
+	private Date date;
+	
 	private DataTransfusion dataTransfusion; 
 	private DataLaboratoryResult labResult;
+	private Date labDate;
+	
 	private DataTransfusionEvent event;
 	
 	private List<SelectItem> severities;
@@ -55,9 +62,18 @@ public class TransfusionBB implements Serializable {
 
 	
 	public void addLabResult(){
-		if(this.dataTransfusion.getLaboratoryResults() != null)
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		if(labDate != null){
+			labResult.setDate(sdf.format(labDate));
+			labDate = null;
+		}
+		
+		if(this.dataTransfusion.getLaboratoryResults() != null){
+		
 			this.dataTransfusion.getLaboratoryResults().add(0,this.labResult);
-		else{
+		
+		}else{
 			
 			List<DataLaboratoryResult> list = new ArrayList<DataLaboratoryResult>();
 			list.add(this.labResult);
@@ -168,7 +184,28 @@ public class TransfusionBB implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 	
-	public void submit(){
+	public Date getDate() {
+		return date;
+	}
+
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	
+
+	public Date getLabDate() {
+		return labDate;
+	}
+
+
+	public void setLabDate(Date labDate) {
+		this.labDate = labDate;
+	}
+
+
+	public String submit(){
 		
 		FacesContext context = FacesContext.getCurrentInstance();
 		Application app = context.getApplication();
@@ -176,6 +213,15 @@ public class TransfusionBB implements Serializable {
 		
 		FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, null, bundle.getString("add_transfusion_error"));
 		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		if(date != null)
+			dataTransfusion.setDate(sdf.format(date));
+		
+		SimpleDateFormat sdfTime = new SimpleDateFormat("yyyyMMddHHmmss");
+		dataTransfusion.setTime(sdfTime.format(Calendar.getInstance().getTime()));
+		
+		dataTransfusion.setPerson(personBB.getDataPerson());
+		dataTransfusion.setBank(sessionBB.getBank());
 		DataResponse response = RestFactory.getServicesClient().addTransfusion(dataTransfusion);
 
 		if(response != null && response.getCode() == 0){
@@ -185,6 +231,12 @@ public class TransfusionBB implements Serializable {
 		}
 		
 		FacesContext.getCurrentInstance().addMessage(null, msg);
+		
+		if(response.getCode() == 0){
+			
+			return "transfusionCreateEdit";
+		}
+		return null;
 
 	}
 

@@ -77,13 +77,13 @@
 <!-- 							<p:panelGrid id="filterGrid" layout="grid" columns="2" -->
 <!-- 								columnClasses="ui-grid-col-3,ui-grid-col-9"> -->
 								
-								<div class="col-md-12 center">
-									<div >
-										<label class="col-md-2 col-lg-2 control-label" for="stock_bank_filter">
+								<div class="col-md-12 col-lg-12">
+									<div  class="col-md-9 col-lg-6">
+										<label class="col-md-2 col-lg-4 control-label" for="stock_bank_filter">
 											<h:outputText value="#{messages.stock_bank_filter}" />
 										</label>
 										
-										<div class="col-md-9 col-lg-2">
+										<div class="col-md-9 col-lg-8">
 											<h:selectOneMenu style="height: 34px;"  class="form-control" id="stock_bank_filter"
 												value="#{stockBB.banksItemsSelected}">
 												<f:selectItem itemLabel="" itemValue="" />
@@ -91,31 +91,31 @@
 											</h:selectOneMenu>
 										</div>
 									</div>
-									<div >
-										<label class="col-md-2 col-lg-2 control-label" for="stock_product_type_filter">
+									<div  class="col-md-9 col-lg-6">
+										<label class="col-md-2 col-lg-4 control-label" for="stock_product_type_filter">
 											<h:outputText
 												value="#{messages.stock_product_type_filter}" />
 										</label>
 											
-										<div class="col-md-9 col-lg-2">	
+										<div class="col-md-9 col-lg-8">	
 											<h:selectOneMenu  style="height: 34px;" class="form-control" id="stock_product_type_filter"
 												value="#{stockBB.productTypeCode}"
 												converter="#{dataProductTypeConverter}">
 												<f:selectItem itemLabel="" itemValue="" />
 												<f:selectItems value="#{applicationBB.products}"
 													var="productType" itemValue="#{productType}"
-													itemLabel="#{productType.display}" />
+													itemLabel="#{messages[productType.display]}" />
 											</h:selectOneMenu>
 										</div>
 									</div>
 								</div>
 								<div class="col-md-12" style="padding-top: 10px;">
-									<div class="form-group">
-										<label class="col-md-2 control-label" style="padding: 0;" for="stock_blood_type_filter" >
+								
+										<label class="col-md-2 col-lg-2 control-label pull-left" style="padding: 0;" for="stock_blood_type_filter" >
 											<h:outputText value="#{messages.stock_blood_type_filter}" />
 										</label>
 										
-										<div class="col-md-9 col-lg-2">
+										<div class="col-md-9 col-lg-2 pull-left">
 											<h:selectOneMenu  style="height: 34px;" class="form-control" id="stock_blood_type_filter_abo"
 												value="#{stockBB.bloodTypeABO}"
 												converter="#{dataBloodTypeConverterABO}">
@@ -126,7 +126,7 @@
 											</h:selectOneMenu>
 										</div>
 										
-										<div class="col-md-9 col-lg-2">
+										<div class="col-md-9 col-lg-2 pull-left">
 											<h:selectOneMenu style="height: 34px;" class="form-control" id="stock_blood_type_filter_rh"
 												value="#{stockBB.bloodTypeRH}"
 												converter="#{dataBloodTypeConverterRH}">
@@ -136,13 +136,12 @@
 													itemLabel="#{bloodType.displayName}" />
 											</h:selectOneMenu>
 										</div>
-									</div>
 									
-									<p:commandButton action="#{stockBB.search()}"
+										<p:commandButton action="#{stockBB.search()}" 
 										value="#{messages.generic_search}" update="banksStockPanel" />
-									<p:commandLink value="#{messages.generic_search_clear}"
-										update="banksStockPanel"
-										resetValues="stock_bank_filter stock_product_type_filter stock_blood_type_filter stock_count_filter" />
+<!-- 									<p:commandLink value="#{messages.generic_search_clear}" -->
+<!-- 										update="banksStockPanel" -->
+<!-- 										resetValues="stock_bank_filter stock_product_type_filter stock_blood_type_filter stock_count_filter" /> -->
 								</div>
 								
 <!-- 								<div class="form-group"> -->
