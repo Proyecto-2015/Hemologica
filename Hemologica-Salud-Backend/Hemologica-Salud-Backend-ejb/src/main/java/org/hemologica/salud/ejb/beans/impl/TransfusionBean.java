@@ -115,19 +115,22 @@ public class TransfusionBean implements TransfusionBeanLocal, Serializable {
 		 * Components
 		 */
 		
-		List<Document> components = XMLUtils.executeXPathStringList(document, "/ClinicalDocument/component/structuredBody/component");
-		for(Document d : components){
+		List<Document> components = XMLUtils.executeXPathStringList(document, "/ClinicalDocument/component/structuredBody/component/section/entry/procedure");
+		if(components!= null && components.size()==1){
 			
-			String componentCode = XMLUtils.executeXPathString(d, "/component/section/code/@code");
+			Document d = components.get(0);
+			//String procedure = XMLUtils.executeXPathString(document,"/ClinicalDocument/component/structuredBody/component/section/entry/procedure");
+			
+			//String componentCode = XMLUtils.executeXPathString(d, "/component/section/code/@code");
 
-			if(componentCode.equals("54790000") ){
+//			if(componentCode.equals("54790000") ){
 				/**
 				 * Transfusion
 				 */	
 				
-				data.setDataProduct(FactoryBeans.getCodeBeans().getProductBySnomedCode(XMLUtils.executeXPathString(d, "//component//section//entry//procedure//entryRelationship[descendant-or-self::node()/@typeCode = \"COMP\"]//observation//@code")));
-				String v = XMLUtils.executeXPathString(d, "/component/section/entry/procedure/entryRelationship/observation/value/@value");
-				String vUnit = XMLUtils.executeXPathString(d, "/component/section/entry/procedure/entryRelationship/observation/value/@unit");
+				data.setDataProduct(FactoryBeans.getCodeBeans().getProductBySnomedCode(XMLUtils.executeXPathString(d, "//procedure//entryRelationship[descendant-or-self::node()/@typeCode = \"COMP\"]//observation//@code")));
+				String v = XMLUtils.executeXPathString(d, "/procedure/entryRelationship/observation/value/@value");
+				String vUnit = XMLUtils.executeXPathString(d, "/procedure/entryRelationship/observation/value/@unit");
 				data.setVolume(v + " " + vUnit);
 				
 				
@@ -135,7 +138,7 @@ public class TransfusionBean implements TransfusionBeanLocal, Serializable {
 				 * Eventos adeversos
 				 */
 				List<DataTransfusionEvent> events = new ArrayList<>();
-				List<Document> eventsDoc = XMLUtils.executeXPathStringList(d, "/component/section/entry/observation/entryRelationship");
+				List<Document> eventsDoc = XMLUtils.executeXPathStringList(document, "/ClinicalDocument/component/structuredBody/component/section/entry/observation/entryRelationship");
 				
 				if(eventsDoc != null){
 					
@@ -158,30 +161,33 @@ public class TransfusionBean implements TransfusionBeanLocal, Serializable {
 					data.setEvents(events);
 				}
 
-			}else if(componentCode.equals("127795003")){ 
-				/**
-				 * Analisis pre transfusionales - esto es medio trucho.
-				 */
-				
-				List<DataLaboratoryResult> laboratoryResultList = new ArrayList<>();
-				List<Document> analysis = XMLUtils.executeXPathStringList(d, "/ClinicalDocument/component/structuredBody/component/section/entry/observation/entryRelationship");
-				
-				if(analysis != null){
-					
-					for(Document docAnalysis : analysis){
-						
-						DataLaboratoryResult dataLaboratoryResult = new DataLaboratoryResult();
-						dataLaboratoryResult.setAnalysis(FactoryBeans.getCodeBeans().getTransfusionAnalysisBySnomedCode(XMLUtils.executeXPathString(docAnalysis, "/entryRelationship/observation/code/@code")));
-						dataLaboratoryResult.setResult(FactoryBeans.getCodeBeans().getResultBySnomedCode(XMLUtils.executeXPathString(docAnalysis, "/entryRelationship/observation/value/@code")));
-						
-						laboratoryResultList.add(dataLaboratoryResult);
-					}
-				}
-				
-				data.setLaboratoryResults(laboratoryResultList);
-			}
-			
 		}
+		
+		List<Document> componentAnalysis = XMLUtils.executeXPathStringList(document, "/ClinicalDocument/component/structuredBody/component/section/entry/organizer/component");
+		
+		List<DataLaboratoryResult> laboratoryResultList = new ArrayList<>();
+		
+		for(Document d : componentAnalysis){
+			/**
+			 * Analisis pre transfusionales 
+			 */
+			
+//			if(analysis != null){
+//				
+//				for(Document docAnalysis : analysis){
+					
+			DataLaboratoryResult dataLaboratoryResult = new DataLaboratoryResult();
+			dataLaboratoryResult.setAnalysis(FactoryBeans.getCodeBeans().getTransfusionAnalysisBySnomedCode(XMLUtils.executeXPathString(d, "/component/observation/entryRelationship/observation/code/@code")));
+			dataLaboratoryResult.setResult(FactoryBeans.getCodeBeans().getResultBySnomedCode(XMLUtils.executeXPathString(d, "/component/observation/entryRelationship/observation/value/@code")));
+			
+			laboratoryResultList.add(dataLaboratoryResult);
+			
+//				}
+//			}
+
+		}
+		
+		data.setLaboratoryResults(laboratoryResultList);
 		
 		return data;
 	}
