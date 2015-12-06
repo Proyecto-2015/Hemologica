@@ -47,7 +47,7 @@ public class RestServicesImpl implements IRestServices{
 	private Logger logger = Logger.getLogger(RestServicesImpl.class.getName());
 
 	@Override
-	public List<DataDonation> getDonations(String user) {
+	public List<DataDonation> getDonations(Long user) {
 		
 		try {
 			
@@ -80,7 +80,7 @@ public class RestServicesImpl implements IRestServices{
 	}
 
 	@Override
-	public List<DataTransfusion> getTransfusions(String user) {
+	public List<DataTransfusion> getTransfusions(Long user) {
 		
 		try {
 			
@@ -113,7 +113,7 @@ public class RestServicesImpl implements IRestServices{
 	}
 
 	@Override
-	public DataPerson getPerson(String id) {
+	public DataPerson getPerson(Long id) {
 				
 		return FactoryBeans.getPersonBean().getPersonId(id);
 
@@ -198,7 +198,7 @@ public class RestServicesImpl implements IRestServices{
 	}
 
 	@Override
-	public List<DataBank> getBanksUser(String user) {
+	public List<DataBank> getBanksUser(Long user) {
 
 		if(user == null)
 			return null;
@@ -206,7 +206,7 @@ public class RestServicesImpl implements IRestServices{
 	}
 
 	@Override
-	public List<DataInstitution> getInstitutionsUser(String user) {
+	public List<DataInstitution> getInstitutionsUser(Long user) {
 		
 		if(user == null)
 			return null;
