@@ -1114,4 +1114,50 @@ public class ServicesClientImpl implements IServicesClient {
 		return response;
 	}
 
+	@Override
+	public List<DataCode> getGenderCodes() throws ClientProtocolException, IOException {
+		
+		String urlService = url + ConstantsRest.PATH_CODES +"/"+ ConstantsRest.PATH_GENDER;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		String responseString = "";
+		try {
+			
+			responseString = RestFactory.getRestServicesUtils().get(urlService, hash);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.log(Level.SEVERE,"Error al llamar al servicio", e);
+			
+		}
+		
+		Type listType = new TypeToken<List<DataCode>>(){}.getType();
+		List<DataCode> responseObject = new Gson().fromJson(responseString, listType);
+		
+		return responseObject;
+	}
+
+	@Override
+	public List<DataCode> getResultsCodes() throws ClientProtocolException, IOException {
+		
+		String urlService = url + ConstantsRest.PATH_CODES +"/"+ ConstantsRest.PATH_RESULTS;
+		
+		HashMap<String , String> hash = new HashMap<String, String>();
+		String responseString = "";
+		try {
+			
+			responseString = RestFactory.getRestServicesUtils().get(urlService, hash);
+			
+		} catch (URISyntaxException e) {
+			
+			logger.log(Level.SEVERE,"Error al llamar al servicio", e);
+			
+		}
+		
+		Type listType = new TypeToken<List<DataCode>>(){}.getType();
+		List<DataCode> responseObject = new Gson().fromJson(responseString, listType);
+		
+		return responseObject;
+	}
+
 }

@@ -50,8 +50,15 @@ public class PersonBean implements PersonBeanLocal {
 			data.setSecondLastName((p.getPersonSecondLastname() == null) ? "" :p.getPersonSecondLastname());
 			data.setAddress((p.getPersonAddress() == null) ? "" :p.getPersonAddress());
 			data.setEmail((p.getPersonEmail() == null) ? "" :p.getPersonEmail());
-			data.setGender(p.getGenderCode().getGenderCodeLabel());
 			
+			if(p.getGenderCode()!= null){
+				
+				DataCode gender = new DataCode();
+				gender.setCode(p.getGenderCode().getGenderCodeValue());
+				gender.setDisplayName(p.getGenderCode().getGenderCodeLabel());
+				data.setGender(gender);
+				
+			}
 			
 			Calendar date = Calendar.getInstance();
 			date.setTime(p.getPersonBirthday());
@@ -64,7 +71,20 @@ public class PersonBean implements PersonBeanLocal {
 			
 			if(p.getDocuments() != null && p.getDocuments().size() != 0){
 				
-				data.setDocumentType((p.getDocuments().get(0).getDocumentsTypesCode().getDocumentsTypeCodeLabel() == null) ? "" : p.getDocuments().get(0).getDocumentsTypesCode().getDocumentsTypeCodeLabel());
+				if(p.getDocuments().get(0).getCountriesCode() == null){
+					DataCode documentCountry = new DataCode();
+					documentCountry.setCode(p.getDocuments().get(0).getCountriesCode().getCountryCodeValue());
+					documentCountry.setDisplayName(p.getDocuments().get(0).getCountriesCode().getCountryCodeLabel());
+					data.setDocumentCountry(documentCountry);
+				}
+				
+				if(p.getDocuments().get(0).getDocumentsTypesCode() == null){
+					DataCode documentType = new DataCode();
+					documentType.setCode(p.getDocuments().get(0).getDocumentsTypesCode().getDocumentsTypeCodeValue());
+					documentType.setDisplayName(p.getDocuments().get(0).getDocumentsTypesCode().getDocumentsTypeCodeLabel());
+					data.setDocumentType(documentType);
+				}
+				
 				data.setDocumentNumber((p.getDocuments().get(0).getDocumentNumber() == null) ? "" :p.getDocuments().get(0).getDocumentNumber());
 				
 			}
@@ -123,7 +143,16 @@ public class PersonBean implements PersonBeanLocal {
 			data.setSecondLastName((p.getPersonSecondLastname() == null) ? "" :p.getPersonSecondLastname());
 			data.setAddress((p.getPersonAddress() == null) ? "" :p.getPersonAddress());
 			data.setEmail((p.getPersonEmail() == null) ? "" :p.getPersonEmail());
-			data.setGender(p.getGenderCode().getGenderCodeLabel());
+			
+			if(p.getGenderCode()!= null){
+				
+				DataCode gender = new DataCode();
+				gender.setCode(p.getGenderCode().getGenderCodeValue());
+				gender.setDisplayName(p.getGenderCode().getGenderCodeLabel());
+				data.setGender(gender);
+				
+			}
+			
 			
 			
 			Calendar date = Calendar.getInstance();
@@ -138,7 +167,20 @@ public class PersonBean implements PersonBeanLocal {
 			
 			if(p.getDocuments() != null && p.getDocuments().size() != 0){
 				
-				data.setDocumentType((p.getDocuments().get(0).getDocumentsTypesCode().getDocumentsTypeCodeLabel() == null) ? "" : p.getDocuments().get(0).getDocumentsTypesCode().getDocumentsTypeCodeLabel());
+				if(p.getDocuments().get(0).getCountriesCode() == null){
+					DataCode documentCountry = new DataCode();
+					documentCountry.setCode(p.getDocuments().get(0).getCountriesCode().getCountryCodeValue());
+					documentCountry.setDisplayName(p.getDocuments().get(0).getCountriesCode().getCountryCodeLabel());
+					data.setDocumentCountry(documentCountry);
+				}
+				
+				if(p.getDocuments().get(0).getDocumentsTypesCode() == null){
+					DataCode documentType = new DataCode();
+					documentType.setCode(p.getDocuments().get(0).getDocumentsTypesCode().getDocumentsTypeCodeValue());
+					documentType.setDisplayName(p.getDocuments().get(0).getDocumentsTypesCode().getDocumentsTypeCodeLabel());
+					data.setDocumentType(documentType);
+				}
+				
 				data.setDocumentNumber((p.getDocuments().get(0).getDocumentNumber() == null) ? "" :p.getDocuments().get(0).getDocumentNumber());
 				
 			}

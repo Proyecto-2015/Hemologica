@@ -20,4 +20,6 @@ public interface IBloodDAO {
 	
 	public BloodTypes getBloodTypeCodeBySnomedCodeId(String code);
 
+	public BloodTypes getBloodTypeCodeByABORHCodes(String abo, String rh);
+
 }

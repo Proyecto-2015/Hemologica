@@ -79,4 +79,14 @@ public interface CodesBeanLocal {
 
 	public List<DataCode> getDonorTypes();
 
+	public List<DataCode> getGenderCodes();
+
+	public List<DataCode> getResultsCodes();
+
+	public DataCode getResultBySnomedCode(String executeXPathString);
+
+	public String getNewCDAid();
+
+	public String getNewHcCDAid();
+
 }

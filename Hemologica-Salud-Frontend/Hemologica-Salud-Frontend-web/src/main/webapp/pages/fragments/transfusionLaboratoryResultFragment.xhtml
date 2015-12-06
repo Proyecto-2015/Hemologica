@@ -11,11 +11,8 @@
 <h:body>
 
 	<div class="container-fluid">
-		<p:messages/>
 		<div>
 			<div>
-
-<!-- 				<h:form id="labResultForm"> -->
 
 					<div >
 
@@ -27,8 +24,6 @@
 											value="#{messages.label_analysis}" /></th>
 									<th><h:outputText
 											value="#{messages.donation_lab_result_date}" /></th>
-									<th><h:outputText
-											value="#{messages.label_responsible_transfusion_person}" /></th>
 									<th><h:outputText
 											value="#{messages.label_result}" /></th>
 								</tr>
@@ -47,22 +42,20 @@
 									</td>
 									
 									<td data-title="#{messages.donation_lab_result_date}"><p:calendar
-											value="#{transfusionBB.labResult.date}">
-											<f:convertDateTime pattern="dd/MM/yyyy" />
+											value="#{transfusionBB.labDate}" pattern="dd/MM/yyyy">
+											
 										</p:calendar></td>
 									
-									
-									<td data-title="#{messages.label_responsible_transfusion_person}">
-										<h:selectOneMenu class="form-control" value="#{transfusionBB.labResult.responsiblePerson}"
-										style="height: 34px;" converter="#{dataResponsiblePersonConverter}">
-											<f:selectItems value="#{sessionBB.responsibleTransfusionPersons}" var="item"
-												itemValue="#{item}" itemLabel="#{item.fullName}" />
-						
-										</h:selectOneMenu>		
+									<td data-title="#{messages.donation_lab_result_value}">
+										<h:selectOneMenu class="form-control" value="#{transfusionBB.labResult.result}"
+											style="height: 34px;" converter="#{dataResultConverter}">
+										
+											<f:selectItems value="#{applicationBB.results}" var="item"
+												itemValue="#{item}" itemLabel="#{messages[item.displayName]}" />
+							
+										</h:selectOneMenu>
 									</td>
-									
-									<td data-title="#{messages.donation_lab_result_value}"><h:selectBooleanCheckbox
-											value="#{transfusionBB.labResult.result}" /></td>
+
 									<td data-title="">
 										<p:commandButton value="#{messages.label_add}" action="#{transfusionBB.addLabResult()}" update="@form"/>
 									</td>
@@ -78,18 +71,13 @@
 										</td>
 										<td
 											data-title="#{messages.donation_lab_result_date}">
-<!-- 											<p:calendar value="#{labResItem.date}"> -->
-<!-- 												<f:convertDateTime pattern="dd/MM/yyyy" /> -->
-<!-- 											</p:calendar> -->
+
 											<h:outputText value="#{labResItem.date}" />
-										</td>
-										<td
-											data-title="#{messages.label_responsible_transfusion_person}">
-											<h:outputText value="#{labResItem.responsiblePerson.getFullName()}" />
+												 
 										</td>
 										<td
 											data-title="#{messages.donation_lab_result_value}">
-											<h:outputText value="#{labResItem.result}" />
+											<h:outputText value="#{messages[labResItem.result.displayName]}" />
 										</td>
 									</tr>
 								</c:forEach>
@@ -99,7 +87,6 @@
 
 					</div>
 
-<!-- 				</h:form> -->
 			</div>
 		</div>
 	</div>

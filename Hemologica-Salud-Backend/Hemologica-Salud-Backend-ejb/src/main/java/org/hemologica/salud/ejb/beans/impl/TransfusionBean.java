@@ -1,5 +1,6 @@
 package org.hemologica.salud.ejb.beans.impl;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.text.ParseException;
@@ -13,8 +14,13 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
+
+import org.hemologica.constants.Constants;
 import org.hemologica.dao.model.PersonsRecord;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCode;
@@ -24,6 +30,10 @@ import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataTransfusionEvent;
 import org.hemologica.factories.FactoryDAO;
 import org.hemologica.salud.ejb.beans.TransfusionBeanLocal;
+import org.hemologica.salud.ejb.cdas.ClinicalDocumentType;
+import org.hemologica.salud.ejb.cdas.CodeType;
+import org.hemologica.salud.ejb.cdas.ComponentType;
+import org.hemologica.salud.ejb.utils.CdaUtils;
 import org.hemologica.salud.ejb.utils.FactoryBeans;
 import org.hemologica.salud.ejb.utils.XMLUtils;
 import org.hemologica.xmldatabase.exceptions.XMLDataBaseException;
@@ -105,19 +115,22 @@ public class TransfusionBean implements TransfusionBeanLocal, Serializable {
 		 * Components
 		 */
 		
-		List<Document> components = XMLUtils.executeXPathStringList(document, "/ClinicalDocument/component/structuredBody/component");
-		for(Document d : components){
+		List<Document> components = XMLUtils.executeXPathStringList(document, "/ClinicalDocument/component/structuredBody/component/section/entry/procedure");
+		if(components!= null && components.size()==1){
 			
-			String componentCode = XMLUtils.executeXPathString(d, "/component/section/code/@code");
+			Document d = components.get(0);
+			//String procedure = XMLUtils.executeXPathString(document,"/ClinicalDocument/component/structuredBody/component/section/entry/procedure");
+			
+			//String componentCode = XMLUtils.executeXPathString(d, "/component/section/code/@code");
 
-			if(componentCode.equals("54790000") ){
+//			if(componentCode.equals("54790000") ){
 				/**
 				 * Transfusion
 				 */	
 				
-				data.setDataProduct(FactoryBeans.getCodeBeans().getProductBySnomedCode(XMLUtils.executeXPathString(d, "//component//section//entry//procedure//entryRelationship[descendant-or-self::node()/@typeCode = \"COMP\"]//observation//@code")));
-				String v = XMLUtils.executeXPathString(d, "/component/section/entry/procedure/entryRelationship/observation/value/@value");
-				String vUnit = XMLUtils.executeXPathString(d, "/component/section/entry/procedure/entryRelationship/observation/value/@unit");
+				data.setDataProduct(FactoryBeans.getCodeBeans().getProductBySnomedCode(XMLUtils.executeXPathString(d, "//procedure//entryRelationship[descendant-or-self::node()/@typeCode = \"COMP\"]//observation//@code")));
+				String v = XMLUtils.executeXPathString(d, "/procedure/entryRelationship/observation/value/@value");
+				String vUnit = XMLUtils.executeXPathString(d, "/procedure/entryRelationship/observation/value/@unit");
 				data.setVolume(v + " " + vUnit);
 				
 				
@@ -125,7 +138,7 @@ public class TransfusionBean implements TransfusionBeanLocal, Serializable {
 				 * Eventos adeversos
 				 */
 				List<DataTransfusionEvent> events = new ArrayList<>();
-				List<Document> eventsDoc = XMLUtils.executeXPathStringList(d, "/component/section/entry/observation/entryRelationship");
+				List<Document> eventsDoc = XMLUtils.executeXPathStringList(document, "/ClinicalDocument/component/structuredBody/component/section/entry/observation/entryRelationship");
 				
 				if(eventsDoc != null){
 					
@@ -148,30 +161,33 @@ public class TransfusionBean implements TransfusionBeanLocal, Serializable {
 					data.setEvents(events);
 				}
 
-			}else if(componentCode.equals("127795003")){ 
-				/**
-				 * Analisis pre transfusionales - esto es medio trucho.
-				 */
-				
-				List<DataLaboratoryResult> laboratoryResultList = new ArrayList<>();
-				List<Document> analysis = XMLUtils.executeXPathStringList(d, "/ClinicalDocument/component/structuredBody/component/section/entry/observation/entryRelationship");
-				
-				if(analysis != null){
-					
-					for(Document docAnalysis : analysis){
-						
-						DataLaboratoryResult dataLaboratoryResult = new DataLaboratoryResult();
-						dataLaboratoryResult.setAnalysis(FactoryBeans.getCodeBeans().getTransfusionAnalysisBySnomedCode(XMLUtils.executeXPathString(docAnalysis, "/entryRelationship/observation/code/@code")));
-						dataLaboratoryResult.setResult(FactoryBeans.getCodeBeans().getBooleanResultBySnomedCode(XMLUtils.executeXPathString(docAnalysis, "/entryRelationship/observation/value/@code")));
-						
-						laboratoryResultList.add(dataLaboratoryResult);
-					}
-				}
-				
-				data.setLaboratoryResults(laboratoryResultList);
-			}
-			
 		}
+		
+		List<Document> componentAnalysis = XMLUtils.executeXPathStringList(document, "/ClinicalDocument/component/structuredBody/component/section/entry/organizer/component");
+		
+		List<DataLaboratoryResult> laboratoryResultList = new ArrayList<>();
+		
+		for(Document d : componentAnalysis){
+			/**
+			 * Analisis pre transfusionales 
+			 */
+			
+//			if(analysis != null){
+//				
+//				for(Document docAnalysis : analysis){
+					
+			DataLaboratoryResult dataLaboratoryResult = new DataLaboratoryResult();
+			dataLaboratoryResult.setAnalysis(FactoryBeans.getCodeBeans().getTransfusionAnalysisBySnomedCode(XMLUtils.executeXPathString(d, "/component/observation/entryRelationship/observation/code/@code")));
+			dataLaboratoryResult.setResult(FactoryBeans.getCodeBeans().getResultBySnomedCode(XMLUtils.executeXPathString(d, "/component/observation/entryRelationship/observation/value/@code")));
+			
+			laboratoryResultList.add(dataLaboratoryResult);
+			
+//				}
+//			}
+
+		}
+		
+		data.setLaboratoryResults(laboratoryResultList);
 		
 		return data;
 	}
@@ -179,15 +195,48 @@ public class TransfusionBean implements TransfusionBeanLocal, Serializable {
 	@Override
 	public DataResponse addTransfusion(DataTransfusion dataTransfusion) {
 		
-		logger.info("Crear cda");
-		
 		DataResponse dataResponse = new DataResponse();
 		
-		dataResponse.setCode(0);
+		/**
+		 *  Devuelve el documentos con las partes que son comunes a todos los cdas.
+		 */
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy");
+		
+		ClinicalDocumentType clinicalDocumentType = CdaUtils.getCDAStructure(dataTransfusion.getPerson(),dataTransfusion.getTime(),dataTransfusion.getBank(),dataTransfusion.getResponsibleTransfusionPerson());
+		
+		/**
+		 * CODIGO del Documento y Titulo -- Donacion.
+		 */
+		CodeType codeType = new CodeType();
+		codeType.setCode(Constants.DOCUMENT_CODE_TRANSFUSION);
+		clinicalDocumentType.setCode(codeType);	
+		clinicalDocumentType.setTitle("Donacion de sangre");
+		
+		/**
+		 * Devuelve el componente con los datos de la donacion.
+		 */
+		ComponentType componentType = CdaUtils.getComponentTransfusion(dataTransfusion,em);
+		clinicalDocumentType.setComponent(componentType);
+		
+		try {
+
+			File file = new File(Constants.CDA_PATH +"/"+ clinicalDocumentType.getId().getRoot()+"."+clinicalDocumentType.getId().getExtension()+ ".xml");
+			JAXBContext jaxbContext = JAXBContext.newInstance(ClinicalDocumentType.class);
+			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+
+			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			jaxbMarshaller.marshal(clinicalDocumentType, file);
+			jaxbMarshaller.marshal(clinicalDocumentType, System.out);
+			
+			dataResponse.setCode(0);
+			
+		} catch (JAXBException e) {
+			
+			logger.log(Level.SEVERE, "Error al guardar el documento en el sistema de archivos", e);
+			dataResponse.setCode(1);
+			
+		}
 		
 		return dataResponse;
-	}
-
-
-    
+	} 
 }

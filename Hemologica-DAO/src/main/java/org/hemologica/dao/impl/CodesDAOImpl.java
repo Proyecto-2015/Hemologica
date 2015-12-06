@@ -2,7 +2,10 @@ package org.hemologica.dao.impl;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
 import javax.persistence.Query;
+
+import org.hemologica.constants.Constants;
 import org.hemologica.dao.ICodesDAO;
 import org.hemologica.dao.model.BloodTypes;
 import org.hemologica.dao.model.CitiesCode;
@@ -17,14 +20,17 @@ import org.hemologica.dao.model.DonationLaboratoyCode;
 import org.hemologica.dao.model.DonationStateCode;
 import org.hemologica.dao.model.DonationTypesCode;
 import org.hemologica.dao.model.EventSeverityCode;
+import org.hemologica.dao.model.GenderCode;
 import org.hemologica.dao.model.MessageSendOption;
 import org.hemologica.dao.model.ResponsibleTransfusionPerson;
 import org.hemologica.dao.model.ResultsCode;
+import org.hemologica.dao.model.Sequencer;
 import org.hemologica.dao.model.StatesCode;
 import org.hemologica.dao.model.TransfusionEventsCode;
 import org.hemologica.dao.model.TransfusionFilterCode;
 import org.hemologica.dao.model.TransfusionLaboratoryCode;
 import org.hemologica.dao.model.UnitsType;
+import org.hemologica.factories.FactoryDAO;
 
 public class CodesDAOImpl implements ICodesDAO{
 
@@ -324,6 +330,123 @@ public class CodesDAOImpl implements ICodesDAO{
 		
 		Query query = em.createNamedQuery("DonationTypesCode.findAll");
 		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<GenderCode> getGenderCodes() {
+		
+		Query query = em.createNamedQuery("GenderCode.findAll");
+		return query.getResultList();
+	}
+
+	public DonationEventsCode getDonationsEventById(String code) {
+		
+		Query query = em.createNamedQuery("DonationEventsCode.findById");
+		query.setParameter("code", code);
+		return (DonationEventsCode) query.getSingleResult();
+	}
+
+	public EventSeverityCode getSeverityById(String code) {
+		
+		Query query = em.createNamedQuery("EventSeverityCode.findById");
+		query.setParameter("code", code);
+		return (EventSeverityCode) query.getSingleResult();
+	}
+
+	public DonationFailCausesCode getRejectionCauseById(String code) {
+		
+		Query query = em.createNamedQuery("DonationFailCausesCode.findBySnomedById");
+		query.setParameter("code", code);
+		return (DonationFailCausesCode) query.getSingleResult();
+	}
+
+	public DonationFailTypeCode getRejectionTypesById(String code) {
+		
+		Query query = em.createNamedQuery("DonationFailTypeCode.findBySnomedById");
+		query.setParameter("code", code);
+		return (DonationFailTypeCode) query.getSingleResult();
+	}
+
+	public DonationLaboratoyCode getDonationsAnalysisById(String code) {
+		
+		Query query = em.createNamedQuery("DonationLaboratoyCode.findById");
+		query.setParameter("code", code);
+		return (DonationLaboratoyCode) query.getSingleResult();
+	}
+
+	public ResultsCode getSnomedCodeByBooleanResult(Boolean result) {
+
+		Query query = em.createNamedQuery("ResultsCode.findSnomedCodeByBooleanCode");
+		query.setParameter("code", result);
+		return (ResultsCode) query.getSingleResult();
+	}
+
+	public UnitsType getProductById(String code) {
+		
+		Query query = em.createNamedQuery("UnitsType.findById");
+		query.setParameter("code", code);
+		return (UnitsType) query.getSingleResult();
+	}
+
+	public TransfusionEventsCode getTransfusionEventById(String code) {
+		
+		Query query = em.createNamedQuery("TransfusionEventsCode.findById");
+		query.setParameter("code", code);
+		return (TransfusionEventsCode) query.getSingleResult();
+	}
+
+	public TransfusionLaboratoryCode getTransfusionAnalysisById(String code) {
+		
+		Query query = em.createNamedQuery("TransfusionLaboratoryCode.findById");
+		query.setParameter("code", code);
+		return (TransfusionLaboratoryCode) query.getSingleResult();
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<ResultsCode> getResultsCodes() {
+		
+		Query query = em.createNamedQuery("ResultsCode.findAll");
+		return query.getResultList();
+	}
+
+	public ResultsCode getResultById(String result) {
+		
+		Query query = em.createNamedQuery("ResultsCode.findById");
+		query.setParameter("code", result);
+		return (ResultsCode) query.getSingleResult();
+	}
+
+	public ResultsCode getResultBySnomedCode(String executeXPathString) {
+		
+		Query query = em.createNamedQuery("ResultsCode.findBySnomedCode");
+		query.setParameter("code", executeXPathString);
+		return (ResultsCode) query.getSingleResult();
+	}
+
+	public Long getNewCDAid() {
+		
+		Query query = em.createNamedQuery("Sequencer.findById");
+		query.setParameter("code", Constants.OID_HEMOLOGICA_CDA);
+		Sequencer sequence= (Sequencer) query.getSingleResult();
+			
+		Long cdaId = sequence.getSequencerNumber();
+		sequence.setSequencerNumber(sequence.getSequencerNumber()+1);
+		FactoryDAO.getSequencerDAO(em).update(sequence);
+		
+		return cdaId;
+	}
+
+	public Long getNewHcCDAid() {
+		
+		Query query = em.createNamedQuery("Sequencer.findById");
+		query.setParameter("code", Constants.OID_HCE_HEMOLOGICA_CDA);
+		Sequencer sequence= (Sequencer) query.getSingleResult();
+			
+		Long cdaId = sequence.getSequencerNumber();
+		sequence.setSequencerNumber(sequence.getSequencerNumber()+1);
+		FactoryDAO.getSequencerDAO(em).update(sequence);
+		
+		return cdaId;
 	}
 
 }

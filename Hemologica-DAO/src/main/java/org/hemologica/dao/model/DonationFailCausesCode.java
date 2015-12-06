@@ -12,7 +12,8 @@ import javax.persistence.*;
 @Table(name="donation_fail_causes_codes")
 @NamedQueries({
 @NamedQuery(name="DonationFailCausesCode.findAll", query="SELECT d FROM DonationFailCausesCode d"),
-@NamedQuery(name="DonationFailCausesCode.findBySnomedCode", query="SELECT d FROM DonationFailCausesCode d WHERE d.concept.conceptCode = :code")
+@NamedQuery(name="DonationFailCausesCode.findBySnomedCode", query="SELECT d FROM DonationFailCausesCode d WHERE d.concept.conceptCode = :code"),
+@NamedQuery(name="DonationFailCausesCode.findBySnomedById", query="SELECT d FROM DonationFailCausesCode d WHERE d.donationFailCauseCodeValue = :code")
 })
 
 public class DonationFailCausesCode implements Serializable {
@@ -59,5 +60,15 @@ public class DonationFailCausesCode implements Serializable {
 	public void setDonationFailCauseCodeValue(String donationFailCauseCodeValue) {
 		this.donationFailCauseCodeValue = donationFailCauseCodeValue;
 	}
+
+	public Concept getConcept() {
+		return concept;
+	}
+
+	public void setConcept(Concept concept) {
+		this.concept = concept;
+	}
+	
+	
 
 }

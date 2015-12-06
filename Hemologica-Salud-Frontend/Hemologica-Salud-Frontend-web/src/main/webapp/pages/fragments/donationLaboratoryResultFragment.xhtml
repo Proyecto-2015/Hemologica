@@ -10,9 +10,7 @@
 
 <h:body>
 
-<!-- 			<h:form id="labResultForm"> -->
 	<div class="container-fluid">
-		<p:messages/>		 
 					
 			<table id="lab_results_table"
 				class="col-md-12 table-bordered table-striped table-condensed cf">
@@ -41,18 +39,25 @@
 						
 						</td>
 						<td data-title="#{messages.donation_lab_result_date}"><p:calendar
-								value="#{donationBB.labResult.date}">
-								<f:convertDateTime pattern="dd/MM/yyyy" />
+								value="#{donationBB.labDate}" pattern="dd/MM/yyyy">
 							</p:calendar></td>
-						<td data-title="#{messages.donation_lab_result_value}"><h:selectBooleanCheckbox
-								value="#{donationBB.labResult.result}" /></td>
+						
+						<td data-title="#{messages.donation_lab_result_value}">
+							<h:selectOneMenu class="form-control" value="#{donationBB.labResult.result}"
+								style="height: 34px;" converter="#{dataResultConverter}">
+							
+								<f:selectItems value="#{applicationBB.results}" var="item"
+									itemValue="#{item}" itemLabel="#{messages[item.displayName]}" />
+				
+							</h:selectOneMenu>
+						</td>
 	
 						<td data-title="">
 							<p:commandButton value="Agregar" action="#{donationBB.addLabResult()}" update="@form"/>
 						</td>
 					</tr>
 	
-					<c:forEach items="#{donationBB.dataDonacion.labResults}"
+					<c:forEach items="#{donationBB.dataDonation.labResults}"
 						var="labResItem" varStatus="counter">
 						<tr>
 							<td
@@ -63,10 +68,11 @@
 								data-title="#{messages.donation_lab_result_date_placeholder}">
 								
 								<h:outputText value="#{labResItem.date}" />
+						
 							</td>
 							<td
-								data-title="#{messages.donation_lab_result_value_placeholder}">
-								<h:outputText value="#{labResItem.result}" />
+								data-title="#{messages.donation_lab_result_value}">
+									<h:outputText value="#{messages[labResItem.result.displayName]}" />
 							</td>
 						</tr>
 					</c:forEach>

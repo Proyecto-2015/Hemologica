@@ -1,7 +1,6 @@
 package org.hemologica.factories;
 
 import javax.persistence.EntityManager;
-
 import org.hemologica.dao.IAdvertismentDAO;
 import org.hemologica.dao.IBloodDAO;
 import org.hemologica.dao.ICenterDAO;
@@ -12,6 +11,7 @@ import org.hemologica.dao.IMovementDAO;
 import org.hemologica.dao.INotificationDAO;
 import org.hemologica.dao.IPersonDAO;
 import org.hemologica.dao.IPersonRecordDAO;
+import org.hemologica.dao.ISequencerDAO;
 import org.hemologica.dao.IUnitDAO;
 import org.hemologica.dao.IUserDAO;
 import org.hemologica.dao.impl.AdvertismentDAOImpl;
@@ -24,6 +24,7 @@ import org.hemologica.dao.impl.MovementDAOImpl;
 import org.hemologica.dao.impl.NotificationDAOImpl;
 import org.hemologica.dao.impl.PersonDAOImpl;
 import org.hemologica.dao.impl.PersonRecordDAOImpl;
+import org.hemologica.dao.impl.SequencerDaoImpl;
 import org.hemologica.dao.impl.UnitDAOImpl;
 import org.hemologica.dao.impl.UserDAOImpl;
 
@@ -86,4 +87,9 @@ public class FactoryDAO {
 	public static IUnitDAO getUnitDAO(EntityManager em){
 		return new UnitDAOImpl(em);
 	}
+	
+	public static ISequencerDAO getSequencerDAO(EntityManager em){
+		return new SequencerDaoImpl(em);
+	}
+	
 }

@@ -1,5 +1,6 @@
 package org.hemologica.salud.ejb.beans.impl;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
 import java.text.ParseException;
@@ -15,12 +16,16 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.hemologica.constants.Constants;
 import org.hemologica.dao.enums.DataDonationStateEnum;
 import org.hemologica.dao.model.PersonsRecord;
+import org.hemologica.dao.model.ResultsCode;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataDonation;
@@ -30,6 +35,10 @@ import org.hemologica.datatypes.DataLaboratoryResult;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.factories.FactoryDAO;
 import org.hemologica.salud.ejb.beans.DonationBeanLocal;
+import org.hemologica.salud.ejb.cdas.ClinicalDocumentType;
+import org.hemologica.salud.ejb.cdas.CodeType;
+import org.hemologica.salud.ejb.cdas.ComponentType;
+import org.hemologica.salud.ejb.utils.CdaUtils;
 import org.hemologica.salud.ejb.utils.FactoryBeans;
 import org.hemologica.salud.ejb.utils.XMLUtils;
 import org.hemologica.xmldatabase.exceptions.XMLDataBaseException;
@@ -214,8 +223,9 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 						}
 					}
 					
-					dataLab.setResult(FactoryBeans.getCodeBeans().getBooleanResultBySnomedCode(XMLUtils.executeXPathString(d, "//component//value//@code")));
-					if(dataLab.getResult())
+					
+					dataLab.setResult(FactoryBeans.getCodeBeans().getResultBySnomedCode(XMLUtils.executeXPathString(d, "//component//value//@code")));
+					if(FactoryBeans.getCodeBeans().getBooleanResultBySnomedCode(XMLUtils.executeXPathString(d, "//component//value//@code")))
 						approved = false;
 					
 					laboratoriesResults.add(dataLab);
@@ -273,11 +283,89 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 	@Override
 	public DataResponse addDonation(DataDonation dataDonacion) {
 		
-		logger.info("Crear cda");
-		
 		DataResponse dataResponse = new DataResponse();
 		
-		dataResponse.setCode(0);
+		/**
+		 *  Devuelve el documentos con las partes que son comunes a todos los cdas.
+		 */
+		ClinicalDocumentType clinicalDocumentType = CdaUtils.getCDAStructure(dataDonacion.getPerson(),dataDonacion.getTime(),dataDonacion.getBank(),dataDonacion.getResponsiblePerson());
+		
+		/**
+		 * CODIGO del Documento y Titulo -- Donacion.
+		 */
+		CodeType codeType = new CodeType();
+		codeType.setCode(Constants.DOCUMENT_CODE_DONATION);
+		clinicalDocumentType.setCode(codeType);	
+		clinicalDocumentType.setTitle("Donacion de sangre");
+		
+		/**
+		 * Devuelve el componente con los datos de la donacion.
+		 */
+		ComponentType componentType = CdaUtils.getComponentDonation(dataDonacion,em);
+		clinicalDocumentType.setComponent(componentType);
+		
+		try {
+
+			File file = new File(Constants.CDA_PATH + "/"+ clinicalDocumentType.getId().getRoot()+"."+clinicalDocumentType.getId().getExtension()+ ".xml");
+			JAXBContext jaxbContext = JAXBContext.newInstance(ClinicalDocumentType.class);
+			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+
+			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			jaxbMarshaller.marshal(clinicalDocumentType, file);
+			jaxbMarshaller.marshal(clinicalDocumentType, System.out);
+			
+			dataResponse.setCode(0);
+			
+		} catch (JAXBException e) {
+			
+			logger.log(Level.SEVERE, "Error al guardar el documento en el sistema de archivos", e);
+			dataResponse.setCode(1);
+			
+		}
+		
+		
+		/**
+		 * Si hay examenes de laboratorio
+		 */
+		/**
+		 * CODIGO del Documento y Titulo -- Donacion.
+		 */
+		
+		/**
+		 *  Devuelve el documentos con las partes que son comunes a todos los cdas.
+		 */
+		ClinicalDocumentType clinicalDocumentTypeLaboratory = CdaUtils.getCDAStructure(dataDonacion.getPerson(),dataDonacion.getTime(),dataDonacion.getBank(),dataDonacion.getResponsiblePerson());
+		
+		
+		CodeType codeTypeLaboratory = new CodeType();
+		codeTypeLaboratory.setCode(Constants.DOCUMENT_CODE_LABORATORY);
+		clinicalDocumentTypeLaboratory.setCode(codeTypeLaboratory);	
+		clinicalDocumentTypeLaboratory.setTitle("Analisis de laboratorio");
+		
+		/**
+		 * Devuelve el componente con los datos de la donacion.
+		 */
+		ComponentType componentTypeLaboratory = CdaUtils.getComponentLaboratory(dataDonacion,em);
+		clinicalDocumentTypeLaboratory.setComponent(componentTypeLaboratory);
+		
+		try {
+
+			File file = new File(Constants.CDA_PATH + "/"+ clinicalDocumentTypeLaboratory.getId().getRoot()+"."+clinicalDocumentTypeLaboratory.getId().getExtension()+ ".xml");
+			JAXBContext jaxbContext = JAXBContext.newInstance(ClinicalDocumentType.class);
+			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+
+			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			jaxbMarshaller.marshal(clinicalDocumentTypeLaboratory, file);
+			jaxbMarshaller.marshal(clinicalDocumentTypeLaboratory, System.out);
+			
+			dataResponse.setCode(0);
+			
+		} catch (JAXBException e) {
+			
+			logger.log(Level.SEVERE, "Error al guardar el documento en el sistema de archivos", e);
+			dataResponse.setCode(1);
+			
+		}	
 		
 		return dataResponse;
 		

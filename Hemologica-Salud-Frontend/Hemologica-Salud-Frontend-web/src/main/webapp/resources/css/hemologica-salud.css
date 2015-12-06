@@ -400,4 +400,8 @@ table.jqplot-table-legend, table.jqplot-cursor-legend {
     border: none;
 }
 
+.table-striped tbody tr.highlight td {
+    background-color: red;
+}
+
 

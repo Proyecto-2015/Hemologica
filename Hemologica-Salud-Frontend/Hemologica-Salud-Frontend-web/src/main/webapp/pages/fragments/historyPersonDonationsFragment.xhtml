@@ -10,9 +10,23 @@
 	xmlns:pe="http://primefaces.org/ui/extensions">
 
 <h:head>
+	
 </h:head>
 <h:body>
-
+	
+	<script type="text/javascript">
+		
+		$('#mytable').on('click', 'tbody tr',function(event) {
+		    $(this).addClass('highlight').siblings().removeClass('highlight');
+		    console.log("holaaaaaaa")
+		});
+		
+		function log(){
+			console.log("ddddddddddddddd");	
+		}
+	
+	</script>
+	
 	<div class="col-sm-6 col-md-6" style="margin-bottom: 10px;">
 		<h3>
 			<h:outputText value="#{messages.title_donations}" />
@@ -37,7 +51,7 @@
 	</div>
 
 	<table
-		class="col-md-12 table-bordered table-striped table-condensed cf">
+		class="col-md-12 table-bordered table-striped table-condensed cf" id="mytable">
 
 		<thead class="cf">
 			<tr>
@@ -71,7 +85,11 @@
 								<p:commandLink class="icon-list icon-preview"
 									title="#{messages.label_view}"
 									action="#{personRecordBloodBB.setDonationItem(donationItem)}"
-									ajax="true" update="adverse-events-donations" />
+									ajax="true" update="adverse-events-donations" >
+									
+<!-- 									 <p:ajax event="log()" process="log()" /> -->
+									
+								</p:commandLink>
 							</c:when>
 							<c:otherwise>
 								<h:outputText value="#{messages.label_no}" />

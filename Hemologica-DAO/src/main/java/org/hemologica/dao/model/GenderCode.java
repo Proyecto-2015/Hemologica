@@ -13,7 +13,8 @@ import javax.persistence.Table;
 @Table(name="gender_code")
 @NamedQueries({
 @NamedQuery(name="GenderCode.findAll", query="SELECT d FROM GenderCode d"),
-@NamedQuery(name="GenderCode.findByHl7Code", query="SELECT d FROM GenderCode d WHERE d.hl7Code = :code")
+@NamedQuery(name="GenderCode.findByHl7Code", query="SELECT d FROM GenderCode d WHERE d.hl7Code = :code"),
+@NamedQuery(name="GenderCode.findById", query="SELECT d FROM GenderCode d WHERE d.genderCodeValue = :code")
 })
 public class GenderCode {
 	

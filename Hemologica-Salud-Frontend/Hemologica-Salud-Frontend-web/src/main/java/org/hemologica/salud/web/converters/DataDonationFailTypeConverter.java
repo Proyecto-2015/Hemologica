@@ -18,8 +18,8 @@ public class DataDonationFailTypeConverter implements Converter{
 		}
 		
 		
-		if(applicationBB.getRejectionReasons() != null){
-			for(DataCode code : applicationBB.getRejectionReasons()){
+		if(applicationBB.getRejectionTypes() != null){
+			for(DataCode code : applicationBB.getRejectionTypes()){
 				
 				if(code.getCode().equals(arg2)){
 					return code;

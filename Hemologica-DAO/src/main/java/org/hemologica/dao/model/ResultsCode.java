@@ -15,7 +15,9 @@ import javax.persistence.Table;
 @Table(name="results_code")
 @NamedQueries({
 @NamedQuery(name="ResultsCode.findAll", query="SELECT d FROM ResultsCode d"),
-@NamedQuery(name="ResultsCode.findBySnomedCode", query="SELECT d FROM ResultsCode d WHERE d.concept.conceptCode = :code")
+@NamedQuery(name="ResultsCode.findById", query="SELECT d FROM ResultsCode d WHERE d.resultsCodeValue = :code"),
+@NamedQuery(name="ResultsCode.findBySnomedCode", query="SELECT d FROM ResultsCode d WHERE d.concept.conceptCode = :code"),
+@NamedQuery(name="ResultsCode.findSnomedCodeByBooleanCode", query="SELECT d FROM ResultsCode d WHERE d.booleanValue = :code")
 })
 public class ResultsCode {
 	

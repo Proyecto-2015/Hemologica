@@ -65,5 +65,14 @@ public class BloodDAOImpl implements IBloodDAO{
 		return (BloodTypes) query.getSingleResult();
 		
 	}
+
+	public BloodTypes getBloodTypeCodeByABORHCodes(String abo, String rh) {
+		
+		Query query = em.createNamedQuery("BloodTypes.findByABORHCodes");
+		query.setParameter("codeABO", abo);
+		query.setParameter("codeRH", rh);
+		
+		return (BloodTypes) query.getSingleResult();
+	}
 	
 }

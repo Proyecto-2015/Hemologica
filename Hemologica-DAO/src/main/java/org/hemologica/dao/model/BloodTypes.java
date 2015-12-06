@@ -18,7 +18,10 @@ import javax.persistence.Table;
 @NamedQueries({
 @NamedQuery(name="BloodTypes.findAll", query="SELECT b FROM BloodTypes b"),
 @NamedQuery(name="BloodTypes.findById", query="SELECT b FROM BloodTypes b WHERE b.bloodTypeCodeValue = :code"),
-@NamedQuery(name="BloodTypes.findBySnomedCodeId", query="SELECT b FROM BloodTypes b WHERE b.concept.conceptCode = :code")
+@NamedQuery(name="BloodTypes.findBySnomedCodeId", query="SELECT b FROM BloodTypes b WHERE b.concept.conceptCode = :code"),
+@NamedQuery(name="BloodTypes.findByABORHCodes", query="SELECT b FROM BloodTypes b WHERE"
+		+ " b.bloodAboTypesCode.bloodAboTypeCodeValue = :codeABO AND b.bloodDTypesCode.bloodDTypeCodeValue = :codeRH")
+
 })
 public class BloodTypes implements Serializable {
 	

@@ -411,4 +411,20 @@ public interface IServicesClient {
 	 * @return
 	 */
 	public DataResponse addTransfusion(DataTransfusion dataTransfusion);
+
+	/**
+	 * Devuelve los generos 
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataCode> getGenderCodes() throws ClientProtocolException, IOException;
+	
+	/**
+	 * Devuelve los valores positivo y negativo 
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataCode> getResultsCodes() throws ClientProtocolException, IOException;
 }

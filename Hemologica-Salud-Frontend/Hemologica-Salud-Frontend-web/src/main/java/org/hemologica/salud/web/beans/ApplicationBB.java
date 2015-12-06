@@ -51,9 +51,11 @@ public class ApplicationBB implements Serializable {
 	private List<DataMessageOption> messageOptions;
 	private List<DataCode> donorTypes;
 	private List<DataCode> donationTypes;
+	private List<DataCode> results;
 	private List<DataCode> donationStates;
 	private List<DataCode> donationABOTypes;
 	private List<DataCode> donationDTypes;
+	private List<DataCode> gender;
 	private List<DataDonationEvent> donationEvents;
 	private List<DataBank> banks;
 	private List<DataInstitution> institutions;
@@ -93,6 +95,10 @@ public class ApplicationBB implements Serializable {
 			this.documentTypes = RestFactory.getServicesClient().getDocumentsTypes();
 			
 			this.messageOptions = RestFactory.getServicesClient().getMessageOptions();
+			this.gender = RestFactory.getServicesClient().getGenderCodes();
+			
+			this.results = RestFactory.getServicesClient().getResultsCodes();
+			
 			
 		} catch (ClientProtocolException e) {
 			
@@ -305,7 +311,21 @@ public class ApplicationBB implements Serializable {
 	public void setDonationTypes(List<DataCode> donationTypes) {
 		this.donationTypes = donationTypes;
 	}
-	
-	
+
+	public List<DataCode> getGender() {
+		return gender;
+	}
+
+	public void setGender(List<DataCode> gender) {
+		this.gender = gender;
+	}
+
+	public List<DataCode> getResults() {
+		return results;
+	}
+
+	public void setResults(List<DataCode> results) {
+		this.results = results;
+	}
 
 }

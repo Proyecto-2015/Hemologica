@@ -48,17 +48,6 @@
 										
 										</h:selectOneMenu>	
 									</td> 
-									
-
-<!-- 									<td data-title="#{messages.donation_event_severity}"><h:selectOneMenu -->
-<!-- 											id="donation_event_severity" styleClass="form-control" -->
-<!-- 											value="#{donationBB.event.severity}" style="height: 34px;" -->
-<!-- 											converter="dataEventSeverityConverter"> -->
-<!-- 											<f:selectItems var="severity"  -->
-<!-- 												value="#{applicationBB.severities}" -->
-<!-- 												itemValue="#{severity}" itemLabel="#{messages[severity.code]}" /> -->
-<!-- 										</h:selectOneMenu></td> -->
-
 
 									<td data-title="">
 										<p:commandButton value="#{messages.label_add}" 
@@ -68,7 +57,7 @@
 
 								</tr>
 
-								<c:forEach items="#{donationBB.dataDonacion.events}"
+								<c:forEach items="#{donationBB.dataDonation.events}"
 									var="event" varStatus="counter">
 									<tr>
 										<td data-title="#{messages.donation_event_display}">
