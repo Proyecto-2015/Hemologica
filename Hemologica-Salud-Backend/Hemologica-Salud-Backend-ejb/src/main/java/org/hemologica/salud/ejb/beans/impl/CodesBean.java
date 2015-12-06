@@ -641,7 +641,6 @@ public class CodesBean implements CodesBeanLocal {
 	@Override
 	public DataCode getResultBySnomedCode(String executeXPathString) {
 		
-		List<DataCode> listReturn = new ArrayList<>();
 		ResultsCode result = FactoryDAO.getCodesDAO(em).getResultBySnomedCode(executeXPathString);
 
 		DataCode data = new DataCode();

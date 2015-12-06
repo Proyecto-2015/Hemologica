@@ -178,9 +178,9 @@ public class DonationBean implements DonationBeanLocal {
 				List<Document> analisis = XMLUtils.executeXPathStringList(doc, "//ClinicalDocument//component//structuredBody//component//section//entry//organizer//component");
 				for(Document d : analisis){
 					
-					dataLab.setAnalysis(FactoryBeans.getCodeBeans().getDonationsAnalysisBySnomedCode(XMLUtils.executeXPathString(d, "//ClinicalDocument//component//structuredBody//component//section//entry//organizer//component//code//@code")));
+					dataLab.setAnalysis(FactoryBeans.getCodeBeans().getDonationsAnalysisBySnomedCode(XMLUtils.executeXPathString(d, "//component//code//@code")));
 					
-					String dateS = XMLUtils.executeXPathString(d, "//ClinicalDocument//component//structuredBody//component//section//entry//organizer//component//effectiveTime//@value");
+					String dateS = XMLUtils.executeXPathString(d, "//component//effectiveTime//@value");
 					
 					if(dateS != null && !dateS.equals("")){
 						
@@ -199,8 +199,9 @@ public class DonationBean implements DonationBeanLocal {
 						}
 					}
 					
-					dataLab.setResult(FactoryBeans.getCodeBeans().getBooleanResultBySnomedCode(XMLUtils.executeXPathString(d, "//ClinicalDocument//component//structuredBody//component//section//entry//organizer//component//value//@code")));
-					if(dataLab.getResult())
+					
+					dataLab.setResult(FactoryBeans.getCodeBeans().getResultBySnomedCode(XMLUtils.executeXPathString(d, "//component//value//@code")));
+					if(FactoryBeans.getCodeBeans().getBooleanResultBySnomedCode(XMLUtils.executeXPathString(d, "//component//value//@code")))
 						approved = false;
 					
 					laboratoriesResults.add(dataLab);

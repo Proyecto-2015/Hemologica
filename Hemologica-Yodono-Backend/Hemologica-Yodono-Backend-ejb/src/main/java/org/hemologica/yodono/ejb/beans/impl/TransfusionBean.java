@@ -162,7 +162,7 @@ public class TransfusionBean implements TransfusionBeanLocal {
 						
 						DataLaboratoryResult dataLaboratoryResult = new DataLaboratoryResult();
 						dataLaboratoryResult.setAnalysis(FactoryBeans.getCodeBeans().getTransfusionAnalysisBySnomedCode(XMLUtils.executeXPathString(docAnalysis, "/ClinicalDocument/component/structuredBody/component/section/entry/observation/entryRelationship/observation/code/@code")));
-						dataLaboratoryResult.setResult(FactoryBeans.getCodeBeans().getBooleanResultBySnomedCode(XMLUtils.executeXPathString(docAnalysis, "/ClinicalDocument/component/structuredBody/component/section/entry/observation/entryRelationship/observation/value/@code")));
+						dataLaboratoryResult.setResult(FactoryBeans.getCodeBeans().getResultBySnomedCode(XMLUtils.executeXPathString(docAnalysis, "/ClinicalDocument/component/structuredBody/component/section/entry/observation/entryRelationship/observation/value/@code")));
 						
 						laboratoryResultList.add(dataLaboratoryResult);
 					}

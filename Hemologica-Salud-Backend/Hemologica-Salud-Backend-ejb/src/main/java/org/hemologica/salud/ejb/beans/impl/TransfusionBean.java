@@ -171,19 +171,12 @@ public class TransfusionBean implements TransfusionBeanLocal, Serializable {
 			/**
 			 * Analisis pre transfusionales 
 			 */
-			
-//			if(analysis != null){
-//				
-//				for(Document docAnalysis : analysis){
 					
 			DataLaboratoryResult dataLaboratoryResult = new DataLaboratoryResult();
 			dataLaboratoryResult.setAnalysis(FactoryBeans.getCodeBeans().getTransfusionAnalysisBySnomedCode(XMLUtils.executeXPathString(d, "/component/observation/entryRelationship/observation/code/@code")));
 			dataLaboratoryResult.setResult(FactoryBeans.getCodeBeans().getResultBySnomedCode(XMLUtils.executeXPathString(d, "/component/observation/entryRelationship/observation/value/@code")));
 			
 			laboratoryResultList.add(dataLaboratoryResult);
-			
-//				}
-//			}
 
 		}
 		

@@ -258,4 +258,17 @@ public class CodesBean implements CodesBeanLocal {
 		return eventCode;
 	}
 
+	@Override
+	public DataCode getResultBySnomedCode(String executeXPathString) {
+		
+		ResultsCode result = FactoryDAO.getCodesDAO(em).getResultBySnomedCode(executeXPathString);
+
+		DataCode data = new DataCode();
+		data.setCode(result.getResultsCodeValue());
+		data.setDisplayName(result.getResultsCodeLabel());
+		
+		return data;
+
+	}
+
 }
