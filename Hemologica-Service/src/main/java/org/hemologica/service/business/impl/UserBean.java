@@ -2,12 +2,11 @@ package org.hemologica.service.business.impl;
 
 import java.io.IOException;
 import java.security.SecureRandom;
+import java.util.Base64;
 import java.util.Date;
 import java.util.Properties;
 import java.util.logging.Logger;
-
 import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.hemologica.dao.IPersonDAO;
@@ -22,7 +21,6 @@ import org.hemologica.service.datatype.UserData;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.google.common.net.InetAddresses;
 
 @Component
 public class UserBean implements IUserBean {
@@ -68,9 +66,9 @@ public class UserBean implements IUserBean {
 
 	private String generateToken() {
 		SecureRandom random = new SecureRandom();
-		byte bytes[] = new byte[1025];
+		byte bytes[] = new byte[128];
 		random.nextBytes(bytes);
-		String token = bytes.toString();
+		String token = Base64.getEncoder().encodeToString(bytes);
 		return token;
 	}
 
@@ -81,7 +79,7 @@ public class UserBean implements IUserBean {
 		MailData data = new MailData();
 		data.setToken(token);
 		data.setFrom(prop.getProperty("mail.username"));
-		data.setAddressTO();
+		data.addAddressTO(person.getPersonEmail());
 		data.setSubject(prop.getProperty("user.account.active.subject"));
 		data.setContent(this.buildMailContent(token));
 		return data;

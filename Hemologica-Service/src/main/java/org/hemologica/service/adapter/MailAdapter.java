@@ -3,8 +3,6 @@ package org.hemologica.service.adapter;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javax.mail.Address;
 import javax.mail.Message;
 import javax.mail.Message.RecipientType;
 import javax.mail.MessagingException;
@@ -28,7 +26,7 @@ public class MailAdapter {
 
 		MailData data = new Gson().fromJson(mailDataJson, MailData.class);
 		String username = properties.getProperty("username");
-		String password = properties.getProperty("passwrod");
+		String password = properties.getProperty("password");
 
 		Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
@@ -40,25 +38,9 @@ public class MailAdapter {
 
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(username));
-			if (data.getAddressTO() != null && data.getAddressTO().length > 0) {
-				Address[] address = new InternetAddress[data.getAddressTO().length];
-				for(int i = 0; i< data.getAddressTO().length ; ++i)
-					address[i] = new InternetAddress(data.getAddressTO()[i]);
-				message.setRecipients(RecipientType.TO, address);
-			}
-			if (data.getAddressTO() != null && data.getAddressCC().length > 0) {
-				Address[] address = new InternetAddress[data.getAddressCC().length];
-				for(int i = 0; i< data.getAddressCC().length ; ++i)
-					address[i] = new InternetAddress(data.getAddressCC()[i]);
-				message.setRecipients(RecipientType.CC, address);
-			}
-			if (data.getAddressTO() != null && data.getAddressBCC().length > 0) {
-				Address[] address = new InternetAddress[data.getAddressBCC().length];
-				for(int i = 0; i< data.getAddressTO().length ; ++i)
-					address[i] = new InternetAddress(data.getAddressTO()[i]);
-				message.setRecipients(RecipientType.TO, address);
-			}
-			
+			message.setRecipients(RecipientType.TO, data.addressTO());
+			message.setRecipients(RecipientType.CC, data.addressCC());
+			message.setRecipients(RecipientType.BCC, data.addressBCC());
 			message.setSubject(data.getSubject());
 			message.setText(data.getContent());
 			Transport.send(message);
