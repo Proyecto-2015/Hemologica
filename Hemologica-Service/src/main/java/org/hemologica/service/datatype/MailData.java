@@ -1,54 +1,77 @@
 package org.hemologica.service.datatype;
 
-import java.net.InetAddress;
+import java.io.Serializable;
 import java.util.ArrayList;
 
+public class MailData implements Serializable {
 
-public class MailData {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-	
 	private String from;
-	private String subjet;
+	private String subject;
 	private String content;
-	private ArrayList<InetAddress> addressTO;
-	private ArrayList<InetAddress> addressCC;
-	private ArrayList<InetAddress> addressBCC;
-	
+	private String token;
+	private ArrayList<String> addressTO;
+	private ArrayList<String> addressCC;
+	private ArrayList<String> addressBCC;
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+
 	public String getFrom() {
 		return from;
 	}
+
 	public void setFrom(String from) {
 		this.from = from;
 	}
-	public String getSubjet() {
-		return subjet;
+
+	public String getSubject() {
+		return subject;
 	}
-	public void setSubjet(String subjet) {
-		this.subjet = subjet;
+
+	public void setSubject(String subject) {
+		this.subject = subject;
 	}
+
 	public String getContent() {
 		return content;
 	}
+
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public ArrayList<InetAddress> getAddressTO() {
+
+	public ArrayList<String> getAddressTO() {
 		return addressTO;
 	}
-	public void setAddressTO(ArrayList<InetAddress> addressTO) {
+
+	public void setAddressTO(ArrayList<String> addressTO) {
 		this.addressTO = addressTO;
 	}
-	public ArrayList<InetAddress> getAddressCC() {
+
+	public ArrayList<String> getAddressCC() {
 		return addressCC;
 	}
-	public void setAddressCC(ArrayList<InetAddress> addressCC) {
+
+	public void setAddressCC(ArrayList<String> addressCC) {
 		this.addressCC = addressCC;
 	}
-	public ArrayList<InetAddress> getAddressBCC() {
+
+	public ArrayList<String> getAddressBCC() {
 		return addressBCC;
 	}
-	public void setAddressBCC(ArrayList<InetAddress> addressBCC) {
+
+	public void setAddressBCC(ArrayList<String> addressBCC) {
 		this.addressBCC = addressBCC;
 	}
-	
+
 }

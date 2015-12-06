@@ -58,8 +58,6 @@ public class Concept implements Serializable {
 	@OneToMany(mappedBy="concept")
 	private List<TransfusionLaboratoryCode> transfusionLaboratoryCodes;
 
-	public Concept() {
-	}
 
 	public Long getId() {
 		return this.id;

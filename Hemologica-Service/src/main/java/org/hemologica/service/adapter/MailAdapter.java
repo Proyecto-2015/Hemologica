@@ -14,20 +14,22 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import org.hemologica.service.datatype.MailData;
+
 import com.google.gson.Gson;
 
 public class MailAdapter {
 
 	private static final Logger logger = Logger.getLogger(MailAdapter.class.getName());
-	
+
 	private Properties properties;
-	private String username;
-	private String password;
+
 
 	public void process(String mailDataJson) {
 
 		MailData data = new Gson().fromJson(mailDataJson, MailData.class);
-		
+		String username = properties.getProperty("username");
+		String password = properties.getProperty("passwrod");
+
 		Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication(username, password);
@@ -37,51 +39,46 @@ public class MailAdapter {
 		try {
 
 			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress(data.getFrom()));
-			if(data.getAddressTO() != null && data.getAddressTO().size() > 0){
-				message.setRecipients(RecipientType.TO, (Address[]) data.getAddressTO().toArray());
+			message.setFrom(new InternetAddress(username));
+			if (data.getAddressTO() != null && data.getAddressTO().length > 0) {
+				Address[] address = new InternetAddress[data.getAddressTO().length];
+				for(int i = 0; i< data.getAddressTO().length ; ++i)
+					address[i] = new InternetAddress(data.getAddressTO()[i]);
+				message.setRecipients(RecipientType.TO, address);
 			}
-			if(data.getAddressCC() != null && data.getAddressCC().size() > 0){
-				message.setRecipients(RecipientType.CC, (Address[]) data.getAddressCC().toArray());
+			if (data.getAddressTO() != null && data.getAddressCC().length > 0) {
+				Address[] address = new InternetAddress[data.getAddressCC().length];
+				for(int i = 0; i< data.getAddressCC().length ; ++i)
+					address[i] = new InternetAddress(data.getAddressCC()[i]);
+				message.setRecipients(RecipientType.CC, address);
 			}
-			if(data.getAddressBCC() != null && data.getAddressBCC().size() > 0){
-				message.setRecipients(RecipientType.BCC, (Address[]) data.getAddressBCC().toArray());
+			if (data.getAddressTO() != null && data.getAddressBCC().length > 0) {
+				Address[] address = new InternetAddress[data.getAddressBCC().length];
+				for(int i = 0; i< data.getAddressTO().length ; ++i)
+					address[i] = new InternetAddress(data.getAddressTO()[i]);
+				message.setRecipients(RecipientType.TO, address);
 			}
-			message.setSubject(data.getSubjet());
-			message.setText(data.getContent());
-
-			Transport.send(message);
 			
-			logger.log(Level.INFO, "Send mail: "+ new Gson().toJson(data));
+			message.setSubject(data.getSubject());
+			message.setText(data.getContent());
+			Transport.send(message);
+
+			logger.log(Level.INFO, "Send mail: " + new Gson().toJson(data));
 
 		} catch (MessagingException e) {
-			logger.log(Level.SEVERE, "Cannot send mail to: "+ new Gson().toJson(data), e);
+			logger.log(Level.SEVERE, "Cannot send mail to: " + new Gson().toJson(data), e);
 		}
 
 	}
-
+	
+	
+	
 	public Properties getProperties() {
 		return properties;
 	}
 
 	public void setProperties(Properties properties) {
 		this.properties = properties;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 }

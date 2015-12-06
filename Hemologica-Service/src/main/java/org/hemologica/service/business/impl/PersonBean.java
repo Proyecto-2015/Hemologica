@@ -128,7 +128,7 @@ public class PersonBean implements IPersonBean, Serializable {
 //			if (tx.isActive()) {
 //				tx.rollback();
 //			}
-
+			logger.log(Level.SEVERE, ex.getMessage(), ex);
 		}
 
 		return person;

@@ -42,7 +42,7 @@ public class CDAProcessActivator {
 		}
 		
 		Person person = personBean.processCDAwithEMPIandDatabases(cda.getUserData(), doc);
-		if(person.getPersonEmail() != null){
+		if(person != null && person.getPersonEmail() != null){
 			UserData userData = new UserData(person.getId(), person.getPersonEmail());
 			return new Gson().toJson(userData);
 		}

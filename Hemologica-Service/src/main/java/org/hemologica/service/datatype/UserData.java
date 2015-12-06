@@ -7,6 +7,10 @@ public class UserData {
 	private String mail;
 	
 	
+	public UserData(){
+		
+	}
+	
 	public UserData(Long personId, String mail){
 		
 		this.personId = personId;

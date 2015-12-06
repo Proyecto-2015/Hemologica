@@ -253,8 +253,6 @@
 	</bean>
 	
 	<bean id="mailAdapter" class="org.hemologica.service.adapter.MailAdapter" >
-		<property name="username" value="hemologica@gmail.com"/>
-		<property name="password" value=".pr0yect0"/>
 		<property name="properties">
 			<props>
 				<prop key="host">"${mail.host}</prop>

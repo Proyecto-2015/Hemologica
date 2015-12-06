@@ -49,6 +49,7 @@ public class MovementBean implements IMovementBean{
 			unitType = unitDAO.findUnitTypeByCode(m.getUnitType());
 			center = centerDAO.getBankById(m.getCenter());
 			
+			//si no existe la unidad, la creo
 			if(unit == null){
 				unit = new Unit();
 				unit.setUnitInstitutionCode(m.getUnit());

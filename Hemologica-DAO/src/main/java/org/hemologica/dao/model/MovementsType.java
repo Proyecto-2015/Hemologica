@@ -23,7 +23,7 @@ public class MovementsType implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
-	@Column(columnDefinition="movement_type_code")
+	@Column(name="movement_type_code")
 	private String code;
 
 	public String getCode() {

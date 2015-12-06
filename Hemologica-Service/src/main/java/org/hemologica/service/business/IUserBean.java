@@ -7,6 +7,6 @@ import org.hemologica.service.datatype.UserData;
 
 public interface IUserBean extends Serializable{
 
-	public MailData createUser(UserData data);
+	public MailData createUser(UserData data) throws Exception;
 	
 }
