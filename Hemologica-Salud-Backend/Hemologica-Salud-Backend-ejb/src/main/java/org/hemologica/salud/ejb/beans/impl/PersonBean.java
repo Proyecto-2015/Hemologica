@@ -11,7 +11,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.hemologica.dao.model.Person;
-import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataPerson;
 import org.hemologica.factories.FactoryDAO;
@@ -88,14 +87,6 @@ public class PersonBean implements PersonBeanLocal {
 				data.setDocumentNumber((p.getDocuments().get(0).getDocumentNumber() == null) ? "" :p.getDocuments().get(0).getDocumentNumber());
 				
 			}
-			
-			//TODO cambiar esto
-			data.setAbleToDonate(true);
-			DataBloodType dbt = new DataBloodType();
-			dbt.setCode("AB+");
-			dbt.setDisplayName("AB+");
-			data.setBloodType(dbt);
-			// ***************************
 			
 			if(p.getPersonBirthday() != null){
 				DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -183,16 +174,6 @@ public class PersonBean implements PersonBeanLocal {
 				data.setDocumentNumber((p.getDocuments().get(0).getDocumentNumber() == null) ? "" :p.getDocuments().get(0).getDocumentNumber());
 				
 			}
-			
-			
-			
-			//TODO cambiar esto
-			data.setAbleToDonate(true);
-			DataBloodType dbt = new DataBloodType();
-			dbt.setCode("AB+");
-			dbt.setDisplayName("AB+");
-			data.setBloodType(dbt);
-			// ***************************
 			
 			if(p.getPersonBirthday() != null){
 				DateFormat df = new SimpleDateFormat("dd/MM/yyyy");

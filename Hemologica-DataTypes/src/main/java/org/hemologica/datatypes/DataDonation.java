@@ -19,7 +19,7 @@ public class DataDonation implements Serializable {
 	private String time;
 	private DataBank bank;
 	
-	private String bloodCode;
+	private DataCode bloodCode;
 	private DataInstitution institution;
 	private DataPerson person;
 	private DataCode dataDonorType;
@@ -183,11 +183,11 @@ public class DataDonation implements Serializable {
 		this.approved = approved;
 	}
 
-	public String getBloodCode() {
+	public DataCode getBloodCode() {
 		return bloodCode;
 	}
 
-	public void setBloodCode(String bloodCode) {
+	public void setBloodCode(DataCode bloodCode) {
 		this.bloodCode = bloodCode;
 	}
 

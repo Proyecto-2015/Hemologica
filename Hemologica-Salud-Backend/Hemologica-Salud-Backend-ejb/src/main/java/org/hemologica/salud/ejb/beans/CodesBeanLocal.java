@@ -89,4 +89,6 @@ public interface CodesBeanLocal {
 
 	public String getNewHcCDAid();
 
+	public DataCode getBloodTypeCodeBySnomedCode(String bloodType);
+
 }

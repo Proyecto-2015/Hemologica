@@ -11,7 +11,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -21,11 +20,9 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
-
 import org.hemologica.constants.Constants;
 import org.hemologica.dao.enums.DataDonationStateEnum;
 import org.hemologica.dao.model.PersonsRecord;
-import org.hemologica.dao.model.ResultsCode;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataDonation;
@@ -149,7 +146,7 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 			String bloodType = XMLUtils.executeXPathString(document, "//ClinicalDocument//component//structuredBody//component//section//entry//procedure//entryRelationship[descendant-or-self::node()/@typeCode = \"COMP\"]//observation//code/@code");
 			data.setBloodABOType(FactoryBeans.getCodeBeans().getABOBloodTypeCodeByBloodSnomedCode(bloodType));
 			data.setBloodDType(FactoryBeans.getCodeBeans().getRHBloodTypeCodeByBloodSnomedCode(bloodType));
-		
+			data.setBloodCode(FactoryBeans.getCodeBeans().getBloodTypeCodeBySnomedCode(bloodType));
 			/**
 			 * Eventos Adversos
 			 */
