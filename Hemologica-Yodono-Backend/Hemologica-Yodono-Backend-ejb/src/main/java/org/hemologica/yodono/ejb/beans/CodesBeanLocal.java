@@ -41,4 +41,7 @@ public interface CodesBeanLocal {
 	 public DataCode getTransfusionEventBySnomedCode(String event);
 
 	 public DataCode getTransfusionAnalysisBySnomedCode(String executeXPathString);
+	 
+	 public DataCode getResultBySnomedCode(String executeXPathString);
 }
+
