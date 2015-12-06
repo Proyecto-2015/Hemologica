@@ -66,7 +66,7 @@ public class UserBean implements IUserBean {
 
 	private String generateToken() {
 		SecureRandom random = new SecureRandom();
-		byte bytes[] = new byte[128];
+		byte bytes[] = new byte[64];
 		random.nextBytes(bytes);
 		String token = Base64.getEncoder().encodeToString(bytes);
 		return token;
