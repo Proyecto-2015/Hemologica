@@ -13,7 +13,10 @@ import javax.validation.constraints.NotNull;
  */
 @Entity
 @Table(name="movements")
-@NamedQuery(name="Movement.findAll", query="SELECT m FROM Movement m")
+@NamedQueries(value={
+	@NamedQuery(name="Movement.findAll", query="SELECT m FROM Movement m"),
+	@NamedQuery(name="Movement.getAllByUnitSortedByDate", query="SELECT m FROM Movement m WHERE m.unit.id = :unitId ORDER BY m.date DESC")
+})
 public class Movement implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -26,7 +29,6 @@ public class Movement implements Serializable {
 	@NotNull
 	@Column(name="movement_date", nullable=false)
 	private Date date;
-
 
 
 	//bi-directional many-to-one association to MovementsType

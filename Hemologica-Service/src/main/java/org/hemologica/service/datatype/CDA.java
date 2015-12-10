@@ -16,6 +16,7 @@ import org.hemologica.empi.datatypes.Identifier;
 import org.hemologica.service.utils.xml.XMLUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
@@ -45,6 +46,39 @@ public class CDA {
 	private String submissionTime;
 	private String root;
 	private String extension;
+	
+	
+	/**
+	 * Remove personal data from CDA
+	 * @param cda
+	 * @return
+	 * @throws SAXException
+	 * @throws IOException
+	 * @throws ParserConfigurationException
+	 * @throws TransformerException
+	 */
+	public static String anonymize(String cda) throws SAXException, IOException, ParserConfigurationException, TransformerException{
+		
+		Document doc = XMLUtils.stringToDocument(cda);
+		Node patient = doc.getElementsByTagName("patient").item(0);
+		
+		NodeList list = patient.getChildNodes();
+		Node n = null;
+		for(int i = 0; i < list.getLength(); ++i){
+			
+			n = list.item(i);
+			if( n.getNodeName().equals("name") ||
+				n.getNodeName().equals("telecom") ||
+				n.getNodeName().equals("id")
+					){
+				patient.removeChild(n);
+			}
+			
+		}
+		
+		
+		return XMLUtils.documentToString(doc);
+	}
 
 	public CDA(Document document) throws ParserConfigurationException, SAXException, IOException, TransformerException,
 			XPathExpressionException {

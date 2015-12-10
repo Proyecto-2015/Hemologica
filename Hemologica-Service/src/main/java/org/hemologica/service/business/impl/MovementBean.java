@@ -59,14 +59,27 @@ public class MovementBean implements IMovementBean{
 				unit = unitDAO.create(unit);
 			}
 			
-			movementType = movementDAO.findMovementTypeByCode(m.getType());
 			
+			
+			movementType = movementDAO.findMovementTypeByCode(m.getType());
 			movement = new Movement();
 			movement.setCenter(center);
 			movement.setMovementsType(movementType);
 			movement.setUnit(unit);
 			movement.setDate(sdf.parse(m.getDate()));
-			movementDAO.create(movement);
+			movement = movementDAO.create(movement);
+			
+			
+			//FIX unit state
+			List<Movement> unitMovementsOrdered = movementDAO.getAllByUnitSortedByDate(unit.getId());
+			if(unitMovementsOrdered != null && unitMovementsOrdered.size() > 0){
+				
+				//si movements_types.type es true entonces es entrada, si es false es salida
+				unit.setActive(unitMovementsOrdered.get(0).getMovementsType().getType());
+				unit = unitDAO.update(unit);
+				
+			}
+			
 		}
 		
 	}

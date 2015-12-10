@@ -29,6 +29,13 @@ public class MovementDAOImpl extends GenericDAOImpl<Movement> implements IMoveme
 		return ret != null && ret.size() > 0 ? ret.get(0) : null;
 	}
 
+	public List<Movement> getAllByUnitSortedByDate(Long id) {
+		
+		Query query = em.createNamedQuery("MovementsType.getAllByUnitSortedByDate");
+		query.setParameter("unitId", id);
+		return query.getResultList();
+	}
+
 	
 	
 }

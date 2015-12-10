@@ -28,6 +28,17 @@ public class Unit implements Serializable {
 
 	@Column(name="unit_uuid")
 	private String unitUuid;
+	
+	@Column(name="unit_state")
+	private Boolean active; 
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
 
 	//bi-directional many-to-one association to Movement
 	@OneToMany(mappedBy="unit")

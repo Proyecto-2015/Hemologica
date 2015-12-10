@@ -32,6 +32,12 @@ public class PersonsRecord implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="identifications_id")
 	private Identification identification;
+	
+//	@Convert(
+//			attributeName="identification",
+//			converter=org.hemologica.dao.converter.CryptoConverter.class
+//			)
+	
 
 	public PersonsRecord() {
 	}

@@ -28,7 +28,14 @@ public class CDAProcessActivator {
 		CDA cda = null;
 
 		try {
+			
 			cda = new CDA(XMLUtils.stringToDocument(doc));
+			Person person = personBean.processCDAwithEMPIandDatabases(cda.getUserData(), CDA.anonymize(doc));
+			if(person != null && person.getPersonEmail() != null){
+				UserData userData = new UserData(person.getId(), person.getPersonEmail());
+				return new Gson().toJson(userData);
+			}
+			
 		} catch (ParserConfigurationException e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		} catch (SAXException e) {
@@ -40,12 +47,8 @@ public class CDAProcessActivator {
 		} catch (XPathExpressionException e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		}
+//		
 		
-		Person person = personBean.processCDAwithEMPIandDatabases(cda.getUserData(), doc);
-		if(person != null && person.getPersonEmail() != null){
-			UserData userData = new UserData(person.getId(), person.getPersonEmail());
-			return new Gson().toJson(userData);
-		}
 		return null;
 
 	}

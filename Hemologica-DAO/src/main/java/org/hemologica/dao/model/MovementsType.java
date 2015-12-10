@@ -23,6 +23,10 @@ public class MovementsType implements Serializable {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	
+	@Column(name="type")
+	private Boolean type;
+	
+	
 	@Column(name="movement_type_code")
 	private String code;
 
@@ -30,6 +34,7 @@ public class MovementsType implements Serializable {
 		return code;
 	}
 
+	
 	public void setCode(String code) {
 		this.code = code;
 	}
@@ -41,6 +46,16 @@ public class MovementsType implements Serializable {
 	public MovementsType() {
 	}
 
+	
+	public Boolean getType() {
+		return type;
+	}
+
+	public void setType(Boolean type) {
+		this.type = type;
+	}
+
+	
 	public Long getId() {
 		return this.id;
 	}
