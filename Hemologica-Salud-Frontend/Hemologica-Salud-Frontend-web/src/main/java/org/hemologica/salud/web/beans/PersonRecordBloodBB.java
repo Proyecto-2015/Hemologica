@@ -57,8 +57,8 @@ public class PersonRecordBloodBB implements Serializable{
 					
 					DataBloodType dataBlood = new DataBloodType();
 					if(d.getBloodCode()!= null){
-						dataBlood.setCode(d.getBloodCode().getCode());
-						dataBlood.setDisplayName(d.getBloodCode().getDisplayName());
+						dataBlood.setCode(d.getBloodType().getCode());
+						dataBlood.setDisplayName(d.getBloodType().getDisplayName());
 						person.setBloodType(dataBlood);
 					}
 					if(d.isApproved()){

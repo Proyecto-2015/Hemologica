@@ -948,6 +948,8 @@ public class ServicesClientImpl implements IServicesClient {
 		String urlService = url + ConstantsRest.PATH_UNIT_INFO;
 		
 		HashMap<String , String> hash = new HashMap<String, String>();
+		hash.put(ConstansJson.JSON_UNIT_CODE, code);
+		
 		String responseString = "";
 		try {
 			

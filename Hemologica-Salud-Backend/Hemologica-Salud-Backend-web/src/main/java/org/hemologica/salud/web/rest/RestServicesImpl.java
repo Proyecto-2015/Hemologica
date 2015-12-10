@@ -10,8 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
-import org.hemologica.dao.enums.DataDonationStateEnum;
-import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCode;
@@ -567,79 +565,64 @@ public class RestServicesImpl implements IRestServices{
 	}
 
 	@Override
-	public DataUnitInfo getUnitInfo() {
+	public DataUnitInfo getUnitInfo(String code) {
 		
 		DataUnitInfo dataUnitInfo = new DataUnitInfo();
 		
 		DataTransfusion dataTransfusion = new DataTransfusion();
-		dataTransfusion.setDate("10/10/2015");
+		try {
+			
+			dataTransfusion = FactoryBeans.getTransfusionBean().getDataTransfusionSpecimenId(code);
+			
+		} catch (SAXException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener la transfusion SAXException", e);
+			
+		} catch (IOException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener la transfusion IOException", e);
+			
+		} catch (ParserConfigurationException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener la transfusion ParserConfigurationException", e);
+			
+		} catch (XPathExpressionException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener la transfusion XPathExpressionException", e);
+			
+		} 
 		
-		DataBank b2 = new DataBank();
-		b2.setName("Banco de Sangre 2");
-		
-		
-		dataTransfusion.setBank(b2);
-		
-		DataProductType dataProduct = new DataProductType();
-		dataProduct.setDisplay("Plaquetas");
-		dataTransfusion.setDataProduct(dataProduct);
-		dataTransfusion.setVolume("20ml");
 		dataUnitInfo.setTransfusion(dataTransfusion);
 		
-//		List<Movement> movements = new ArrayList<>();
-//		
-//		Movement m1 = new Movement();
-//		
-//		MovementsType mt1= new MovementsType();
-//		
-//		m1.setMovementsType(movementsType);
+		DataDonation dataDonation = new DataDonation();
+		try {
+			
+			dataDonation = FactoryBeans.getDonationBean().getDataDonationSpecimenId(code);
+		
+		}catch (SAXException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener los cdas SAXException", e);
+			
+		} catch (IOException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener los cdas IOException", e);
+			
+		} catch (ParserConfigurationException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener los cdas ParserConfigurationException", e);
+			
+		} catch (XPathExpressionException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener los cdas XPathExpressionException", e);
+			
+		}
+		
+		dataUnitInfo.setDonation(dataDonation);
 		
 		
-		DataDonation d = new DataDonation();
-		
-		DataCode dc24 = new DataCode();
-		dc24.setCode(DataDonationStateEnum.MADE.label);
-		dc24.setDisplayName(DataDonationStateEnum.MADE.label);
-		
-		
-		d.setState(dc24);
-		DataBank b1 = new DataBank();
-		b1.setName("Banco de Sangre 1");
-		d.setBank(b1);
-		DataInstitution di = new DataInstitution();
-		di.setName("Hospital de clinicas");
-		d.setInstitution(di);
-		d.setName("Pedro");
-
-		DataCode a = new DataCode();
-		a.setDisplayName("Voluntario");
-		d.setDataDonorType(a);
-//		d.setDate("10/02/2015");
-		
-		DataPerson dataPerson = new DataPerson();
-		DataBloodType dataBloodType = new DataBloodType();
-		dataBloodType.setDisplayName("AB+");
-		
-		dataPerson.setBloodType(dataBloodType);
-		d.setPerson(dataPerson);
-		dataUnitInfo.setDonation(d);
-		
-		List<DataMovement> movements = new ArrayList<>();
-		
-		DataMovement d1 = new DataMovement();
-		d1.setDate("15/03/2015");
-		d1.setCenterName("Banco de Sangre 1");
-		d1.setMovementsType("Salida");
-		
-		DataMovement d2 = new DataMovement();
-		d2.setDate("15/03/2015");
-		d2.setCenterName("Banco de Sangre 2");
-		d2.setMovementsType("Entrada");
-		
-		movements.add(d2);
-		movements.add(d1);
-		
+		List<DataMovement> movements = FactoryBeans.getStockBeanLocal().getMovementsUnitId(code);
 		dataUnitInfo.setMovements(movements);
+		
 		return dataUnitInfo;
 	}
 	

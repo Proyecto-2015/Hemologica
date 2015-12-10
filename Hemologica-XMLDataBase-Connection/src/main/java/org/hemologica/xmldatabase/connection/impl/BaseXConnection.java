@@ -1,10 +1,8 @@
 package org.hemologica.xmldatabase.connection.impl;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -376,15 +374,13 @@ public class BaseXConnection implements IXMLDataBase {
 		this.password = password;
 	}
 
-	public List<String> getLaboratoryElementsBySpecimenId(String root, String extension) throws XMLDataBaseException {
+	public List<String> getLaboratoryElementsBySpecimenId(String root) throws XMLDataBaseException {
 
 		ArrayList<String> cdasList = new ArrayList<String>();
 
 		String input = "for $doc in collection('" + dataBase + "') "
 				+ "where  $doc//ClinicalDocument//component//structuredBody//component//section//entry//organizer//specimen//specimenRole//@root='"
-				+ root + "' and "
-				+ "$doc//ClinicalDocument//component//structuredBody//component//section//entry//organizer//specimen//specimenRole//@extension='"
-				+ extension + "' return $doc";
+				+ root + "' return $doc";
 		BaseXClient.Query query;
 		BaseXClient session = null;
 		try {
@@ -641,6 +637,98 @@ public class BaseXConnection implements IXMLDataBase {
 		}
 
 		return 0;
+	}
+
+	public String getTransfusionCDABySpecimenId(String root) throws XMLDataBaseException {
+		
+		ArrayList<String> cdasList = new ArrayList<String>();
+
+		String input = "for $doc in collection('" + dataBase + "') "
+				+ "where  $doc//ClinicalDocument//component//structuredBody//component//section//entry//procedure//specimen[descendant-or-self::node()/@code = \"122563008\"]//id[descendant-or-self::node()/@root]/@root='"
+				+ root + "' return $doc";
+		BaseXClient.Query query;
+		BaseXClient session = null;
+		try {
+			session = this.getClient();
+			query = session.query(input);
+			query.execute();
+
+			while (query.more()) {
+				cdasList.add(query.next());
+			}
+
+		} catch (IOException e) {
+
+			logger.log(Level.SEVERE, "Error al intentar recuperarlos elementos en la base de datos.", e);
+			throw new XMLDataBaseException();
+		} finally {
+			if (session != null) {
+				try {
+					session.close();
+				} catch (IOException e) {
+					logger.log(Level.SEVERE, e.getMessage(), e);
+				}
+			}
+		}
+
+		if(cdasList != null && cdasList.size()==1){
+			
+			return cdasList.get(0);
+			
+		}else if(cdasList != null && cdasList.size()==1){
+			
+			logger.log(Level.SEVERE, "Error se recuperaron mas de un documento con el root specimn pasado ");
+			throw new XMLDataBaseException();
+		}
+		
+		return "";
+
+		
+	}
+
+	public String getDonationCDABySpecimenId(String root) throws XMLDataBaseException {
+		
+		ArrayList<String> cdasList = new ArrayList<String>();
+
+		String input = "for $doc in collection('" + dataBase + "') "
+				+ "where  $doc/ClinicalDocument/component/structuredBody/component/section/entry/procedure/specimen/specimenRole/id/@root='"
+				+ root + "' return $doc";
+		BaseXClient.Query query;
+		BaseXClient session = null;
+		try {
+			session = this.getClient();
+			query = session.query(input);
+			query.execute();
+
+			while (query.more()) {
+				cdasList.add(query.next());
+			}
+
+		} catch (IOException e) {
+
+			logger.log(Level.SEVERE, "Error al intentar recuperarlos elementos en la base de datos.", e);
+			throw new XMLDataBaseException();
+		} finally {
+			if (session != null) {
+				try {
+					session.close();
+				} catch (IOException e) {
+					logger.log(Level.SEVERE, e.getMessage(), e);
+				}
+			}
+		}
+
+		if(cdasList != null && cdasList.size()==1){
+			
+			return cdasList.get(0);
+			
+		}else if(cdasList != null && cdasList.size()==1){
+			
+			logger.log(Level.SEVERE, "Error se recuperaron mas de un documento con el root specimn pasado ");
+			throw new XMLDataBaseException();
+		}
+		
+		return "";
 	}
 
 }

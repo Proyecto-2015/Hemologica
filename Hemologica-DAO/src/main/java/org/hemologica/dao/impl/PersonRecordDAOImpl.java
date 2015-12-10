@@ -18,7 +18,7 @@ public class PersonRecordDAOImpl extends GenericDAOImpl<PersonsRecord> implement
 	@SuppressWarnings("unchecked")
 	public List<PersonsRecord> getCDAsUserId(Long userId) {
 		
-		Query query = em.createNamedQuery("PersonsRecord.findByIdentificationCode");
+		Query query = em.createNamedQuery("PersonsRecord.findByPersonId");
 		query.setParameter("id", userId);
 		return (List<PersonsRecord>) query.getResultList();
 		

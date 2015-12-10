@@ -2,12 +2,10 @@ package org.hemologica.datatypes;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.logging.Logger;
 
 public class DataDonationsStatistics implements Serializable{
 
 	private static final long serialVersionUID = 1L;
-	private static final Logger logger = Logger.getLogger(DataDonationsStatistics.class.getName());
 	
 	private String fromDate;
 	private String toDate;
@@ -34,6 +32,7 @@ public class DataDonationsStatistics implements Serializable{
 	public void setInstitution(DataInstitution institution) {
 		this.institution = institution;
 	}
+
 	public DataBank getBloodBank() {
 		return bloodBank;
 	}

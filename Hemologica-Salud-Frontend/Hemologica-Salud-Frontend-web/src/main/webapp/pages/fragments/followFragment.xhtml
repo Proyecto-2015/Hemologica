@@ -94,7 +94,7 @@
 														value="#{messages.label_product}" />:</label>
 												
 												<label class="col-md-7 control-label" style="text-align: left;">
-													<h:outputText value="#{unitBB.unit.transfusion.dataProduct.display}" />
+													<h:outputText value="#{messages[unitBB.unit.transfusion.dataProduct.display]}" />
 												</label>
 												
 											</div>
@@ -186,7 +186,7 @@
 														value="#{messages.donation_blood_type}" />:</label>
 												
 												<label class="col-md-7 control-label" style="text-align: left;">
-													<h:outputText value="#{unitBB.unit.donation.person.bloodType.displayName}" />
+													<h:outputText value="#{messages[unitBB.unit.donation.bloodType.displayName]}" />
 												</label>
 												
 											</div>
@@ -205,114 +205,6 @@
 				</div>		
 						
 			</div>
-						
-					
-<!-- 		</div> -->
-<!-- 	</div> -->
-		
-					
-<!-- 					<p:panelGrid layout="grid" columns="2" -->
-<!-- 						columnClasses="ui-grid-col-3,ui-grid-col-9"> -->
-
-<!-- 						<p:outputLabel for="follow_unit_filter_institution" -->
-<!-- 							value="Institucion" /> -->
-<!-- 						<h:selectOneMenu id="follow_unit_filter_institution" -->
-<!-- 							value="#{unitBB.institution}" -->
-<!-- 							converter="#{dataInstitutionConverter}"> -->
-<!-- 							<f:selectItems itemLabel="#{institution.name}" -->
-<!-- 								itemValue="#{institution}" value="#{applicationBB.institutions}" -->
-<!-- 								var="institution" /> -->
-<!-- 						</h:selectOneMenu> -->
-
-<!-- 						<p:outputLabel for="follow_unit_filter_institution_code" -->
-<!-- 							value="Códgo de la Institucion" /> -->
-<!-- 						<p:inputText id="follow_unit_filter_institution_code" -->
-<!-- 							value="#{unitBB.institutionCode}" /> -->
-
-
-<!-- 						<p:outputLabel for="follow_unit_filter_code" -->
-<!-- 							value="Códgo de la Institucion" /> -->
-<!-- 						<p:inputText id="follow_unit_filter_code" value="#{unitBB.code}" /> -->
-
-
-<!-- 						<p:outputLabel for="follow_unit_filter_product_type" -->
-<!-- 							value="Institucion" /> -->
-<!-- 						<h:selectOneMenu id="follow_unit_filter_product_type" -->
-<!-- 							value="#{unitBB.productType}" -->
-<!-- 							converter="#{dataProductTypeConverter}"> -->
-<!-- 							<f:selectItems itemValue="#{product}" -->
-<!-- 								itemLabel="#{product.display}" value="#{applicationBB.products}" -->
-<!-- 								var="product" /> -->
-<!-- 						</h:selectOneMenu> -->
-
-<!-- 						<p:outputLabel for="follow_unit_filter_blood_type" -->
-<!-- 							value="Institucion" /> -->
-<!-- 						<h:selectOneMenu id="follow_unit_filter_blood_type" -->
-<!-- 							value="#{unitBB.bloodType}" converter="#{dataBloodTypeConverter}"> -->
-<!-- 							<f:selectItems itemValue="#{bloodType}" -->
-<!-- 								itemLabel="#{bloodType.displayName}" -->
-<!-- 								value="#{applicationBB.bloodTypes}" var="bloodType" /> -->
-<!-- 						</h:selectOneMenu> -->
-
-<!-- 					</p:panelGrid> -->
-
-<!-- 					<p:outputPanel> -->
-<!-- 						<p:commandButton value="#{messages.label_search}" -->
-<!-- 							action="#{unitBB.search()}" update="@form" /> -->
-<!-- 						<p:commandLink value="#{messages.label_clear}" -->
-<!-- 							action="#{unitBB.searchClear()}" update="@form" /> -->
-<!-- 					</p:outputPanel> -->
-
-					<!-- 				</p:fieldset> -->
-<!-- 				</p:outputPanel> -->
-
-<!-- 				<p:outputPanel styleClass="ui-grid-row" -->
-<!-- 					rendered="#{unitBB.renderResult}"> -->
-					<!-- 				<p:fieldset legend="Resultado"> -->
-
-<!-- 					<table id="lab_results_table" -->
-<!-- 						class="col-md-12 table-bordered table-striped table-condensed cf"> -->
-<!-- 						<thead class="cf"> -->
-<!-- 							<tr> -->
-<!-- 								<th><h:outputText value="Código" /></th> -->
-<!-- 								<th><h:outputText value="Institución" /></th> -->
-<!-- 								<th><h:outputText value="Codigo Institución" /></th> -->
-<!-- 								<th><h:outputText value="Producto" /></th> -->
-<!-- 								<th><h:outputText value="Tipo" /></th> -->
-<!-- 								<th><h:outputText value="Vencimiento" /></th> -->
-<!-- 								<th><h:outputText value="Estado" /></th> -->
-<!-- 							</tr> -->
-<!-- 						</thead> -->
-<!-- 						<tbody> -->
-<!-- 							<c:forEach items="#{unitBB.units}" var="unit" varStatus="counter"> -->
-<!-- 								<tr> -->
-<!-- 									<td data-title="Código"><h:outputText value="#{unit.code}" /> -->
-<!-- 									</td> -->
-<!-- 									<td data-title="Institución"><h:outputText -->
-<!-- 											value="#{unit.institution}" /></td> -->
-<!-- 									<td data-title="Código Institución"><h:outputText -->
-<!-- 											value="#{unit.institutionCode}" /></td> -->
-<!-- 									<td data-title="Producto"><h:outputText -->
-<!-- 											value="#{unit.productType.display}" /></td> -->
-<!-- 									<td data-title="Tipo"><h:outputText -->
-<!-- 											value="#{unit.bloodType.displayName}" /></td> -->
-<!-- 									<td data-title="Vencimiento"><h:outputText -->
-<!-- 											value="#{unit.dueDate}"> -->
-<!-- 																					<f:convertDateTime pattern="dd/MM/yyyy" /> -->
-<!-- 										</h:outputText></td> -->
-<!-- 									<td data-title="Estado"><h:outputText -->
-<!-- 											value="#{unit.active}" /></td> -->
-<!-- 								</tr> -->
-<!-- 							</c:forEach> -->
-
-<!-- 						</tbody> -->
-<!-- 					</table> -->
-
-					<!-- 				</p:fieldset> -->
-<!-- 				</p:outputPanel> -->
-
-<!-- 			</p:outputPanel> -->
 		</h:form>
-<!-- 	</h:panelGroup> -->
 </h:body>
 </html>
