@@ -666,4 +666,16 @@ public class CodesBean implements CodesBeanLocal {
 		
 		return String.valueOf(cdaId);
 	}
+
+	@Override
+	public DataCode getBloodTypeCodeBySnomedCode(String bloodType) {
+		
+		BloodTypes result = FactoryDAO.getCodesDAO(em).getBloodTypeCodeBySnomedCode(bloodType);
+
+		DataCode data = new DataCode();
+		data.setCode(result.getBloodTypeCodeValue());
+		data.setDisplayName(result.getBloodTypeCodeLabel());
+		
+		return data;
+	}
 }

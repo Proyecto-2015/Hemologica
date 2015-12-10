@@ -12,7 +12,8 @@ import javax.persistence.*;
 @Table(name="persons_records")
 @NamedQueries(value={
 	@NamedQuery(name="PersonsRecord.findAll", query="SELECT p FROM PersonsRecord p"),
-	@NamedQuery(name="PersonsRecord.findByIdentificationCode", query="SELECT p FROM PersonsRecord p WHERE p.identification.identificacionCode = :id")
+	@NamedQuery(name="PersonsRecord.findByIdentificationCode", query="SELECT p FROM PersonsRecord p WHERE p.identification.identificacionCode = :id"),
+	@NamedQuery(name="PersonsRecord.findByPersonId", query="SELECT p FROM PersonsRecord p WHERE p.identification.person.id = :id")
 })
 public class PersonsRecord implements Serializable {
 	

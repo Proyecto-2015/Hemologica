@@ -2,6 +2,8 @@ package org.hemologica.salud.ejb.beans;
 
 import java.util.List;
 import javax.ejb.Local;
+
+import org.hemologica.dao.model.DonationDonorTypesCode;
 import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataMessageOption;
 import org.hemologica.datatypes.DataProductType;
@@ -88,5 +90,8 @@ public interface CodesBeanLocal {
 	public String getNewCDAid();
 
 	public String getNewHcCDAid();
+
+	public DataCode getBloodTypeCodeBySnomedCode(String bloodType);
+
 
 }

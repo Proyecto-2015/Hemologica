@@ -73,10 +73,10 @@ public class DataBank {
 	public void setLongitude(Double longitude) {
 		this.longitude = longitude;
 	}
-	@Override
-	public boolean equals(Object obj) {
-		
-		return super.equals(((DataBank)obj).getCode().equals(this.getCode()));
-	}
+//	@Override
+//	public boolean equals(Object obj) {
+//		
+//		return super.equals(((DataBank)obj).getCode().equals(this.getCode()));
+//	}
 	
 }

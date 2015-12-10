@@ -174,7 +174,7 @@ public interface IRestServices {
 	@GET
 	@Path("/" +ConstantsRest.PATH_UNIT_INFO)
 	@Produces("application/json")
-	public DataUnitInfo getUnitInfo();
+	public DataUnitInfo getUnitInfo(@QueryParam(ConstansJson.JSON_UNIT_CODE) String code);
 	
 	@GET
 	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_BLOOD_TYPES_ABO)

@@ -40,7 +40,7 @@
 						<h:outputText value="#{personRecordBloodBB.person.documentNumber}" /></label>
 						
 					<label class="col-md-2 col-lg-1 control-label pull-right blood-type" >
-						<h:outputText value="#{personRecordBloodBB.person.bloodType.displayName}" /></label>
+						<h:outputText value="#{messages[personRecordBloodBB.person.bloodType.displayName]}" rendered="#{personRecordBloodBB.person.bloodType != null}" /></label>
 					
 				</fieldset>
 				

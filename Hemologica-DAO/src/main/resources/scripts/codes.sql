@@ -68,6 +68,9 @@ INSERT INTO `hemologica`.`donation_state_code` (`donation_state_code_id`, `donat
 UPDATE `hemologica`.`donation_state_code` SET `donation_state_code_value`='completed' WHERE `donation_state_code_id`='1';
 UPDATE `hemologica`.`donation_state_code` SET `donation_state_code_value`='cancelled' WHERE `donation_state_code_id`='2';
 
+-- Tipos de donantes
+INSERT INTO `hemologica`.`donation_donor_types_codes` (`donation_donor_type_code_id`, `donation_donor_type_code_label`, `donation_donor_type_code_value`) VALUES ('1', 'donor_voluntary', '1');
+INSERT INTO `hemologica`.`donation_donor_types_codes` (`donation_donor_type_code_id`, `donation_donor_type_code_label`, `donation_donor_type_code_value`) VALUES ('2', 'donor_replacement', '2');
 
 
 

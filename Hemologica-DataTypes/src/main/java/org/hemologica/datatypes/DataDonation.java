@@ -2,7 +2,6 @@ package org.hemologica.datatypes;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.hemologica.constants.Constants;
@@ -24,9 +23,11 @@ public class DataDonation implements Serializable {
 	private DataPerson person;
 	private DataCode dataDonorType;
 	private DataCode donationType;
+	
 	private DataCode state;
 	private DataCode bloodABOType;
 	private DataCode bloodDType;
+	private DataCode bloodType;
 	private DataDonationFail fail;
 	private DataResponsiblePerson responsiblePerson;
 	private List<DataLaboratoryResult> labResults;
@@ -205,6 +206,14 @@ public class DataDonation implements Serializable {
 
 	public void setResponsiblePerson(DataResponsiblePerson responsiblePerson) {
 		this.responsiblePerson = responsiblePerson;
+	}
+
+	public DataCode getBloodType() {
+		return bloodType;
+	}
+
+	public void setBloodType(DataCode bloodType) {
+		this.bloodType = bloodType;
 	}
 	
 

@@ -69,7 +69,7 @@ public class StatisticsBean implements StatisticsBeanLocal {
 			}
 		}else if(donationsStatisticsData.getBloodBank() != null){
 			
-			String query = "//ClinicalDocument//author//assignedAuthor//representedOrganization//id//@root='" + donationsStatisticsData.getBloodBank() +"'";
+			String query = "//ClinicalDocument//author//assignedAuthor//representedOrganization//id//@root='" + donationsStatisticsData.getBloodBank().getCode() +"'";
 			andClauses.add(query);
 			
 		}
@@ -277,8 +277,9 @@ public class StatisticsBean implements StatisticsBeanLocal {
 			}
 		}else if(transfusionStatisticsData.getBloodBank() != null){
 			
-			String query = "//ClinicalDocument//author//assignedAuthor//representedOrganization//id//@root='" + transfusionStatisticsData.getBloodBank() +"'";
+			String query = "//ClinicalDocument//author//assignedAuthor//representedOrganization//id//@root='" + transfusionStatisticsData.getBloodBank().getCode() +"'";
 			andClauses.add(query);
+			
 			
 		}
 		

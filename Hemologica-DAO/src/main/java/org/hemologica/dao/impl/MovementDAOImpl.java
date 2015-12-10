@@ -8,6 +8,7 @@ import javax.persistence.Query;
 import org.hemologica.dao.IMovementDAO;
 import org.hemologica.dao.model.Movement;
 import org.hemologica.dao.model.MovementsType;
+import org.hemologica.dao.model.Unit;
 
 public class MovementDAOImpl extends GenericDAOImpl<Movement> implements IMovementDAO {
 
@@ -27,6 +28,17 @@ public class MovementDAOImpl extends GenericDAOImpl<Movement> implements IMoveme
 		@SuppressWarnings("unchecked")
 		List<MovementsType> ret = query.getResultList();
 		return ret != null && ret.size() > 0 ? ret.get(0) : null;
+	}
+
+
+	public List<Movement> getMovementsUnitId(String unitId) {
+		
+		Query query = em.createNamedQuery("Unit.findByUUID");
+		query.setParameter("uuid", unitId);
+		
+		Unit unit = (Unit) query.getSingleResult();
+		
+		return unit != null ? unit.getMovements() : null;
 	}
 
 	public List<Movement> getAllByUnitSortedByDate(Long id) {

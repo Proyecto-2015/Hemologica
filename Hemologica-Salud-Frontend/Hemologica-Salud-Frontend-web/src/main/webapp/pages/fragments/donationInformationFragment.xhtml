@@ -41,6 +41,19 @@
 							</div>
 						</div>
 						
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="donation_state"><h:outputText
+									value="#{messages.donor_type}" /></label>
+							<div class="col-md-9 col-lg-6">
+								<h:selectOneMenu id="donor_type" styleClass="form-control"
+									value="#{donationBB.dataDonation.dataDonorType}" style="height: 34px;"
+									converter="#{dataDonorTypeConverter}">
+									<f:selectItems value="#{applicationBB.donorTypes}" var="state"
+										itemValue="#{state}" itemLabel="#{messages[state.displayName]}" />
+								</h:selectOneMenu>
+							</div>
+						</div>
+						
 						<h:panelGroup layout="block" styleClass="form-group" >
 							<label class="col-md-4 control-label" for="donation_abo_type"><h:outputText
 									value="#{messages.donation_type}" /></label>

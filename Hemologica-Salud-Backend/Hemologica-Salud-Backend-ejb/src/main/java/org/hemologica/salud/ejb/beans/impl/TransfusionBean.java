@@ -231,5 +231,25 @@ public class TransfusionBean implements TransfusionBeanLocal, Serializable {
 		}
 		
 		return dataResponse;
+	}
+
+	@Override
+	public DataTransfusion getDataTransfusionSpecimenId(String code) throws SAXException, IOException, ParserConfigurationException, XPathExpressionException, DOMException {
+		
+		try {
+			
+			String cda = XMLDataBaseFactory.getIXMLDataBaseTransfusions().getTransfusionCDABySpecimenId(code);
+			if(cda!= null && !cda.equals("")){
+				Document document= XMLUtils.stringToDocument(cda);
+				return getDataTransfusion(document);
+				
+			}
+			
+		} catch (XMLDataBaseException e) {
+			
+			logger.log(Level.SEVERE, "Error al recuperar el documento de la base de datos xml", e);
+		}
+		
+		return new DataTransfusion();
 	} 
 }

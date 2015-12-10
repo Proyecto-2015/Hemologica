@@ -41,7 +41,7 @@ public class PersonRecordBB implements Serializable{
 		
 		for(DataPerson p : persons){
 			
-			if(p.getId().equals(personId)){
+			if(p.getId().equals(Long.parseLong(personId))){
 				FacesContext context = FacesContext.getCurrentInstance();
 				context.getExternalContext().getSessionMap().put("person", p);
 				return "historyPerson";

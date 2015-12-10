@@ -28,7 +28,6 @@ public class UnitBB implements Serializable {
 	@PostConstruct
 	public void init(){
 	
-//		this.renderResult = false;
 		
 	}	
 	
@@ -36,9 +35,7 @@ public class UnitBB implements Serializable {
 		
 		try {
 			
-			System.out.println("hOLA");
 			unit =  RestFactory.getServicesClient().getUnitInfo(code);
-			System.out.println("hOLA");
 			
 		} catch (IOException e) {
 			e.printStackTrace();

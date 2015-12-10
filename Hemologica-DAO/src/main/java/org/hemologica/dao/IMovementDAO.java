@@ -8,6 +8,8 @@ import org.hemologica.dao.model.MovementsType;
 public interface IMovementDAO extends IGenericDAO<Movement>{
 
 	public MovementsType findMovementTypeByCode(String code);
+
+	public List<Movement> getMovementsUnitId(String unitId);
 	
 	public List<Movement> getAllByUnitSortedByDate(Long id);
 	

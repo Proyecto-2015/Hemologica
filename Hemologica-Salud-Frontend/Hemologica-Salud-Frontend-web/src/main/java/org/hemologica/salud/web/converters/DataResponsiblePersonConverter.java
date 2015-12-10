@@ -21,7 +21,7 @@ public class DataResponsiblePersonConverter implements Converter {
 		if(sessionBB.getResponsibleTransfusionPersons() != null){
 			for(DataResponsiblePerson code : sessionBB.getResponsibleTransfusionPersons()){
 				
-				if(code.getId().equals(arg2)){
+				if(code.getId().toString().equals(arg2)){
 					return code;
 				}
 			}

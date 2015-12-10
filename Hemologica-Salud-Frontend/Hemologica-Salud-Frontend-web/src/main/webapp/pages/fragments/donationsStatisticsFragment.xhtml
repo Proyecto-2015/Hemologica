@@ -42,18 +42,18 @@
 						</div>
 					</div>
 					
-<!-- 					<div class="col-md-9 col-lg-6"> -->
-<!-- 						<label class="col-md-2  col-lg-4 control-label" for="name"><h:outputText -->
-<!-- 								value="#{messages.label_bank}" /></label> -->
-<!-- 						<div class="col-md-9 col-lg-8"> -->
-<!-- 							<h:selectOneMenu id="bankOption" class="form-control" value="#{donationsStatisticsBB.statictic.bloodBank}" -->
-<!-- 								style="height: 34px;" converter="#{dataBankConverterSession}"> -->
-<!-- 								<f:selectItem itemLabel="#{messages.label_all}" itemValue="#{null}"/> -->
-<!-- 								<f:selectItems value="#{sessionBB.userBanks}" var="bank" -->
-<!-- 									itemValue="#{bank}" itemLabel="#{bank.name}" /> -->
-<!-- 							</h:selectOneMenu> -->
-<!-- 						</div> -->
-<!-- 					</div> -->
+					<div class="col-md-9 col-lg-6">
+						<label class="col-md-2  col-lg-4 control-label" for="name"><h:outputText
+								value="#{messages.label_bank}" /></label>
+						<div class="col-md-9 col-lg-8">
+							<h:selectOneMenu id="bankOption" class="form-control" value="#{donationsStatisticsBB.statictic.bloodBank}"
+								style="height: 34px;" converter="#{dataBankConverterSession}">
+								<f:selectItem itemLabel="#{messages.label_all}" itemValue="#{null}"/>
+								<f:selectItems value="#{sessionBB.userBanks}" var="bank"
+									itemValue="#{bank}" itemLabel="#{bank.name}" />
+							</h:selectOneMenu>
+						</div>
+					</div>
 					
 					<div class="col-md-9 col-lg-6" style="padding-top: 12px;">
 						<label class="col-md-2 col-lg-4 control-label" for="name"><h:outputText
@@ -79,7 +79,7 @@
 			<fieldset>
 				<div class="form-group div-center col-md-12 col-lg-12">
 				<legend>
-					<h:outputText value="#{messages.label_refine}"/>	
+					<h:outputText value="#{messages.label_filter}"/>	
 				</legend>
 								
 					<c:forEach items="#{donationsStatisticsBB.allFilters}"

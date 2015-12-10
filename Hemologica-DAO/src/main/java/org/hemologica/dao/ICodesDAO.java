@@ -130,4 +130,6 @@ public interface ICodesDAO {
 
 	public Long getNewHcCDAid();
 
+	public BloodTypes getBloodTypeCodeBySnomedCode(String bloodType);
+
 }

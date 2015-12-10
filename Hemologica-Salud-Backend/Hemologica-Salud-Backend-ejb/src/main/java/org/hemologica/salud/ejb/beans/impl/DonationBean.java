@@ -11,7 +11,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -21,11 +20,9 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
-
 import org.hemologica.constants.Constants;
 import org.hemologica.dao.enums.DataDonationStateEnum;
 import org.hemologica.dao.model.PersonsRecord;
-import org.hemologica.dao.model.ResultsCode;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataDonation;
@@ -33,6 +30,7 @@ import org.hemologica.datatypes.DataDonationEvent;
 import org.hemologica.datatypes.DataDonationFail;
 import org.hemologica.datatypes.DataLaboratoryResult;
 import org.hemologica.datatypes.DataResponse;
+import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.factories.FactoryDAO;
 import org.hemologica.salud.ejb.beans.DonationBeanLocal;
 import org.hemologica.salud.ejb.cdas.ClinicalDocumentType;
@@ -149,7 +147,7 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 			String bloodType = XMLUtils.executeXPathString(document, "//ClinicalDocument//component//structuredBody//component//section//entry//procedure//entryRelationship[descendant-or-self::node()/@typeCode = \"COMP\"]//observation//code/@code");
 			data.setBloodABOType(FactoryBeans.getCodeBeans().getABOBloodTypeCodeByBloodSnomedCode(bloodType));
 			data.setBloodDType(FactoryBeans.getCodeBeans().getRHBloodTypeCodeByBloodSnomedCode(bloodType));
-		
+			data.setBloodType(FactoryBeans.getCodeBeans().getBloodTypeCodeBySnomedCode(bloodType));
 			/**
 			 * Eventos Adversos
 			 */
@@ -181,8 +179,8 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 			 * Resultados de laboratorio 
 			 */
 			String specimenRoot = XMLUtils.executeXPathString(document, "//ClinicalDocument//component//structuredBody//component//section//entry//procedure//specimen//specimenRole//@root");
-			String specimenExtension = XMLUtils.executeXPathString(document, "//ClinicalDocument//component//structuredBody//component//section//entry//procedure//specimen//specimenRole//@extension");
-			List<String> laboratories = XMLDataBaseFactory.getIXMLDataBaseLaboratory().getLaboratoryElementsBySpecimenId(specimenRoot, specimenExtension);
+			//String specimenExtension = XMLUtils.executeXPathString(document, "//ClinicalDocument//component//structuredBody//component//section//entry//procedure//specimen//specimenRole//@extension");
+			List<String> laboratories = XMLDataBaseFactory.getIXMLDataBaseLaboratory().getLaboratoryElementsBySpecimenId(specimenRoot);
 			
 			List<DataLaboratoryResult> laboratoriesResults = new ArrayList<>();
 			boolean approved = true;
@@ -369,6 +367,26 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 		
 		return dataResponse;
 		
+	}
+
+	@Override
+	public DataDonation getDataDonationSpecimenId(String code) throws XPathExpressionException, SAXException, IOException, ParserConfigurationException {
+		
+		try {
+			
+			String cda = XMLDataBaseFactory.getIXMLDataBaseDonations().getDonationCDABySpecimenId(code);
+			if(cda!= null && !cda.equals("")){
+				Document document= XMLUtils.stringToDocument(cda);
+				return getDataDonation(document);
+				
+			}
+			
+		} catch (XMLDataBaseException e) {
+			
+			logger.log(Level.SEVERE, "Error al recuperar el documento de la base de datos xml", e);
+		}
+		
+		return new DataDonation();
 	}
 	
 }

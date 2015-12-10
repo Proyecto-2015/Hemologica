@@ -133,7 +133,7 @@ public class CentersBean implements CentersBeanLocal {
 		for(Center c : centers.values()){
 			
 			DataBank dataBank = new DataBank();
-			dataBank.setCode(String.valueOf(c.getId()));
+			dataBank.setCode(String.valueOf(c.getCenterCode()));
 			dataBank.setName(c.getCenterDisplayName());
 			dataBank.setAddress(c.getCenterAddress());
 			dataBank.setEmail(c.getCenterEmail());

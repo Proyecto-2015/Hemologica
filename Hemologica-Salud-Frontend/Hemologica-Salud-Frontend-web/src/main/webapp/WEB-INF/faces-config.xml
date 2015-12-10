@@ -78,6 +78,22 @@
 	</managed-bean>
 	
 	<converter>
+		<display-name>dataDonorTypeConverter</display-name>
+		<converter-id>dataDonorTypeConverter</converter-id>
+		<converter-class>org.hemologica.salud.web.converters.DataDonorTypeConverter</converter-class>
+	</converter>
+	<managed-bean>
+		<managed-bean-name>dataDonorTypeConverter</managed-bean-name>
+		<managed-bean-class>org.hemologica.salud.web.converters.DataDonorTypeConverter</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>applicationBB</property-name>
+			<property-class>org.hemologica.salud.web.beans.ApplicationBB</property-class>
+			<value>#{applicationBB}</value>
+		</managed-property>
+	</managed-bean>
+	
+	<converter>
 		<display-name>dataResultConverter</display-name>
 		<converter-id>dataResultConverter</converter-id>
 		<converter-class>org.hemologica.salud.web.converters.DataResultConverter</converter-class>

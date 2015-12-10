@@ -449,4 +449,11 @@ public class CodesDAOImpl implements ICodesDAO{
 		return cdaId;
 	}
 
+	public BloodTypes getBloodTypeCodeBySnomedCode(String bloodType) {
+		
+		Query query = em.createNamedQuery("BloodTypes.findBySnomedCodeId");
+		query.setParameter("code", bloodType);
+		return (BloodTypes) query.getSingleResult();
+	}
+
 }

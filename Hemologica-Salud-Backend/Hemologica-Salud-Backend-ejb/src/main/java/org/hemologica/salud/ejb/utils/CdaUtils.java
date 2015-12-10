@@ -3,11 +3,10 @@ package org.hemologica.salud.ejb.utils;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.persistence.EntityManager;
-
 import org.hemologica.constants.Constants;
 import org.hemologica.dao.model.BloodTypes;
 import org.hemologica.dao.model.DonationEventsCode;
@@ -236,9 +235,12 @@ public class CdaUtils {
 		assignedAuthorType.setClassCode(Constants.ASSIGNED);
 		
 		IdType idAuthor = new IdType();
-		idAuthor.setRoot(Constants.ID_OID_PATH + "." + dataDoctor.getDocuments().getDocumentCountry()
-				+"."+dataDoctor.getDocuments().getDocumentType()+"."+dataDoctor.getDocuments().getDocumentNumber());
-		assignedAuthorType.setId(idAuthor);
+		
+		if(dataDoctor != null && dataDoctor.getDocuments()!= null){
+			idAuthor.setRoot(Constants.ID_OID_PATH + "." + dataDoctor.getDocuments().getDocumentCountry()
+					+"."+dataDoctor.getDocuments().getDocumentType()+"."+dataDoctor.getDocuments().getDocumentNumber());
+			assignedAuthorType.setId(idAuthor);
+		}
 		
 		AssignedPersonType assignedPersonType =new AssignedPersonType();
 		
@@ -368,6 +370,26 @@ public class CdaUtils {
 //			effectiveTime.getContent().add((Serializable) highType);
 //			
 //		}
+		
+		/**
+		 * Tipo de Donante
+		 */
+		if(dataDonacion.getDataDonorType() != null){
+			EntryType entryDonorType = new EntryType();
+			
+			ObservationType observartionDonorType = new ObservationType();
+			observartionDonorType.setClassCode(Constants.OBS);
+			observartionDonorType.setMoodCode(Constants.EVN);
+			CodeType codeDonorType = new CodeType();
+			codeDonorType.setCode(Long.valueOf(dataDonacion.getDataDonorType().getCode()));
+//			codeDonorType.setDisplayName(dataDonacion.getDataDonorType().getDisplayName());
+			
+			observartionDonorType.setCode(codeDonorType);
+			entryDonorType.setObservation(observartionDonorType);
+			SectionType.getEntry().add(entryDonorType);
+		}
+		
+		
 		
 		/**
 		 * Status Code
