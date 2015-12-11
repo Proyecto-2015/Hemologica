@@ -2,6 +2,7 @@ package org.hemologica.salud.web.beans;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.URISyntaxException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +23,9 @@ public class SessionBB implements Serializable {
 	private List<DataInstitution> userInstitutions;
 	private List<DataBank> userBanks;
 	
+	private List<DataBank> arrangementBanks;
+	private List<DataInstitution> arrangementInstitutions;
+	
 	private DataPerson person;
 	private ApplicationBB applicationBB;
 	
@@ -37,13 +41,15 @@ public class SessionBB implements Serializable {
 			this.responsibleTransfusionPersons = RestFactory.getServicesClient().getResponsibleTransfusionPersons(bank);
 			
 			person = new DataPerson();
-//			person.setId("1"); Bruno 05-12-2015
 			person.setId(new Long(1));
 			this.userInstitutions = RestFactory.getServicesClient().getInstitution(person.getId().toString());
 			this.userBanks = RestFactory.getServicesClient().getBanks(person.getId().toString());
 			if(userBanks!= null && userBanks.size()!=0){
 				this.bank = userBanks.get(0);
 			}
+			
+			this.arrangementBanks = RestFactory.getServicesClient().getArrangementBanks(person.getId().toString());
+			this.arrangementInstitutions = RestFactory.getServicesClient().getArrangementInstitutions(person.getId().toString());
 			
 		} catch (ClientProtocolException e) {
 			
@@ -53,6 +59,9 @@ public class SessionBB implements Serializable {
 			
 			logger.log(Level.SEVERE, "Error al llamar al servicio web: IOException", e);
 			
+		} catch (URISyntaxException e) {
+			
+			logger.log(Level.SEVERE, "Error al llamar al servicio web: URISyntaxException", e);
 		}
 		
 	}
@@ -112,5 +121,22 @@ public class SessionBB implements Serializable {
 	public void setUserBanks(List<DataBank> userBanks) {
 		this.userBanks = userBanks;
 	}
+
+	public List<DataBank> getArrangementBanks() {
+		return arrangementBanks;
+	}
+
+	public void setArrangementBanks(List<DataBank> arrangementBanks) {
+		this.arrangementBanks = arrangementBanks;
+	}
+
+	public List<DataInstitution> getArrangementInstitutions() {
+		return arrangementInstitutions;
+	}
+
+	public void setArrangementInstitutions(List<DataInstitution> arrangementInstitutions) {
+		this.arrangementInstitutions = arrangementInstitutions;
+	}
+	
 	
 }

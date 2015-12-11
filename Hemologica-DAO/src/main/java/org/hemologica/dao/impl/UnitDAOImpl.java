@@ -38,4 +38,31 @@ public class UnitDAOImpl extends GenericDAOImpl<Unit> implements IUnitDAO {
 		return ret != null && ret.size() > 0 ? ret.get(0) : null;
 	}
 
+	public int getCountUnit(String productTypeCode, String bloodTypeCodeABO, String bloodTypeCodeRH, String code) {
+		
+		String query = "SELECT count(*) from Unit u where u.center ='" + code + "' and " + "u.active = TRUE ";
+		if(bloodTypeCodeABO != null && !bloodTypeCodeABO.equals("")){
+			
+			query+= "and u.bloodTypeABO.bloodAboTypeCodeValue='"+ bloodTypeCodeABO + "'";
+			
+		}
+		
+		if(bloodTypeCodeRH != null && !bloodTypeCodeRH.equals("")){
+			
+			query+= "and u.bloodTypeRH.bloodDTypeCodeValue='"+ bloodTypeCodeRH + "'";
+			
+		}
+		
+		if(productTypeCode != null && !productTypeCode.equals("")){
+			
+			query+= "and u.unitsType.unitTypeCodeValue='"+ productTypeCode + "'";
+			
+		}
+		
+		Query querySql = em.createQuery(query);
+		
+		return querySql.getFirstResult();
+		
+	}
+
 }

@@ -3,15 +3,23 @@ package org.hemologica.salud.ejb.beans.impl;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.hemologica.dao.model.Movement;
+import org.hemologica.datatypes.DataBank;
+import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.DataMovement;
+import org.hemologica.datatypes.DataStock;
+import org.hemologica.datatypes.DataStockProductType;
 import org.hemologica.factories.FactoryDAO;
 import org.hemologica.salud.ejb.beans.StockBeanLocal;
+import org.hemologica.salud.ejb.utils.FactoryBeans;
+
+import net.xqj.basex.bin.ba;
 
 @Stateless
 @LocalBean
@@ -47,6 +55,56 @@ public class StockBean implements StockBeanLocal,Serializable {
 			}
 		}
 		return dataMovements;
+	}
+
+	@Override
+	public DataStock getStockAndBanks(String bankCode, String institution, String productTypeCode,
+			String bloodTypeCodeABO, String bloodTypeCodeRH, Integer count) {
+		
+		DataStock dataStock = new DataStock();
+		
+		LinkedList<DataBank> banks = new LinkedList<>();
+		
+		if(bankCode != null){
+			
+			banks.add(FactoryBeans.getCenterBean().getBankById(bankCode));
+			
+		}else if(bankCode == null && institution != null){
+			
+			DataInstitution banksIntitution = FactoryBeans.getInstitutionBean().getInstitutionById(institution);
+			if(banksIntitution!= null)
+				banks.addAll(banksIntitution.getBanks());
+			
+		}else if(bankCode == null && institution == null && (productTypeCode == null || productTypeCode.equals("")) && 
+				(bloodTypeCodeABO == null || bloodTypeCodeABO.equals("")) && (bloodTypeCodeRH == null || bloodTypeCodeRH.equals(""))){
+			
+			banks.addAll(FactoryBeans.getCenterBean().getBanks());
+			
+		}else{
+			
+			List<DataBank> allBanks = FactoryBeans.getCenterBean().getBanks();
+			for(DataBank bank : allBanks){
+				
+				if(hasStockBank(productTypeCode, bloodTypeCodeABO, bloodTypeCodeRH , bank)){
+					
+					banks.add(bank);
+				}
+				
+			}
+		}
+		
+		dataStock.setBanks(banks);
+		
+		
+		return dataStock;
+	}
+
+	private boolean hasStockBank(String productTypeCode, String bloodTypeCodeABO, String bloodTypeCodeRH,
+			DataBank bank) {
+		
+		int count = FactoryDAO.getUnitDAO(em).getCountUnit(productTypeCode,bloodTypeCodeABO,bloodTypeCodeRH,bank.getCode());
+		
+		return count > 0;
 	}
 
 

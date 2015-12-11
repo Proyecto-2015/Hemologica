@@ -15,4 +15,5 @@ public class ConstansJson {
 	public static final String JSON_BLOOD_TYPE_RH = "bloodTypeCodeRH";
 	public static final String JSON_ACCOUNT_TOKEN = "token";
 	public static final String JSON_UNIT_CODE = "unitCode";
+	public static final String JSON_INSTITUTION = "institution";
 }

@@ -66,6 +66,7 @@ public class ConstantsRest {
 	 * Account to enable from token
 	 */
 	public static final String PATH_ACCOUNT_ENABLE = "account";
+	public static final String ARRANGEMENTS = "arrangement";
 	
 	
 	

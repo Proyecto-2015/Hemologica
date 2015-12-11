@@ -69,8 +69,9 @@ public interface IRestServices {
 	@GET
 	@Path("/" + ConstantsRest.PATH_BANKS_QUERY)
 	@Produces("application/json")
-	public List<DataBank> getBanks(
-			@QueryParam(ConstansJson.JSON_BANK) String bankCode, 
+	public DataStock getBanks(
+			@QueryParam(ConstansJson.JSON_BANK) String bank,
+			@QueryParam(ConstansJson.JSON_INSTITUTION) String institution,
 			@QueryParam(ConstansJson.JSON_PRODUCT_TYPE) String productTypeCode, 
 			@QueryParam(ConstansJson.JSON_BLOOD_TYPE_ABO) String bloodTypeCodeABO, 
 			@QueryParam(ConstansJson.JSON_BLOOD_TYPE_RH) String bloodTypeCodeRH,
@@ -275,4 +276,14 @@ public interface IRestServices {
 	@Path("/" +ConstantsRest.PATH_CODES +"/"+ ConstantsRest.PATH_RESULTS)
 	@Produces("application/json")
 	public List<DataCode> getResultsCodes();
+	
+	@GET
+	@Path("/" +ConstantsRest.PATH_BANKS +"/"+ ConstantsRest.ARRANGEMENTS)
+	@Produces("application/json")
+	public List<DataBank> getArrangementBanks(@QueryParam(ConstansJson.JSON_USER) String code);
+	
+	@GET
+	@Path("/" +ConstantsRest.PATH_INSTITUTIONS +"/"+ ConstantsRest.ARRANGEMENTS)
+	@Produces("application/json")
+	public List<DataInstitution> getArrangementInstitutions(@QueryParam(ConstansJson.JSON_USER) String code);
 }

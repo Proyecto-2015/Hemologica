@@ -456,19 +456,22 @@ public class RestServicesImpl implements IRestServices{
 		
 	}
 	
-	public List<DataBank> getBanks(String bankCode, String productTypeCode, String bloodTypeCodeABO,  String bloodTypeCodeRH, Integer count) {
-
-		List<DataBank> ret = this.getBanks();
-		if (bankCode != null && !bankCode.equals("")) {
-			for (DataBank b : ret) {
-				if (b.getCode().equals(bankCode)) {
-					ret.clear();
-					ret.add(b);
-					return ret;
-				}
-			}
-		}
-		return ret;
+	public DataStock getBanks(String bankCode, String institution, String productTypeCode, String bloodTypeCodeABO,  String bloodTypeCodeRH, Integer count) {
+		
+		return FactoryBeans.getStockBeanLocal().getStockAndBanks(bankCode, institution, productTypeCode, bloodTypeCodeABO, bloodTypeCodeRH, count);
+		
+//		List<DataBank> ret = this.getBanks();
+//		if (bankCode != null && !bankCode.equals("")) {
+//			for (DataBank b : ret) {
+//				if (b.getCode().equals(bankCode)) {
+//					ret.clear();
+//					ret.add(b);
+//					return ret;
+//				}
+//			}
+//		}
+//		
+//		return ret;
 	}
 
 	@Override
@@ -703,6 +706,19 @@ public class RestServicesImpl implements IRestServices{
 		
 		return FactoryBeans.getCodeBeans().getResultsCodes();
 		
+	}
+
+	@Override
+	public List<DataBank> getArrangementBanks(String code) {
+		
+		return getBanks();
+		
+	}
+
+	@Override
+	public List<DataInstitution> getArrangementInstitutions(String code) {
+		
+		return getInstitutions();
 	}
 
 	

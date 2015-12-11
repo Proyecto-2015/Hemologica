@@ -18,50 +18,54 @@
 
 			<p:message for="stockForm" />
 
-			<p:tabView>
+<!-- 			<p:tabView> -->
+			
+			<div class="page-header">
+				<h1> <h:outputText value="#{messages.menu_stock}"/></h1>
+			</div>
 
-				<p:tab title="#{messages.label_national_stock}">
+<!-- 				<p:tab title="#{messages.label_national_stock}"> -->
 
-					<p:outputPanel styleClass="row ui-grid-row">
+<!-- 					<p:outputPanel styleClass="row ui-grid-row"> -->
 
-						<table id="lab_results_table"
-							class="col-md-12 table-bordered table-striped table-condensed cf">
-							<thead class="cf">
+<!-- 						<table id="lab_results_table" -->
+<!-- 							class="col-md-12 table-bordered table-striped table-condensed cf"> -->
+<!-- 							<thead class="cf"> -->
 
-								<tr>
-									<th><h:outputText value="#{messages.label_product}" /></th>
-									<c:forEach items="#{applicationBB.bloodTypes}" var="bloodType">
-										<th><h:outputText value="#{messages[bloodType.displayName]}" /></th>
-									</c:forEach>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="#{stockBB.nationalStockList}" var="product"
-									varStatus="counter">
-									<tr>
-										<td data-title="#{messages.label_product}"><h:outputText
-												value="#{product.display}" /></td>
-										<c:forEach items="#{product.bloodTypes}" var="bloodType">
-											<td data-title="#{bloodType.displayName}"><h:outputText
-													value="#{bloodType.count}" /></td>
-										</c:forEach>
-									</tr>
-								</c:forEach>
+<!-- 								<tr> -->
+<!-- 									<th><h:outputText value="#{messages.label_product}" /></th> -->
+<!-- 									<c:forEach items="#{applicationBB.bloodTypes}" var="bloodType"> -->
+<!-- 										<th><h:outputText value="#{messages[bloodType.displayName]}" /></th> -->
+<!-- 									</c:forEach> -->
+<!-- 								</tr> -->
+<!-- 							</thead> -->
+<!-- 							<tbody> -->
+<!-- 								<c:forEach items="#{stockBB.nationalStockList}" var="product" -->
+<!-- 									varStatus="counter"> -->
+<!-- 									<tr> -->
+<!-- 										<td data-title="#{messages.label_product}"><h:outputText -->
+<!-- 												value="#{product.display}" /></td> -->
+<!-- 										<c:forEach items="#{product.bloodTypes}" var="bloodType"> -->
+<!-- 											<td data-title="#{bloodType.displayName}"><h:outputText -->
+<!-- 													value="#{bloodType.count}" /></td> -->
+<!-- 										</c:forEach> -->
+<!-- 									</tr> -->
+<!-- 								</c:forEach> -->
 
-							</tbody>
-						</table>
+<!-- 							</tbody> -->
+<!-- 						</table> -->
 
-					</p:outputPanel>
+<!-- 					</p:outputPanel> -->
 
-					<p:outputPanel styleClass="row ui-grid-row">
+<!-- 					<p:outputPanel styleClass="row ui-grid-row"> -->
 
-						<p:chart type="bar" model="#{stockBB.nationalStockModel}" style="height:300px" />
-						<!-- 							<pe:gChart value="#{stockBB.nationalStockGModel}" title="national stock"/> -->
-					</p:outputPanel>
+<!-- 						<p:chart type="bar" model="#{stockBB.nationalStockModel}" style="height:300px" /> -->
+<!-- 													<pe:gChart value="#{stockBB.nationalStockGModel}" title="national stock"/> -->
+<!-- 					</p:outputPanel> -->
 
-				</p:tab>
+<!-- 				</p:tab> -->
 
-				<p:tab title="#{messages.label_banks_stock}">
+<!-- 				<p:tab title="#{messages.menu_stock}"> -->
 
 					<p:outputPanel id="banksStockPanel" >
 
@@ -78,6 +82,24 @@
 <!-- 								columnClasses="ui-grid-col-3,ui-grid-col-9"> -->
 								
 								<div class="col-md-12 col-lg-12">
+								
+									<div class="col-md-9 col-lg-6">
+					
+										<label class="col-md-2 col-lg-4 control-label" for="name">
+											<h:outputText value="#{messages.label_insitution}" />
+										</label>
+										<div class="col-md-9 col-lg-8">
+											<h:selectOneMenu id="options" class="form-control" value="#{stockBB.institutionSelected}"
+												style="height: 34px;" converter="#{dataArrangementInstitutionConverterSession}">
+												
+												<f:selectItem itemLabel="#{messages.label_all}" itemValue="#{null}"/>
+												<f:selectItems value="#{sessionBB.arrangementInstitutions}" var="institution"
+													itemValue="#{institution}" itemLabel="#{institution.name}"  noSelectionOption="true"/>
+												
+											</h:selectOneMenu>
+										</div>
+									</div>
+								
 									<div  class="col-md-9 col-lg-6">
 										<label class="col-md-2 col-lg-4 control-label" for="stock_bank_filter">
 											<h:outputText value="#{messages.stock_bank_filter}" />
@@ -85,12 +107,18 @@
 										
 										<div class="col-md-9 col-lg-8">
 											<h:selectOneMenu style="height: 34px;"  class="form-control" id="stock_bank_filter"
-												value="#{stockBB.banksItemsSelected}">
-												<f:selectItem itemLabel="" itemValue="" />
-												<f:selectItems value="#{stockBB.banksItems}" />
+												value="#{stockBB.banksItemsSelected}" converter="#{dataArrangementBankConverterSession}">
+												<f:selectItem itemLabel="#{messages.label_all}" itemValue="#{null}"/>
+												<f:selectItems value="#{sessionBB.arrangementBanks}" 
+												var="bank"
+													itemValue="#{bank}" itemLabel="#{bank.name}"  noSelectionOption="true"
+												/>
 											</h:selectOneMenu>
 										</div>
-									</div>
+									</div>									
+								</div>
+								<div class="col-md-12" style="padding-top: 10px; padding-bottom: 10px;">
+									
 									<div  class="col-md-9 col-lg-6">
 										<label class="col-md-2 col-lg-4 control-label" for="stock_product_type_filter">
 											<h:outputText
@@ -108,14 +136,12 @@
 											</h:selectOneMenu>
 										</div>
 									</div>
-								</div>
-								<div class="col-md-12" style="padding-top: 10px;">
-								
-										<label class="col-md-2 col-lg-2 control-label pull-left" style="padding: 0;" for="stock_blood_type_filter" >
+									<div  class="col-md-9 col-lg-6">
+										<label class="col-md-2 col-lg-4 control-label pull-left" style="padding: 0;" for="stock_blood_type_filter" >
 											<h:outputText value="#{messages.stock_blood_type_filter}" />
 										</label>
-										
-										<div class="col-md-9 col-lg-2 pull-left">
+											
+										<div class="col-md-9 col-lg-3 pull-left">
 											<h:selectOneMenu  style="height: 34px;" class="form-control" id="stock_blood_type_filter_abo"
 												value="#{stockBB.bloodTypeABO}"
 												converter="#{dataBloodTypeConverterABO}">
@@ -126,7 +152,7 @@
 											</h:selectOneMenu>
 										</div>
 										
-										<div class="col-md-9 col-lg-2 pull-left">
+										<div class="col-md-9 col-lg-3 pull-left">
 											<h:selectOneMenu style="height: 34px;" class="form-control" id="stock_blood_type_filter_rh"
 												value="#{stockBB.bloodTypeRH}"
 												converter="#{dataBloodTypeConverterRH}">
@@ -136,46 +162,13 @@
 													itemLabel="#{bloodType.displayName}" />
 											</h:selectOneMenu>
 										</div>
-									
-										<p:commandButton action="#{stockBB.search()}" 
-										value="#{messages.generic_search}" update="banksStockPanel" />
-<!-- 									<p:commandLink value="#{messages.generic_search_clear}" -->
-<!-- 										update="banksStockPanel" -->
-<!-- 										resetValues="stock_bank_filter stock_product_type_filter stock_blood_type_filter stock_count_filter" /> -->
-								</div>
-								
-<!-- 								<div class="form-group"> -->
-<!-- 									<label class="col-md-2 control-label" for="stock_blood_type_filter" > -->
-<!-- 										<h:outputText value="#{messages.stock_blood_type_filter}" /> -->
-<!-- 									</label> -->
-									
-									
-<!-- 								</div> -->
-								
-<!-- 								<p:outputLabel for="stock_count_filter" -->
-<!-- 									value="#{messages.stock_count_filter}" /> -->
-<!-- 								<p:inputText id="stock_count_filter" value="#{stockBB.count}" -->
-<!-- 									placeholder="#{messages.stock_count_filter}" -->
-<!-- 									styleClass="form-control" /> -->
+										
+										<p:commandButton action="#{stockBB.search()}" class="pull-right"
+											value="#{messages.generic_search}" update="banksStockPanel" />
+									</div>
+							</div> 							
 
-<!-- 							</p:panelGrid> -->
-
-									
-						
-
-
-
-							<!-- 							<p:commandButton ajax="true" onclick="PF('banksMap').show();" -->
-							<!-- 								icon="ui-icon-image" /> -->
-<!-- 						</p:outputPanel> -->
-
-						<!-- 						<p:dialog id="banksMap" widgetVar="banksMap" closable="true" -->
-						<!-- 							resizable="true" position="top center" width="400px" -->
-						<!-- 							height="400px" modal="true"> -->
-
-						<!-- 							  <p:ajax event="close" update="banksStockPanel" immediate="true"/> -->
-
-						<p:outputPanel>
+						<p:outputPanel >
 							<p:gmap id="mapa" center="-34.8059635,-56.2145634,11" zoom="10"
 								style="width:100%; height:400px; max-height: 100%;"
 								type="ROADMAP" model="#{stockBB.gmapModel}">
@@ -188,7 +181,7 @@
 						<!-- 						</p:dialog> -->
 
 						<p:outputPanel styleClass="row ui-grid-row"
-							rendered="#{stockBB.stock != null}">
+							rendered="#{stockBB.stock != null}" style="padding-top: 10px;">
 
 							<table id="lab_results_table"
 								class="col-md-12 table-bordered table-striped table-condensed cf">
@@ -223,9 +216,9 @@
 
 					</p:outputPanel>
 
-				</p:tab>
+<!-- 				</p:tab> -->
 
-			</p:tabView>
+<!-- 			</p:tabView> -->
 
 		</h:form>
 

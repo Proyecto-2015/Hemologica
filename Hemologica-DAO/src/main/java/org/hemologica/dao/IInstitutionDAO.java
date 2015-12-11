@@ -10,4 +10,6 @@ public interface IInstitutionDAO  extends IGenericDAO<Institution>{
 
 	public List<Institution> getInstitutionsUser(String user);
 
+	public Institution findInstitutionByCode(String code);
+
 }

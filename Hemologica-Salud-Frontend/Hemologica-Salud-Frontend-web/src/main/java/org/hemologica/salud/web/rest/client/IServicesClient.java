@@ -75,7 +75,7 @@ public interface IServicesClient {
 	 * @throws ClientProtocolException 
 	 * @throws URISyntaxException 
 	 */
-	public List<DataBank> getBanks(String bankCode, String productTypeCode, String bloodTypeCodeRH, String bloodTypeCodeABO, Integer count) throws ClientProtocolException, IOException, URISyntaxException;
+	public DataStock getBanks(DataBank bankCode, DataInstitution institution, String productCode, String bloodTypeCodeRH, String bloodTypeCodeABO, Integer count) throws ClientProtocolException, IOException, URISyntaxException;
 	
 	/**
 	 * Devuelve el stock del banco con el code ingresado
@@ -427,4 +427,22 @@ public interface IServicesClient {
 	 * @throws ClientProtocolException 
 	 */
 	public List<DataCode> getResultsCodes() throws ClientProtocolException, IOException;
+	
+	/**
+	 * Devuelve los bancos con que el centro que de la persona que esta logueada tiene convenios 
+	 * @return
+	 * @throws URISyntaxException 
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataBank> getArrangementBanks(String string) throws URISyntaxException;
+
+	/**
+	 * Devuelve las instituciones con que el centro que la persona que esta logueada tiene convenios 
+	 * @return
+	 * @throws URISyntaxException 
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataInstitution> getArrangementInstitutions(String string) throws URISyntaxException;
 }

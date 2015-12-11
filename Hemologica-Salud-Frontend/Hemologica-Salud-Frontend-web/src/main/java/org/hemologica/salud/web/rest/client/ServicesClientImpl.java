@@ -536,13 +536,22 @@ public class ServicesClientImpl implements IServicesClient {
 	}
 
 	@Override
-	public List<DataBank> getBanks(String bankCode, String productCode, String bloodTypeCodeRH, String bloodTypeCodeABO, Integer count)
+	public DataStock getBanks(DataBank bankCode, DataInstitution institution, String productCode, String bloodTypeCodeRH, String bloodTypeCodeABO, Integer count)
 			throws ClientProtocolException, IOException, URISyntaxException {
 		
 
 		String urlBanks = url + ConstantsRest.PATH_BANKS_QUERY;
 		HashMap<String, String> hash = new HashMap<String, String>();
-		hash.put(ConstansJson.JSON_BANK, bankCode);
+		if(bankCode != null){
+			
+			hash.put(ConstansJson.JSON_BANK, bankCode.getCode());
+		}
+		
+		if(institution !=null){
+		
+			hash.put(ConstansJson.JSON_INSTITUTION, institution.getCode());
+			
+		}
 		hash.put(ConstansJson.JSON_PRODUCT_TYPE, productCode);
 		hash.put(ConstansJson.JSON_BLOOD_TYPE_ABO, bloodTypeCodeRH);
 		hash.put(ConstansJson.JSON_BLOOD_TYPE_RH, bloodTypeCodeABO);
@@ -555,9 +564,7 @@ public class ServicesClientImpl implements IServicesClient {
 			logger.log(Level.SEVERE, "Error al llamar al servicio IOException", e);
 		}
 
-		Type listType = new TypeToken<List<DataBank>>() {
-		}.getType();
-		List<DataBank> banks = new Gson().fromJson(banksString, listType);
+		DataStock banks = new Gson().fromJson(banksString, DataStock.class);
 
 		return banks;
 		
@@ -1160,6 +1167,52 @@ public class ServicesClientImpl implements IServicesClient {
 		List<DataCode> responseObject = new Gson().fromJson(responseString, listType);
 		
 		return responseObject;
+	}
+
+	@Override
+	public List<DataBank> getArrangementBanks(String userId) throws URISyntaxException {
+		
+		String urlBanks = url + ConstantsRest.PATH_BANKS + "/" + ConstantsRest.ARRANGEMENTS;
+
+		HashMap<String, String> hash = new HashMap<String, String>();
+		hash.put(ConstansJson.JSON_USER, userId);
+		
+		String banksString = "";
+		try {
+			banksString = RestFactory.getRestServicesUtils().get(urlBanks, hash);
+
+		} catch (IOException e) {
+			logger.log(Level.SEVERE, "Error al llamar al servicio IOException", e);
+		}
+
+		Type listType = new TypeToken<List<DataBank>>() {
+		}.getType();
+		List<DataBank> banks = new Gson().fromJson(banksString, listType);
+
+		return banks;
+	}
+
+	@Override
+	public List<DataInstitution> getArrangementInstitutions(String userId) throws URISyntaxException {
+		
+		String urlBanks = url + ConstantsRest.PATH_INSTITUTIONS + "/" + ConstantsRest.ARRANGEMENTS;
+
+		HashMap<String, String> hash = new HashMap<String, String>();
+		hash.put(ConstansJson.JSON_USER, userId);
+		
+		String banksString = "";
+		try {
+			banksString = RestFactory.getRestServicesUtils().get(urlBanks, hash);
+
+		} catch (IOException e) {
+			logger.log(Level.SEVERE, "Error al llamar al servicio IOException", e);
+		}
+
+		Type listType = new TypeToken<List<DataInstitution>>() {
+		}.getType();
+		List<DataInstitution> banks = new Gson().fromJson(banksString, listType);
+
+		return banks;
 	}
 
 }
