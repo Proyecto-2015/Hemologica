@@ -54,6 +54,7 @@ public class Unit implements Serializable {
 	@JoinColumn(name="unit_type")
 	private UnitsType unitsType;
 	
+	
 	@ManyToOne
 	@JoinColumn(name="blood_abo_type")
 	private BloodAboTypesCode bloodTypeABO;
@@ -61,8 +62,19 @@ public class Unit implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="blood_rh_type")
 	private BloodDTypesCode bloodTypeRH;
+	
+	
+	@ManyToOne
+	@JoinColumn(name="unit_parent")
+	private Unit unitParent;
 
-	public Unit() {
+
+	public Unit getUnitParent() {
+		return unitParent;
+	}
+
+	public void setUnitParent(Unit unitParent) {
+		this.unitParent = unitParent;
 	}
 
 	public Long getId() {
@@ -126,7 +138,7 @@ public class Unit implements Serializable {
 	public void setUnitsType(UnitsType unitsType) {
 		this.unitsType = unitsType;
 	}
-
+	
 	public BloodAboTypesCode getBloodTypeABO() {
 		return bloodTypeABO;
 	}

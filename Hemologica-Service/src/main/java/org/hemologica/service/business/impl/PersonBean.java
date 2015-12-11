@@ -49,9 +49,9 @@ public class PersonBean implements IPersonBean, Serializable {
 	private BaseXConnection baseXConnectionLaboratory;
 	private IEMPIAdapter empi;
 	private IRepositoryXDS xdsRepository;
-	private String cdaDonationCode; // 4321000179101
-	private String cdaTransfusionCode; // 4321000179102
-	private String cdaLaboratoryCode; // 4321000179103
+	private String cdaDonationCode; 	// 4321000179101
+	private String cdaTransfusionCode; 	// 4321000179102
+	private String cdaLaboratoryCode; 	// 4321000179103
 
 	@PersistenceContext(unitName = "Hemologica-Service-PU")
 	private EntityManager em;

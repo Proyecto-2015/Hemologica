@@ -7,6 +7,8 @@ public class MovementData {
 	private String type;
 	private String unit;
 	private String unitType;
+	private String unitBloodType;
+	private String unitParent;
 	private String date;
 	
 	public String getCenter() {
@@ -39,8 +41,17 @@ public class MovementData {
 	public void setDate(String date) {
 		this.date = date;
 	}
+	public String getUnitParent() {
+		return unitParent;
+	}
+	public void setUnitParent(String unitParent) {
+		this.unitParent = unitParent;
+	}
+	public String getUnitBloodType() {
+		return unitBloodType;
+	}
+	public void setUnitBloodType(String unitBloodType) {
+		this.unitBloodType = unitBloodType;
+	}
 	
-	
-	
-
 }
