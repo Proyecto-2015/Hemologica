@@ -9,17 +9,18 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.hemologica.dao.model.BloodTypes;
 import org.hemologica.dao.model.Movement;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.DataMovement;
+import org.hemologica.datatypes.DataProductType;
 import org.hemologica.datatypes.DataStock;
 import org.hemologica.datatypes.DataStockProductType;
+import org.hemologica.datatypes.DataStockProductTypeBloodType;
 import org.hemologica.factories.FactoryDAO;
 import org.hemologica.salud.ejb.beans.StockBeanLocal;
 import org.hemologica.salud.ejb.utils.FactoryBeans;
-
-import net.xqj.basex.bin.ba;
 
 @Stateless
 @LocalBean
@@ -92,7 +93,40 @@ public class StockBean implements StockBeanLocal,Serializable {
 				
 			}
 		}
+			
+		List<DataStockProductType> products = new LinkedList<>() ;
 		
+		List<DataProductType> listProducts = FactoryBeans.getCodeBeans().getProducts();
+		List<BloodTypes> listBloodTypes = FactoryDAO.getCodesDAO(em).getBloodTypes();
+		/**
+		 * inicializar la matriz
+		 */
+		for(DataProductType product : listProducts){
+			
+			DataStockProductType d = new DataStockProductType();
+			d.setCode(product.getCode());
+			d.setDisplay(product.getDisplay());
+			
+			List<DataStockProductTypeBloodType> productsHash = new LinkedList<>();
+			for(BloodTypes dataBloodType : listBloodTypes){
+				
+				DataStockProductTypeBloodType dataStockProductTypeBloodType = new DataStockProductTypeBloodType();
+				dataStockProductTypeBloodType.setCode(dataBloodType.getBloodTypeCodeValue());
+				dataStockProductTypeBloodType.setDisplayName(dataBloodType.getBloodTypeCodeLabel());
+				
+				int countBlood = FactoryDAO.getUnitDAO(em).getCountUnitBanks(product.getCode(), dataBloodType.getBloodAboTypesCode().getBloodAboTypeCodeValue(),
+						dataBloodType.getBloodDTypesCode().getBloodDTypeCodeValue(), banks);
+				dataStockProductTypeBloodType.setCount(countBlood);
+				
+				productsHash.add(dataStockProductTypeBloodType);
+				
+			}
+			d.setBloodTypes(productsHash);
+			products.add(d);
+			
+		}
+		
+		dataStock.setProducts(products);
 		dataStock.setBanks(banks);
 		
 		

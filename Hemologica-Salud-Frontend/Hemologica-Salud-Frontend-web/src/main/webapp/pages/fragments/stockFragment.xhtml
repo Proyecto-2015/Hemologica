@@ -17,69 +17,15 @@
 		<h:form id="stockForm">
 
 			<p:message for="stockForm" />
-
-<!-- 			<p:tabView> -->
 			
 			<div class="page-header">
 				<h1> <h:outputText value="#{messages.menu_stock}"/></h1>
 			</div>
 
-<!-- 				<p:tab title="#{messages.label_national_stock}"> -->
-
-<!-- 					<p:outputPanel styleClass="row ui-grid-row"> -->
-
-<!-- 						<table id="lab_results_table" -->
-<!-- 							class="col-md-12 table-bordered table-striped table-condensed cf"> -->
-<!-- 							<thead class="cf"> -->
-
-<!-- 								<tr> -->
-<!-- 									<th><h:outputText value="#{messages.label_product}" /></th> -->
-<!-- 									<c:forEach items="#{applicationBB.bloodTypes}" var="bloodType"> -->
-<!-- 										<th><h:outputText value="#{messages[bloodType.displayName]}" /></th> -->
-<!-- 									</c:forEach> -->
-<!-- 								</tr> -->
-<!-- 							</thead> -->
-<!-- 							<tbody> -->
-<!-- 								<c:forEach items="#{stockBB.nationalStockList}" var="product" -->
-<!-- 									varStatus="counter"> -->
-<!-- 									<tr> -->
-<!-- 										<td data-title="#{messages.label_product}"><h:outputText -->
-<!-- 												value="#{product.display}" /></td> -->
-<!-- 										<c:forEach items="#{product.bloodTypes}" var="bloodType"> -->
-<!-- 											<td data-title="#{bloodType.displayName}"><h:outputText -->
-<!-- 													value="#{bloodType.count}" /></td> -->
-<!-- 										</c:forEach> -->
-<!-- 									</tr> -->
-<!-- 								</c:forEach> -->
-
-<!-- 							</tbody> -->
-<!-- 						</table> -->
-
-<!-- 					</p:outputPanel> -->
-
-<!-- 					<p:outputPanel styleClass="row ui-grid-row"> -->
-
-<!-- 						<p:chart type="bar" model="#{stockBB.nationalStockModel}" style="height:300px" /> -->
-<!-- 													<pe:gChart value="#{stockBB.nationalStockGModel}" title="national stock"/> -->
-<!-- 					</p:outputPanel> -->
-
-<!-- 				</p:tab> -->
-
-<!-- 				<p:tab title="#{messages.menu_stock}"> -->
-
 					<p:outputPanel id="banksStockPanel" >
 
 						<script src="http://maps.google.com/maps/api/js?sensor=true"
 							type="text/javascript"></script>
-
-<!-- 						<p:messages /> -->						
-<!-- 							<div class="container" id="banksStockPanel"> -->
-								
-						
-<!-- 						<p:outputPanel styleClass="row ui-grid-row"> -->
-
-<!-- 							<p:panelGrid id="filterGrid" layout="grid" columns="2" -->
-<!-- 								columnClasses="ui-grid-col-3,ui-grid-col-9"> -->
 								
 								<div class="col-md-12 col-lg-12">
 								
@@ -182,7 +128,16 @@
 
 						<p:outputPanel styleClass="row ui-grid-row"
 							rendered="#{stockBB.stock != null}" style="padding-top: 10px;">
-
+							
+							<label class="col-md-2 col-lg-4 control-label pull-left" style="padding: 0; font-size: x-large;" for="stock_blood_type_filter">
+								<c:if test="#{stockBB.bank != null}" >
+									<h:outputText value="#{stockBB.bank.name}"/>
+								</c:if>
+<!-- 								<c:if test="#{not empty user or user.userId eq 0}"> -->
+								
+<!-- 								</c:if> -->
+							</label>
+							
 							<table id="lab_results_table"
 								class="col-md-12 table-bordered table-striped table-condensed cf">
 								<thead class="cf">
@@ -198,7 +153,7 @@
 										varStatus="counter">
 										<tr>
 											<td data-title="#{messages.label_product}"><h:outputText
-													value="#{product.display}" /></td>
+													value="#{messages[product.display]}" /></td>
 											<c:forEach items="#{product.bloodTypes}" var="bloodType">
 												<td data-title="#{bloodType.displayName}"><h:outputText
 														value="#{bloodType.count}" /></td>

@@ -85,7 +85,6 @@ public class InstitutionBean implements IInstitutionBeanLocal {
 				dataBank.setEmail(c.getCenterEmail());
 				dataBank.setHour(c.getCenterHour());
 				dataBank.setInformation(c.getCenterInformation());
-//				dataBank.setInstitution(dataInstitution);
 				dataBank.setLatitude(c.getGeoLocation().getGeoLocationsX());
 				dataBank.setLongitude(c.getGeoLocation().getGeoLocationsY());
 				dataBank.setName(c.getCenterDisplayName());

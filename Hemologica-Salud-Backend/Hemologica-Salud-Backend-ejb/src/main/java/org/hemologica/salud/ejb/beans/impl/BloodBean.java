@@ -8,7 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.hemologica.dao.model.BloodAboTypesCode;
 import org.hemologica.dao.model.BloodDTypesCode;
-import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataCode;
 import org.hemologica.factories.FactoryDAO;
 import org.hemologica.salud.ejb.beans.IBloodLocal;
@@ -26,25 +25,6 @@ public class BloodBean implements IBloodLocal {
     public BloodBean() {
         // TODO Auto-generated constructor stub
     }
-
-	@Override
-	public List<DataBloodType> getBloodTypes() {
-		
-		List<DataBloodType> bloodTypes = new ArrayList<>();
-		
-		return bloodTypes;
-//		List<Institution> institutions = FactoryDAO.getInstitutionDAO(em).getInstitutions();
-//		List<DataInstitution> dataInstitutions = new ArrayList<>();
-//
-//		if (institutions != null) {
-//			for (Institution i : institutions) {
-//				DataInstitution dataIins = new DataInstitution();
-//				dataIins.setCode(i.getInstitutionCode());
-//				dataIins.setName(i.getInstitutionDisplayName());
-//				dataInstitutions.add(dataIins);
-//			}
-//		}
-	}
 
 	@Override
 	public List<DataCode> getDonationABOTypes() {

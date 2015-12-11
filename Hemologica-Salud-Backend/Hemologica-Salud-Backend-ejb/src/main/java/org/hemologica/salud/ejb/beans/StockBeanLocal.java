@@ -1,11 +1,7 @@
 package org.hemologica.salud.ejb.beans;
 
 import java.util.List;
-
 import javax.ejb.Local;
-
-import org.hemologica.datatypes.DataBank;
-import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.DataMovement;
 import org.hemologica.datatypes.DataStock;
 

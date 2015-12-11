@@ -10,8 +10,6 @@ import org.hemologica.datatypes.DataCode;
 @Local
 public interface IBloodLocal {
 	
-	public List<DataBloodType> getBloodTypes();
-	
 	public List<DataCode> getDonationABOTypes();
 	
 	public List<DataCode> getDonationDTTypes();
