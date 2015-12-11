@@ -950,12 +950,13 @@ public class ServicesClientImpl implements IServicesClient {
 	}
 
 	@Override
-	public DataUnitInfo getUnitInfo(String code) throws ClientProtocolException, IOException {
+	public DataUnitInfo getUnitInfo(String code, String institutionCode) throws ClientProtocolException, IOException {
 		
 		String urlService = url + ConstantsRest.PATH_UNIT_INFO;
 		
 		HashMap<String , String> hash = new HashMap<String, String>();
 		hash.put(ConstansJson.JSON_UNIT_CODE, code);
+		hash.put(ConstansJson.JSON_INSTITUTION, institutionCode);
 		
 		String responseString = "";
 		try {

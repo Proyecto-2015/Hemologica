@@ -30,17 +30,21 @@ public class MovementDAOImpl extends GenericDAOImpl<Movement> implements IMoveme
 		return ret != null && ret.size() > 0 ? ret.get(0) : null;
 	}
 
-
+	@SuppressWarnings("unchecked")
 	public List<Movement> getMovementsUnitId(String unitId) {
 		
 		Query query = em.createNamedQuery("Unit.findByUUID");
 		query.setParameter("uuid", unitId);
 		
-		Unit unit = (Unit) query.getSingleResult();
+
+		List<Object> list = query.getResultList();
+		
+		Unit unit = (list != null && list.size()!= 0 ) ? (Unit) list.get(0) : null;
 		
 		return unit != null ? unit.getMovements() : null;
 	}
 
+	@SuppressWarnings("unchecked")
 	public List<Movement> getAllByUnitSortedByDate(Long id) {
 		
 		Query query = em.createNamedQuery("MovementsType.getAllByUnitSortedByDate");

@@ -358,7 +358,7 @@ public interface IServicesClient {
 	 * @throws IOException 
 	 * @throws ClientProtocolException 
 	 */
-	public DataUnitInfo getUnitInfo(String code) throws ClientProtocolException, IOException;
+	public DataUnitInfo getUnitInfo(String code, String institutionCode) throws ClientProtocolException, IOException;
 	
 	/**
 	 * Devuelve los estados de una donacion.

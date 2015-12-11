@@ -34,8 +34,8 @@
 										value="#{unitBB.institution}" style="height: 34px;"
 										converter="#{dataInstitutionConverter}">
 <!-- 										<p:ajax  update="@form"/> -->
-										<f:selectItems value="#{applicationBB.institutions}" var="state"
-											itemValue="#{state.code}" itemLabel="#{state.name}" />
+										<f:selectItems value="#{applicationBB.institutions}" var="institution"
+											itemValue="#{institution}" itemLabel="#{institution.name}" />
 									</h:selectOneMenu>
 								</div>
 							</div>

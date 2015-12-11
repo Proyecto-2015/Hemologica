@@ -374,13 +374,15 @@ public class BaseXConnection implements IXMLDataBase {
 		this.password = password;
 	}
 
-	public List<String> getLaboratoryElementsBySpecimenId(String root) throws XMLDataBaseException {
+	public List<String> getLaboratoryElementsBySpecimenId(String root, String extension) throws XMLDataBaseException {
 
 		ArrayList<String> cdasList = new ArrayList<String>();
 
 		String input = "for $doc in collection('" + dataBase + "') "
 				+ "where  $doc//ClinicalDocument//component//structuredBody//component//section//entry//organizer//specimen//specimenRole//@root='"
-				+ root + "' return $doc";
+				+ root + "' and "
+				+ "$doc//ClinicalDocument//component//structuredBody//component//section//entry//organizer//specimen//specimenRole//@extension='"
+				+ extension + "' return $doc";
 		BaseXClient.Query query;
 		BaseXClient session = null;
 		try {
@@ -639,13 +641,14 @@ public class BaseXConnection implements IXMLDataBase {
 		return 0;
 	}
 
-	public String getTransfusionCDABySpecimenId(String root) throws XMLDataBaseException {
+	public String getTransfusionCDABySpecimenId(String root, String extension) throws XMLDataBaseException {
 		
 		ArrayList<String> cdasList = new ArrayList<String>();
 
 		String input = "for $doc in collection('" + dataBase + "') "
 				+ "where  $doc//ClinicalDocument//component//structuredBody//component//section//entry//procedure//specimen[descendant-or-self::node()/@code = \"122563008\"]//id[descendant-or-self::node()/@root]/@root='"
-				+ root + "' return $doc";
+				+ root + "' and $doc//ClinicalDocument//component//structuredBody//component//section//entry//procedure//specimen[descendant-or-self::node()/@code = \"122563008\"]//id/@extension='"
+				+ extension + "' return $doc";
 		BaseXClient.Query query;
 		BaseXClient session = null;
 		try {
@@ -686,13 +689,14 @@ public class BaseXConnection implements IXMLDataBase {
 		
 	}
 
-	public String getDonationCDABySpecimenId(String root) throws XMLDataBaseException {
+	public String getDonationCDABySpecimenId(String root, String extension) throws XMLDataBaseException {
 		
 		ArrayList<String> cdasList = new ArrayList<String>();
 
 		String input = "for $doc in collection('" + dataBase + "') "
 				+ "where  $doc/ClinicalDocument/component/structuredBody/component/section/entry/procedure/specimen/specimenRole/id/@root='"
-				+ root + "' return $doc";
+				+ root + "' and $doc/ClinicalDocument/component/structuredBody/component/section/entry/procedure/specimen/specimenRole/id/@extension='" 
+				+ extension + "' return $doc";
 		BaseXClient.Query query;
 		BaseXClient session = null;
 		try {

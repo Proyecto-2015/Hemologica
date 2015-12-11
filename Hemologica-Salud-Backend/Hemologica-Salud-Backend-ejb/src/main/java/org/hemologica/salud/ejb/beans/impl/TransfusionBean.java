@@ -234,11 +234,11 @@ public class TransfusionBean implements TransfusionBeanLocal, Serializable {
 	}
 
 	@Override
-	public DataTransfusion getDataTransfusionSpecimenId(String code) throws SAXException, IOException, ParserConfigurationException, XPathExpressionException, DOMException {
+	public DataTransfusion getDataTransfusionSpecimenId(String code, String institutionCode) throws SAXException, IOException, ParserConfigurationException, XPathExpressionException, DOMException {
 		
 		try {
 			
-			String cda = XMLDataBaseFactory.getIXMLDataBaseTransfusions().getTransfusionCDABySpecimenId(code);
+			String cda = XMLDataBaseFactory.getIXMLDataBaseTransfusions().getTransfusionCDABySpecimenId(institutionCode,code);
 			if(cda!= null && !cda.equals("")){
 				Document document= XMLUtils.stringToDocument(cda);
 				return getDataTransfusion(document);

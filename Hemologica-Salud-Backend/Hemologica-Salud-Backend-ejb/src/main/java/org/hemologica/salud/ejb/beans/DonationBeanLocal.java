@@ -15,6 +15,6 @@ public interface DonationBeanLocal {
 
 	DataResponse addDonation(DataDonation dataDonacion);
 
-	DataDonation getDataDonationSpecimenId(String code) throws XPathExpressionException, SAXException, IOException, ParserConfigurationException;
+	DataDonation getDataDonationSpecimenId(String code, String institutionCode) throws XPathExpressionException, SAXException, IOException, ParserConfigurationException;
 
 }

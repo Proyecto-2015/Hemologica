@@ -35,7 +35,7 @@ public class UnitBB implements Serializable {
 		
 		try {
 			
-			unit =  RestFactory.getServicesClient().getUnitInfo(code);
+			unit =  RestFactory.getServicesClient().getUnitInfo(code, institution.getCode());
 			
 		} catch (IOException e) {
 			e.printStackTrace();

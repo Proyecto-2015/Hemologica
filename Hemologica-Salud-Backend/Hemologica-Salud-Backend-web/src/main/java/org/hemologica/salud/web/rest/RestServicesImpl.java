@@ -399,14 +399,14 @@ public class RestServicesImpl implements IRestServices{
 	}
 
 	@Override
-	public DataUnitInfo getUnitInfo(String code) {
+	public DataUnitInfo getUnitInfo(String code, String institutionCode) {
 		
 		DataUnitInfo dataUnitInfo = new DataUnitInfo();
 		
 		DataTransfusion dataTransfusion = new DataTransfusion();
 		try {
 			
-			dataTransfusion = FactoryBeans.getTransfusionBean().getDataTransfusionSpecimenId(code);
+			dataTransfusion = FactoryBeans.getTransfusionBean().getDataTransfusionSpecimenId(code, institutionCode);
 			
 		} catch (SAXException e) {
 			
@@ -431,7 +431,7 @@ public class RestServicesImpl implements IRestServices{
 		DataDonation dataDonation = new DataDonation();
 		try {
 			
-			dataDonation = FactoryBeans.getDonationBean().getDataDonationSpecimenId(code);
+			dataDonation = FactoryBeans.getDonationBean().getDataDonationSpecimenId(code, institutionCode);
 		
 		}catch (SAXException e) {
 			

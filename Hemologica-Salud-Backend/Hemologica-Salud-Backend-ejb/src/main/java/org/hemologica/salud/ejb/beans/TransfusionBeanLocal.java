@@ -18,6 +18,6 @@ public interface TransfusionBeanLocal {
 
 	DataResponse addTransfusion(DataTransfusion dataTransfusion);
 
-	DataTransfusion getDataTransfusionSpecimenId(String code) throws SAXException, IOException, ParserConfigurationException, XPathExpressionException, DOMException;
+	DataTransfusion getDataTransfusionSpecimenId(String code,String institutionCode) throws SAXException, IOException, ParserConfigurationException, XPathExpressionException, DOMException;
 
 }

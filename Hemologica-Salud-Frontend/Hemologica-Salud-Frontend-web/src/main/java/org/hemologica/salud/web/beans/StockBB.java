@@ -4,18 +4,13 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
-import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
-import javax.faces.bean.ManagedProperty;
 import org.apache.http.client.ClientProtocolException;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCode;
@@ -23,18 +18,11 @@ import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.DataProductType;
 import org.hemologica.datatypes.DataStock;
 import org.hemologica.datatypes.DataStockProductType;
-import org.hemologica.datatypes.DataStockProductTypeBloodType;
 import org.hemologica.salud.factories.RestFactory;
 import org.hemologica.salud.web.rest.client.IServicesClient;
 import org.primefaces.event.map.OverlaySelectEvent;
 import org.primefaces.extensions.component.gchart.model.GChartModel;
-import org.primefaces.extensions.component.gchart.model.GChartModelBuilder;
-import org.primefaces.extensions.component.gchart.model.GChartType;
-import org.primefaces.model.chart.Axis;
-import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.BarChartModel;
-import org.primefaces.model.chart.BarChartSeries;
-import org.primefaces.model.chart.ChartSeries;
 import org.primefaces.model.map.DefaultMapModel;
 import org.primefaces.model.map.LatLng;
 import org.primefaces.model.map.MapModel;
@@ -67,7 +55,6 @@ public class StockBB implements Serializable {
 
 	private String bankCode;
 	private DataProductType productTypeCode;
-//	private DataBloodType bloodTypeCode;
 //	
 	private DataCode bloodTypeABO;
 	private DataCode bloodTypeRH;
@@ -79,10 +66,6 @@ public class StockBB implements Serializable {
 	private DataInstitution institutionSelected;
 
 	private BarChartModel barModel;
-	
-	@ManagedProperty("#{messages}")
-	private ResourceBundle bundle;
-	private String languageVarName = "messages";
 
 	private Logger logger = Logger.getLogger(StockBB.class.getName());
 

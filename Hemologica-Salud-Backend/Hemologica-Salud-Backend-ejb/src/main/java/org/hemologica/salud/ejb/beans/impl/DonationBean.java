@@ -179,8 +179,8 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 			 * Resultados de laboratorio 
 			 */
 			String specimenRoot = XMLUtils.executeXPathString(document, "//ClinicalDocument//component//structuredBody//component//section//entry//procedure//specimen//specimenRole//@root");
-			//String specimenExtension = XMLUtils.executeXPathString(document, "//ClinicalDocument//component//structuredBody//component//section//entry//procedure//specimen//specimenRole//@extension");
-			List<String> laboratories = XMLDataBaseFactory.getIXMLDataBaseLaboratory().getLaboratoryElementsBySpecimenId(specimenRoot);
+			String specimenExtension = XMLUtils.executeXPathString(document, "//ClinicalDocument//component//structuredBody//component//section//entry//procedure//specimen//specimenRole//@extension");
+			List<String> laboratories = XMLDataBaseFactory.getIXMLDataBaseLaboratory().getLaboratoryElementsBySpecimenId(specimenRoot, specimenExtension);
 			
 			List<DataLaboratoryResult> laboratoriesResults = new ArrayList<>();
 			boolean approved = true;
@@ -370,11 +370,11 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 	}
 
 	@Override
-	public DataDonation getDataDonationSpecimenId(String code) throws XPathExpressionException, SAXException, IOException, ParserConfigurationException {
+	public DataDonation getDataDonationSpecimenId(String code, String institutionCode) throws XPathExpressionException, SAXException, IOException, ParserConfigurationException {
 		
 		try {
 			
-			String cda = XMLDataBaseFactory.getIXMLDataBaseDonations().getDonationCDABySpecimenId(code);
+			String cda = XMLDataBaseFactory.getIXMLDataBaseDonations().getDonationCDABySpecimenId(institutionCode,code);
 			if(cda!= null && !cda.equals("")){
 				Document document= XMLUtils.stringToDocument(cda);
 				return getDataDonation(document);

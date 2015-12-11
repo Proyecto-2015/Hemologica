@@ -86,12 +86,12 @@ public interface IXMLDataBase {
 	public String getElementCDAId(String root, String extention) throws XMLDataBaseException;
 	
 	/**
-	 * Devuelve todos los elementos con root del especimen los pasado por parametro.
+	 * Devuelve todos los elementos con extencion y root del especimen los pasado por parametro.
 	 * @param patientId
 	 * @return
 	 * @throws XMLDataBaseException
 	 */
-	public List<String> getLaboratoryElementsBySpecimenId(String root) throws XMLDataBaseException;
+	public List<String> getLaboratoryElementsBySpecimenId(String root, String extension) throws XMLDataBaseException;
 	
 	/**
 	 * Devuelve la cantidad de documentos que cumplen con la query pasada por parametro.
@@ -114,13 +114,13 @@ public interface IXMLDataBase {
 	 * @param code
 	 * @throws XMLDataBaseException 
 	 */
-	public String getTransfusionCDABySpecimenId(String root) throws XMLDataBaseException;
+	public String getTransfusionCDABySpecimenId(String root, String extension) throws XMLDataBaseException;
 
 	/**
 	 * Devuelve la donacion con root de specimen el pasado por parametro
 	 * @param code
 	 * @throws XMLDataBaseException 
 	 */
-	public String getDonationCDABySpecimenId(String code) throws XMLDataBaseException;
+	public String getDonationCDABySpecimenId(String code, String extension) throws XMLDataBaseException;
 	
 }
