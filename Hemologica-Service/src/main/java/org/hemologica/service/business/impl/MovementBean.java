@@ -8,12 +8,15 @@ import java.util.UUID;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.hemologica.dao.IBloodDAO;
 import org.hemologica.dao.ICenterDAO;
 import org.hemologica.dao.IMovementDAO;
 import org.hemologica.dao.IUnitDAO;
+import org.hemologica.dao.impl.BloodDAOImpl;
 import org.hemologica.dao.impl.CenterDAOImpl;
 import org.hemologica.dao.impl.MovementDAOImpl;
 import org.hemologica.dao.impl.UnitDAOImpl;
+import org.hemologica.dao.model.BloodTypes;
 import org.hemologica.dao.model.Center;
 import org.hemologica.dao.model.Movement;
 import org.hemologica.dao.model.MovementsType;
@@ -37,21 +40,23 @@ public class MovementBean implements IMovementBean{
 		IMovementDAO movementDAO = new MovementDAOImpl(em);
 		IUnitDAO unitDAO = new UnitDAOImpl(em);
 		ICenterDAO centerDAO = new CenterDAOImpl(em);
+		IBloodDAO bloodDAO = new BloodDAOImpl(em);
 		
 		Movement movement;
 		MovementsType movementType;
 		Unit unit;
 		Unit unitParent;
 		UnitsType unitType;
+		BloodTypes bloodType;
 		Center center;
 		for(MovementData m : movements){
 			
 			unit = unitDAO.findByInstitutionCode(m.getUnit());
 			unitParent = m.getUnitParent() != null ? unitDAO.findByInstitutionCode(m.getUnitParent()) : null;
 			
-			
 			unitType = unitDAO.findUnitTypeByCode(m.getUnitType());
 			center = centerDAO.getBankById(m.getCenter());
+			bloodType = bloodDAO.getBloodTypeCodeBySnomedCodeId(m.getUnitBloodType());
 			
 			//si no existe la unidad, la creo
 			if(unit == null){
@@ -60,6 +65,7 @@ public class MovementBean implements IMovementBean{
 				unit.setUnitInstitutionCode(m.getUnit());
 				unit.setUnitUuid(UUID.randomUUID().toString());
 				unit.setUnitsType(unitType);
+				unit.setBloodType(bloodType);
 				unit.setCenter(center);
 				unit = unitDAO.create(unit);
 			}

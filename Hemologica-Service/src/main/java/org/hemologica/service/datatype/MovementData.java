@@ -7,6 +7,7 @@ public class MovementData {
 	private String type;
 	private String unit;
 	private String unitType;
+	private String unitBloodType;
 	private String unitParent;
 	private String date;
 	
@@ -45,6 +46,12 @@ public class MovementData {
 	}
 	public void setUnitParent(String unitParent) {
 		this.unitParent = unitParent;
+	}
+	public String getUnitBloodType() {
+		return unitBloodType;
+	}
+	public void setUnitBloodType(String unitBloodType) {
+		this.unitBloodType = unitBloodType;
 	}
 	
 }
