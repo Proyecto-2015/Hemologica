@@ -53,8 +53,18 @@ public class Unit implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="unit_type")
 	private UnitsType unitsType;
+	
+	@ManyToOne
+	@JoinColumn(name="unit_parent")
+	private Unit unitParent;
 
-	public Unit() {
+
+	public Unit getUnitParent() {
+		return unitParent;
+	}
+
+	public void setUnitParent(Unit unitParent) {
+		this.unitParent = unitParent;
 	}
 
 	public Long getId() {

@@ -9,4 +9,6 @@ public interface IUserBean extends Serializable{
 
 	public MailData createUser(UserData data) throws Exception;
 	
+	public Boolean existUser(Long personId) throws Exception;
+	
 }

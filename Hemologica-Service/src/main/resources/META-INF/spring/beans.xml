@@ -90,6 +90,7 @@
 
 	<bean id="cdaProcessActivator" class="org.hemologica.service.activator.CDAProcessActivator">
 		<property name="personBean" ref="personBean" />
+		<property name="userBean" ref="userBean" />
 	</bean>
 	
 	<bean id="cdaXDSProcessActivator" class="org.hemologica.service.activator.CDAtoXDSProcessActivator" >

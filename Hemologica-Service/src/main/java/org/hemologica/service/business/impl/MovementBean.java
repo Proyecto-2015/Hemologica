@@ -41,25 +41,28 @@ public class MovementBean implements IMovementBean{
 		Movement movement;
 		MovementsType movementType;
 		Unit unit;
+		Unit unitParent;
 		UnitsType unitType;
 		Center center;
 		for(MovementData m : movements){
 			
 			unit = unitDAO.findByInstitutionCode(m.getUnit());
+			unitParent = m.getUnitParent() != null ? unitDAO.findByInstitutionCode(m.getUnitParent()) : null;
+			
+			
 			unitType = unitDAO.findUnitTypeByCode(m.getUnitType());
 			center = centerDAO.getBankById(m.getCenter());
 			
 			//si no existe la unidad, la creo
 			if(unit == null){
 				unit = new Unit();
+				unit.setUnitParent(unitParent);
 				unit.setUnitInstitutionCode(m.getUnit());
 				unit.setUnitUuid(UUID.randomUUID().toString());
 				unit.setUnitsType(unitType);
 				unit.setCenter(center);
 				unit = unitDAO.create(unit);
 			}
-			
-			
 			
 			movementType = movementDAO.findMovementTypeByCode(m.getType());
 			movement = new Movement();

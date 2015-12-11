@@ -9,6 +9,7 @@ import javax.xml.xpath.XPathExpressionException;
 
 import org.hemologica.dao.model.Person;
 import org.hemologica.service.business.IPersonBean;
+import org.hemologica.service.business.IUserBean;
 import org.hemologica.service.datatype.CDA;
 import org.hemologica.service.datatype.UserData;
 import org.hemologica.service.utils.xml.XMLUtils;
@@ -21,6 +22,15 @@ public class CDAProcessActivator {
 	private static Logger logger = Logger.getLogger(CDAProcessActivator.class.getName());
 
 	private IPersonBean personBean;
+	private IUserBean userBean;
+
+	public IUserBean getUserBean() {
+		return userBean;
+	}
+
+	public void setUserBean(IUserBean userBean) {
+		this.userBean = userBean;
+	}
 
 	public String process(String doc) throws Exception {
 
@@ -31,7 +41,8 @@ public class CDAProcessActivator {
 			
 			cda = new CDA(XMLUtils.stringToDocument(doc));
 			Person person = personBean.processCDAwithEMPIandDatabases(cda.getUserData(), CDA.anonymize(doc));
-			if(person != null && person.getPersonEmail() != null){
+			if(	person != null && person.getPersonEmail() != null &&
+				userBean.existUser(person.getId()) 	){
 				UserData userData = new UserData(person.getId(), person.getPersonEmail());
 				return new Gson().toJson(userData);
 			}

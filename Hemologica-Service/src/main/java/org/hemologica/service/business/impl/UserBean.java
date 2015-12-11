@@ -1,5 +1,6 @@
 package org.hemologica.service.business.impl;
 
+import java.util.List;
 import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.Base64;
@@ -93,6 +94,15 @@ public class UserBean implements IUserBean {
 		url = url.replaceAll(":token", token);
 		content = content.replaceAll(":url", url);
 		return content;
+	}
+
+	@Override
+	public Boolean existUser(Long personId) throws Exception {
+
+		IUserDAO userDAO = new UserDAOImpl(em);
+		List<User> list = userDAO.findByPersonId(personId);
+		return list != null && list.size() > 0;
+		
 	}
 
 }
