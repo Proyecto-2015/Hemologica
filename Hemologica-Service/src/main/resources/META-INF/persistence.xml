@@ -20,6 +20,7 @@
 		<class>org.hemologica.dao.model.AdvertismentsContent</class>
 		<class>org.hemologica.dao.model.BloodAboTypesCode</class>
 		<class>org.hemologica.dao.model.BloodDTypesCode</class>
+		<class>org.hemologica.dao.model.BloodTypes</class>
 		<class>org.hemologica.dao.model.Center</class>
 		<class>org.hemologica.dao.model.CitiesCode</class>
 		<class>org.hemologica.dao.model.Concept</class>
@@ -57,7 +58,7 @@
 		<class>org.hemologica.dao.model.MessageSendOption</class>
 		<class>org.hemologica.dao.model.GenderCode</class>
 		<properties>
-			<property name="hibernate.hbm2ddl.auto" value="none" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
 		</properties>

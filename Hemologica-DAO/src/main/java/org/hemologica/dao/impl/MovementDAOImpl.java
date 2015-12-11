@@ -43,7 +43,7 @@ public class MovementDAOImpl extends GenericDAOImpl<Movement> implements IMoveme
 
 	public List<Movement> getAllByUnitSortedByDate(Long id) {
 		
-		Query query = em.createNamedQuery("MovementsType.getAllByUnitSortedByDate");
+		Query query = em.createNamedQuery("Movement.getAllByUnitSortedByDate");
 		query.setParameter("unitId", id);
 		return query.getResultList();
 	}

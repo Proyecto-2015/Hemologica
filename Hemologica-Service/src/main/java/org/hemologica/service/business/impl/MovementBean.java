@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
 import org.hemologica.dao.IBloodDAO;
 import org.hemologica.dao.ICenterDAO;
@@ -16,6 +17,8 @@ import org.hemologica.dao.impl.BloodDAOImpl;
 import org.hemologica.dao.impl.CenterDAOImpl;
 import org.hemologica.dao.impl.MovementDAOImpl;
 import org.hemologica.dao.impl.UnitDAOImpl;
+import org.hemologica.dao.model.BloodAboTypesCode;
+import org.hemologica.dao.model.BloodDTypesCode;
 import org.hemologica.dao.model.BloodTypes;
 import org.hemologica.dao.model.Center;
 import org.hemologica.dao.model.Movement;
@@ -32,6 +35,7 @@ public class MovementBean implements IMovementBean{
 	@PersistenceContext(unitName = "Hemologica-Service-PU")
 	private EntityManager em;
 	
+	@Transactional
 	@Override
 	public void save(List<MovementData> movements) throws ParseException {
 
@@ -47,7 +51,9 @@ public class MovementBean implements IMovementBean{
 		Unit unit;
 		Unit unitParent;
 		UnitsType unitType;
-		BloodTypes bloodType;
+		BloodTypes bloodTypes;
+		BloodAboTypesCode bloodAboType;
+		BloodDTypesCode bloodDType;
 		Center center;
 		for(MovementData m : movements){
 			
@@ -56,7 +62,9 @@ public class MovementBean implements IMovementBean{
 			
 			unitType = unitDAO.findUnitTypeByCode(m.getUnitType());
 			center = centerDAO.getBankById(m.getCenter());
-			bloodType = bloodDAO.getBloodTypeCodeBySnomedCodeId(m.getUnitBloodType());
+			bloodTypes = bloodDAO.getBloodTypeCodeBySnomedCodeId(m.getUnitBloodType());
+			bloodAboType = bloodTypes.getBloodAboTypesCode();
+			bloodDType = bloodTypes.getBloodDTypesCode();
 			
 			//si no existe la unidad, la creo
 			if(unit == null){
@@ -65,7 +73,8 @@ public class MovementBean implements IMovementBean{
 				unit.setUnitInstitutionCode(m.getUnit());
 				unit.setUnitUuid(UUID.randomUUID().toString());
 				unit.setUnitsType(unitType);
-				unit.setBloodType(bloodType);
+				unit.setBloodTypeABO(bloodAboType);
+				unit.setBloodTypeRH(bloodDType);
 				unit.setCenter(center);
 				unit = unitDAO.create(unit);
 			}
