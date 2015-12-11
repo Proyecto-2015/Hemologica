@@ -53,6 +53,10 @@ public class Unit implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="unit_type")
 	private UnitsType unitsType;
+	
+	@ManyToOne
+	@JoinColumn(name="blood_type")
+	private BloodTypes bloodType;
 
 	public Unit() {
 	}
@@ -118,5 +122,15 @@ public class Unit implements Serializable {
 	public void setUnitsType(UnitsType unitsType) {
 		this.unitsType = unitsType;
 	}
+
+	public BloodTypes getBloodType() {
+		return bloodType;
+	}
+
+	public void setBloodType(BloodTypes bloodType) {
+		this.bloodType = bloodType;
+	}
+	
+	
 
 }
