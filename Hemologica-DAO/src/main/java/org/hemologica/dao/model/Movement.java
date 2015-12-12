@@ -39,7 +39,7 @@ public class Movement implements Serializable {
 	//bi-directional many-to-one association to Service
 	
 	@ManyToOne
-	@JoinColumn(name="movement_id")
+	@JoinColumn(name="movement_center")
 	private Center center;
 
 	//bi-directional many-to-one association to Unit
