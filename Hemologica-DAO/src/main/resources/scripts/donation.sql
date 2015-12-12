@@ -40,7 +40,7 @@ UPDATE `hemologica`.`donation_filter_codes` SET `donation_filter_codes_sql`='sel
 UPDATE `hemologica`.`donation_filter_codes` SET `donation_filter_codes_sql`='select a.donation_fail_cause_code_value, b.concept_code from donation_fail_causes_codes as a join concepts as b on a.donation_fail_cause_code_snomed = b.id;' WHERE `donation_filter_codes_id`='6';
 UPDATE `hemologica`.`donation_filter_codes` SET `donation_filter_codes_sql`='select a.blood_type_code_value, b.concept_code from blood_types_codes as a join concepts as b on a.blood_type_code_snomed = b.id;' WHERE `donation_filter_codes_id`='7';
 
-UPDATE `hemologica`.`donation_filter_codes` SET `donation_filter_codes_path`='//ClinicalDocument//component//structuredBody//component//section//entry//procedure//entryRelationship[descendant-or-self::node()/@typeCode = 'COMP']//observation//code/@code' WHERE `donation_filter_codes_id`='7';
+UPDATE `hemologica`.`donation_filter_codes` SET `donation_filter_codes_path`='//ClinicalDocument//component//structuredBody//component//section//entry//procedure//entryRelationship[descendant-or-self::node()/@typeCode = \\\"COMP\\\"]//observation//code/@code' WHERE `donation_filter_codes_id`='7';
 
 UPDATE `hemologica`.`donation_filter_codes` SET `donation_filter_codes_sql`='select gender_hl7_code, gender_code_label from gender_code;' WHERE `donation_filter_codes_id`='1';
 
