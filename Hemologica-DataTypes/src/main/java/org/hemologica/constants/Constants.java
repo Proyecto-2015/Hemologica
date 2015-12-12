@@ -23,6 +23,10 @@ public class Constants {
 	public static final String EVENT_FILTER = "entryRelationship[descendant-or-self::node()/@code =";
 	public static final String VAR_EVENT_FILTER = "$1";
 	
+	public static final String ANALYSIS_FILTER = "observation[descendant-or-self::node()/@code =";
+	
+	
+	
 	
 	//DOCUMENTOS
 	

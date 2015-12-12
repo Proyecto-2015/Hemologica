@@ -53,14 +53,19 @@ public class StatisticsBean implements StatisticsBeanLocal {
 		List<String> andClausesNumerator = new ArrayList<>();
 		List<String> andClausesDonaminator = new ArrayList<>();
 		
+		List<String> orClausesNoDataNumerator = new ArrayList<>();
+		List<String> orClausesNoDataDenominator = new ArrayList<>();
+		
 		List<List<String>> orClausesList = new ArrayList<>();
 		List<String> orClauses = new ArrayList<>();
 		
 		/**
 		 * Bancos
 		 */
+		boolean bankFilter = false;
 		if(donationsStatisticsData.getBloodBank() == null && donationsStatisticsData.getInstitution() != null ){
 			
+			bankFilter = true;
 			List<Center> banks = FactoryDAO.getCenterDAO(em).getBanksByInstitutionId(donationsStatisticsData.getInstitution().getCode());
 			for(Center c : banks){
 				
@@ -70,10 +75,19 @@ public class StatisticsBean implements StatisticsBeanLocal {
 			}
 		}else if(donationsStatisticsData.getBloodBank() != null){
 			
+			bankFilter = true;
 			String query = "//ClinicalDocument//author//assignedAuthor//representedOrganization//id//@root='" + donationsStatisticsData.getBloodBank().getCode() +"'";
 			andClausesNumerator.add(query);
 			andClausesDonaminator.add(query);
 			
+		}
+		
+		if(bankFilter){
+			String bankNodata = "$doc//ClinicalDocument//author//assignedAuthor//representedOrganization//id//@root='' or "
+					+ "$doc//ClinicalDocument//author//assignedAuthor//representedOrganization//id//not(@root)" ;
+			
+			orClausesNoDataNumerator.add(bankNodata);
+			orClausesNoDataDenominator.add(bankNodata);
 		}
 		
 		orClausesList.add(orClauses);
@@ -81,8 +95,10 @@ public class StatisticsBean implements StatisticsBeanLocal {
 		/**
 		 * Fecha desde
 		 */
+		boolean dateFilter = false;
 		if(donationsStatisticsData.getFromDate()!= null && !donationsStatisticsData.getFromDate().equals("")){
 			
+			dateFilter = true;
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			Date dateFrom;
 			try {
@@ -107,6 +123,7 @@ public class StatisticsBean implements StatisticsBeanLocal {
 		 */
 		if(donationsStatisticsData.getToDate()!= null && !donationsStatisticsData.getToDate().equals("")){
 			
+			dateFilter = true;
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			Date dateFrom;
 			try {
@@ -126,6 +143,13 @@ public class StatisticsBean implements StatisticsBeanLocal {
 			}
 		}
 		
+		if(dateFilter){
+			String dateNodata = "$doc/ClinicalDocument/component/structuredBody/component/section/entry/procedure/effectiveTime/low/@value='' or "
+					+ "$doc/ClinicalDocument/component/structuredBody/component/section/entry/procedure/effectiveTime/low/not(@value)" ;
+			orClausesNoDataNumerator.add(dateNodata);
+			orClausesNoDataDenominator.add(dateNodata);
+		}
+		
 		/**
 		 * Cantidad de donaciones
 		 */
@@ -137,6 +161,8 @@ public class StatisticsBean implements StatisticsBeanLocal {
 		
 		
 		List<String> filtersAnalysisNumerator = new ArrayList<>();
+		List<String> filtersAnalysisNumeratorNoData = new ArrayList<>();
+		
 		String analisisCode = "";
 		for(DonationFilterData filter :donationsStatisticsData.getFiltersNumerator()){
 			
@@ -153,6 +179,10 @@ public class StatisticsBean implements StatisticsBeanLocal {
 				
 				String query = donationFilter.getDonationFilterCodesPath() + "<='" + dateFromString +"'";
 				andClausesNumerator.add(query);
+				
+				String dateNodata = "$doc/" +donationFilter.getDonationFilterCodesPath()+"='' or "
+						+ "not("+"$doc/" + donationFilter.getDonationFilterCodesPath() +")" ;
+				orClausesNoDataNumerator.add(dateNodata);
 								
 			}
 			
@@ -168,6 +198,10 @@ public class StatisticsBean implements StatisticsBeanLocal {
 				String query = donationFilter.getDonationFilterCodesPath() + ">='" + dateFromString +"'";
 				andClausesNumerator.add(query);
 				
+				String dateNodata = "$doc/" +donationFilter.getDonationFilterCodesPath()+"='' or "
+						+ "not("+"$doc/" + donationFilter.getDonationFilterCodesPath() +")" ;
+				orClausesNoDataNumerator.add(dateNodata);
+				
 			}
 			
 			
@@ -179,21 +213,26 @@ public class StatisticsBean implements StatisticsBeanLocal {
 					
 					String query = donationFilter.getDonationFilterCodesPath() + "='" + filter.getValue().getCode() +"'";
 					
+					String dateNodata = "$doc/" +donationFilter.getDonationFilterCodesPath()+"='' or "
+							+ "not("+ "$doc/" +donationFilter.getDonationFilterCodesPath() +")" ;
+					
+					
 					if(filter.getCode().equals(Constants.ANALYSIS) || filter.getCode().equals(Constants.RESULTS)){
 						/**
 						 * Analisis
 						 */
 						if(donationFilter.getDonationFilterCodesValue().equals(Constants.RESULTS)){
 							
-							if(analisisCode.equals(""))
+							if(analisisCode.equals("")){
 								
 								query = query.replace("/"+Constants.VAR_EVENT_FILTER.toString()+"/", "");
-							
-							else{
+								dateNodata = dateNodata.replace("/"+Constants.VAR_EVENT_FILTER.toString()+"/", "");
 								
-								String filterEvent = Constants.EVENT_FILTER + "'" + analisisCode + "']";
-								query = query.replace(Constants.VAR_EVENT_FILTER.toString(), filterEvent);
+							}else{
 								
+								String filterEvent = Constants.ANALYSIS_FILTER + "'" + analisisCode + "']";
+								query = query.replace(Constants.VAR_EVENT_FILTER.toString(), filterEvent);					
+								dateNodata = dateNodata.replace(Constants.VAR_EVENT_FILTER.toString(), filterEvent);
 							}
 							
 							
@@ -201,14 +240,20 @@ public class StatisticsBean implements StatisticsBeanLocal {
 							
 							analisisCode = filter.getValue().getCode();
 							
+							// Si es evento adverso solo ve que sea vacio si no esta es porque no tuvo esvento adverso.
+							dateNodata = donationFilter.getDonationFilterCodesPath()+"=''";
+							
 						}	
 						
 						filtersAnalysisNumerator.add(query);
+						filtersAnalysisNumeratorNoData.add(dateNodata);
 						
 					}else{
 					
 						andClausesNumerator.add(query);
-					}		
+						orClausesNoDataNumerator.add(dateNodata);
+					}	
+					
 				}
 			}	
 		}
@@ -217,6 +262,7 @@ public class StatisticsBean implements StatisticsBeanLocal {
 		 * Filtros DENOMINADOR
 		 */
 		List<String> filtersAnalysisDenominator = new ArrayList<>();
+		List<String> filtersAnalysisDenominatorNoData = new ArrayList<>();
 		String analisisCodeDenominator = "";
 		for(DonationFilterData filter :donationsStatisticsData.getFiltersDenominator()){
 			
@@ -234,6 +280,10 @@ public class StatisticsBean implements StatisticsBeanLocal {
 				String query = donationFilter.getDonationFilterCodesPath() + "<='" + dateFromString +"'";
 				andClausesDonaminator.add(query);
 				
+				String dateNodata = "$doc/" +donationFilter.getDonationFilterCodesPath()+"='' or "
+						+ "not("+"$doc/" + donationFilter.getDonationFilterCodesPath() +")" ;
+				orClausesNoDataDenominator.add(dateNodata);
+				
 			}
 			
 			if(filter.getCode().equals(Constants.AGE_TO) && (filter.getValueString()!= null) && !(filter.getValueString().equals(""))){
@@ -248,6 +298,10 @@ public class StatisticsBean implements StatisticsBeanLocal {
 				String query = donationFilter.getDonationFilterCodesPath() + ">='" + dateFromString +"'";
 				andClausesDonaminator.add(query);
 				
+				String dateNodata = "$doc/" +donationFilter.getDonationFilterCodesPath()+"='' or "
+						+ "not("+"$doc/" + donationFilter.getDonationFilterCodesPath() +")" ;
+				orClausesNoDataDenominator.add(dateNodata);
+				
 			}
 			
 			
@@ -259,20 +313,25 @@ public class StatisticsBean implements StatisticsBeanLocal {
 					
 					String query = donationFilter.getDonationFilterCodesPath() + "='" + filter.getValue().getCode() +"'";
 					
+					String dateNodata = "$doc/" +donationFilter.getDonationFilterCodesPath()+"='' or "
+							+ "not("+ "$doc/" +donationFilter.getDonationFilterCodesPath() +")" ;
+					
 					if(filter.getCode().equals(Constants.ANALYSIS) || filter.getCode().equals(Constants.RESULTS)){
 						/**
 						 * Analisis
 						 */
 						if(donationFilter.getDonationFilterCodesValue().equals(Constants.RESULTS)){
 							
-							if(analisisCodeDenominator.equals(""))
+							if(analisisCodeDenominator.equals("")){
 								
 								query = query.replace("/"+Constants.VAR_EVENT_FILTER.toString()+"/", "");
+								dateNodata = dateNodata.replace("/"+Constants.VAR_EVENT_FILTER.toString()+"/", "");
 							
-							else{
+							}else{
 								
-								String filterEvent = Constants.EVENT_FILTER + "'" + analisisCodeDenominator + "']";
+								String filterEvent = Constants.ANALYSIS_FILTER + "'" + analisisCodeDenominator + "']";
 								query = query.replace(Constants.VAR_EVENT_FILTER.toString(), filterEvent);
+								dateNodata = dateNodata.replace(Constants.VAR_EVENT_FILTER.toString(), filterEvent);
 								
 							}
 							
@@ -281,14 +340,21 @@ public class StatisticsBean implements StatisticsBeanLocal {
 							
 							analisisCodeDenominator = filter.getValue().getCode();
 							
+							// Si es evento adverso solo ve que sea vacio si no esta es porque no tuvo esvento adverso.
+							dateNodata = donationFilter.getDonationFilterCodesPath()+"=''";
+							
 						}	
 						
 						filtersAnalysisDenominator.add(query);
+						filtersAnalysisDenominatorNoData.add(dateNodata);
 						
 					}else{
 					
 						andClausesDonaminator.add(query);
-					}		
+						orClausesNoDataDenominator.add(dateNodata);
+					}	
+					
+					
 				}
 			}	
 		}
@@ -305,6 +371,20 @@ public class StatisticsBean implements StatisticsBeanLocal {
 		donationsCount.setPercentage((donationsCount.getCountDenominator() != 0) ? donationsCount.getCountNumerator() *100/donationsCount.getCountDenominator() : 0);
 		
 		dataDonationsStatistics.setDonationsCount(donationsCount);
+				
+		int noDataNumeratorDonations = 0, noDataDenominatorDonations = 0  ;
+		if((orClausesNoDataNumerator != null && orClausesNoDataNumerator.size() !=0) || (filtersAnalysisNumeratorNoData != null && filtersAnalysisNumeratorNoData.size() !=0)){
+			
+			noDataNumeratorDonations = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(orClausesNoDataNumerator,filtersAnalysisNumeratorNoData);
+		}
+		
+		if(orClausesNoDataDenominator != null && orClausesNoDataDenominator.size() != 0 || (filtersAnalysisDenominatorNoData != null && filtersAnalysisDenominatorNoData.size() !=0) ){
+			
+			noDataDenominatorDonations = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(orClausesNoDataDenominator, filtersAnalysisDenominatorNoData);
+		}	 
+		
+		dataDonationsStatistics.setNoDataDenominator(noDataDenominatorDonations);
+		dataDonationsStatistics.setNoDataNumerator(noDataNumeratorDonations);
 		
 		/**
 		 * Cantidad de donantes
@@ -654,12 +734,12 @@ public class StatisticsBean implements StatisticsBeanLocal {
 		int noDataNumeratorDonations = 0, noDataDenominatorDonations = 0  ;
 		if(orClausesNoDataNumerator != null && orClausesNoDataNumerator.size() !=0){
 			
-			noDataNumeratorDonations = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(orClausesNoDataNumerator);
+			noDataNumeratorDonations = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(orClausesNoDataNumerator,null);
 		}
 		
 		if(orClausesNoDataDenominator != null && orClausesNoDataDenominator.size() != 0){
 			
-			noDataDenominatorDonations = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(orClausesNoDataDenominator);
+			noDataDenominatorDonations = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(orClausesNoDataDenominator,null);
 		}	 
 		
 		dataDonationsStatistics.setNoDataDenominator(noDataDenominatorDonations);

@@ -412,11 +412,11 @@ public class BaseXConnection implements IXMLDataBase {
 
 	}
 	
-	public int countQuery(List<String> orClauses) throws XMLDataBaseException{
+	public int countQuery(List<String> orClauses, List<String> analysisIds) throws XMLDataBaseException{
 		
 		String input = "";
 
-		if (orClauses != null && orClauses.size() != 0) {
+		if ((orClauses != null && orClauses.size() != 0) || (analysisIds != null && analysisIds.size() != 0)) {
 
 			input += "count(for $doc in collection('" + dataBase + "') " + "where ";
 
@@ -436,6 +436,56 @@ public class BaseXConnection implements IXMLDataBase {
 	
 				}
 			}
+			
+			String analysisQuery ="";
+			if (analysisIds != null && analysisIds.size() > 0) {
+
+				analysisQuery = "for $docLab in collection('"
+						+ XMLDataBaseFactory.getIXMLDataBaseLaboratory().getDataBaseName() + "') " + "where "
+						+ "$docLab//ClinicalDocument/component/structuredBody/component/section/entry/organizer/specimen/specimenRole/id/@root="
+						+ "$doc/ClinicalDocument/component/structuredBody/component/section/entry/procedure/specimen/specimenRole/id/@root   and "
+						+ "$docLab//ClinicalDocument/component/structuredBody/component/section/entry/organizer/specimen/specimenRole/id//@extension="
+						+ "$doc/ClinicalDocument/component/structuredBody/component/section/entry/procedure/specimen/specimenRole/id/@extension";
+
+				if (analysisIds.size() == 1) {
+					
+					String q="";
+					if(analysisIds.get(0).contains("$doc")){
+						
+						q = analysisIds.get(0).replace("$doc/", "$docLab/");
+						
+					}else{
+						
+						q = "$docLab/" + analysisIds.get(0);
+					}
+					
+					analysisQuery += " and ( " + q + ")";
+
+				} else if (analysisIds.size() == 2) {
+					
+					String q="";
+					if(analysisIds.get(1).contains("$doc")){
+						
+						q = analysisIds.get(1).replace("$doc/", "$docLab/");
+						
+					}
+					analysisQuery += " and ("+ q + ")";
+
+				}
+
+				analysisQuery += " return $docLab ";
+
+				if (first) {
+
+					input += "count(" + analysisQuery + ") > 0";
+
+				} else {
+
+					input += " and " + "count(" + analysisQuery + ") > 0";
+
+				}
+			}
+			
 			
 			input += " return $doc)";
 		} else {

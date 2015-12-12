@@ -155,7 +155,24 @@
 					<legend>
 						<h:outputText value="#{messages.label_result}"/>	
 					</legend>
-			
+				
+					<div class="col-md-9 col-lg-12" style="padding-top: 12px;">
+						<label class="col-md-2 col-lg-12 control-label">
+							<h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null}" 
+									 value="#{messages.lable_no_data_numerator} :" /> <h:outputText value="&#160; &#160;" />
+									 
+							<h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null}" 
+									 value="#{donationsStatisticsBB.statisticsResults.noDataNumerator}" /> <h:outputText value="&#160; &#160; &#160;" />
+							
+							<h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null}" 
+									 value="#{messages.lable_no_data_denominator} :" /> <h:outputText value="&#160; &#160;" />
+							 
+							<h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null}" 
+									 value="#{donationsStatisticsBB.statisticsResults.noDataDenominator}" /> <h:outputText value="&#160; &#160; &#160;" />
+						 </label>
+					</div>
+				
+				
 					<div class="col-md-9 col-lg-12" style="padding-top: 12px;">
 						<label class="col-md-2 col-lg-3 control-label">
 							<h:outputText value="#{messages.label_donations_count}" />
@@ -174,12 +191,6 @@
 								 
 								<h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null and donationsStatisticsBB.statisticsResults.donationsCount != null}" 
 								 value="#{donationsStatisticsBB.statisticsResults.donationsCount.countDenominator}" /> <h:outputText value="&#160; &#160; &#160;" />
-								 
-								 <h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null and donationsStatisticsBB.statisticsResults.donationsCount != null}" 
-								 value="#{messages.lable_no_data} :" /> <h:outputText value="&#160; &#160;" />
-								 
-								<h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null and donationsStatisticsBB.statisticsResults.donationsCount != null}" 
-								 value="#{donationsStatisticsBB.statisticsResults.donationsCount.noDataNumerator}" /> <h:outputText value="&#160; &#160; &#160;" />
 
 							</label>
 							
