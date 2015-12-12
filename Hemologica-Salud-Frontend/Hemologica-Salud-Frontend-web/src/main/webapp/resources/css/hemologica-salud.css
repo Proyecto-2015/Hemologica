@@ -404,4 +404,9 @@ table.jqplot-table-legend, table.jqplot-cursor-legend {
     background-color: red;
 }
 
+.ui-tabs.ui-widget-content{
+
+	border-bottom: none !important;
+}
+
 

@@ -4,15 +4,14 @@ import java.util.List;
 
 public class DataTransfusionsStatistics {
 	
-	private static final long serialVersionUID = 1L;
-	
 	private String type;
 	private String fromDate;
 	private String toDate;
 	private DataInstitution institution;
 	private DataBank bloodBank;
 	private List<TransfusionFilterData> filters;
-	private List<TransfusionFilterData> distinguish;
+	private List<TransfusionFilterData> allFiltersDenominator;
+
 	
 	public String getType() {
 		return type;
@@ -51,11 +50,12 @@ public class DataTransfusionsStatistics {
 	public void setFilters(List<TransfusionFilterData> filters) {
 		this.filters = filters;
 	}
-	public List<TransfusionFilterData> getDistinguish() {
-		return distinguish;
+	public List<TransfusionFilterData> getAllFiltersDenominator() {
+		return allFiltersDenominator;
 	}
-	public void setDistinguish(List<TransfusionFilterData> distinguish) {
-		this.distinguish = distinguish;
+	public void setAllFiltersDenominator(List<TransfusionFilterData> allFiltersDenominator) {
+		this.allFiltersDenominator = allFiltersDenominator;
 	}
+	
 	
 }

@@ -11,8 +11,8 @@ public class DataDonationsStatistics implements Serializable{
 	private String toDate;
 	private DataInstitution institution;
 	private DataBank bloodBank;
-	private List<DonationFilterData> filters;
-
+	private List<DonationFilterData> filtersDenominator;
+	private List<DonationFilterData> filtersNumerator;
 	
 	public String getFromDate() {
 		return fromDate;
@@ -39,11 +39,17 @@ public class DataDonationsStatistics implements Serializable{
 	public void setBloodBank(DataBank bloodBank) {
 		this.bloodBank = bloodBank;
 	}
-	public List<DonationFilterData> getFilters() {
-		return filters;
+	public List<DonationFilterData> getFiltersDenominator() {
+		return filtersDenominator;
 	}
-	public void setFilters(List<DonationFilterData> filters) {
-		this.filters = filters;
+	public void setFiltersDenominator(List<DonationFilterData> filtersDenominator) {
+		this.filtersDenominator = filtersDenominator;
+	}
+	public List<DonationFilterData> getFiltersNumerator() {
+		return filtersNumerator;
+	}
+	public void setFiltersNumerator(List<DonationFilterData> filtersNumerator) {
+		this.filtersNumerator = filtersNumerator;
 	}
 
 }
