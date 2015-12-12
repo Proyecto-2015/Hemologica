@@ -76,40 +76,73 @@
 				</div>
 			</fieldset>
 		
-			<fieldset>
-				<div class="form-group div-center col-md-12 col-lg-12">
+			<fieldset >
+				<div class="form-group col-md-12 col-lg-12">
 				<legend>
 					<h:outputText value="#{messages.label_filter}"/>	
 				</legend>
-								
-					<c:forEach items="#{donationsStatisticsBB.allFilters}"
-						var="filterItem" >
-						
-						<div class="col-md-9 col-lg-4 form-group"  style="padding-top: 12px;">
-							<label class="col-md-2  col-lg-6 control-label" for="name"><h:outputText
-									value="#{messages[filterItem.displayName]}" /></label>
-									
-								<div class="col-md-9 col-lg-6">
-									<c:choose>
-										<c:when test="${filterItem.options.size() != 0}">
-											<h:selectOneMenu class="form-control" 
-												style="height: 34px; padding: 0 !important;" value="#{filterItem.value}"
-												
-												converter="#{dataFilterConverter}">
-												
-												 <f:attribute name="filterItem" id="filterItem" value="#{filterItem}"/>
-												<f:selectItem itemLabel="#{messages.label_all}" itemValue="#{null}"/>
-												<f:selectItems value="#{filterItem.options}" var="option"
-													itemValue="#{option}" itemLabel="#{messages[option.displayName]}" />
-											</h:selectOneMenu>
-										</c:when>
-										<c:otherwise>
-											<h:inputText style="height: 34px;" value="#{filterItem.valueString}"/>
-										</c:otherwise>
-									</c:choose>
-								</div>
-						</div>		
-					</c:forEach>
+				
+				<p:tabView>
+					<p:tab title="#{messages.label_numerator}">		
+						<c:forEach items="#{donationsStatisticsBB.allFilters}" var="filterItem" >
+							
+							<div class="col-md-9 col-lg-4 form-group"  style="padding-top: 12px;">
+									<label class="col-md-2  col-lg-6 control-label" for="name"><h:outputText
+										value="#{messages[filterItem.displayName]}" /></label>
+										
+									<div class="col-md-9 col-lg-6">
+										<c:choose>
+											<c:when test="${filterItem.options.size() != 0}">
+												<h:selectOneMenu class="form-control" 
+													style="height: 34px; padding: 0 !important;" value="#{filterItem.value}"
+													
+													converter="#{dataFilterConverter}">
+													
+													 <f:attribute name="filterItem" id="filterItem" value="#{filterItem}"/>
+													<f:selectItem itemLabel="#{messages.label_all}" itemValue="#{null}"/>
+													<f:selectItems value="#{filterItem.options}" var="option"
+														itemValue="#{option}" itemLabel="#{messages[option.displayName]}" />
+												</h:selectOneMenu>
+											</c:when>
+											<c:otherwise>
+												<h:inputText style="height: 34px; width: 70%;" value="#{filterItem.valueString}"/>
+											</c:otherwise>
+										</c:choose>
+									</div>
+							</div>		
+						</c:forEach>
+					</p:tab>
+					<p:tab title="#{messages.label_denominator}">
+						<c:forEach items="#{donationsStatisticsBB.allFiltersDenominator}"
+							var="filterItem" >
+							
+							<div class="col-md-9 col-lg-4 form-group"  style="padding-top: 12px;">
+								<label class="col-md-2  col-lg-6 control-label" for="name"><h:outputText
+										value="#{messages[filterItem.displayName]}" /></label>
+										
+									<div class="col-md-9 col-lg-6">
+										<c:choose>
+											<c:when test="${filterItem.options.size() != 0}">
+												<h:selectOneMenu class="form-control" 
+													style="height: 34px; padding: 0 !important;" value="#{filterItem.value}"
+													
+													converter="#{dataFilterConverter}">
+													
+													 <f:attribute name="filterItem" id="filterItem" value="#{filterItem}"/>
+													<f:selectItem itemLabel="#{messages.label_all}" itemValue="#{null}"/>
+													<f:selectItems value="#{filterItem.options}" var="option"
+														itemValue="#{option}" itemLabel="#{messages[option.displayName]}" />
+												</h:selectOneMenu>
+											</c:when>
+											<c:otherwise>
+												<h:inputText style="height: 34px; width: 70%;" value="#{filterItem.valueString}"/>
+											</c:otherwise>
+										</c:choose>
+									</div>
+							</div>		
+						</c:forEach>
+					</p:tab>
+				</p:tabView>
 	
 					<p:commandButton action="#{donationsStatisticsBB.find()}" style="height: 42px; width: 100px;" class="pull-right"
 											value="#{messages.generic_search}" process="@form" update="@form" />
@@ -124,17 +157,27 @@
 					</legend>
 			
 					<div class="col-md-9 col-lg-12" style="padding-top: 12px;">
-						<label class="col-md-2 col-lg-4 control-label">
+						<label class="col-md-2 col-lg-3 control-label">
 							<h:outputText value="#{messages.label_donations_count}" />
 						</label>
 												
-						<div class="col-md-9 col-lg-8">							
-							<label class="col-md-2 col-lg-4 control-label" >
+						<div class="col-md-9 col-lg-7">							
+							<label class="col-md-2 col-lg-8 control-label" >
 								<h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null and donationsStatisticsBB.statisticsResults.donationsCount != null}" 
-								 value="#{donationsStatisticsBB.statisticsResults.donationsCount.count}" />
+								 value="#{messages.label_numerator} : " /> <h:outputText value="&#160; &#160;" />
+								 
+								<h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null and donationsStatisticsBB.statisticsResults.donationsCount != null}" 
+								 value="#{donationsStatisticsBB.statisticsResults.donationsCount.countNumerator}" /> <h:outputText value="&#160; &#160; &#160;" />
+								 
+								<h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null and donationsStatisticsBB.statisticsResults.donationsCount != null}" 
+								 value="#{messages.label_denominator} :" /> <h:outputText value="&#160; &#160;" />
+								 
+								<h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null and donationsStatisticsBB.statisticsResults.donationsCount != null}" 
+								 value="#{donationsStatisticsBB.statisticsResults.donationsCount.countDenominator}" /> <h:outputText value="&#160; &#160; &#160;" />
+
 							</label>
 							
-							<label class="col-md-2 col-lg-4 control-label" >
+							<label class="col-md-2 col-lg-3 control-label" >
 								<h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null and donationsStatisticsBB.statisticsResults.donationsCount != null}" 
 								 value="#{donationsStatisticsBB.statisticsResults.donationsCount.percentage} %"  />
 							</label>
@@ -144,18 +187,28 @@
 					</div>
 					
 					<div class="col-md-9 col-lg-12" style="padding-top: 12px;">
-						<label class="col-md-2 col-lg-4 control-label" >
+						<label class="col-md-2 col-lg-3 control-label" >
 							<h:outputText value="#{messages.label_donors_count}" />
 						</label>
 												
-						<div class="col-md-9 col-lg-8">	
+						<div class="col-md-9 col-lg-7">	
 							
-							<label class="col-md-2 col-lg-4 control-label">
+							<label class="col-md-2 col-lg-8 control-label" >
+							<h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null and donationsStatisticsBB.statisticsResults.donorsCount != null}" 
+								 value="#{messages.label_numerator} : " /> <h:outputText value="&#160; &#160;" />
+								 
 								<h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null and donationsStatisticsBB.statisticsResults.donorsCount != null}" 
-									value="#{donationsStatisticsBB.statisticsResults.donorsCount.count} " />
+								 value="#{donationsStatisticsBB.statisticsResults.donorsCount.countNumerator}" /> <h:outputText value="&#160; &#160; &#160;" />
+								 
+								<h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null and donationsStatisticsBB.statisticsResults.donorsCount != null}" 
+								 value="#{messages.label_denominator} :" /> <h:outputText value="&#160; &#160;" />
+								 
+								<h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null and donationsStatisticsBB.statisticsResults.donorsCount != null}" 
+								 value="#{donationsStatisticsBB.statisticsResults.donorsCount.countDenominator}" /> <h:outputText value="&#160; &#160; &#160;" />
+							
 							</label>
 												
-							<label class="col-md-2 col-lg-4 control-label">
+							<label class="col-md-2 col-lg-3 control-label">
 								<h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null and donationsStatisticsBB.statisticsResults.donorsCount != null}" 
 									value="#{donationsStatisticsBB.statisticsResults.donorsCount.percentage} %" />
 							</label>

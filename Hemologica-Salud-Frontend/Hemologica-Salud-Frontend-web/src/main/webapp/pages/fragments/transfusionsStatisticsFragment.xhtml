@@ -80,36 +80,70 @@
 				<legend>
 					<h:outputText value="#{messages.label_filter}"/>	
 				</legend>
+					<p:tabView>
+						<p:tab title="#{messages.label_numerator}">			
+							<c:forEach items="#{transfusionsStatisticsBB.allFilters}"
+								var="filterItem" >
 								
-					<c:forEach items="#{transfusionsStatisticsBB.allFilters}"
-						var="filterItem" >
+								<div class="col-md-9 col-lg-4 form-group"  style="padding-top: 12px;">
+									<label class="col-md-2  col-lg-6 control-label" for="name"><h:outputText
+											value="#{messages[filterItem.displayName]}" /></label>
+											
+										<div class="col-md-9 col-lg-6">
+											<c:choose>
+												<c:when test="${filterItem.options.size() != 0}">
+													<h:selectOneMenu class="form-control" 
+														style="height: 34px; padding: 0 !important;" value="#{filterItem.value}"
+														
+														converter="#{dataTransfusionFilterConverter}">
+														
+														 <f:attribute name="filterItem" id="filterItem" value="#{filterItem}"/>
+														<f:selectItem itemLabel="#{messages.label_all}" itemValue="#{null}"/>
+														<f:selectItems value="#{filterItem.options}" var="option"
+															itemValue="#{option}" itemLabel="#{messages[option.displayName]}" />
+													</h:selectOneMenu>
+												</c:when>
+												<c:otherwise>
+													<h:inputText style="height: 34px;" value="#{filterItem.valueString}"/>
+												</c:otherwise>
+											</c:choose>
+										</div>
+								</div>		
+							</c:forEach>
+						</p:tab>
+						<p:tab title="#{messages.label_denominator}">
+							<c:forEach items="#{transfusionsStatisticsBB.allFiltersDenominator}"
+								var="filterItem" >
+								
+								<div class="col-md-9 col-lg-4 form-group"  style="padding-top: 12px;">
+									<label class="col-md-2  col-lg-6 control-label" for="name"><h:outputText
+											value="#{messages[filterItem.displayName]}" /></label>
+											
+										<div class="col-md-9 col-lg-6">
+											<c:choose>
+												<c:when test="${filterItem.options.size() != 0}">
+													<h:selectOneMenu class="form-control" 
+														style="height: 34px; padding: 0 !important;" value="#{filterItem.value}"
+														
+														converter="#{dataTransfusionFilterConverter}">
+														
+														 <f:attribute name="filterItem" id="filterItem" value="#{filterItem}"/>
+														<f:selectItem itemLabel="#{messages.label_all}" itemValue="#{null}"/>
+														<f:selectItems value="#{filterItem.options}" var="option"
+															itemValue="#{option}" itemLabel="#{messages[option.displayName]}" />
+													</h:selectOneMenu>
+												</c:when>
+												<c:otherwise>
+													<h:inputText style="height: 34px;" value="#{filterItem.valueString}"/>
+												</c:otherwise>
+											</c:choose>
+										</div>
+								</div>		
+							</c:forEach>
 						
-						<div class="col-md-9 col-lg-4 form-group"  style="padding-top: 12px;">
-							<label class="col-md-2  col-lg-6 control-label" for="name"><h:outputText
-									value="#{messages[filterItem.displayName]}" /></label>
-									
-								<div class="col-md-9 col-lg-6">
-									<c:choose>
-										<c:when test="${filterItem.options.size() != 0}">
-											<h:selectOneMenu class="form-control" 
-												style="height: 34px; padding: 0 !important;" value="#{filterItem.value}"
-												
-												converter="#{dataTransfusionFilterConverter}">
-												
-												 <f:attribute name="filterItem" id="filterItem" value="#{filterItem}"/>
-												<f:selectItem itemLabel="#{messages.label_all}" itemValue="#{null}"/>
-												<f:selectItems value="#{filterItem.options}" var="option"
-													itemValue="#{option}" itemLabel="#{messages[option.displayName]}" />
-											</h:selectOneMenu>
-										</c:when>
-										<c:otherwise>
-											<h:inputText style="height: 34px;" value="#{filterItem.valueString}"/>
-										</c:otherwise>
-									</c:choose>
-								</div>
-						</div>		
-					</c:forEach>
-	
+						</p:tab>
+					</p:tabView>
+			
 					<p:commandButton action="#{transfusionsStatisticsBB.find()}" style="height: 42px; width: 100px;" class="pull-right"
 											value="#{messages.generic_search}" process="@form" update="@form" />
 	
@@ -127,12 +161,22 @@
 							<h:outputText value="#{messages.label_transfusions_count}" />
 						</label>
 												
-						<div class="col-md-9 col-lg-8">							
-							<label class="col-md-2 col-lg-4 control-label" >
+						<div class="col-md-9 col-lg-7">							
+							<label class="col-md-2 col-lg-8 control-label" >
 								<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.transfusionsCount != null}" 
-								 value="#{transfusionsStatisticsBB.statisticsResults.transfusionsCount.count}" />
+								 value="#{messages.label_numerator} : " /> <h:outputText value="&#160; &#160;" />
+							
+								<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.transfusionsCount != null}" 
+								 value="#{transfusionsStatisticsBB.statisticsResults.transfusionsCount.countNumerator}" /><h:outputText value="&#160; &#160; &#160;" />
+								 
+								 <h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.transfusionsCount != null}" 
+								 value="#{messages.label_denominator} :" /> <h:outputText value="&#160; &#160;" />
+								 
+								 <h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.transfusionsCount != null}" 
+								 value="#{transfusionsStatisticsBB.statisticsResults.transfusionsCount.countDenominator}" /><h:outputText value="&#160; &#160; &#160;" />
+								 
 							</label>
-							<label class="col-md-2 col-lg-4 control-label" >
+							<label class="col-md-2 col-lg-3 control-label" >
 								<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.transfusionsCount != null}" 
 								 value="#{transfusionsStatisticsBB.statisticsResults.transfusionsCount.percentage} %" />
 							</label>
@@ -145,12 +189,23 @@
 							<h:outputText value="#{messages.label_person_transfusions_count}" />
 						</label>
 												
-						<div class="col-md-9 col-lg-8">							
-							<label class="col-md-2 col-lg-4 control-label" >
+						<div class="col-md-9 col-lg-8">		
+
+							<label class="col-md-2 col-lg-7 control-label" >
 								<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.personTransfusionsCount != null}" 
-								 value="#{transfusionsStatisticsBB.statisticsResults.personTransfusionsCount.count}" />
+								 value="#{messages.label_numerator} : " /> <h:outputText value="&#160; &#160;" />
+							
+								<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.personTransfusionsCount != null}" 
+								 	value="#{transfusionsStatisticsBB.statisticsResults.personTransfusionsCount.countNumerator}" /> <h:outputText value="&#160; &#160; &#160;" />
+								 
+								 <h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.personTransfusionsCount != null}" 
+								 	value="#{messages.label_denominator} :" /> <h:outputText value="&#160; &#160;" />
+								 	
+								 <h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.personTransfusionsCount != null}" 
+								 	value="#{transfusionsStatisticsBB.statisticsResults.personTransfusionsCount.countDenominator}" /> <h:outputText value="&#160; &#160; &#160;" />
 							</label>
-							<label class="col-md-2 col-lg-4 control-label" >
+							
+							<label class="col-md-2 col-lg-3 control-label" >
 								<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.personTransfusionsCount != null}" 
 								 value="#{transfusionsStatisticsBB.statisticsResults.personTransfusionsCount.percentage} %" />
 							</label>
@@ -163,11 +218,23 @@
 						</label>
 												
 						<div class="col-md-9 col-lg-8">							
-							<label class="col-md-2 col-lg-4 control-label">
+							<label class="col-md-2 col-lg-7 control-label">
+								
 								<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.adversEventsCount != null}" 
-									value="#{transfusionsStatisticsBB.statisticsResults.adversEventsCount.count}" />
+								 value="#{messages.label_numerator} : " /> <h:outputText value="&#160; &#160;" />
+							
+							
+								<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.adversEventsCount != null}" 
+									value="#{transfusionsStatisticsBB.statisticsResults.adversEventsCount.countNumerator}" /> <h:outputText value="&#160; &#160; &#160;" />
+									
+								<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.adversEventsCount != null}" 
+								 	value="#{messages.label_denominator} :" /> <h:outputText value="&#160; &#160;" />
+								 	
+								 <h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.adversEventsCount != null}" 
+									value="#{transfusionsStatisticsBB.statisticsResults.adversEventsCount.countDenominator}" /> <h:outputText value="&#160; &#160; &#160;" />
+								 	
 							</label>
-							<label class="col-md-2 col-lg-4 control-label">
+							<label class="col-md-2 col-lg-3 control-label">
 								<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.adversEventsCount != null}" 
 									value="#{transfusionsStatisticsBB.statisticsResults.adversEventsCount.percentage} %" />
 							</label>

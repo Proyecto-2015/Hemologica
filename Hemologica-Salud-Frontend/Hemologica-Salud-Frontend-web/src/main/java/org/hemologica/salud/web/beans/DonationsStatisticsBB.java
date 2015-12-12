@@ -24,6 +24,7 @@ public class DonationsStatisticsBB implements Serializable{
 	private ApplicationBB applicationBB;
 	private DataDonationsStatistics statictic;
 	private List<DonationFilterData> allFilters;
+	private List<DonationFilterData> allFiltersDenominator;
 	private DataDonationsStatisticsResults statisticsResults;
 	private Date dateFrom;
 	private Date dateTo;
@@ -33,10 +34,12 @@ public class DonationsStatisticsBB implements Serializable{
 	private void init(){
 		
 		allFilters = new ArrayList<DonationFilterData>(applicationBB.getDonationsFilters().size());
+		allFiltersDenominator = new ArrayList<DonationFilterData>(applicationBB.getDonationsFilters().size());
 	    for(DonationFilterData item: applicationBB.getDonationsFilters()){
 			try {
 				
 				allFilters.add((DonationFilterData) item.clone());
+				allFiltersDenominator.add((DonationFilterData) item.clone());
 				
 			} catch (CloneNotSupportedException e) {
 				
@@ -51,7 +54,8 @@ public class DonationsStatisticsBB implements Serializable{
     
     public void find(){
     	
-    	statictic.setFilters(allFilters);
+    	statictic.setFiltersNumerator(allFilters);
+    	statictic.setFiltersDenominator(allFiltersDenominator);
     	
     	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		if(dateFrom != null)
@@ -120,4 +124,11 @@ public class DonationsStatisticsBB implements Serializable{
 		return serialVersionUID;
 	}
 
+	public List<DonationFilterData> getAllFiltersDenominator() {
+		return allFiltersDenominator;
+	}
+
+	public void setAllFiltersDenominator(List<DonationFilterData> allFiltersDenominator) {
+		this.allFiltersDenominator = allFiltersDenominator;
+	}
 }

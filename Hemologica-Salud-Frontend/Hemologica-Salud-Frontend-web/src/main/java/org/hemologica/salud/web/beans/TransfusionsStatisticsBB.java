@@ -24,6 +24,7 @@ public class TransfusionsStatisticsBB implements Serializable{
 	private ApplicationBB applicationBB;
 	private DataTransfusionsStatistics statictic;
 	private List<TransfusionFilterData> allFilters;
+	private List<TransfusionFilterData> allFiltersDenominator;
 	private Date dateFrom;
 	private Date dateTo;
 	private DataTransfusionsStatisticsResults statisticsResults;
@@ -32,10 +33,13 @@ public class TransfusionsStatisticsBB implements Serializable{
 	private void init(){
 		
 		allFilters = new ArrayList<TransfusionFilterData>(applicationBB.getTransfusionsFilters().size());
-	    for(TransfusionFilterData item: applicationBB.getTransfusionsFilters()){
+		allFiltersDenominator = new ArrayList<TransfusionFilterData>(applicationBB.getDonationsFilters().size());
+	 
+		for(TransfusionFilterData item: applicationBB.getTransfusionsFilters()){
 			try {
 				
 				allFilters.add((TransfusionFilterData) item.clone());
+				allFiltersDenominator.add((TransfusionFilterData) item.clone());
 				
 			} catch (CloneNotSupportedException e) {
 				
@@ -54,6 +58,7 @@ public class TransfusionsStatisticsBB implements Serializable{
     	logger.info("IR a buscar la infoooo");
     	
     	statictic.setFilters(allFilters);
+    	statictic.setAllFiltersDenominator(allFiltersDenominator);
     	
     	SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		if(dateFrom != null)
@@ -118,7 +123,13 @@ public class TransfusionsStatisticsBB implements Serializable{
 	     
 	    FacesContext.getCurrentInstance().addMessage(null, msg);
 	}
-	
-	
+
+	public List<TransfusionFilterData> getAllFiltersDenominator() {
+		return allFiltersDenominator;
+	}
+
+	public void setAllFiltersDenominator(List<TransfusionFilterData> allFiltersDenominator) {
+		this.allFiltersDenominator = allFiltersDenominator;
+	}
 
 }

@@ -2,21 +2,28 @@ package org.hemologica.datatypes;
 
 public class DataStatistic {
 	
-	private double count;
+	private int countDenominator;
+	private int countNumerator;
 	private double percentage;
 	
-	public double getCount() {
-		return count;
-	}
-	public void setCount(double count) {
-		this.count = count;
-	}
+	
 	public double getPercentage() {
 		return percentage;
 	}
 	public void setPercentage(double percentage) {
 		this.percentage = percentage;
 	}
+	public int getCountDenominator() {
+		return countDenominator;
+	}
+	public void setCountDenominator(int countDenominator) {
+		this.countDenominator = countDenominator;
+	}
+	public int getCountNumerator() {
+		return countNumerator;
+	}
+	public void setCountNumerator(int countNumerator) {
+		this.countNumerator = countNumerator;
+	}
 	
-
 }
