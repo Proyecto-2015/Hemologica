@@ -155,14 +155,31 @@
 					<legend>
 						<h:outputText value="#{messages.label_result}"/>	
 					</legend>
-			
+				
+				
 					<div class="col-md-9 col-lg-12" style="padding-top: 12px;">
-						<label class="col-md-2 col-lg-4 control-label">
-							<h:outputText value="#{messages.label_transfusions_count}" />
+						<label class="col-md-2 col-lg-12 control-label">
+							<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.transfusionsCount != null}" 
+									 value="#{messages.lable_no_data_numerator} :" /> <h:outputText value="&#160; &#160;" />
+									 
+							<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.transfusionsCount != null}" 
+									 value="#{transfusionsStatisticsBB.statisticsResults.noDataNumerator}" /> <h:outputText value="&#160; &#160; &#160;" />
+							
+							<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.transfusionsCount != null}" 
+									 value="#{messages.lable_no_data_denominator} :" /> <h:outputText value="&#160; &#160;" />
+							 
+							<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.transfusionsCount != null}" 
+									 value="#{transfusionsStatisticsBB.statisticsResults.noDataDenominator}" /> <h:outputText value="&#160; &#160; &#160;" />
+						 </label>
+					</div>		
+				
+					<div class="col-md-9 col-lg-12" style="padding-top: 12px;">
+						<label class="col-md-2 col-lg-3 control-label">
+							<h:outputText value="#{messages.title_transfusions}" />
 						</label>
 												
-						<div class="col-md-9 col-lg-7">							
-							<label class="col-md-2 col-lg-8 control-label" >
+						<div class="col-md-9 col-lg-9">							
+							<label class="col-md-2 col-lg-7 control-label" >
 								<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.transfusionsCount != null}" 
 								 value="#{messages.label_numerator} : " /> <h:outputText value="&#160; &#160;" />
 							
@@ -174,9 +191,9 @@
 								 
 								 <h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.transfusionsCount != null}" 
 								 value="#{transfusionsStatisticsBB.statisticsResults.transfusionsCount.countDenominator}" /><h:outputText value="&#160; &#160; &#160;" />
-								 
+								  
 							</label>
-							<label class="col-md-2 col-lg-3 control-label" >
+							<label class="col-md-2 col-lg-2 control-label" >
 								<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.transfusionsCount != null}" 
 								 value="#{transfusionsStatisticsBB.statisticsResults.transfusionsCount.percentage} %" />
 							</label>
@@ -185,11 +202,11 @@
 					</div>
 					
 					<div class="col-md-9 col-lg-12" style="padding-top: 12px;">
-						<label class="col-md-2 col-lg-4 control-label">
+						<label class="col-md-2 col-lg-3 control-label">
 							<h:outputText value="#{messages.label_person_transfusions_count}" />
 						</label>
 												
-						<div class="col-md-9 col-lg-8">		
+						<div class="col-md-9 col-lg-9">		
 
 							<label class="col-md-2 col-lg-7 control-label" >
 								<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.personTransfusionsCount != null}" 
@@ -205,7 +222,7 @@
 								 	value="#{transfusionsStatisticsBB.statisticsResults.personTransfusionsCount.countDenominator}" /> <h:outputText value="&#160; &#160; &#160;" />
 							</label>
 							
-							<label class="col-md-2 col-lg-3 control-label" >
+							<label class="col-md-2 col-lg-2 control-label" >
 								<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.personTransfusionsCount != null}" 
 								 value="#{transfusionsStatisticsBB.statisticsResults.personTransfusionsCount.percentage} %" />
 							</label>
@@ -213,11 +230,11 @@
 					</div>
 					
 					<div class="col-md-9 col-lg-12" style="padding-top: 12px;">
-						<label class="col-md-2 col-lg-4 control-label" >
+						<label class="col-md-2 col-lg-3 control-label" >
 							<h:outputText value="#{messages.label_adverse_events_count}" />
 						</label>
 												
-						<div class="col-md-9 col-lg-8">							
+						<div class="col-md-9 col-lg-9">							
 							<label class="col-md-2 col-lg-7 control-label">
 								
 								<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.adversEventsCount != null}" 
@@ -234,7 +251,7 @@
 									value="#{transfusionsStatisticsBB.statisticsResults.adversEventsCount.countDenominator}" /> <h:outputText value="&#160; &#160; &#160;" />
 								 	
 							</label>
-							<label class="col-md-2 col-lg-3 control-label">
+							<label class="col-md-2 col-lg-2 control-label">
 								<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.adversEventsCount != null}" 
 									value="#{transfusionsStatisticsBB.statisticsResults.adversEventsCount.percentage} %" />
 							</label>

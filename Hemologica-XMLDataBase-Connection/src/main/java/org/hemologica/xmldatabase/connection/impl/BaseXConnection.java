@@ -411,6 +411,71 @@ public class BaseXConnection implements IXMLDataBase {
 		return cdasList;
 
 	}
+	
+	public int countQuery(List<String> orClauses) throws XMLDataBaseException{
+		
+		String input = "";
+
+		if (orClauses != null && orClauses.size() != 0) {
+
+			input += "count(for $doc in collection('" + dataBase + "') " + "where ";
+
+			boolean first = true;
+			if(orClauses != null){
+				for (String s : orClauses) {
+					if (first) {
+
+						input += "(" + s + ")";
+						first = false;
+
+					} else {
+
+						input += " or (" + s + ")";
+
+					}
+	
+				}
+			}
+			
+			input += " return $doc)";
+		} else {
+
+			input = "count(collection('" + dataBase + "'))";
+
+		}
+		
+
+		BaseXClient.Query query;
+		BaseXClient session = null;
+		try {
+			session = this.getClient();
+
+			query = session.query(input);
+			query.execute();
+
+			if (query.more()) {
+
+				return Integer.parseInt(query.next());
+			}
+
+		} catch (IOException e) {
+
+			logger.log(Level.SEVERE, "Error al intentar recuperarlos elementos en la base de datos.", e);
+			throw new XMLDataBaseException();
+		} finally {
+			if (session != null) {
+				try {
+					session.close();
+				} catch (IOException e) {
+					logger.log(Level.SEVERE, e.getMessage(), e);
+				}
+			}
+		}
+
+		return 0;
+		
+	}
+	
 
 	public int countQuery(List<String> andClauses, List<List<String>> orClauses, List<String> orClausesCDAsIds,
 			List<String> analysisIds) throws XMLDataBaseException {
@@ -425,13 +490,15 @@ public class BaseXConnection implements IXMLDataBase {
 			input += "count(for $doc in collection('" + dataBase + "') " + "where ";
 
 			boolean first = true;
-			for (String s : andClauses) {
-				if (first) {
-					input += "$doc" + s;
-					first = false;
-				} else
-					input += " and $doc" + s;
-
+			if(andClauses != null){
+				for (String s : andClauses) {
+					if (first) {
+						input += "$doc" + s;
+						first = false;
+					} else
+						input += " and $doc" + s;
+	
+				}
 			}
 
 			for (List<String> orClausesList : orClauses) {

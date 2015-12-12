@@ -358,14 +358,18 @@ public class StatisticsBean implements StatisticsBeanLocal {
 		List<String> andClausesNumerator = new ArrayList<>();
 		List<String> andClausesDenominator = new ArrayList<>();
 		
+		List<String> orClausesNoDataNumerator = new ArrayList<>();
+		List<String> orClausesNoDataDenominator = new ArrayList<>();
+		
 		List<List<String>> orClausesList = new ArrayList<>();
 		List<String> orClauses = new ArrayList<>();
 		
 		/**
 		 * Bancos
 		 */
+		boolean bankFilter = false;
 		if(transfusionStatisticsData.getBloodBank() == null && transfusionStatisticsData.getInstitution() != null ){
-			
+			bankFilter = true;
 			List<Center> banks = FactoryDAO.getCenterDAO(em).getBanksByInstitutionId(transfusionStatisticsData.getInstitution().getCode());
 			for(Center c : banks){
 				
@@ -373,21 +377,30 @@ public class StatisticsBean implements StatisticsBeanLocal {
 				orClauses.add(query);
 			
 			}
-		}else if(transfusionStatisticsData.getBloodBank() != null){
 			
+		}else if(transfusionStatisticsData.getBloodBank() != null){
+			bankFilter = true;
 			String query = "//ClinicalDocument//author//assignedAuthor//representedOrganization//id//@root='" + transfusionStatisticsData.getBloodBank().getCode() +"'";
 			andClausesNumerator.add(query);
 			andClausesDenominator.add(query);
 			
 		}
-		
+		if(bankFilter){
+			String bankNodata = "$doc//ClinicalDocument//author//assignedAuthor//representedOrganization//id//@root='' or "
+					+ "$doc//ClinicalDocument//author//assignedAuthor//representedOrganization//id//not(@root)" ;
+			
+			orClausesNoDataNumerator.add(bankNodata);
+			orClausesNoDataDenominator.add(bankNodata);
+		}
 		orClausesList.add(orClauses);
 		
 		/**
 		 * Fecha desde
 		 */
+		
+		boolean dateFilter = false;
 		if(transfusionStatisticsData.getFromDate()!= null && !transfusionStatisticsData.getFromDate().equals("")){
-			
+			dateFilter=true;
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			Date dateFrom;
 			try {
@@ -411,7 +424,7 @@ public class StatisticsBean implements StatisticsBeanLocal {
 		 * Fecha Hasta
 		 */
 		if(transfusionStatisticsData.getToDate()!= null && !transfusionStatisticsData.getToDate().equals("")){
-			
+			dateFilter=true;
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			Date dateFrom;
 			try {
@@ -429,6 +442,13 @@ public class StatisticsBean implements StatisticsBeanLocal {
 				logger.log(Level.SEVERE, "Error al parsear la fecha", e);
 				
 			}
+			
+		}
+		if(dateFilter){
+			String dateNodata = "$doc/ClinicalDocument/component/structuredBody/component/section/entry/procedure/effectiveTime/low/@value='' or "
+					+ "$doc/ClinicalDocument/component/structuredBody/component/section/entry/procedure/effectiveTime/low/not(@value)" ;
+			orClausesNoDataNumerator.add(dateNodata);
+			orClausesNoDataDenominator.add(dateNodata);
 		}
 		
 		/**
@@ -463,6 +483,10 @@ public class StatisticsBean implements StatisticsBeanLocal {
 				String query = donationFilter.getTransfusionFilterCodesPath() + "<='" + dateFromString +"'";
 				andClausesDenominator.add(query);
 				
+				String dateNodata = "$doc/" +donationFilter.getTransfusionFilterCodesPath()+"='' or "
+						+ "not("+"$doc/" + donationFilter.getTransfusionFilterCodesPath() +")" ;
+				orClausesNoDataDenominator.add(dateNodata);
+				
 			}
 			
 			if(filter.getCode().equals(Constants.AGE_TO) && (filter.getValueString()!= null) && !(filter.getValueString().equals(""))){
@@ -477,6 +501,10 @@ public class StatisticsBean implements StatisticsBeanLocal {
 				String query = donationFilter.getTransfusionFilterCodesPath() + ">='" + dateFromString +"'";
 				andClausesDenominator.add(query);
 				
+				String dateNodata ="$doc/" + donationFilter.getTransfusionFilterCodesPath()+"='' or "
+						+ "not("+ "$doc/" +donationFilter.getTransfusionFilterCodesPath() +")" ;
+				orClausesNoDataDenominator.add(dateNodata);
+				
 			}
 			
 			if(filter.getValue() != null && filter.getValue().getCode() != null){
@@ -485,16 +513,23 @@ public class StatisticsBean implements StatisticsBeanLocal {
 				String query ="";
 				if(donationFilter != null){
 					
-					
 					query = donationFilter.getTransfusionFilterCodesPath() + "='" + filter.getValue().getCode() +"'";
+					
+					String dateNodata = "$doc/" +donationFilter.getTransfusionFilterCodesPath()+"='' or "
+							+ "not("+ "$doc/" +donationFilter.getTransfusionFilterCodesPath() +")" ;
 					
 					if(donationFilter.getTransfusionFilterCodesValue().equals(Constants.SEVERITY_EVENT)){
 						
-						if(edverseEventCodeDenominator.equals(""))
+						if(edverseEventCodeDenominator.equals("")){
+							
 							query = query.replace("/"+Constants.VAR_EVENT_FILTER.toString()+"/", "");
-						else{
+							dateNodata = dateNodata.replace("/"+Constants.VAR_EVENT_FILTER.toString()+"/", "");
+							
+						}else{
+							
 							String filterEvent = Constants.EVENT_FILTER + "'" + edverseEventCodeDenominator + "']";
 							query = query.replace(Constants.VAR_EVENT_FILTER.toString(), filterEvent);
+							dateNodata = dateNodata.replace(Constants.VAR_EVENT_FILTER.toString(), filterEvent);
 						}
 						filtersDenominator.add(query);
 						
@@ -505,7 +540,13 @@ public class StatisticsBean implements StatisticsBeanLocal {
 					if(donationFilter.getTransfusionFilterCodesValue().equals(Constants.ADVERSE_EVENT)){
 						edverseEventCodeDenominator = filter.getValue().getCode();
 						filtersDenominator.add(query);
+						
+						// Si es evento adverso solo ve que sea vacio si no esta es porque no tuvo esvento adverso.
+						dateNodata ="$doc/" + donationFilter.getTransfusionFilterCodesPath()+"=''";
 					}	
+					
+					orClausesNoDataDenominator.add(dateNodata);
+					
 				}
 			}	
 		}
@@ -532,6 +573,10 @@ public class StatisticsBean implements StatisticsBeanLocal {
 				String query = donationFilter.getTransfusionFilterCodesPath() + "<='" + dateFromString +"'";
 				andClausesNumerator.add(query);
 				
+				String dateNodata = "$doc/" +donationFilter.getTransfusionFilterCodesPath()+"='' or "
+						+ "not("+"$doc/" + donationFilter.getTransfusionFilterCodesPath() +")" ;
+				orClausesNoDataNumerator.add(dateNodata);
+				
 			}
 			
 			if(filter.getCode().equals(Constants.AGE_TO) && (filter.getValueString()!= null) && !(filter.getValueString().equals(""))){
@@ -546,6 +591,10 @@ public class StatisticsBean implements StatisticsBeanLocal {
 				String query = donationFilter.getTransfusionFilterCodesPath() + ">='" + dateFromString +"'";
 				andClausesNumerator.add(query);
 				
+				String dateNodata = "$doc/" +donationFilter.getTransfusionFilterCodesPath()+"='' or "
+						+ "not("+"$doc/" + donationFilter.getTransfusionFilterCodesPath() +")" ;
+				orClausesNoDataNumerator.add(dateNodata);
+				
 			}
 			
 			if(filter.getValue() != null && filter.getValue().getCode() != null){
@@ -557,13 +606,19 @@ public class StatisticsBean implements StatisticsBeanLocal {
 					
 					query = donationFilter.getTransfusionFilterCodesPath() + "='" + filter.getValue().getCode() +"'";
 					
+					String dateNodata = "$doc/" +donationFilter.getTransfusionFilterCodesPath()+"='' or "
+							+ "not("+ "$doc/" +donationFilter.getTransfusionFilterCodesPath() +")" ;
+					
+					
 					if(donationFilter.getTransfusionFilterCodesValue().equals(Constants.SEVERITY_EVENT)){
 						
-						if(edverseEventCode.equals(""))
+						if(edverseEventCode.equals("")){
 							query = query.replace("/"+Constants.VAR_EVENT_FILTER.toString()+"/", "");
-						else{
+							dateNodata = dateNodata.replace("/"+Constants.VAR_EVENT_FILTER.toString()+"/", "");
+						}else{
 							String filterEvent = Constants.EVENT_FILTER + "'" + edverseEventCode + "']";
 							query = query.replace(Constants.VAR_EVENT_FILTER.toString(), filterEvent);
+							dateNodata = dateNodata.replace(Constants.VAR_EVENT_FILTER.toString(), filterEvent);
 						}
 						adversEventsFilters.add(query);
 						
@@ -572,9 +627,14 @@ public class StatisticsBean implements StatisticsBeanLocal {
 					andClausesNumerator.add(query);
 					
 					if(donationFilter.getTransfusionFilterCodesValue().equals(Constants.ADVERSE_EVENT)){
+						// Si es evento adverso solo ve que sea vacio si no esta es porque no tuvo esvento adverso.
+						dateNodata = "$doc/" +donationFilter.getTransfusionFilterCodesPath()+"=''";
+						
 						edverseEventCode = filter.getValue().getCode();
 						adversEventsFilters.add(query);
-					}	
+					}
+					
+					orClausesNoDataNumerator.add(dateNodata);
 				}
 			}	
 		}
@@ -590,6 +650,21 @@ public class StatisticsBean implements StatisticsBeanLocal {
 		donationsCount.setCountNumerator(countNumeratos);
 		donationsCount.setCountDenominator(countDenominator);
 		
+		
+		int noDataNumeratorDonations = 0, noDataDenominatorDonations = 0  ;
+		if(orClausesNoDataNumerator != null && orClausesNoDataNumerator.size() !=0){
+			
+			noDataNumeratorDonations = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(orClausesNoDataNumerator);
+		}
+		
+		if(orClausesNoDataDenominator != null && orClausesNoDataDenominator.size() != 0){
+			
+			noDataDenominatorDonations = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(orClausesNoDataDenominator);
+		}	 
+		
+		dataDonationsStatistics.setNoDataDenominator(noDataDenominatorDonations);
+		dataDonationsStatistics.setNoDataNumerator(noDataNumeratorDonations);
+		
 		donationsCount.setPercentage((donationsCount.getCountDenominator() != 0) ? donationsCount.getCountNumerator() *100/donationsCount.getCountDenominator() : 0);
 		dataDonationsStatistics.setTransfusionsCount(donationsCount);
 		
@@ -598,11 +673,8 @@ public class StatisticsBean implements StatisticsBeanLocal {
 		 */
 		int cantNumerator = 0;
 		int cantDenominator = 0;
-		//int cantPersons = 0;
 		
 		for(Person p : FactoryDAO.getPeronDAO(em).getPersonsFilters(new HashMap<String,Object>())){
-			
-			//cantPersons++;
 			
 			List<String> orClausesCDAsIds = new ArrayList<>();
 			for(PersonsRecord personRecord :FactoryDAO.getPersonRecordDAO(em).getCDAsUserId(p.getId())){
@@ -627,7 +699,7 @@ public class StatisticsBean implements StatisticsBeanLocal {
 		
 		DataStatistic donorsCount = new DataStatistic();
 		donorsCount.setCountNumerator(cantNumerator);
-		donorsCount.setCountDenominator(countDenominator);
+		donorsCount.setCountDenominator(cantDenominator);
 		donorsCount.setPercentage((donorsCount.getCountDenominator() != 0) ? donorsCount.getCountNumerator() *100/donorsCount.getCountDenominator() : 0);
 		dataDonationsStatistics.setPersonTransfusionsCount(donorsCount);
 		

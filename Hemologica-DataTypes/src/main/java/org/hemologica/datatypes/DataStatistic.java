@@ -4,6 +4,7 @@ public class DataStatistic {
 	
 	private int countDenominator;
 	private int countNumerator;
+	
 	private double percentage;
 	
 	

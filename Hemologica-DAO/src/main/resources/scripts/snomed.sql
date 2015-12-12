@@ -63,7 +63,7 @@ INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('40', '427360
 INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('41', '233555005');
  
 -- Severidad
-INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('42', '267008002');
+INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('42', '255604002');
 INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('43', '6736007');
 INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('44', '24484000');
 
@@ -79,7 +79,7 @@ INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('48', '148030
 INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('49', '127788007');
 
 
-
+UPDATE `hemologica`.`concepts` SET `concept_code`='255604002' WHERE `id`='42';
 
 
 
