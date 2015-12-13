@@ -126,5 +126,10 @@ public class Constants {
 	public static final String ADVERS_EVENT_SEVERITY_SEVERE = "3";
 	public static final String ADVERS_EVENT_ABO = "3";
 	public static final String ADVERS_EVENT_RH = "4";
+	public static final String DONATION_ANALYSIS = "9";
+	public static final String DONATION_ANALYSIS_VHI = "3";
+	public static final String DONATION_ANALYSIS_SYPHILIS = "1";
+	public static final String DONATION_ANALYSIS_HEPATITIS_C = "2";
+	public static final String DONATION_ANALYSIS_HEPATITIS_B = "4";
 	
 }

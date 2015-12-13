@@ -10,6 +10,7 @@ import javax.persistence.EntityManager;
 import org.hemologica.constants.Constants;
 import org.hemologica.dao.model.DonationFailCausesCode;
 import org.hemologica.dao.model.DonationFilterCode;
+import org.hemologica.dao.model.DonationLaboratoyCode;
 import org.hemologica.dao.model.EventSeverityCode;
 import org.hemologica.dao.model.Person;
 import org.hemologica.dao.model.PersonsRecord;
@@ -118,6 +119,15 @@ public class OmsStatistics {
 		/**
 		 * Pregunta 8
 		 */
+		listAux = new ArrayList<>();
+		for(String s : andClausesNumerator){
+			
+			listAux.add(new String(s));
+		}
+		
+		DataQuestion d8 = get8Question(orClausesList, listAux, em);
+		questions.add(d8);
+		
 		/**
 		 * Pregunta 9
 		 */
@@ -617,7 +627,7 @@ public class OmsStatistics {
 		return q;
 	}
 
-	
+
 	public static DataQuestion get7Question(List<List<String>> orClausesList, List<String> andClausesNumerator, EntityManager em){
 		
 		DataQuestion q = new DataQuestion();
@@ -734,6 +744,89 @@ public class OmsStatistics {
 						
 		return query;
 		
+	}
+	
+
+	public static DataQuestion get8Question(List<List<String>> orClausesList, List<String> andClausesNumerator, EntityManager em){
+		
+		DataQuestion q = new DataQuestion();
+		List<DataAnswer> answers = new ArrayList<>();
+		q.setAnswers(answers);
+			
+		try {
+			
+			q.setQuestion("Número y porcentaje de donaciones (sangre entera y aféresis) sometidas a pruebas de detección de las siguientes infecciones transmisibles por transfusión (Número de pruebas de detección (Numerador)/ Número de donaciones total (Denominador)):");
+
+			DonationFilterCode donationFilter = FactoryDAO.getCodesDAO(em).getDonationsFilterById(Constants.DONATION_ANALYSIS);
+			
+			List<String> filtersAnalysis = new ArrayList<>();
+			
+			// Respuestas
+			DataAnswer d1 = new DataAnswer();
+			q.getAnswers().add(d1);
+			d1.setAnswer("VIH 1+2.");
+			
+			DonationLaboratoyCode lab = FactoryDAO.getCodesDAO(em).getDonationsAnalysisById(Constants.DONATION_ANALYSIS_VHI);
+			String query = donationFilter.getDonationFilterCodesPath() + "='"+lab.getConcept().getConceptCode()+"'";
+			filtersAnalysis.add(query);
+			
+			int countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysis);
+			d1.setAnswerResult(String.valueOf(countNumerator));
+			
+			
+			DataAnswer d2 = new DataAnswer();
+			q.getAnswers().add(d2);
+			d2.setAnswer("HBV.");
+			
+			filtersAnalysis.remove(query);
+			lab = FactoryDAO.getCodesDAO(em).getDonationsAnalysisById(Constants.DONATION_ANALYSIS_HEPATITIS_B);
+			query = donationFilter.getDonationFilterCodesPath() + "='"+lab.getConcept().getConceptCode()+"'";
+			filtersAnalysis.add(query);
+			
+			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysis);
+			d2.setAnswerResult(String.valueOf(countNumerator));
+			
+			DataAnswer d3 = new DataAnswer();
+			q.getAnswers().add(d3);
+			d3.setAnswer("HCV.");
+			
+			filtersAnalysis.remove(query);
+			lab = FactoryDAO.getCodesDAO(em).getDonationsAnalysisById(Constants.DONATION_ANALYSIS_HEPATITIS_C);
+			query = donationFilter.getDonationFilterCodesPath() + "='"+lab.getConcept().getConceptCode()+"'";
+			filtersAnalysis.add(query);
+			
+			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysis);
+			d3.setAnswerResult(String.valueOf(countNumerator));
+			
+			DataAnswer d4 = new DataAnswer();
+			q.getAnswers().add(d4);
+			d4.setAnswer("Sífilis.");
+			
+			filtersAnalysis.remove(query);
+			lab = FactoryDAO.getCodesDAO(em).getDonationsAnalysisById(Constants.DONATION_ANALYSIS_SYPHILIS);
+			query = donationFilter.getDonationFilterCodesPath() + "='"+lab.getConcept().getConceptCode()+"'";
+			filtersAnalysis.add(query);
+			
+			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysis);
+			d4.setAnswerResult(String.valueOf(countNumerator));
+			
+			DataAnswer d5 = new DataAnswer();
+			q.getAnswers().add(d5);
+			d5.setAnswer("Enfermedad de Chagas.");
+			
+//			filtersAnalysis.remove(query);
+//			lab = FactoryDAO.getCodesDAO(em).getDonationsAnalysisById("code");
+//			query = donationFilter.getDonationFilterCodesPath() + "='"+lab.getConcept().getConceptCode()+"'";
+//			filtersAnalysis.add(query);
+//			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysis);
+			d5.setAnswerResult("0");
+		
+		} catch (XMLDataBaseException e) {
+			
+			
+		}
+		
+		return q;
 	}
 	
 	

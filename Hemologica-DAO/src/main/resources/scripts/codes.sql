@@ -81,5 +81,6 @@ INSERT INTO `hemologica`.`donation_fail_causes_codes` (`donation_fail_cause_code
 
 INSERT INTO `hemologica`.`units_types` (`unit_type_id`, `unit_type_code_label`, `unit_type_code_value`, `unit_type_code_snomed`) VALUES ('5', 'label_hematies', '5', '54');
 
+INSERT INTO `hemologica`.`donation_laboratoy_codes` (`donation_laboratoy_code_id`, `donation_laboratoy_code_value`, `donation_laboratoy_code_label`, `donation_laboratoy_code_snomed`) VALUES ('4', '4', 'label_analysis_hepatitis_b', '55');
 
 

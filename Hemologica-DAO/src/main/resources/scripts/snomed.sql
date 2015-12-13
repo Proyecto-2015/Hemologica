@@ -90,6 +90,8 @@ INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('53', '844005
 -- otro tipo de producto
 INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('54', '119351004');
 
+-- hepatitis b
+INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('55', '122450004');
 
 
 
