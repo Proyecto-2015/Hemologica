@@ -101,6 +101,9 @@ public interface IXMLDataBase {
 	 */
 	public int countQuery(List<String> andClauses, List<List<String>> orClauses, List<String> orClausesCDAsIds, List<String> analysisIds) throws XMLDataBaseException;
 	
+	
+	public int countQuery(List<String> orClauses,List<String> analysisIds ) throws XMLDataBaseException;
+	
 	/**
 	 * Devuelve la cantidad de eventos adversos que cumplen con la query pasada por parametro.
 	 * @param patientId

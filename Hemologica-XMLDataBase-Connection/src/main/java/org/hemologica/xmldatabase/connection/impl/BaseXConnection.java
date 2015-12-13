@@ -411,6 +411,121 @@ public class BaseXConnection implements IXMLDataBase {
 		return cdasList;
 
 	}
+	
+	public int countQuery(List<String> orClauses, List<String> analysisIds) throws XMLDataBaseException{
+		
+		String input = "";
+
+		if ((orClauses != null && orClauses.size() != 0) || (analysisIds != null && analysisIds.size() != 0)) {
+
+			input += "count(for $doc in collection('" + dataBase + "') " + "where ";
+
+			boolean first = true;
+			if(orClauses != null){
+				for (String s : orClauses) {
+					if (first) {
+
+						input += "(" + s + ")";
+						first = false;
+
+					} else {
+
+						input += " or (" + s + ")";
+
+					}
+	
+				}
+			}
+			
+			String analysisQuery ="";
+			if (analysisIds != null && analysisIds.size() > 0) {
+
+				analysisQuery = "for $docLab in collection('"
+						+ XMLDataBaseFactory.getIXMLDataBaseLaboratory().getDataBaseName() + "') " + "where "
+						+ "$docLab//ClinicalDocument/component/structuredBody/component/section/entry/organizer/specimen/specimenRole/id/@root="
+						+ "$doc/ClinicalDocument/component/structuredBody/component/section/entry/procedure/specimen/specimenRole/id/@root   and "
+						+ "$docLab//ClinicalDocument/component/structuredBody/component/section/entry/organizer/specimen/specimenRole/id//@extension="
+						+ "$doc/ClinicalDocument/component/structuredBody/component/section/entry/procedure/specimen/specimenRole/id/@extension";
+
+				if (analysisIds.size() == 1) {
+					
+					String q="";
+					if(analysisIds.get(0).contains("$doc")){
+						
+						q = analysisIds.get(0).replace("$doc/", "$docLab/");
+						
+					}else{
+						
+						q = "$docLab/" + analysisIds.get(0);
+					}
+					
+					analysisQuery += " and ( " + q + ")";
+
+				} else if (analysisIds.size() == 2) {
+					
+					String q="";
+					if(analysisIds.get(1).contains("$doc")){
+						
+						q = analysisIds.get(1).replace("$doc/", "$docLab/");
+						
+					}
+					analysisQuery += " and ("+ q + ")";
+
+				}
+
+				analysisQuery += " return $docLab ";
+
+				if (first) {
+
+					input += "count(" + analysisQuery + ") > 0";
+
+				} else {
+
+					input += " and " + "count(" + analysisQuery + ") > 0";
+
+				}
+			}
+			
+			
+			input += " return $doc)";
+		} else {
+
+			input = "count(collection('" + dataBase + "'))";
+
+		}
+		
+
+		BaseXClient.Query query;
+		BaseXClient session = null;
+		try {
+			session = this.getClient();
+
+			query = session.query(input);
+			query.execute();
+
+			if (query.more()) {
+
+				return Integer.parseInt(query.next());
+			}
+
+		} catch (IOException e) {
+
+			logger.log(Level.SEVERE, "Error al intentar recuperarlos elementos en la base de datos.", e);
+			throw new XMLDataBaseException();
+		} finally {
+			if (session != null) {
+				try {
+					session.close();
+				} catch (IOException e) {
+					logger.log(Level.SEVERE, e.getMessage(), e);
+				}
+			}
+		}
+
+		return 0;
+		
+	}
+	
 
 	public int countQuery(List<String> andClauses, List<List<String>> orClauses, List<String> orClausesCDAsIds,
 			List<String> analysisIds) throws XMLDataBaseException {
@@ -425,13 +540,15 @@ public class BaseXConnection implements IXMLDataBase {
 			input += "count(for $doc in collection('" + dataBase + "') " + "where ";
 
 			boolean first = true;
-			for (String s : andClauses) {
-				if (first) {
-					input += "$doc" + s;
-					first = false;
-				} else
-					input += " and $doc" + s;
-
+			if(andClauses != null){
+				for (String s : andClauses) {
+					if (first) {
+						input += "$doc" + s;
+						first = false;
+					} else
+						input += " and $doc" + s;
+	
+				}
 			}
 
 			for (List<String> orClausesList : orClauses) {
