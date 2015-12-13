@@ -122,5 +122,9 @@ public class Constants {
 	public static final String PRODUCT_TYPE_PLASMA = "3";
 	public static final String PRODUCT_TYPE_CRIOPRECIPITADO = "2";
 	public static final String PRODUCT_TYPE_HEMATIES = "5";
+	public static final String ADVERS_EVENT_SEVERITY = "6";
+	public static final String ADVERS_EVENT_SEVERITY_SEVERE = "3";
+	public static final String ADVERS_EVENT_ABO = "3";
+	public static final String ADVERS_EVENT_RH = "4";
 	
 }

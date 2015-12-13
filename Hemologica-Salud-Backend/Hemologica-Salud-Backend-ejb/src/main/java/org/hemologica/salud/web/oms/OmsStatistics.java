@@ -10,8 +10,10 @@ import javax.persistence.EntityManager;
 import org.hemologica.constants.Constants;
 import org.hemologica.dao.model.DonationFailCausesCode;
 import org.hemologica.dao.model.DonationFilterCode;
+import org.hemologica.dao.model.EventSeverityCode;
 import org.hemologica.dao.model.Person;
 import org.hemologica.dao.model.PersonsRecord;
+import org.hemologica.dao.model.TransfusionEventsCode;
 import org.hemologica.dao.model.TransfusionFilterCode;
 import org.hemologica.dao.model.UnitsType;
 import org.hemologica.datatypes.DataAnswer;
@@ -146,6 +148,18 @@ public class OmsStatistics {
 		
 		DataQuestion d12 = get12Question(orClausesList, listAux, em);
 		questions.add(d12);
+		
+		/**
+		 * Pregunta 13
+		 */
+		listAux = new ArrayList<>();
+		for(String s : andClausesNumerator){
+			
+			listAux.add(new String(s));
+		}
+		
+		DataQuestion d13 = get13Question(orClausesList, listAux, em);
+		questions.add(d13);
 		
 		return questions;
 		
@@ -557,6 +571,7 @@ public class OmsStatistics {
 		return q;
 	}
 	
+	
 	public static DataQuestion get6Question(List<List<String>> orClausesList, List<String> andClausesNumerator, EntityManager em){
 		
 		DataQuestion q = new DataQuestion();
@@ -602,6 +617,7 @@ public class OmsStatistics {
 		return q;
 	}
 
+	
 	public static DataQuestion get7Question(List<List<String>> orClausesList, List<String> andClausesNumerator, EntityManager em){
 		
 		DataQuestion q = new DataQuestion();
@@ -720,6 +736,7 @@ public class OmsStatistics {
 		
 	}
 	
+	
 	public static DataQuestion get11Question(List<List<String>> orClausesList, List<String> andClausesNumerator, EntityManager em){
 		
 		DataQuestion q = new DataQuestion();
@@ -797,6 +814,7 @@ public class OmsStatistics {
 	}
 
 	
+
 	public static DataQuestion get12Question(List<List<String>> orClausesList, List<String> andClausesNumerator, EntityManager em){
 		
 		DataQuestion q = new DataQuestion();
@@ -889,5 +907,87 @@ public class OmsStatistics {
 		
 		return q;
 	}
+	
+	public static DataQuestion get13Question(List<List<String>> orClausesList, List<String> andClausesNumerator, EntityManager em){
+		
+		DataQuestion q = new DataQuestion();
+		List<DataAnswer> answers = new ArrayList<>();
+		q.setAnswers(answers);
+			
+		try {
+			
+			q.setQuestion("Número de reacciones adversas graves relacionadas con las transfusiones que se han notificado en el país");
 
+			TransfusionFilterCode donationFilter = FactoryDAO.getCodesDAO(em).getTransfusionFilterById(Constants.ADVERS_EVENT_SEVERITY);
+			
+			EventSeverityCode event = FactoryDAO.getCodesDAO(em).getSeverityById(Constants.ADVERS_EVENT_SEVERITY_SEVERE);
+			
+			String pathQuery = donationFilter.getTransfusionFilterCodesPath() +"='"+event.getConcept().getConceptCode()+ "'";
+			
+			// Respuestas
+			DataAnswer d1 = new DataAnswer();
+			q.getAnswers().add(d1);
+			d1.setAnswer("Hemólisis debida a incompatibilidad ABO.");
+			
+			TransfusionEventsCode unit = FactoryDAO.getCodesDAO(em).getTransfusionEventById(Constants.ADVERS_EVENT_ABO);
+			
+			String filterEvent = Constants.EVENT_FILTER + "'" + unit.getConcept().getConceptCode() + "']";
+			String query = pathQuery.replace(Constants.VAR_EVENT_FILTER, filterEvent) ;
+			andClausesNumerator.add(query);
+			int countNumerator = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClausesNumerator,orClausesList,null,null);
+			
+			d1.setAnswerResult(String.valueOf(countNumerator));
+			
+
+			DataAnswer d2 = new DataAnswer();
+			q.getAnswers().add(d2);
+			d2.setAnswer("Hemólisis debida a incompatibilidad RH.");
+			
+			andClausesNumerator.remove(query);
+			
+			unit = FactoryDAO.getCodesDAO(em).getTransfusionEventById(Constants.ADVERS_EVENT_RH);
+			filterEvent = Constants.EVENT_FILTER + "'" + unit.getConcept().getConceptCode() + "']";
+			query = pathQuery.replace(Constants.VAR_EVENT_FILTER, filterEvent) ;
+			andClausesNumerator.add(query);
+			countNumerator = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClausesNumerator,orClausesList,null,null);
+
+			d2.setAnswerResult(String.valueOf(countNumerator));
+			
+//			DataAnswer d3 = new DataAnswer();
+//			q.getAnswers().add(d3);
+//			d3.setAnswer("Sangre entera.");
+//			d3.setAnswerResult("0");
+//
+//			
+//			DataAnswer d4 = new DataAnswer();
+//			q.getAnswers().add(d4);
+//			d4.setAnswer("Hematíes.");
+//			andClausesNumerator.remove(query);
+//			
+//			unit = FactoryDAO.getCodesDAO(em).getProductById(Constants.PRODUCT_TYPE_HEMATIES);
+//			query = donationFilter.getTransfusionFilterCodesPath() + "='"+unit.getConcept().getConceptCode()+"'";
+//			andClausesNumerator.add(query);
+//			countNumerator = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClausesNumerator,orClausesList,null,null);
+//			d4.setAnswerResult(String.valueOf(countNumerator));
+//			
+//			
+//			DataAnswer d5 = new DataAnswer();
+//			q.getAnswers().add(d5);
+//			d5.setAnswer("Crioprecipitado");
+//			andClausesNumerator.remove(query);
+//			
+//			unit = FactoryDAO.getCodesDAO(em).getProductById(Constants.PRODUCT_TYPE_CRIOPRECIPITADO);
+//			query = donationFilter.getTransfusionFilterCodesPath() + "='"+unit.getConcept().getConceptCode()+"'";
+//			andClausesNumerator.add(query);
+//			countNumerator = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClausesNumerator,orClausesList,null,null);
+//			d5.setAnswerResult(String.valueOf(countNumerator));
+			
+		
+		} catch (XMLDataBaseException e) {
+			
+			
+		}
+		
+		return q;
+	}
 }
