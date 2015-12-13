@@ -20,7 +20,7 @@ public class UnitsType implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="unit_type_id")
 	private Long unitTypeId;
 

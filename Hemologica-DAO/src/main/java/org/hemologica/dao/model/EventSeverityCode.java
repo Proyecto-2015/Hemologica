@@ -21,7 +21,7 @@ import javax.persistence.Table;
 public class EventSeverityCode {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="event_severity_code_id")
 	private Long eventSeverityCodeId;
 

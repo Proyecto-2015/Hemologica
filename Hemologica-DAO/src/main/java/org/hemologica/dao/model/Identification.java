@@ -20,7 +20,7 @@ public class Identification implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(name="identificacion_code")
@@ -35,9 +35,9 @@ public class Identification implements Serializable {
 	@OneToMany(mappedBy="identification")
 	private List<IdentificationsHistory> identificationsHistories;
 
-	//bi-directional many-to-one association to PersonsRecord
-	@OneToMany(mappedBy="identification")
-	private List<PersonsRecord> personsRecords;
+//	//bi-directional many-to-one association to PersonsRecord
+//	@OneToMany(mappedBy="identification")
+//	private List<PersonsRecord> personsRecords;
 
 	public Identification() {
 	}
@@ -88,26 +88,26 @@ public class Identification implements Serializable {
 		return identificationsHistory;
 	}
 
-	public List<PersonsRecord> getPersonsRecords() {
-		return this.personsRecords;
-	}
+//	public List<PersonsRecord> getPersonsRecords() {
+//		return this.personsRecords;
+//	}
+//
+//	public void setPersonsRecords(List<PersonsRecord> personsRecords) {
+//		this.personsRecords = personsRecords;
+//	}
 
-	public void setPersonsRecords(List<PersonsRecord> personsRecords) {
-		this.personsRecords = personsRecords;
-	}
-
-	public PersonsRecord addPersonsRecord(PersonsRecord personsRecord) {
-		getPersonsRecords().add(personsRecord);
-		personsRecord.setIdentification(this);
-
-		return personsRecord;
-	}
-
-	public PersonsRecord removePersonsRecord(PersonsRecord personsRecord) {
-		getPersonsRecords().remove(personsRecord);
-		personsRecord.setIdentification(null);
-
-		return personsRecord;
-	}
+//	public PersonsRecord addPersonsRecord(PersonsRecord personsRecord) {
+//		getPersonsRecords().add(personsRecord);
+//		personsRecord.setIdentification(this);
+//
+//		return personsRecord;
+//	}
+//
+//	public PersonsRecord removePersonsRecord(PersonsRecord personsRecord) {
+//		getPersonsRecords().remove(personsRecord);
+//		personsRecord.setIdentification(null);
+//
+//		return personsRecord;
+//	}
 
 }

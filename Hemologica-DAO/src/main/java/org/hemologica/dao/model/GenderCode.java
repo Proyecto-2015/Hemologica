@@ -19,7 +19,7 @@ import javax.persistence.Table;
 public class GenderCode {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="gender_code_id")
 	private Long genderCodeId;
 

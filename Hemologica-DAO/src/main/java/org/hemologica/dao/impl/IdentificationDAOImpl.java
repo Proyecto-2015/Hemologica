@@ -10,7 +10,9 @@ import org.hemologica.dao.IGenericDAO;
 import org.hemologica.dao.IIdentificationDAO;
 import org.hemologica.dao.INotificationPersonDAO;
 import org.hemologica.dao.IPersonDAO;
+import org.hemologica.dao.IPersonRecordDAO;
 import org.hemologica.dao.IUserDAO;
+import org.hemologica.dao.converter.CryptoConverter;
 import org.hemologica.dao.model.Identification;
 import org.hemologica.dao.model.IdentificationsHistory;
 import org.hemologica.dao.model.NotificationsPerson;
@@ -95,6 +97,7 @@ public class IdentificationDAOImpl implements IIdentificationDAO {
 		INotificationPersonDAO notificationDAO = new NotificationPersonDAOImpl(em);
 		IUserDAO userDAO = new UserDAOImpl(em);
 		IPersonDAO personDAO = new PersonDAOImpl(em);
+		IPersonRecordDAO personRecordDAO = new PersonRecordDAOImpl(em);
 
 		// Para cada id de los que tengo que arreglar
 		for (Identification idToFix : ids) {
@@ -108,8 +111,10 @@ public class IdentificationDAOImpl implements IIdentificationDAO {
 				personToDelete = idToFix.getPerson();
 
 				// Actualizo los personrecords asociados al id que elegi
-				for (PersonsRecord record : idToFix.getPersonsRecords()) {
-					record.setIdentification(id);
+//				for (PersonsRecord record : idToFix.getPersonsRecords()) { 12-12-2015 change bruno
+				for (PersonsRecord record : personRecordDAO.getCDAsIdentificationId(idToFix.getId())) {
+//					record.setIdentification(id); 12-12-2015 change bruno
+					record.setIdentificationRef(CryptoConverter.encrypt(idToFix.getId().toString()));
 				}
 				
 				// Actualizo los notificationsPersons asociados al id que elegi

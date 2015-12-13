@@ -2,9 +2,7 @@ package org.hemologica.dao.impl;
 
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.LockModeType;
 import javax.persistence.Query;
-
 import org.hemologica.constants.Constants;
 import org.hemologica.dao.ICodesDAO;
 import org.hemologica.dao.model.BloodTypes;

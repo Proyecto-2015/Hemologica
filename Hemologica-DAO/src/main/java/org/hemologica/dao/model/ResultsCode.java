@@ -22,7 +22,7 @@ import javax.persistence.Table;
 public class ResultsCode {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="results_code_id")
 	private Long resultsCodeId;
 

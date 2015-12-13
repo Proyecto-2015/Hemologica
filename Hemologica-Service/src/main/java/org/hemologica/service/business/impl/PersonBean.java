@@ -9,11 +9,11 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
 import javax.persistence.PersistenceContext;
 import org.hemologica.dao.IIdentificationDAO;
 import org.hemologica.dao.IPersonDAO;
 import org.hemologica.dao.IPersonRecordDAO;
+import org.hemologica.dao.converter.CryptoConverter;
 import org.hemologica.dao.impl.IdentificationDAOImpl;
 import org.hemologica.dao.impl.PersonDAOImpl;
 import org.hemologica.dao.impl.PersonRecordDAOImpl;
@@ -139,7 +139,8 @@ public class PersonBean implements IPersonBean, Serializable {
 
 		Identification identification = this.createPerson(data);
 		PersonsRecord personsRecord = new PersonsRecord();
-		personsRecord.setIdentification(identification);
+//		personsRecord.setIdentification(identification); 12-12-2015 change bruno
+		personsRecord.setIdentificationRef(CryptoConverter.encrypt(identification.getId().toString()));
 		personsRecord.setPersonsRecordCdaExtension(cdaExtension);
 		personsRecord.setPersonsRecordCdaRoot(cdaRoot);
 		IPersonRecordDAO personRecordDAO = new PersonRecordDAOImpl(em);
@@ -158,7 +159,8 @@ public class PersonBean implements IPersonBean, Serializable {
 	private PersonsRecord createRecord(Identification identification, String cdaRoot, String cdaExtension) {
 
 		PersonsRecord personsRecord = new PersonsRecord();
-		personsRecord.setIdentification(identification);
+//		personsRecord.setIdentification(identification); 12-12-2015 change bruno
+		personsRecord.setIdentificationRef(CryptoConverter.encrypt(identification.getId().toString()));
 		personsRecord.setPersonsRecordCdaExtension(cdaExtension);
 		personsRecord.setPersonsRecordCdaRoot(cdaRoot);
 		IPersonRecordDAO personRecordDAO = new PersonRecordDAOImpl(em);

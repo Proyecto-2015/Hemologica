@@ -76,8 +76,8 @@ public class CDA {
 			
 		}
 		
-		
-		return XMLUtils.documentToString(doc);
+		String ret = XMLUtils.documentToString(doc);
+		return ret;
 	}
 
 	public CDA(Document document) throws ParserConfigurationException, SAXException, IOException, TransformerException,

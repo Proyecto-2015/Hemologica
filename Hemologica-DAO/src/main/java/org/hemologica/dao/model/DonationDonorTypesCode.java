@@ -15,7 +15,7 @@ public class DonationDonorTypesCode implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="donation_donor_type_code_id")
 	private Long donationDonorTypeCodeId;
 

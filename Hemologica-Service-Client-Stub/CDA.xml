@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ClinicalDocument xmlns="urn:hl7-org:v3"
+<ClinicalDocument
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="urn:hl7-org:v3 ftp://ftp.ihe.net/TF_Implementation_Material/PCC/schemas/cda/infrastructure/cda/CDA.xsd"
     classCode="DOCCLIN" 
@@ -9,8 +9,6 @@
     <!-- OID HEMOLOGICA = 2.16.858.0.0.1.10.2.3.1.1 -->
     <!-- OID HEMOLOGICA-CDA = 2.16.858.0.0.1.10.2.3.1.1.1 -->
     <!-- OID HEMOLOGICA-HCE = 2.16.858.0.0.1.10.2.3.1.1.2 -->
-    <!-- OID HEMOLOGICA-PRODUCTOS = 2.16.858.0.0.1.10.2.3.1.1.3 -->
-    <!-- OID HEMOLOGICA-Muestra-Donaciones = 2.16.858.0.0.1.10.2.3.1.1.4 -->
     
     <!--  ********************************************************    CDA Header  ********************************************************  -->
     
@@ -50,16 +48,16 @@
             <!-- Número de historia del paciente en Hemologica - -->
             <id  root="2.16.858.0.0.1.10.2.3.1.1.2" extension="49354237"/>
             
+            <!-- Telefono y MAil -->
+            <!-- HP: Primary home WP: Work Place -->
+            <telecom value="tel:+1(301)111-1111" use="HP"/>
+            <telecom value="mailto:brunostrasser18@gmail.com" use="HP"/>
+            
             <patient classCode="PSN" determinerCode="INSTANCE">
                 
                 <!-- Identificador del paciente  El root 2.16.858.1.858.68909.12345678 - Código CI = 68909 - CI = 12345678  -->
                 <!-- asocia el identificador de persona definido por la UNAOID, no es necesario incorporar la extensión.  -->  
-                <id  root="2.16.858.68909.12345678"/>
-           
-                <!-- Telefono y MAil -->
-                <!-- HP: Primary home WP: Work Place -->
-                <telecom value="tel:+1(301)111-1111" use="HP"/>
-                <telecom value="mailto:brunostrasser18@gmail.com" use="HP"/>
+                <id  root="2.16.858.1.858.68909.12345678"/>
            
                 <!-- Nombres y Apellidos -->
                 <name>
@@ -119,77 +117,62 @@
             <component>          
                 <section>         
                     <!-- Codigo del Procedimiento.
-                        54790000 - transfusión de un componente sanguíneo -->
-                     
-	                <code code="12719002" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" displayName="transfusión de plaquetas"/>
+                        42736004 - recolección de unidad de sangre para autotransfusión (procedimiento)
+                        1788001  - recolección de unidad de sangre para donación dirigida, donante (procedimiento)
+                        Generico = 25179006 recolección de unidad de sangre (procedimiento) -->
+                        
+                    <!-- se va porque esta lo mismo en el prodecimiento    
+                        
+                        <code code="233555005" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" displayName="donación de sangre al azar"/>
+                    
+                    -->
                     <!--  ********************************************************    Representacion Grafica  ********************************************************  -->
-                    <title>Transfusión de Sangre</title>
-                	<text>
-                		<table>
-                			<thead>
-                				<tr>
-                					<th>Description</th>
-                					<th>Date and Time (Range)</th>
-                					<th>Status</th>
-                				</tr>
-                			</thead>
-                			<tbody>
-                				<tr ID="Procedure1">
-                					<td ID="ProcedureDesc1">Laparoscopic appendectomy</td>
-                					<td>(03 Feb 2014 09:22am- 03 Feb 2014 11:15am)</td>
-                					<td>Completed</td>
-                				</tr>
-                			</tbody>
-                		</table>
-                	</text>
+                    <title>Donación de Sangre</title>
+                    <text>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Date and Time (Range)</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ID="Procedure1">
+                                    <td ID="ProcedureDesc1">Laparoscopic appendectomy</td>
+                                    <td>(03 Feb 2014 09:22am- 03 Feb 2014 11:15am)</td>
+                                    <td>Completed</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </text>
                     
                     <!--  ********************************************************    Resultados  ********************************************************  -->  
                     <entry>
-                		<!-- Procedures should be used for care that directly changes the patient's physical state.-->
-                		<procedure moodCode="EVN" classCode="PROC">
-                			<templateId root="2.16.840.1.113883.10.20.22.4.14" />
-                		
-                			<!-- identificador de la transfusion realizada -->
-                			<id root="64af26d5-88ef-4169-ba16-c6ef16a1824f"/>
-                			
-                			<!-- código de SNOMED-CT del procedimient de la transfusión -->
-                			<code code="12719002" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" displayName="transfusión de plaquetas"/>
+                        <!-- Procedures should be used for care that directly changes the patient's physical state.-->
+                        <procedure moodCode="EVN" classCode="PROC">
+                            <templateId root="2.16.840.1.113883.10.20.22.4.14" />
+                            
+                            <!-- identificador de la donación realizada -->
+                            <id root="64af26d5-88ef-4169-ba16-c6ef16a1824f"/>
+                            
+                            <!-- código de SNOMED-CT del tipo de donación realizada -->
+                            <code code="233555005" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" displayName="donación de sangre al azar"/>
 
                             <!-- “cancelled“ - The Act has been abandoned before activation. (No Efectuada)
                                  “completed” - An Act that has terminated normally after all of its constituents have been performed. (Efectuada) 
                                  Fuente - http://www.cdapro.com/know/25035 -->
-                			<statusCode code="completed" />
-                			
-                			<!-- Hora de la Transfusión -->
-                			<effectiveTime xsi:type="IVL_TS">
-                				<low value="20140203092205-0700" />
-                				<high value="20140203111514-0700" />
-                			</effectiveTime>
-                			
-                			
-                			<!-- OID HEMOLOGICA-PRODUCTOS = 2.16.858.0.0.1.10.2.3.1.1.3 -->
-                            <!-- OID HEMOLOGICA-Muestra-Donaciones = 2.16.858.0.0.1.10.2.3.1.1.4 -->
-                			<!-- id producto a transfundir -->
-                			<specimen typeCode="SPC">
-                            	<specimenRole classCode="SPEC">
-                            	<id xmlns="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                            	assigningAuthorityName="NIST HL7 Test Laboratory" 
-                            	extension="cefcdec2-4432-435e-a07f-00023d96b621" root="2.16.858.0.0.1.10.2.3.1.1.3"/>
-                            	</specimenRole>
-                            </specimen>
+                            <statusCode code="completed" />
                             
-                            <!-- id Donacion -->
-                            <specimen typeCode="SPC">
-                            	<specimenRole classCode="SPEC">
-                            	<id xmlns="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                            	   assigningAuthorityName="NIST HL7 Test Laboratory" 
-                            	   extension="cefcdec2-4432-435e-a07f-00023d96b621" root="2.16.858.0.0.1.10.2.3.1.1.4"/>
-                            	</specimenRole>
-                            </specimen>
-                			
-                			<!--
-                			    entryRelationShip (http://www.cdapro.com/know/25043)
-                			    typeCode:
+                            <!-- Hora de la donacion -->
+                            <effectiveTime xsi:type="IVL_TS">
+                                <low value="20140203092205" />
+                                <high value="20140203111514" />
+                            </effectiveTime>
+                            
+                            <!--
+                                entryRelationShip (http://www.cdapro.com/know/25043)
+                                typeCode:
                                     -CAUS: the source caused the target
                                     -COMP: the target is a component of the source
                                     -GEVL: the source observation evaluates the target goal
@@ -200,36 +183,49 @@
                                     -SPRT: the target provides supporting evidence for the source
                                     -SUBJ: the target is the subject of the source
                                     -XCRPT: the source is excerpted from the target
-                			
-                			-->
-                			<!-- Volumen transfundido - VER SI ESTA BIEN PONERLO ASI -->
-                			<entryRelationship typeCode="SPRT" >
-                          		<observation classCode="OBS" moodCode="EVN">
-                          		    <code code="118565006" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" displayName="volumen (propiedad) (calificador)"></code>
-                          		    <value xsi:type="PQ" value="90" unit="ml"/>
-                    		    </observation>
-                			</entryRelationship>
-                			
-                			<!-- Analisis PreTransfusionales -->
-                		    <entryRelationship typeCode="CAUS" >
-                		           <observation classCode="OBS" moodCode="EVN">
-                		            <!-- 252314007 - prueba de transfusión sanguínea-->
-                    			    <code code="77020008" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" displayName="prueba de Coombs directa (procedimiento)" />
-                    			   </observation>
-                    		</entryRelationship>
-                			
-                			<!-- EVENTOS ADVERSOS SI CORRESPONDE -->
-                		    <entryRelationship typeCode="CAUS" >
-                		           <observation classCode="OBS" moodCode="EVN">
-                    			    <code code="341009" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" displayName="reacción de incompatibilidad ABO" />
-                    			   </observation>
-                    		</entryRelationship>
-                			
-                		</procedure>
-                		
-                		
-            	    </entry>
-                                
+                            
+                            -->
+                            
+                            <!-- OID HEMOLOGICA-Muestra-Donaciones = 2.16.858.0.0.1.10.2.3.1.1.4 -->
+                            <!-- Identificador de la muestra extraída -->
+                            <specimen typeCode="SPC">
+                                <specimenRole classCode="SPEC">
+                                    <id root="2.16.858.0.0.1.10.2.3.1.1.4" extension ="1"/>
+                                </specimenRole>
+                            </specimen>
+                            
+                            <entryRelationship typeCode="COMP" >
+                                <!-- Grupo Sanguíneo --> 
+                                <observation classCode="OBS" moodCode="EVN">
+                                    <code code="278151004" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" displayName="grupo sanguíneo AB Rh(D) positivo" />
+                                </observation>
+                            </entryRelationship>
+
+                        </procedure>
+                        
+                        
+                    </entry>
+                    <!-- Eventos adversos -->
+                    <entry>    
+                        <observation classCode="OBS" moodCode="EVN">
+                            <code></code>
+                            
+                            <!-- EVENTOS ADVERSOS SI CORRESPONDE -->
+                            <entryRelationship typeCode="CAUS" >
+                                <observation classCode="OBS" moodCode="EVN">
+                                    <code code="404640003" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" displayName="mareo" />
+                                    <interpretationCode  code="267008002" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" displayName="leve"></interpretationCode>
+                                </observation>
+                            </entryRelationship>
+                        </observation>
+                    </entry>
+                    
+                    <entry>
+                        <observation classCode="OBS" moodCode="EVN">
+                            <code code="1" displayName="Donante voluntario"></code>
+                        </observation>
+                    </entry>
+                    
                 </section>
             </component>       
         </structuredBody>  

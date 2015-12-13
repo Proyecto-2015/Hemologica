@@ -18,7 +18,7 @@ import javax.persistence.Table;
 public class DonationStateCode {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="donation_state_code_id")
 	private Long donationStateCodeId;
 

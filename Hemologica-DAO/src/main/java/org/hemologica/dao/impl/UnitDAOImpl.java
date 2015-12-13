@@ -84,30 +84,30 @@ public class UnitDAOImpl extends GenericDAOImpl<Unit> implements IUnitDAO {
 					query+= ",'" + bank.getCode() + "'";
 				}
 			}
-			query+=")";
+			query+=") ";
 		}
 		
 		if(bloodTypeCodeABO != null && !bloodTypeCodeABO.equals("")){
 			
-			query+= "and u.bloodTypeABO.bloodAboTypeCodeValue='"+ bloodTypeCodeABO + "'";
+			query+= "and u.bloodTypeABO.bloodAboTypeCodeValue='"+ bloodTypeCodeABO + "' ";
 			
 		}
 		
 		if(bloodTypeCodeRH != null && !bloodTypeCodeRH.equals("")){
 			
-			query+= "and u.bloodTypeRH.bloodDTypeCodeValue='"+ bloodTypeCodeRH + "'";
+			query+= "and u.bloodTypeRH.bloodDTypeCodeValue='"+ bloodTypeCodeRH + "' ";
 			
 		}
 		
 		if(productTypeCode != null && !productTypeCode.equals("")){
 			
-			query+= "and u.unitsType.unitTypeCodeValue='"+ productTypeCode + "'";
+			query+= "and u.unitsType.unitTypeCodeValue='"+ productTypeCode + "' ";
 			
 		}
 		
 		Query querySql = em.createQuery(query);
-		
-		return querySql.getFirstResult();
+		Long ret = (Long) querySql.getSingleResult();
+		return ret.intValue();
 	}
 
 }

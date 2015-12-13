@@ -18,7 +18,7 @@ import javax.persistence.Table;
 public class Sequencer {
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="sequencer_code_id")
 	private int sequencerCodeId;
 

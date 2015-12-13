@@ -12,15 +12,17 @@ import javax.persistence.*;
 @Table(name="persons_records")
 @NamedQueries(value={
 	@NamedQuery(name="PersonsRecord.findAll", query="SELECT p FROM PersonsRecord p"),
-	@NamedQuery(name="PersonsRecord.findByIdentificationCode", query="SELECT p FROM PersonsRecord p WHERE p.identification.identificacionCode = :id"),
-	@NamedQuery(name="PersonsRecord.findByPersonId", query="SELECT p FROM PersonsRecord p WHERE p.identification.person.id = :id")
+//	@NamedQuery(name="PersonsRecord.findByIdentificationCode", query="SELECT p FROM PersonsRecord p WHERE p.identification.identificacionCode = :id"),
+//	@NamedQuery(name="PersonsRecord.findByPersonId", query="SELECT p FROM PersonsRecord p WHERE p.identification.person.id = :id"),
+	@NamedQuery(name="PersonsRecord.findByIdentificationRefCode", query="SELECT p FROM PersonsRecord p WHERE p.identificationRef = :id"),
+	@NamedQuery(name="PersonsRecord.findByIdentificationRefCodes", query="SELECT p FROM PersonsRecord p WHERE p.identificationRef in (:ids)")
 })
 public class PersonsRecord implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(name="persons_record_cda_root")
@@ -30,15 +32,12 @@ public class PersonsRecord implements Serializable {
 	private String personsRecordCdaExtension;
 
 	//bi-directional many-to-one association to Identification
-	@ManyToOne
-	@JoinColumn(name="identifications_id")
-	private Identification identification;
+//	@ManyToOne
+//	@JoinColumn(name="identifications_id")
+//	private Identification identification;
 	
-//	@Convert(
-//			attributeName="identification",
-//			converter=org.hemologica.dao.converter.CryptoConverter.class
-//			)
-	
+	@Column(name="person_record_identification_id")
+	private String identificationRef;
 
 	public PersonsRecord() {
 	}
@@ -67,12 +66,20 @@ public class PersonsRecord implements Serializable {
 		this.personsRecordCdaExtension = personsRecordCdaExtension;
 	}
 
-	public Identification getIdentification() {
-		return this.identification;
+//	public Identification getIdentification() {
+//		return this.identification;
+//	}
+//
+//	public void setIdentification(Identification identification) {
+//		this.identification = identification;
+//	}
+
+	public String getIdentificationRef() {
+		return identificationRef;
 	}
 
-	public void setIdentification(Identification identification) {
-		this.identification = identification;
+	public void setIdentificationRef(String identificationRef) {
+		this.identificationRef = identificationRef;
 	}
 
 }

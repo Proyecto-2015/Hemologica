@@ -21,7 +21,7 @@ public class DonationFilterCode implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="donation_filter_codes_id")
 	private Long donationFilterCodes;
 

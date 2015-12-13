@@ -15,13 +15,13 @@ import java.util.List;
 		@NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
 		@NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id"),
 		@NamedQuery(name = "User.findByAccountToken", query = "SELECT u FROM User u WHERE u.activeAccountToken = :token"),
-		@NamedQuery(name = "User.findByPersonId", query = "SELECT u FROM User u WHERE u.person = :personId"),
+		@NamedQuery(name = "User.findByPersonId", query = "SELECT u FROM User u WHERE u.person.id = :personId"),
 })
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@Column(name = "code")
