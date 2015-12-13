@@ -702,6 +702,18 @@
 			<value>#{applicationBB}</value>
 		</managed-property>
 	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>omsStatisticsBB</managed-bean-name>
+		<managed-bean-class>org.hemologica.salud.web.beans.OmsStatisticsBB</managed-bean-class>
+		<managed-bean-scope>view</managed-bean-scope>
+		<managed-property>
+			<property-name>applicationBB</property-name>
+			<property-class>org.hemologica.salud.web.beans.ApplicationBB</property-class>
+			<value>#{applicationBB}</value>
+		</managed-property>
+	</managed-bean>
+	
 	<managed-bean>
 		<managed-bean-name>personRecordBB</managed-bean-name>
 		<managed-bean-class>org.hemologica.salud.web.beans.PersonRecordBB</managed-bean-class>

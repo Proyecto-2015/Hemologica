@@ -92,5 +92,35 @@ public class Constants {
 	public static final String ASSIGNED = "ASSIGNED";
 	
 	
+	public static final String DONOR_TYPE = "11";
+	public static final String DONOR_TYPE_VOLUNTARY = "1";
+	public static final String DONOR_TYPE_REPLACEMENTS = "2";
+	public static final String DONOR_TYPE_OTHER = "3";
+	public static final String DONATION_TYPE = "8";
+	public static final String DONATION_APHERESIS = "4";
+	public static final String DONATION_STATE = "4";
+	public static final String DONATION_STATE_MADE = "1";
+	public static final String DONATION_STATE_REJECTED = "2";
+	
+	public static final String DONATION_FAIL_TYPE = "5";
+	public static final String DONATION_FAIL_TYPE_TEMPORAL = "2";
+	public static final String DONATION_FAIL_TYPE_PERMANENT = "1";
+	
+	public static final String DONATION_FAIL_CAUSE = "6";
+	public static final String DONATION_FAIL_CAUSE_LOW_WEIGHT = "4";
+	public static final String DONATION_FAIL_CAUSE_LOW_HEMOGLOBIN = "5";
+	public static final String DONATION_FAIL_CAUSE_TRAVEL = "6";
+	public static final String DONATION_FAIL_CAUSE_BEHAVIOR = "7";
+	public static final String DONOR_GENDER = "1";
+	public static final String DONOR_MALE = "1";
+	public static final String DONOR_FEMALE = "2";
+	public static final String DONOR_AGE_TO = "3";
+	public static final String DONOR_AGE_FROM = "2";
+	
+	public static final String PRODUCT_TYPE = "1";
+	public static final String PRODUCT_TYPE_PLAQUETAS= "1";
+	public static final String PRODUCT_TYPE_PLASMA = "3";
+	public static final String PRODUCT_TYPE_CRIOPRECIPITADO = "2";
+	public static final String PRODUCT_TYPE_HEMATIES = "5";
 	
 }

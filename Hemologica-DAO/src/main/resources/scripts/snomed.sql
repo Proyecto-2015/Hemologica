@@ -81,6 +81,18 @@ INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('49', '127788
 
 UPDATE `hemologica`.`concepts` SET `concept_code`='255604002' WHERE `id`='42';
 
+-- otros tipos de rechazo de donacion
+INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('50', '248342006');
+INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('51', '165397008');
+INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('52', '365457007');
+INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('53', '844005');
+
+-- otro tipo de producto
+INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('54', '119351004');
+
+
+
+
 
 
 

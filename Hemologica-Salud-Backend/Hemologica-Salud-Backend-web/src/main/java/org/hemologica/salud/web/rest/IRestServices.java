@@ -7,6 +7,9 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 import org.hemologica.constants.ConstansJson;
 import org.hemologica.constants.ConstantsRest;
 import org.hemologica.datatypes.DataBank;
@@ -29,6 +32,7 @@ import org.hemologica.datatypes.DataDonationsStatistics;
 import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.MailData;
 import org.hemologica.datatypes.DataMessageOption;
+import org.hemologica.datatypes.DataOmsStatistics;
 import org.hemologica.datatypes.TransfusionFilterData;
 
 @Path("/services")
@@ -281,4 +285,9 @@ public interface IRestServices {
 	@Path("/" +ConstantsRest.PATH_INSTITUTIONS +"/"+ ConstantsRest.ARRANGEMENTS)
 	@Produces("application/json")
 	public List<DataInstitution> getArrangementInstitutions(@QueryParam(ConstansJson.JSON_USER) String code);
+	
+	@POST
+	@Path("/" + ConstantsRest.PATH_OMS_STATISTICS)
+	@Produces(MediaType.APPLICATION_OCTET_STREAM)
+	public Response getOmsStatistics(DataOmsStatistics statictic);
 }

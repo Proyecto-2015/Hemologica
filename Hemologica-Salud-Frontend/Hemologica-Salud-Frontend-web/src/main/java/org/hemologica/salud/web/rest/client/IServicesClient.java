@@ -1,6 +1,7 @@
 package org.hemologica.salud.web.rest.client;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.util.List;
 import javax.enterprise.context.RequestScoped;
@@ -29,8 +30,10 @@ import org.hemologica.datatypes.DataDonationsStatisticsResults;
 import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.MailData;
 import org.hemologica.datatypes.DataMessageOption;
+import org.hemologica.datatypes.DataOmsStatistics;
 import org.hemologica.datatypes.DataResponsiblePerson;
 import org.hemologica.datatypes.TransfusionFilterData;
+import org.primefaces.model.StreamedContent;
 
 @RequestScoped
 public interface IServicesClient {
@@ -445,4 +448,11 @@ public interface IServicesClient {
 	 * @throws ClientProtocolException 
 	 */
 	public List<DataInstitution> getArrangementInstitutions(String string) throws URISyntaxException;
+
+	/**
+	 * Devuelve el File con los datos de la OMS. 
+	 * @param statictic
+	 * @return
+	 */
+	public InputStream getOmsStatistics(DataOmsStatistics statictic);
 }

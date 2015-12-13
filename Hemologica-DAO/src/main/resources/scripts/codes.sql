@@ -71,7 +71,15 @@ UPDATE `hemologica`.`donation_state_code` SET `donation_state_code_value`='cance
 -- Tipos de donantes
 INSERT INTO `hemologica`.`donation_donor_types_codes` (`donation_donor_type_code_id`, `donation_donor_type_code_label`, `donation_donor_type_code_value`) VALUES ('1', 'donor_voluntary', '1');
 INSERT INTO `hemologica`.`donation_donor_types_codes` (`donation_donor_type_code_id`, `donation_donor_type_code_label`, `donation_donor_type_code_value`) VALUES ('2', 'donor_replacement', '2');
+INSERT INTO `hemologica`.`donation_donor_types_codes` (`donation_donor_type_code_id`, `donation_donor_type_code_label`, `donation_donor_type_code_value`) VALUES ('3', 'donor_other', '3');
 
+INSERT INTO `hemologica`.`donation_fail_causes_codes` (`donation_fail_cause_code_id`, `donation_fail_cause_code_value`, `donation_fail_cause_code_label`, `donation_fail_cause_code_snomed`) VALUES ('4', '4', 'label_low_weight', '50');
+INSERT INTO `hemologica`.`donation_fail_causes_codes` (`donation_fail_cause_code_id`, `donation_fail_cause_code_value`, `donation_fail_cause_code_label`, `donation_fail_cause_code_snomed`) VALUES ('5', '5', 'label_low_hemoglobin', '51');
+INSERT INTO `hemologica`.`donation_fail_causes_codes` (`donation_fail_cause_code_id`, `donation_fail_cause_code_value`, `donation_fail_cause_code_label`, `donation_fail_cause_code_snomed`) VALUES ('6', '6', 'label_travel', '52');
+
+INSERT INTO `hemologica`.`donation_fail_causes_codes` (`donation_fail_cause_code_id`, `donation_fail_cause_code_value`, `donation_fail_cause_code_label`, `donation_fail_cause_code_snomed`) VALUES ('7', '7', 'label_behavior', '53');
+
+INSERT INTO `hemologica`.`units_types` (`unit_type_id`, `unit_type_code_label`, `unit_type_code_value`, `unit_type_code_snomed`) VALUES ('5', 'label_hematies', '5', '54');
 
 
 

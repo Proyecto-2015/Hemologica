@@ -1,6 +1,7 @@
 package org.hemologica.salud.web.rest.client;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Type;
 import java.net.URISyntaxException;
 import java.util.HashMap;
@@ -34,6 +35,7 @@ import org.hemologica.datatypes.DataDonationsStatisticsResults;
 import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.MailData;
 import org.hemologica.datatypes.DataMessageOption;
+import org.hemologica.datatypes.DataOmsStatistics;
 import org.hemologica.datatypes.DataResponsiblePerson;
 import org.hemologica.datatypes.TransfusionFilterData;
 import org.hemologica.salud.factories.RestFactory;
@@ -1214,6 +1216,25 @@ public class ServicesClientImpl implements IServicesClient {
 		List<DataInstitution> banks = new Gson().fromJson(banksString, listType);
 
 		return banks;
+	}
+
+	@Override
+	public InputStream getOmsStatistics(DataOmsStatistics statictic) {
+		
+		String urlBanks = url + ConstantsRest.PATH_OMS_STATISTICS;
+		
+		
+		try {
+			
+			InputStream is =  RestFactory.getRestServicesUtils().postStream(urlBanks, statictic);
+			
+			return is;
+
+		} catch (IOException e) {
+			logger.log(Level.SEVERE, "Error al llamar al servicio IOException", e);
+		}
+
+		return null;
 	}
 
 }

@@ -2,6 +2,7 @@ package org.hemologica.salud.web.rest.utils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -48,6 +49,44 @@ public class RestServicesUtilsImpl implements IRestServicesUtils {
 				sb.append(s);
 			}
 			return sb.toString();
+		}else{
+			return null;
+			
+		}
+	}
+	
+	@Override
+	public InputStream postStream(String url, Object o) throws IOException {
+		
+		HttpClient client = HttpClientBuilder.create().build();
+    	HttpPost post = new HttpPost(url);
+    	
+    	Gson gson = new Gson();
+    	
+		/**
+		 * Se pasa siempre un objto en formato JSON en el contenido del mensaje
+		 */
+		StringEntity entity = new StringEntity(gson.toJson(o));
+		entity.setContentType("application/json");
+		post.setEntity(entity);
+		
+		HttpResponse r = client.execute(post);		
+		
+		/**
+		 * status code 200 = success
+		 */
+		if(r.getStatusLine().getStatusCode() == 200){
+		
+			InputStream i = r.getEntity().getContent();
+			
+//			BufferedReader br = new BufferedReader(new InputStreamReader(r.getEntity().getContent()));
+//			StringBuilder sb = new StringBuilder();
+//			String s;
+//
+//			while ((s = br.readLine()) != null) {
+//				sb.append(s);
+//			}
+			return i;
 		}else{
 			return null;
 			

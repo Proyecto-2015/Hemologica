@@ -1,6 +1,9 @@
 package org.hemologica.salud.ejb.beans.impl;
 
 
+import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,8 +23,11 @@ import org.hemologica.dao.model.DonationFilterCode;
 import org.hemologica.dao.model.Person;
 import org.hemologica.dao.model.PersonsRecord;
 import org.hemologica.dao.model.TransfusionFilterCode;
+import org.hemologica.datatypes.DataAnswer;
 import org.hemologica.datatypes.DataDonationsStatistics;
 import org.hemologica.datatypes.DataDonationsStatisticsResults;
+import org.hemologica.datatypes.DataOmsStatistics;
+import org.hemologica.datatypes.DataQuestion;
 import org.hemologica.datatypes.DataStatistic;
 import org.hemologica.datatypes.DataTransfusionsStatistics;
 import org.hemologica.datatypes.DataTransfusionsStatisticsResults;
@@ -29,8 +35,19 @@ import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.datatypes.TransfusionFilterData;
 import org.hemologica.factories.FactoryDAO;
 import org.hemologica.salud.ejb.beans.StatisticsBeanLocal;
+import org.hemologica.salud.web.oms.OmsStatistics;
 import org.hemologica.xmldatabase.exceptions.XMLDataBaseException;
 import org.hemologica.xmldatabase.factories.XMLDataBaseFactory;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.ListItem;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.ColumnText;
+import com.itextpdf.text.pdf.PdfPageEventHelper;
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.*;
 
 @Stateless
 @LocalBean
@@ -797,5 +814,154 @@ public class StatisticsBean implements StatisticsBeanLocal {
 			
 		return dataDonationsStatistics;
 	}
+
+	@Override
+	public ByteArrayOutputStream getOmsStatistics(DataOmsStatistics statictic) {
+		
+		List<String> andClausesNumerator = new ArrayList<>();
+		
+		List<List<String>> orClausesList = new ArrayList<>();
+		List<String> orClauses = new ArrayList<>();
+		
+		/**
+		 * Bancos
+		 */
+		if(statictic.getBloodBank() == null && statictic.getInstitution() != null ){
+			
+			List<Center> banks = FactoryDAO.getCenterDAO(em).getBanksByInstitutionId(statictic.getInstitution().getCode());
+			for(Center c : banks){
+				
+				String query = "//ClinicalDocument//author//assignedAuthor//representedOrganization//id//@root='" + c.getCenterCode() +"'";
+				orClauses.add(query);
+			
+			}
+			
+		}else if(statictic.getBloodBank() != null){
+			
+			String query = "//ClinicalDocument//author//assignedAuthor//representedOrganization//id//@root='" + statictic.getBloodBank().getCode() +"'";
+			andClausesNumerator.add(query);
+			
+		}
+		
+		orClausesList.add(orClauses);
+		
+		/**
+		 * Fecha desde
+		 */
+		
+		if(statictic.getFromDate()!= null && !statictic.getFromDate().equals("")){
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			Date dateFrom;
+			try {
+				dateFrom = sdf.parse(statictic.getFromDate());
+				SimpleDateFormat sdfCDA = new SimpleDateFormat("yyyyMMddHHmmss");
+				
+				String dateString = sdfCDA.format(dateFrom);
+				
+				String query = "/ClinicalDocument/component/structuredBody/component/section/entry/procedure/effectiveTime/low/@value" + ">='" + dateString +"'";
+				andClausesNumerator.add(query);
+							
+			} catch (ParseException e) {
+				
+				logger.log(Level.SEVERE, "Error al parsear la fecha", e);
+				
+			}
+		}
+		
+		/**
+		 * Fecha Hasta
+		 */
+		if(statictic.getToDate()!= null && !statictic.getToDate().equals("")){
+
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			Date dateFrom;
+			try {
+				dateFrom = sdf.parse(statictic.getToDate());
+				SimpleDateFormat sdfCDA = new SimpleDateFormat("yyyyMMddHHmmss");
+				
+				String dateString = sdfCDA.format(dateFrom);
+				
+				String query = "/ClinicalDocument/component/structuredBody/component/section/entry/procedure/effectiveTime/low/@value" + "<='" + dateString +"'";
+				andClausesNumerator.add(query);
+							
+			} catch (ParseException e) {
+				
+				logger.log(Level.SEVERE, "Error al parsear la fecha", e);
+				
+			}
+			
+		}
+
+		Document document = new Document();
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+		
+        try {
+        	
+        	PdfWriter p = PdfWriter.getInstance(document,
+                   new FileOutputStream("Phrase.pdf"));
+
+            PdfWriter.getInstance(document, byteArrayOutputStream);
+            
+            Rectangle rect = new Rectangle(30, 30, 550, 800);
+            p.setBoxSize("art", rect);
+            
+            HeaderFooterPageEvent event = new HeaderFooterPageEvent();
+            p.setPageEvent(event);
+            
+            document.open();
+            
+            document.addTitle("My first PDF");
+
+            List<DataQuestion> questions = OmsStatistics.getQuestions(orClausesList,andClausesNumerator,em);
+            
+            for(DataQuestion dataQuestion : questions){
+            	
+            	Paragraph preface = new Paragraph(); 
+            	//preface.setAlignment(Element.ALIGN_CENTER);
+            	
+            	preface.add(new Phrase(dataQuestion.getQuestion()));
+            	
+            	com.itextpdf.text.List orderedList = new com.itextpdf.text.List(com.itextpdf.text.List.ORDERED);
+	            
+            	for(DataAnswer dataAnswer : dataQuestion.getAnswers()){
+	            
+		            orderedList.add(new ListItem(dataAnswer.getAnswer() + " " + dataAnswer.getAnswerResult()));
+
+	            }
+	            
+            	preface.add(orderedList);
+            	
+	            document.add(preface);
+	            document.add( Chunk.NEWLINE );
+            }
+            
+            document.close();
+
+        } catch (DocumentException e) {
+        	
+            logger.log(Level.SEVERE, "Error al crear el documento DocumentException", e);
+            
+        } catch (FileNotFoundException e) {
+        	
+        	logger.log(Level.SEVERE, "Error al crear el documento FileNotFoundException", e);
+        } 
+
+		return byteArrayOutputStream;
+		
+	}
+	
+	public class HeaderFooterPageEvent extends PdfPageEventHelper {
+	    
+		public void onStartPage(PdfWriter writer,Document document) {
+	    	Rectangle rect = writer.getBoxSize("art");
+	        ColumnText.showTextAligned(writer.getDirectContent(),Element.ALIGN_CENTER, new Phrase("Top Left"), rect.getLeft(), rect.getTop(), 0);
+	        ColumnText.showTextAligned(writer.getDirectContent(),Element.ALIGN_CENTER, new Phrase("Top Right"), rect.getRight(), rect.getTop(), 0);
+	    }
+	    public void onEndPage(PdfWriter writer,Document document) {
+	    	Rectangle rect = writer.getBoxSize("art");
+	        ColumnText.showTextAligned(writer.getDirectContent(),Element.ALIGN_CENTER, new Phrase("Bottom Left"), rect.getLeft(), rect.getBottom(), 0);
+	        ColumnText.showTextAligned(writer.getDirectContent(),Element.ALIGN_CENTER, new Phrase("Bottom Right"), rect.getRight(), rect.getBottom(), 0);
+	    }
+	} 
 
 }

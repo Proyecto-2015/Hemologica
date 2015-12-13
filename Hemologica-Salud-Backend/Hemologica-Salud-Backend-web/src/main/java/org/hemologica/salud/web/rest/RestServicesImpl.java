@@ -1,5 +1,6 @@
 package org.hemologica.salud.web.rest;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -8,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ws.rs.core.Response;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 import org.hemologica.datatypes.DataBank;
@@ -20,8 +22,6 @@ import org.hemologica.datatypes.DataProductType;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataResponsiblePerson;
 import org.hemologica.datatypes.DataStock;
-import org.hemologica.datatypes.DataStockProductType;
-import org.hemologica.datatypes.DataStockProductTypeBloodType;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataTransfusionsStatistics;
 import org.hemologica.datatypes.DataTransfusionsStatisticsResults;
@@ -31,6 +31,7 @@ import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.datatypes.DataDonationsStatistics;
 import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.DataMovement;
+import org.hemologica.datatypes.DataOmsStatistics;
 import org.hemologica.datatypes.MailData;
 import org.hemologica.datatypes.DataMessageOption;
 import org.hemologica.datatypes.TransfusionFilterData;
@@ -550,6 +551,18 @@ public class RestServicesImpl implements IRestServices{
 	public List<DataInstitution> getArrangementInstitutions(String code) {
 		
 		return getInstitutions();
+	}
+
+	@Override
+	public Response getOmsStatistics(DataOmsStatistics statictic) {
+	
+		ByteArrayOutputStream o = FactoryBeans.getStatisticsBeanLocal().getOmsStatistics(statictic); 
+        
+		if(o!= null)
+			return Response.status(200).entity(o.toByteArray()).build(); 
+		else
+			return Response.status(0).build();
+		
 	}
 
 	

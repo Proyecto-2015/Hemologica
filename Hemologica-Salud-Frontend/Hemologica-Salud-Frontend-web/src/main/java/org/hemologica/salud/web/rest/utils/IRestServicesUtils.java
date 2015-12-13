@@ -1,6 +1,7 @@
 package org.hemologica.salud.web.rest.utils;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 
@@ -28,4 +29,12 @@ public interface IRestServicesUtils {
 	 */
 	public String get(String url, HashMap<String, String> parameters) throws ClientProtocolException, IOException, URISyntaxException;
 	
+	/**
+	 * Realiza un llamado post al servicio web en url con el objeto en el contenido del mensaje
+	 * @param url - ruta al servicio web
+	 * @param o - Objeto
+	 * @return Devuleve un InputStream.
+	 * @throws IOException 
+	 */
+	public InputStream postStream(String url, Object o) throws IOException;
 }

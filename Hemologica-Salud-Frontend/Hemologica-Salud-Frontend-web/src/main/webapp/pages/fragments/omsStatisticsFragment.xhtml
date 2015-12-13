@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+	
+<h:head>
+
+</h:head>
+<h:body>
+	<h:form>
+		<div class="form-group">
+		
+		<p:messages></p:messages>
+			<fieldset>
+				<div class="form-group div-center col-md-12 col-lg-12">
+				<legend>
+					<h:outputText value="#{messages.label_filter_insitution}"/>	
+				</legend>
+				
+					<div class="col-md-9 col-lg-6">
+						<label class="col-md-2 col-lg-4 control-label" for="name"><h:outputText
+								value="#{messages.label_insitution}" /></label>
+						<div class="col-md-9 col-lg-8">
+							<h:selectOneMenu id="options" class="form-control" value="#{omsStatisticsBB.statictic.institution}"
+								style="height: 34px;" converter="#{dataInstitutionConverterSession}">
+								
+								<f:selectItem itemLabel="#{messages.label_all}" itemValue="#{null}"/>
+								<f:selectItems value="#{sessionBB.userInstitutions}" var="institution"
+									itemValue="#{institution}" itemLabel="#{institution.name}" />
+								
+							</h:selectOneMenu>
+						</div>
+					</div>
+					
+					<div class="col-md-9 col-lg-6">
+						<label class="col-md-2  col-lg-4 control-label" for="name"><h:outputText
+								value="#{messages.label_bank}" /></label>
+						<div class="col-md-9 col-lg-8">
+							<h:selectOneMenu class="form-control" value="#{omsStatisticsBB.statictic.bloodBank}"
+								style="height: 34px;" converter="#{dataBankConverterSession}">
+								<f:selectItem itemLabel="#{messages.label_all}" itemValue="#{null}"/>
+								<f:selectItems value="#{sessionBB.userBanks}" var="bank"
+									itemValue="#{bank}" itemLabel="#{bank.name}" />
+							</h:selectOneMenu>
+						</div>
+					</div>
+
+					
+					<div class="col-md-9 col-lg-6" style="padding-top: 12px;">
+						<label class="col-md-2 col-lg-4 control-label" for="name"><h:outputText
+									value="#{messages.label_date_from}" /></label>
+									
+						<div class="col-md-9 col-lg-8">
+							<p:calendar pattern="dd/MM/yyyy"
+									mode="popup" value="#{omsStatisticsBB.dateFrom}" />
+						</div>
+					</div>
+					<div class="col-md-9 col-lg-6" style="padding-top: 12px;">
+						<label class="col-md-2 col-lg-4 control-label" for="name"><h:outputText
+									value="#{messages.label_date_to}" /></label>
+									
+						<div class="col-md-9 col-lg-8">							
+							<p:calendar  pattern="dd/MM/yyyy"
+									mode="popup" value="#{omsStatisticsBB.dateTo}" />
+						</div>
+					</div>
+					
+					<p:commandButton action="#{omsStatisticsBB.download()}" style="height: 42px; width: 100px; margin: 30px;" class="pull-right"
+									ajax="false"	value="#{messages.label_download}" >
+							 <p:fileDownload value="#{omsStatisticsBB.download()}" />
+					</p:commandButton>
+				</div>
+			</fieldset>
+			
+
+		</div>
+	</h:form>	
+	
+</h:body>
+</html>
