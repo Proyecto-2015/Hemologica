@@ -1,10 +1,12 @@
 package org.hemologica.salud.web.oms;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import org.hemologica.constants.Constants;
@@ -15,6 +17,7 @@ import org.hemologica.dao.model.DonationLaboratoyCode;
 import org.hemologica.dao.model.EventSeverityCode;
 import org.hemologica.dao.model.Person;
 import org.hemologica.dao.model.PersonsRecord;
+import org.hemologica.dao.model.ResultsCode;
 import org.hemologica.dao.model.TransfusionEventsCode;
 import org.hemologica.dao.model.TransfusionFilterCode;
 import org.hemologica.dao.model.UnitsType;
@@ -26,7 +29,10 @@ import org.hemologica.xmldatabase.factories.XMLDataBaseFactory;
 
 public class OmsStatistics {
 	
-	private Logger logger = Logger.getLogger(OmsStatistics.class.getName());
+	private static Logger logger = Logger.getLogger(OmsStatistics.class.getName());
+	private static int countDonations;
+	private static List<Double> countAnalysis;
+	private static List<Double> countDonationsDonorType;
 	
 	public static List<DataQuestion> getQuestions(List<List<String>> orClausesList, List<String> andClausesNumerator, EntityManager em){
 		
@@ -131,9 +137,26 @@ public class OmsStatistics {
 		/**
 		 * Pregunta 9
 		 */
+		listAux = new ArrayList<>();
+		for(String s : andClausesNumerator){
+			
+			listAux.add(new String(s));
+		}
+		
+		DataQuestion d9 = get9Question(orClausesList, listAux, em);
+		questions.add(d9);
+		
 		/**
 		 * Pregunta 10
 		 */
+		listAux = new ArrayList<>();
+		for(String s : andClausesNumerator){
+			
+			listAux.add(new String(s));
+		}
+		
+		DataQuestion d10 = get10Question(orClausesList, listAux, em);
+		questions.add(d10);
 		
 		/**
 		 * Pregunta 11
@@ -271,7 +294,7 @@ public class OmsStatistics {
 			
 		} catch (XMLDataBaseException e) {
 			
-			
+			logger.log(Level.SEVERE, "Error al realizar la pregunta 1 del formulario OMS", e);
 		}
 		
 		return q;
@@ -282,14 +305,15 @@ public class OmsStatistics {
 		DataQuestion q = new DataQuestion();
 		List<DataAnswer> answers = new ArrayList<>();
 		q.setAnswers(answers);
-			
+		
+		countDonationsDonorType = new ArrayList<>();
 		try {
 			
 			DonationFilterCode donationFilterState = FactoryDAO.getCodesDAO(em).getDonationsFilterById(Constants.DONATION_STATE);
 			String queryAfer = donationFilterState.getDonationFilterCodesPath() +"='" +Constants.COMPLETED + "'";
 			andClausesNumerator.add(queryAfer);
 			
-			int countDonations = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,null);
+			countDonations = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,null);
 			
 			q.setQuestion("Número de donaciones de sangre entera colectadas para un periodo de tiempo, por tipo de donación:");
 
@@ -302,8 +326,13 @@ public class OmsStatistics {
 			
 			String query = donationFilter.getDonationFilterCodesPath() + "='"+Constants.DONOR_TYPE_VOLUNTARY+"'";
 			andClausesNumerator.add(query);
-			int countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,null);
+			double countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,null);
+			countDonationsDonorType.add(countNumerator);
 			d1.setAnswerResult(String.valueOf(countNumerator));
+			
+			
+//			/ClinicalDocument/effectiveTime/@value
+			
 			
 			
 			DataAnswer d2 = new DataAnswer();
@@ -314,6 +343,7 @@ public class OmsStatistics {
 			query = donationFilter.getDonationFilterCodesPath() + "='"+Constants.DONOR_TYPE_REPLACEMENTS+"'";
 			andClausesNumerator.add(query);
 			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,null);
+			countDonationsDonorType.add(countNumerator);
 			d2.setAnswerResult(String.valueOf(countNumerator));
 			
 			
@@ -340,7 +370,7 @@ public class OmsStatistics {
 				
 		} catch (XMLDataBaseException e) {
 			
-			
+			logger.log(Level.SEVERE, "Error al realizar la pregunta 2 del formulario OMS", e);
 		}
 		
 		return q;
@@ -408,7 +438,7 @@ public class OmsStatistics {
 				
 		} catch (XMLDataBaseException e) {
 			
-			
+			logger.log(Level.SEVERE, "Error al realizar la pregunta 3 del formulario OMS", e);
 		}
 		
 		return q;
@@ -492,7 +522,7 @@ public class OmsStatistics {
 			
 		} catch (XMLDataBaseException e) {
 			
-			
+			logger.log(Level.SEVERE, "Error al realizar la pregunta 4 del formulario OMS", e);
 		}
 		
 		return q;
@@ -599,12 +629,11 @@ public class OmsStatistics {
 				
 		} catch (XMLDataBaseException e) {
 			
-			
+			logger.log(Level.SEVERE, "Error al realizar la pregunta 5 del formulario OMS", e);
 		}
 		
 		return q;
 	}
-	
 	
 	public static DataQuestion get6Question(List<List<String>> orClausesList, List<String> andClausesNumerator, EntityManager em){
 		
@@ -645,12 +674,11 @@ public class OmsStatistics {
 		
 		} catch (XMLDataBaseException e) {
 			
-			
+			logger.log(Level.SEVERE, "Error al realizar la pregunta 6 del formulario OMS", e);
 		}
 		
 		return q;
 	}
-
 
 	public static DataQuestion get7Question(List<List<String>> orClausesList, List<String> andClausesNumerator, EntityManager em){
 		
@@ -736,47 +764,19 @@ public class OmsStatistics {
 		
 		} catch (XMLDataBaseException e) {
 			
-			
+			logger.log(Level.SEVERE, "Error al realizar la pregunta 7 del formulario OMS", e);
 		}
 		
 		return q;
 	}
 	
-	private static String getQueryFromAge(String queryPath, int ageFrom){
-			
-		Calendar dateFrom = Calendar.getInstance();
-		dateFrom.add(Calendar.YEAR, (ageFrom)*(-1));
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		String dateFromString = sdf.format(dateFrom.getTime());
-		
-		String query = queryPath + "<='" + dateFromString +"'";
-		
-		return query;
-	}
-	
-	private static String getQueryToAge(String queryPath, int ageFrom){
-	
-		Calendar dateFrom = Calendar.getInstance();
-		dateFrom.add(Calendar.YEAR, (ageFrom+1)*(-1));
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
-		
-		String dateFromString = sdf.format(dateFrom.getTime());
-		
-		String query = queryPath + ">='" + dateFromString +"'";
-						
-		return query;
-		
-	}
-	
-
 	public static DataQuestion get8Question(List<List<String>> orClausesList, List<String> andClausesNumerator, EntityManager em){
 		
 		DataQuestion q = new DataQuestion();
 		List<DataAnswer> answers = new ArrayList<>();
 		q.setAnswers(answers);
-			
+		
+		countAnalysis = new ArrayList<>();
 		try {
 			
 			q.setQuestion("Número y porcentaje de donaciones (sangre entera y aféresis) sometidas a pruebas de detección de las siguientes infecciones transmisibles por transfusión (Número de pruebas de detección (Numerador)/ Número de donaciones total (Denominador)):");
@@ -794,9 +794,10 @@ public class OmsStatistics {
 			String query = donationFilter.getDonationFilterCodesPath() + "='"+lab.getConcept().getConceptCode()+"'";
 			filtersAnalysis.add(query);
 			
-			int countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysis);
-			d1.setAnswerResult(String.valueOf(countNumerator));
-			
+			double countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysis);
+			countAnalysis.add(countNumerator);
+			double percentage = (countDonations != 0) ? countNumerator/countDonations*100 : 0;
+			d1.setAnswerResult(String.valueOf(countNumerator) + " - " + String.valueOf(new DecimalFormat("#.##").format(percentage)) + "%");
 			
 			DataAnswer d2 = new DataAnswer();
 			q.getAnswers().add(d2);
@@ -808,7 +809,9 @@ public class OmsStatistics {
 			filtersAnalysis.add(query);
 			
 			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysis);
-			d2.setAnswerResult(String.valueOf(countNumerator));
+			countAnalysis.add(countNumerator);
+			percentage = (countDonations != 0) ? countNumerator/countDonations*100 : 0;
+			d2.setAnswerResult(String.valueOf(countNumerator) + " - " + String.valueOf(new DecimalFormat("#.##").format(percentage)) + "%");
 			
 			DataAnswer d3 = new DataAnswer();
 			q.getAnswers().add(d3);
@@ -820,7 +823,9 @@ public class OmsStatistics {
 			filtersAnalysis.add(query);
 			
 			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysis);
-			d3.setAnswerResult(String.valueOf(countNumerator));
+			countAnalysis.add(countNumerator);
+			percentage = (countDonations != 0) ? countNumerator/countDonations*100 : 0;
+			d3.setAnswerResult(String.valueOf(countNumerator) + " - " + String.valueOf(new DecimalFormat("#.##").format(percentage)) + "%");
 			
 			DataAnswer d4 = new DataAnswer();
 			q.getAnswers().add(d4);
@@ -832,27 +837,189 @@ public class OmsStatistics {
 			filtersAnalysis.add(query);
 			
 			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysis);
-			d4.setAnswerResult(String.valueOf(countNumerator));
+			countAnalysis.add(countNumerator);
+			percentage = (countDonations != 0) ? countNumerator/countDonations*100 : 0;
+			d4.setAnswerResult(String.valueOf(countNumerator) + " - " + String.valueOf(new DecimalFormat("#.##").format(percentage))+ "%");
 			
 			DataAnswer d5 = new DataAnswer();
 			q.getAnswers().add(d5);
 			d5.setAnswer("Enfermedad de Chagas.");
-			
-//			filtersAnalysis.remove(query);
-//			lab = FactoryDAO.getCodesDAO(em).getDonationsAnalysisById("code");
-//			query = donationFilter.getDonationFilterCodesPath() + "='"+lab.getConcept().getConceptCode()+"'";
-//			filtersAnalysis.add(query);
-//			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysis);
-			d5.setAnswerResult("0");
+			d5.setAnswerResult("0 - 0%");
 		
 		} catch (XMLDataBaseException e) {
 			
+			logger.log(Level.SEVERE, "Error al realizar la pregunta 8 del formulario OMS", e);
 			
 		}
 		
 		return q;
 	}
+	
+	public static DataQuestion get9Question(List<List<String>> orClausesList, List<String> andClausesNumerator, EntityManager em){
 		
+		DataQuestion q = new DataQuestion();
+		List<DataAnswer> answers = new ArrayList<>();
+		q.setAnswers(answers);
+			
+		try {
+			
+			List<String> filtersAnalysis = new ArrayList<>();
+			q.setQuestion("Prevalencia (Número y porcentaje) de infecciones en donaciones que resultaron positivas para las siguientes pruebas de ITT (Número de positivos/reactivos (Numerador)/Número de pruebas de detección (Denominador)):");
+
+			DonationFilterCode donationFilter = FactoryDAO.getCodesDAO(em).getDonationsFilterById(Constants.ANALYSIS_RESULT);
+			
+			ResultsCode event = FactoryDAO.getCodesDAO(em).getResultById(Constants.ANALYSIS_RESULT_POSITIVE);
+			
+			String pathQuery = donationFilter.getDonationFilterCodesPath() +"='"+event.getConcept().getConceptCode()+ "'";
+			
+			// Respuestas
+			DataAnswer d1 = new DataAnswer();
+			q.getAnswers().add(d1);
+			d1.setAnswer("VIH 1+2.");
+			
+			DonationLaboratoyCode lab = FactoryDAO.getCodesDAO(em).getDonationsAnalysisById(Constants.DONATION_ANALYSIS_VHI);
+			
+			String filterEvent = Constants.ANALYSIS_FILTER + "'" + lab.getConcept().getConceptCode() + "']";
+			String query = pathQuery.replace(Constants.VAR_EVENT_FILTER, filterEvent) ;
+			filtersAnalysis.add(query);
+			double countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysis);
+			double percentaje = (countAnalysis != null && countAnalysis.get(0) != 0) ?  countNumerator/countAnalysis.get(0)*100 : 0;
+			d1.setAnswerResult(String.valueOf(countNumerator) + " - " + String.valueOf(new DecimalFormat("#.##").format(percentaje))+ "%");		
+			
+
+			DataAnswer d2 = new DataAnswer();
+			q.getAnswers().add(d2);
+			d2.setAnswer("HBV.");
+			
+			filtersAnalysis.remove(query);
+			
+			lab = FactoryDAO.getCodesDAO(em).getDonationsAnalysisById(Constants.DONATION_ANALYSIS_HEPATITIS_B);
+			filterEvent = Constants.ANALYSIS_FILTER + "'" + lab.getConcept().getConceptCode() + "']";
+			query = pathQuery.replace(Constants.VAR_EVENT_FILTER, filterEvent) ;
+			filtersAnalysis.add(query);
+			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysis);
+
+			percentaje = (countAnalysis != null && countAnalysis.get(1) != 0) ?  countNumerator/countAnalysis.get(1)*100 : 0;
+			d2.setAnswerResult(String.valueOf(countNumerator) + " - " + String.valueOf(new DecimalFormat("#.##").format(percentaje))+ "%");
+			
+			DataAnswer d3 = new DataAnswer();
+			q.getAnswers().add(d3);
+			d3.setAnswer("HCV.");
+			
+			filtersAnalysis.remove(query);
+			
+			lab = FactoryDAO.getCodesDAO(em).getDonationsAnalysisById(Constants.DONATION_ANALYSIS_HEPATITIS_C);
+			filterEvent = Constants.ANALYSIS_FILTER + "'" + lab.getConcept().getConceptCode() + "']";
+			query = pathQuery.replace(Constants.VAR_EVENT_FILTER, filterEvent) ;
+			filtersAnalysis.add(query);
+			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysis);
+
+			percentaje = (countAnalysis != null && countAnalysis.get(2) != 0) ?  countNumerator/countAnalysis.get(2)*100 : 0;
+			d3.setAnswerResult(String.valueOf(countNumerator) + " - " + String.valueOf(new DecimalFormat("#.##").format(percentaje))+ "%");
+
+
+			
+			DataAnswer d4 = new DataAnswer();
+			q.getAnswers().add(d4);
+			d4.setAnswer("Sífilis.");
+			filtersAnalysis.remove(query);
+			
+			lab = FactoryDAO.getCodesDAO(em).getDonationsAnalysisById(Constants.DONATION_ANALYSIS_SYPHILIS);
+			filterEvent = Constants.ANALYSIS_FILTER + "'" + lab.getConcept().getConceptCode() + "']";
+			query = pathQuery.replace(Constants.VAR_EVENT_FILTER, filterEvent) ;
+			filtersAnalysis.add(query);
+			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysis);
+
+			percentaje = (countAnalysis != null && countAnalysis.get(3) != 0) ?  countNumerator/countAnalysis.get(3)*100 : 0;
+			d4.setAnswerResult(String.valueOf(countNumerator) + " - " + String.valueOf(new DecimalFormat("#.##").format(percentaje))+ "%");
+//			
+			DataAnswer d5 = new DataAnswer();
+			q.getAnswers().add(d5);
+			d5.setAnswer("Enfermedad de Chagas.");
+			d5.setAnswerResult("0 - 0%");
+			
+		
+		} catch (XMLDataBaseException e) {
+			
+			logger.log(Level.SEVERE, "Error al realizar la pregunta 9 del formulario OMS", e);
+		}
+		
+		return q;
+	}
+	
+	public static DataQuestion get10Question(List<List<String>> orClausesList, List<String> andClausesNumerator, EntityManager em){
+		
+		DataQuestion q = new DataQuestion();
+		List<DataAnswer> answers = new ArrayList<>();
+		q.setAnswers(answers);
+			
+		try {
+			
+			List<String> filtersAnalysis = new ArrayList<>();
+			q.setQuestion("Número y % de infecciones por VIH categorizadas como sigue:");
+
+			DonationFilterCode donationFilterAnalysis = FactoryDAO.getCodesDAO(em).getDonationsFilterById(Constants.ANALYSIS_RESULT);
+			ResultsCode event = FactoryDAO.getCodesDAO(em).getResultById(Constants.ANALYSIS_RESULT_POSITIVE);
+			String pathQuery = donationFilterAnalysis.getDonationFilterCodesPath() +"='"+event.getConcept().getConceptCode()+ "'";
+			
+			DonationLaboratoyCode lab = FactoryDAO.getCodesDAO(em).getDonationsAnalysisById(Constants.DONATION_ANALYSIS_VHI);		
+			String filterEvent = Constants.ANALYSIS_FILTER + "'" + lab.getConcept().getConceptCode() + "']";
+			
+			String queryAnalysis = pathQuery.replace(Constants.VAR_EVENT_FILTER, filterEvent) ;
+			
+			filtersAnalysis.add(queryAnalysis);
+			
+			DonationFilterCode donationFilter = FactoryDAO.getCodesDAO(em).getDonationsFilterById(Constants.DONOR_TYPE);
+			
+			// Respuestas
+			DataAnswer d1 = new DataAnswer();
+			q.getAnswers().add(d1);
+			d1.setAnswer("Donaciones voluntarias no remuneradas.");
+			
+			String query = donationFilter.getDonationFilterCodesPath() + "='"+Constants.DONOR_TYPE_VOLUNTARY+"'";
+			andClausesNumerator.add(query);
+			int countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysis);
+			
+			double percentaje = (countDonationsDonorType != null && countDonationsDonorType.get(0) != 0) ?  countNumerator/countDonationsDonorType.get(0)*100 : 0;
+			d1.setAnswerResult(String.valueOf(countNumerator) + " - " + String.valueOf(new DecimalFormat("#.##").format(percentaje))+ "%");
+
+			DataAnswer d2 = new DataAnswer();
+			q.getAnswers().add(d2);
+			d2.setAnswer("Donaciones de familiares/ de reposición");
+			
+			andClausesNumerator.remove(query);
+			query = donationFilter.getDonationFilterCodesPath() + "='"+Constants.DONOR_TYPE_REPLACEMENTS+"'";
+			andClausesNumerator.add(query);
+			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysis);
+			
+			percentaje = (countDonationsDonorType != null && countDonationsDonorType.get(1) != 0) ?  countNumerator/countDonationsDonorType.get(1)*100 : 0;
+			d2.setAnswerResult(String.valueOf(countNumerator) + " - " + String.valueOf(new DecimalFormat("#.##").format(percentaje))+ "%");
+			
+			
+			DataAnswer d3 = new DataAnswer();
+			q.getAnswers().add(d3);
+			d3.setAnswer("Donaciones remuneradas");
+			d3.setAnswerResult("0");
+			
+			DataAnswer d4 = new DataAnswer();
+			q.getAnswers().add(d4);
+			d4.setAnswer("Otros tipos de donaciones");
+			
+			andClausesNumerator.remove(query);
+			query = donationFilter.getDonationFilterCodesPath() + "='"+Constants.DONOR_TYPE_OTHER+"'";
+			andClausesNumerator.add(query);
+			
+			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysis);
+			d4.setAnswerResult(String.valueOf(countNumerator));		
+			
+		} catch (XMLDataBaseException e) {
+			
+			logger.log(Level.SEVERE, "Error al realizar la pregunta 10 del formulario OMS", e);
+			
+		}
+		return q;
+	}
+	
 	public static DataQuestion get11Question(List<List<String>> orClausesList, List<String> andClausesNumerator, EntityManager em){
 		
 		DataQuestion q = new DataQuestion();
@@ -923,13 +1090,12 @@ public class OmsStatistics {
 		
 		} catch (XMLDataBaseException e) {
 			
+			logger.log(Level.SEVERE, "Error al realizar la pregunta 11 del formulario OMS", e);
 			
 		}
 		
 		return q;
 	}
-
-	
 
 	public static DataQuestion get12Question(List<List<String>> orClausesList, List<String> andClausesNumerator, EntityManager em){
 		
@@ -969,6 +1135,7 @@ public class OmsStatistics {
 		
 		} catch (XMLDataBaseException e) {
 			
+			logger.log(Level.SEVERE, "Error al realizar la pregunta 12 del formulario OMS", e);
 			
 		}
 		
@@ -1056,7 +1223,7 @@ public class OmsStatistics {
 		
 		} catch (XMLDataBaseException e) {
 			
-			
+			logger.log(Level.SEVERE, "Error al realizar la pregunta 13 del formulario OMS", e);
 		}
 		
 		return q;
@@ -1107,41 +1274,40 @@ public class OmsStatistics {
 
 			d2.setAnswerResult(String.valueOf(countNumerator));
 			
-//			DataAnswer d3 = new DataAnswer();
-//			q.getAnswers().add(d3);
-//			d3.setAnswer("Sangre entera.");
-//			d3.setAnswerResult("0");
-//
-//			
-//			DataAnswer d4 = new DataAnswer();
-//			q.getAnswers().add(d4);
-//			d4.setAnswer("Hematíes.");
-//			andClausesNumerator.remove(query);
-//			
-//			unit = FactoryDAO.getCodesDAO(em).getProductById(Constants.PRODUCT_TYPE_HEMATIES);
-//			query = donationFilter.getTransfusionFilterCodesPath() + "='"+unit.getConcept().getConceptCode()+"'";
-//			andClausesNumerator.add(query);
-//			countNumerator = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClausesNumerator,orClausesList,null,null);
-//			d4.setAnswerResult(String.valueOf(countNumerator));
-//			
-//			
-//			DataAnswer d5 = new DataAnswer();
-//			q.getAnswers().add(d5);
-//			d5.setAnswer("Crioprecipitado");
-//			andClausesNumerator.remove(query);
-//			
-//			unit = FactoryDAO.getCodesDAO(em).getProductById(Constants.PRODUCT_TYPE_CRIOPRECIPITADO);
-//			query = donationFilter.getTransfusionFilterCodesPath() + "='"+unit.getConcept().getConceptCode()+"'";
-//			andClausesNumerator.add(query);
-//			countNumerator = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClausesNumerator,orClausesList,null,null);
-//			d5.setAnswerResult(String.valueOf(countNumerator));
-			
 		
 		} catch (XMLDataBaseException e) {
 			
-			
+			logger.log(Level.SEVERE, "Error al realizar la pregunta 14 del formulario OMS", e);
 		}
 		
 		return q;
+	}
+
+	private static String getQueryFromAge(String queryPath, int ageFrom){
+		
+		Calendar dateFrom = Calendar.getInstance();
+		dateFrom.add(Calendar.YEAR, (ageFrom)*(-1));
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		String dateFromString = sdf.format(dateFrom.getTime());
+		
+		String query = queryPath + "<='" + dateFromString +"'";
+		
+		return query;
+	}
+	
+	private static String getQueryToAge(String queryPath, int ageFrom){
+	
+		Calendar dateFrom = Calendar.getInstance();
+		dateFrom.add(Calendar.YEAR, (ageFrom+1)*(-1));
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		
+		String dateFromString = sdf.format(dateFrom.getTime());
+		
+		String query = queryPath + ">='" + dateFromString +"'";
+						
+		return query;
+		
 	}
 }

@@ -173,34 +173,7 @@
 						 </label>
 					</div>		
 				
-					<div class="col-md-9 col-lg-12" style="padding-top: 12px;">
-						<label class="col-md-2 col-lg-3 control-label">
-							<h:outputText value="#{messages.title_transfusions}" />
-						</label>
-												
-						<div class="col-md-9 col-lg-9">							
-							<label class="col-md-2 col-lg-7 control-label" >
-								<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.transfusionsCount != null}" 
-								 value="#{messages.label_numerator} : " /> <h:outputText value="&#160; &#160;" />
-							
-								<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.transfusionsCount != null}" 
-								 value="#{transfusionsStatisticsBB.statisticsResults.transfusionsCount.countNumerator}" /><h:outputText value="&#160; &#160; &#160;" />
-								 
-								 <h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.transfusionsCount != null}" 
-								 value="#{messages.label_denominator} :" /> <h:outputText value="&#160; &#160;" />
-								 
-								 <h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.transfusionsCount != null}" 
-								 value="#{transfusionsStatisticsBB.statisticsResults.transfusionsCount.countDenominator}" /><h:outputText value="&#160; &#160; &#160;" />
-								  
-							</label>
-							<label class="col-md-2 col-lg-2 control-label" >
-								<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.transfusionsCount != null}" 
-								 value="#{transfusionsStatisticsBB.statisticsResults.transfusionsCount.percentage} %" />
-							</label>
-							
-						</div>
-					</div>
-					
+
 					<div class="col-md-9 col-lg-12" style="padding-top: 12px;">
 						<label class="col-md-2 col-lg-3 control-label">
 							<h:outputText value="#{messages.label_person_transfusions_count}" />
@@ -226,6 +199,34 @@
 								<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.personTransfusionsCount != null}" 
 								 value="#{transfusionsStatisticsBB.statisticsResults.personTransfusionsCount.percentage} %" />
 							</label>
+						</div>
+					</div>
+					
+					<div class="col-md-9 col-lg-12" style="padding-top: 12px;">
+						<label class="col-md-2 col-lg-3 control-label">
+							<h:outputText value="#{messages.title_transfusions}" />
+						</label>
+												
+						<div class="col-md-9 col-lg-9">							
+							<label class="col-md-2 col-lg-7 control-label" >
+								<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.transfusionsCount != null}" 
+								 value="#{messages.label_numerator} : " /> <h:outputText value="&#160; &#160;" />
+							
+								<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.transfusionsCount != null}" 
+								 value="#{transfusionsStatisticsBB.statisticsResults.transfusionsCount.countNumerator}" /><h:outputText value="&#160; &#160; &#160;" />
+								 
+								 <h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.transfusionsCount != null}" 
+								 value="#{messages.label_denominator} :" /> <h:outputText value="&#160; &#160;" />
+								 
+								 <h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.transfusionsCount != null}" 
+								 value="#{transfusionsStatisticsBB.statisticsResults.transfusionsCount.countDenominator}" /><h:outputText value="&#160; &#160; &#160;" />
+								  
+							</label>
+							<label class="col-md-2 col-lg-2 control-label" >
+								<h:outputText rendered="#{transfusionsStatisticsBB.statisticsResults != null and transfusionsStatisticsBB.statisticsResults.transfusionsCount != null}" 
+								 value="#{transfusionsStatisticsBB.statisticsResults.transfusionsCount.percentage} %" />
+							</label>
+							
 						</div>
 					</div>
 					

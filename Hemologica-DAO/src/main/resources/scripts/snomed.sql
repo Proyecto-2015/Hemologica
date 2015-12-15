@@ -91,8 +91,9 @@ INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('53', '844005
 INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('54', '119351004');
 
 -- hepatitis b
-INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('55', '122450004');
+INSERT INTO `hemologica`.`concepts` (`id`, `concept_code`) VALUES ('55', '171122006');
 
+UPDATE `hemologica`.`concepts` SET `concept_code`='413107006' WHERE `id`='15';
 
 
 
