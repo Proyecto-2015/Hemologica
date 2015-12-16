@@ -16,9 +16,9 @@ import javax.jms.Session;
 import javax.jms.TextMessage;
 import javax.jws.WebService;
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.hemologica.dao.model.Movement;
 import org.hemologica.service.business.IMovementBean;
 import org.hemologica.service.datatype.MovementData;
+import org.hemologica.service.utils.xml.XMLUtils;
 import org.hemologica.service.ws.Service;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -28,18 +28,50 @@ public class ServiceImpl implements Service {
 
 	private static final Logger logger = Logger.getLogger(ServiceImpl.class.getName());
 
-	public void provideCDA(String cda) {
+	public void provideCDA(String cda) throws Exception {
 
 		try {
-			
-//			ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring/beans.xml");
 
+			InputStream xsd1 = ServiceImpl.class.getClassLoader().getResourceAsStream("/xsd/donation_fail.xsd");
+			InputStream xsd2 = ServiceImpl.class.getClassLoader().getResourceAsStream("/xsd/donation_ok.xsd");
+			InputStream xsd3 = ServiceImpl.class.getClassLoader().getResourceAsStream("/xsd/laboratory.xsd");
+			InputStream xsd4 = ServiceImpl.class.getClassLoader().getResourceAsStream("/xsd/transfusion.xsd");
+
+			Exception ex = null;
+
+			try {
+				XMLUtils.validar(cda, xsd1);
+			} catch (Exception ex1) {
+				ex = ex1;
+			}
+			try {
+				XMLUtils.validar(cda, xsd2);
+			} catch (Exception ex1) {
+				ex = ex1;
+			}
+			try {
+				XMLUtils.validar(cda, xsd3);
+			} catch (Exception ex1) {
+				ex = ex1;
+			}
+			try {
+				XMLUtils.validar(cda, xsd4);
+			} catch (Exception ex1) {
+				ex = ex1;
+			}
+			
+			if(ex != null) throw ex;
+
+			// ApplicationContext context = new
+			// ClassPathXmlApplicationContext("META-INF/spring/beans.xml");
 			Properties prop = new Properties();
 			InputStream stream = ServiceImpl.class.getClassLoader().getResourceAsStream("hemologica.properties");
 			prop.load(stream);
 
-//			ActiveMQConnectionFactory factory = (ActiveMQConnectionFactory) context.getBean("connectionFactory");
-			ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(prop.getProperty("jms.connection.factory.broker.url"));
+			// ActiveMQConnectionFactory factory = (ActiveMQConnectionFactory)
+			// context.getBean("connectionFactory");
+			ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(
+					prop.getProperty("jms.connection.factory.broker.url"));
 			// Create a Connection
 			Connection connection = factory.createConnection();
 			connection.start();
@@ -71,13 +103,12 @@ public class ServiceImpl implements Service {
 
 	}
 
-
 	@Override
 	public void importMovements(List<MovementData> movements) throws ParseException {
 		ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring/beans.xml");
 		IMovementBean movementBean = (IMovementBean) context.getBean("movementBean");
 		movementBean.save(movements);
-		
+
 	}
 
 }

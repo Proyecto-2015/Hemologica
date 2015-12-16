@@ -308,8 +308,8 @@ public class BaseXConnection implements IXMLDataBase {
 		try {
 			session = this.getClient();
 			query = session.query(input);
-			query.execute();
-
+			System.out.println("Query input: "+ input);
+			System.out.println("Query execute: "+ query.execute()); ;
 			while (query.more()) {
 				cdasList.add(query.next());
 			}

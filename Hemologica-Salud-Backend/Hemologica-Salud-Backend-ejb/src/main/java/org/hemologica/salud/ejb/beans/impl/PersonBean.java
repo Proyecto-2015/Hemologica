@@ -59,14 +59,15 @@ public class PersonBean implements PersonBeanLocal {
 				
 			}
 			
-			Calendar date = Calendar.getInstance();
-			date.setTime(p.getPersonBirthday());
-			
-			LocalDate birthdate = new LocalDate(date.get(Calendar.YEAR),date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH));
-			LocalDate now = new LocalDate();
-			Years age = Years.yearsBetween(birthdate, now);
-			data.setAge(String.valueOf(age.getYears()));
-			
+			if(p.getPersonBirthday() != null){
+				Calendar date = Calendar.getInstance();
+				date.setTime(p.getPersonBirthday());
+				
+				LocalDate birthdate = new LocalDate(date.get(Calendar.YEAR),date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH));
+				LocalDate now = new LocalDate();
+				Years age = Years.yearsBetween(birthdate, now);
+				data.setAge(String.valueOf(age.getYears()));
+			}
 			
 			if(p.getDocuments() != null && p.getDocuments().size() != 0){
 				
