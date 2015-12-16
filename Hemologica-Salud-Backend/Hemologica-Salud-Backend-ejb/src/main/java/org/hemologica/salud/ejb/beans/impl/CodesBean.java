@@ -311,9 +311,10 @@ public class CodesBean implements CodesBeanLocal {
 		BloodTypes blood = FactoryDAO.getbloodDAO(em).getBloodTypeCodeByCode(code);
 	
 		DataCode data = new DataCode();
-		data.setCode(blood.getBloodTypeCodeValue());
-		data.setDisplayName(blood.getBloodTypeCodeLabel());
-			
+		if(blood != null){
+			data.setCode(blood.getBloodTypeCodeValue());
+			data.setDisplayName(blood.getBloodTypeCodeLabel());
+		}
 		return data;
 	}
 
@@ -323,9 +324,10 @@ public class CodesBean implements CodesBeanLocal {
 		BloodTypes blood = FactoryDAO.getbloodDAO(em).getBloodTypeCodeBySnomedCodeId(code);
 		
 		DataCode data = new DataCode();
-		data.setCode(blood.getBloodAboTypesCode().getBloodAboTypeCodeValue());
-		data.setDisplayName(blood.getBloodAboTypesCode().getBloodAboTypeCodeLabel());
-			
+		if(blood != null){
+			data.setCode(blood.getBloodAboTypesCode().getBloodAboTypeCodeValue());
+			data.setDisplayName(blood.getBloodAboTypesCode().getBloodAboTypeCodeLabel());
+		}
 		return data;
 		
 	}
@@ -336,9 +338,10 @@ public class CodesBean implements CodesBeanLocal {
 		BloodTypes blood = FactoryDAO.getbloodDAO(em).getBloodTypeCodeBySnomedCodeId(code);
 		
 		DataCode data = new DataCode();
-		data.setCode(blood.getBloodDTypesCode().getBloodDTypeCodeValue());
-		data.setDisplayName(blood.getBloodDTypesCode().getBloodDTypeCodeLabel());
-			
+		if(blood != null){
+			data.setCode(blood.getBloodDTypesCode().getBloodDTypeCodeValue());
+			data.setDisplayName(blood.getBloodDTypesCode().getBloodDTypeCodeLabel());
+		}
 		return data;
 	}
 
@@ -348,9 +351,10 @@ public class CodesBean implements CodesBeanLocal {
 		DonationTypesCode d = FactoryDAO.getCodesDAO(em).getDonationTypeByCode(donationType);
 		
 		DataCode data = new DataCode();
-		data.setCode(d.getDonationTypeCodeValue());
-		data.setDisplayName(d.getDonationTypeCodeLabel());
-		
+		if(d!= null){
+			data.setCode(d.getDonationTypeCodeValue());
+			data.setDisplayName(d.getDonationTypeCodeLabel());
+		}
 		return data;
 	}
 
@@ -360,9 +364,10 @@ public class CodesBean implements CodesBeanLocal {
 		DonationTypesCode d = FactoryDAO.getCodesDAO(em).getDonationTypeBySnomedCode(donationType);
 		
 		DataCode data = new DataCode();
-		data.setCode(d.getDonationTypeCodeValue());
-		data.setDisplayName(d.getDonationTypeCodeLabel());
-		
+		if(d != null){
+			data.setCode(d.getDonationTypeCodeValue());
+			data.setDisplayName(d.getDonationTypeCodeLabel());
+		}
 		return data;
 	}
 
@@ -372,9 +377,11 @@ public class CodesBean implements CodesBeanLocal {
 		DonationEventsCode donationEventsCode = FactoryDAO.getCodesDAO(em).getDonationEventBySnomedCode(event);
 		
 		DataCode eventCode = new DataCode();
-		eventCode.setCode(donationEventsCode.getDonationEventCodeValue());
-		eventCode.setDisplayName(donationEventsCode.getDonationEventCodeLabel());
-
+		
+		if(donationEventsCode != null){
+			eventCode.setCode(donationEventsCode.getDonationEventCodeValue());
+			eventCode.setDisplayName(donationEventsCode.getDonationEventCodeLabel());
+		}
 		return eventCode;
 	}
 
@@ -384,10 +391,13 @@ public class CodesBean implements CodesBeanLocal {
 		EventSeverityCode severityCode = FactoryDAO.getCodesDAO(em).getSeverityBySnomedCode(severity);
 		
 		DataCode eventCode = new DataCode();
-		eventCode.setCode(severityCode.getEventSeverityCodeValue());
-		eventCode.setDisplayName(severityCode.getEventSeverityCodeLabel());
-
-		return eventCode;
+		if(severityCode != null){
+			
+			eventCode.setCode(severityCode.getEventSeverityCodeValue());
+			eventCode.setDisplayName(severityCode.getEventSeverityCodeLabel());
+			
+		}
+		return eventCode; 
 	}
 
 	@Override
@@ -396,9 +406,10 @@ public class CodesBean implements CodesBeanLocal {
 		DonationLaboratoyCode severityCode = FactoryDAO.getCodesDAO(em).getDonationsAnalysisBySnomedCode(analisisCode);
 		
 		DataCode eventCode = new DataCode();
-		eventCode.setCode(severityCode.getDonationLaboratoyCodeValue());
-		eventCode.setDisplayName(severityCode.getDonationLaboratoyCodeLabel());
-
+		if(severityCode != null){
+			eventCode.setCode(severityCode.getDonationLaboratoyCodeValue());
+			eventCode.setDisplayName(severityCode.getDonationLaboratoyCodeLabel());
+		}
 		return eventCode;
 	}
 
@@ -406,7 +417,7 @@ public class CodesBean implements CodesBeanLocal {
 	public boolean getBooleanResultBySnomedCode(String resultCode) {
 		
 		ResultsCode severityCode = FactoryDAO.getCodesDAO(em).getBooleanResultBySnomedCode(resultCode);
-
+		
 		return severityCode.isBooleanValue();
 	}
 
@@ -416,9 +427,10 @@ public class CodesBean implements CodesBeanLocal {
 		DonationFailCausesCode failCauses = FactoryDAO.getCodesDAO(em).getRejectionCauseBySnomedCode(rejectionCode);
 		
 		DataCode eventCode = new DataCode();
-		eventCode.setCode(failCauses.getDonationFailCauseCodeValue());
-		eventCode.setDisplayName(failCauses.getDonationFailCauseCodeLabel());
-
+		if(failCauses != null){
+			eventCode.setCode(failCauses.getDonationFailCauseCodeValue());
+			eventCode.setDisplayName(failCauses.getDonationFailCauseCodeLabel());
+		}
 		return eventCode;
 	}
 
@@ -428,9 +440,10 @@ public class CodesBean implements CodesBeanLocal {
 		DonationFailTypeCode failCauses = FactoryDAO.getCodesDAO(em).getRejectionTypesBySnomedCode(rejectionType);
 		
 		DataCode eventCode = new DataCode();
-		eventCode.setCode(failCauses.getDonationFailCodeValue());
-		eventCode.setDisplayName(failCauses.getDonationFailCodeLabel());
-
+		if(failCauses != null){
+			eventCode.setCode(failCauses.getDonationFailCodeValue());
+			eventCode.setDisplayName(failCauses.getDonationFailCodeLabel());
+		}
 		return eventCode;
 	}
 
@@ -456,9 +469,11 @@ public class CodesBean implements CodesBeanLocal {
 		TransfusionEventsCode donationEventsCode = FactoryDAO.getCodesDAO(em).getTransfusionEventBySnomedCode(event);
 		
 		DataCode eventCode = new DataCode();
-		eventCode.setCode(donationEventsCode.getTransfusionEventCodeValue());
-		eventCode.setDisplayName(donationEventsCode.getTransfusionEventCodeLabel());
-
+		
+		if(donationEventsCode != null){
+			eventCode.setCode(donationEventsCode.getTransfusionEventCodeValue());
+			eventCode.setDisplayName(donationEventsCode.getTransfusionEventCodeLabel());
+		}
 		return eventCode;
 	}
 
@@ -468,9 +483,10 @@ public class CodesBean implements CodesBeanLocal {
 		TransfusionLaboratoryCode donationEventsCode = FactoryDAO.getCodesDAO(em).getTransfusionAnalysisBySnomedCode(executeXPathString);
 		
 		DataCode eventCode = new DataCode();
-		eventCode.setCode(donationEventsCode.getTransfusionLaboratoryCodeValue());
-		eventCode.setDisplayName(donationEventsCode.getTransfusionLaboratoryCodeLabel());
-
+		if(donationEventsCode != null){
+			eventCode.setCode(donationEventsCode.getTransfusionLaboratoryCodeValue());
+			eventCode.setDisplayName(donationEventsCode.getTransfusionLaboratoryCodeLabel());
+		}
 		return eventCode;
 	}
 
@@ -644,9 +660,10 @@ public class CodesBean implements CodesBeanLocal {
 		ResultsCode result = FactoryDAO.getCodesDAO(em).getResultBySnomedCode(executeXPathString);
 
 		DataCode data = new DataCode();
-		data.setCode(result.getResultsCodeValue());
-		data.setDisplayName(result.getResultsCodeLabel());
-		
+		if(result != null){
+			data.setCode(result.getResultsCodeValue());
+			data.setDisplayName(result.getResultsCodeLabel());
+		}
 		return data;
 	}
 
@@ -673,9 +690,11 @@ public class CodesBean implements CodesBeanLocal {
 		BloodTypes result = FactoryDAO.getCodesDAO(em).getBloodTypeCodeBySnomedCode(bloodType);
 
 		DataCode data = new DataCode();
-		data.setCode(result.getBloodTypeCodeValue());
-		data.setDisplayName(result.getBloodTypeCodeLabel());
 		
+		if(result != null){
+			data.setCode(result.getBloodTypeCodeValue());
+			data.setDisplayName(result.getBloodTypeCodeLabel());
+		}
 		return data;
 	}
 }

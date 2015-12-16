@@ -20,7 +20,7 @@
        		<thead class="cf">
        			<tr>
        				<th><h:outputText value="#{messages.person_name}"/></th>
-       				
+       				<th><h:outputText value="#{messages.person_document_number}"/></th>
        				<th><h:outputText value="#{messages.label_gender}"/></th>
        				<th><h:outputText value="#{messages.labe_age}"/></th>
        				
@@ -31,6 +31,7 @@
        			<c:forEach items="#{personRecordBB.persons}" var="personItem" varStatus="counter">
         			<tr>
         				<td data-title="#{messages.person_document_type}"><h:outputText value="#{personItem.fullName}"/></td>
+        				<td data-title="#{messages.person_document_number}"><h:outputText value="#{personItem.documentNumber}"/></td>
         				<td data-title="#{messages.label_gender}"><h:outputText value="#{messages[personItem.gender.displayName]}"/></td>
         				<td data-title="#{messages.labe_age}"><h:outputText value="#{personItem.age}"/></td>
         				<td> 

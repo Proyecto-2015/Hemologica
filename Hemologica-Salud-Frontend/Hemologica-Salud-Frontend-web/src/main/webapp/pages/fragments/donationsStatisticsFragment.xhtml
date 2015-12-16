@@ -172,7 +172,35 @@
 						 </label>
 					</div>
 				
-				
+					<div class="col-md-9 col-lg-12" style="padding-top: 12px;">
+						<label class="col-md-2 col-lg-3 control-label" >
+							<h:outputText value="#{messages.label_donors_count}" />
+						</label>
+												
+						<div class="col-md-9 col-lg-7">	
+							
+							<label class="col-md-2 col-lg-8 control-label" >
+							<h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null and donationsStatisticsBB.statisticsResults.donorsCount != null}" 
+								 value="#{messages.label_numerator} : " /> <h:outputText value="&#160; &#160;" />
+								 
+								<h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null and donationsStatisticsBB.statisticsResults.donorsCount != null}" 
+								 value="#{donationsStatisticsBB.statisticsResults.donorsCount.countNumerator}" /> <h:outputText value="&#160; &#160; &#160;" />
+								 
+								<h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null and donationsStatisticsBB.statisticsResults.donorsCount != null}" 
+								 value="#{messages.label_denominator} :" /> <h:outputText value="&#160; &#160;" />
+								 
+								<h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null and donationsStatisticsBB.statisticsResults.donorsCount != null}" 
+								 value="#{donationsStatisticsBB.statisticsResults.donorsCount.countDenominator}" /> <h:outputText value="&#160; &#160; &#160;" />
+							
+							</label>
+												
+							<label class="col-md-2 col-lg-3 control-label">
+								<h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null and donationsStatisticsBB.statisticsResults.donorsCount != null}" 
+									value="#{donationsStatisticsBB.statisticsResults.donorsCount.percentage} %" />
+							</label>
+						</div>
+					</div>
+					
 					<div class="col-md-9 col-lg-12" style="padding-top: 12px;">
 						<label class="col-md-2 col-lg-3 control-label">
 							<h:outputText value="#{messages.label_donations_count}" />
@@ -203,34 +231,7 @@
 						
 					</div>
 					
-					<div class="col-md-9 col-lg-12" style="padding-top: 12px;">
-						<label class="col-md-2 col-lg-3 control-label" >
-							<h:outputText value="#{messages.label_donors_count}" />
-						</label>
-												
-						<div class="col-md-9 col-lg-7">	
-							
-							<label class="col-md-2 col-lg-8 control-label" >
-							<h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null and donationsStatisticsBB.statisticsResults.donorsCount != null}" 
-								 value="#{messages.label_numerator} : " /> <h:outputText value="&#160; &#160;" />
-								 
-								<h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null and donationsStatisticsBB.statisticsResults.donorsCount != null}" 
-								 value="#{donationsStatisticsBB.statisticsResults.donorsCount.countNumerator}" /> <h:outputText value="&#160; &#160; &#160;" />
-								 
-								<h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null and donationsStatisticsBB.statisticsResults.donorsCount != null}" 
-								 value="#{messages.label_denominator} :" /> <h:outputText value="&#160; &#160;" />
-								 
-								<h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null and donationsStatisticsBB.statisticsResults.donorsCount != null}" 
-								 value="#{donationsStatisticsBB.statisticsResults.donorsCount.countDenominator}" /> <h:outputText value="&#160; &#160; &#160;" />
-							
-							</label>
-												
-							<label class="col-md-2 col-lg-3 control-label">
-								<h:outputText rendered="#{donationsStatisticsBB.statisticsResults != null and donationsStatisticsBB.statisticsResults.donorsCount != null}" 
-									value="#{donationsStatisticsBB.statisticsResults.donorsCount.percentage} %" />
-							</label>
-						</div>
-					</div>
+					
 				</div>
 			</fieldset>
 		</div>

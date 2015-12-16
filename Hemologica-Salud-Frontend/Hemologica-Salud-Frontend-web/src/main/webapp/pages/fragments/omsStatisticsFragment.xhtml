@@ -22,7 +22,7 @@
 			<fieldset>
 				<div class="form-group div-center col-md-12 col-lg-12">
 				<legend>
-					<h:outputText value="#{messages.label_filter_insitution}"/>	
+					<h:outputText value="#{messages.label_general_filter}"/>	
 				</legend>
 				
 					<div class="col-md-9 col-lg-6">
@@ -73,13 +73,112 @@
 						</div>
 					</div>
 					
-					<p:commandButton action="#{omsStatisticsBB.download()}" style="height: 42px; width: 100px; margin: 30px;" class="pull-right"
-									ajax="false"	value="#{messages.label_download}" >
-							 <p:fileDownload value="#{omsStatisticsBB.download()}" />
-					</p:commandButton>
+					<c:forEach items="#{omsStatisticsBB.commonsFilters}" var="filterItem" >
+						
+						<div class="col-md-9 col-lg-4 form-group"  style="padding-top: 12px;">
+								<label class="col-md-2  col-lg-6 control-label" for="name"><h:outputText
+									value="#{messages[filterItem.displayName]}" /></label>
+									
+								<div class="col-md-9 col-lg-6">
+									<c:choose>
+										<c:when test="${filterItem.options.size() != 0}">
+											<h:selectOneMenu class="form-control" 
+												style="height: 34px; padding: 0 !important;" value="#{filterItem.value}"
+												
+												converter="#{dataFilterConverter}">
+												
+												 <f:attribute name="filterItem" id="filterItem" value="#{filterItem}"/>
+												<f:selectItem itemLabel="#{messages.label_all}" itemValue="#{null}"/>
+												<f:selectItems value="#{filterItem.options}" var="option"
+													itemValue="#{option}" itemLabel="#{messages[option.displayName]}" />
+											</h:selectOneMenu>
+										</c:when>
+										<c:otherwise>
+											<h:inputText style="height: 34px; width: 70%;" value="#{filterItem.valueString}"/>
+										</c:otherwise>
+									</c:choose>
+								</div>
+						</div>		
+					</c:forEach>
+					
+					
 				</div>
 			</fieldset>
 			
+			<fieldset >
+				<div class="form-group col-md-12 col-lg-12">
+				<legend>
+					<h:outputText value="#{messages.label_filter_donation}"/>	
+				</legend>		
+					<c:forEach items="#{omsStatisticsBB.donationFilter}" var="filterItem" >
+						
+						<div class="col-md-9 col-lg-4 form-group"  style="padding-top: 12px;">
+								<label class="col-md-2  col-lg-6 control-label" for="name"><h:outputText
+									value="#{messages[filterItem.displayName]}" /></label>
+									
+								<div class="col-md-9 col-lg-6">
+									<c:choose>
+										<c:when test="${filterItem.options.size() != 0}">
+											<h:selectOneMenu class="form-control" 
+												style="height: 34px; padding: 0 !important;" value="#{filterItem.value}"
+												
+												converter="#{dataFilterConverter}">
+												
+												 <f:attribute name="filterItem" id="filterItem" value="#{filterItem}"/>
+												<f:selectItem itemLabel="#{messages.label_all}" itemValue="#{null}"/>
+												<f:selectItems value="#{filterItem.options}" var="option"
+													itemValue="#{option}" itemLabel="#{messages[option.displayName]}" />
+											</h:selectOneMenu>
+										</c:when>
+										<c:otherwise>
+											<h:inputText style="height: 34px; width: 70%;" value="#{filterItem.valueString}"/>
+										</c:otherwise>
+									</c:choose>
+								</div>
+						</div>		
+					</c:forEach>
+				</div>
+			</fieldset>
+			
+			<fieldset >
+				<div class="form-group col-md-12 col-lg-12">
+				<legend>
+					<h:outputText value="#{messages.label_filter_tranfusion}"/>	
+				</legend>		
+					<c:forEach items="#{omsStatisticsBB.transfusionFilter}" var="filterItem" >
+						
+						<div class="col-md-9 col-lg-4 form-group"  style="padding-top: 12px;">
+								<label class="col-md-2  col-lg-6 control-label" for="name"><h:outputText
+									value="#{messages[filterItem.displayName]}" /></label>
+									
+								<div class="col-md-9 col-lg-6">
+									<c:choose>
+										<c:when test="${filterItem.options.size() != 0}">
+											<h:selectOneMenu class="form-control" 
+												style="height: 34px; padding: 0 !important;" value="#{filterItem.value}"
+												
+												converter="#{dataTransfusionFilterConverter}">
+												
+												 <f:attribute name="filterItem" id="filterItem" value="#{filterItem}"/>
+												<f:selectItem itemLabel="#{messages.label_all}" itemValue="#{null}"/>
+												<f:selectItems value="#{filterItem.options}" var="option"
+													itemValue="#{option}" itemLabel="#{messages[option.displayName]}" />
+											</h:selectOneMenu>
+										</c:when>
+										<c:otherwise>
+											<h:inputText style="height: 34px; width: 70%;" value="#{filterItem.valueString}"/>
+										</c:otherwise>
+									</c:choose>
+								</div>
+						</div>		
+					</c:forEach>
+				</div>
+			</fieldset>
+			
+			<p:commandButton action="#{omsStatisticsBB.download()}" style="height: 42px; width: 100px; margin: 30px;" class="pull-right"
+									ajax="false"	value="#{messages.label_download}" >
+				<p:fileDownload value="#{omsStatisticsBB.download()}" />
+			</p:commandButton>
 
 		</div>
 	</h:form>	

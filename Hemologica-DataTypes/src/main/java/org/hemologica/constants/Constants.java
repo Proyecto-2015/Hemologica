@@ -131,5 +131,6 @@ public class Constants {
 	public static final String DONATION_ANALYSIS_SYPHILIS = "1";
 	public static final String DONATION_ANALYSIS_HEPATITIS_C = "2";
 	public static final String DONATION_ANALYSIS_HEPATITIS_B = "4";
-	
+	public static final String ANALYSIS_RESULT = "10";
+	public static final String ANALYSIS_RESULT_POSITIVE = "1";
 }
