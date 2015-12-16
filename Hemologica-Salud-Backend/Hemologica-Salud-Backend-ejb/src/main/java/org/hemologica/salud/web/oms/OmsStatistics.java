@@ -34,7 +34,8 @@ public class OmsStatistics {
 	private static List<Double> countAnalysis;
 	private static List<Double> countDonationsDonorType;
 	
-	public static List<DataQuestion> getQuestions(List<List<String>> orClausesList, List<String> andClausesNumerator, EntityManager em){
+	public static List<DataQuestion> getDonationsQuestions(List<List<String>> orClausesList, List<String> andClausesNumerator, 
+			List<String> orClausesNoDataDenominator,List<String> filtersAnalysisDenominator,List<String> filtersAnalysisDenominatorNoData,EntityManager em){
 		
 		List<DataQuestion> questions = new ArrayList<>();
 		
@@ -47,7 +48,7 @@ public class OmsStatistics {
 			listAux.add(new String(s));
 		}
 		
-		DataQuestion d1 = get1Question(orClausesList, listAux, em);
+		DataQuestion d1 = get1Question(orClausesList, listAux,filtersAnalysisDenominator,orClausesNoDataDenominator,filtersAnalysisDenominatorNoData, em);
 		questions.add(d1);
 		
 		/**
@@ -59,7 +60,7 @@ public class OmsStatistics {
 			listAux.add(new String(s));
 		}
 		
-		DataQuestion d2 = get2Question(orClausesList, listAux, em);
+		DataQuestion d2 = get2Question(orClausesList, listAux,filtersAnalysisDenominator, orClausesNoDataDenominator,filtersAnalysisDenominatorNoData,em);
 		questions.add(d2);
 		
 		/**
@@ -71,7 +72,7 @@ public class OmsStatistics {
 			listAux.add(new String(s));
 		}
 		
-		DataQuestion d3 = get3Question(orClausesList, listAux, em);
+		DataQuestion d3 = get3Question(orClausesList, listAux,filtersAnalysisDenominator,orClausesNoDataDenominator,filtersAnalysisDenominatorNoData, em);
 		questions.add(d3);
 		
 		/**
@@ -83,7 +84,7 @@ public class OmsStatistics {
 			listAux.add(new String(s));
 		}
 		
-		DataQuestion d4 = get4Question(orClausesList, listAux, em);
+		DataQuestion d4 = get4Question(orClausesList, listAux,filtersAnalysisDenominator,orClausesNoDataDenominator,filtersAnalysisDenominatorNoData, em);
 		questions.add(d4);
 		
 		/**
@@ -95,7 +96,7 @@ public class OmsStatistics {
 			listAux.add(new String(s));
 		}
 		
-		DataQuestion d5 = get5Question(orClausesList, listAux, em);
+		DataQuestion d5 = get5Question(orClausesList, listAux, filtersAnalysisDenominator,orClausesNoDataDenominator,filtersAnalysisDenominatorNoData, em);
 		questions.add(d5);
 		
 		/**
@@ -107,7 +108,7 @@ public class OmsStatistics {
 			listAux.add(new String(s));
 		}
 		
-		DataQuestion d6 = get6Question(orClausesList, listAux, em);
+		DataQuestion d6 = get6Question(orClausesList, listAux,filtersAnalysisDenominator,orClausesNoDataDenominator,filtersAnalysisDenominatorNoData, em);
 		questions.add(d6);
 		
 		/**
@@ -119,7 +120,7 @@ public class OmsStatistics {
 			listAux.add(new String(s));
 		}
 		
-		DataQuestion d7 = get7Question(orClausesList, listAux, em);
+		DataQuestion d7 = get7Question(orClausesList, listAux, filtersAnalysisDenominator,orClausesNoDataDenominator,filtersAnalysisDenominatorNoData, em);
 		questions.add(d7);
 		
 		/**
@@ -131,7 +132,7 @@ public class OmsStatistics {
 			listAux.add(new String(s));
 		}
 		
-		DataQuestion d8 = get8Question(orClausesList, listAux, em);
+		DataQuestion d8 = get8Question(orClausesList, listAux, filtersAnalysisDenominator,orClausesNoDataDenominator,filtersAnalysisDenominatorNoData, em);
 		questions.add(d8);
 		
 		/**
@@ -143,7 +144,7 @@ public class OmsStatistics {
 			listAux.add(new String(s));
 		}
 		
-		DataQuestion d9 = get9Question(orClausesList, listAux, em);
+		DataQuestion d9 = get9Question(orClausesList, listAux, filtersAnalysisDenominator,orClausesNoDataDenominator,filtersAnalysisDenominatorNoData, em);
 		questions.add(d9);
 		
 		/**
@@ -155,8 +156,20 @@ public class OmsStatistics {
 			listAux.add(new String(s));
 		}
 		
-		DataQuestion d10 = get10Question(orClausesList, listAux, em);
+		DataQuestion d10 = get10Question(orClausesList, listAux, filtersAnalysisDenominator,orClausesNoDataDenominator,filtersAnalysisDenominatorNoData, em);
 		questions.add(d10);
+	
+		return questions;
+	}
+	
+	public static List<DataQuestion> getTransfusionsQuestions(List<List<String>> orClausesList, List<String> andClausesNumerator, 
+			List<String> orClausesNoDataDenominator,List<String> filtersAnalysisDenominator,List<String> filtersAnalysisDenominatorNoData,EntityManager em){
+	
+		List<DataQuestion> questions = new ArrayList<>();
+		/**
+		 * ************************** Transfusiones ***************************
+		 */
+		List<String> listAux = new ArrayList<>();
 		
 		/**
 		 * Pregunta 11
@@ -167,19 +180,20 @@ public class OmsStatistics {
 			listAux.add(new String(s));
 		}
 		
-		DataQuestion d11 = get11Question(orClausesList, listAux, em);
+		DataQuestion d11 = get11Question(orClausesList, listAux,orClausesNoDataDenominator, em);
 		questions.add(d11);
 		
 		/**
 		 * Pregunta 12
 		 */
+		
 		listAux = new ArrayList<>();
 		for(String s : andClausesNumerator){
 			
 			listAux.add(new String(s));
 		}
 		
-		DataQuestion d12 = get12Question(orClausesList, listAux, em);
+		DataQuestion d12 = get12Question(orClausesList, listAux,orClausesNoDataDenominator, em);
 		questions.add(d12);
 		
 		/**
@@ -191,7 +205,7 @@ public class OmsStatistics {
 			listAux.add(new String(s));
 		}
 		
-		DataQuestion d13 = get13Question(orClausesList, listAux, em);
+		DataQuestion d13 = get13Question(orClausesList, listAux,orClausesNoDataDenominator, em);
 		questions.add(d13);
 		
 		/**
@@ -203,14 +217,15 @@ public class OmsStatistics {
 			listAux.add(new String(s));
 		}
 		
-		DataQuestion d14 = get14Question(orClausesList, listAux, em);
+		DataQuestion d14 = get14Question(orClausesList, listAux,orClausesNoDataDenominator, em);
 		questions.add(d14);
 		
 		return questions;
 		
 	}
 	
-	public static DataQuestion get1Question(List<List<String>> orClausesList, List<String> andClausesNumerator, EntityManager em){
+	public static DataQuestion get1Question(List<List<String>> orClausesList, List<String> andClausesNumerator, List<String> filtersAnalysisDenominator,
+			List<String> orClausesNoDataDenominator, List<String> filtersAnalysisDenominatorNoData, EntityManager em){
 		
 		DataQuestion q = new DataQuestion();
 		List<DataAnswer> answers = new ArrayList<>();
@@ -234,6 +249,27 @@ public class OmsStatistics {
 
 			DonationFilterCode donationFilter = FactoryDAO.getCodesDAO(em).getDonationsFilterById(Constants.DONOR_TYPE);
 			
+			/**
+			 * Sin datos
+			 */
+			String dateNodata = "$doc/" +donationFilterState.getDonationFilterCodesPath()+"='' or "
+					+ "not("+"$doc/" + donationFilterState.getDonationFilterCodesPath() +")" ;
+			
+			orClausesNoDataDenominator.add(dateNodata);
+			
+			String dateNodataType = "$doc/" +donationFilter.getDonationFilterCodesPath()+"='' or "
+					+ "not("+"$doc/" + donationFilter.getDonationFilterCodesPath() +")" ;
+			
+			orClausesNoDataDenominator.add(dateNodataType);
+			int nodata = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(orClausesNoDataDenominator,filtersAnalysisDenominatorNoData);
+			
+			q.setNodata(nodata);
+			
+			orClausesNoDataDenominator.remove(dateNodata);
+			orClausesNoDataDenominator.remove(dateNodataType);
+			
+			/****************************************************/
+				
 			// Respuestas
 			DataAnswer d1 = new DataAnswer();
 			q.getAnswers().add(d1);
@@ -265,13 +301,13 @@ public class OmsStatistics {
 					
 				}
 				
-				if(orClausesCDAsIds.size() != 0 && XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,orClausesCDAsIds,null) > 0){
+				if(orClausesCDAsIds.size() != 0 && XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,orClausesCDAsIds,filtersAnalysisDenominator) > 0){
 					
 					countVol++;
 					
 				}
 				
-				if(orClausesCDAsIds.size() != 0 && XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(listAux,orClausesList,orClausesCDAsIds,null) > 0){
+				if(orClausesCDAsIds.size() != 0 && XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(listAux,orClausesList,orClausesCDAsIds,filtersAnalysisDenominator) > 0){
 					
 					countRepo++;
 					
@@ -300,7 +336,8 @@ public class OmsStatistics {
 		return q;
 	}
 	
-	public static DataQuestion get2Question(List<List<String>> orClausesList, List<String> andClausesNumerator, EntityManager em){
+	public static DataQuestion get2Question(List<List<String>> orClausesList, List<String> andClausesNumerator, List<String> filtersAnalysisDenominator, 
+			List<String> orClausesNoDataDenominator, List<String> filtersAnalysisDenominatorNoData, EntityManager em){
 		
 		DataQuestion q = new DataQuestion();
 		List<DataAnswer> answers = new ArrayList<>();
@@ -313,11 +350,34 @@ public class OmsStatistics {
 			String queryAfer = donationFilterState.getDonationFilterCodesPath() +"='" +Constants.COMPLETED + "'";
 			andClausesNumerator.add(queryAfer);
 			
-			countDonations = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,null);
+			countDonations = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
 			
 			q.setQuestion("Número de donaciones de sangre entera colectadas para un periodo de tiempo, por tipo de donación:");
 
 			DonationFilterCode donationFilter = FactoryDAO.getCodesDAO(em).getDonationsFilterById(Constants.DONOR_TYPE);
+			
+			/**
+			 * Sin datos
+			 */
+			String dateNodata = "$doc/" +donationFilterState.getDonationFilterCodesPath()+"='' or "
+					+ "not("+"$doc/" + donationFilterState.getDonationFilterCodesPath() +")" ;
+			
+			orClausesNoDataDenominator.add(dateNodata);
+			
+			String dateNodataType = "$doc/" +donationFilter.getDonationFilterCodesPath()+"='' or "
+					+ "not("+"$doc/" + donationFilter.getDonationFilterCodesPath() +")" ;
+			
+			orClausesNoDataDenominator.add(dateNodataType);
+			int nodata = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(orClausesNoDataDenominator,filtersAnalysisDenominatorNoData);
+			
+			q.setNodata(nodata);
+			
+			orClausesNoDataDenominator.remove(dateNodata);
+			orClausesNoDataDenominator.remove(dateNodataType);
+			
+			/****************************************************/
+			
+			
 			
 			// Respuestas
 			DataAnswer d1 = new DataAnswer();
@@ -326,14 +386,11 @@ public class OmsStatistics {
 			
 			String query = donationFilter.getDonationFilterCodesPath() + "='"+Constants.DONOR_TYPE_VOLUNTARY+"'";
 			andClausesNumerator.add(query);
-			double countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,null);
+			double countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
 			countDonationsDonorType.add(countNumerator);
 			d1.setAnswerResult(String.valueOf(countNumerator));
 			
-			
-//			/ClinicalDocument/effectiveTime/@value
-			
-			
+//			/ClinicalDocument/effectiveTime/@value		
 			
 			DataAnswer d2 = new DataAnswer();
 			q.getAnswers().add(d2);
@@ -342,7 +399,7 @@ public class OmsStatistics {
 			andClausesNumerator.remove(query);
 			query = donationFilter.getDonationFilterCodesPath() + "='"+Constants.DONOR_TYPE_REPLACEMENTS+"'";
 			andClausesNumerator.add(query);
-			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,null);
+			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
 			countDonationsDonorType.add(countNumerator);
 			d2.setAnswerResult(String.valueOf(countNumerator));
 			
@@ -360,7 +417,7 @@ public class OmsStatistics {
 			query = donationFilter.getDonationFilterCodesPath() + "='"+Constants.DONOR_TYPE_OTHER+"'";
 			andClausesNumerator.add(query);
 			
-			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,null);
+			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
 			d4.setAnswerResult(String.valueOf(countNumerator));
 			
 			DataAnswer d5 = new DataAnswer();
@@ -377,7 +434,8 @@ public class OmsStatistics {
 		
 	}
 	
-	public static DataQuestion get3Question(List<List<String>> orClausesList, List<String> andClausesNumerator, EntityManager em){
+	public static DataQuestion get3Question(List<List<String>> orClausesList, List<String> andClausesNumerator, List<String> filtersAnalysisDenominator, 
+			List<String> orClausesNoDataDenominator, List<String> filtersAnalysisDenominatorNoData,EntityManager em){
 		
 		DataQuestion q = new DataQuestion();
 		List<DataAnswer> answers = new ArrayList<>();
@@ -387,11 +445,34 @@ public class OmsStatistics {
 			
 			q.setQuestion("Cantidad de donaciones que  efectuaron mediante aféresis (excluyendo las donaciones autólogas) para un periodo de tiempo:");
 
-			DonationFilterCode donationFilter = FactoryDAO.getCodesDAO(em).getDonationsFilterById(Constants.DONATION_TYPE);
-			String queryAfer = donationFilter.getDonationFilterCodesPath() +"='" +Constants.DONATION_APHERESIS + "'";
+			DonationFilterCode donationFilterType = FactoryDAO.getCodesDAO(em).getDonationsFilterById(Constants.DONATION_TYPE);
+			String queryAfer = donationFilterType.getDonationFilterCodesPath() +"='" +Constants.DONATION_APHERESIS + "'";
 			andClausesNumerator.add(queryAfer);
 			
-			int countDonationsAfer = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,null);
+			DonationFilterCode donationFilter = FactoryDAO.getCodesDAO(em).getDonationsFilterById(Constants.DONOR_TYPE);
+			
+			/**
+			 * Sin datos
+			 */
+			String dateNodata = "$doc/" +donationFilterType.getDonationFilterCodesPath()+"='' or "
+					+ "not("+"$doc/" + donationFilterType.getDonationFilterCodesPath() +")" ;
+			
+			orClausesNoDataDenominator.add(dateNodata);
+			
+			String dateNodataType = "$doc/" +donationFilter.getDonationFilterCodesPath()+"='' or "
+					+ "not("+"$doc/" + donationFilter.getDonationFilterCodesPath() +")" ;
+			
+			orClausesNoDataDenominator.add(dateNodataType);
+			int nodata = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(orClausesNoDataDenominator,filtersAnalysisDenominatorNoData);
+			
+			q.setNodata(nodata);
+			
+			orClausesNoDataDenominator.remove(dateNodata);
+			orClausesNoDataDenominator.remove(dateNodataType);
+			
+			/****************************************************/
+			
+			int countDonationsAfer = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
 			
 			// Respuestas
 			DataAnswer d1 = new DataAnswer();
@@ -400,7 +481,7 @@ public class OmsStatistics {
 			
 			String query = donationFilter.getDonationFilterCodesPath() + "='"+Constants.DONOR_TYPE_VOLUNTARY+"'";
 			andClausesNumerator.add(query);
-			int countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,null);
+			int countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
 			d1.setAnswerResult(String.valueOf(countNumerator));
 			
 			
@@ -411,7 +492,7 @@ public class OmsStatistics {
 			andClausesNumerator.remove(query);
 			query = donationFilter.getDonationFilterCodesPath() + "='"+Constants.DONOR_TYPE_REPLACEMENTS+"'";
 			andClausesNumerator.add(query);
-			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,null);
+			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
 			d2.setAnswerResult(String.valueOf(countNumerator));
 			
 			
@@ -428,7 +509,7 @@ public class OmsStatistics {
 			query = donationFilter.getDonationFilterCodesPath() + "='"+Constants.DONOR_TYPE_OTHER+"'";
 			andClausesNumerator.add(query);
 			
-			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,null);
+			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
 			d4.setAnswerResult(String.valueOf(countNumerator));
 			
 			DataAnswer d5 = new DataAnswer();
@@ -445,7 +526,8 @@ public class OmsStatistics {
 		
 	}
 	
-	public static DataQuestion get4Question(List<List<String>> orClausesList, List<String> andClausesNumerator, EntityManager em){
+	public static DataQuestion get4Question(List<List<String>> orClausesList, List<String> andClausesNumerator, List<String> filtersAnalysisDenominator,
+			List<String> orClausesNoDataDenominator, List<String> filtersAnalysisDenominatorNoData,EntityManager em){
 		
 		DataQuestion q = new DataQuestion();
 		List<DataAnswer> answers = new ArrayList<>();
@@ -468,6 +550,29 @@ public class OmsStatistics {
 			listAux.add(queryAfer);
 			
 			DonationFilterCode donationFilterTypes = FactoryDAO.getCodesDAO(em).getDonationsFilterById(Constants.DONATION_FAIL_TYPE);
+			
+			/**
+			 * Sin datos
+			 */
+			String dateNodata = "$doc/"+queryAfer + " and (" + "$doc/" +donationFilterTypes.getDonationFilterCodesPath()+"='' or "
+					+ "not("+"$doc/" + donationFilterTypes.getDonationFilterCodesPath() +"))" ;
+			
+			orClausesNoDataDenominator.add(dateNodata);
+			
+			String dateNodataType =  "$doc/" +donationFilter.getDonationFilterCodesPath()+"='' or "
+					+ "not("+"$doc/" + donationFilter.getDonationFilterCodesPath() +")" ;
+			
+			orClausesNoDataDenominator.add(dateNodataType);
+			int nodata = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(orClausesNoDataDenominator,filtersAnalysisDenominatorNoData);
+			
+			q.setNodata(nodata);
+			
+			orClausesNoDataDenominator.remove(dateNodata);
+			orClausesNoDataDenominator.remove(dateNodataType);
+			
+			/****************************************************/
+			
+			
 			
 			// Respuestas
 			DataAnswer d1 = new DataAnswer();
@@ -503,13 +608,13 @@ public class OmsStatistics {
 					
 				}
 				
-				if(orClausesCDAsIds.size() != 0 && XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,orClausesCDAsIds,null) > 0){
+				if(orClausesCDAsIds.size() != 0 && XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,orClausesCDAsIds,filtersAnalysisDenominator) > 0){
 					
 					countPerm++;
 					
 				}
 				
-				if(orClausesCDAsIds.size() != 0 && XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(listAux,orClausesList,orClausesCDAsIds,null) > 0){
+				if(orClausesCDAsIds.size() != 0 && XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(listAux,orClausesList,orClausesCDAsIds,filtersAnalysisDenominator) > 0){
 					
 					countTemp++;
 					
@@ -528,7 +633,8 @@ public class OmsStatistics {
 		return q;
 	}
 	
-	public static DataQuestion get5Question(List<List<String>> orClausesList, List<String> andClausesNumerator, EntityManager em){
+	public static DataQuestion get5Question(List<List<String>> orClausesList, List<String> andClausesNumerator, List<String> filtersAnalysisDenominator, 
+			List<String> orClausesNoDataDenominator, List<String> filtersAnalysisDenominatorNoData, EntityManager em){
 		
 		DataQuestion q = new DataQuestion();
 		List<DataAnswer> answers = new ArrayList<>();
@@ -542,10 +648,34 @@ public class OmsStatistics {
 			String queryAfer = donationFilterState.getDonationFilterCodesPath() +"='" +Constants.CANCELED+ "'";
 			andClausesNumerator.add(queryAfer);
 			
-			int countDonationsDif = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,null);
+			int countDonationsDif = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
 			int countDif = 0;
 			
 			DonationFilterCode donationFilter = FactoryDAO.getCodesDAO(em).getDonationsFilterById(Constants.DONATION_FAIL_CAUSE);
+			
+			/**
+			 * Sin datos
+			 */
+			String dateNodata = "$doc/" +donationFilterState.getDonationFilterCodesPath()+"='' or "
+					+ "not("+"$doc/" + donationFilterState.getDonationFilterCodesPath() +")" ;
+			
+			orClausesNoDataDenominator.add(dateNodata);
+			
+			String dateNodataType = "$doc/" +donationFilter.getDonationFilterCodesPath()+"='' or "
+					+ "not("+"$doc/" + donationFilter.getDonationFilterCodesPath() +")" ;
+			
+			orClausesNoDataDenominator.add(dateNodataType);
+			int nodata = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(orClausesNoDataDenominator,filtersAnalysisDenominatorNoData);
+			
+			q.setNodata(nodata);
+			
+			orClausesNoDataDenominator.remove(dateNodata);
+			orClausesNoDataDenominator.remove(dateNodataType);
+			
+			/****************************************************/
+			
+			
+			
 			
 			// Respuestas
 			DataAnswer d1 = new DataAnswer();
@@ -555,7 +685,7 @@ public class OmsStatistics {
 			DonationFailCausesCode failCause = FactoryDAO.getCodesDAO(em).getRejectionCauseById(Constants.DONATION_FAIL_CAUSE_LOW_WEIGHT);
 			String query = donationFilter.getDonationFilterCodesPath() + "='"+failCause.getConcept().getConceptCode()+"'";
 			andClausesNumerator.add(query);
-			int countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,null);
+			int countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
 			countDif+=countNumerator;
 			d1.setAnswerResult(String.valueOf(countNumerator));
 			
@@ -569,7 +699,7 @@ public class OmsStatistics {
 			failCause = FactoryDAO.getCodesDAO(em).getRejectionCauseById(Constants.DONATION_FAIL_CAUSE_LOW_HEMOGLOBIN);
 			query = donationFilter.getDonationFilterCodesPath() + "='"+failCause.getConcept().getConceptCode()+"'";
 			andClausesNumerator.add(query);
-			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,null);
+			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
 			countDif+=countNumerator;
 			d2.setAnswerResult(String.valueOf(countNumerator));
 			
@@ -594,7 +724,7 @@ public class OmsStatistics {
 			failCause = FactoryDAO.getCodesDAO(em).getRejectionCauseById(Constants.DONATION_FAIL_CAUSE_BEHAVIOR);
 			query = donationFilter.getDonationFilterCodesPath() + "='"+failCause.getConcept().getConceptCode()+"'";
 			andClausesNumerator.add(query);
-			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,null);
+			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
 			countDif+=countNumerator;
 			d4.setAnswerResult(String.valueOf(countNumerator));
 			
@@ -607,7 +737,7 @@ public class OmsStatistics {
 			failCause = FactoryDAO.getCodesDAO(em).getRejectionCauseById(Constants.DONATION_FAIL_CAUSE_TRAVEL);
 			query = donationFilter.getDonationFilterCodesPath() + "='"+failCause.getConcept().getConceptCode()+"'";
 			andClausesNumerator.add(query);
-			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,null);
+			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
 			countDif+=countNumerator;
 			d5.setAnswerResult(String.valueOf(countNumerator));
 			
@@ -635,7 +765,8 @@ public class OmsStatistics {
 		return q;
 	}
 	
-	public static DataQuestion get6Question(List<List<String>> orClausesList, List<String> andClausesNumerator, EntityManager em){
+	public static DataQuestion get6Question(List<List<String>> orClausesList, List<String> andClausesNumerator, List<String> filtersAnalysisDenominator,
+			List<String> orClausesNoDataDenominator, List<String> filtersAnalysisDenominatorNoData,EntityManager em){
 		
 		DataQuestion q = new DataQuestion();
 		List<DataAnswer> answers = new ArrayList<>();
@@ -651,6 +782,28 @@ public class OmsStatistics {
 			
 			DonationFilterCode donationFilter = FactoryDAO.getCodesDAO(em).getDonationsFilterById(Constants.DONOR_GENDER);
 			
+			/**
+			 * Sin datos
+			 */
+			String dateNodata = "$doc/" +donationFilterState.getDonationFilterCodesPath()+"='' or "
+					+ "not("+"$doc/" + donationFilterState.getDonationFilterCodesPath() +")" ;
+			
+			orClausesNoDataDenominator.add(dateNodata);
+			
+			String dateNodataType = "$doc/" +donationFilter.getDonationFilterCodesPath()+"='' or "
+					+ "not("+"$doc/" + donationFilter.getDonationFilterCodesPath() +")" ;
+			
+			orClausesNoDataDenominator.add(dateNodataType);
+			int nodata = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(orClausesNoDataDenominator,filtersAnalysisDenominatorNoData);
+			
+			q.setNodata(nodata);
+			
+			orClausesNoDataDenominator.remove(dateNodata);
+			orClausesNoDataDenominator.remove(dateNodataType);
+			
+			/****************************************************/
+			
+			
 			// Respuestas
 			DataAnswer d1 = new DataAnswer();
 			q.getAnswers().add(d1);
@@ -658,7 +811,7 @@ public class OmsStatistics {
 			
 			String query = donationFilter.getDonationFilterCodesPath() + "='"+Constants.DONOR_MALE+"'";
 			andClausesNumerator.add(query);
-			int countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,null);
+			int countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
 			d1.setAnswerResult(String.valueOf(countNumerator));
 			
 			
@@ -669,7 +822,7 @@ public class OmsStatistics {
 			andClausesNumerator.remove(query);
 			query = donationFilter.getDonationFilterCodesPath() + "='"+Constants.DONOR_FEMALE+"'";
 			andClausesNumerator.add(query);
-			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,null);
+			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
 			d2.setAnswerResult(String.valueOf(countNumerator));
 		
 		} catch (XMLDataBaseException e) {
@@ -680,7 +833,8 @@ public class OmsStatistics {
 		return q;
 	}
 
-	public static DataQuestion get7Question(List<List<String>> orClausesList, List<String> andClausesNumerator, EntityManager em){
+	public static DataQuestion get7Question(List<List<String>> orClausesList, List<String> andClausesNumerator, List<String> filtersAnalysisDenominator,
+			List<String> orClausesNoDataDenominator, List<String> filtersAnalysisDenominatorNoData,EntityManager em){
 		
 		DataQuestion q = new DataQuestion();
 		List<DataAnswer> answers = new ArrayList<>();
@@ -697,6 +851,29 @@ public class OmsStatistics {
 			DonationFilterCode donationFilterFrom = FactoryDAO.getCodesDAO(em).getDonationsFilterById(Constants.DONOR_AGE_FROM);
 			DonationFilterCode donationFilterTo = FactoryDAO.getCodesDAO(em).getDonationsFilterById(Constants.DONOR_AGE_TO);
 			
+			/**
+			 * Sin datos
+			 */
+			String dateNodata = "$doc/" +donationFilterState.getDonationFilterCodesPath()+"='' or "
+					+ "not("+"$doc/" + donationFilterState.getDonationFilterCodesPath() +")" ;
+			
+			orClausesNoDataDenominator.add(dateNodata);
+			
+			String dateNodataType = "$doc/" +donationFilterFrom.getDonationFilterCodesPath()+"='' or "
+					+ "not("+"$doc/" + donationFilterFrom.getDonationFilterCodesPath() +")" ;
+			
+			orClausesNoDataDenominator.add(dateNodataType);
+			int nodata = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(orClausesNoDataDenominator,filtersAnalysisDenominatorNoData);
+			
+			q.setNodata(nodata);
+			
+			orClausesNoDataDenominator.remove(dateNodata);
+			orClausesNoDataDenominator.remove(dateNodataType);
+			
+			/****************************************************/
+			
+			
+			
 			// Respuestas
 			DataAnswer d1 = new DataAnswer();
 			q.getAnswers().add(d1);
@@ -704,7 +881,7 @@ public class OmsStatistics {
 			
 			String query = getQueryToAge(donationFilterTo.getDonationFilterCodesPath(), 17);
 			andClausesNumerator.add(query);
-			int countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,null);
+			int countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
 			d1.setAnswerResult(String.valueOf(countNumerator));
 			
 			
@@ -717,7 +894,7 @@ public class OmsStatistics {
 			String queryTo = getQueryToAge(donationFilterTo.getDonationFilterCodesPath(), 24);
 			andClausesNumerator.add(query);
 			andClausesNumerator.add(queryTo);
-			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,null);
+			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
 			
 			d2.setAnswerResult(String.valueOf(countNumerator));
 			
@@ -731,7 +908,7 @@ public class OmsStatistics {
 			queryTo = getQueryToAge(donationFilterTo.getDonationFilterCodesPath(), 44);
 			andClausesNumerator.add(query);
 			andClausesNumerator.add(queryTo);
-			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,null);
+			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
 			
 			d3.setAnswerResult(String.valueOf(countNumerator));
 			
@@ -746,7 +923,7 @@ public class OmsStatistics {
 			andClausesNumerator.add(query);
 			andClausesNumerator.add(queryTo);
 			
-			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,null);
+			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
 			d4.setAnswerResult(String.valueOf(countNumerator));
 			
 			DataAnswer d5 = new DataAnswer();
@@ -759,7 +936,7 @@ public class OmsStatistics {
 			
 			andClausesNumerator.add(query);
 			
-			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,null);
+			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
 			d5.setAnswerResult(String.valueOf(countNumerator));
 		
 		} catch (XMLDataBaseException e) {
@@ -770,7 +947,8 @@ public class OmsStatistics {
 		return q;
 	}
 	
-	public static DataQuestion get8Question(List<List<String>> orClausesList, List<String> andClausesNumerator, EntityManager em){
+	public static DataQuestion get8Question(List<List<String>> orClausesList, List<String> andClausesNumerator, List<String> filtersAnalysisDenominator,
+			List<String> orClausesNoDataDenominator, List<String> filtersAnalysisDenominatorNoData,EntityManager em){
 		
 		DataQuestion q = new DataQuestion();
 		List<DataAnswer> answers = new ArrayList<>();
@@ -783,7 +961,22 @@ public class OmsStatistics {
 
 			DonationFilterCode donationFilter = FactoryDAO.getCodesDAO(em).getDonationsFilterById(Constants.DONATION_ANALYSIS);
 			
-			List<String> filtersAnalysis = new ArrayList<>();
+			/**
+			 * Sin datos
+			 */
+			String dateNodata = "$doc/" +donationFilter.getDonationFilterCodesPath()+"='' or "
+					+ "not("+"$doc/" + donationFilter.getDonationFilterCodesPath() +")" ;
+			
+			filtersAnalysisDenominatorNoData.add(dateNodata);
+			
+			int nodata = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(orClausesNoDataDenominator,filtersAnalysisDenominatorNoData);
+			
+			q.setNodata(nodata);
+			
+			filtersAnalysisDenominatorNoData.remove(dateNodata);
+			
+			/****************************************************/
+
 			
 			// Respuestas
 			DataAnswer d1 = new DataAnswer();
@@ -792,9 +985,9 @@ public class OmsStatistics {
 			
 			DonationLaboratoyCode lab = FactoryDAO.getCodesDAO(em).getDonationsAnalysisById(Constants.DONATION_ANALYSIS_VHI);
 			String query = donationFilter.getDonationFilterCodesPath() + "='"+lab.getConcept().getConceptCode()+"'";
-			filtersAnalysis.add(query);
+			filtersAnalysisDenominator.add(0, query);
 			
-			double countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysis);
+			double countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
 			countAnalysis.add(countNumerator);
 			double percentage = (countDonations != 0) ? countNumerator/countDonations*100 : 0;
 			d1.setAnswerResult(String.valueOf(countNumerator) + " - " + String.valueOf(new DecimalFormat("#.##").format(percentage)) + "%");
@@ -803,12 +996,12 @@ public class OmsStatistics {
 			q.getAnswers().add(d2);
 			d2.setAnswer("HBV.");
 			
-			filtersAnalysis.remove(query);
+			filtersAnalysisDenominator.remove(0);
 			lab = FactoryDAO.getCodesDAO(em).getDonationsAnalysisById(Constants.DONATION_ANALYSIS_HEPATITIS_B);
 			query = donationFilter.getDonationFilterCodesPath() + "='"+lab.getConcept().getConceptCode()+"'";
-			filtersAnalysis.add(query);
+			filtersAnalysisDenominator.add(0, query);
 			
-			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysis);
+			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
 			countAnalysis.add(countNumerator);
 			percentage = (countDonations != 0) ? countNumerator/countDonations*100 : 0;
 			d2.setAnswerResult(String.valueOf(countNumerator) + " - " + String.valueOf(new DecimalFormat("#.##").format(percentage)) + "%");
@@ -817,12 +1010,12 @@ public class OmsStatistics {
 			q.getAnswers().add(d3);
 			d3.setAnswer("HCV.");
 			
-			filtersAnalysis.remove(query);
+			filtersAnalysisDenominator.remove(0);
 			lab = FactoryDAO.getCodesDAO(em).getDonationsAnalysisById(Constants.DONATION_ANALYSIS_HEPATITIS_C);
 			query = donationFilter.getDonationFilterCodesPath() + "='"+lab.getConcept().getConceptCode()+"'";
-			filtersAnalysis.add(query);
+			filtersAnalysisDenominator.add(0, query);
 			
-			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysis);
+			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
 			countAnalysis.add(countNumerator);
 			percentage = (countDonations != 0) ? countNumerator/countDonations*100 : 0;
 			d3.setAnswerResult(String.valueOf(countNumerator) + " - " + String.valueOf(new DecimalFormat("#.##").format(percentage)) + "%");
@@ -831,15 +1024,16 @@ public class OmsStatistics {
 			q.getAnswers().add(d4);
 			d4.setAnswer("Sífilis.");
 			
-			filtersAnalysis.remove(query);
+			filtersAnalysisDenominator.remove(0);
 			lab = FactoryDAO.getCodesDAO(em).getDonationsAnalysisById(Constants.DONATION_ANALYSIS_SYPHILIS);
 			query = donationFilter.getDonationFilterCodesPath() + "='"+lab.getConcept().getConceptCode()+"'";
-			filtersAnalysis.add(query);
+			filtersAnalysisDenominator.add(0, query);
 			
-			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysis);
+			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
 			countAnalysis.add(countNumerator);
 			percentage = (countDonations != 0) ? countNumerator/countDonations*100 : 0;
 			d4.setAnswerResult(String.valueOf(countNumerator) + " - " + String.valueOf(new DecimalFormat("#.##").format(percentage))+ "%");
+			filtersAnalysisDenominator.remove(0);
 			
 			DataAnswer d5 = new DataAnswer();
 			q.getAnswers().add(d5);
@@ -855,7 +1049,8 @@ public class OmsStatistics {
 		return q;
 	}
 	
-	public static DataQuestion get9Question(List<List<String>> orClausesList, List<String> andClausesNumerator, EntityManager em){
+	public static DataQuestion get9Question(List<List<String>> orClausesList, List<String> andClausesNumerator, List<String> filtersAnalysisDenominator,
+			List<String> orClausesNoDataDenominator, List<String> filtersAnalysisDenominatorNoData,EntityManager em){
 		
 		DataQuestion q = new DataQuestion();
 		List<DataAnswer> answers = new ArrayList<>();
@@ -863,7 +1058,6 @@ public class OmsStatistics {
 			
 		try {
 			
-			List<String> filtersAnalysis = new ArrayList<>();
 			q.setQuestion("Prevalencia (Número y porcentaje) de infecciones en donaciones que resultaron positivas para las siguientes pruebas de ITT (Número de positivos/reactivos (Numerador)/Número de pruebas de detección (Denominador)):");
 
 			DonationFilterCode donationFilter = FactoryDAO.getCodesDAO(em).getDonationsFilterById(Constants.ANALYSIS_RESULT);
@@ -871,6 +1065,26 @@ public class OmsStatistics {
 			ResultsCode event = FactoryDAO.getCodesDAO(em).getResultById(Constants.ANALYSIS_RESULT_POSITIVE);
 			
 			String pathQuery = donationFilter.getDonationFilterCodesPath() +"='"+event.getConcept().getConceptCode()+ "'";
+			
+			
+			/**
+			 * Sin datos
+			 */
+			String path = donationFilter.getDonationFilterCodesPath().replace("/" +Constants.VAR_EVENT_FILTER +"/", "");
+			String dateNodata = "$doc/" +path+"='' or "
+					+ "not("+"$doc/" + path +")" ;
+			
+			filtersAnalysisDenominatorNoData.add(dateNodata);
+			
+			int nodata = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(orClausesNoDataDenominator,filtersAnalysisDenominatorNoData);
+			
+			q.setNodata(nodata);
+			
+			filtersAnalysisDenominatorNoData.remove(dateNodata);
+			
+			/****************************************************/
+			
+			
 			
 			// Respuestas
 			DataAnswer d1 = new DataAnswer();
@@ -881,8 +1095,8 @@ public class OmsStatistics {
 			
 			String filterEvent = Constants.ANALYSIS_FILTER + "'" + lab.getConcept().getConceptCode() + "']";
 			String query = pathQuery.replace(Constants.VAR_EVENT_FILTER, filterEvent) ;
-			filtersAnalysis.add(query);
-			double countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysis);
+			filtersAnalysisDenominator.add(0, query);
+			double countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
 			double percentaje = (countAnalysis != null && countAnalysis.get(0) != 0) ?  countNumerator/countAnalysis.get(0)*100 : 0;
 			d1.setAnswerResult(String.valueOf(countNumerator) + " - " + String.valueOf(new DecimalFormat("#.##").format(percentaje))+ "%");		
 			
@@ -891,13 +1105,13 @@ public class OmsStatistics {
 			q.getAnswers().add(d2);
 			d2.setAnswer("HBV.");
 			
-			filtersAnalysis.remove(query);
+			filtersAnalysisDenominator.remove(0);
 			
 			lab = FactoryDAO.getCodesDAO(em).getDonationsAnalysisById(Constants.DONATION_ANALYSIS_HEPATITIS_B);
 			filterEvent = Constants.ANALYSIS_FILTER + "'" + lab.getConcept().getConceptCode() + "']";
 			query = pathQuery.replace(Constants.VAR_EVENT_FILTER, filterEvent) ;
-			filtersAnalysis.add(query);
-			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysis);
+			filtersAnalysisDenominator.add(0, query);
+			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
 
 			percentaje = (countAnalysis != null && countAnalysis.get(1) != 0) ?  countNumerator/countAnalysis.get(1)*100 : 0;
 			d2.setAnswerResult(String.valueOf(countNumerator) + " - " + String.valueOf(new DecimalFormat("#.##").format(percentaje))+ "%");
@@ -906,13 +1120,13 @@ public class OmsStatistics {
 			q.getAnswers().add(d3);
 			d3.setAnswer("HCV.");
 			
-			filtersAnalysis.remove(query);
+			filtersAnalysisDenominator.remove(0);
 			
 			lab = FactoryDAO.getCodesDAO(em).getDonationsAnalysisById(Constants.DONATION_ANALYSIS_HEPATITIS_C);
 			filterEvent = Constants.ANALYSIS_FILTER + "'" + lab.getConcept().getConceptCode() + "']";
 			query = pathQuery.replace(Constants.VAR_EVENT_FILTER, filterEvent) ;
-			filtersAnalysis.add(query);
-			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysis);
+			filtersAnalysisDenominator.add(query);
+			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
 
 			percentaje = (countAnalysis != null && countAnalysis.get(2) != 0) ?  countNumerator/countAnalysis.get(2)*100 : 0;
 			d3.setAnswerResult(String.valueOf(countNumerator) + " - " + String.valueOf(new DecimalFormat("#.##").format(percentaje))+ "%");
@@ -922,17 +1136,19 @@ public class OmsStatistics {
 			DataAnswer d4 = new DataAnswer();
 			q.getAnswers().add(d4);
 			d4.setAnswer("Sífilis.");
-			filtersAnalysis.remove(query);
+			filtersAnalysisDenominator.remove(query);
 			
 			lab = FactoryDAO.getCodesDAO(em).getDonationsAnalysisById(Constants.DONATION_ANALYSIS_SYPHILIS);
 			filterEvent = Constants.ANALYSIS_FILTER + "'" + lab.getConcept().getConceptCode() + "']";
 			query = pathQuery.replace(Constants.VAR_EVENT_FILTER, filterEvent) ;
-			filtersAnalysis.add(query);
-			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysis);
+			filtersAnalysisDenominator.add(0, query);
+			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
 
 			percentaje = (countAnalysis != null && countAnalysis.get(3) != 0) ?  countNumerator/countAnalysis.get(3)*100 : 0;
 			d4.setAnswerResult(String.valueOf(countNumerator) + " - " + String.valueOf(new DecimalFormat("#.##").format(percentaje))+ "%");
 //			
+			filtersAnalysisDenominator.remove(0);
+			
 			DataAnswer d5 = new DataAnswer();
 			q.getAnswers().add(d5);
 			d5.setAnswer("Enfermedad de Chagas.");
@@ -947,7 +1163,8 @@ public class OmsStatistics {
 		return q;
 	}
 	
-	public static DataQuestion get10Question(List<List<String>> orClausesList, List<String> andClausesNumerator, EntityManager em){
+	public static DataQuestion get10Question(List<List<String>> orClausesList, List<String> andClausesNumerator, List<String> filtersAnalysisDenominator,
+			List<String> orClausesNoDataDenominator, List<String> filtersAnalysisDenominatorNoData, EntityManager em){
 		
 		DataQuestion q = new DataQuestion();
 		List<DataAnswer> answers = new ArrayList<>();
@@ -955,21 +1172,47 @@ public class OmsStatistics {
 			
 		try {
 			
-			List<String> filtersAnalysis = new ArrayList<>();
 			q.setQuestion("Número y % de infecciones por VIH categorizadas como sigue:");
 
 			DonationFilterCode donationFilterAnalysis = FactoryDAO.getCodesDAO(em).getDonationsFilterById(Constants.ANALYSIS_RESULT);
 			ResultsCode event = FactoryDAO.getCodesDAO(em).getResultById(Constants.ANALYSIS_RESULT_POSITIVE);
 			String pathQuery = donationFilterAnalysis.getDonationFilterCodesPath() +"='"+event.getConcept().getConceptCode()+ "'";
+			String pathQueryNoDta = donationFilterAnalysis.getDonationFilterCodesPath() +"=''";
 			
 			DonationLaboratoyCode lab = FactoryDAO.getCodesDAO(em).getDonationsAnalysisById(Constants.DONATION_ANALYSIS_VHI);		
 			String filterEvent = Constants.ANALYSIS_FILTER + "'" + lab.getConcept().getConceptCode() + "']";
+			String filterEventNoData = Constants.ANALYSIS_FILTER + "'']";
 			
 			String queryAnalysis = pathQuery.replace(Constants.VAR_EVENT_FILTER, filterEvent) ;
+			pathQueryNoDta = pathQueryNoDta.replace(Constants.VAR_EVENT_FILTER, filterEventNoData);
 			
-			filtersAnalysis.add(queryAnalysis);
+			filtersAnalysisDenominator.add(queryAnalysis);
 			
 			DonationFilterCode donationFilter = FactoryDAO.getCodesDAO(em).getDonationsFilterById(Constants.DONOR_TYPE);
+			
+			/**
+			 * Sin datos
+			 */
+			String dateNodata = "$doc/" +donationFilter.getDonationFilterCodesPath()+"='' or "
+					+ "not("+"$doc/" + donationFilter.getDonationFilterCodesPath() +")" ;
+			
+			orClausesNoDataDenominator.add(dateNodata);
+			
+			
+			filtersAnalysisDenominatorNoData.add(pathQueryNoDta);
+			
+			int nodata = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(orClausesNoDataDenominator,filtersAnalysisDenominatorNoData);
+			
+			q.setNodata(nodata);
+			
+			filtersAnalysisDenominatorNoData.remove(pathQueryNoDta);
+			
+			orClausesNoDataDenominator.remove(dateNodata);
+			
+			/****************************************************/
+			
+			
+			
 			
 			// Respuestas
 			DataAnswer d1 = new DataAnswer();
@@ -978,7 +1221,7 @@ public class OmsStatistics {
 			
 			String query = donationFilter.getDonationFilterCodesPath() + "='"+Constants.DONOR_TYPE_VOLUNTARY+"'";
 			andClausesNumerator.add(query);
-			int countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysis);
+			int countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
 			
 			double percentaje = (countDonationsDonorType != null && countDonationsDonorType.get(0) != 0) ?  countNumerator/countDonationsDonorType.get(0)*100 : 0;
 			d1.setAnswerResult(String.valueOf(countNumerator) + " - " + String.valueOf(new DecimalFormat("#.##").format(percentaje))+ "%");
@@ -990,7 +1233,7 @@ public class OmsStatistics {
 			andClausesNumerator.remove(query);
 			query = donationFilter.getDonationFilterCodesPath() + "='"+Constants.DONOR_TYPE_REPLACEMENTS+"'";
 			andClausesNumerator.add(query);
-			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysis);
+			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
 			
 			percentaje = (countDonationsDonorType != null && countDonationsDonorType.get(1) != 0) ?  countNumerator/countDonationsDonorType.get(1)*100 : 0;
 			d2.setAnswerResult(String.valueOf(countNumerator) + " - " + String.valueOf(new DecimalFormat("#.##").format(percentaje))+ "%");
@@ -1009,7 +1252,7 @@ public class OmsStatistics {
 			query = donationFilter.getDonationFilterCodesPath() + "='"+Constants.DONOR_TYPE_OTHER+"'";
 			andClausesNumerator.add(query);
 			
-			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysis);
+			countNumerator = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
 			d4.setAnswerResult(String.valueOf(countNumerator));		
 			
 		} catch (XMLDataBaseException e) {
@@ -1020,7 +1263,7 @@ public class OmsStatistics {
 		return q;
 	}
 	
-	public static DataQuestion get11Question(List<List<String>> orClausesList, List<String> andClausesNumerator, EntityManager em){
+	public static DataQuestion get11Question(List<List<String>> orClausesList, List<String> andClausesNumerator, List<String> orClausesNoDataDenominator,  EntityManager em){
 		
 		DataQuestion q = new DataQuestion();
 		List<DataAnswer> answers = new ArrayList<>();
@@ -1031,7 +1274,25 @@ public class OmsStatistics {
 			q.setQuestion("Número de unidades  de sangre y de los siguientes componentes sanguíneos distribuidos / transfundidos en el país (exceptuando las unidades de sangre autóloga)");
 
 			TransfusionFilterCode donationFilter = FactoryDAO.getCodesDAO(em).getTransfusionFilterById(Constants.PRODUCT_TYPE);
-
+			
+			/**
+			 * Sin datos
+			 */
+			String dateNodata = "$doc/" +donationFilter.getTransfusionFilterCodesPath()+"='' or "
+					+ "not("+"$doc/" + donationFilter.getTransfusionFilterCodesPath() +")" ;
+			
+			orClausesNoDataDenominator.add(dateNodata);
+			
+		
+			int nodata = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(orClausesNoDataDenominator,null);
+			
+			q.setNodata(nodata);
+			
+			orClausesNoDataDenominator.remove(dateNodata);
+			
+			/****************************************************/
+			
+			
 			// Respuestas
 			DataAnswer d1 = new DataAnswer();
 			q.getAnswers().add(d1);
@@ -1097,7 +1358,7 @@ public class OmsStatistics {
 		return q;
 	}
 
-	public static DataQuestion get12Question(List<List<String>> orClausesList, List<String> andClausesNumerator, EntityManager em){
+	public static DataQuestion get12Question(List<List<String>> orClausesList, List<String> andClausesNumerator, List<String> orClausesNoDataDenominator, EntityManager em){
 		
 		DataQuestion q = new DataQuestion();
 		List<DataAnswer> answers = new ArrayList<>();
@@ -1106,6 +1367,19 @@ public class OmsStatistics {
 		try {
 			
 			q.setQuestion("Número de pacientes transfundidos en el país.");
+			
+			/**
+			 * Sin datos
+			 */
+			
+		
+			int nodata = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(orClausesNoDataDenominator,null);
+			
+			q.setNodata(nodata);
+			
+			/****************************************************/
+			
+			
 			
 			// Respuestas
 			DataAnswer d1 = new DataAnswer();
@@ -1142,7 +1416,7 @@ public class OmsStatistics {
 		return q;
 	}
 	
-	public static DataQuestion get13Question(List<List<String>> orClausesList, List<String> andClausesNumerator, EntityManager em){
+	public static DataQuestion get13Question(List<List<String>> orClausesList, List<String> andClausesNumerator, List<String> orClausesNoDataDenominator, EntityManager em){
 		
 		DataQuestion q = new DataQuestion();
 		List<DataAnswer> answers = new ArrayList<>();
@@ -1154,6 +1428,25 @@ public class OmsStatistics {
 			
 			TransfusionFilterCode donationFilterFrom = FactoryDAO.getCodesDAO(em).getTransfusionFilterById(Constants.DONOR_AGE_FROM);
 			TransfusionFilterCode donationFilterTo = FactoryDAO.getCodesDAO(em).getTransfusionFilterById(Constants.DONOR_AGE_TO);
+			
+			
+			/**
+			 * Sin datos
+			 */
+			String dateNodata = "$doc/" +donationFilterFrom.getTransfusionFilterCodesPath()+"='' or "
+					+ "not("+"$doc/" + donationFilterFrom.getTransfusionFilterCodesPath() +")" ;
+			
+			orClausesNoDataDenominator.add(dateNodata);
+			
+		
+			int nodata = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(orClausesNoDataDenominator,null);
+			
+			q.setNodata(nodata);
+			
+			orClausesNoDataDenominator.remove(dateNodata);
+			
+			/****************************************************/
+			
 			
 			// Respuestas
 			DataAnswer d1 = new DataAnswer();
@@ -1229,7 +1522,7 @@ public class OmsStatistics {
 		return q;
 	}
 	
-	public static DataQuestion get14Question(List<List<String>> orClausesList, List<String> andClausesNumerator, EntityManager em){
+	public static DataQuestion get14Question(List<List<String>> orClausesList, List<String> andClausesNumerator, List<String> orClausesNoDataDenominator, EntityManager em){
 		
 		DataQuestion q = new DataQuestion();
 		List<DataAnswer> answers = new ArrayList<>();
@@ -1244,6 +1537,24 @@ public class OmsStatistics {
 			EventSeverityCode event = FactoryDAO.getCodesDAO(em).getSeverityById(Constants.ADVERS_EVENT_SEVERITY_SEVERE);
 			
 			String pathQuery = donationFilter.getTransfusionFilterCodesPath() +"='"+event.getConcept().getConceptCode()+ "'";
+			
+			/**
+			 * Sin datos
+			 */
+			String path = donationFilter.getTransfusionFilterCodesPath().replace("/"+Constants.VAR_EVENT_FILTER+"/", "");
+			String dateNodata = "$doc/" +path+"=''";
+			
+			orClausesNoDataDenominator.add(dateNodata);
+			
+		
+			int nodata = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(orClausesNoDataDenominator,null);
+			
+			q.setNodata(nodata);
+			
+			orClausesNoDataDenominator.remove(dateNodata);
+			
+			/****************************************************/
+			
 			
 			// Respuestas
 			DataAnswer d1 = new DataAnswer();

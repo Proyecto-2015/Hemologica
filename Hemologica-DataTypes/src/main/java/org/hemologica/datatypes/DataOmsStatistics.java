@@ -1,5 +1,6 @@
 package org.hemologica.datatypes;
 
+import java.util.List;
 
 public class DataOmsStatistics {
 	
@@ -7,6 +8,9 @@ public class DataOmsStatistics {
 	private String fromDate;
 	private String toDate;
 	private DataInstitution institution;
+	private List<TransfusionFilterData> transfusionFilter;
+	private List<DonationFilterData> donationFilter;
+	private List<DonationFilterData> commonsFilters;
 	private DataBank bloodBank;
 
 	
@@ -40,6 +44,24 @@ public class DataOmsStatistics {
 	}
 	public void setBloodBank(DataBank bloodBank) {
 		this.bloodBank = bloodBank;
+	}
+	public List<TransfusionFilterData> getTransfusionFilter() {
+		return transfusionFilter;
+	}
+	public void setTransfusionFilter(List<TransfusionFilterData> transfusionFilter) {
+		this.transfusionFilter = transfusionFilter;
+	}
+	public List<DonationFilterData> getDonationFilter() {
+		return donationFilter;
+	}
+	public void setDonationFilter(List<DonationFilterData> donationFilter) {
+		this.donationFilter = donationFilter;
+	}
+	public List<DonationFilterData> getCommonsFilters() {
+		return commonsFilters;
+	}
+	public void setCommonsFilters(List<DonationFilterData> commonsFilters) {
+		this.commonsFilters = commonsFilters;
 	}
 	
 }

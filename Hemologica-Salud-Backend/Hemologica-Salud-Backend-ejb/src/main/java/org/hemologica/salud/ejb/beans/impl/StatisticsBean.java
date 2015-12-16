@@ -911,8 +911,32 @@ public class StatisticsBean implements StatisticsBeanLocal {
             document.open();
             
             document.addTitle("My first PDF");
+            
+            List<String> filtersAnalysisDenominator = new ArrayList<>();
+            List<String> filtersAnalysisDenominatorNoData = new ArrayList<>();
+            List<String> orClausesNoDataDenominator = new ArrayList<>();
+            
+            getCommonsQueries(statictic.getCommonsFilters(), andClausesNumerator, orClausesNoDataDenominator);
+           
+            List<String> andClausesNumeratorCopy = new ArrayList<>();
+            List<String> orClausesNoDataDenominatorCopy = new ArrayList<>();
+            
+            for(String s : andClausesNumerator){
+            	andClausesNumeratorCopy.add(new String(s));
+            }
+            for(String s : orClausesNoDataDenominator){
+            	orClausesNoDataDenominatorCopy.add(new String(s));
+            }
+            
+            getQueriesDonations(statictic.getDonationFilter(), andClausesNumerator, orClausesNoDataDenominator, filtersAnalysisDenominator, filtersAnalysisDenominatorNoData);
 
-            List<DataQuestion> questions = OmsStatistics.getQuestions(orClausesList,andClausesNumerator,em);
+            getQueriesTransfusion(statictic.getTransfusionFilter(), andClausesNumeratorCopy, orClausesNoDataDenominatorCopy);
+            
+            List<DataQuestion> questions = OmsStatistics.getDonationsQuestions(orClausesList,andClausesNumerator,orClausesNoDataDenominator,filtersAnalysisDenominator, filtersAnalysisDenominatorNoData, em);
+            
+            List<DataQuestion> qTransfusions = OmsStatistics.getTransfusionsQuestions(orClausesList,andClausesNumeratorCopy,orClausesNoDataDenominatorCopy,null, null, em);
+            
+            questions.addAll(qTransfusions);
             
             for(DataQuestion dataQuestion : questions){
             	
@@ -932,6 +956,9 @@ public class StatisticsBean implements StatisticsBeanLocal {
             	preface.add(orderedList);
             	
 	            document.add(preface);
+	            document.add( Chunk.NEWLINE );
+	            document.add(new Phrase("Sin datos: " + dataQuestion.getNodata()));
+	            document.add( Chunk.NEWLINE );
 	            document.add( Chunk.NEWLINE );
             }
             
@@ -963,5 +990,186 @@ public class StatisticsBean implements StatisticsBeanLocal {
 	        ColumnText.showTextAligned(writer.getDirectContent(),Element.ALIGN_CENTER, new Phrase("Bottom Right"), rect.getRight(), rect.getBottom(), 0);
 	    }
 	} 
+	
+	public void getCommonsQueries(List<DonationFilterData> commonsFilters, List<String> andClausesDenominator, List<String> orClausesNoDataDenominator ){
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		
+		if(andClausesDenominator == null)
+			andClausesDenominator = new ArrayList<>();
+		
+		if(orClausesNoDataDenominator == null)
+			orClausesNoDataDenominator = new ArrayList<>();
+		
+		for(DonationFilterData filter : commonsFilters){
+		
+			if(filter.getCode().equals(Constants.AGE_FROM) && (filter.getValueString()!= null) && (!filter.getValueString().equals(""))){
+				
+				Calendar dateFrom = Calendar.getInstance();
+				dateFrom.add(Calendar.YEAR, (Integer.parseInt(filter.getValueString()))*(-1));
+				
+				String dateFromString = sdf.format(dateFrom.getTime());
+				
+				DonationFilterCode donationFilter = FactoryDAO.getCodesDAO(em).getDonationsFilterById(filter.getCode());
+				
+				String query = donationFilter.getDonationFilterCodesPath() + "<='" + dateFromString +"'";
+				andClausesDenominator.add(query);
+				
+				String dateNodata = "$doc/" +donationFilter.getDonationFilterCodesPath()+"='' or "
+						+ "not("+"$doc/" + donationFilter.getDonationFilterCodesPath() +")" ;
+				orClausesNoDataDenominator.add(dateNodata);
+				
+			}
+			
+			if(filter.getCode().equals(Constants.AGE_TO) && (filter.getValueString()!= null) && !(filter.getValueString().equals(""))){
+				
+				Calendar dateFrom = Calendar.getInstance();
+				dateFrom.add(Calendar.YEAR, (Integer.parseInt(filter.getValueString())+1)*(-1));
+				
+				String dateFromString = sdf.format(dateFrom.getTime());
+				
+				DonationFilterCode donationFilter = FactoryDAO.getCodesDAO(em).getDonationsFilterById(filter.getCode());
+				
+				String query = donationFilter.getDonationFilterCodesPath() + ">='" + dateFromString +"'";
+				andClausesDenominator.add(query);
+				
+				String dateNodata ="$doc/" + donationFilter.getDonationFilterCodesPath()+"='' or "
+						+ "not("+ "$doc/" +donationFilter.getDonationFilterCodesPath() +")" ;
+				orClausesNoDataDenominator.add(dateNodata);
+				
+			}
+			
+			if(filter.getValue() != null && filter.getValue().getCode() != null){
+				
+				DonationFilterCode donationFilter = FactoryDAO.getCodesDAO(em).getDonationsFilterById(filter.getCode());
+				String query ="";
+				if(donationFilter != null){
+					
+					query = donationFilter.getDonationFilterCodesPath() + "='" + filter.getValue().getCode() +"'";
+					
+					String dateNodata = "$doc/" +donationFilter.getDonationFilterCodesPath()+"='' or "
+							+ "not("+ "$doc/" +donationFilter.getDonationFilterCodesPath() +")" ;
+					
+					
+					andClausesDenominator.add(query);
+					orClausesNoDataDenominator.add(dateNodata);
+					
+				}
+			}	
+		}	
+	}
+	
+	public void getQueriesTransfusion(List<TransfusionFilterData> transfusionFilters, List<String> andClausesDenominator, List<String> orClausesNoDataDenominator ){
+		
+		List<String> filtersDenominator = new ArrayList<>();
+		String edverseEventCodeDenominator = "";
+		
+		for(TransfusionFilterData filter : transfusionFilters){
+			
+			if(filter.getValue() != null && filter.getValue().getCode() != null){
+				
+				TransfusionFilterCode donationFilter = FactoryDAO.getCodesDAO(em).getTransfusionFilterById(filter.getCode());
+				String query ="";
+				
+				if(donationFilter != null){
+					
+					query = donationFilter.getTransfusionFilterCodesPath() + "='" + filter.getValue().getCode() +"'";
+					
+					String dateNodata = "$doc/" +donationFilter.getTransfusionFilterCodesPath()+"='' or "
+							+ "not("+ "$doc/" +donationFilter.getTransfusionFilterCodesPath() +")" ;
+					
+					if(donationFilter.getTransfusionFilterCodesValue().equals(Constants.SEVERITY_EVENT)){
+						
+						if(edverseEventCodeDenominator.equals("")){
+							
+							query = query.replace("/"+Constants.VAR_EVENT_FILTER.toString()+"/", "");
+							dateNodata = dateNodata.replace("/"+Constants.VAR_EVENT_FILTER.toString()+"/", "");
+							
+						}else{
+							
+							String filterEvent = Constants.EVENT_FILTER + "'" + edverseEventCodeDenominator + "']";
+							query = query.replace(Constants.VAR_EVENT_FILTER.toString(), filterEvent);
+							dateNodata = dateNodata.replace(Constants.VAR_EVENT_FILTER.toString(), filterEvent);
+						}
+						filtersDenominator.add(query);
+						
+					}
+					
+					andClausesDenominator.add(query);
+					
+					if(donationFilter.getTransfusionFilterCodesValue().equals(Constants.ADVERSE_EVENT)){
+						edverseEventCodeDenominator = filter.getValue().getCode();
+						filtersDenominator.add(query);
+						
+						// Si es evento adverso solo ve que sea vacio si no esta es porque no tuvo esvento adverso.
+						dateNodata ="$doc/" + donationFilter.getTransfusionFilterCodesPath()+"=''";
+					}	
+					
+					orClausesNoDataDenominator.add(dateNodata);
+					
+				}
+			}	
+		}
+		
+	}
+	
+	public void getQueriesDonations(List<DonationFilterData> donationFilters, List<String> andClausesDenominator, 
+			List<String> orClausesNoDataDenominator,List<String> filtersAnalysisDenominator, List<String> filtersAnalysisDenominatorNoData ){
 
+		String analisisCodeDenominator = "";
+		
+		for(DonationFilterData filter : donationFilters){
+			
+			if(filter.getValue() != null && filter.getValue().getCode() != null){
+				
+				DonationFilterCode donationFilter = FactoryDAO.getCodesDAO(em).getDonationsFilterById(filter.getCode());
+				
+				if(donationFilter != null){
+					
+					String query = donationFilter.getDonationFilterCodesPath() + "='" + filter.getValue().getCode() +"'";
+					
+					String dateNodata = "$doc/" +donationFilter.getDonationFilterCodesPath()+"='' or "
+							+ "not("+ "$doc/" +donationFilter.getDonationFilterCodesPath() +")" ;
+					
+					if(filter.getCode().equals(Constants.ANALYSIS) || filter.getCode().equals(Constants.RESULTS)){
+						/**
+						 * Analisis
+						 */
+						if(donationFilter.getDonationFilterCodesValue().equals(Constants.RESULTS)){
+							
+							if(analisisCodeDenominator.equals("")){
+								
+								query = query.replace("/"+Constants.VAR_EVENT_FILTER.toString()+"/", "");
+								dateNodata = dateNodata.replace("/"+Constants.VAR_EVENT_FILTER.toString()+"/", "");
+							
+							}else{
+								
+								String filterEvent = Constants.ANALYSIS_FILTER + "'" + analisisCodeDenominator + "']";
+								query = query.replace(Constants.VAR_EVENT_FILTER.toString(), filterEvent);
+								dateNodata = dateNodata.replace(Constants.VAR_EVENT_FILTER.toString(), filterEvent);
+								
+							}
+							
+							
+						}else if(donationFilter.getDonationFilterCodesValue().equals(Constants.ANALYSIS)){
+							
+							analisisCodeDenominator = filter.getValue().getCode();
+							
+							// Si es evento adverso solo ve que sea vacio si no esta es porque no tuvo esvento adverso.
+							dateNodata = donationFilter.getDonationFilterCodesPath()+"=''";
+							
+						}	
+						
+						filtersAnalysisDenominator.add(query);
+						filtersAnalysisDenominatorNoData.add(dateNodata);
+						
+					}else{
+					
+						andClausesDenominator.add(query);
+						orClausesNoDataDenominator.add(dateNodata);
+					}	
+				}
+			}
+		}
+	}
 }
