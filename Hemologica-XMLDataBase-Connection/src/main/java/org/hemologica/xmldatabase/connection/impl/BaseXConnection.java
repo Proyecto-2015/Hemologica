@@ -550,30 +550,31 @@ public class BaseXConnection implements IXMLDataBase {
 	
 				}
 			}
-
-			for (List<String> orClausesList : orClauses) {
-				String or = "";
-				for (String s : orClausesList) {
-
-					if (orClausesList.indexOf(s) == 0)
-						or += "$doc" + s;
-					else
-						or += " or $doc" + s;
-				}
-				if (or != "") {
-					if (first) {
-
-						input += "(" + or + ")";
-						first = false;
-
-					} else {
-
-						input += " and (" + or + ")";
-
+			if(orClauses != null){
+				for (List<String> orClausesList : orClauses) {
+					String or = "";
+					for (String s : orClausesList) {
+	
+						if (orClausesList.indexOf(s) == 0)
+							or += "$doc" + s;
+						else
+							or += " or $doc" + s;
+					}
+					if (or != "") {
+						if (first) {
+	
+							input += "(" + or + ")";
+							first = false;
+	
+						} else {
+	
+							input += " and (" + or + ")";
+	
+						}
 					}
 				}
 			}
-
+			
 			if (orClausesCDAsIds != null) {
 				String or = "";
 				for (String s : orClausesCDAsIds) {
