@@ -17,6 +17,8 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Tuple;
+
 import org.hemologica.constants.Constants;
 import org.hemologica.dao.model.Center;
 import org.hemologica.dao.model.DonationFilterCode;
@@ -38,15 +40,12 @@ import org.hemologica.salud.ejb.beans.StatisticsBeanLocal;
 import org.hemologica.salud.web.oms.OmsStatistics;
 import org.hemologica.xmldatabase.exceptions.XMLDataBaseException;
 import org.hemologica.xmldatabase.factories.XMLDataBaseFactory;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Element;
-import com.itextpdf.text.ListItem;
-import com.itextpdf.text.Phrase;
-import com.itextpdf.text.Rectangle;
+
+import com.itextpdf.text.TabStop.Alignment;
 import com.itextpdf.text.pdf.ColumnText;
 import com.itextpdf.text.pdf.PdfPageEventHelper;
 import com.itextpdf.text.pdf.PdfWriter;
+import com.bradmcevoy.http.values.Pair;
 import com.itextpdf.text.*;
 
 @Stateless
@@ -910,8 +909,114 @@ public class StatisticsBean implements StatisticsBeanLocal {
             
             document.open();
             
-            document.addTitle("My first PDF");
             
+            Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
+            	      Font.BOLD);
+            Font smallBold = new Font(Font.FontFamily.TIMES_ROMAN, 12,
+          	      Font.BOLD);
+            
+            /**
+             * Titulo
+             */
+            Paragraph title = new Paragraph("Indicadores", catFont);
+            title.setAlignment(Element.ALIGN_MIDDLE);
+            document.add(title);
+            
+            document.add(Chunk.NEWLINE);
+            
+            /**
+             * Info general
+             */
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            Paragraph paragrafInfo = new Paragraph("Fecha: " + sdf.format(Calendar.getInstance().getTime()));
+            document.add(paragrafInfo);
+            
+            document.add(Chunk.NEWLINE);
+            
+            Paragraph paragrafVersion = new Paragraph("Version Hemologica: 1.0");
+            document.add(paragrafVersion);
+            document.add(Chunk.NEWLINE);
+            
+            /**
+             * Población general
+             */  
+            
+            Paragraph generalPeople = new Paragraph("Poblacion general",smallBold);
+            document.add(generalPeople);
+            
+            int cantDonations = 0, cantTransfusions = 0, cantAdversEvents = 0;
+            Pair<Integer,Integer> cant = null;
+            try {
+            	cant = getCantPerson(null,null,null,null,null);
+            	cantDonations = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(null,null,null,null);
+            	cantTransfusions = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(null,null,null,null);
+            	cantAdversEvents = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countEvents(null, null, null);
+            	
+			} catch (XMLDataBaseException e) {
+				
+				logger.log(Level.SEVERE, "Error al calcular poblacion general ", e);
+			}
+            
+            document.add(new Paragraph("Cantidad de donantes: " + cant.getObject1() ));
+            document.add(new Paragraph("Cantidad de donaciones: " + cantDonations));
+            document.add(new Paragraph("Cantidad de personas transfundidas: " + cant.getObject2()));
+            document.add(new Paragraph("Cantidad de transfusiones: " + cantTransfusions));
+            document.add(new Paragraph("Cantidad de eventos adversos: " + cantAdversEvents));
+            
+            document.add(Chunk.NEWLINE);
+       
+            /**
+             * Filtros
+             */
+            
+            document.add(new Paragraph("Filtros generales",smallBold));
+            
+            for(DonationFilterData filter : statictic.getCommonsFilters()){
+            	
+            	if(filter.getValue() != null){
+            		
+            		document.add(new Paragraph(filter.getDisplayName() +": " + filter.getValue().getDisplayName()));
+            		
+            	}else if(filter.getValueString() != null && !filter.getValueString().equals("")){
+            		
+            		document.add(new Paragraph(filter.getDisplayName() +": " + filter.getValueString()));
+            		
+            	}            	
+            }
+            
+            document.add(new Paragraph("Filtros donaciones", smallBold));
+            
+            for(DonationFilterData filter : statictic.getDonationFilter()){
+            	
+            	if(filter.getValue() != null){
+            		
+            		document.add(new Paragraph(filter.getDisplayName() +": " + filter.getValue().getDisplayName()));
+            		
+            	}else if(filter.getValueString() != null){
+            		
+            		document.add(new Paragraph(filter.getDisplayName() +": " + filter.getValueString()));
+            		
+            	}            	
+            }
+            
+            document.add(new Paragraph("Filtros transfusiones", smallBold ));
+            
+            for(TransfusionFilterData filter : statictic.getTransfusionFilter()){
+            	
+            	if(filter.getValue() != null){
+            		
+            		document.add(new Paragraph(filter.getDisplayName() +": " + filter.getValue().getDisplayName()));
+            		
+            	}else if(filter.getValueString() != null){
+            		
+            		document.add(new Paragraph(filter.getDisplayName() +": " + filter.getValueString()));
+            		
+            	}            	
+            }
+            
+            document.add(Chunk.NEWLINE);
+            
+
             List<String> filtersAnalysisDenominator = new ArrayList<>();
             List<String> filtersAnalysisDenominatorNoData = new ArrayList<>();
             List<String> orClausesNoDataDenominator = new ArrayList<>();
@@ -931,6 +1036,36 @@ public class StatisticsBean implements StatisticsBeanLocal {
             getQueriesDonations(statictic.getDonationFilter(), andClausesNumerator, orClausesNoDataDenominator, filtersAnalysisDenominator, filtersAnalysisDenominatorNoData);
 
             getQueriesTransfusion(statictic.getTransfusionFilter(), andClausesNumeratorCopy, orClausesNoDataDenominatorCopy);
+            
+            /**
+             * Población general
+             */  
+            
+            Paragraph filterPeople = new Paragraph("Poblacion filtrada",smallBold);
+            document.add(filterPeople);
+            
+            int cantDonationsFilter = 0, cantTransfusionsFilter = 0, cantAdversEventsFilter = 0;
+            Pair<Integer,Integer> cantFilter = null;
+            try {
+            	cantFilter = getCantPerson(andClausesNumerator,orClausesList,andClausesNumeratorCopy,filtersAnalysisDenominator,orClausesList);
+            	cantDonationsFilter = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
+            	cantTransfusionsFilter = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClausesNumeratorCopy,orClausesList,null,null);
+            	cantAdversEventsFilter = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countEvents(andClausesNumeratorCopy, orClausesList, null);
+            	
+			} catch (XMLDataBaseException e) {
+				
+				logger.log(Level.SEVERE, "Error al calcular poblacion general ", e);
+			}
+            
+            document.add(new Paragraph("Cantidad de donantes: " + cantFilter.getObject1() ));
+            document.add(new Paragraph("Cantidad de donaciones: " + cantDonationsFilter));
+            document.add(new Paragraph("Cantidad de personas transfundidas: " + cantFilter.getObject2()));
+            document.add(new Paragraph("Cantidad de transfusiones: " + cantTransfusionsFilter));
+            document.add(new Paragraph("Cantidad de eventos adversos: " + cantAdversEventsFilter));
+            
+            document.add(Chunk.NEWLINE);
+            document.add(Chunk.NEWLINE);
+            
             
             List<DataQuestion> questions = OmsStatistics.getDonationsQuestions(orClausesList,andClausesNumerator,orClausesNoDataDenominator,filtersAnalysisDenominator, filtersAnalysisDenominatorNoData, em);
             
@@ -1171,5 +1306,41 @@ public class StatisticsBean implements StatisticsBeanLocal {
 				}
 			}
 		}
+	}
+
+	public Pair<Integer,Integer> getCantPerson(List<String> andClausesDonations, List<List<String>> orClausesDonations, List<String> analysis,
+		List<String> andClausesTransfusions, List<List<String>> orClausesTransfusions){
+
+		Integer cantDonors = 0,  cantTransfussed = 0;
+		try {
+
+			for(Person p : FactoryDAO.getPeronDAO(em).getPersonsFilters(new HashMap<String,Object>())){
+				
+				List<String> orClausesCDAsIds = new ArrayList<>();
+				for(PersonsRecord personRecord :FactoryDAO.getPersonRecordDAO(em).getCDAsUserId(p.getId())){
+		
+					String query = "$doc/ClinicalDocument/id/@root='"+ personRecord.getPersonsRecordCdaRoot() + "' and " +
+					"$doc/ClinicalDocument/id/@extension='" + personRecord.getPersonsRecordCdaExtension() +"'";
+					orClausesCDAsIds.add(query);
+					
+				}
+				if(orClausesCDAsIds.size() != 0 && XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesDonations,orClausesDonations,orClausesCDAsIds,analysis) > 0){
+					
+					cantDonors++;
+					
+				}
+				if(orClausesCDAsIds.size() != 0 && XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClausesTransfusions,orClausesTransfusions,orClausesCDAsIds,null) > 0){
+					
+					cantTransfussed++;
+					
+				}
+			}
+		}catch (XMLDataBaseException e) {
+			
+			logger.log(Level.SEVERE, "Error al calcular la cantidad de personas", e);
+			
+		}
+		Pair<Integer, Integer> p = new Pair<Integer, Integer>(cantDonors,cantTransfussed);
+		return p;
 	}
 }
