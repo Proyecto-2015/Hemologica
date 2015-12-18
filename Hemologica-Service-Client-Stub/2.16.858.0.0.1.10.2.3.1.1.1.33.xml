@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ClinicalDocument xmlns="urn:hl7-org:v3">
+    <typeId root="2.16.840.1.113883.1.3" extension="POCD_HD000040"/>
+    <templateId root="2.16.840.1.113883.19.57.7.1.3.1"  extension="CCD_RM201201CO01" assigningAuthorityName="HL7CO"/>
+    <id root="2.16.858.0.0.1.10.2.3.1.1.1" extension="33"/>
+    <code code="4321000179101"/>
+    <title>Donacion de sangre</title>
+    <effectiveTime value="20151209220913"/>
+    <confidentialityCode codeSystemName="Confidentiality" code="N" codeSystem="2.16.840.1.113883.5.25" displayName="normal"/>
+    <languageCode code="es-UY"/>
+    <recordTarget typeCode="RCT" contextControlCode="OP">
+        <patientRole classCode="PAT">
+            <id root="2.16.858.0.0.1.10.2.3.1.1.2" extension="5"/>
+            <patient classCode="PSN" determinerCode="INSTANCE">
+                <id root="2.16.858.1.858.68909.3333"/>
+                <name>
+                    <given>ff</given>
+                    <given>ss</given>
+                    <family>fff</family>
+                    <family>ff</family>
+                </name>
+                <administrativeGenderCode code="1" codeSystem="2.16.858.2.10000675.69600"/>
+                <birthTime value="20151209"/>
+            </patient>
+        </patientRole>
+    </recordTarget>
+    <author typeCode="AUT" contextControlCode="OP">
+        <time value="20151209220913"/>
+        <assignedAuthor classCode="ASSIGNED">
+            <id root="2.16.858.1.858.68909.46714299"/>
+            <assignedPerson>
+                <name>
+                    <given>Paula</given>
+                    <given>De Polsi</given>
+                    <family>Paula</family>
+                    <family>De Polsi</family>
+                </name>
+            </assignedPerson>
+            <representedOrganization>
+                <id root="1"/>
+                <name>Banco de Sangre 1</name>
+            </representedOrganization>
+        </assignedAuthor>
+    </author>
+    <custodian>
+        <assignedCustodian>
+            <representedCustodianOrganization>
+                <id root="2.16.858.0.0.1.10.2.3.1.1"/>
+                <name>HEMOLOGICA</name>
+            </representedCustodianOrganization>
+        </assignedCustodian>
+    </custodian>
+    <component>
+        <structuredBody>
+            <component>
+                <section>
+
+                    <code code="12719002" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" displayName="transfusión de plaquetas"/>
+                    
+                    <entry>
+                        <procedure moodCode="EVN" classCode="PROC">
+                            <id root="id"/>
+                            <code codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" code="1788001"/>
+                            <statusCode code="completed"/>
+                            <effectiveTime/>
+                            <specimen typeCode="SPC">
+<specimenRole classCode="SPEC">
+    <id root=""/>
+</specimenRole>
+                            </specimen>
+                            <entryRelationship typeCode="COMP">
+<observation classCode="OBS" moodCode="EVN">
+    <code codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" code="278149003"/>
+</observation>
+                            </entryRelationship>
+                        </procedure>
+                    </entry>
+                    <entry>
+                        <observation classCode="OBS" moodCode="EVN">
+                            <code code="1" displayName="donor_voluntary"/>
+                        </observation>
+                    </entry>
+                </section>
+            </component>
+        </structuredBody>
+    </component>
+</ClinicalDocument>

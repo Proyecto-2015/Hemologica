@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ClinicalDocument  xmlns="urn:hl7-org:v3"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="urn:hl7-org:v3 ftp://ftp.ihe.net/TF_Implementation_Material/PCC/schemas/cda/infrastructure/cda/CDA.xsd" 
-                  classCode="DOCCLIN"  moodCode="EVN">
+<ClinicalDocument  xmlns="urn:hl7-org:v3" 
+    xsi:schemaLocation="urn:hl7-org:v3 ftp://ftp.ihe.net/TF_Implementation_Material/PCC/schemas/cda/infrastructure/cda/CDA.xsd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" classCode="DOCCLIN"  moodCode="EVN">
+
+    <!-- xsi:schemaLocation="urn:hl7-org:v3 ftp://ftp.ihe.net/TF_Implementation_Material/PCC/schemas/cda/infrastructure/cda/CDA.xsd"  -->
     
     <!-- OID HEMOLOGICA = 2.16.858.0.0.1.10.2.3.1.1 -->
     <!-- OID HEMOLOGICA-CDA = 2.16.858.0.0.1.10.2.3.1.1.1 -->

@@ -20,8 +20,12 @@ import org.hemologica.service.business.IMovementBean;
 import org.hemologica.service.datatype.MovementData;
 import org.hemologica.service.utils.xml.XMLUtils;
 import org.hemologica.service.ws.Service;
+import org.hemologica.service.ws.exception.ServiceException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 
 @WebService(endpointInterface = "org.hemologica.service.ws.Service")
 public class ServiceImpl implements Service {
@@ -30,76 +34,63 @@ public class ServiceImpl implements Service {
 
 	public void provideCDA(String cda) throws Exception {
 
-		try {
+//		try {
 
-			InputStream xsd1 = ServiceImpl.class.getClassLoader().getResourceAsStream("/xsd/donation_fail.xsd");
-			InputStream xsd2 = ServiceImpl.class.getClassLoader().getResourceAsStream("/xsd/donation_ok.xsd");
-			InputStream xsd3 = ServiceImpl.class.getClassLoader().getResourceAsStream("/xsd/laboratory.xsd");
-			InputStream xsd4 = ServiceImpl.class.getClassLoader().getResourceAsStream("/xsd/transfusion.xsd");
-
-			Exception ex = null;
-
+			
 			try {
-				XMLUtils.validar(cda, xsd1);
-			} catch (Exception ex1) {
-				ex = ex1;
-			}
-			try {
-				XMLUtils.validar(cda, xsd2);
-			} catch (Exception ex1) {
-				ex = ex1;
-			}
-			try {
-				XMLUtils.validar(cda, xsd3);
-			} catch (Exception ex1) {
-				ex = ex1;
-			}
-			try {
-				XMLUtils.validar(cda, xsd4);
-			} catch (Exception ex1) {
-				ex = ex1;
+				InputStream xsd = ServiceImpl.class.getClassLoader().getResourceAsStream("/xsd/cda.xsd");	
+				Document document = XMLUtils.stringToDocument(cda);
+				Element docElement = document.getDocumentElement();
+				docElement.setAttribute("xmlns", "urn:hl7-org:v3");
+				docElement.setAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
+				cda = XMLUtils.documentToString(document);
+				if( ! XMLUtils.validateWithExtXSDUsingSAX(cda, xsd) ){
+					throw ServiceException.create(ServiceException.CDA_VALIDATION_SCHEMA_ERROR_CODE, ServiceException.CDA_VALIDATION_SCHEMA_ERROR_DETAILS);
+				}
+			} catch (Exception ex) {
+				logger.log(Level.SEVERE, ex.getMessage(), ex);
+				throw ServiceException.create(ServiceException.CDA_VALIDATION_SCHEMA_ERROR_CODE, ServiceException.CDA_VALIDATION_SCHEMA_ERROR_DETAILS);
 			}
 			
-			if(ex != null) throw ex;
 
-			// ApplicationContext context = new
-			// ClassPathXmlApplicationContext("META-INF/spring/beans.xml");
-			Properties prop = new Properties();
-			InputStream stream = ServiceImpl.class.getClassLoader().getResourceAsStream("hemologica.properties");
-			prop.load(stream);
-
-			// ActiveMQConnectionFactory factory = (ActiveMQConnectionFactory)
-			// context.getBean("connectionFactory");
-			ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(
-					prop.getProperty("jms.connection.factory.broker.url"));
-			// Create a Connection
-			Connection connection = factory.createConnection();
-			connection.start();
-
-			// Create a Session
-			Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
-
-			// Create the destination (Topic or Queue)
-			Destination destination = session.createQueue(prop.getProperty("jms.queue.cda.receive"));
-
-			// Create a MessageProducer from the Session to the Topic or Queue
-			MessageProducer producer = session.createProducer(destination);
-			producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
-
-			// Create a messages
-
-			TextMessage message = session.createTextMessage(cda);
-			producer.send(message);
-
-			// Clean up
-			session.close();
-			connection.close();
-
-		} catch (JMSException e) {
-			logger.log(Level.SEVERE, null, e);
-		} catch (IOException e) {
-			logger.log(Level.SEVERE, null, e);
-		}
+//			// ApplicationContext context = new
+//			// ClassPathXmlApplicationContext("META-INF/spring/beans.xml");
+//			Properties prop = new Properties();
+//			InputStream stream = ServiceImpl.class.getClassLoader().getResourceAsStream("hemologica.properties");
+//			prop.load(stream);
+//
+//			// ActiveMQConnectionFactory factory = (ActiveMQConnectionFactory)
+//			// context.getBean("connectionFactory");
+//			ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(
+//					prop.getProperty("jms.connection.factory.broker.url"));
+//			// Create a Connection
+//			Connection connection = factory.createConnection();
+//			connection.start();
+//
+//			// Create a Session
+//			Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+//
+//			// Create the destination (Topic or Queue)
+//			Destination destination = session.createQueue(prop.getProperty("jms.queue.cda.receive"));
+//
+//			// Create a MessageProducer from the Session to the Topic or Queue
+//			MessageProducer producer = session.createProducer(destination);
+//			producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
+//
+//			// Create a messages
+//
+//			TextMessage message = session.createTextMessage(cda);
+//			producer.send(message);
+//
+//			// Clean up
+//			session.close();
+//			connection.close();
+//
+//		} catch (JMSException e) {
+//			logger.log(Level.SEVERE, null, e);
+//		} catch (IOException e) {
+//			logger.log(Level.SEVERE, null, e);
+//		}
 
 	}
 
