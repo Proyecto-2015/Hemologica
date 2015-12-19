@@ -165,7 +165,7 @@
                             
                             <!-- Hora de la donacion -->
                             <effectiveTime>
-                                <low value="20140203092205" />
+                                <low value="20140203092205-11" />
                                 <high value="20140203111514" />
                             </effectiveTime>
                             

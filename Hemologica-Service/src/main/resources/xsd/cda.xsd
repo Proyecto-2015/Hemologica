@@ -236,14 +236,14 @@
   <xs:complexType name="lowType">
     <xs:simpleContent>
       <xs:extension base="xs:string">
-        <xs:attribute type="xs:long" name="value"/>
+        <xs:attribute type="xs:string" name="value"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
   <xs:complexType name="highType">
     <xs:simpleContent>
       <xs:extension base="xs:string">
-        <xs:attribute type="xs:long" name="value"/>
+        <xs:attribute type="xs:string" name="value"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
