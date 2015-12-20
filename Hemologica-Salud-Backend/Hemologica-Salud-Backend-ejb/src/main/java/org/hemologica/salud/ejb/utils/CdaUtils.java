@@ -501,7 +501,9 @@ public class CdaUtils {
 					 interpretationCodeType.setCodeSystem(Constants.SNOMED_CODE);
 					 interpretationCodeType.setCodeSystemName(Constants.SNOMED_NAME);
 					 
-					 EventSeverityCode severity = FactoryDAO.getCodesDAO(em).getSeverityById(event.getSeverity().getCode());
+					 EventSeverityCode severity = null;
+					 if(event.getSeverity() != null)
+						 severity = FactoryDAO.getCodesDAO(em).getSeverityById(event.getSeverity().getCode());
 					 if(severity != null){
 						 
 						 interpretationCodeType.setCode(Integer.valueOf(severity.getConcept().getConceptCode()));
@@ -709,7 +711,10 @@ public class CdaUtils {
 			 value.setCodeSystem(Constants.SNOMED_CODE);
 			 value.setCodeSystemName(Constants.SNOMED_NAME);
 			
-			 ResultsCode resultCode = FactoryDAO.getCodesDAO(em).getResultById(laboratory.getResult().getCode());
+			 ResultsCode resultCode = null;
+			 if(laboratory.getResult() != null)
+				 resultCode = FactoryDAO.getCodesDAO(em).getResultById(laboratory.getResult().getCode());
+			
 			 if(resultCode != null){
 				 
 				 value.setCode(Integer.valueOf(resultCode.getConcept().getConceptCode()));
@@ -958,7 +963,9 @@ public class CdaUtils {
 				 interpretationCodeType.setCodeSystem(Constants.SNOMED_CODE);
 				 interpretationCodeType.setCodeSystemName(Constants.SNOMED_NAME);
 				 
-				 EventSeverityCode severity = FactoryDAO.getCodesDAO(em).getSeverityById(event.getSeverity().getCode());
+				 EventSeverityCode severity = null;
+				 if(event.getSeverity() != null)
+					 severity = FactoryDAO.getCodesDAO(em).getSeverityById(event.getSeverity().getCode());
 				 if(severity != null){
 					 
 					 interpretationCodeType.setCode(Integer.valueOf(severity.getConcept().getConceptCode()));
@@ -1042,7 +1049,9 @@ public class CdaUtils {
 					 value.setCodeSystem(Constants.SNOMED_CODE);
 					 value.setCodeSystemName(Constants.SNOMED_NAME);
 					
-					 ResultsCode resultCode = FactoryDAO.getCodesDAO(em).getResultById(laboratory.getResult().getCode());
+					 ResultsCode resultCode = null;
+					 if(laboratory.getResult() != null)
+						 resultCode = FactoryDAO.getCodesDAO(em).getResultById(laboratory.getResult().getCode());
 					 if(resultCode != null){
 						 
 						 value.setCode(Integer.valueOf(resultCode.getConcept().getConceptCode()));
