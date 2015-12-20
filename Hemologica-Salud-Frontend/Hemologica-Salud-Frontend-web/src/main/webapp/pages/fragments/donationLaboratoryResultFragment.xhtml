@@ -46,6 +46,7 @@
 							<h:selectOneMenu class="form-control" value="#{donationBB.labResult.result}"
 								style="height: 34px;" converter="#{dataResultConverter}">
 							
+								<f:selectItem itemLabel="" itemValue="#{null}"/>
 								<f:selectItems value="#{applicationBB.results}" var="item"
 									itemValue="#{item}" itemLabel="#{messages[item.displayName]}" />
 				

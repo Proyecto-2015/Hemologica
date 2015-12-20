@@ -144,16 +144,21 @@
 					</p:tab>
 				</p:tabView>
 	
-					<p:commandButton action="#{donationsStatisticsBB.find()}" style="height: 42px; width: 100px;" class="pull-right"
-											value="#{messages.generic_search}" process="@form" update="@form" />
-	
+				<p:commandButton action="#{donationsStatisticsBB.download()}" style="height: 42px; width: 100px; margin: 30px;" class="pull-right"
+									ajax="false"	value="#{messages.label_download}" >
+					<p:fileDownload value="#{donationsStatisticsBB.download()}" />
+				</p:commandButton>
+				
+				<p:commandButton action="#{donationsStatisticsBB.find()}" style="height: 42px; width: 100px;  margin: 30px;" class="pull-right"
+										value="#{messages.label_calculate}" process="@form" update="@form" />
+										
 				</div>
 			</fieldset>
 			
 			<fieldset>
 				<div class="form-group div-center col-md-12 col-lg-12">
 					<legend>
-						<h:outputText value="#{messages.label_result}"/>	
+						<h:outputText value="#{messages.label_result_hemologica}"/>	
 					</legend>
 				
 					<div class="col-md-9 col-lg-12" style="padding-top: 12px;">

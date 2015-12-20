@@ -14,7 +14,7 @@
 <h:body>
 	<h:form>
 		
-		<p:message id="messagesId" for="messagesId" showDetail="true" autoUpdate="true"
+		<p:messages id="messagesId" for="messagesId" showDetail="true" autoUpdate="true"
 								closable="true" />
 		
 		<fieldset>
@@ -38,6 +38,7 @@
 				<div class="col-md-9 col-lg-2">
 					<h:selectOneMenu class="form-control" value="#{messageBB.mailData.bloodTypeABO}"
 						id="ABO" style="height: 34px;" converter="#{dataBloodTypeConverterABO}">
+						<f:selectItem itemLabel="#{messages.label_all}" itemValue="#{null}"/>
 						<f:selectItems value="#{applicationBB.donationABOTypes}" var="bloodTypeABO"
 						itemValue="#{bloodTypeABO}" itemLabel="#{bloodTypeABO.displayName}" />
 					</h:selectOneMenu>
@@ -46,6 +47,7 @@
 				<div class="col-md-9 col-lg-2">
 					<h:selectOneMenu class="form-control" value="#{messageBB.mailData.bloodTypeRH}"
 						id="RH" style="height: 34px;" converter="#{dataBloodTypeConverterRH}">
+						<f:selectItem itemLabel="#{messages.label_all}" itemValue="#{null}"/>
 						<f:selectItems value="#{applicationBB.donationDTypes}" var="bloodTypeRH"
 							itemValue="#{bloodTypeRH}" itemLabel="#{bloodTypeRH.displayName}" />
 

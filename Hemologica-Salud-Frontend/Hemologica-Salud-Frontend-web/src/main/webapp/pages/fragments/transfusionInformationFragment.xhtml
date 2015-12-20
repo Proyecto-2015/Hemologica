@@ -33,7 +33,8 @@
 								
 								<h:selectOneMenu class="form-control" value="#{transfusionBB.dataTransfusion.dataProduct}"
 											style="height: 34px;" converter="#{dataProductConverter}">
-										
+									
+									<f:selectItem itemLabel="" itemValue="#{null}"/>
 									<f:selectItems value="#{applicationBB.products}" var="item"
 										itemValue="#{item}" itemLabel="#{messages[item.display]}" />
 							
@@ -75,6 +76,8 @@
 								
 								<h:selectOneMenu class="form-control" value="#{transfusionBB.dataTransfusion.responsibleTransfusionPerson}"
 										style="height: 34px;" converter="#{dataResponsiblePersonConverter}">
+										
+										<f:selectItem itemLabel="" itemValue="#{null}"/>
 										<f:selectItems value="#{sessionBB.responsibleTransfusionPersons}" var="item"
 											itemValue="#{item}" itemLabel="#{item.fullName}" />
 						

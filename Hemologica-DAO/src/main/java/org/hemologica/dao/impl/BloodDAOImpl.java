@@ -30,7 +30,7 @@ public class BloodDAOImpl implements IBloodDAO{
 	public BloodAboTypesCode findBloodAboTypesCodeByCode(String code){
 		
 		Query query = em.createNamedQuery("BloodAboTypesCode.getBloodAboTypesCodeByCode");
-		query.setParameter("code", Integer.parseInt(code));
+		query.setParameter("code", code);
 		List<BloodAboTypesCode> list = query.getResultList();
 		return (list != null && list.size() > 0) ? list.get(0) : null;
 	}

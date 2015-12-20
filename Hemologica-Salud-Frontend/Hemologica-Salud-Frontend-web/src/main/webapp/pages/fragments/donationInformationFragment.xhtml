@@ -48,6 +48,7 @@
 								<h:selectOneMenu id="donor_type" styleClass="form-control"
 									value="#{donationBB.dataDonation.dataDonorType}" style="height: 34px;"
 									converter="#{dataDonorTypeConverter}">
+									<f:selectItem itemLabel="" itemValue="#{null}"/>
 									<f:selectItems value="#{applicationBB.donorTypes}" var="state"
 										itemValue="#{state}" itemLabel="#{messages[state.displayName]}" />
 								</h:selectOneMenu>
@@ -62,6 +63,7 @@
 									styleClass="form-control"
 									value="#{donationBB.dataDonation.donationType}"
 									style="height: 34px;" converter="#{dataDonationTypeConverter}">
+									<f:selectItem itemLabel="" itemValue="#{null}"/>
 									<f:selectItems value="#{applicationBB.donationTypes}"
 										var="type" itemValue="#{type}"
 										itemLabel="#{messages[type.displayName]}" />
@@ -74,8 +76,10 @@
 						value="#{messages.label_responsible_person}" /></label>
 							<div class="col-md-9 col-lg-6">
 								
+								<f:selectItem itemLabel="" itemValue="#{null}"/>
 								<h:selectOneMenu class="form-control" value="#{donationBB.dataDonation.responsiblePerson}"
 										style="height: 34px;" converter="#{dataResponsiblePersonConverter}">
+										<f:selectItem itemLabel="" itemValue="#{null}"/>
 										<f:selectItems value="#{sessionBB.responsibleTransfusionPersons}" var="item"
 											itemValue="#{item}" itemLabel="#{item.fullName}" />
 						
@@ -94,6 +98,7 @@
 								<h:selectOneMenu id="donation_failed_type" styleClass="form-control"
 									value="#{donationBB.dataDonation.fail.rejectionType}" style="height: 34px;"
 									converter="#{dataDonationFailTypeConverter}">
+									<f:selectItem itemLabel="" itemValue="#{null}"/>
 									<f:selectItems value="#{applicationBB.rejectionTypes}" var="fail"
 										itemValue="#{fail}" itemLabel="#{messages[fail.displayName]}" />
 								</h:selectOneMenu>
@@ -119,6 +124,7 @@
 									value="#{donationBB.dataDonation.fail.cause}"
 									style="height: 34px;"
 									converter="#{dataDonationFailCauseConverter}">
+									<f:selectItem itemLabel="" itemValue="#{null}"/>
 									<f:selectItems value="#{applicationBB.rejectionReasons}"
 										var="cause" itemValue="#{cause}"
 										itemLabel="#{messages[cause.displayName]}" />
@@ -140,6 +146,7 @@
 									styleClass="form-control"
 									value="#{donationBB.dataDonation.bloodABOType}"
 									style="height: 34px;" converter="#{dataBloodTypeConverterABO}">
+									<f:selectItem itemLabel="" itemValue="#{null}"/>
 									<f:selectItems value="#{applicationBB.donationABOTypes}"
 										var="type" itemValue="#{type}"
 										itemLabel="#{type.displayName}" />
@@ -154,6 +161,7 @@
 								<h:selectOneMenu id="donation_d_type" styleClass="form-control"
 									value="#{donationBB.dataDonation.bloodDType}"
 									style="height: 34px;" converter="#{dataBloodTypeConverterRH}">
+									<f:selectItem itemLabel="" itemValue="#{null}"/>
 									<f:selectItems value="#{applicationBB.donationDTypes}" var="type"
 										itemValue="#{type}" itemLabel="#{type.displayName}" />
 								</h:selectOneMenu>

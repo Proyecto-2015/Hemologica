@@ -68,9 +68,11 @@ public class CampaignsBB implements Serializable{
 			FacesContext context = FacesContext.getCurrentInstance();
 			context.getExternalContext().getSessionMap().put("campaignNew", null);
 			
+			campaign = new DataCampaign();
+			
 		}
 		
-		FacesContext.getCurrentInstance().addMessage(null, msg);
+		FacesContext.getCurrentInstance().addMessage("campaignId", msg);
 		logger.info("submit");
 	}
 	

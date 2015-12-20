@@ -4,6 +4,7 @@ package org.hemologica.salud.ejb.beans.impl;
 import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.LocalBean;
@@ -38,6 +40,7 @@ import org.hemologica.datatypes.TransfusionFilterData;
 import org.hemologica.factories.FactoryDAO;
 import org.hemologica.salud.ejb.beans.StatisticsBeanLocal;
 import org.hemologica.salud.web.oms.OmsStatistics;
+import org.hemologica.xmldatabase.connection.impl.BaseXConnection;
 import org.hemologica.xmldatabase.exceptions.XMLDataBaseException;
 import org.hemologica.xmldatabase.factories.XMLDataBaseFactory;
 
@@ -65,6 +68,17 @@ public class StatisticsBean implements StatisticsBeanLocal {
 	public DataDonationsStatisticsResults getDonationsStatistics(DataDonationsStatistics donationsStatisticsData) throws XMLDataBaseException {
 		
 		DataDonationsStatisticsResults dataDonationsStatistics = new DataDonationsStatisticsResults();
+		
+		/**
+		 * Cantidad de transfusiones
+		 */
+		int countDonations = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(null,null,null,null);
+		dataDonationsStatistics.setCantDonations(countDonations);
+		
+		Pair<Integer, Integer> countPersonDonation = getCantPerson(null, null, null, null, null);
+		if(countPersonDonation != null){
+			dataDonationsStatistics.setCantDonors(countPersonDonation.getObject1());
+		}
 		
 		List<String> andClausesNumerator = new ArrayList<>();
 		List<String> andClausesDonaminator = new ArrayList<>();
@@ -451,6 +465,22 @@ public class StatisticsBean implements StatisticsBeanLocal {
 		
 		DataTransfusionsStatisticsResults dataDonationsStatistics = new DataTransfusionsStatisticsResults();
 		
+		/**
+		 * Cantidad de transfusiones
+		 */
+		int countTransfusions = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(null,null,null,null);
+		dataDonationsStatistics.setCantTransfusions(countTransfusions);
+		/**
+		 * Cantidad de eventos adversos
+		 */
+		int countAdverseEvents = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countEvents(null,null,null);
+		dataDonationsStatistics.setCantEvents(countAdverseEvents);
+		
+		Pair<Integer, Integer> countPersonTransfusion = getCantPerson(null, null, null, null, null);
+		if(countPersonTransfusion != null){
+			dataDonationsStatistics.setCantPersonTransfusion(countPersonTransfusion.getObject2());
+		}
+		
 		List<String> andClausesNumerator = new ArrayList<>();
 		List<String> andClausesDenominator = new ArrayList<>();
 		
@@ -546,18 +576,7 @@ public class StatisticsBean implements StatisticsBeanLocal {
 			orClausesNoDataNumerator.add(dateNodata);
 			orClausesNoDataDenominator.add(dateNodata);
 		}
-		
-		/**
-		 * Cantidad de transfusiones
-		 */
-		//int countTransfusions = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClauses,orClausesList,null,null);
-		
-		/**
-		 * Cantidad de eventos adversos
-		 */
-		//int countAdverseEvents = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countEvents(andClauses,orClausesList,null);
-		
-		
+
 		/**
 		 * Filtros DENOMINADOR
 		 */
@@ -969,17 +988,27 @@ public class StatisticsBean implements StatisticsBeanLocal {
              * Filtros
              */
             
+            Properties prop = new Properties();
+			try {
+				
+				prop.load(StatisticsBean.class.getClassLoader().getResourceAsStream("messages.properties"));
+				
+			} catch (IOException e) {
+				
+				logger.log(Level.SEVERE,"error al leer el archivo de etiquetas", e);
+			}
+            
             document.add(new Paragraph("Filtros generales",smallBold));
             
             for(DonationFilterData filter : statictic.getCommonsFilters()){
             	
             	if(filter.getValue() != null){
             		
-            		document.add(new Paragraph(filter.getDisplayName() +": " + filter.getValue().getDisplayName()));
+            		document.add(new Paragraph(prop.getProperty(filter.getDisplayName()) +": " + prop.getProperty(filter.getValue().getDisplayName())));
             		
             	}else if(filter.getValueString() != null && !filter.getValueString().equals("")){
             		
-            		document.add(new Paragraph(filter.getDisplayName() +": " + filter.getValueString()));
+            		document.add(new Paragraph(prop.getProperty(filter.getDisplayName()) +": " + prop.getProperty(filter.getValueString())));
             		
             	}            	
             }
@@ -990,11 +1019,11 @@ public class StatisticsBean implements StatisticsBeanLocal {
             	
             	if(filter.getValue() != null){
             		
-            		document.add(new Paragraph(filter.getDisplayName() +": " + filter.getValue().getDisplayName()));
+            		document.add(new Paragraph(prop.getProperty(filter.getDisplayName()) +": " + prop.getProperty(filter.getValue().getDisplayName())));
             		
             	}else if(filter.getValueString() != null){
             		
-            		document.add(new Paragraph(filter.getDisplayName() +": " + filter.getValueString()));
+            		document.add(new Paragraph(prop.getProperty(filter.getDisplayName()) +": " + prop.getProperty(filter.getValueString())));
             		
             	}            	
             }
@@ -1005,11 +1034,11 @@ public class StatisticsBean implements StatisticsBeanLocal {
             	
             	if(filter.getValue() != null){
             		
-            		document.add(new Paragraph(filter.getDisplayName() +": " + filter.getValue().getDisplayName()));
+            		document.add(new Paragraph(prop.getProperty(filter.getDisplayName()) +": " + prop.getProperty(filter.getValue().getDisplayName())));
             		
             	}else if(filter.getValueString() != null){
             		
-            		document.add(new Paragraph(filter.getDisplayName() +": " + filter.getValueString()));
+            		document.add(new Paragraph(prop.getProperty(filter.getDisplayName()) +": " + prop.getProperty(filter.getValueString())));
             		
             	}            	
             }
@@ -1047,7 +1076,7 @@ public class StatisticsBean implements StatisticsBeanLocal {
             int cantDonationsFilter = 0, cantTransfusionsFilter = 0, cantAdversEventsFilter = 0;
             Pair<Integer,Integer> cantFilter = null;
             try {
-            	cantFilter = getCantPerson(andClausesNumerator,orClausesList,andClausesNumeratorCopy,filtersAnalysisDenominator,orClausesList);
+            	cantFilter = getCantPerson(andClausesNumerator,orClausesList,filtersAnalysisDenominator,andClausesNumeratorCopy,orClausesList);
             	cantDonationsFilter = XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
             	cantTransfusionsFilter = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClausesNumeratorCopy,orClausesList,null,null);
             	cantAdversEventsFilter = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countEvents(andClausesNumeratorCopy, orClausesList, null);

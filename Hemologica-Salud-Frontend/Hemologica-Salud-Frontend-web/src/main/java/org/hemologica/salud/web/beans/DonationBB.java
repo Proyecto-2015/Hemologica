@@ -270,7 +270,7 @@ public class DonationBB implements Serializable {
 
 		}
 		
-		FacesContext.getCurrentInstance().addMessage(null, msg);
+		FacesContext.getCurrentInstance().addMessage("messagesIdDonation", msg);
 		
 		if(response.getCode() == 0){
 			

@@ -107,7 +107,7 @@ public class OmsStatisticsBB implements Serializable{
 		InputStream stream = RestFactory.getServicesClient().getOmsStatistics(statictic);
 		
 		if(stream != null)
-			file = new DefaultStreamedContent(stream, "application/pdf", "doc.pdf"); 
+			file = new DefaultStreamedContent(stream, "application/pdf", "indicadores.pdf"); 
 
 		return file;
 	    

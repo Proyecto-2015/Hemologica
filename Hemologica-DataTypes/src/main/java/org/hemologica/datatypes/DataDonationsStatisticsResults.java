@@ -6,6 +6,8 @@ public class DataDonationsStatisticsResults {
 	private DataStatistic donorsCount;
 	private int noDataDenominator;
 	private int noDataNumerator;
+	private int cantDonations;
+	private int cantDonors;
 	
 	public DataStatistic getDonationsCount() {
 		return donationsCount;
@@ -31,7 +33,16 @@ public class DataDonationsStatisticsResults {
 	public void setNoDataNumerator(int noDataNumerator) {
 		this.noDataNumerator = noDataNumerator;
 	}
-	
-	
-	
+	public int getCantDonations() {
+		return cantDonations;
+	}
+	public void setCantDonations(int cantDonations) {
+		this.cantDonations = cantDonations;
+	}
+	public int getCantDonors() {
+		return cantDonors;
+	}
+	public void setCantDonors(int cantDonors) {
+		this.cantDonors = cantDonors;
+	}	
 }

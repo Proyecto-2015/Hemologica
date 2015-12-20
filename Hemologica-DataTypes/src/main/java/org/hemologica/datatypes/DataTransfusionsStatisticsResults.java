@@ -8,6 +8,10 @@ public class DataTransfusionsStatisticsResults {
 	
 	private int noDataDenominator;
 	private int noDataNumerator;
+	
+	private int cantTransfusions;
+	private int cantPersonTransfusion;
+	private int cantEvents;
 
 	public DataStatistic getTransfusionsCount() {
 		return transfusionsCount;
@@ -48,5 +52,31 @@ public class DataTransfusionsStatisticsResults {
 	public void setNoDataNumerator(int noDataNumerator) {
 		this.noDataNumerator = noDataNumerator;
 	}
+
+	public int getCantTransfusions() {
+		return cantTransfusions;
+	}
+
+	public void setCantTransfusions(int cantTransfusions) {
+		this.cantTransfusions = cantTransfusions;
+	}
+
+	public int getCantPersonTransfusion() {
+		return cantPersonTransfusion;
+	}
+
+	public void setCantPersonTransfusion(int cantPersonTransfusion) {
+		this.cantPersonTransfusion = cantPersonTransfusion;
+	}
+
+	public int getCantEvents() {
+		return cantEvents;
+	}
+
+	public void setCantEvents(int cantEvents) {
+		this.cantEvents = cantEvents;
+	}
+	
+	
 	
 }

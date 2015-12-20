@@ -10,6 +10,8 @@ import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
+
+import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.MailData;
 import org.hemologica.salud.factories.RestFactory;
@@ -50,13 +52,14 @@ public class MessageBB implements Serializable{
 				msg = new FacesMessage(FacesMessage.SEVERITY_INFO, null, bundle.getString("message_send_success"));
 	
 			}
+			mailData = new MailData();
 			
 		} catch (IOException e) {
 			
 			logger.log(Level.SEVERE, "Error al llamar al servicio web IOException", e);
 		}
 		
-		FacesContext.getCurrentInstance().addMessage(null, msg);
+		FacesContext.getCurrentInstance().addMessage("messagesId", msg);
 		
 	}
 
@@ -66,5 +69,11 @@ public class MessageBB implements Serializable{
 
 	public void setMailData(MailData mailData) {
 		this.mailData = mailData;
+	}
+	
+	public void clean(){
+		
+		mailData = new MailData();
+		
 	}
 }
