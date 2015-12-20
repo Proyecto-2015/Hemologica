@@ -68,6 +68,15 @@
 										<td data-title="#{messages.donation_event_severity}">
 											<h:outputText value="#{messages[event.severity.displayName]}" />
 										</td>
+										
+										<td>
+											<p:commandLink  ajax="true" class="icon-list delete-icon pull-right"
+												title="#{messages.label_delete}" action="#{donationBB.removeEvent(event)}"  update="@form" >
+										
+											</p:commandLink>
+										</td>
+										
+										
 									</tr>
 								</c:forEach>
 

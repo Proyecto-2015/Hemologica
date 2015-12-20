@@ -14,6 +14,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
+
+import org.hemologica.datatypes.DataDonationEvent;
 import org.hemologica.datatypes.DataLaboratoryResult;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataTransfusion;
@@ -81,6 +83,18 @@ public class TransfusionBB implements Serializable {
 		}
 		
 		this.labResult = new DataLaboratoryResult();
+	}
+	
+	public void removeLabResult(DataLaboratoryResult labResult){
+		
+		this.dataTransfusion.getLaboratoryResults().remove(labResult);
+		
+	}
+	
+	public void removeEvent(DataTransfusionEvent event){
+		
+		this.dataTransfusion.getEvents().remove(event);
+		
 	}
 	
 	public void addEvent(){

@@ -87,6 +87,18 @@ public class DonationBB implements Serializable {
 		this.labResult = new DataLaboratoryResult();
 	}
 	
+	public void removeLabResult(DataLaboratoryResult labResult){
+		
+		this.dataDonation.getLabResults().remove(labResult);
+		
+	}
+	
+	public void removeEvent(DataDonationEvent event){
+		
+		this.dataDonation.getEvents().remove(event);
+		
+	}
+	
 	public void addEvent(){
 		
 		if(this.dataDonation.getEvents() != null){

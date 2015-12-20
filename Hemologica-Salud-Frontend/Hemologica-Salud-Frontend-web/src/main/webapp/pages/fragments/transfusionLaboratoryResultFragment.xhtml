@@ -80,6 +80,12 @@
 											data-title="#{messages.donation_lab_result_value}">
 											<h:outputText value="#{messages[labResItem.result.displayName]}" />
 										</td>
+										<td>
+											<p:commandLink  ajax="true" class="icon-list delete-icon pull-right"
+											title="#{messages.label_delete}" action="#{transfusionBB.removeLabResult(labResItem)}"  update="@form" >
+											
+											</p:commandLink>
+										</td>
 									</tr>
 								</c:forEach>
 

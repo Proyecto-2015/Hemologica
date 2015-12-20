@@ -300,6 +300,20 @@ h6 .h6 {
 	cursor: pointer;
 	
 }
+
+.delete-icon{
+	
+	background-image: url("#{resource['img/delete-icon.png']}");
+	cursor: pointer;
+	
+}
+
+.add-icon{
+	
+	background-image: url("#{resource['img/add-icon.png']}");
+	cursor: pointer;
+}
+
 .icon-filter{
 	
 	background-image: url("#{resource['img/filter-icon.png']}");
