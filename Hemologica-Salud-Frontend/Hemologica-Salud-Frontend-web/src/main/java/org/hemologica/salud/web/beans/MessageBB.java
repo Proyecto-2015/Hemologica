@@ -59,7 +59,7 @@ public class MessageBB implements Serializable{
 			logger.log(Level.SEVERE, "Error al llamar al servicio web IOException", e);
 		}
 		
-		FacesContext.getCurrentInstance().addMessage(null, msg);
+		FacesContext.getCurrentInstance().addMessage("messagesId", msg);
 		
 	}
 

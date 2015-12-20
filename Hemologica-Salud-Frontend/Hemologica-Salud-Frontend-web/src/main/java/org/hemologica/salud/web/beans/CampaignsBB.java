@@ -72,7 +72,7 @@ public class CampaignsBB implements Serializable{
 			
 		}
 		
-		FacesContext.getCurrentInstance().addMessage(null, msg);
+		FacesContext.getCurrentInstance().addMessage("campaignId", msg);
 		logger.info("submit");
 	}
 	
