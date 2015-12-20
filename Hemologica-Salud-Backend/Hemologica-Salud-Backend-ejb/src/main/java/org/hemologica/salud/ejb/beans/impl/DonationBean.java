@@ -332,39 +332,41 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 		/**
 		 *  Devuelve el documentos con las partes que son comunes a todos los cdas.
 		 */
-		ClinicalDocumentType clinicalDocumentTypeLaboratory = CdaUtils.getCDAStructure(dataDonacion.getPerson(),dataDonacion.getTime(),dataDonacion.getBank(),dataDonacion.getResponsiblePerson());
+		if(dataDonacion.getLabResults() != null && dataDonacion.getLabResults().size() != 0){
 		
-		
-		CodeType codeTypeLaboratory = new CodeType();
-		codeTypeLaboratory.setCode(Constants.DOCUMENT_CODE_LABORATORY);
-		clinicalDocumentTypeLaboratory.setCode(codeTypeLaboratory);	
-		clinicalDocumentTypeLaboratory.setTitle("Analisis de laboratorio");
-		
-		/**
-		 * Devuelve el componente con los datos de la donacion.
-		 */
-		ComponentType componentTypeLaboratory = CdaUtils.getComponentLaboratory(dataDonacion,em);
-		clinicalDocumentTypeLaboratory.setComponent(componentTypeLaboratory);
-		
-		try {
-
-			File file = new File(Constants.CDA_PATH + "/"+ clinicalDocumentTypeLaboratory.getId().getRoot()+"."+clinicalDocumentTypeLaboratory.getId().getExtension()+ ".xml");
-			JAXBContext jaxbContext = JAXBContext.newInstance(ClinicalDocumentType.class);
-			Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
-
-			jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-			jaxbMarshaller.marshal(clinicalDocumentTypeLaboratory, file);
-			jaxbMarshaller.marshal(clinicalDocumentTypeLaboratory, System.out);
+			ClinicalDocumentType clinicalDocumentTypeLaboratory = CdaUtils.getCDAStructure(dataDonacion.getPerson(),dataDonacion.getTime(),dataDonacion.getBank(),dataDonacion.getResponsiblePerson());
 			
-			dataResponse.setCode(0);
 			
-		} catch (JAXBException e) {
+			CodeType codeTypeLaboratory = new CodeType();
+			codeTypeLaboratory.setCode(Constants.DOCUMENT_CODE_LABORATORY);
+			clinicalDocumentTypeLaboratory.setCode(codeTypeLaboratory);	
+			clinicalDocumentTypeLaboratory.setTitle("Analisis de laboratorio");
 			
-			logger.log(Level.SEVERE, "Error al guardar el documento en el sistema de archivos", e);
-			dataResponse.setCode(1);
+			/**
+			 * Devuelve el componente con los datos de la donacion.
+			 */
+			ComponentType componentTypeLaboratory = CdaUtils.getComponentLaboratory(dataDonacion,em);
+			clinicalDocumentTypeLaboratory.setComponent(componentTypeLaboratory);
 			
-		}	
-		
+			try {
+	
+				File file = new File(Constants.CDA_PATH + "/"+ clinicalDocumentTypeLaboratory.getId().getRoot()+"."+clinicalDocumentTypeLaboratory.getId().getExtension()+ ".xml");
+				JAXBContext jaxbContext = JAXBContext.newInstance(ClinicalDocumentType.class);
+				Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
+	
+				jaxbMarshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+				jaxbMarshaller.marshal(clinicalDocumentTypeLaboratory, file);
+				jaxbMarshaller.marshal(clinicalDocumentTypeLaboratory, System.out);
+				
+				dataResponse.setCode(0);
+				
+			} catch (JAXBException e) {
+				
+				logger.log(Level.SEVERE, "Error al guardar el documento en el sistema de archivos", e);
+				dataResponse.setCode(1);
+				
+			}	
+		}
 		return dataResponse;
 		
 	}

@@ -21,6 +21,8 @@ INSERT INTO `hemologica`.`countries_codes` (`id`, `country_code_label`, `country
 INSERT INTO `hemologica`.`countries_codes` (`id`, `country_code_label`, `country_code_value`) VALUES ('2', 'label_argentina', '2');
 INSERT INTO `hemologica`.`countries_codes` (`id`, `country_code_label`, `country_code_value`) VALUES ('3', 'label_brasil', '3');
 INSERT INTO `hemologica`.`countries_codes` (`id`, `country_code_label`, `country_code_value`) VALUES ('4', 'label_chile', '4');
+INSERT INTO `hemologica`.`countries_codes` (`id`, `country_code_label`, `country_code_value`) VALUES ('5', 'label_unknown_country', '5');
+
 
 UPDATE `hemologica`.`countries_codes` SET `country_code_value`='858' WHERE `id`='1';
 UPDATE `hemologica`.`countries_codes` SET `country_code_value`='032' WHERE `id`='2';

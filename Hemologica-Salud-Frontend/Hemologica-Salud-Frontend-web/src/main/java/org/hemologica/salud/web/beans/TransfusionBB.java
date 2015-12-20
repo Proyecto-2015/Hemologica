@@ -230,7 +230,7 @@ public class TransfusionBB implements Serializable {
 
 		}
 		
-		FacesContext.getCurrentInstance().addMessage(null, msg);
+		FacesContext.getCurrentInstance().addMessage("messagesIdTransfusion", msg);
 		
 		if(response.getCode() == 0){
 			

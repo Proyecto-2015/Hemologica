@@ -165,6 +165,7 @@ public class CdaUtils {
 		PatientType.setDeterminerCode(Constants.INSTANCE);
 		
 		IdType idPerson = new IdType();
+		
 		idPerson.setRoot(Constants.ID_OID_PATH + "." + dataPerson.getDocumentCountry().getCode()+"."+dataPerson.getDocumentType().getCode()+"."+dataPerson.getDocumentNumber());
 		PatientType.setId(idPerson);
 		
@@ -245,17 +246,20 @@ public class CdaUtils {
 		AssignedPersonType assignedPersonType =new AssignedPersonType();
 		
 		NameType nameAuthor = new NameType();
-		if(dataDoctor.getFirstName()!= null)
-			nameAuthor.getGiven().add(dataDoctor.getFirstName());
+		if(dataDoctor != null){
 		
-		if(dataDoctor.getSecondName()!=null)
-			nameAuthor.getGiven().add(dataDoctor.getSecondName());
-		
-		if(dataDoctor.getSecondName()!=null)
-			nameAuthor.getFamily().add(dataDoctor.getFirstLastName());
-		
-		if(dataDoctor.getSecondLastName()!=null)
-			nameAuthor.getFamily().add(dataDoctor.getSecondLastName());
+			if(dataDoctor.getFirstName()!= null)
+				nameAuthor.getGiven().add(dataDoctor.getFirstName());
+			
+			if(dataDoctor.getSecondName()!=null)
+				nameAuthor.getGiven().add(dataDoctor.getSecondName());
+			
+			if(dataDoctor.getSecondName()!=null)
+				nameAuthor.getFamily().add(dataDoctor.getFirstLastName());
+			
+			if(dataDoctor.getSecondLastName()!=null)
+				nameAuthor.getFamily().add(dataDoctor.getSecondLastName());
+		}
 		
 		assignedPersonType.setName(nameAuthor);
 		
@@ -336,14 +340,18 @@ public class CdaUtils {
 		/**
 		 * tipo de donacion.
 		 */
-		DonationTypesCode donationTypesCode = FactoryDAO.getCodesDAO(em).getDonationTypeByCode(dataDonacion.getDonationType().getCode());
-		
-		codeType.setCode(Long.valueOf(donationTypesCode.getConcept().getConceptCode()));
-		
-		if(donationTypesCode.getConcept().getConceptsDisplays() != null && donationTypesCode.getConcept().getConceptsDisplays().size() !=0){
+		DonationTypesCode donationTypesCode = null;
+		if(dataDonacion.getDonationType() != null){
+			donationTypesCode = FactoryDAO.getCodesDAO(em).getDonationTypeByCode(dataDonacion.getDonationType().getCode());
+		}
+		if(donationTypesCode != null){
+			codeType.setCode(Long.valueOf(donationTypesCode.getConcept().getConceptCode()));
 			
-			codeType.setDisplayName(donationTypesCode.getConcept().getConceptsDisplays().get(0).getConceptLabel());
-			
+			if(donationTypesCode.getConcept().getConceptsDisplays() != null && donationTypesCode.getConcept().getConceptsDisplays().size() !=0){
+				
+				codeType.setDisplayName(donationTypesCode.getConcept().getConceptsDisplays().get(0).getConceptLabel());
+				
+			}
 		}
 		procedureType.setCode(codeType);
 		
@@ -866,8 +874,10 @@ public class CdaUtils {
 		codeTypeUnit.setCodeSystem(Constants.SNOMED_CODE);
 		codeTypeUnit.setCodeSystemName(Constants.SNOMED_NAME);
 		 
-			
-		UnitsType productType = FactoryDAO.getCodesDAO(em).getProductById(dataTransfusion.getDataProduct().getCode());
+		UnitsType productType = null;
+		if(dataTransfusion.getDataProduct() != null)
+			productType = FactoryDAO.getCodesDAO(em).getProductById(dataTransfusion.getDataProduct().getCode());
+		
 		if(productType != null){
 			 
 			codeTypeUnit.setCode(Long.valueOf(productType.getConcept().getConceptCode()));
