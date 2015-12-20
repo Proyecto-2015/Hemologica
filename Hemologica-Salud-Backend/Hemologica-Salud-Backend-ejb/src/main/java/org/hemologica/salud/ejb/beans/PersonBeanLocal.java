@@ -12,5 +12,7 @@ public interface PersonBeanLocal {
 
 	DataPerson getPersonId(Long id);
 
+	List<DataPerson> getPersonsFilters(String filterName, String filterDocumentNumber);
+
 	
 }

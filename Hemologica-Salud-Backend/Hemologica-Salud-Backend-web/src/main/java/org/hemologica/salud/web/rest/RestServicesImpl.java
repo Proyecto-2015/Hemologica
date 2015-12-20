@@ -565,5 +565,12 @@ public class RestServicesImpl implements IRestServices{
 		
 	}
 
+	@Override
+	public List<DataPerson> getPersonsFilters(String filterName, String filterDocumentNumber) {
+		
+		
+		return FactoryBeans.getPersonBean().getPersonsFilters(filterName, filterDocumentNumber);
+	}
+
 	
 }

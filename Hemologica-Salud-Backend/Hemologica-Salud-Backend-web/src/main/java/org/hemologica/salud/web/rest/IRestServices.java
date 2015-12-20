@@ -146,6 +146,12 @@ public interface IRestServices {
 	public List<DataPerson> getPersons();
 	
 	@GET
+	@Path("/"+ConstantsRest.PATH_PERSONS + "/" + ConstantsRest.FILTERS)
+	@Produces("application/json")
+	public List<DataPerson> getPersonsFilters(@QueryParam(ConstansJson.JSON_FILTER_NAME) String filterName,
+			@QueryParam(ConstansJson.JSON_FILTER_DOCUMENT_NUMBER) String filterDocumentNumber);
+	
+	@GET
 	@Path("/"+ConstantsRest.PATH_PERSONS + "/"+ ConstantsRest.PATH_RESPONSIBLE_TRENSFUSION)
 	@Produces("application/json")
 	public List<DataResponsiblePerson> getResponsibleTransfusionPersons(@QueryParam(ConstansJson.JSON_BANK) String bankCode);

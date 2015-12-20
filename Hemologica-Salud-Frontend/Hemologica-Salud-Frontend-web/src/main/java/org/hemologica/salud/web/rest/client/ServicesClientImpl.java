@@ -1237,4 +1237,31 @@ public class ServicesClientImpl implements IServicesClient {
 		return null;
 	}
 
+	@Override
+	public List<DataPerson> getPersons(String filterName, String filterDocumentNumber) throws ClientProtocolException, IOException {
+		
+		String urlService = url + ConstantsRest.PATH_PERSONS + "/" + ConstantsRest.FILTERS;
+
+		HashMap<String, String> hash = new HashMap<String, String>();
+		hash.put(ConstansJson.JSON_FILTER_NAME, filterName);
+		hash.put(ConstansJson.JSON_FILTER_DOCUMENT_NUMBER, filterDocumentNumber);
+
+		String responseString = "";
+		try {
+
+			responseString = RestFactory.getRestServicesUtils().get(urlService, hash);
+
+		} catch (URISyntaxException e) {
+
+			logger.log(Level.SEVERE, "Error al llamar al servicio", e);
+
+		}
+
+		Type listType = new TypeToken<List<DataPerson>>() {
+		}.getType();
+		List<DataPerson> responseObject = new Gson().fromJson(responseString, listType);
+
+		return responseObject;
+	}
+
 }

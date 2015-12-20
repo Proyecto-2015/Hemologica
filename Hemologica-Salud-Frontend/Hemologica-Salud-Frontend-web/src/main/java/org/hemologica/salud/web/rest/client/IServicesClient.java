@@ -455,4 +455,14 @@ public interface IServicesClient {
 	 * @return
 	 */
 	public InputStream getOmsStatistics(DataOmsStatistics statictic);
+
+	/**
+	 * Devuelve las personas que cumplen con los filtros pasados.
+	 * @param filterName
+	 * @param filterDocumentNumber
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataPerson> getPersons(String filterName, String filterDocumentNumber) throws ClientProtocolException, IOException;
 }

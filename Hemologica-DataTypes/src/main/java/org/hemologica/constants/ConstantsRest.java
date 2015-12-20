@@ -68,6 +68,7 @@ public class ConstantsRest {
 	public static final String PATH_ACCOUNT_ENABLE = "account";
 	public static final String ARRANGEMENTS = "arrangement";
 	public static final String PATH_OMS_STATISTICS = "omsstatistics";
+	public static final String FILTERS = "filters";
 	
 	
 	
