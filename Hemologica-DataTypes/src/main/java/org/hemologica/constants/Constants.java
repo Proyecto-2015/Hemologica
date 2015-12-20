@@ -133,4 +133,7 @@ public class Constants {
 	public static final String DONATION_ANALYSIS_HEPATITIS_B = "4";
 	public static final String ANALYSIS_RESULT = "10";
 	public static final String ANALYSIS_RESULT_POSITIVE = "1";
+	
+	public static final String TEMPLATE_ID_ROOT = "2.16.840.1.113883.19.57.7.1.3.1";
+	public static final String TEMPLATE_ID_EXTENTION = "CCD_RM201201CO01";
 }

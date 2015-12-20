@@ -61,6 +61,7 @@ import org.hemologica.salud.ejb.cdas.SpecimenType;
 import org.hemologica.salud.ejb.cdas.StatusCodeType;
 import org.hemologica.salud.ejb.cdas.StructuredBodyType;
 import org.hemologica.salud.ejb.cdas.TelecomType;
+import org.hemologica.salud.ejb.cdas.TemplateIdType;
 import org.hemologica.salud.ejb.cdas.TimeType;
 import org.hemologica.salud.ejb.cdas.TypeIdType;
 import org.hemologica.salud.ejb.cdas.ValueType;
@@ -80,6 +81,15 @@ public class CdaUtils {
 	public static ClinicalDocumentType getCDAStructure(DataPerson dataPerson,String date, DataBank dataBank, DataResponsiblePerson dataDoctor){
 		
 		ClinicalDocumentType clinicalDocumentType = new ClinicalDocumentType();
+		
+		/**
+		 * Template id
+		 */
+		TemplateIdType templateId = new TemplateIdType();
+		templateId.setRoot(Constants.TEMPLATE_ID_ROOT);
+		templateId.setExtension(Constants.TEMPLATE_ID_EXTENTION);
+		
+		clinicalDocumentType.setTemplateId(templateId);
 		
 		/**
 		 * typeId
