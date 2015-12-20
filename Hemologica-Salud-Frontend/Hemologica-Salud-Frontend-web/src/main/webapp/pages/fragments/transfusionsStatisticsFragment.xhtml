@@ -144,7 +144,12 @@
 						</p:tab>
 					</p:tabView>
 			
-					<p:commandButton action="#{transfusionsStatisticsBB.find()}" style="height: 42px; width: 100px;" class="pull-right"
+					<p:commandButton action="#{transfusionsStatisticsBB.download()}" style="height: 42px; width: 100px; margin: 30px;" class="pull-right"
+									ajax="false"	value="#{messages.label_calculate}" >
+						<p:fileDownload value="#{transfusionsStatisticsBB.download()}" />
+					</p:commandButton>
+			
+					<p:commandButton action="#{transfusionsStatisticsBB.find()}" style="height: 42px; width: 100px;  margin: 30px;" class="pull-right"
 											value="#{messages.generic_search}" process="@form" update="@form" />
 	
 				</div>
