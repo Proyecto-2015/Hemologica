@@ -15,7 +15,7 @@ import org.hemologica.service.datatype.MovementData;
 public interface Service {
 	
 	@WebMethod(operationName="PROVIDE_CDA")
-	public void provideCDA(String cda);
+	public void provideCDA(String cda) throws Exception;
 	
 	@WebMethod(operationName="IMPORT_MOVEMENTS")
 	public void importMovements(List<MovementData> movements ) throws ParseException;

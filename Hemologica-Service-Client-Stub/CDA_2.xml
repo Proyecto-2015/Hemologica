@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ClinicalDocument xmlns="urn:hl7-org:v3"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<ClinicalDocument xmlns="urn:hl7-org:v3"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="urn:hl7-org:v3 ftp://ftp.ihe.net/TF_Implementation_Material/PCC/schemas/cda/infrastructure/cda/CDA.xsd"
     classCode="DOCCLIN" 
     moodCode="EVN"
@@ -49,17 +48,20 @@
             <!-- OID HEMOLOGICA-HCE = 2.16.858.0.0.1.10.2.3.1.1.2 -->
             <!-- Número de historia del paciente en Hemologica - -->
             <id  root="2.16.858.0.0.1.10.2.3.1.1.2" extension="49354236"/>
+
+
+             <telecom value="tel:+1(301)111-1111" use="HP"/>
+                <telecom value="mailto:brunostrasser18@gmail.com" use="HP"/>
             
             <patient classCode="PSN" determinerCode="INSTANCE">
                 
                 <!-- Identificador del paciente  El root 2.16.858.1.858.68909.12345678 - Código CI = 68909 - CI = 12345678  -->
                 <!-- asocia el identificador de persona definido por la UNAOID, no es necesario incorporar la extensión.  -->  
-                <id  root="2.16.858.68909.48719360"/>
+                <id  root="2.16.858.68909.48719360" extension="49354237"/>
            
                 <!-- Telefono y MAil -->
                 <!-- HP: Primary home WP: Work Place -->
-                <telecom value="tel:+1(301)111-1111" use="HP"/>
-                <telecom value="mailto:gsanchez@gmail.com" use="HP"/>
+               
            
                 <!-- Nombres y Apellidos -->
                 <name>
@@ -161,9 +163,9 @@
                 			<statusCode code="completed" />
                 			
                 			<!-- Hora de la Transfusión -->
-                			<effectiveTime xsi:type="IVL_TS">
-                				<low value="20140203092205-0700" />
-                				<high value="20140203111514-0700" />
+                			<effectiveTime >
+                				<low value="20140203092205" />
+                				<high value="20140203111514" />
                 			</effectiveTime>
                 			
                 			
@@ -206,7 +208,7 @@
                 			<entryRelationship typeCode="SPRT" >
                           		<observation classCode="OBS" moodCode="EVN">
                           		    <code code="118565006" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" displayName="volumen (propiedad) (calificador)"></code>
-                          		    <value xsi:type="PQ" value="90" unit="ml"/>
+                          		    <value value="90" unit="ml"/>
                     		    </observation>
                 			</entryRelationship>
                 			

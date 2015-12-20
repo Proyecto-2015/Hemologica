@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ClinicalDocument
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<ClinicalDocument  xmlns="urn:hl7-org:v3" 
     xsi:schemaLocation="urn:hl7-org:v3 ftp://ftp.ihe.net/TF_Implementation_Material/PCC/schemas/cda/infrastructure/cda/CDA.xsd"
-    classCode="DOCCLIN" 
-    moodCode="EVN"
-    >
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" classCode="DOCCLIN"  moodCode="EVN">
+
+    <!-- xsi:schemaLocation="urn:hl7-org:v3 ftp://ftp.ihe.net/TF_Implementation_Material/PCC/schemas/cda/infrastructure/cda/CDA.xsd"  -->
     
     <!-- OID HEMOLOGICA = 2.16.858.0.0.1.10.2.3.1.1 -->
     <!-- OID HEMOLOGICA-CDA = 2.16.858.0.0.1.10.2.3.1.1.1 -->
@@ -121,11 +120,11 @@
                         1788001  - recolección de unidad de sangre para donación dirigida, donante (procedimiento)
                         Generico = 25179006 recolección de unidad de sangre (procedimiento) -->
                         
-                    <!-- se va porque esta lo mismo en el prodecimiento    
+                    <!-- se va porque esta lo mismo en el prodecimiento -->    
                         
                         <code code="233555005" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" displayName="donación de sangre al azar"/>
                     
-                    -->
+                    <!-- -->
                     <!--  ********************************************************    Representacion Grafica  ********************************************************  -->
                     <title>Donación de Sangre</title>
                     <text>
@@ -165,8 +164,8 @@
                             <statusCode code="completed" />
                             
                             <!-- Hora de la donacion -->
-                            <effectiveTime xsi:type="IVL_TS">
-                                <low value="20140203092205" />
+                            <effectiveTime>
+                                <low value="20140203092205-11" />
                                 <high value="20140203111514" />
                             </effectiveTime>
                             

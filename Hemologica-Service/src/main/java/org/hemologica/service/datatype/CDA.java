@@ -75,7 +75,7 @@ public class CDA {
 			}
 			
 		}
-		
+
 		String ret = XMLUtils.documentToString(doc);
 		return ret;
 	}

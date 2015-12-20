@@ -30,6 +30,14 @@ public interface IXMLDataBase {
 	public void addElement(String path) throws XMLDataBaseException;
 	
 	/**
+	 * Agrega Elemento en la base de datos
+	 * @param name nombre con el que se guardara el archivo
+	 * @param input contenido del archivo
+	 * @throws XMLDataBaseException 
+	 */
+	public void addElement(String name, String input) throws XMLDataBaseException;
+	
+	/**
 	 * Borra Elemento en la base de datos
 	 * @param element
 	 */

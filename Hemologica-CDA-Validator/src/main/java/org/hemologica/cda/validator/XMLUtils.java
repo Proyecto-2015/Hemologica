@@ -1,11 +1,11 @@
-package org.hemologica.service.utils.xml;
+package org.hemologica.cda.validator;
 
 import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
 import javax.xml.XMLConstants;
-import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -39,6 +39,21 @@ public class XMLUtils {
 
 	private static final String XMLNAMESPACE = "xmlns";
 
+	
+	
+	public static Document fixCDANamespaces(Document document){
+		Element docElement = document.getDocumentElement();
+		docElement.setAttribute("xmlns", "urn:hl7-org:v3");
+		docElement.setAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
+		return document;
+	}
+	
+	public static Document removeCDANamespaces(Document document){
+		Element docElement = document.getDocumentElement();
+		docElement.setAttribute("xmlns", "urn:hl7-org:v3");
+		docElement.setAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
+		return document;
+	}
 	
 	
 	// validate SAX and external XSD
@@ -201,11 +216,20 @@ public class XMLUtils {
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		dbFactory.setNamespaceAware(false);
 		dbFactory.setIgnoringComments(true);
-		return dbFactory.newDocumentBuilder()
-				.parse(new ByteArrayInputStream(input.getBytes()));
+		return dbFactory.newDocumentBuilder().parse(new ByteArrayInputStream(input.getBytes()));
 
 	}
 
+	public static Document fileToDocument(String path)
+			throws SAXException, IOException, ParserConfigurationException {
+
+		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+		dbFactory.setNamespaceAware(false);
+		dbFactory.setIgnoringComments(true);
+		return dbFactory.newDocumentBuilder().parse(new FileInputStream(path));
+
+	}
+	
 	public static Document cloneDocument(Document doc)
 			throws SAXException, IOException, ParserConfigurationException, TransformerException {
 
@@ -227,3 +251,4 @@ public class XMLUtils {
 	}
 
 }
+
