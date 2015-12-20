@@ -68,7 +68,7 @@
 		<class>org.hemologica.dao.model.TransfusionFilterCode</class>
 		<class>org.hemologica.dao.model.Sequencer</class>
 		<properties>
-			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.hbm2ddl.auto" value="none" />
 			<property name="hibernate.show_sql" value="true" />
 		</properties>
 	</persistence-unit>

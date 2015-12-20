@@ -22,7 +22,8 @@ public class BloodDAOImpl implements IBloodDAO{
 	public List<BloodAboTypesCode> getBloodAboTypesCode() {
 		
 		Query query = em.createNamedQuery("BloodAboTypesCode.findAll");
-		return query.getResultList();
+		List<BloodAboTypesCode> list = query.getResultList();
+		return list;
 		
 	}
 	
@@ -30,8 +31,8 @@ public class BloodDAOImpl implements IBloodDAO{
 		
 		Query query = em.createNamedQuery("BloodAboTypesCode.getBloodAboTypesCodeByCode");
 		query.setParameter("code", Integer.parseInt(code));
-		return (BloodAboTypesCode) query.getSingleResult();
-		
+		List<BloodAboTypesCode> list = query.getResultList();
+		return (list != null && list.size() > 0) ? list.get(0) : null;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -46,15 +47,16 @@ public class BloodDAOImpl implements IBloodDAO{
 		
 		Query query = em.createNamedQuery("BloodDTypesCode.getBloodDTypesCodeByCode");
 		query.setParameter("code", code);
-		return (BloodDTypesCode) query.getSingleResult();
-		
+		List<BloodDTypesCode> list = query.getResultList();
+		return (list != null && list.size() > 0) ? list.get(0) : null;
 	}
 
 	public BloodTypes getBloodTypeCodeByCode(String code) {
 		
 		Query query = em.createNamedQuery("BloodTypes.findById");
 		query.setParameter("code", code);
-		return (BloodTypes) query.getSingleResult();
+		List<BloodTypes> list = query.getResultList();
+		return (list != null && list.size() > 0) ? list.get(0) : null;
 		
 	}
 	
@@ -62,7 +64,8 @@ public class BloodDAOImpl implements IBloodDAO{
 		
 		Query query = em.createNamedQuery("BloodTypes.findBySnomedCodeId");
 		query.setParameter("code", code);
-		return (BloodTypes) query.getSingleResult();
+		List<BloodTypes> list = query.getResultList();
+		return (list != null && list.size() > 0) ? list.get(0) : null;
 		
 	}
 
@@ -71,8 +74,8 @@ public class BloodDAOImpl implements IBloodDAO{
 		Query query = em.createNamedQuery("BloodTypes.findByABORHCodes");
 		query.setParameter("codeABO", abo);
 		query.setParameter("codeRH", rh);
-		
-		return (BloodTypes) query.getSingleResult();
+		List<BloodTypes> list = query.getResultList();
+		return (list != null && list.size() > 0) ? list.get(0) : null;
 	}
 	
 }

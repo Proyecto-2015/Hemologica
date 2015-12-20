@@ -2,8 +2,8 @@ package org.hemologica.constants;
 
 public class ConstantsRest {
 	
-	public static final String PATH_SERVICES_YO_DONO = "http://localhost:8080/Hemologica-Yodono-Backend-web/services/";
-	public static final String PATH_SERVICES_HEMOSALUD = "http://localhost:8080/Hemologica-Salud-Backend-web/services/";
+	public static final String PATH_SERVICES_YO_DONO = "http://localhost:8180/Hemologica-Yodono-Backend-web/services/";
+	public static final String PATH_SERVICES_HEMOSALUD = "http://localhost:8180/Hemologica-Salud-Backend-web/services/";
 	
 	public static final String PATH_DONATIONS = "donations";
 	public static final String PATH_TRANSFUTIONS = "transfusions";

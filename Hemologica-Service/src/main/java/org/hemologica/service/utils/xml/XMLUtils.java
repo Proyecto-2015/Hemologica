@@ -1,6 +1,7 @@
 package org.hemologica.service.utils.xml;
 
 import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
@@ -39,6 +40,27 @@ public class XMLUtils {
 
 	private static final String XMLNAMESPACE = "xmlns";
 
+	
+	
+	public static Document fixCDANamespaces(Document document){
+		Element docElement = document.getDocumentElement();
+		docElement.setAttribute("xmlns", "urn:hl7-org:v3");
+		docElement.setAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
+		return document;
+	}
+	
+	public static String removeCDANamespaces(String document){
+		document = document.replaceAll("xmlns=\"urn:hl7-org:v3\"", "");
+//		document = document.replaceAll("xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"", "");
+		return document;
+	}
+	
+	public static Document removeCDANamespaces(Document document){
+		Element docElement = document.getDocumentElement();
+		docElement.removeAttributeNS("urn:hl7-org:v3","xmlns");
+		docElement.removeAttributeNS("http://www.w3.org/2001/XMLSchema-instance","xmlns:xsi");
+		return document;
+	}
 	
 	
 	// validate SAX and external XSD
@@ -201,11 +223,20 @@ public class XMLUtils {
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		dbFactory.setNamespaceAware(false);
 		dbFactory.setIgnoringComments(true);
-		return dbFactory.newDocumentBuilder()
-				.parse(new ByteArrayInputStream(input.getBytes()));
+		return dbFactory.newDocumentBuilder().parse(new ByteArrayInputStream(input.getBytes()));
 
 	}
 
+	public static Document fileToDocument(String path)
+			throws SAXException, IOException, ParserConfigurationException {
+
+		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+		dbFactory.setNamespaceAware(false);
+		dbFactory.setIgnoringComments(true);
+		return dbFactory.newDocumentBuilder().parse(new FileInputStream(path));
+
+	}
+	
 	public static Document cloneDocument(Document doc)
 			throws SAXException, IOException, ParserConfigurationException, TransformerException {
 

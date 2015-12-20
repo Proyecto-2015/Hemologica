@@ -16,7 +16,6 @@ public class CDAtoDatabaseActivator {
 			
 //			personBean.createPersonAndRecord(cda.getUserData(), cda.getRoot(), cda.getExtension());
 			
-			
 
 		} catch (Exception e) {
 			e.printStackTrace();
