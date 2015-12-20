@@ -203,7 +203,7 @@ public class TransfusionBean implements TransfusionBeanLocal, Serializable {
 		CodeType codeType = new CodeType();
 		codeType.setCode(Constants.DOCUMENT_CODE_TRANSFUSION);
 		clinicalDocumentType.setCode(codeType);	
-		clinicalDocumentType.setTitle("Donacion de sangre");
+		clinicalDocumentType.setTitle("Transfusion de sangre");
 		
 		/**
 		 * Devuelve el componente con los datos de la donacion.

@@ -1,7 +1,10 @@
 package org.hemologica.datatypes;
 
-public class MailData {
+import java.io.Serializable;
+
+public class MailData implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
 	private DataMessageOption messageOption;
 	private DataCode bloodTypeABO;
 	private DataCode bloodTypeRH;

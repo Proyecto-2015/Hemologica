@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Table(name="blood_abo_types_codes")
 @NamedQueries({
 @NamedQuery(name="BloodAboTypesCode.findAll", query="SELECT b FROM BloodAboTypesCode b"),
-@NamedQuery(name="BloodAboTypesCode.getBloodAboTypesCodeByCode", query="SELECT i FROM BloodAboTypesCode i where i.bloodAboTypeCodeId = :code")
+@NamedQuery(name="BloodAboTypesCode.getBloodAboTypesCodeByCode", query="SELECT i FROM BloodAboTypesCode i where i.bloodAboTypeCodeValue = :code")
 })
 public class BloodAboTypesCode implements Serializable {
 	private static final long serialVersionUID = 1L;
