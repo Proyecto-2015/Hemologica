@@ -32,6 +32,7 @@ import org.hemologica.datatypes.MailData;
 import org.hemologica.datatypes.DataMessageOption;
 import org.hemologica.datatypes.DataOmsStatistics;
 import org.hemologica.datatypes.DataResponsiblePerson;
+import org.hemologica.datatypes.DataSearchFilter;
 import org.hemologica.datatypes.TransfusionFilterData;
 import org.primefaces.model.StreamedContent;
 
@@ -465,4 +466,12 @@ public interface IServicesClient {
 	 * @throws ClientProtocolException 
 	 */
 	public List<DataPerson> getPersons(String filterName, String filterDocumentNumber) throws ClientProtocolException, IOException;
+
+	/**
+	 * DEvuelve los filtros para la busqueda de donaciones y tranfusiones
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataSearchFilter> getSearchFilters() throws ClientProtocolException, IOException;
 }

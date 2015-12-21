@@ -7,25 +7,29 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+
+import org.hemologica.datatypes.DataSearchFilter;
+import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.datatypes.DonationResult;
 
 public class SearchDonationBB implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 4834951080949861155L;
 
 	private static final Logger logger = Logger.getLogger(SearchDonationBB.class.getName());
 	
 	private SessionBB sessionBB;
+	private ApplicationBB applicationBB;
 
+	List<DataSearchFilter> filters;
+	
 	// search inputs
 	private String searchPerson;
 	private Date searchDateFrom;
 	private Date searchDateTo;
 	private String searchState;
 	private String searchId;
+	
 
 	private Boolean renderResult;
 
@@ -34,6 +38,9 @@ public class SearchDonationBB implements Serializable {
 
 	@PostConstruct
 	public void init() {
+		
+		filters = applicationBB.getSearchFilters();
+		
 		renderResult = false;
 		this.searchDateTo = new Date();
 		Calendar calendar = Calendar.getInstance();
@@ -123,5 +130,23 @@ public class SearchDonationBB implements Serializable {
 	public void setResultDonations(List<DonationResult> resultDonations) {
 		this.resultDonations = resultDonations;
 	}
+
+	public ApplicationBB getApplicationBB() {
+		return applicationBB;
+	}
+
+	public void setApplicationBB(ApplicationBB applicationBB) {
+		this.applicationBB = applicationBB;
+	}
+
+	public List<DataSearchFilter> getFilters() {
+		return filters;
+	}
+
+	public void setFilters(List<DataSearchFilter> filters) {
+		this.filters = filters;
+	}
+	
+	
 
 }

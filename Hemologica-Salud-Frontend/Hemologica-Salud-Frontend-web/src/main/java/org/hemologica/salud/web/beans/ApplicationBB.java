@@ -13,6 +13,7 @@ import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataDonationEvent;
 import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.DataProductType;
+import org.hemologica.datatypes.DataSearchFilter;
 import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.datatypes.TransfusionFilterData;
 import org.hemologica.datatypes.DataMessageOption;
@@ -61,6 +62,8 @@ public class ApplicationBB implements Serializable {
 	private List<DataInstitution> institutions;
 	private List<DonationFilterData> donationsFilters;
 	private List<TransfusionFilterData> transfusionsFilters;
+	
+	private List<DataSearchFilter> searchFilters;
 
 	
 	@PostConstruct
@@ -98,6 +101,7 @@ public class ApplicationBB implements Serializable {
 			this.gender = RestFactory.getServicesClient().getGenderCodes();
 			
 			this.results = RestFactory.getServicesClient().getResultsCodes();
+			this.searchFilters = RestFactory.getServicesClient().getSearchFilters();
 			
 			
 		} catch (ClientProtocolException e) {
@@ -326,6 +330,14 @@ public class ApplicationBB implements Serializable {
 
 	public void setResults(List<DataCode> results) {
 		this.results = results;
+	}
+
+	public List<DataSearchFilter> getSearchFilters() {
+		return searchFilters;
+	}
+
+	public void setSearchFilters(List<DataSearchFilter> searchFilters) {
+		this.searchFilters = searchFilters;
 	}
 
 }

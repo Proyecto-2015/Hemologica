@@ -2,11 +2,10 @@ package org.hemologica.salud.ejb.beans;
 
 import java.util.List;
 import javax.ejb.Local;
-
-import org.hemologica.dao.model.DonationDonorTypesCode;
 import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataMessageOption;
 import org.hemologica.datatypes.DataProductType;
+import org.hemologica.datatypes.DataSearchFilter;
 import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.datatypes.TransfusionFilterData;
 
@@ -92,6 +91,8 @@ public interface CodesBeanLocal {
 	public String getNewHcCDAid();
 
 	public DataCode getBloodTypeCodeBySnomedCode(String bloodType);
+
+	public List<DataSearchFilter> getSearchFilters();
 
 
 }

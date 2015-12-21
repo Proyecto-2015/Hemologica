@@ -37,6 +37,7 @@ import org.hemologica.datatypes.MailData;
 import org.hemologica.datatypes.DataMessageOption;
 import org.hemologica.datatypes.DataOmsStatistics;
 import org.hemologica.datatypes.DataResponsiblePerson;
+import org.hemologica.datatypes.DataSearchFilter;
 import org.hemologica.datatypes.TransfusionFilterData;
 import org.hemologica.salud.factories.RestFactory;
 import com.google.gson.Gson;
@@ -1260,6 +1261,31 @@ public class ServicesClientImpl implements IServicesClient {
 		Type listType = new TypeToken<List<DataPerson>>() {
 		}.getType();
 		List<DataPerson> responseObject = new Gson().fromJson(responseString, listType);
+
+		return responseObject;
+	}
+
+	@Override
+	public List<DataSearchFilter> getSearchFilters() throws ClientProtocolException, IOException {
+		
+		String urlService = url + ConstantsRest.PATH_CODES + "/" + ConstantsRest.PATH_SEARCH_FILTERS;
+
+		HashMap<String, String> hash = new HashMap<String, String>();
+
+		String responseString = "";
+		try {
+
+			responseString = RestFactory.getRestServicesUtils().get(urlService, hash);
+
+		} catch (URISyntaxException e) {
+
+			logger.log(Level.SEVERE, "Error al llamar al servicio", e);
+
+		}
+
+		Type listType = new TypeToken<List<DataSearchFilter>>() {
+		}.getType();
+		List<DataSearchFilter> responseObject = new Gson().fromJson(responseString, listType);
 
 		return responseObject;
 	}

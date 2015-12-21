@@ -22,6 +22,7 @@ import org.hemologica.dao.model.EventSeverityCode;
 import org.hemologica.dao.model.GenderCode;
 import org.hemologica.dao.model.MessageSendOption;
 import org.hemologica.dao.model.ResultsCode;
+import org.hemologica.dao.model.SearchFilterCode;
 import org.hemologica.dao.model.StatesCode;
 import org.hemologica.dao.model.TransfusionEventsCode;
 import org.hemologica.dao.model.TransfusionFilterCode;
@@ -30,6 +31,7 @@ import org.hemologica.dao.model.UnitsType;
 import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataMessageOption;
 import org.hemologica.datatypes.DataProductType;
+import org.hemologica.datatypes.DataSearchFilter;
 import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.datatypes.TransfusionFilterData;
 import org.hemologica.factories.FactoryDAO;
@@ -696,5 +698,23 @@ public class CodesBean implements CodesBeanLocal {
 			data.setDisplayName(result.getBloodTypeCodeLabel());
 		}
 		return data;
+	}
+
+	@Override
+	public List<DataSearchFilter> getSearchFilters() {
+		
+		List<DataSearchFilter> listReturn = new ArrayList<>();
+		List<SearchFilterCode> list = FactoryDAO.getCodesDAO(em).getSearchFilters();
+		
+		for(SearchFilterCode filter :list){
+			
+			DataSearchFilter data = new DataSearchFilter();
+			data.setCode(filter.getSearchFilterCodesValue());
+			data.setDisplayName(filter.getSearchFilterCodesLabel());
+
+			listReturn.add(data);
+			
+		}
+		return listReturn;
 	}
 }

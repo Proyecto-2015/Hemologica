@@ -18,6 +18,7 @@ import org.hemologica.dao.model.GenderCode;
 import org.hemologica.dao.model.MessageSendOption;
 import org.hemologica.dao.model.ResponsibleTransfusionPerson;
 import org.hemologica.dao.model.ResultsCode;
+import org.hemologica.dao.model.SearchFilterCode;
 import org.hemologica.dao.model.StatesCode;
 import org.hemologica.dao.model.TransfusionEventsCode;
 import org.hemologica.dao.model.TransfusionFilterCode;
@@ -131,5 +132,7 @@ public interface ICodesDAO {
 	public Long getNewHcCDAid();
 
 	public BloodTypes getBloodTypeCodeBySnomedCode(String bloodType);
+
+	public List<SearchFilterCode> getSearchFilters();
 
 }

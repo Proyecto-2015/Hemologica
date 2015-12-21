@@ -21,6 +21,7 @@ import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataProductType;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataResponsiblePerson;
+import org.hemologica.datatypes.DataSearchFilter;
 import org.hemologica.datatypes.DataStock;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataTransfusionsStatistics;
@@ -296,4 +297,9 @@ public interface IRestServices {
 	@Path("/" + ConstantsRest.PATH_OMS_STATISTICS)
 	@Produces(MediaType.APPLICATION_OCTET_STREAM)
 	public Response getOmsStatistics(DataOmsStatistics statictic);
+	
+	@GET
+	@Path("/"+ConstantsRest.PATH_CODES + "/" + ConstantsRest.PATH_SEARCH_FILTERS)
+	@Produces("application/json")
+	public List<DataSearchFilter> getSearchFilters();
 }

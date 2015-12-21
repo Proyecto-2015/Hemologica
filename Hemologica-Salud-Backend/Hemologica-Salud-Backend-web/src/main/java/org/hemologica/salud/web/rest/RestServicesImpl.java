@@ -21,6 +21,7 @@ import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataProductType;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataResponsiblePerson;
+import org.hemologica.datatypes.DataSearchFilter;
 import org.hemologica.datatypes.DataStock;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataTransfusionsStatistics;
@@ -570,6 +571,13 @@ public class RestServicesImpl implements IRestServices{
 		
 		
 		return FactoryBeans.getPersonBean().getPersonsFilters(filterName, filterDocumentNumber);
+	}
+
+	@Override
+	public List<DataSearchFilter> getSearchFilters() {
+		
+		return FactoryBeans.getCodeBeans().getSearchFilters();
+		
 	}
 
 	
