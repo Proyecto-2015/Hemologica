@@ -30,7 +30,7 @@
 								<c:choose>
 									
 									<c:when test="${filterItem.code == 3}">
-										<label class="col-md-2  col-lg-4 control-label" for="name" style="padding: 0;"><h:outputText
+										<label class="col-md-2  col-lg-4 control-label" style="padding: 0;"><h:outputText
 									value="#{messages[filterItem.displayName]}"  /></label>
 									
 										<div class="col-md-9 col-lg-7">
@@ -39,7 +39,7 @@
 										</div>
 									</c:when>
 									<c:when test="${filterItem.code != 3 and filterItem.code != 4}">
-										<label class="col-md-2  col-lg-4 control-label" for="name" style="padding: 0;"><h:outputText
+										<label class="col-md-2  col-lg-4 control-label" style="padding: 0;"><h:outputText
 									value="#{messages[filterItem.displayName]}"  /></label>
 									
 										<div class="col-md-9 col-lg-7">

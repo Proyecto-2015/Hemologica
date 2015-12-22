@@ -139,4 +139,8 @@ public interface ICodesDAO {
 
 	public GenderCode getGenderCodeById(String genderCode);
 
+	public DocumentsTypesCode getDocumentsTypeByCode(String documentTypeS);
+
+	public CountriesCode getCountryByCode(String documentCountryS);
+
 }

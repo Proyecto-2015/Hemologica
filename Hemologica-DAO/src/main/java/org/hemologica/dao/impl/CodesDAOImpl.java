@@ -526,4 +526,22 @@ public class CodesDAOImpl implements ICodesDAO{
 		return (!list.isEmpty()) ? (GenderCode) list.get(0) : null;
 	}
 
+	public DocumentsTypesCode getDocumentsTypeByCode(String documentTypeS) {
+		
+		Query query = em.createNamedQuery("DocumentsTypesCode.findByCode");
+		query.setParameter("code", documentTypeS);
+		
+		List<?> list = query.getResultList();
+		return (!list.isEmpty()) ? (DocumentsTypesCode) list.get(0) : null;
+	}
+
+	public CountriesCode getCountryByCode(String documentCountryS) {
+		
+		Query query = em.createNamedQuery("CountriesCode.findByCode");
+		query.setParameter("code", documentCountryS);
+		
+		List<?> list = query.getResultList();
+		return (!list.isEmpty()) ? (CountriesCode) list.get(0) : null;
+	}
+
 }

@@ -22,6 +22,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 import org.hemologica.constants.Constants;
 import org.hemologica.dao.enums.DataDonationStateEnum;
+import org.hemologica.dao.model.CountriesCode;
+import org.hemologica.dao.model.DocumentsTypesCode;
 import org.hemologica.dao.model.GenderCode;
 import org.hemologica.dao.model.PersonsRecord;
 import org.hemologica.dao.model.SearchFilterCode;
@@ -139,6 +141,36 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 		} catch (ParseException e) {
 			
 			logger.log(Level.SEVERE, "Error al parsear la fecha de nacimiento", e);
+			
+		}
+		
+		String documentPerson = XMLUtils.executeXPathString(document, "/ClinicalDocument/recordTarget/patientRole/patient/id/@root");
+		if(documentPerson != null){
+			
+			String documentNumber = documentPerson.substring(documentPerson.lastIndexOf(".")+1, documentPerson.length()-1);
+			dataPerson.setDocumentNumber(documentNumber);
+			
+			documentPerson = documentPerson.substring(0, documentPerson.lastIndexOf("."));
+			String documentTypeS = documentPerson.substring(documentPerson.lastIndexOf(".")+1, documentPerson.length());
+			
+			DocumentsTypesCode documentType = FactoryDAO.getCodesDAO(em).getDocumentsTypeByCode(documentTypeS);
+			if(documentType != null){
+				DataCode documentTypeCode = new DataCode();
+				documentTypeCode.setCode(documentType.getDocumentsTypeCodeValue());
+				documentTypeCode.setDisplayName(documentType.getDocumentsTypeCodeLabel());
+				dataPerson.setDocumentType(documentTypeCode);
+			}
+			
+			documentPerson = documentPerson.substring(0, documentPerson.lastIndexOf("."));
+			String documentCountryS = documentPerson.substring(documentPerson.lastIndexOf(".")+1, documentPerson.length());
+			
+			CountriesCode country = FactoryDAO.getCodesDAO(em).getCountryByCode(documentCountryS);
+			if(country != null){
+				DataCode countryCode = new DataCode();
+				countryCode.setCode(country.getCountryCodeLabel());
+				countryCode.setDisplayName(country.getCountryCodeLabel());
+				dataPerson.setDocumentType(countryCode);
+			}
 			
 		}
 		
