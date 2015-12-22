@@ -1290,4 +1290,19 @@ public class ServicesClientImpl implements IServicesClient {
 		return responseObject;
 	}
 
+	@Override
+	public List<DataDonation> getDonations(List<DataSearchFilter> resultDonations) throws ClientProtocolException, IOException {
+
+		String urlService = url + ConstantsRest.PATH_DONATIONS + "/" + ConstantsRest.PATH_SEARCH_FILTERS;
+
+		String responseString = "";
+		responseString = RestFactory.getRestServicesUtils().post(urlService, resultDonations);
+
+		Type listType = new TypeToken<List<DataDonation>>() {
+		}.getType();
+		List<DataDonation> responseObject = new Gson().fromJson(responseString, listType);
+
+		return responseObject;
+	}
+
 }

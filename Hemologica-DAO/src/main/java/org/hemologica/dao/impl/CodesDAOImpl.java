@@ -508,4 +508,22 @@ public class CodesDAOImpl implements ICodesDAO{
 		
 	}
 
+	public SearchFilterCode getSearchFilterByCode(String code) {
+		
+		Query query = em.createNamedQuery("SearchFilterCode.findByCode");
+		query.setParameter("code", code);
+		
+		List<?> list = query.getResultList();
+		return (!list.isEmpty()) ? (SearchFilterCode) list.get(0) : null;
+	}
+
+	public GenderCode getGenderCodeById(String genderCode) {
+		
+		Query query = em.createNamedQuery("GenderCode.findById");
+		query.setParameter("code", genderCode);
+		
+		List<?> list = query.getResultList();
+		return (!list.isEmpty()) ? (GenderCode) list.get(0) : null;
+	}
+
 }

@@ -2,6 +2,8 @@ package org.hemologica.salud.ejb.beans;
 
 import java.util.List;
 import javax.ejb.Local;
+
+import org.hemologica.dao.model.SearchFilterCode;
 import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataMessageOption;
 import org.hemologica.datatypes.DataProductType;
@@ -93,6 +95,8 @@ public interface CodesBeanLocal {
 	public DataCode getBloodTypeCodeBySnomedCode(String bloodType);
 
 	public List<DataSearchFilter> getSearchFilters();
+
+	public DataCode getGenderCodeById(String genderCode);
 
 
 }

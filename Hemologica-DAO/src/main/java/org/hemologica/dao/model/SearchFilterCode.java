@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Table(name="search_filter_codes")
 @NamedQueries({
 @NamedQuery(name="SearchFilterCode.findAll", query="SELECT d FROM SearchFilterCode d"),
-@NamedQuery(name="SearchFilterCode.findById", query="SELECT d FROM SearchFilterCode d WHERE d.searchFilterCodesValue = :code"),
+@NamedQuery(name="SearchFilterCode.findByCode", query="SELECT d FROM SearchFilterCode d WHERE d.searchFilterCodesValue = :code"),
 
 })
 public class SearchFilterCode implements Serializable{

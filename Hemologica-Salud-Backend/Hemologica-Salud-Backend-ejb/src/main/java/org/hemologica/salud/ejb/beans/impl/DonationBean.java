@@ -22,15 +22,18 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 import org.hemologica.constants.Constants;
 import org.hemologica.dao.enums.DataDonationStateEnum;
+import org.hemologica.dao.model.GenderCode;
 import org.hemologica.dao.model.PersonsRecord;
+import org.hemologica.dao.model.SearchFilterCode;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataDonationEvent;
 import org.hemologica.datatypes.DataDonationFail;
 import org.hemologica.datatypes.DataLaboratoryResult;
+import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataResponse;
-import org.hemologica.datatypes.DataTransfusion;
+import org.hemologica.datatypes.DataSearchFilter;
 import org.hemologica.factories.FactoryDAO;
 import org.hemologica.salud.ejb.beans.DonationBeanLocal;
 import org.hemologica.salud.ejb.cdas.ClinicalDocumentType;
@@ -41,6 +44,8 @@ import org.hemologica.salud.ejb.utils.FactoryBeans;
 import org.hemologica.salud.ejb.utils.XMLUtils;
 import org.hemologica.xmldatabase.exceptions.XMLDataBaseException;
 import org.hemologica.xmldatabase.factories.XMLDataBaseFactory;
+import org.joda.time.LocalDate;
+import org.joda.time.Years;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -88,6 +93,11 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 		DataDonation data = new DataDonation();
 		
 		/**
+		 * id Donacion
+		 */
+		data.setId(XMLUtils.executeXPathString(document, "/ClinicalDocument/component/structuredBody/component/section/entry/procedure/id/@root"));
+		
+		/**
 		 * Banco de Sangre e Institucion
 		 */
 		DataBank dataBank = FactoryBeans.getCenterBean().getBankById(XMLUtils.executeXPathString(document, "//ClinicalDocument//author//assignedAuthor//representedOrganization//id//@root"));
@@ -98,6 +108,39 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 		 * Tipo Donante -- No se como ponerlo.
 		 */
 //		data.setDataDonorType(dataDonorType);
+		
+		/**
+		 * Data Person
+		 */
+		DataPerson dataPerson = new DataPerson();
+		data.setPerson(dataPerson);
+		
+		String genderCode = XMLUtils.executeXPathString(document, "/ClinicalDocument/recordTarget/patientRole/patient/administrativeGenderCode/@code");
+		
+		DataCode gender = FactoryBeans.getCodeBeans().getGenderCodeById(genderCode);
+		dataPerson.setGender(gender);
+		
+		dataPerson.setFirstName(XMLUtils.executeXPathString(document, "/ClinicalDocument/recordTarget/patientRole/patient/name/given/text()"));
+		dataPerson.setFirstLastName(XMLUtils.executeXPathString(document, "/ClinicalDocument/recordTarget/patientRole/patient/name/family/text()"));
+		
+		String birthday = XMLUtils.executeXPathString(document, "/ClinicalDocument/recordTarget/patientRole/patient/birthTime/@value");
+		SimpleDateFormat sdfAge = new SimpleDateFormat("yyyyMMdd");
+		try {
+			
+			Date dateBir = sdfAge.parse(birthday);
+			Calendar date = Calendar.getInstance();
+			date.setTime(dateBir);
+			LocalDate birthdate = new LocalDate(date.get(Calendar.YEAR), date.get(Calendar.MONDAY), date.get(Calendar.DAY_OF_MONTH));
+			LocalDate now = new LocalDate();
+			Years age = Years.yearsBetween(birthdate, now);
+			
+			dataPerson.setAge(String.valueOf(age.getYears()));
+			
+		} catch (ParseException e) {
+			
+			logger.log(Level.SEVERE, "Error al parsear la fecha de nacimiento", e);
+			
+		}
 		
 		/**
 		 * Tipo Donacion 
@@ -389,6 +432,45 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 		}
 		
 		return new DataDonation();
+	}
+
+	@Override
+	public List<DataDonation> getDonationsuser(List<DataSearchFilter> resultDonations) throws XPathExpressionException, SAXException, IOException, ParserConfigurationException {
+		
+		List<String> queries = new ArrayList<>();
+		
+		for(DataSearchFilter filter :resultDonations){
+			
+			if(filter.getValueString() != null && !filter.getValueString().equals("")){
+				
+				SearchFilterCode search = FactoryDAO.getCodesDAO(em).getSearchFilterByCode(filter.getCode());
+				if(search != null){
+				
+					String query = search.getSearchFilterCodesPath() + "/contains(.,'"+ filter.getValueString() +"')";
+					queries.add(query);
+				}
+			}
+		}
+		
+		List<DataDonation> listReturn = new ArrayList<>();
+		List<String> cdas;
+		try {
+			cdas = XMLDataBaseFactory.getIXMLDataBaseDonations().getLaboratoryElements(queries);
+			
+			if(cdas != null && cdas.size() != 0){
+				for(String cda : cdas){
+				
+					Document document= XMLUtils.stringToDocument(cda);
+					DataDonation dataDonacion = getDataDonation(document);
+					listReturn.add(dataDonacion);
+				}
+			}
+		} catch (XMLDataBaseException e) {
+			
+			logger.log(Level.SEVERE, "Error al procesar loss documentos cda ", e);
+		}
+
+		return listReturn;
 	}
 	
 }

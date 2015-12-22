@@ -9,7 +9,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
 import org.hemologica.constants.ConstansJson;
 import org.hemologica.constants.ConstantsRest;
 import org.hemologica.datatypes.DataBank;
@@ -26,7 +25,6 @@ import org.hemologica.datatypes.DataStock;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataTransfusionsStatistics;
 import org.hemologica.datatypes.DataTransfusionsStatisticsResults;
-import org.hemologica.datatypes.DataUnit;
 import org.hemologica.datatypes.DataUnitInfo;
 import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.datatypes.DataDonationsStatistics;
@@ -173,11 +171,6 @@ public interface IRestServices {
 	public List<DataCode> getSeverities();
 	
 	@GET
-	@Path("/" +ConstantsRest.PATH_UNITS)
-	@Produces("application/json")
-	public DataUnit getUnit();
-	
-	@GET
 	@Path("/" +ConstantsRest.PATH_UNIT_INFO)
 	@Produces("application/json")
 	public DataUnitInfo getUnitInfo(@QueryParam(ConstansJson.JSON_UNIT_CODE) String code,
@@ -302,4 +295,10 @@ public interface IRestServices {
 	@Path("/"+ConstantsRest.PATH_CODES + "/" + ConstantsRest.PATH_SEARCH_FILTERS)
 	@Produces("application/json")
 	public List<DataSearchFilter> getSearchFilters();
+	
+
+	@POST
+	@Path("/"+ConstantsRest.PATH_DONATIONS + "/" + ConstantsRest.PATH_SEARCH_FILTERS)
+	@Produces("application/json")
+	public List<DataDonation> getDonations(List<DataSearchFilter> resultDonations);
 }

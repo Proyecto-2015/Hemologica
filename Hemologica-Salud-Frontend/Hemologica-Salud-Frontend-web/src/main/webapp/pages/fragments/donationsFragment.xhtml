@@ -22,26 +22,75 @@
 		<h:form>
 
 			<p:messages />
-				<div class="col-md-9 col-lg-10"  style="padding-top: 12px;">
+				<div class="col-md-9 col-lg-11"  style="padding-top: 12px;">
 					<c:forEach items="#{searchDonationBB.filters}" var="filterItem" >
 									
 						<div class="col-md-9 col-lg-3 form-group"  style="padding-top: 12px;padding: 0 !important;">
-								<label class="col-md-2  col-lg-5 control-label" for="name" style="padding: 0;"><h:outputText
+								
+								<c:choose>
+									
+									<c:when test="${filterItem.code == 3}">
+										<label class="col-md-2  col-lg-4 control-label" for="name" style="padding: 0;"><h:outputText
 									value="#{messages[filterItem.displayName]}"  /></label>
 									
-								<div class="col-md-9 col-lg-7">
-								
-									<h:inputText style="height: 34px; width: 100%;" value="#{filterItem.valueString}"/>
-								
-								</div>
+										<div class="col-md-9 col-lg-7">
+											<p:calendar  pattern="dd/MM/yyyy"
+												mode="popup" value="#{searchDonationBB.date}" />
+										</div>
+									</c:when>
+									<c:when test="${filterItem.code != 3 and filterItem.code != 4}">
+										<label class="col-md-2  col-lg-4 control-label" for="name" style="padding: 0;"><h:outputText
+									value="#{messages[filterItem.displayName]}"  /></label>
+									
+										<div class="col-md-9 col-lg-7">
+											<h:inputText style="height: 34px; width: 100%;" value="#{filterItem.valueString}"/>
+										</div>
+									</c:when>
+								</c:choose>
 						</div>		
 					</c:forEach>
 				</div>
-				<div class="col-md-9 col-lg-2"  style="padding-top: 12px;">
+				<div class="col-md-9 col-lg-1"  style="padding-top: 12px;">
 					<p:commandButton icon="ui-icon-search"
 					styleClass="form-control search-btn col-xs-2 col-sm-3 col-md-3 col-lg-1"
 				 action="#{searchDonationBB.search()}" process="@form" update="@form" />
 			 	</div>
+			 	
+			 	<table class="col-md-12 table-bordered table-striped table-condensed cf" style="margin-top: 15px;" id="persontable">
+		       		<thead class="cf">
+		       			<tr>
+							<th><h:outputText value="#{messages.donations_result_table_header_id}"/></th>
+		       				<th><h:outputText value="#{messages.person_name}"/></th>
+		       				<th><h:outputText value="#{messages.person_document_number}"/></th>
+		       				<th><h:outputText value="#{messages.label_gender}"/></th>
+		       				<th><h:outputText value="#{messages.labe_age}"/></th>
+		       				<th><h:outputText value="#{messages.donation_date}"/></th>
+		       				<th><h:outputText value="#{messages.donation_state}"/></th>   				
+		       			</tr>
+		       		</thead>
+		       		<tbody>
+		       			<c:forEach items="#{searchDonationBB.resultDonations}" var="danationItem" varStatus="counter">
+		        			<tr>
+								<td data-title="#{messages.donations_result_table_header_id}"><h:outputText value="#{danationItem.id}"/></td>
+		        				<td data-title="#{messages.person_name}"><h:outputText value="#{danationItem.person.fullName}"/></td>
+		        				<td data-title="#{messages.person_document_number}"><h:outputText value="#{danationItem.person.documentNumber}"/></td>
+		        				<td data-title="#{messages.label_gender}"><h:outputText value="#{messages[danationItem.person.gender.displayName]}"/></td>
+		        				<td data-title="#{messages.labe_age}"><h:outputText value="#{danationItem.person.age}"/></td>
+		        				<td data-title="#{messages.donation_date}"><h:outputText value="#{danationItem.date}"/></td>
+		        				<td data-title="#{messages.donation_state}"><h:outputText value="#{messages[danationItem.state.displayName]}"/></td>
+		        				<td> 
+		        				<p:commandLink  ajax="true" class="icon-list icon-preview"
+						title="#{messages.label_view}" action="#{personRecordBB.viewPerson(personItem.id)}"/>
+			<!-- 						<f:ajax  execute="@form"  /> -->
+								</td>
+			
+		        			</tr>
+		        		</c:forEach>
+		       		
+		       		</tbody>
+       			 </table>
+			 	
+			 	
 			
 
 <!-- 			<h:panelGroup id="panel_search_inputs2" layout="block" -->

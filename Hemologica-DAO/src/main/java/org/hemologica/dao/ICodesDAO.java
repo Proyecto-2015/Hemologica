@@ -135,4 +135,8 @@ public interface ICodesDAO {
 
 	public List<SearchFilterCode> getSearchFilters();
 
+	public SearchFilterCode getSearchFilterByCode(String code);
+
+	public GenderCode getGenderCodeById(String genderCode);
+
 }

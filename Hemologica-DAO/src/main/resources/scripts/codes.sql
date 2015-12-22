@@ -91,6 +91,8 @@ INSERT INTO `hemologica`.`search_filter_codes` (`search_filter_codes_id`, `searc
 INSERT INTO `hemologica`.`search_filter_codes` (`search_filter_codes_id`, `search_filter_codes_label`, `search_filter_codes_path`, `search_filter_codes_value`) VALUES ('2', 'donations_result_table_header_document', '/ClinicalDocument/recordTarget/patientRole/patient/id/@root', '2');
 INSERT INTO `hemologica`.`search_filter_codes` (`search_filter_codes_id`, `search_filter_codes_label`, `search_filter_codes_path`, `search_filter_codes_value`) VALUES ('4', 'label_bank', '/ClinicalDocument/author/assignedAuthor/representedOrganization/id/@root', '4');
 INSERT INTO `hemologica`.`search_filter_codes` (`search_filter_codes_id`, `search_filter_codes_label`, `search_filter_codes_path`, `search_filter_codes_value`) VALUES ('1', 'transfusions_input_search_id', '/ClinicalDocument/id/@extension', '1');
+INSERT INTO `hemologica`.`search_filter_codes` (`search_filter_codes_id`, `search_filter_codes_label`, `search_filter_codes_path`, `search_filter_codes_value`) VALUES ('5', 'person_name', '/ClinicalDocument/recordTarget/patientRole/patient/name', '5');
 
+UPDATE `hemologica`.`search_filter_codes` SET `search_filter_codes_path`='/ClinicalDocument/component/structuredBody/component/section/entry/procedure/effectiveTime/low/@value' WHERE `search_filter_codes_id`='3';
 
 

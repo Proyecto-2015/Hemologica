@@ -13,6 +13,7 @@ public class DataDonation implements Serializable {
 	 */
 	private static final long serialVersionUID = -4260250837335930498L;
 
+	private String id;
 	private String name;
 	private String date;
 	private String time;
@@ -45,6 +46,16 @@ public class DataDonation implements Serializable {
 //		this.person = new DataPerson();
 		this.labResults = new ArrayList<DataLaboratoryResult>();
 		this.events = new ArrayList<DataDonationEvent>();
+	}
+	
+	
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public String getName() {

@@ -717,4 +717,19 @@ public class CodesBean implements CodesBeanLocal {
 		}
 		return listReturn;
 	}
+
+	@Override
+	public DataCode getGenderCodeById(String genderCode) {
+		
+		GenderCode gender = FactoryDAO.getCodesDAO(em).getGenderCodeById(genderCode);
+		
+		DataCode data = new DataCode();
+		if(gender != null){
+			
+			data.setCode(gender.getGenderCodeValue());
+			data.setDisplayName(gender.getGenderCodeLabel());
+			
+		}
+		return data;
+	}
 }

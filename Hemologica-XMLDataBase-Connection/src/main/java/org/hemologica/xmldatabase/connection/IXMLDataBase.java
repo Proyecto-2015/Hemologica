@@ -134,4 +134,11 @@ public interface IXMLDataBase {
 	 */
 	public String getDonationCDABySpecimenId(String code, String extension) throws XMLDataBaseException;
 	
+	/**
+	 * Devuelve los elementos que cumples los filtros pasados
+	 * @param code
+	 * @throws XMLDataBaseException 
+	 */
+	public List<String> getLaboratoryElements(List<String> queries) throws XMLDataBaseException;
+	
 }
