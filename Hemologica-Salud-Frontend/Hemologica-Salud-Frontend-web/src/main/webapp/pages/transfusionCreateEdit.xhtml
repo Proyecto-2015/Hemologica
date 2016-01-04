@@ -16,7 +16,12 @@
 		<ui:define name="content">	
 			<div class="container-fluid">
 				<ol class="breadcrumb">
-					<li><a href="#"><h:outputText value="#{messages.title_donations}"/></a></li> 
+					<li>
+					<h:link outcome="transfusions"><h:outputText value="#{messages.menu_transfusions}"/></h:link>
+					/
+					<a href="#"><h:outputText value="#{messages.new_transfusion}"/></a>
+					</li> 
+ 
 				</ol>
 			</div>
 			<ui:include src="fragments/transfusionFragment.xhtml" />

@@ -854,7 +854,7 @@ public class BaseXConnection implements IXMLDataBase {
 		return "";
 	}
 
-	public List<String> getLaboratoryElements(List<String> queries) throws XMLDataBaseException {
+	public List<String> getElements(List<String> queries) throws XMLDataBaseException {
 		
 		String input = "for $doc in collection('" + dataBase + "') ";
 		

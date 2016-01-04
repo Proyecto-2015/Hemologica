@@ -34,6 +34,7 @@ import org.hemologica.datatypes.DataOmsStatistics;
 import org.hemologica.datatypes.DataResponsiblePerson;
 import org.hemologica.datatypes.DataSearchFilter;
 import org.hemologica.datatypes.TransfusionFilterData;
+import org.hemologica.datatypes.TransfusionResult;
 
 @RequestScoped
 public interface IServicesClient {
@@ -482,4 +483,13 @@ public interface IServicesClient {
 	 * @throws ClientProtocolException 
 	 */
 	public List<DataDonation> getDonations(List<DataSearchFilter> filters) throws ClientProtocolException, IOException;
+
+	/**
+	 * Devuelve las transfusiones para los filtros pasados por parametro.
+	 * @param filters
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<TransfusionResult> getTransfusions(List<DataSearchFilter> filters) throws IOException;
 }

@@ -423,4 +423,12 @@ table.jqplot-table-legend, table.jqplot-cursor-legend {
 	border-bottom: none !important;
 }
 
+.ui-button.btn-add{
+	padding: 10px !important;;
+    background-color: #d14836 !important;;
+    font-weight: 500 !important;;
+    /* font-variant-ligatures: normal; */
+    color: #fff !important;;
+}
+
 

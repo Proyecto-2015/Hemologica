@@ -58,11 +58,23 @@ public class DonationBB implements Serializable {
 	@PostConstruct
 	public void init(){
 		
-		this.dataDonation = new DataDonation();
+		FacesContext context = FacesContext.getCurrentInstance();
+	
+		DataDonation donation = (DataDonation) context.getExternalContext().getSessionMap().get("donation");
+		context.getExternalContext().getSessionMap().put("donation", null);
+		
+		if(donation != null){
+			
+			dataDonation = donation;
+			
+		}else{
+			this.dataDonation = new DataDonation();
+			this.dataDonation.setState(applicationBB.getDonationStates().get(0));
+		}
 		this.labResult = new DataLaboratoryResult();
 		this.event = new DataDonationEvent();
 		this.ctx = FacesContext.getCurrentInstance();
-		this.dataDonation.setState(applicationBB.getDonationStates().get(0));
+		
 	}
 
 	public void addLabResult(){
@@ -286,7 +298,7 @@ public class DonationBB implements Serializable {
 		
 		if(response.getCode() == 0){
 			
-			return "donationCreateEdit";
+			return "donations";
 		}
 		
 		return null;

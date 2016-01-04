@@ -301,4 +301,9 @@ public interface IRestServices {
 	@Path("/"+ConstantsRest.PATH_DONATIONS + "/" + ConstantsRest.PATH_SEARCH_FILTERS)
 	@Produces("application/json")
 	public List<DataDonation> getDonations(List<DataSearchFilter> resultDonations);
+	
+	@POST
+	@Path("/"+ConstantsRest.PATH_TRANSFUTIONS + "/" + ConstantsRest.PATH_SEARCH_FILTERS)
+	@Produces("application/json")
+	public List<DataTransfusion> getTransfusions(List<DataSearchFilter> resultDonations);
 }

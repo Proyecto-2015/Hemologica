@@ -6,9 +6,12 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
+
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataCountry;
 import org.hemologica.datatypes.DataDocumentType;
+import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataState;
 
@@ -32,11 +35,20 @@ public class PersonBB implements Serializable {
 	private DataState state;
 	private DataCity city;
 	private DataCountry country;
-	private DataDocumentType documentType;
+//	private DataDocumentType documentType;
 	
 	@PostConstruct
 	public void init(){
-		dataPerson = new DataPerson();
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		DataPerson person = (DataPerson) context.getExternalContext().getSessionMap().get("person_donation");
+		context.getExternalContext().getSessionMap().put("person_donation", null);
+		
+		if(person != null){
+			dataPerson = person;
+			
+		}else
+			dataPerson = new DataPerson();
 	}
 	
 	
@@ -103,14 +115,14 @@ public class PersonBB implements Serializable {
 	}
 
 
-	public DataDocumentType getDocumentType() {
-		return documentType;
-	}
-
-
-	public void setDocumentType(DataDocumentType documentType) {
-		this.documentType = documentType;
-	}
+//	public DataDocumentType getDocumentType() {
+//		return documentType;
+//	}
+//
+//
+//	public void setDocumentType(DataDocumentType documentType) {
+//		this.documentType = documentType;
+//	}
 
 
 	public ApplicationBB getApplicationBB() {

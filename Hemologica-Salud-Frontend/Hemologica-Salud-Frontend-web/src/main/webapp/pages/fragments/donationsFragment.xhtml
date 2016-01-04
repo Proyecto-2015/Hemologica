@@ -10,10 +10,6 @@
 	xmlns:pm="http://primefaces.org/mobile"
 	xmlns:pe="http://primefaces.org/ui/extensions">
 
-<!-- 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" -->
-<!-- 	xmlns:h="http://xmlns.jcp.org/jsf/html" -->
-<!-- 	xmlns:f="http://xmlns.jcp.org/jsf/core" -->
-
 <h:head>
 </h:head>
 <h:body>
@@ -22,32 +18,40 @@
 		<h:form>
 
 			<p:messages />
+				
+				<div class="col-lg-12" >
+					<p:commandButton  ajax="true" class="pull-right" 
+						value="#{messages.new_donation}" action="donationCreateEdit"/>
+				</div>			
+			
 				<div class="col-md-9 col-lg-11"  style="padding-top: 12px;">
 					<c:forEach items="#{searchDonationBB.filters}" var="filterItem" >
-									
-						<div class="col-md-9 col-lg-3 form-group"  style="padding-top: 12px;padding: 0 !important;">
+		
+						<c:choose>
+							
+							<c:when test="${filterItem.code == 3}">
+								<div class="col-md-9 col-lg-3 form-group"  style="padding-top: 12px;padding: 0 !important;">
+									<label class="col-md-2  col-lg-4 control-label" style="padding: 0;"><h:outputText
+										value="#{messages[filterItem.displayName]}"  /></label>
 								
-								<c:choose>
-									
-									<c:when test="${filterItem.code == 3}">
-										<label class="col-md-2  col-lg-4 control-label" style="padding: 0;"><h:outputText
+									<div class="col-md-9 col-lg-7">
+										<p:calendar  pattern="dd/MM/yyyy"
+											mode="popup" value="#{searchDonationBB.date}" />
+									</div>
+								</div>
+							</c:when>
+							<c:when test="${filterItem.code != 3 and filterItem.code != 4}">
+								<div class="col-md-9 col-lg-3 form-group"  style="padding-top: 12px;padding: 0 !important;">
+									<label class="col-md-2  col-lg-4 control-label" style="padding: 0;"><h:outputText
 									value="#{messages[filterItem.displayName]}"  /></label>
-									
-										<div class="col-md-9 col-lg-7">
-											<p:calendar  pattern="dd/MM/yyyy"
-												mode="popup" value="#{searchDonationBB.date}" />
-										</div>
-									</c:when>
-									<c:when test="${filterItem.code != 3 and filterItem.code != 4}">
-										<label class="col-md-2  col-lg-4 control-label" style="padding: 0;"><h:outputText
-									value="#{messages[filterItem.displayName]}"  /></label>
-									
-										<div class="col-md-9 col-lg-7">
-											<h:inputText style="height: 34px; width: 100%;" value="#{filterItem.valueString}"/>
-										</div>
-									</c:when>
-								</c:choose>
-						</div>		
+								
+									<div class="col-md-9 col-lg-7">
+										<h:inputText style="height: 34px; width: 100%;" value="#{filterItem.valueString}"/>
+									</div>
+								</div>
+							</c:when>
+						</c:choose>
+						
 					</c:forEach>
 				</div>
 				<div class="col-md-9 col-lg-1"  style="padding-top: 12px;">
@@ -80,8 +84,7 @@
 		        				<td data-title="#{messages.donation_state}"><h:outputText value="#{messages[danationItem.state.displayName]}"/></td>
 		        				<td> 
 		        				<p:commandLink  ajax="true" class="icon-list icon-preview"
-						title="#{messages.label_view}" action="#{personRecordBB.viewPerson(personItem.id)}"/>
-			<!-- 						<f:ajax  execute="@form"  /> -->
+						title="#{messages.label_view}" action="#{searchDonationBB.viewPerson(danationItem)}"/>
 								</td>
 			
 		        			</tr>
@@ -89,70 +92,6 @@
 		       		
 		       		</tbody>
        			 </table>
-			 	
-			 	
-			
-
-<!-- 			<h:panelGroup id="panel_search_inputs2" layout="block" -->
-<!-- 				styleClass="row"> -->
-<!-- 				<h:panelGroup layout="block" styleClass="form-inline search-bar"> -->
-<!-- 					<p:outputLabel class="sr-only" for="donations_input_search_person2" -->
-<!-- 						value="#{messages.donations_input_search_person_placeholder}" /> -->
-<!-- 					<p:inputText id="donations_input_search_person2" -->
-<!-- 						styleClass="form-control col-xs-6 col-sm-6 col-md-6 col-lg-6" -->
-<!-- 						placeholder="#{messages.donations_input_search_person_placeholder}" -->
-<!-- 						value="#{searchDonationBB.searchPerson}" /> -->
-<!-- 					<p:commandButton icon="ui-icon-search" -->
-<!-- 						styleClass="form-control search-btn col-xs-2 col-sm-3 col-md-3 col-lg-1" -->
-<!-- 						title="#{messages.generic_search}" action="#{searchDonationBB.search()}" -->
-<!-- 						process="panel_search_inputs2" update="@form" /> -->
-
-<!-- 				</h:panelGroup> -->
-<!-- 			</h:panelGroup> -->
-
-<!-- 			<h:panelGroup layout="block" styleClass="row" -->
-<!-- 				rendered="#{searchDonationBB.renderResult}"> -->
-
-<!-- 				<p:dataTable value="#{searchDonationBB.resultDonations}" var="donation" -->
-<!-- 					reflow="true" -->
-<!-- 					emptyMessage="#{messages.donations_result_empty_message}" -->
-<!-- 					sortMode="multiple"> -->
-
-<!-- 					<p:column filterBy="#{donation.donationId}" -->
-<!-- 						headerText="#{messages.donations_result_table_header_id}" -->
-<!-- 						filterMatchMode="contains" sortBy="#{donation.donationId}"> -->
-<!-- 						<h:outputText value="#{donation.donationId}" /> -->
-<!-- 					</p:column> -->
-
-<!-- 					<p:column filterBy="#{donation.personDocument}" -->
-<!-- 						headerText="#{messages.donations_result_table_header_document}" -->
-<!-- 						filterMatchMode="contains" sortBy="#{donation.personDocument}"> -->
-<!-- 						<h:outputText value="#{donation.personDocument}" /> -->
-<!-- 					</p:column> -->
-
-<!-- 					<p:column filterBy="#{donation.personCompleteName}" -->
-<!-- 						headerText="#{messages.donations_result_table_header_name}" -->
-<!-- 						filterMatchMode="contains" sortBy="#{donation.personCompleteName}"> -->
-<!-- 						<h:outputText value="#{donation.personCompleteName}" /> -->
-<!-- 					</p:column> -->
-
-<!-- 					<p:column filterBy="#{donation.donationDate}" -->
-<!-- 						headerText="#{messages.donations_result_table_header_date}" -->
-<!-- 						filterMatchMode="contains" sortBy="#{donation.donationDate}"> -->
-<!-- 						<h:outputText value="#{donation.donationDate}"> -->
-<!-- 							<f:convertDateTime pattern="dd-MM-yyyy, hh:mm" /> -->
-<!-- 						</h:outputText> -->
-<!-- 					</p:column> -->
-
-<!-- 					<p:column filterBy="#{donation.donationState}" -->
-<!-- 						headerText="#{messages.donations_result_table_header_state}" -->
-<!-- 						filterMatchMode="contains" selectRow="#{donation.donationState}"> -->
-<!-- 						<h:outputText value="#{donation.donationState}" /> -->
-<!-- 					</p:column> -->
-
-<!-- 				</p:dataTable> -->
-
-<!-- 			</h:panelGroup> -->
 
 		</h:form>
 	</div>

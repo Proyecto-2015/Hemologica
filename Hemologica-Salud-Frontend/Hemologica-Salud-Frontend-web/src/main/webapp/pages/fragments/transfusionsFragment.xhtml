@@ -1,90 +1,94 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile"
 	xmlns:pe="http://primefaces.org/ui/extensions">
-
-<!-- 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" -->
-<!-- 	xmlns:h="http://xmlns.jcp.org/jsf/html" -->
-<!-- 	xmlns:f="http://xmlns.jcp.org/jsf/core" -->
 
 <h:body>
 
-	<h:panelGroup styleClass="container-fluid container col-sm-12"
-		layout="block">
-
+	<div class="container">
 		<h:form>
-			<h:panelGroup id="panel_search_inputs2" layout="block"
-				styleClass="row">
-				<h:panelGroup layout="block" styleClass="form-inline search-bar">
-					<p:outputLabel class="sr-only" for="transfusions_input_search_person2"
-						value="#{messages.transfusions_input_search_person_placeholder}" />
-					<p:inputText id="transfusions_input_search_person2"
-						styleClass="form-control col-xs-6 col-sm-6 col-md-6 col-lg-6"
-						placeholder="#{messages.transfusions_input_search_person_placeholder}"
-						value="#{searchTransfusionBB.searchPerson}" />
-										<p:commandButton id="panel_search_inputs_advanced" 
-														styleClass="form-control search-btn-adv col-xs-2 col-sm-3 col-md-4 col-lg-4" 
-														icon="ui-icon-triangle-1-s" 
-														title="#{messages.generic_search}" />
+
+			<p:messages />
+			
+			<div class="col-lg-12" >
+				<p:commandButton  ajax="true" class="pull-right" 
+						value="#{messages.new_transfusion}" action="transfusionCreateEdit"/>
+			</div>			
+			
+			
+				<div class="col-md-9 col-lg-11"  style="padding-top: 12px;">
+					<c:forEach items="#{searchTransfusionBB.filters}" var="filterItem" >	
+						<c:choose>
+							
+							<c:when test="${filterItem.code == 3}">
+								<div class="col-md-9 col-lg-3 form-group"  style="padding-top: 12px;padding: 0 !important;">
+									<label class="col-md-2  col-lg-4 control-label" style="padding: 0;"><h:outputText
+									value="#{messages[filterItem.displayName]}"  /></label>
+								
+									<div class="col-md-9 col-lg-7">
+										<p:calendar  pattern="dd/MM/yyyy"
+											mode="popup" value="#{searchTransfusionBB.date}" />
+									</div>
+								</div>
+							</c:when>
+							<c:when test="${filterItem.code != 3 and filterItem.code != 4}">
+								<div class="col-md-9 col-lg-3 form-group"  style="padding-top: 12px;padding: 0 !important;">
+									<label class="col-md-2  col-lg-4 control-label" style="padding: 0;"><h:outputText
+									value="#{messages[filterItem.displayName]}"  /></label>
+								
+									<div class="col-md-9 col-lg-7">
+										<h:inputText style="height: 34px; width: 100%;" value="#{filterItem.valueString}"/>
+									</div>
+								</div>
+							</c:when>
+						</c:choose>	
+					</c:forEach>
+				</div>
+				<div class="col-md-9 col-lg-1"  style="padding-top: 12px;">
 					<p:commandButton icon="ui-icon-search"
-						styleClass="form-control search-btn col-xs-2 col-sm-3 col-md-3 col-lg-1"
-						title="#{messages.generic_search}" action="#{searchTransfusionBB.search()}"
-						process="panel_search_inputs2" update="@form" />
-
-				</h:panelGroup>
-			</h:panelGroup>
-
-			<h:panelGroup layout="block" styleClass="row"
-				rendered="#{searchTransfusionBB.renderResult}">
-
-				<p:dataTable value="#{searchTransfusionBB.resultTransfusions}" var="transfusion"
-					reflow="true"
-					emptyMessage="#{messages.transfusions_result_empty_message}"
-					sortMode="multiple">
-
-					<p:column filterBy="#{transfusion.donationId}"
-						headerText="#{messages.transfusions_result_table_header_id}"
-						filterMatchMode="contains" sortBy="#{transfusion.transfusionId}">
-						<h:outputText value="#{transfusion.transfusionId}" />
-					</p:column>
-
-					<p:column filterBy="#{transfusion.personDocument}"
-						headerText="#{messages.transfusions_result_table_header_document}"
-						filterMatchMode="contains" sortBy="#{transfusion.personDocument}">
-						<h:outputText value="#{transfusion.personDocument}" />
-					</p:column>
-
-					<p:column filterBy="#{transfusion.personCompleteName}"
-						headerText="#{messages.transfusions_result_table_header_name}"
-						filterMatchMode="contains" sortBy="#{transfusion.personCompleteName}">
-						<h:outputText value="#{transfusion.personCompleteName}" />
-					</p:column>
-
-					<p:column filterBy="#{transfusion.transfusionDate}"
-						headerText="#{messages.transfusions_result_table_header_date}"
-						filterMatchMode="contains" sortBy="#{transfusion.transfusionDate}">
-						<h:outputText value="#{transfusion.transfusionDate}">
-							<f:convertDateTime pattern="dd-MM-yyyy, hh:mm" />
-						</h:outputText>
-					</p:column>
-
-					<p:column filterBy="#{transfusion.transfusionState}"
-						headerText="#{messages.transfusions_result_table_header_state}"
-						filterMatchMode="contains" selectRow="#{transfusion.transfusionState}">
-						<h:outputText value="#{transfusion.transfusionState}" />
-					</p:column>
-
-				</p:dataTable>
-
-			</h:panelGroup>
+					styleClass="form-control search-btn col-xs-2 col-sm-3 col-md-3 col-lg-1"
+				 action="#{searchTransfusionBB.search()}" process="@form" update="@form" />
+			 	</div>
+			 	
+			 	<table class="col-md-12 table-bordered table-striped table-condensed cf" style="margin-top: 15px;" id="persontable">
+		       		<thead class="cf">
+		       			<tr>
+							<th><h:outputText value="#{messages.donations_result_table_header_id}"/></th>
+		       				<th><h:outputText value="#{messages.person_name}"/></th>
+		       				<th><h:outputText value="#{messages.person_document_number}"/></th>
+		       				<th><h:outputText value="#{messages.label_gender}"/></th>
+		       				<th><h:outputText value="#{messages.labe_age}"/></th>
+		       				<th><h:outputText value="#{messages.donation_date}"/></th> 				
+		       			</tr>
+		       		</thead>
+		       		<tbody>
+		       			<c:forEach items="#{searchTransfusionBB.resultTransfusions}" var="transfusionItem">
+		        			<tr>
+								<td data-title="#{messages.donations_result_table_header_id}"><h:outputText value="#{transfusionItem.id}"/></td>
+		        				<td data-title="#{messages.person_name}"><h:outputText value="#{transfusionItem.person.fullName}"/></td>
+		        				<td data-title="#{messages.person_document_number}"><h:outputText value="#{transfusionItem.person.documentNumber}"/></td>
+		        				<td data-title="#{messages.label_gender}"><h:outputText value="#{messages[transfusionItem.person.gender.displayName]}"/></td>
+		        				<td data-title="#{messages.labe_age}"><h:outputText value="#{transfusionItem.person.age}"/></td>
+		        				<td data-title="#{messages.donation_date}"><h:outputText value="#{transfusionItem.date}"/></td>
+		        				<td> 
+		        				<p:commandLink  ajax="true" class="icon-list icon-preview"
+						title="#{messages.label_view}" action="#{searchTransfusionBB.viewPerson(transfusionItem)}"/>
+								</td>
+			
+		        			</tr>
+		        		</c:forEach>
+		       		
+		       		</tbody>
+       			 </table>
 
 		</h:form>
-
-
-	</h:panelGroup>
+	</div>
 </h:body>
 </html>

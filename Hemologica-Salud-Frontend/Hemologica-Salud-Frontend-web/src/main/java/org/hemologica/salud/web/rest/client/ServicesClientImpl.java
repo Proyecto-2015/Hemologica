@@ -39,6 +39,7 @@ import org.hemologica.datatypes.DataOmsStatistics;
 import org.hemologica.datatypes.DataResponsiblePerson;
 import org.hemologica.datatypes.DataSearchFilter;
 import org.hemologica.datatypes.TransfusionFilterData;
+import org.hemologica.datatypes.TransfusionResult;
 import org.hemologica.salud.factories.RestFactory;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -1301,6 +1302,21 @@ public class ServicesClientImpl implements IServicesClient {
 		Type listType = new TypeToken<List<DataDonation>>() {
 		}.getType();
 		List<DataDonation> responseObject = new Gson().fromJson(responseString, listType);
+
+		return responseObject;
+	}
+
+	@Override
+	public List<TransfusionResult> getTransfusions(List<DataSearchFilter> filters) throws IOException {
+		
+		String urlService = url + ConstantsRest.PATH_TRANSFUTIONS + "/" + ConstantsRest.PATH_SEARCH_FILTERS;
+
+		String responseString = "";
+		responseString = RestFactory.getRestServicesUtils().post(urlService, filters);
+
+		Type listType = new TypeToken<List<DataDonation>>() {
+		}.getType();
+		List<TransfusionResult> responseObject = new Gson().fromJson(responseString, listType);
 
 		return responseObject;
 	}

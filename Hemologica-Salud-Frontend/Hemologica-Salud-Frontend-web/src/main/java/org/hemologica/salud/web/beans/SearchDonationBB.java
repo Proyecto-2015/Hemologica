@@ -7,7 +7,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 
+import org.apache.http.client.ClientProtocolException;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataSearchFilter;
 import org.hemologica.salud.factories.RestFactory;
@@ -31,11 +33,32 @@ public class SearchDonationBB implements Serializable {
 	public void init() {
 		
 		filters = applicationBB.getSearchFilters();
-		
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			for(DataSearchFilter data : filters){
+				if(data.getCode().equals("3")){
+					
+					if(date != null){
+						String dateString = sdf.format(date);
+						data.setValueString(dateString);
+					}else
+						data.setValueString(null);
+				}
+			}	
+			resultDonations = RestFactory.getServicesClient().getDonations(filters);
+			
+		} catch (ClientProtocolException e) {
+			
+			logger.info("Error al ir a buscar las donaciones ClientProtocolException");
+			
+		} catch (IOException e) {
+			
+			logger.info("Error al ir a buscar las donaciones IOException");
+			
+		}
 	}
 
 	public void search() {
-		logger.info("DonationBB > do search");
 		
 		try {
 			
@@ -57,6 +80,15 @@ public class SearchDonationBB implements Serializable {
 			logger.info("Error al ir a buscar las donaciones IOException");
 		}
 		
+	}
+	
+	public String viewPerson(DataDonation donation){
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getSessionMap().put("person_donation", donation.getPerson());
+		context.getExternalContext().getSessionMap().put("donation", donation);
+		
+		return "donationCreateEdit";
 	}
 
 	public SessionBB getSessionBB() {

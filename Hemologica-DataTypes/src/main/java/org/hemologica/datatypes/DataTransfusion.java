@@ -10,6 +10,7 @@ public class DataTransfusion implements Serializable {
 	 */
 	private static final long serialVersionUID = 3440653129221915523L;
 	
+	private String id;
 	private String name;
 	private String date;
 	private String time;
@@ -103,6 +104,12 @@ public class DataTransfusion implements Serializable {
 	}
 	public void setProductCode(String productCode) {
 		this.productCode = productCode;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 }

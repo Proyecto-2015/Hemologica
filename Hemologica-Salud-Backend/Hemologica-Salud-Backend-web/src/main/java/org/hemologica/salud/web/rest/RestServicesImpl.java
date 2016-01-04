@@ -523,7 +523,7 @@ public class RestServicesImpl implements IRestServices{
 		
 		try {
 			
-			return FactoryBeans.getDonationBean().getDonationsuser(resultDonations);
+			return FactoryBeans.getDonationBean().getDonationsFilters(resultDonations);
 			
 		}catch (SAXException e) {
 			
@@ -544,6 +544,34 @@ public class RestServicesImpl implements IRestServices{
 		}
 		
 		return new ArrayList<DataDonation>();
+	}
+
+	@Override
+	public List<DataTransfusion> getTransfusions(List<DataSearchFilter> filters) {
+		
+		try {
+			
+			return FactoryBeans.getTransfusionBean().getTransfusionsFilters(filters);
+			
+		}catch (SAXException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener los cdas SAXException", e);
+			
+		} catch (IOException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener los cdas IOException", e);
+			
+		} catch (ParserConfigurationException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener los cdas ParserConfigurationException", e);
+			
+		} catch (XPathExpressionException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener los cdas XPathExpressionException", e);
+			
+		}
+		
+		return new ArrayList<DataTransfusion>();
 	}
 
 	

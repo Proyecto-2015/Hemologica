@@ -7,6 +7,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.hemologica.datatypes.DataResponse;
+import org.hemologica.datatypes.DataSearchFilter;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.xmldatabase.exceptions.XMLDataBaseException;
 import org.w3c.dom.DOMException;
@@ -19,5 +20,7 @@ public interface TransfusionBeanLocal {
 	DataResponse addTransfusion(DataTransfusion dataTransfusion);
 
 	DataTransfusion getDataTransfusionSpecimenId(String code,String institutionCode) throws SAXException, IOException, ParserConfigurationException, XPathExpressionException, DOMException;
+
+	List<DataTransfusion> getTransfusionsFilters(List<DataSearchFilter> filters) throws SAXException, IOException, ParserConfigurationException, XPathExpressionException, DOMException;
 
 }

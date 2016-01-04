@@ -1,13 +1,15 @@
 package org.hemologica.salud.web.beans;
 
+import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Calendar;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import org.hemologica.datatypes.DataSearchFilter;
 import org.hemologica.datatypes.TransfusionResult;
+import org.hemologica.salud.factories.RestFactory;
 
 
 public class SearchTransfusionBB implements Serializable {
@@ -20,47 +22,64 @@ public class SearchTransfusionBB implements Serializable {
 	private static final Logger logger = Logger.getLogger(SearchDonationBB.class.getName());
 	
 	private SessionBB sessionBB;
+	private ApplicationBB applicationBB;
 
-	// search inputs
-	private String searchPerson;
-	private Date searchDateFrom;
-	private Date searchDateTo;
-	private String searchState;
-	private String searchId;
-
-	private Boolean renderResult;
-
+	List<DataSearchFilter> filters;
 	private List<TransfusionResult> resultTransfusions;
-
+	
+	private Date date;
 
 	@PostConstruct
 	public void init() {
-		renderResult = false;
-		this.searchDateTo = new Date();
-		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.DAY_OF_MONTH, -1);
-		this.searchDateFrom = calendar.getTime();
+		
+		filters = applicationBB.getSearchFilters();
+		
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			for(DataSearchFilter data : filters){
+				if(data.getCode().equals("3")){
+					
+					if(date != null){
+						String dateString = sdf.format(date);
+						data.setValueString(dateString);
+					}else
+						data.setValueString(null);
+				}
+			}	
+			
+			resultTransfusions = RestFactory.getServicesClient().getTransfusions(filters);
+			
+		} catch (IOException e) {
+			
+			logger.info("Error al ir a buscar las donaciones IOException");
+			
+		}
+		
 	}
 
 	public void search() {
-		logger.info("TransfusionBB > do search");
-		this.renderResult = true;
-		this.resultTransfusions = new ArrayList<TransfusionResult>();
-		for(int i=0; i < 10; ++i){
-			this.resultTransfusions.add(new TransfusionResult(""+ i, "1234567-"+i, "Nombre Apellido", new Date(), "Montevideo"));
+		
+		try {
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+			for(DataSearchFilter data : filters){
+				if(data.getCode().equals("3")){
+					
+					if(date != null){
+						String dateString = sdf.format(date);
+						data.setValueString(dateString);
+					}else
+						data.setValueString(null);
+				}
+			}		
+			resultTransfusions = RestFactory.getServicesClient().getTransfusions(filters);
+			
+		} catch (IOException e) {
+			
+			logger.info("Error al ir a buscar las donaciones IOException");
 		}
 	}
 
-	public void searchClear() {
-		this.searchPerson = null;
-		this.searchDateTo = new Date();
-		Calendar calendar = Calendar.getInstance();
-		calendar.add(Calendar.DAY_OF_MONTH, -1);
-		this.searchDateFrom = calendar.getTime();
-		renderResult = false;
-
-	}
-	
 	
 	
 	
@@ -72,52 +91,28 @@ public class SearchTransfusionBB implements Serializable {
 		this.sessionBB = sessionBB;
 	}
 
-	public String getSearchPerson() {
-		return searchPerson;
+	public ApplicationBB getApplicationBB() {
+		return applicationBB;
 	}
 
-	public void setSearchPerson(String searchPerson) {
-		this.searchPerson = searchPerson;
+	public void setApplicationBB(ApplicationBB applicationBB) {
+		this.applicationBB = applicationBB;
 	}
 
-	public Date getSearchDateFrom() {
-		return searchDateFrom;
+	public List<DataSearchFilter> getFilters() {
+		return filters;
 	}
 
-	public void setSearchDateFrom(Date searchDateFrom) {
-		this.searchDateFrom = searchDateFrom;
+	public void setFilters(List<DataSearchFilter> filters) {
+		this.filters = filters;
 	}
 
-	public Date getSearchDateTo() {
-		return searchDateTo;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setSearchDateTo(Date searchDateTo) {
-		this.searchDateTo = searchDateTo;
-	}
-
-	public String getSearchState() {
-		return searchState;
-	}
-
-	public void setSearchState(String searchState) {
-		this.searchState = searchState;
-	}
-
-	public String getSearchId() {
-		return searchId;
-	}
-
-	public void setSearchId(String searchId) {
-		this.searchId = searchId;
-	}
-
-	public Boolean getRenderResult() {
-		return renderResult;
-	}
-
-	public void setRenderResult(Boolean renderResult) {
-		this.renderResult = renderResult;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public List<TransfusionResult> getResultTransfusions() {

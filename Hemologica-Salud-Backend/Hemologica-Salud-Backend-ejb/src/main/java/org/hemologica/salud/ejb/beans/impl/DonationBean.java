@@ -24,7 +24,6 @@ import org.hemologica.constants.Constants;
 import org.hemologica.dao.enums.DataDonationStateEnum;
 import org.hemologica.dao.model.CountriesCode;
 import org.hemologica.dao.model.DocumentsTypesCode;
-import org.hemologica.dao.model.GenderCode;
 import org.hemologica.dao.model.PersonsRecord;
 import org.hemologica.dao.model.SearchFilterCode;
 import org.hemologica.datatypes.DataBank;
@@ -467,7 +466,7 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 	}
 
 	@Override
-	public List<DataDonation> getDonationsuser(List<DataSearchFilter> resultDonations) throws XPathExpressionException, SAXException, IOException, ParserConfigurationException {
+	public List<DataDonation> getDonationsFilters(List<DataSearchFilter> resultDonations) throws XPathExpressionException, SAXException, IOException, ParserConfigurationException {
 		
 		List<String> queries = new ArrayList<>();
 		
@@ -487,7 +486,7 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 		List<DataDonation> listReturn = new ArrayList<>();
 		List<String> cdas;
 		try {
-			cdas = XMLDataBaseFactory.getIXMLDataBaseDonations().getLaboratoryElements(queries);
+			cdas = XMLDataBaseFactory.getIXMLDataBaseDonations().getElements(queries);
 			
 			if(cdas != null && cdas.size() != 0){
 				for(String cda : cdas){
@@ -504,5 +503,5 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 
 		return listReturn;
 	}
-	
+
 }

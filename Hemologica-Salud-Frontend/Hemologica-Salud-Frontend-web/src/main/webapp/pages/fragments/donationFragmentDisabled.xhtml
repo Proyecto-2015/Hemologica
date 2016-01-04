@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<!-- 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets" -->
+<!-- 	xmlns:h="http://xmlns.jcp.org/jsf/html" -->
+<!-- 	xmlns:f="http://xmlns.jcp.org/jsf/core" -->
+
+<h:head>
+</h:head>
+<h:body>
+	
+	<h:form>
+		<div class="container">
+			<p:messages id="messagesIdDonation" for="messagesIdDonation" showDetail="true" autoUpdate="true"
+								closable="true" />
+		
+			<p:wizard flowListener="#{donationBB.onFlowProcess}">		
+				<!-- Person -->
+				<p:tab title="#{messages.donation_create_edit_tab_person_title}">
+					<p:panel header="#{messages.donation_create_edit_tab_person_title}" style="background-color: whitesmoke;">
+						<ui:include src="donationPersonFragment.xhtml" />
+					</p:panel>
+				</p:tab>
+	
+				<!-- Donation Information -->
+				<p:tab title="#{messages.label_donation}">
+					<p:panel header="#{messages.donation_create_edit_tab_information_title}" style="background-color: whitesmoke;">
+						<ui:include src="donationInformationFragment.xhtml" />
+					</p:panel>
+				</p:tab>
+	
+				<!-- Donation Laboratory Results -->
+				<p:tab title="#{messages.donation_create_edit_tab_laboratory_title}">
+					<p:panel header="#{messages.donation_create_edit_tab_laboratory_title}" style="background-color: whitesmoke;">
+						<ui:include src="donationLaboratoryResultFragment.xhtml" />
+					</p:panel>
+				</p:tab>
+	
+				<!-- Donation Events -->
+				<p:tab title="#{messages.donation_create_edit_tab_events_title}">
+					<p:panel header="#{messages.donation_create_edit_tab_events_title}" style="background-color: whitesmoke;">
+						<ui:include src="donationEventsFragment.xhtml" />
+						
+						<div class="col-md-12 text-right" style="margin-top: 15px;">
+							<p:commandButton
+								styleClass="btn btn-primary btn-lg center btnSave"
+								value="#{messages.label_save}" action="#{donationBB.submit()}"
+								process="@form" update="@form" />
+						</div>
+					</p:panel>
+				</p:tab>
+	
+			</p:wizard>
+		</div>
+	</h:form>
+
+</h:body>
+</html>

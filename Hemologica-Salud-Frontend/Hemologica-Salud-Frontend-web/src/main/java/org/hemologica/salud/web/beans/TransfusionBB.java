@@ -14,8 +14,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
-
-import org.hemologica.datatypes.DataDonationEvent;
 import org.hemologica.datatypes.DataLaboratoryResult;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataTransfusion;
@@ -248,7 +246,7 @@ public class TransfusionBB implements Serializable {
 		
 		if(response.getCode() == 0){
 			
-			return "transfusionCreateEdit";
+			return "transfusions";
 		}
 		return null;
 
