@@ -58,3 +58,5 @@ INSERT INTO `hemologica`.`donation_filter_codes` (`donation_filter_codes_id`, `d
 UPDATE `hemologica`.`donation_filter_codes` SET `donation_filter_codes_path`='/ClinicalDocument//component//structuredBody//component//section//entry//procedure//entryRelationship//observation//value//@code' WHERE `donation_filter_codes_id`='5';
 UPDATE `hemologica`.`donation_filter_codes` SET `donation_filter_codes_path`='/ClinicalDocument//component//structuredBody//component//section//entry//procedure//entryRelationship[descendant-or-self::node()/@typeCode = \'COMP\']//observation//code/@code' WHERE `donation_filter_codes_id`='7';
 
+UPDATE `hemologica`.`donation_filter_codes` SET `donation_filter_codes_id`='12' WHERE `donation_filter_codes_id`='1';
+

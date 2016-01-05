@@ -6,6 +6,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataResponse;
+import org.hemologica.datatypes.DataSearchFilter;
 import org.hemologica.xmldatabase.exceptions.XMLDataBaseException;
 import org.xml.sax.SAXException;
 
@@ -16,5 +17,7 @@ public interface DonationBeanLocal {
 	DataResponse addDonation(DataDonation dataDonacion);
 
 	DataDonation getDataDonationSpecimenId(String code, String institutionCode) throws XPathExpressionException, SAXException, IOException, ParserConfigurationException;
+
+	List<DataDonation> getDonationsFilters(List<DataSearchFilter> resultDonations) throws XPathExpressionException, SAXException, IOException, ParserConfigurationException;
 
 }

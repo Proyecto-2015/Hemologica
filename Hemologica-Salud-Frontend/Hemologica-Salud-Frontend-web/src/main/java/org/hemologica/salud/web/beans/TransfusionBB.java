@@ -83,6 +83,18 @@ public class TransfusionBB implements Serializable {
 		this.labResult = new DataLaboratoryResult();
 	}
 	
+	public void removeLabResult(DataLaboratoryResult labResult){
+		
+		this.dataTransfusion.getLaboratoryResults().remove(labResult);
+		
+	}
+	
+	public void removeEvent(DataTransfusionEvent event){
+		
+		this.dataTransfusion.getEvents().remove(event);
+		
+	}
+	
 	public void addEvent(){
 		
 		if(this.dataTransfusion.getEvents() != null){
@@ -234,7 +246,7 @@ public class TransfusionBB implements Serializable {
 		
 		if(response.getCode() == 0){
 			
-			return "transfusionCreateEdit";
+			return "transfusions";
 		}
 		return null;
 

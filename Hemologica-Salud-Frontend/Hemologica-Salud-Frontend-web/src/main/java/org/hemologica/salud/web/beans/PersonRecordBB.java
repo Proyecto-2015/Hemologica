@@ -17,6 +17,8 @@ public class PersonRecordBB implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private static final Logger logger = Logger.getLogger(CampaignsBB.class.getName());
 	
+	private String filterName;
+	private String filterDocumentNumber;
 	private List<DataPerson> persons;
 	
 	@PostConstruct
@@ -24,7 +26,7 @@ public class PersonRecordBB implements Serializable{
 		
 		try {
 			
-			persons = RestFactory.getServicesClient().getPersons();
+			persons = RestFactory.getServicesClient().getPersons(filterName,filterDocumentNumber);
 			
 		} catch (ClientProtocolException e) {
 			
@@ -65,4 +67,41 @@ public class PersonRecordBB implements Serializable{
 		this.persons = persons;
 		
 	}
+
+	public String getFilterName() {
+		return filterName;
+	}
+
+	public void setFilterName(String filterName) {
+		this.filterName = filterName;
+	}
+
+	public String getFilterDocumentNumber() {
+		return filterDocumentNumber;
+	}
+
+	public void setFilterDocumentNumber(String filterDocumentNumber) {
+		this.filterDocumentNumber = filterDocumentNumber;
+	}
+	
+	public void search(){
+		
+		logger.info("BUSCAR--------------------");
+		
+		try {
+			
+			persons = RestFactory.getServicesClient().getPersons(filterName, filterDocumentNumber);
+			
+		} catch (ClientProtocolException e) {
+			
+			logger.log(Level.SEVERE, "Error al llamar al servicio web ClientProtocolException", e);
+			
+		} catch (IOException e) {
+			
+			logger.log(Level.SEVERE, "Error al llamar al servicio web IOException", e);
+			
+		}
+	}
+	
+	
 }

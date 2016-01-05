@@ -15,4 +15,6 @@ public interface IPersonDAO extends IGenericDAO<Person>{
 
 	Person getPersonsId(Long id);
 
+	List<Person> getPersonsFilters(String filterName, String filterDocumentNumber);
+
 }

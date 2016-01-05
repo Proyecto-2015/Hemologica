@@ -854,4 +854,54 @@ public class BaseXConnection implements IXMLDataBase {
 		return "";
 	}
 
+	public List<String> getElements(List<String> queries) throws XMLDataBaseException {
+		
+		String input = "for $doc in collection('" + dataBase + "') ";
+		
+		if(queries != null && queries.size() != 0){
+		
+			input += "where ";
+			boolean first = true;
+			
+			for (String s : queries) {
+				if (first) {
+					input += "$doc" + s;
+					first = false;
+				} else
+					input += " and $doc" + s;
+
+			}	
+		}
+		input += " return $doc";
+		
+		ArrayList<String> cdasList = new ArrayList<String>();
+		BaseXClient.Query query;
+		BaseXClient session = null;
+		try {
+			session = this.getClient();
+			query = session.query(input);
+			query.execute();
+
+			while (query.more()) {
+				cdasList.add(query.next());
+			}
+
+		} catch (IOException e) {
+
+			logger.log(Level.SEVERE, "Error al intentar recuperarlos elementos en la base de datos.", e);
+			throw new XMLDataBaseException();
+			
+		} finally {
+			if (session != null) {
+				try {
+					session.close();
+				} catch (IOException e) {
+					logger.log(Level.SEVERE, e.getMessage(), e);
+				}
+			}
+		}
+		
+		return cdasList;
+	}
+
 }

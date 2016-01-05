@@ -15,6 +15,7 @@ import java.util.List;
 @NamedQueries({
 @NamedQuery(name="Person.findAll", query="SELECT p FROM Person p"),
 @NamedQuery(name="Person.findById", query="SELECT p FROM Person p where p.id = :id"),
+
 })
 public class Person implements Serializable {
 	private static final long serialVersionUID = 1L;

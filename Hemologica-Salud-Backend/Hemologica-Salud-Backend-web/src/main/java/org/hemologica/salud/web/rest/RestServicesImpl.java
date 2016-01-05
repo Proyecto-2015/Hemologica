@@ -2,9 +2,7 @@ package org.hemologica.salud.web.rest;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
@@ -21,11 +19,11 @@ import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataProductType;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataResponsiblePerson;
+import org.hemologica.datatypes.DataSearchFilter;
 import org.hemologica.datatypes.DataStock;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataTransfusionsStatistics;
 import org.hemologica.datatypes.DataTransfusionsStatisticsResults;
-import org.hemologica.datatypes.DataUnit;
 import org.hemologica.datatypes.DataUnitInfo;
 import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.datatypes.DataDonationsStatistics;
@@ -307,65 +305,6 @@ public class RestServicesImpl implements IRestServices{
 	}
 
 	@Override
-	public DataUnit getUnit() {
-
-		List<DataInstitution> banks = new ArrayList<DataInstitution>();
-		DataInstitution db1 = new DataInstitution();
-		db1.setCode("1");
-		db1.setName("Institucion 1");
-		db1.setAddress("Av Italia 345");
-		db1.setEmail("infobanco1@hc.com");
-		db1.setHour("Lunes a viernes de 8 - 18 hs ");
-		db1.setInformation("Se dan 40 numeros a partir de las 8 am.");
-		db1.setTelephone("12345678");
-		db1.setLatitude(-34.898930);
-		db1.setLongitude(-56.165753);
-
-		
-		banks.add(db1);
-
-		DataInstitution db2 = new DataInstitution();
-		db2.setCode("2");
-		db1.setName("Institucion 2");
-		db2.setAddress("Rivera 567");
-		db2.setEmail("infobanco2@hc.com");
-		db2.setHour("Lunes a viernes de 8 - 20 hs y Sabados 8 - 12 ");
-		db2.setInformation("Pedir hora por telefono");
-		db2.setTelephone("098765432");
-		db2.setLatitude(-34.871729);
-		db2.setLongitude(-56.188868);
-
-		List<DataProductType> productTypes = this.getProducts();
-		List<DataCode> bloodTypes = this.getBloodTypes();
-		
-		DataUnit d = null;
-		
-		
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-
-		for (DataCode bt : bloodTypes) {
-			for (DataProductType pt : productTypes) {
-				for (int i = 0; i < 1; ++i) {
-					d = new DataUnit();
-					d.setActive(true);
-					d.setCode("" + i);
-					d.setDonationId(new Long(i));
-					d.setId(new Long(i));
-					d.setDueDate(sdf.format(new Date()));
-					d.setInstitution(db1.getCode());
-					d.setInstitutionCode("123456789-"+i);
-					d.setProductType(pt);
-					d.setBloodType(bt);
-//					ret.add(d);
-				}
-			}
-		}
-
-		return d;
-	}
-
-	@Override
 	public List<DataCode> getDocumentsTypes() {
 		
 		return FactoryBeans.getCodeBeans().getDocumentsTypes();
@@ -563,6 +502,76 @@ public class RestServicesImpl implements IRestServices{
 		else
 			return Response.status(0).build();
 		
+	}
+
+	@Override
+	public List<DataPerson> getPersonsFilters(String filterName, String filterDocumentNumber) {
+		
+		
+		return FactoryBeans.getPersonBean().getPersonsFilters(filterName, filterDocumentNumber);
+	}
+
+	@Override
+	public List<DataSearchFilter> getSearchFilters() {
+		
+		return FactoryBeans.getCodeBeans().getSearchFilters();
+		
+	}
+
+	@Override
+	public List<DataDonation> getDonations(List<DataSearchFilter> resultDonations) {
+		
+		try {
+			
+			return FactoryBeans.getDonationBean().getDonationsFilters(resultDonations);
+			
+		}catch (SAXException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener los cdas SAXException", e);
+			
+		} catch (IOException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener los cdas IOException", e);
+			
+		} catch (ParserConfigurationException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener los cdas ParserConfigurationException", e);
+			
+		} catch (XPathExpressionException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener los cdas XPathExpressionException", e);
+			
+		}
+		
+		return new ArrayList<DataDonation>();
+	}
+
+	@Override
+	public List<DataTransfusion> getTransfusions(List<DataSearchFilter> filters) {
+		
+		try {
+			
+			return FactoryBeans.getTransfusionBean().getTransfusionsFilters(filters);
+			
+		}catch (SAXException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener los cdas SAXException", e);
+			
+		} catch (IOException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener los cdas IOException", e);
+			
+		} catch (ParserConfigurationException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener los cdas ParserConfigurationException", e);
+			
+		} catch (XPathExpressionException e) {
+			
+			logger.log(Level.SEVERE, "Error al obtener los cdas XPathExpressionException", e);
+			
+		}
+		
+		return new ArrayList<DataTransfusion>();
 	}
 
 	

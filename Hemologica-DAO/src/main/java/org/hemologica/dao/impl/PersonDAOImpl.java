@@ -48,4 +48,15 @@ public class PersonDAOImpl extends GenericDAOImpl<Person> implements IPersonDAO{
 		
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Person> getPersonsFilters(String filterName, String filterDocumentNumber) {
+		
+		Query query = em.createNamedQuery("Document.findPersonsFilters");
+		query.setParameter("filterName","%"+ filterName + "%");
+		query.setParameter("filterDocumentNumber", "%"+ filterDocumentNumber + "%");
+		
+		
+		return query.getResultList();
+	}
+
 }

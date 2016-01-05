@@ -54,7 +54,7 @@
 						</td>
 	
 						<td data-title="">
-							<p:commandButton value="Agregar" action="#{donationBB.addLabResult()}" update="@form"/>
+							<p:commandButton value="#{messages.label_add}" action="#{donationBB.addLabResult()}" update="@form"/>
 						</td>
 					</tr>
 	
@@ -74,6 +74,15 @@
 							<td
 								data-title="#{messages.donation_lab_result_value}">
 									<h:outputText value="#{messages[labResItem.result.displayName]}" />
+							</td>
+							
+							<td
+								data-title="#{messages.donation_lab_result_value}">
+									<p:commandLink   ajax="true" class="icon-list delete-icon center"
+										title="#{messages.label_delete}" action="#{donationBB.removeLabResult(labResItem)}"  update="@form" >
+<!-- 						<f:ajax  execute="@form"  /> -->
+					
+								</p:commandLink>
 							</td>
 						</tr>
 					</c:forEach>

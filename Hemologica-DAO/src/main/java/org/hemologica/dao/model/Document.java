@@ -10,7 +10,14 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name="documents")
-@NamedQuery(name="Document.findAll", query="SELECT d FROM Document d")
+@NamedQueries({
+@NamedQuery(name="Document.findAll", query="SELECT d FROM Document d"),
+@NamedQuery(name="Document.findPersonsFilters", query="SELECT p.person FROM Document p where "
+		+ " p.documentNumber like :filterDocumentNumber "
+		+ "and concat(p.person.personFirstName,' ',p.person.personSecondName, ' ',p.person.personFirstLastname, ' ',"
+		+ " p.person.personSecondLastname) like :filterName " )
+
+})
 public class Document implements Serializable {
 	private static final long serialVersionUID = 1L;
 

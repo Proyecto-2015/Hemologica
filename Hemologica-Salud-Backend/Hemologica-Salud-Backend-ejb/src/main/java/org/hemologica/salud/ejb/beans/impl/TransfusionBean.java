@@ -6,6 +6,7 @@ import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -19,13 +20,17 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
-
 import org.hemologica.constants.Constants;
+import org.hemologica.dao.model.CountriesCode;
+import org.hemologica.dao.model.DocumentsTypesCode;
 import org.hemologica.dao.model.PersonsRecord;
+import org.hemologica.dao.model.SearchFilterCode;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataLaboratoryResult;
+import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataResponse;
+import org.hemologica.datatypes.DataSearchFilter;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataTransfusionEvent;
 import org.hemologica.factories.FactoryDAO;
@@ -38,6 +43,8 @@ import org.hemologica.salud.ejb.utils.FactoryBeans;
 import org.hemologica.salud.ejb.utils.XMLUtils;
 import org.hemologica.xmldatabase.exceptions.XMLDataBaseException;
 import org.hemologica.xmldatabase.factories.XMLDataBaseFactory;
+import org.joda.time.LocalDate;
+import org.joda.time.Years;
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
@@ -90,7 +97,76 @@ public class TransfusionBean implements TransfusionBeanLocal, Serializable {
 		DataBank dataBank = FactoryBeans.getCenterBean().getBankById(XMLUtils.executeXPathString(document, "//ClinicalDocument//author//assignedAuthor//representedOrganization//id//@root"));
 		data.setBank(dataBank);
 		data.setInstitution(dataBank.getInstitution());
+		
+		/**
+		 * id Transfusion
+		 */
+		data.setId(XMLUtils.executeXPathString(document, "/ClinicalDocument/component/structuredBody/component/section/entry/procedure/id/@root"));
+		
+		/**
+		 * Data Person
+		 */
+		DataPerson dataPerson = new DataPerson();
+		data.setPerson(dataPerson);
+		
+		String genderCode = XMLUtils.executeXPathString(document, "/ClinicalDocument/recordTarget/patientRole/patient/administrativeGenderCode/@code");
+		
+		DataCode gender = FactoryBeans.getCodeBeans().getGenderCodeById(genderCode);
+		dataPerson.setGender(gender);
+		
+		dataPerson.setFirstName(XMLUtils.executeXPathString(document, "/ClinicalDocument/recordTarget/patientRole/patient/name/given/text()"));
+		dataPerson.setFirstLastName(XMLUtils.executeXPathString(document, "/ClinicalDocument/recordTarget/patientRole/patient/name/family/text()"));
+		
+		String birthday = XMLUtils.executeXPathString(document, "/ClinicalDocument/recordTarget/patientRole/patient/birthTime/@value");
+		SimpleDateFormat sdfAge = new SimpleDateFormat("yyyyMMdd");
+		try {
 			
+			Date dateBir = sdfAge.parse(birthday);
+			Calendar date = Calendar.getInstance();
+			date.setTime(dateBir);
+			LocalDate birthdate = new LocalDate(date.get(Calendar.YEAR), date.get(Calendar.MONDAY), date.get(Calendar.DAY_OF_MONTH));
+			LocalDate now = new LocalDate();
+			Years age = Years.yearsBetween(birthdate, now);
+			
+			dataPerson.setAge(String.valueOf(age.getYears()));
+			
+		} catch (ParseException e) {
+			
+			logger.log(Level.SEVERE, "Error al parsear la fecha de nacimiento", e);
+			
+		}
+		
+		String documentPerson = XMLUtils.executeXPathString(document, "/ClinicalDocument/recordTarget/patientRole/patient/id/@root");
+		if(documentPerson != null){
+			
+			String documentNumber = documentPerson.substring(documentPerson.lastIndexOf(".")+1, documentPerson.length()-1);
+			dataPerson.setDocumentNumber(documentNumber);
+			
+			documentPerson = documentPerson.substring(0, documentPerson.lastIndexOf("."));
+			String documentTypeS = documentPerson.substring(documentPerson.lastIndexOf(".")+1, documentPerson.length());
+			
+			DocumentsTypesCode documentType = FactoryDAO.getCodesDAO(em).getDocumentsTypeByCode(documentTypeS);
+			if(documentType != null){
+				DataCode documentTypeCode = new DataCode();
+				documentTypeCode.setCode(documentType.getDocumentsTypeCodeValue());
+				documentTypeCode.setDisplayName(documentType.getDocumentsTypeCodeLabel());
+				dataPerson.setDocumentType(documentTypeCode);
+			}
+			
+			documentPerson = documentPerson.substring(0, documentPerson.lastIndexOf("."));
+			String documentCountryS = documentPerson.substring(documentPerson.lastIndexOf(".")+1, documentPerson.length());
+			
+			CountriesCode country = FactoryDAO.getCodesDAO(em).getCountryByCode(documentCountryS);
+			if(country != null){
+				DataCode countryCode = new DataCode();
+				countryCode.setCode(country.getCountryCodeLabel());
+				countryCode.setDisplayName(country.getCountryCodeLabel());
+				dataPerson.setDocumentType(countryCode);
+			}
+			
+		}
+		
+		
 		/**
 		 * Fecha 
 		 */
@@ -251,5 +327,44 @@ public class TransfusionBean implements TransfusionBeanLocal, Serializable {
 		}
 		
 		return new DataTransfusion();
-	} 
+	}
+
+	@Override
+	public List<DataTransfusion> getTransfusionsFilters(List<DataSearchFilter> filters) throws SAXException, IOException, ParserConfigurationException, XPathExpressionException, DOMException {
+		
+		List<String> queries = new ArrayList<>();
+		
+		for(DataSearchFilter filter :filters){
+			
+			if(filter.getValueString() != null && !filter.getValueString().equals("")){
+				
+				SearchFilterCode search = FactoryDAO.getCodesDAO(em).getSearchFilterByCode(filter.getCode());
+				if(search != null){
+				
+					String query = search.getSearchFilterCodesPath() + "/contains(.,'"+ filter.getValueString() +"')";
+					queries.add(query);
+				}
+			}
+		}
+		
+		List<DataTransfusion> listReturn = new ArrayList<>();
+		List<String> cdas;
+		try {
+			cdas = XMLDataBaseFactory.getIXMLDataBaseTransfusions().getElements(queries);
+			
+			if(cdas != null && cdas.size() != 0){
+				for(String cda : cdas){
+				
+					Document document= XMLUtils.stringToDocument(cda);
+					DataTransfusion dataDonacion = getDataTransfusion(document);
+					listReturn.add(dataDonacion);
+				}
+			}
+		} catch (XMLDataBaseException e) {
+			
+			logger.log(Level.SEVERE, "Error al procesar loss documentos cda ", e);
+		}
+
+		return listReturn;
+	}
 }

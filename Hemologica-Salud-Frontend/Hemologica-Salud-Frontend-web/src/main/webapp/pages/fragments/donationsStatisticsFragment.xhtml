@@ -16,7 +16,7 @@
 </h:head>
 <h:body>
 	<h:form>
-		<div class="form-group">
+		<div class="form-group form-horizontal">
 		
 			<p:messages></p:messages>
 			<fieldset>
@@ -27,9 +27,9 @@
 				
 					<div class="col-md-9 col-lg-6">
 					
-						<label class="col-md-2 col-lg-4 control-label" for="name"><h:outputText
+						<label class="col-md-2 col-lg-6 control-label" for="name"><h:outputText
 								value="#{messages.label_insitution}" /></label>
-						<div class="col-md-9 col-lg-8">
+						<div class="col-md-9 col-lg-6">
 							<h:selectOneMenu id="options" class="form-control" value="#{donationsStatisticsBB.statictic.institution}"
 								style="height: 34px;" converter="#{dataInstitutionConverterSession}">
 								
@@ -43,9 +43,9 @@
 					</div>
 					
 					<div class="col-md-9 col-lg-6">
-						<label class="col-md-2  col-lg-4 control-label" for="name"><h:outputText
+						<label class="col-md-2  col-lg-6 control-label" for="name"><h:outputText
 								value="#{messages.label_bank}" /></label>
-						<div class="col-md-9 col-lg-8">
+						<div class="col-md-9 col-lg-6">
 							<h:selectOneMenu id="bankOption" class="form-control" value="#{donationsStatisticsBB.statictic.bloodBank}"
 								style="height: 34px;" converter="#{dataBankConverterSession}">
 								<f:selectItem itemLabel="#{messages.label_all}" itemValue="#{null}"/>
@@ -56,19 +56,19 @@
 					</div>
 					
 					<div class="col-md-9 col-lg-6" style="padding-top: 12px;">
-						<label class="col-md-2 col-lg-4 control-label" for="name"><h:outputText
+						<label class="col-md-2 col-lg-6 control-label" for="name"><h:outputText
 									value="#{messages.label_date_from}" /></label>
 									
-						<div class="col-md-9 col-lg-8">
+						<div class="col-md-9 col-lg-6">
 							<p:calendar pattern="dd/MM/yyyy"
 									mode="popup" value="#{donationsStatisticsBB.dateFrom}" />
 						</div>
 					</div>
 					<div class="col-md-9 col-lg-6" style="padding-top: 12px;">
-						<label class="col-md-2 col-lg-4 control-label" for="name"><h:outputText
+						<label class="col-md-2 col-lg-6 control-label" for="name"><h:outputText
 									value="#{messages.label_date_to}" /></label>
 									
-						<div class="col-md-9 col-lg-8">							
+						<div class="col-md-9 col-lg-6">							
 							<p:calendar  pattern="dd/MM/yyyy"
 									mode="popup" value="#{donationsStatisticsBB.dateTo}" />
 						</div>
@@ -86,7 +86,7 @@
 					<p:tab title="#{messages.label_numerator}">		
 						<c:forEach items="#{donationsStatisticsBB.allFilters}" var="filterItem" >
 							
-							<div class="col-md-9 col-lg-4 form-group"  style="padding-top: 12px;">
+							<div class="col-md-9 col-lg-6 form-group"  style="padding-top: 12px;">
 									<label class="col-md-2  col-lg-6 control-label" for="name"><h:outputText
 										value="#{messages[filterItem.displayName]}" /></label>
 										
@@ -116,7 +116,7 @@
 						<c:forEach items="#{donationsStatisticsBB.allFiltersDenominator}"
 							var="filterItem" >
 							
-							<div class="col-md-9 col-lg-4 form-group"  style="padding-top: 12px;">
+							<div class="col-md-9 col-lg-6 form-group"  style="padding-top: 12px;">
 								<label class="col-md-2  col-lg-6 control-label" for="name"><h:outputText
 										value="#{messages[filterItem.displayName]}" /></label>
 										

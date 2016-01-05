@@ -16,4 +16,6 @@ public class ConstansJson {
 	public static final String JSON_ACCOUNT_TOKEN = "token";
 	public static final String JSON_UNIT_CODE = "unitCode";
 	public static final String JSON_INSTITUTION = "institution";
+	public static final String JSON_FILTER_NAME = "filtername";
+	public static final String JSON_FILTER_DOCUMENT_NUMBER = "filterdocumentnumber";
 }

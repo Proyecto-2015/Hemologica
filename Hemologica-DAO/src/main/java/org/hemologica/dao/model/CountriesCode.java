@@ -11,7 +11,10 @@ import java.util.List;
  */
 @Entity
 @Table(name="countries_codes")
-@NamedQuery(name="CountriesCode.findAll", query="SELECT c FROM CountriesCode c")
+@NamedQueries({
+@NamedQuery(name="CountriesCode.findAll", query="SELECT c FROM CountriesCode c"),
+@NamedQuery(name="CountriesCode.findByCode", query="SELECT d FROM CountriesCode d WHERE d.countryCodeValue = :code")
+})
 public class CountriesCode implements Serializable {
 	private static final long serialVersionUID = 1L;
 

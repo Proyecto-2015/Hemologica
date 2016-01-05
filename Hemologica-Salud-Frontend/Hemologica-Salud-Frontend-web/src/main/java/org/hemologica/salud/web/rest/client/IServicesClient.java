@@ -32,8 +32,9 @@ import org.hemologica.datatypes.MailData;
 import org.hemologica.datatypes.DataMessageOption;
 import org.hemologica.datatypes.DataOmsStatistics;
 import org.hemologica.datatypes.DataResponsiblePerson;
+import org.hemologica.datatypes.DataSearchFilter;
 import org.hemologica.datatypes.TransfusionFilterData;
-import org.primefaces.model.StreamedContent;
+import org.hemologica.datatypes.TransfusionResult;
 
 @RequestScoped
 public interface IServicesClient {
@@ -455,4 +456,40 @@ public interface IServicesClient {
 	 * @return
 	 */
 	public InputStream getOmsStatistics(DataOmsStatistics statictic);
+
+	/**
+	 * Devuelve las personas que cumplen con los filtros pasados.
+	 * @param filterName
+	 * @param filterDocumentNumber
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataPerson> getPersons(String filterName, String filterDocumentNumber) throws ClientProtocolException, IOException;
+
+	/**
+	 * Devuelve los filtros para la busqueda de donaciones y tranfusiones
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataSearchFilter> getSearchFilters() throws ClientProtocolException, IOException;
+
+	/**
+	 * Devuelve las donaciones para los filtros pasados por parametro.
+	 * @param filters
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<DataDonation> getDonations(List<DataSearchFilter> filters) throws ClientProtocolException, IOException;
+
+	/**
+	 * Devuelve las transfusiones para los filtros pasados por parametro.
+	 * @param filters
+	 * @return
+	 * @throws IOException 
+	 * @throws ClientProtocolException 
+	 */
+	public List<TransfusionResult> getTransfusions(List<DataSearchFilter> filters) throws IOException;
 }

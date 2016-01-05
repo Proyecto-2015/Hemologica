@@ -16,7 +16,7 @@
 </h:head>
 <h:body>
 	<h:form>
-		<div class="form-group">
+		<div class="form-group form-horizontal">
 		
 		<p:messages></p:messages>
 			<fieldset>
@@ -26,11 +26,11 @@
 				</legend>
 				
 					<div class="col-md-9 col-lg-6">
-						<label class="col-md-2 col-lg-4 control-label" for="name"><h:outputText
+						<label class="col-md-2 col-lg-6 control-label" for="name"><h:outputText
 								value="#{messages.label_insitution}" /></label>
-						<div class="col-md-9 col-lg-8">
+						<div class="col-md-9 col-lg-6">
 							<h:selectOneMenu id="options" class="form-control" value="#{transfusionsStatisticsBB.statictic.institution}"
-								style="height: 34px;" converter="#{dataInstitutionConverterSession}">
+								style="height: 34px; padding: 0 !important;" converter="#{dataInstitutionConverterSession}">
 								
 								<f:selectItem itemLabel="#{messages.label_all}" itemValue="#{null}"/>
 								<f:selectItems value="#{sessionBB.userInstitutions}" var="institution"
@@ -41,11 +41,11 @@
 					</div>
 					
 					<div class="col-md-9 col-lg-6">
-						<label class="col-md-2  col-lg-4 control-label" for="name"><h:outputText
+						<label class="col-md-2  col-lg-6 control-label" for="name"><h:outputText
 								value="#{messages.label_bank}" /></label>
-						<div class="col-md-9 col-lg-8">
+						<div class="col-md-9 col-lg-6">
 							<h:selectOneMenu class="form-control" value="#{transfusionsStatisticsBB.statictic.bloodBank}"
-								style="height: 34px;" converter="#{dataBankConverterSession}">
+								style="height: 34px; padding: 0 !important;" converter="#{dataBankConverterSession}">
 								<f:selectItem itemLabel="#{messages.label_all}" itemValue="#{null}"/>
 								<f:selectItems value="#{sessionBB.userBanks}" var="bank"
 									itemValue="#{bank}" itemLabel="#{bank.name}" />
@@ -55,19 +55,19 @@
 
 					
 					<div class="col-md-9 col-lg-6" style="padding-top: 12px;">
-						<label class="col-md-2 col-lg-4 control-label" for="name"><h:outputText
+						<label class="col-md-2 col-lg-6 control-label" for="name"><h:outputText
 									value="#{messages.label_date_from}" /></label>
 									
-						<div class="col-md-9 col-lg-8">
+						<div class="col-md-9 col-lg-6">
 							<p:calendar pattern="dd/MM/yyyy"
 									mode="popup" value="#{transfusionsStatisticsBB.dateFrom}" />
 						</div>
 					</div>
 					<div class="col-md-9 col-lg-6" style="padding-top: 12px;">
-						<label class="col-md-2 col-lg-4 control-label" for="name"><h:outputText
+						<label class="col-md-2 col-lg-6 control-label" for="name"><h:outputText
 									value="#{messages.label_date_to}" /></label>
 									
-						<div class="col-md-9 col-lg-8">							
+						<div class="col-md-9 col-lg-6">							
 							<p:calendar  pattern="dd/MM/yyyy"
 									mode="popup" value="#{transfusionsStatisticsBB.dateTo}" />
 						</div>
@@ -85,7 +85,7 @@
 							<c:forEach items="#{transfusionsStatisticsBB.allFilters}"
 								var="filterItem" >
 								
-								<div class="col-md-9 col-lg-4 form-group"  style="padding-top: 12px;">
+								<div class="col-md-9 col-lg-6 form-group"  style="padding-top: 12px;">
 									<label class="col-md-2  col-lg-6 control-label" for="name"><h:outputText
 											value="#{messages[filterItem.displayName]}" /></label>
 											
@@ -115,7 +115,7 @@
 							<c:forEach items="#{transfusionsStatisticsBB.allFiltersDenominator}"
 								var="filterItem" >
 								
-								<div class="col-md-9 col-lg-4 form-group"  style="padding-top: 12px;">
+								<div class="col-md-9 col-lg-6 form-group"  style="padding-top: 12px;">
 									<label class="col-md-2  col-lg-6 control-label" for="name"><h:outputText
 											value="#{messages[filterItem.displayName]}" /></label>
 											

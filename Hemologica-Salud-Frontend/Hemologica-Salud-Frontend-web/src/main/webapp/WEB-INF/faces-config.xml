@@ -609,6 +609,11 @@
 			<property-class>org.hemologica.salud.web.beans.SessionBB</property-class>
 			<value>#{sessionBB}</value>
 		</managed-property>
+		<managed-property>
+			<property-name>applicationBB</property-name>
+			<property-class>org.hemologica.salud.web.beans.ApplicationBB</property-class>
+			<value>#{applicationBB}</value>
+		</managed-property>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>searchTransfusionBB</managed-bean-name>
@@ -618,6 +623,11 @@
 			<property-name>sessionBB</property-name>
 			<property-class>org.hemologica.salud.web.beans.SessionBB</property-class>
 			<value>#{sessionBB}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>applicationBB</property-name>
+			<property-class>org.hemologica.salud.web.beans.ApplicationBB</property-class>
+			<value>#{applicationBB}</value>
 		</managed-property>
 	</managed-bean>
 

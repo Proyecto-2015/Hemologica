@@ -42,15 +42,16 @@ public class DonationsBB implements Serializable{
 		try {
 			
 			myDonations = RestFactory.getServicesClient().getMyDonations("1");
-			
-			Collections.sort(myDonations, new Comparator<DataDonation>() {
-				  
-				@Override public int compare( DataDonation d1, DataDonation d2) {
-					
-				    return d2.getDate().compareTo(d1.getDate());
-				    
-				  }
-			});
+			if(myDonations != null){
+				Collections.sort(myDonations, new Comparator<DataDonation>() {
+					  
+					@Override public int compare( DataDonation d1, DataDonation d2) {
+						
+					    return d2.getDate().compareTo(d1.getDate());
+					    
+					  }
+				});
+			}
 
 		} catch (IOException e) {
 			

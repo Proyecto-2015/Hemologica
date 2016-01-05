@@ -22,6 +22,7 @@ import org.hemologica.dao.model.GenderCode;
 import org.hemologica.dao.model.MessageSendOption;
 import org.hemologica.dao.model.ResponsibleTransfusionPerson;
 import org.hemologica.dao.model.ResultsCode;
+import org.hemologica.dao.model.SearchFilterCode;
 import org.hemologica.dao.model.Sequencer;
 import org.hemologica.dao.model.StatesCode;
 import org.hemologica.dao.model.TransfusionEventsCode;
@@ -162,7 +163,7 @@ public class CodesDAOImpl implements ICodesDAO{
 		Query query = em.createNamedQuery("CitiesCode.getCitiesByCode");
 		query.setParameter("code", code);
 		
-		List list = query.getResultList();
+		List<?> list = query.getResultList();
 		return (!list.isEmpty()) ? (CitiesCode) list.get(0) : null;
 	}
 
@@ -170,7 +171,7 @@ public class CodesDAOImpl implements ICodesDAO{
 		Query query = em.createNamedQuery("StatesCode.findByCode");
 		query.setParameter("code", code);
 		
-		List list = query.getResultList();
+		List<?> list = query.getResultList();
 		return (!list.isEmpty()) ? (StatesCode) list.get(0) : null;
 	}
 
@@ -179,7 +180,7 @@ public class CodesDAOImpl implements ICodesDAO{
 		Query query = em.createNamedQuery("DonationTypesCode.findById");
 		query.setParameter("code", donationCode);
 		
-		List list = query.getResultList();
+		List<?> list = query.getResultList();
 		return (!list.isEmpty()) ? (DonationTypesCode) list.get(0) : null;
 	}
 
@@ -188,7 +189,7 @@ public class CodesDAOImpl implements ICodesDAO{
 		Query query = em.createNamedQuery("DonationTypesCode.findBySnomedCode");
 		query.setParameter("code", donationCode);
 		
-		List list = query.getResultList();
+		List<?> list = query.getResultList();
 		return (!list.isEmpty()) ? (DonationTypesCode) list.get(0) : null;
 	}
 
@@ -204,7 +205,7 @@ public class CodesDAOImpl implements ICodesDAO{
 		Query query = em.createNamedQuery("EventSeverityCode.findBySnomedCode");
 		query.setParameter("code", severityCode);
 		
-		List list = query.getResultList();
+		List<?> list = query.getResultList();
 		
 		return (!list.isEmpty()) ? (EventSeverityCode) list.get(0) : null;
 	}
@@ -214,7 +215,7 @@ public class CodesDAOImpl implements ICodesDAO{
 		Query query = em.createNamedQuery("DonationEventsCode.findBySnomedCode");
 		query.setParameter("code", event);
 		
-		List list = query.getResultList();
+		List<?> list = query.getResultList();
 		return (!list.isEmpty()) ? (DonationEventsCode) list.get(0) : null;
 	}
 
@@ -223,7 +224,7 @@ public class CodesDAOImpl implements ICodesDAO{
 		Query query = em.createNamedQuery("DonationLaboratoyCode.findBySnomedCode");
 		query.setParameter("code", analisisCode);
 
-		List list = query.getResultList();		
+		List<?> list = query.getResultList();		
 		return (!list.isEmpty()) ? (DonationLaboratoyCode) list.get(0) : null;
 		
 	}
@@ -233,7 +234,7 @@ public class CodesDAOImpl implements ICodesDAO{
 		Query query = em.createNamedQuery("ResultsCode.findBySnomedCode");
 		query.setParameter("code", resultCode);
 		
-		List list = query.getResultList();
+		List<?> list = query.getResultList();
 		return (!list.isEmpty()) ? (ResultsCode) list.get(0) : null;
 	}
 
@@ -242,7 +243,7 @@ public class CodesDAOImpl implements ICodesDAO{
 		Query query = em.createNamedQuery("DonationFailCausesCode.findBySnomedCode");
 		query.setParameter("code", rejectionCode);
 		
-		List list = query.getResultList();
+		List<?> list = query.getResultList();
 		return (!list.isEmpty()) ? (DonationFailCausesCode) list.get(0) : null;
 	}
 
@@ -251,7 +252,7 @@ public class CodesDAOImpl implements ICodesDAO{
 		Query query = em.createNamedQuery("DonationFailTypeCode.findBySnomedCode");
 		query.setParameter("code", rejectionType);
 		
-		List list = query.getResultList();
+		List<?> list = query.getResultList();
 		return (!list.isEmpty()) ? (DonationFailTypeCode) list.get(0) : null;
 	}
 
@@ -260,7 +261,7 @@ public class CodesDAOImpl implements ICodesDAO{
 		Query query = em.createNamedQuery("UnitsType.findBySnomedCode");
 		query.setParameter("code", componentCode);
 		
-		List list = query.getResultList();
+		List<?> list = query.getResultList();
 		return (!list.isEmpty()) ? (UnitsType) list.get(0) : null;
 	}
 
@@ -269,7 +270,7 @@ public class CodesDAOImpl implements ICodesDAO{
 		Query query = em.createNamedQuery("TransfusionEventsCode.findBySnomedCode");
 		query.setParameter("code", event);
 		
-		List list = query.getResultList();
+		List<?> list = query.getResultList();
 		return (!list.isEmpty()) ? (TransfusionEventsCode) list.get(0) : null;
 	}
 
@@ -278,7 +279,7 @@ public class CodesDAOImpl implements ICodesDAO{
 		Query query = em.createNamedQuery("TransfusionLaboratoryCode.findBySnomedCode");
 		query.setParameter("code", executeXPathString);
 		
-		List list = query.getResultList();
+		List<?> list = query.getResultList();
 		return (!list.isEmpty()) ? (TransfusionLaboratoryCode) list.get(0) : null;
 	}
 
@@ -315,7 +316,7 @@ public class CodesDAOImpl implements ICodesDAO{
 		Query query = em.createNamedQuery("DonationFilterCode.findById");
 		query.setParameter("code", code);
 		
-		List list = query.getResultList();
+		List<?> list = query.getResultList();
 		return (!list.isEmpty()) ? (DonationFilterCode) list.get(0) : null;
 		
 	}
@@ -332,7 +333,7 @@ public class CodesDAOImpl implements ICodesDAO{
 		Query query = em.createNamedQuery("TransfusionFilterCode.findById");
 		query.setParameter("code", code);
 		
-		List list = query.getResultList();
+		List<?> list = query.getResultList();
 		return (!list.isEmpty()) ? (TransfusionFilterCode) list.get(0) : null;
 		
 	}
@@ -363,7 +364,7 @@ public class CodesDAOImpl implements ICodesDAO{
 		Query query = em.createNamedQuery("DonationEventsCode.findById");
 		query.setParameter("code", code);
 		
-		List list = query.getResultList();
+		List<?> list = query.getResultList();
 		return (!list.isEmpty()) ? (DonationEventsCode) list.get(0) : null;
 	}
 
@@ -372,7 +373,7 @@ public class CodesDAOImpl implements ICodesDAO{
 		Query query = em.createNamedQuery("EventSeverityCode.findById");
 		query.setParameter("code", code);
 		
-		List list = query.getResultList();
+		List<?> list = query.getResultList();
 		return (!list.isEmpty()) ? (EventSeverityCode) list.get(0) : null;
 	}
 
@@ -381,7 +382,7 @@ public class CodesDAOImpl implements ICodesDAO{
 		Query query = em.createNamedQuery("DonationFailCausesCode.findBySnomedById");
 		query.setParameter("code", code);
 		
-		List list = query.getResultList();
+		List<?> list = query.getResultList();
 		return (!list.isEmpty()) ? (DonationFailCausesCode) list.get(0) : null;
 	}
 
@@ -390,7 +391,7 @@ public class CodesDAOImpl implements ICodesDAO{
 		Query query = em.createNamedQuery("DonationFailTypeCode.findBySnomedById");
 		query.setParameter("code", code);
 		
-		List list = query.getResultList();
+		List<?> list = query.getResultList();
 		return (!list.isEmpty()) ? (DonationFailTypeCode) list.get(0) : null;
 	}
 
@@ -399,7 +400,7 @@ public class CodesDAOImpl implements ICodesDAO{
 		Query query = em.createNamedQuery("DonationLaboratoyCode.findById");
 		query.setParameter("code", code);
 		
-		List list = query.getResultList();
+		List<?> list = query.getResultList();
 		return (!list.isEmpty()) ? (DonationLaboratoyCode) list.get(0) : null;
 	}
 
@@ -408,7 +409,7 @@ public class CodesDAOImpl implements ICodesDAO{
 		Query query = em.createNamedQuery("ResultsCode.findSnomedCodeByBooleanCode");
 		query.setParameter("code", result);
 		
-		List list = query.getResultList();
+		List<?> list = query.getResultList();
 		return (!list.isEmpty()) ? (ResultsCode) list.get(0) : null;
 	}
 
@@ -417,7 +418,7 @@ public class CodesDAOImpl implements ICodesDAO{
 		Query query = em.createNamedQuery("UnitsType.findById");
 		query.setParameter("code", code);
 		
-		List list = query.getResultList();
+		List<?> list = query.getResultList();
 		return (!list.isEmpty()) ? (UnitsType) list.get(0) : null;
 	}
 
@@ -426,7 +427,7 @@ public class CodesDAOImpl implements ICodesDAO{
 		Query query = em.createNamedQuery("TransfusionEventsCode.findById");
 		query.setParameter("code", code);
 		
-		List list = query.getResultList();
+		List<?> list = query.getResultList();
 		return (!list.isEmpty()) ? (TransfusionEventsCode) list.get(0) : null;
 	}
 
@@ -435,7 +436,7 @@ public class CodesDAOImpl implements ICodesDAO{
 		Query query = em.createNamedQuery("TransfusionLaboratoryCode.findById");
 		query.setParameter("code", code);
 		
-		List list = query.getResultList();
+		List<?> list = query.getResultList();
 		return (!list.isEmpty()) ? (TransfusionLaboratoryCode) list.get(0) : null;
 	}
 
@@ -451,7 +452,7 @@ public class CodesDAOImpl implements ICodesDAO{
 		Query query = em.createNamedQuery("ResultsCode.findById");
 		query.setParameter("code", result);
 		
-		List list = query.getResultList();
+		List<?> list = query.getResultList();
 		return (!list.isEmpty()) ? (ResultsCode) list.get(0) : null;
 	}
 
@@ -460,7 +461,7 @@ public class CodesDAOImpl implements ICodesDAO{
 		Query query = em.createNamedQuery("ResultsCode.findBySnomedCode");
 		query.setParameter("code", executeXPathString);
 		
-		List list = query.getResultList();
+		List<?> list = query.getResultList();
 		return (!list.isEmpty()) ? (ResultsCode) list.get(0) : null;
 	}
 
@@ -495,8 +496,52 @@ public class CodesDAOImpl implements ICodesDAO{
 		Query query = em.createNamedQuery("BloodTypes.findBySnomedCodeId");
 		query.setParameter("code", bloodType);
 		
-		List list = query.getResultList();
+		List<?> list = query.getResultList();
 		return (!list.isEmpty()) ? (BloodTypes) list.get(0) : null;
+	}
+
+	@SuppressWarnings("unchecked")
+	public List<SearchFilterCode> getSearchFilters() {
+		
+		Query query = em.createNamedQuery("SearchFilterCode.findAll");
+		return query.getResultList();
+		
+	}
+
+	public SearchFilterCode getSearchFilterByCode(String code) {
+		
+		Query query = em.createNamedQuery("SearchFilterCode.findByCode");
+		query.setParameter("code", code);
+		
+		List<?> list = query.getResultList();
+		return (!list.isEmpty()) ? (SearchFilterCode) list.get(0) : null;
+	}
+
+	public GenderCode getGenderCodeById(String genderCode) {
+		
+		Query query = em.createNamedQuery("GenderCode.findById");
+		query.setParameter("code", genderCode);
+		
+		List<?> list = query.getResultList();
+		return (!list.isEmpty()) ? (GenderCode) list.get(0) : null;
+	}
+
+	public DocumentsTypesCode getDocumentsTypeByCode(String documentTypeS) {
+		
+		Query query = em.createNamedQuery("DocumentsTypesCode.findByCode");
+		query.setParameter("code", documentTypeS);
+		
+		List<?> list = query.getResultList();
+		return (!list.isEmpty()) ? (DocumentsTypesCode) list.get(0) : null;
+	}
+
+	public CountriesCode getCountryByCode(String documentCountryS) {
+		
+		Query query = em.createNamedQuery("CountriesCode.findByCode");
+		query.setParameter("code", documentCountryS);
+		
+		List<?> list = query.getResultList();
+		return (!list.isEmpty()) ? (CountriesCode) list.get(0) : null;
 	}
 
 }

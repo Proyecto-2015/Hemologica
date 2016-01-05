@@ -16,19 +16,19 @@
 </h:head>
 <h:body>
 	<h:form>
-		<div class="form-group">
+		<div class="form-group form-horizontal">
 		
 		<p:messages></p:messages>
 			<fieldset>
-				<div class="form-group div-center col-md-12 col-lg-12">
-				<legend>
-					<h:outputText value="#{messages.label_general_filter}"/>	
-				</legend>
+				<div class="form-group col-md-12 col-lg-12">
+					<legend>
+						<h:outputText value="#{messages.label_general_filter}"/>	
+					</legend>
 				
 					<div class="col-md-9 col-lg-6">
-						<label class="col-md-2 col-lg-4 control-label" for="name"><h:outputText
+						<label class="col-md-2 col-lg-6 control-label" for="name"><h:outputText
 								value="#{messages.label_insitution}" /></label>
-						<div class="col-md-9 col-lg-8">
+						<div class="col-md-9 col-lg-6">
 							<h:selectOneMenu id="options" class="form-control" value="#{omsStatisticsBB.statictic.institution}"
 								style="height: 34px;" converter="#{dataInstitutionConverterSession}">
 								
@@ -41,9 +41,9 @@
 					</div>
 					
 					<div class="col-md-9 col-lg-6">
-						<label class="col-md-2  col-lg-4 control-label" for="name"><h:outputText
+						<label class="col-md-2  col-lg-6 control-label" for="name"><h:outputText
 								value="#{messages.label_bank}" /></label>
-						<div class="col-md-9 col-lg-8">
+						<div class="col-md-9 col-lg-6">
 							<h:selectOneMenu class="form-control" value="#{omsStatisticsBB.statictic.bloodBank}"
 								style="height: 34px;" converter="#{dataBankConverterSession}">
 								<f:selectItem itemLabel="#{messages.label_all}" itemValue="#{null}"/>
@@ -55,19 +55,19 @@
 
 					
 					<div class="col-md-9 col-lg-6" style="padding-top: 12px;">
-						<label class="col-md-2 col-lg-4 control-label" for="name"><h:outputText
+						<label class="col-md-2 col-lg-6 control-label" for="name"><h:outputText
 									value="#{messages.label_date_from}" /></label>
 									
-						<div class="col-md-9 col-lg-8">
+						<div class="col-md-9 col-lg-6">
 							<p:calendar pattern="dd/MM/yyyy"
 									mode="popup" value="#{omsStatisticsBB.dateFrom}" />
 						</div>
 					</div>
 					<div class="col-md-9 col-lg-6" style="padding-top: 12px;">
-						<label class="col-md-2 col-lg-4 control-label" for="name"><h:outputText
+						<label class="col-md-2 col-lg-6 control-label" for="name"><h:outputText
 									value="#{messages.label_date_to}" /></label>
 									
-						<div class="col-md-9 col-lg-8">							
+						<div class="col-md-9 col-lg-6">							
 							<p:calendar  pattern="dd/MM/yyyy"
 									mode="popup" value="#{omsStatisticsBB.dateTo}" />
 						</div>
@@ -75,8 +75,8 @@
 					
 					<c:forEach items="#{omsStatisticsBB.commonsFilters}" var="filterItem" >
 						
-						<div class="col-md-9 col-lg-4 form-group"  style="padding-top: 12px;">
-								<label class="col-md-2  col-lg-6 control-label" for="name"><h:outputText
+						<div class="col-md-9 col-lg-6"  style="padding-top: 12px;">
+								<label class="col-md-9  col-lg-6 control-label" for="name"><h:outputText
 									value="#{messages[filterItem.displayName]}" /></label>
 									
 								<div class="col-md-9 col-lg-6">
@@ -112,8 +112,8 @@
 				</legend>		
 					<c:forEach items="#{omsStatisticsBB.donationFilter}" var="filterItem" >
 						
-						<div class="col-md-9 col-lg-4 form-group"  style="padding-top: 12px;">
-								<label class="col-md-2  col-lg-6 control-label" for="name"><h:outputText
+						<div class="col-md-9 col-lg-6 form-group"  style="padding-top: 12px;">
+								<label class="col-md-9  col-lg-6 control-label" for="name"><h:outputText
 									value="#{messages[filterItem.displayName]}" /></label>
 									
 								<div class="col-md-9 col-lg-6">
@@ -147,8 +147,8 @@
 				</legend>		
 					<c:forEach items="#{omsStatisticsBB.transfusionFilter}" var="filterItem" >
 						
-						<div class="col-md-9 col-lg-4 form-group"  style="padding-top: 12px;">
-								<label class="col-md-2  col-lg-6 control-label" for="name"><h:outputText
+						<div class="col-md-9 col-lg-6 form-group"  style="padding-top: 12px;">
+								<label class="col-md-9  col-lg-6 control-label" for="name"><h:outputText
 									value="#{messages[filterItem.displayName]}" /></label>
 									
 								<div class="col-md-9 col-lg-6">

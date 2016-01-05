@@ -168,9 +168,11 @@ public class CodesBean implements CodesBeanLocal {
 		EventSeverityCode severityCode = FactoryDAO.getCodesDAO(em).getSeverityBySnomedCode(severity);
 		
 		DataCode eventCode = new DataCode();
-		eventCode.setCode(severityCode.getEventSeverityCodeValue());
-		eventCode.setDisplayName(severityCode.getEventSeverityCodeLabel());
-
+		
+		if(severityCode != null){
+			eventCode.setCode(severityCode.getEventSeverityCodeValue());
+			eventCode.setDisplayName(severityCode.getEventSeverityCodeLabel());
+		}
 		return eventCode;
 	}
 

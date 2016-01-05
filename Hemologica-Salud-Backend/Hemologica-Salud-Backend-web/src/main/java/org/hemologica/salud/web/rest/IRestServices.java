@@ -9,7 +9,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
 import org.hemologica.constants.ConstansJson;
 import org.hemologica.constants.ConstantsRest;
 import org.hemologica.datatypes.DataBank;
@@ -21,11 +20,11 @@ import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataProductType;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.DataResponsiblePerson;
+import org.hemologica.datatypes.DataSearchFilter;
 import org.hemologica.datatypes.DataStock;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataTransfusionsStatistics;
 import org.hemologica.datatypes.DataTransfusionsStatisticsResults;
-import org.hemologica.datatypes.DataUnit;
 import org.hemologica.datatypes.DataUnitInfo;
 import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.datatypes.DataDonationsStatistics;
@@ -146,6 +145,12 @@ public interface IRestServices {
 	public List<DataPerson> getPersons();
 	
 	@GET
+	@Path("/"+ConstantsRest.PATH_PERSONS + "/" + ConstantsRest.FILTERS)
+	@Produces("application/json")
+	public List<DataPerson> getPersonsFilters(@QueryParam(ConstansJson.JSON_FILTER_NAME) String filterName,
+			@QueryParam(ConstansJson.JSON_FILTER_DOCUMENT_NUMBER) String filterDocumentNumber);
+	
+	@GET
 	@Path("/"+ConstantsRest.PATH_PERSONS + "/"+ ConstantsRest.PATH_RESPONSIBLE_TRENSFUSION)
 	@Produces("application/json")
 	public List<DataResponsiblePerson> getResponsibleTransfusionPersons(@QueryParam(ConstansJson.JSON_BANK) String bankCode);
@@ -164,11 +169,6 @@ public interface IRestServices {
 	@Path("/" +ConstantsRest.PATH_CODES  + "/"+  ConstantsRest.PATH_SEVERITIES)
 	@Produces("application/json")
 	public List<DataCode> getSeverities();
-	
-	@GET
-	@Path("/" +ConstantsRest.PATH_UNITS)
-	@Produces("application/json")
-	public DataUnit getUnit();
 	
 	@GET
 	@Path("/" +ConstantsRest.PATH_UNIT_INFO)
@@ -290,4 +290,20 @@ public interface IRestServices {
 	@Path("/" + ConstantsRest.PATH_OMS_STATISTICS)
 	@Produces(MediaType.APPLICATION_OCTET_STREAM)
 	public Response getOmsStatistics(DataOmsStatistics statictic);
+	
+	@GET
+	@Path("/"+ConstantsRest.PATH_CODES + "/" + ConstantsRest.PATH_SEARCH_FILTERS)
+	@Produces("application/json")
+	public List<DataSearchFilter> getSearchFilters();
+	
+
+	@POST
+	@Path("/"+ConstantsRest.PATH_DONATIONS + "/" + ConstantsRest.PATH_SEARCH_FILTERS)
+	@Produces("application/json")
+	public List<DataDonation> getDonations(List<DataSearchFilter> resultDonations);
+	
+	@POST
+	@Path("/"+ConstantsRest.PATH_TRANSFUTIONS + "/" + ConstantsRest.PATH_SEARCH_FILTERS)
+	@Produces("application/json")
+	public List<DataTransfusion> getTransfusions(List<DataSearchFilter> resultDonations);
 }

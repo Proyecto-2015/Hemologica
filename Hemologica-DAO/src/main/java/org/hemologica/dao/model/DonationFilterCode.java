@@ -14,7 +14,8 @@ import javax.persistence.Table;
 @Table(name="donation_filter_codes")
 @NamedQueries({
 @NamedQuery(name="DonationFilterCode.findAll", query="SELECT d FROM DonationFilterCode d"),
-@NamedQuery(name="DonationFilterCode.findById", query="SELECT d FROM DonationFilterCode d WHERE d.donationFilterCodesValue = :code")
+@NamedQuery(name="DonationFilterCode.findById", query="SELECT d FROM DonationFilterCode d WHERE d.donationFilterCodesValue = :code"),
+
 })
 public class DonationFilterCode implements Serializable{
 	

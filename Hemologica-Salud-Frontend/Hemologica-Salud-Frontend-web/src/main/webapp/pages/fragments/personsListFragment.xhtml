@@ -9,27 +9,51 @@
 	xmlns:pe="http://primefaces.org/ui/extensions">
 
 <h:head>
+
+
 </h:head>
 <h:body>
-	
+	<h:form>
 		<div class="page-header">
 			<h1> <h:outputText value="#{messages.label_persons}"/></h1>
 		</div>
-	
-		<table class="col-md-12 table-bordered table-striped table-condensed cf">
+		
+		<div class="form-group">
+			<label class="col-md-1 control-label" for="name"><h:outputText
+					value="#{messages.person_name}" /></label>
+			<div class="col-md-9 col-lg-3">
+				<h:inputText class="label-form-user form-control"
+					value="#{personRecordBB.filterName}" />
+			</div>
+			
+			<label class="col-md-1 control-label" for="name"><h:outputText
+					value="#{messages.person_document_number}" /></label>
+			<div class="col-md-9 col-lg-3">
+				<h:inputText class="label-form-user form-control"
+					value="#{personRecordBB.filterDocumentNumber}" />
+			</div>
+			
+			<p:commandButton icon="ui-icon-search"
+				styleClass="form-control search-btn col-xs-2 col-sm-3 col-md-3 col-lg-1"
+			 action="#{personRecordBB.search()}" process="@form" update="@form" />
+		</div>
+		
+		
+		<table class="col-md-12 table-bordered table-striped table-condensed cf" style="margin-top: 15px;" id="persontable">
        		<thead class="cf">
        			<tr>
+
        				<th><h:outputText value="#{messages.person_name}"/></th>
        				<th><h:outputText value="#{messages.person_document_number}"/></th>
        				<th><h:outputText value="#{messages.label_gender}"/></th>
        				<th><h:outputText value="#{messages.labe_age}"/></th>
-       				
        				<th></th>        				
        			</tr>
        		</thead>
        		<tbody>
        			<c:forEach items="#{personRecordBB.persons}" var="personItem" varStatus="counter">
         			<tr>
+
         				<td data-title="#{messages.person_document_type}"><h:outputText value="#{personItem.fullName}"/></td>
         				<td data-title="#{messages.person_document_number}"><h:outputText value="#{personItem.documentNumber}"/></td>
         				<td data-title="#{messages.label_gender}"><h:outputText value="#{messages[personItem.gender.displayName]}"/></td>
@@ -45,5 +69,6 @@
        		
        		</tbody>
         </table>
+    </h:form>
 </h:body>
 </html>

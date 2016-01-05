@@ -300,6 +300,20 @@ h6 .h6 {
 	cursor: pointer;
 	
 }
+
+.delete-icon{
+	
+	background-image: url("#{resource['img/delete-icon.png']}");
+	cursor: pointer;
+	
+}
+
+.add-icon{
+	
+	background-image: url("#{resource['img/add-icon.png']}");
+	cursor: pointer;
+}
+
 .icon-filter{
 	
 	background-image: url("#{resource['img/filter-icon.png']}");
@@ -407,6 +421,14 @@ table.jqplot-table-legend, table.jqplot-cursor-legend {
 .ui-tabs.ui-widget-content{
 
 	border-bottom: none !important;
+}
+
+.ui-button.btn-add{
+	padding: 10px !important;;
+    background-color: #d14836 !important;;
+    font-weight: 500 !important;;
+    /* font-variant-ligatures: normal; */
+    color: #fff !important;;
 }
 
 

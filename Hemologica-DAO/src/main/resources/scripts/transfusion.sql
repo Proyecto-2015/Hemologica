@@ -30,3 +30,4 @@ UPDATE `hemologica`.`transfusion_filter_codes` SET `transfusion_filter_codes_sql
 UPDATE `hemologica`.`transfusion_filter_codes` SET `transfusion_filter_codes_path`='/ClinicalDocument//component//structuredBody//component//section//entry//observation//$1//interpretationCode//@code' WHERE `transfusion_filter_codes_id`='6';
 UPDATE `hemologica`.`transfusion_filter_codes` SET `transfusion_filter_codes_path`='/ClinicalDocument//component//structuredBody//component//section//entry//procedure//entryRelationship[descendant-or-self::node()/@typeCode = \"COMP\"]//observation//@code' WHERE `transfusion_filter_codes_id`='1';
 
+UPDATE `hemologica`.`transfusion_filter_codes` SET `transfusion_filter_codes_id`='7' WHERE `transfusion_filter_codes_id`='1';
