@@ -8,6 +8,7 @@ public class MailData implements Serializable{
 	private DataMessageOption messageOption;
 	private DataCode bloodTypeABO;
 	private DataCode bloodTypeRH;
+	private DataCode bloodType;
 	private String subject;
 	private String text;
 	
@@ -43,5 +44,12 @@ public class MailData implements Serializable{
 	public void setText(String text) {
 		this.text = text;
 	}
+	public DataCode getBloodType() {
+		return bloodType;
+	}
+	public void setBloodType(DataCode bloodType) {
+		this.bloodType = bloodType;
+	}
+	
 
 }

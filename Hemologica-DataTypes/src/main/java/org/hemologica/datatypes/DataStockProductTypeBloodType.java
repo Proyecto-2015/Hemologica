@@ -2,7 +2,7 @@ package org.hemologica.datatypes;
 
 import java.io.Serializable;
 
-public class DataStockProductTypeBloodType extends DataBloodType implements Serializable {
+public class DataStockProductTypeBloodType extends DataCode implements Serializable {
 
 	/**
 	 * 

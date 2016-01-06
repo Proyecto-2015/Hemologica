@@ -25,7 +25,7 @@ public class DataPerson implements Serializable{
 	private String address;
 	private String telephone;
 	private String email;
-	private DataBloodType bloodType;
+	private DataCode bloodType;
 	private boolean ableToDonate;
 	private byte[] image;
 	private boolean allowNotificationNeedDonor;
@@ -132,10 +132,10 @@ public class DataPerson implements Serializable{
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public DataBloodType getBloodType() {
+	public DataCode getBloodType() {
 		return bloodType;
 	}
-	public void setBloodType(DataBloodType bloodType) {
+	public void setBloodType(DataCode bloodType) {
 		this.bloodType = bloodType;
 	}
 	public boolean isAbleToDonate() {
