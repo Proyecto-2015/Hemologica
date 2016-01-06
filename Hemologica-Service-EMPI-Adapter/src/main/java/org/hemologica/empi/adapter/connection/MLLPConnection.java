@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.SocketException;
 import java.net.UnknownHostException;
 
 import ca.uhn.hl7v2.llp.HL7Reader;
@@ -24,12 +25,14 @@ public class MLLPConnection implements IConnection {
 		this.protocol = new MinLowerLayerProtocol();
 		this.host = host;
 		this.port = port;
+		
 	}
 
 	public void connect() throws UnknownHostException, IOException {
 		if (!isConnected()) {
 			if ((host != null) && (port != -1)) {
 				client = new Socket(host, port);
+				client.setSoTimeout(50000);
 			}
 		}
 	}

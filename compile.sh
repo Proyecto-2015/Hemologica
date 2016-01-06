@@ -1,7 +1,11 @@
-cd Hemologica-Datatypes
+cd Hemologica-DataTypes
 mvn install
 cd ..
 echo "Build: Hemologica-DataTypes"
+cd Hemologica-XMLDataBase-Connection
+mvn install
+cd ..
+echo "Build: Hemologica-XMLDatabase-Connection"
 cd Hemologica-DAO
 mvn install
 cd ..
@@ -22,3 +26,17 @@ cd Hemologica-Salud-Frontend
 mvn install
 cd ..
 echo "Build: Hemologica-Salud-Frontend"
+
+# Hemologica Service
+cd Hemologica-Service-EMPI-Adapter
+mvn install
+cd ..
+echo "Build: Hemologica-Service-EMPI-Adapter"
+cd Hemologica-XDS-Repository-Adapter
+mvn install
+cd ..
+echo "Build: Hemologica-Service-XDS-Repository-Adapter"
+cd Hemologica-Service
+mvn install
+cd ..
+echo "Build: Hemologica-Service"
