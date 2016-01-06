@@ -764,6 +764,11 @@
 			<value>#{sessionBB}</value>
 		</managed-property>
 	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>donationViewBB</managed-bean-name>
+		<managed-bean-class>org.hemologica.salud.web.beans.DonationViewBB</managed-bean-class>
+		<managed-bean-scope>view</managed-bean-scope>
+	</managed-bean>
 	
 	<!-- Navigation Rules  -->
 
