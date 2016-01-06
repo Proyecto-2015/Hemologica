@@ -7,7 +7,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
+
+import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataSearchFilter;
+import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.TransfusionResult;
 import org.hemologica.salud.factories.RestFactory;
 
@@ -25,7 +29,7 @@ public class SearchTransfusionBB implements Serializable {
 	private ApplicationBB applicationBB;
 
 	List<DataSearchFilter> filters;
-	private List<TransfusionResult> resultTransfusions;
+	private List<DataTransfusion> resultTransfusions;
 	
 	private Date date;
 
@@ -80,8 +84,13 @@ public class SearchTransfusionBB implements Serializable {
 		}
 	}
 
-	
-	
+	public String viewPerson(DataTransfusion transfusion){
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		context.getExternalContext().getSessionMap().put("transfusionView", transfusion);
+		
+		return "viewTransfusion";
+	}
 	
 	public SessionBB getSessionBB() {
 		return sessionBB;
@@ -115,11 +124,11 @@ public class SearchTransfusionBB implements Serializable {
 		this.date = date;
 	}
 
-	public List<TransfusionResult> getResultTransfusions() {
+	public List<DataTransfusion> getResultTransfusions() {
 		return resultTransfusions;
 	}
 
-	public void setResultTransfusions(List<TransfusionResult> resultTransfusions) {
+	public void setResultTransfusions(List<DataTransfusion> resultTransfusions) {
 		this.resultTransfusions = resultTransfusions;
 	}
 	

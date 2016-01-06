@@ -1307,16 +1307,16 @@ public class ServicesClientImpl implements IServicesClient {
 	}
 
 	@Override
-	public List<TransfusionResult> getTransfusions(List<DataSearchFilter> filters) throws IOException {
+	public List<DataTransfusion> getTransfusions(List<DataSearchFilter> filters) throws IOException {
 		
 		String urlService = url + ConstantsRest.PATH_TRANSFUTIONS + "/" + ConstantsRest.PATH_SEARCH_FILTERS;
 
 		String responseString = "";
 		responseString = RestFactory.getRestServicesUtils().post(urlService, filters);
 
-		Type listType = new TypeToken<List<DataDonation>>() {
+		Type listType = new TypeToken<List<DataTransfusion>>() {
 		}.getType();
-		List<TransfusionResult> responseObject = new Gson().fromJson(responseString, listType);
+		List<DataTransfusion> responseObject = new Gson().fromJson(responseString, listType);
 
 		return responseObject;
 	}

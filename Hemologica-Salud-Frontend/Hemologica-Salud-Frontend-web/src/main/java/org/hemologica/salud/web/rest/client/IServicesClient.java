@@ -491,5 +491,5 @@ public interface IServicesClient {
 	 * @throws IOException 
 	 * @throws ClientProtocolException 
 	 */
-	public List<TransfusionResult> getTransfusions(List<DataSearchFilter> filters) throws IOException;
+	public List<DataTransfusion> getTransfusions(List<DataSearchFilter> filters) throws IOException;
 }
