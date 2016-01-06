@@ -33,7 +33,7 @@ public class DataDonation implements Serializable {
 	private DataResponsiblePerson responsiblePerson;
 	private List<DataLaboratoryResult> labResults;
 	private List<DataDonationEvent> events;
-	private boolean approved; 
+	private boolean approvedDonation; 
 
 	private String extractionTimeBegin;
 	private String extractionTimeEnd;
@@ -90,22 +90,26 @@ public class DataDonation implements Serializable {
 		this.institution = institution;
 	}
 
-//	public boolean isApproved() {
-//		
-//		if(state != null && state.getCode().equals(Constants.COMPLETED))
-//			return true;
-//		else 
-//			return false;
-//
-//	}
+	public boolean isApproved() {
+		
+		if(state != null && state.getCode().equals(Constants.COMPLETED))
+			return true;
+		else 
+			return false;
+
+	}
 	
 	
 	public Boolean isStateDefined(){
 		return this.state != null;
 	}
 
-	public boolean isApproved() {
-		return approved;
+	public boolean isApprovedDonation() {
+		return approvedDonation;
+	}
+
+	public void setApprovedDonation(boolean approvedDonation) {
+		this.approvedDonation = approvedDonation;
 	}
 
 	public List<DataLaboratoryResult> getLabResults() {
@@ -194,10 +198,6 @@ public class DataDonation implements Serializable {
 
 	public void setDonationType(DataCode donationType) {
 		this.donationType = donationType;
-	}
-
-	public void setApproved(boolean approved) {
-		this.approved = approved;
 	}
 
 	public String getBloodCode() {

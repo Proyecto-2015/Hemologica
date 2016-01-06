@@ -109,19 +109,19 @@ public class Unit implements Serializable {
 		this.movements = movements;
 	}
 
-	public Movement addMovement(Movement movement) {
-		getMovements().add(movement);
-		movement.setUnit(this);
-
-		return movement;
-	}
-
-	public Movement removeMovement(Movement movement) {
-		getMovements().remove(movement);
-		movement.setUnit(null);
-
-		return movement;
-	}
+//	public Movement addMovement(Movement movement) {
+//		getMovements().add(movement);
+//		movement.setUnit(this);
+//
+//		return movement;
+//	}
+//
+//	public Movement removeMovement(Movement movement) {
+//		getMovements().remove(movement);
+//		movement.setUnit(null);
+//
+//		return movement;
+//	}
 
 	public Center getCenter() {
 		return this.center;

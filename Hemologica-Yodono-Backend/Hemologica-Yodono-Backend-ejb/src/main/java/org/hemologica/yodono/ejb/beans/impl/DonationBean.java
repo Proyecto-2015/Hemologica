@@ -209,13 +209,13 @@ public class DonationBean implements DonationBeanLocal {
 				}	
 			}
 			data.setLabResults(laboratoriesResults);
-			data.setApproved(approved);
+			data.setApprovedDonation(approved);
 			
 		}else if(completed != null && completed.equals(Constants.CANCELED)){
 			/**
 			 * No se realizo la donacion
 			 */
-			data.setApproved(false);
+			data.setApprovedDonation(false);
 			
 			DataDonationFail dataDonationFail = new DataDonationFail();
 			dataDonationFail.setCause(FactoryBeans.getCodeBeans().getRejectionCauseBySnomedCode(XMLUtils.executeXPathString(document, "/ClinicalDocument/component/structuredBody/component/section/entry/procedure/entryRelationship/observation/code/@code")));

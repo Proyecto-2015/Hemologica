@@ -26,22 +26,23 @@ public class MovementsType implements Serializable {
 	@Column(name="type")
 	private Boolean type;
 	
-	
 	@Column(name="movement_type_code")
 	private String code;
+	
+	@Column(name="movement_type_label")
+	private String typeLabel;
 
 	public String getCode() {
 		return code;
 	}
 
-	
 	public void setCode(String code) {
 		this.code = code;
 	}
 
 	//bi-directional many-to-one association to Movement
-	@OneToMany(mappedBy="movementsType")
-	private List<Movement> movements;
+//	@OneToMany(mappedBy="movementsType")
+//	private List<Movement> movements;
 
 	public MovementsType() {
 	}
@@ -64,26 +65,36 @@ public class MovementsType implements Serializable {
 		this.id = id;
 	}
 
-	public List<Movement> getMovements() {
-		return this.movements;
+//	public List<Movement> getMovements() {
+//		return this.movements;
+//	}
+//
+//	public void setMovements(List<Movement> movements) {
+//		this.movements = movements;
+//	}
+
+	public String getTypeLabel() {
+		return typeLabel;
 	}
 
-	public void setMovements(List<Movement> movements) {
-		this.movements = movements;
+
+	public void setTypeLabel(String typeLabel) {
+		this.typeLabel = typeLabel;
 	}
 
-	public Movement addMovement(Movement movement) {
-		getMovements().add(movement);
-		movement.setMovementsType(this);
 
-		return movement;
-	}
-
-	public Movement removeMovement(Movement movement) {
-		getMovements().remove(movement);
-		movement.setMovementsType(null);
-
-		return movement;
-	}
+//	public Movement addMovement(Movement movement) {
+//		getMovements().add(movement);
+//		movement.setMovementsType(this);
+//
+//		return movement;
+//	}
+//
+//	public Movement removeMovement(Movement movement) {
+//		getMovements().remove(movement);
+//		movement.setMovementsType(null);
+//
+//		return movement;
+//	}
 
 }

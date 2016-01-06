@@ -1,6 +1,8 @@
 insert into `hemologica`.`movements_types` (`id`, `movement_type_code`, `type`) values
 ('1', '1', '1'),
 ('2', '2', '0');
+UPDATE `hemologica`.`movements_types` SET `movement_type_label`='label_input' WHERE `id`='1';
+UPDATE `hemologica`.`movements_types` SET `movement_type_label`='label_output' WHERE `id`='2';
 
 insert into `hemologica`.`units` (`id`,`unit_institution_code`,`unit_uuid`,`unit_institution_center_id`,`unit_type`,`unit_state`,`unit_parent`,`blood_abo_type`,`blood_rh_type`) values
 ('4', '1000000', '6e973e21-3ff2-4832-9ea6-0f24587be57c', '1', '4', '1', NULL, '4', '2'),
