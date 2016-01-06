@@ -143,4 +143,6 @@ public interface ICodesDAO {
 
 	public CountriesCode getCountryByCode(String documentCountryS);
 
+	public DonationDonorTypesCode getDonorTypeById(String donorType);
+
 }

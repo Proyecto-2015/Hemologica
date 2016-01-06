@@ -27,9 +27,11 @@ import org.hemologica.dao.model.PersonsRecord;
 import org.hemologica.dao.model.SearchFilterCode;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCode;
+import org.hemologica.datatypes.DataDocument;
 import org.hemologica.datatypes.DataLaboratoryResult;
 import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataResponse;
+import org.hemologica.datatypes.DataResponsiblePerson;
 import org.hemologica.datatypes.DataSearchFilter;
 import org.hemologica.datatypes.DataTransfusion;
 import org.hemologica.datatypes.DataTransfusionEvent;
@@ -104,6 +106,50 @@ public class TransfusionBean implements TransfusionBeanLocal, Serializable {
 		data.setId(XMLUtils.executeXPathString(document, "/ClinicalDocument/component/structuredBody/component/section/entry/procedure/id/@root"));
 		
 		/**
+		 * Responsable
+		 */
+		
+		DataResponsiblePerson dataResponsiblePerson = new DataResponsiblePerson();
+		data.setResponsibleTransfusionPerson(dataResponsiblePerson);
+		
+		dataResponsiblePerson.setFirstName(XMLUtils.executeXPathString(document, "/ClinicalDocument/author/assignedAuthor/assignedPerson/name/given/text()"));
+		dataResponsiblePerson.setFirstLastName(XMLUtils.executeXPathString(document, "/ClinicalDocument/author/assignedAuthor/assignedPerson/name/family/text()"));
+		
+		
+		String documentResponsiblePerson = XMLUtils.executeXPathString(document, "/ClinicalDocument/author/assignedAuthor/id/@root");
+		
+		DataDocument dataDocument = new DataDocument();
+		dataResponsiblePerson.setDocuments(dataDocument);
+		if(documentResponsiblePerson != null){
+			
+			String documentNumber = documentResponsiblePerson.substring(documentResponsiblePerson.lastIndexOf(".")+1, documentResponsiblePerson.length()-1);
+			dataDocument.setDocumentNumber(documentNumber);
+			
+			documentResponsiblePerson = documentResponsiblePerson.substring(0, documentResponsiblePerson.lastIndexOf("."));
+			String documentTypeS = documentResponsiblePerson.substring(documentResponsiblePerson.lastIndexOf(".")+1, documentResponsiblePerson.length());
+			
+			DocumentsTypesCode documentType = FactoryDAO.getCodesDAO(em).getDocumentsTypeByCode(documentTypeS);
+			if(documentType != null){
+				DataCode documentTypeCode = new DataCode();
+				documentTypeCode.setCode(documentType.getDocumentsTypeCodeValue());
+				documentTypeCode.setDisplayName(documentType.getDocumentsTypeCodeLabel());
+				dataDocument.setDocumentType(documentType.getDocumentsTypeCodeLabel());
+			}
+			
+			documentResponsiblePerson = documentResponsiblePerson.substring(0, documentResponsiblePerson.lastIndexOf("."));
+			String documentCountryS = documentResponsiblePerson.substring(documentResponsiblePerson.lastIndexOf(".")+1, documentResponsiblePerson.length());
+			
+			CountriesCode country = FactoryDAO.getCodesDAO(em).getCountryByCode(documentCountryS);
+			if(country != null){
+				DataCode countryCode = new DataCode();
+				countryCode.setCode(country.getCountryCodeLabel());
+				countryCode.setDisplayName(country.getCountryCodeLabel());
+				dataDocument.setDocumentCountry(country.getCountryCodeLabel());
+			}
+			
+		}
+
+		/**
 		 * Data Person
 		 */
 		DataPerson dataPerson = new DataPerson();
@@ -165,8 +211,7 @@ public class TransfusionBean implements TransfusionBeanLocal, Serializable {
 			}
 			
 		}
-		
-		
+
 		/**
 		 * Fecha 
 		 */

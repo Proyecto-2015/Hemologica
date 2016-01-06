@@ -36,7 +36,7 @@
 		<!-- ************* 		DONACION  *********************** -->
 
 		<div class="row">
-			<div class="col-md-6 col-md-offset-3 form-horizontal">
+			<div class="col-md-8 col-md-offset-2 form-horizontal">
 
 				<fieldset>
 
@@ -81,7 +81,7 @@
 					value="#{messages.label_responsible_person}" /></label>
 						<div class="col-md-9 col-lg-6">
 							
-							<h:outputText value="#{messages[donationViewBB.donation.responsiblePerson.fullName]}"></h:outputText>
+							<h:outputText value="#{donationViewBB.donation.responsiblePerson.fullName}"></h:outputText>
 							
 						</div>
 					</div>
@@ -161,9 +161,9 @@
 						<label class="col-md-6 control-label"
 							for="donation_extraction_time_end" style="padding-top: 0px !important;"><h:outputText
 								value="#{messages.label_code_donation}" /></label>
-						<div class="col-md-9 col-lg-6">
+						<div class="col-md-6">
 						
-							<h:outputText value="#{donationViewBB.donation.bloodCode}"></h:outputText>
+							<h:outputText value="#{donationViewBB.donation.id}"></h:outputText>
 						</div>
 					</h:panelGroup>
 
