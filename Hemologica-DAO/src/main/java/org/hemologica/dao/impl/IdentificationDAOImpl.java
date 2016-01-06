@@ -184,5 +184,10 @@ public class IdentificationDAOImpl implements IIdentificationDAO {
 		List<?> rest = q.getResultList();
 		return rest == null || rest.isEmpty() ? null : (IdentificationsHistory) rest.get(0);
 	}
+	
+	public void fixIdentifiersWithDatabase(Identification id, List<Identification> ids){
+	
+		
+	}
 
 }

@@ -301,7 +301,7 @@ public class BaseXConnection implements IXMLDataBase {
 
 		ArrayList<String> cdasList = new ArrayList<String>();
 
-		String input = "for $doc in collection('" + dataBase + "') " + "where  $doc//ClinicalDocument/id/@root='"
+		String input = "for $doc in collection('" + dataBase + "') " + " where  $doc//ClinicalDocument/id/@root='"
 				+ root + "' and " + "$doc//ClinicalDocument/id/@extension='" + extention + "' return $doc";
 		BaseXClient.Query query;
 		BaseXClient session = null;

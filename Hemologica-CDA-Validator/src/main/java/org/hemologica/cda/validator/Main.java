@@ -1,13 +1,18 @@
 package org.hemologica.cda.validator;
 
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+
 import org.hemologica.xmldatabase.connection.IXMLDataBase;
 import org.hemologica.xmldatabase.exceptions.XMLDataBaseException;
 import org.hemologica.xmldatabase.factories.XMLDataBaseFactory;
+import org.xml.sax.SAXException;
 
 
 public class Main {
@@ -80,14 +85,13 @@ public class Main {
 			try {
 				
 				IXMLDataBase db = XMLDataBaseFactory.getIXMLDataBaseDonations();
-//				db.addElement(xml_name[i], XMLUtils.documentToString(
-//						XMLUtils.fixCDANamespaces(
-//								XMLUtils.fileToDocument(x)
-//								)
-//							)
-//						);
-				xmlContent = db.getElementCDAId(xml_id[i][0], xml_id[i][1]);
-//				xmlContent = db.getElement(xml_name[i]);
+				//agrego al cda a la base
+				db.addElement(xml_name[i], fixXML(x) );
+//				XMLUtils.fixCDANamespaces(doc) para agregar los namespaces de hl7
+//				XMLUtils.removeCDANamespaces(doc) para sacar los namepsaces
+				
+				xmlContent = db.getElementCDAId(xml_id[i][0], xml_id[i][1]); //NO ANDA
+//				xmlContent = db.getElement(xml_name[i]); ANDA BIEN!
 				if(xmlContent != null){
 					System.out.println(i + " VALIDO");
 				}else{
@@ -110,8 +114,15 @@ public class Main {
 	}
 	
 	
-	private String fixXML(String xml){
-		return xml;
+	private static String fixXML(String xml) throws TransformerException, SAXException, IOException, ParserConfigurationException{
+		
+//		xml.replaceAll("xmlns=\"urn:hl7-org:v3\"", "");
+		return XMLUtils.documentToString(
+				XMLUtils.removeCDANamespaces(
+						XMLUtils.fileToDocument(xml)
+						)
+					);
+//				.replaceAll("xmlns=\"urn:hl7-org:v3\"", "");
 	}
 
 }

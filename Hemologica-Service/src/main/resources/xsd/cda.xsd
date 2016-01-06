@@ -423,7 +423,7 @@
   </xs:complexType>
   <xs:complexType name="sectionType">
     <xs:sequence>
-      <xs:element xmlns:urn="urn:hl7-org:v3" type="urn:codeType" name="code">
+      <xs:element xmlns:urn="urn:hl7-org:v3" type="urn:codeType" name="code" minOccurs="0">
         <xs:annotation>
           <xs:documentation> Codigo del Procedimiento.
                         42736004 - recolecci&#xF3;n de unidad de sangre para autotransfusi&#xF3;n (procedimiento)

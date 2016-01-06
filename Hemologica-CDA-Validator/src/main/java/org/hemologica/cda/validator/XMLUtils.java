@@ -50,8 +50,8 @@ public class XMLUtils {
 	
 	public static Document removeCDANamespaces(Document document){
 		Element docElement = document.getDocumentElement();
-		docElement.setAttribute("xmlns", "urn:hl7-org:v3");
-		docElement.setAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
+		docElement.removeAttributeNS("urn:hl7-org:v3","xmlns");
+		docElement.removeAttributeNS("http://www.w3.org/2001/XMLSchema-instance","xmlns:xsi");
 		return document;
 	}
 	

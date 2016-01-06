@@ -46,7 +46,7 @@ public class Constants {
 	public static final String SNOMED_CODE ="2.16.840.1.113883.6.96";
 	public static final String SNOMED_NAME = "SNOMED-CT";
 	
-	public static final String CDA_PATH = "/Users/paularoche/Documents/Proyecto/cdaGenerados";
+	public static final String CDA_PATH = "/home/bruno/Escritorio/proyecto/Mirth/Integracion/import";
 	
 	public static final String ID_OID_PATH = "2.16.858.1";
 	

@@ -5,6 +5,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import org.hemologica.dao.ICenterDAO;
 import org.hemologica.dao.model.Center;
+import org.hemologica.dao.model.DonationTypesCode;
 
 public class CenterDAOImpl extends GenericDAOImpl<Center> implements ICenterDAO {
 
@@ -28,7 +29,8 @@ public class CenterDAOImpl extends GenericDAOImpl<Center> implements ICenterDAO 
 		
 		Query query = em.createNamedQuery("Center.findBankById");
 		query.setParameter("code", bankId);
-		return (Center) query.getSingleResult();
+		List<Center> list = query.getResultList();
+		return (!list.isEmpty()) ? (Center) list.get(0) : null;
 		
 	}
 

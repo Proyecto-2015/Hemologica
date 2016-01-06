@@ -32,7 +32,8 @@ public interface IIdentificationDAO{
 	
 	public void refresh(IdentificationsHistory entity);
 	
-	
 	public void fix(Identification id, List<Identification> ids);
+	
+	public void fixIdentifiersWithDatabase(Identification id, List<Identification> ids);
 	
 }
