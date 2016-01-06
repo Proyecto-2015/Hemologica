@@ -20,6 +20,10 @@ public class Notification implements Serializable {
 	private Long id;
 	
 	@ManyToOne
+	@JoinColumn(name="notifications_bloodType")
+	private BloodTypes bloodType;
+	
+	@ManyToOne
 	@JoinColumn(name="notifications_bloodTypeABO")
 	private BloodAboTypesCode bloodTypeABO;
 	
@@ -39,7 +43,7 @@ public class Notification implements Serializable {
 	private MessageSendOption messageSendOption;
 
 	//bi-directional many-to-one association to NotificationsPerson
-	@OneToMany(mappedBy="notification")
+	@OneToMany(mappedBy="notification",cascade=CascadeType.PERSIST)
 	private List<NotificationsPerson> notificationsPersons;
 
 	public Notification() {
@@ -99,6 +103,14 @@ public class Notification implements Serializable {
 
 	public void setNotificationsPersons(List<NotificationsPerson> notificationsPersons) {
 		this.notificationsPersons = notificationsPersons;
+	}
+
+	public BloodTypes getBloodType() {
+		return bloodType;
+	}
+
+	public void setBloodType(BloodTypes bloodType) {
+		this.bloodType = bloodType;
 	}
 
 	public NotificationsPerson addNotificationsPerson(NotificationsPerson notificationsPerson) {

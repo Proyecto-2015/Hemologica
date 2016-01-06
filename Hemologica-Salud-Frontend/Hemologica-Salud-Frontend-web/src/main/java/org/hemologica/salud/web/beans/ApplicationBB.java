@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 import javax.faces.model.SelectItem;
 import org.apache.http.client.ClientProtocolException;
 import org.hemologica.datatypes.DataBank;
-import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataDonationEvent;
 import org.hemologica.datatypes.DataInstitution;
@@ -38,7 +37,6 @@ public class ApplicationBB implements Serializable {
 	private List<DataCode> documentTypes;
 	
 	private List<DataProductType> products;
-	private List<DataBloodType> bloodTypes;
 	private List<DataCode> transfusionAnalysis;
 	private List<DataCode> donationAnalysis;
 	
@@ -56,6 +54,7 @@ public class ApplicationBB implements Serializable {
 	private List<DataCode> donationStates;
 	private List<DataCode> donationABOTypes;
 	private List<DataCode> donationDTypes;
+	private List<DataCode> bloodTypes;
 	private List<DataCode> gender;
 	private List<DataDonationEvent> donationEvents;
 	private List<DataBank> banks;
@@ -172,11 +171,11 @@ public class ApplicationBB implements Serializable {
 		this.products = products;
 	}
 
-	public List<DataBloodType> getBloodTypes() {
+	public List<DataCode> getBloodTypes() {
 		return bloodTypes;
 	}
 
-	public void setBloodTypes(List<DataBloodType> bloodTypes) {
+	public void setBloodTypes(List<DataCode> bloodTypes) {
 		this.bloodTypes = bloodTypes;
 	}
 

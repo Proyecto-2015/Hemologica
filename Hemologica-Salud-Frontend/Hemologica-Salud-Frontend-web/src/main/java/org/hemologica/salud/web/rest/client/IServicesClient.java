@@ -7,7 +7,6 @@ import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import org.apache.http.client.ClientProtocolException;
 import org.hemologica.datatypes.DataBank;
-import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataCode;
@@ -34,7 +33,6 @@ import org.hemologica.datatypes.DataOmsStatistics;
 import org.hemologica.datatypes.DataResponsiblePerson;
 import org.hemologica.datatypes.DataSearchFilter;
 import org.hemologica.datatypes.TransfusionFilterData;
-import org.hemologica.datatypes.TransfusionResult;
 
 @RequestScoped
 public interface IServicesClient {
@@ -138,7 +136,7 @@ public interface IServicesClient {
 	 * @throws IOException 
 	 * @throws ClientProtocolException 
 	 */
-	public List<DataBloodType> getBloodTypes() throws ClientProtocolException, IOException;
+	public List<DataCode> getBloodTypes() throws ClientProtocolException, IOException;
 	
 	/**
 	 * Envia Mails a quien corresponda segun los datos en DAtaMail

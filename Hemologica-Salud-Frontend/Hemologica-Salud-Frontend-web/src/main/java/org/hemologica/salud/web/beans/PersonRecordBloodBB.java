@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.faces.context.FacesContext;
 import org.hemologica.constants.Constants;
-import org.hemologica.datatypes.DataBloodType;
+import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataTransfusion;
@@ -55,7 +55,7 @@ public class PersonRecordBloodBB implements Serializable{
 				
 				for(DataDonation d : donations){	
 					
-					DataBloodType dataBlood = new DataBloodType();
+					DataCode dataBlood = new DataCode();
 					if(d.getBloodCode()!= null){
 						dataBlood.setCode(d.getBloodType().getCode());
 						dataBlood.setDisplayName(d.getBloodType().getDisplayName());

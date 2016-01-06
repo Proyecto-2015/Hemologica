@@ -1,4 +1,4 @@
-package org.hemologica.salud.ejb.utils;
+package org.hemologica.salud.ejb.business;
 
 import java.io.IOException;
 import java.util.Calendar;
@@ -17,6 +17,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import org.hemologica.datatypes.DataEmailSent;
 import org.hemologica.datatypes.DataEmailToSend;
+import org.hemologica.salud.ejb.utils.FactoryBeans;
+import org.hemologica.salud.ejb.utils.TaskCron;
 import org.hemologica.xmldatabase.connection.impl.BaseXConnection;
 import com.google.gson.Gson;
 import it.sauronsoftware.cron4j.Task;

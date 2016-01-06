@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.hemologica.salud.ejb.business.EmailTask;
 import org.hemologica.xmldatabase.connection.impl.BaseXConnection;
 import it.sauronsoftware.cron4j.SchedulingPattern;
 import it.sauronsoftware.cron4j.Task;

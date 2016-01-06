@@ -12,7 +12,6 @@ import org.apache.http.client.ClientProtocolException;
 import org.hemologica.constants.ConstansJson;
 import org.hemologica.constants.ConstantsRest;
 import org.hemologica.datatypes.DataBank;
-import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataCity;
 import org.hemologica.datatypes.DataCode;
@@ -39,7 +38,6 @@ import org.hemologica.datatypes.DataOmsStatistics;
 import org.hemologica.datatypes.DataResponsiblePerson;
 import org.hemologica.datatypes.DataSearchFilter;
 import org.hemologica.datatypes.TransfusionFilterData;
-import org.hemologica.datatypes.TransfusionResult;
 import org.hemologica.salud.factories.RestFactory;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -250,7 +248,7 @@ public class ServicesClientImpl implements IServicesClient {
 	}
 
 	@Override
-	public List<DataBloodType> getBloodTypes() throws ClientProtocolException, IOException {
+	public List<DataCode> getBloodTypes() throws ClientProtocolException, IOException {
 
 		String urlBloodTypes = url + ConstantsRest.PATH_CODES + "/" + ConstantsRest.PATH_BLOOD_TYPES;
 
@@ -266,9 +264,9 @@ public class ServicesClientImpl implements IServicesClient {
 			logger.log(Level.SEVERE, "Error al llamar al servicio", e);
 		}
 
-		Type listType = new TypeToken<List<DataBloodType>>() {
+		Type listType = new TypeToken<List<DataCode>>() {
 		}.getType();
-		List<DataBloodType> bloodTypes = new Gson().fromJson(bloodTypesString, listType);
+		List<DataCode> bloodTypes = new Gson().fromJson(bloodTypesString, listType);
 
 		return bloodTypes;
 	}
