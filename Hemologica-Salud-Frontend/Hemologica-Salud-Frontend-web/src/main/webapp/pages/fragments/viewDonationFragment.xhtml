@@ -1,0 +1,258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions">
+
+<h:head>
+</h:head>
+<h:body>
+	
+	<div class="container">
+		
+		<fieldset id="fieldset-history" style ="font-size: x-large; border:1px solid #999; padding-bottom: 16px; margin-bottom: 20px; padding-top: 20px;" >
+			<label class="col-md-2 col-lg-5 control-label" >
+				<h:outputText value="#{donationViewBB.donation.person.fullName}" rendered="#{donationViewBB.donation.person != null}"/></label>
+			
+			<label class="col-md-2 col-lg-2 control-label" style="font-weight: 300;" >
+				<h:outputText value="#{messages[donationViewBB.donation.person.gender.displayName]}" rendered="#{donationViewBB.donation.person != null}"/></label>
+				
+			<label class="col-md-2 col-lg-2 control-label" style="font-weight: 300;" >
+				<h:outputText value="#{donationViewBB.donation.person.age}" rendered="#{donationViewBB.donation.person != null}"/></label>	
+			
+			<label class="col-md-2 col-lg-2 control-label" style="font-weight: 300;">
+				<h:outputText value="#{donationViewBB.donation.person.documentNumber}" rendered="#{donationViewBB.donation.person != null}"/></label>
+				
+			<label class="col-md-2 col-lg-1 control-label pull-right blood-type" >
+				<h:outputText value="#{messages[donationViewBB.donation.person.bloodType.displayName]}" rendered="#{donationViewBB.donation.person != null and
+								donationViewBB.donation.person.bloodType != null }"  /></label>			
+		</fieldset>
+		
+		<!-- ************* 		DONACION  *********************** -->
+
+		<div class="row">
+			<div class="col-md-8 col-md-offset-2 form-horizontal">
+
+				<fieldset>
+
+					<div class="form-group">
+						<label class="col-md-6 control-label" for="donation_date" style="padding-top: 0px !important;"><h:outputText
+								value="#{messages.donation_date}" /></label>
+						<div class="col-md-9 col-lg-6">
+							<h:outputText value="#{donationViewBB.donation.date}"></h:outputText>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-md-6 control-label" for="donation_state" style="padding-top: 0px !important;"><h:outputText
+								value="#{messages.donation_state}" /></label>
+								
+						<div class="col-md-9 col-lg-6">
+						
+							<h:outputText value="#{messages[donationViewBB.donation.state.displayName]}"></h:outputText>
+						
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<label class="col-md-6 control-label" for="donation_state" style="padding-top: 0px !important;"><h:outputText
+								value="#{messages.donor_type}" /></label>
+						<div class="col-md-9 col-lg-6">
+							<h:outputText value="#{messages[donationViewBB.donation.dataDonorType.displayName]}"></h:outputText>
+						</div>
+					</div>
+					
+					<h:panelGroup layout="block" styleClass="form-group" >
+						<label class="col-md-6 control-label" for="donation_abo_type" style="padding-top: 0px !important;"><h:outputText
+								value="#{messages.donation_type}" /></label>
+						<div class="col-md-9 col-lg-6">
+							<h:outputText value="#{messages[donationViewBB.donation.donationType.displayName]}"></h:outputText>
+
+						</div>
+					</h:panelGroup>
+					
+					<div class="form-group">
+						<label class="col-md-6  control-label" for="name" style="padding-top: 0px !important;"><h:outputText
+					value="#{messages.label_responsible_person}" /></label>
+						<div class="col-md-9 col-lg-6">
+							
+							<h:outputText value="#{donationViewBB.donation.responsiblePerson.fullName}"></h:outputText>
+							
+						</div>
+					</div>
+
+					<!-- IF donation state = FAILED -->
+
+					<h:panelGroup layout="block" styleClass="form-group" rendered="#{donationViewBB.donation.isStateDefined() and not donationViewBB.donation.isApproved()}" >
+						<label class="col-md-6 control-label" for="donation_failed" style="padding-top: 0px !important;"><h:outputText
+								value="#{messages.donation_failed_type}" /></label>
+						<div class="col-md-9 col-lg-6">
+							<h:outputText value="#{messages[donationViewBB.donation.fail.rejectionType.displayName]}"></h:outputText>
+
+						</div>
+					</h:panelGroup>
+
+
+					<h:panelGroup layout="block" styleClass="form-group" rendered="#{donationViewBB.donation.isStateDefined() and not donationViewBB.donation.isApproved()}" >
+						<label class="col-md-6 control-label" for="donation_failed_date" style="padding-top: 0px !important;"><h:outputText
+								value="#{messages.donation_failed_date}" /></label>
+						<div class="col-md-9 col-lg-6">
+							<h:outputText value="#{donationViewBB.donation.fail.date}"></h:outputText>
+
+						</div>
+					</h:panelGroup>
+
+					<h:panelGroup layout="block" styleClass="form-group" rendered="#{donationViewBB.donation.isStateDefined() and not donationViewBB.donation.isApproved()}" >
+						<label class="col-md-6 control-label" for="donation_failed_cause" style="padding-top: 0px !important;"><h:outputText
+								value="#{messages.donation_failed_cause}" /></label>
+						<div class="col-md-9 col-lg-6">
+							
+							<h:outputText value="#{messages[donationViewBB.donation.fail.cause.displayName]}"></h:outputText>
+
+						</div>
+					</h:panelGroup>
+
+
+					<!-- IF donation state = SUCCESS -->
+
+					
+					<!-- Tipo de donante -->
+
+					<h:panelGroup layout="block" styleClass="form-group" rendered="#{donationViewBB.donation.isStateDefined() and donationViewBB.donation.isApproved()}" >
+						<label class="col-md-6 control-label" for="donation_abo_type" style="padding-top: 0px !important;"><h:outputText
+								value="#{messages.donation_abo_type}" /></label>
+						<div class="col-md-9 col-lg-6">
+							<h:outputText value="#{donationViewBB.donation.bloodABOType.displayName}"></h:outputText>
+						</div>
+					</h:panelGroup>
+
+					<h:panelGroup layout="block" styleClass="form-group" rendered="#{donationViewBB.donation.isStateDefined() and donationViewBB.donation.isApproved()}" >
+						<label class="col-md-6 control-label" for="donation_d_type" style="padding-top: 0px !important;"><h:outputText
+								value="#{messages.donation_d_type}" /></label>
+						<div class="col-md-9 col-lg-6">
+							<h:outputText value="#{donationViewBB.donation.bloodDType.displayName}"></h:outputText>
+						</div>
+					</h:panelGroup>
+
+					<h:panelGroup layout="block" styleClass="form-group" rendered="#{donationViewBB.donation.isStateDefined() and donationViewBB.donation.isApproved()}" >
+						<label class="col-md-6 control-label"
+							for="donation_extraction_time_begin" style="padding-top: 0px !important;"><h:outputText
+								value="#{messages.donation_extraction_time_begin}" /></label>
+						<div class="col-md-9 col-lg-6">
+							<h:outputText value="#{donationViewBB.donation.extractionTimeBegin}"></h:outputText>
+						</div>
+					</h:panelGroup>
+
+					<h:panelGroup layout="block" styleClass="form-group" rendered="#{donationViewBB.donation.isStateDefined() and donationViewBB.donation.isApproved()}" >
+						<label class="col-md-6 control-label"
+							for="donation_extraction_time_end" style="padding-top: 0px !important;"><h:outputText
+								value="#{messages.donation_extraction_time_end}" /></label>
+						<div class="col-md-9 col-lg-6">
+							<h:outputText value="#{donationViewBB.donation.extractionTimeEnd}"></h:outputText>
+						</div>
+					</h:panelGroup>
+					
+					<h:panelGroup layout="block" styleClass="form-group"  rendered="#{donationViewBB.donation.isStateDefined() and donationViewBB.donation.isApproved()}">
+						<label class="col-md-6 control-label"
+							for="donation_extraction_time_end" style="padding-top: 0px !important;"><h:outputText
+								value="#{messages.label_code_donation}" /></label>
+						<div class="col-md-6">
+						
+							<h:outputText value="#{donationViewBB.donation.id}"></h:outputText>
+						</div>
+					</h:panelGroup>
+
+				</fieldset>
+			</div>
+		</div>
+		<div class="col-md-12" >
+			<!-- ************* 		Analisis  *********************** -->
+			<h:panelGroup rendered="#{donationViewBB.donation.isStateDefined() and donationViewBB.donation.isApproved()}">
+				<div class="container-fluid col-md-6">
+					<div class="row">
+						<label class="col-md-6 control-label"
+								for="donation_extraction_time_end" style="padding-top: 0px !important;"><h:outputText
+									value="#{messages.donation_create_edit_tab_laboratory_title}"/></label>
+									
+						<table id="lab_results_table"
+								class="table-bordered table-striped table-condensed cf col-md-10">
+								<thead class="cf">
+									<tr>
+										<th><h:outputText
+												value="#{messages.donation_lab_result_display}" /></th>
+										<th><h:outputText
+												value="#{messages.donation_lab_result_date}" /></th>
+										<th><h:outputText
+												value="#{messages.donation_lab_result_value}" /></th>
+									</tr>
+								</thead>
+								<tbody>
+			
+									<c:forEach items="#{donationViewBB.donation.labResults}"
+										var="labResItem" varStatus="counter">
+										<tr>
+											<td data-title="#{messages.donation_lab_result_display_placeholder}">
+												<h:outputText value="#{messages[labResItem.analysis.displayName]}" />
+											</td>
+											<td data-title="#{messages.donation_lab_result_date_placeholder}">
+												<h:outputText value="#{labResItem.date}" />
+											</td>
+											<td data-title="#{messages.donation_lab_result_value}">
+												<h:outputText value="#{messages[labResItem.result.displayName]}" />
+											</td>
+											
+										</tr>
+									</c:forEach>
+					
+								</tbody>
+						</table>
+					</div>
+				</div>
+			</h:panelGroup>	
+			<!-- ************* 	Eventos adversos  *********************** -->
+			<h:panelGroup rendered="#{donationViewBB.donation.isStateDefined() and donationViewBB.donation.isApproved()}">
+				<div class="container-fluid col-md-6">
+					<div class="row">
+						<label class="col-md-6 control-label"
+								for="donation_extraction_time_end" style="padding-top: 0px !important;" ><h:outputText
+									value="#{messages.donation_create_edit_tab_events_title}" /></label>
+						<table id="lab_results_table"
+							class="table-bordered table-striped table-condensed cf col-md-10" >
+							<thead class="cf">
+								<tr>
+									<th><h:outputText 
+											value="#{messages.donation_event_display}" /></th>
+									<th><h:outputText
+											value="#{messages.donation_event_severity}" /></th>
+								</tr>
+							</thead>
+							<tbody>
+		
+								<c:forEach items="#{donationViewBB.donation.events}"
+									var="event" varStatus="counter">
+									<tr>
+										<td data-title="#{messages.donation_event_display}">
+											<h:outputText value="#{messages[event.event.displayName]}" />
+										</td>
+										<td data-title="#{messages.donation_event_severity}">
+											<h:outputText value="#{messages[event.severity.displayName]}" />
+										</td>
+		
+									</tr>
+								</c:forEach>
+		
+							</tbody>
+						</table>
+					</div>
+			</div>
+			</h:panelGroup>
+		</div>
+		
+	</div>	
+</h:body>
+</html>

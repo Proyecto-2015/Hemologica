@@ -137,7 +137,7 @@
 					        			<c:forEach items="#{unitBB.unit.movements}" var="movement" varStatus="counter">
 						        			<tr>
 						        				<td data-title="#{messages.donation_date}"><h:outputText value="#{movement.date}"/></td>
-						        				<td data-title="#{messages.label_movement}"><h:outputText value="#{movement.movementsType}"/></td>
+						        				<td data-title="#{messages.label_movement}"><h:outputText value="#{messages[movement.movementsType.typeLabel]}"/></td>
 						        				<td data-title="#{messages.label_center}"><h:outputText value="#{movement.centerName}"/></td>
 						        				
 						        			</tr>

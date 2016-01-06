@@ -64,10 +64,6 @@ public class Center implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="center_institution_id")
 	private Institution institution;
-
-	//bi-directional many-to-one association to Unit
-//	@OneToMany(mappedBy="center")
-//	private List<Unit> units;
 	
 	//bi-directional many-to-one association to Movement
 	@OneToMany(mappedBy="center")

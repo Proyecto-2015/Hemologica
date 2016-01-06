@@ -85,10 +85,9 @@ public class SearchDonationBB implements Serializable {
 	public String viewPerson(DataDonation donation){
 		
 		FacesContext context = FacesContext.getCurrentInstance();
-		context.getExternalContext().getSessionMap().put("person_donation", donation.getPerson());
-		context.getExternalContext().getSessionMap().put("donation", donation);
+		context.getExternalContext().getSessionMap().put("donationView", donation);
 		
-		return "donationCreateEdit";
+		return "viewDonation";
 	}
 
 	public SessionBB getSessionBB() {

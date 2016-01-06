@@ -98,5 +98,7 @@ public interface CodesBeanLocal {
 
 	public DataCode getGenderCodeById(String genderCode);
 
+	public DataCode getDonorTypeById(String donorType);
+
 
 }

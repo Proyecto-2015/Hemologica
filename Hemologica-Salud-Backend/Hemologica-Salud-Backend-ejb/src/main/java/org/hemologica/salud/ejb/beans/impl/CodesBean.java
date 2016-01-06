@@ -732,4 +732,19 @@ public class CodesBean implements CodesBeanLocal {
 		}
 		return data;
 	}
+
+	@Override
+	public DataCode getDonorTypeById(String donorType) {
+		
+		DonationDonorTypesCode donorTypeCode = FactoryDAO.getCodesDAO(em).getDonorTypeById(donorType);
+		
+		DataCode data = new DataCode();
+		if(donorTypeCode != null){
+			
+			data.setCode(donorTypeCode.getDonationDonorTypeCodeValue());
+			data.setDisplayName(donorTypeCode.getDonationDonorTypeCodeLabel());
+			
+		}
+		return data;
+	}
 }

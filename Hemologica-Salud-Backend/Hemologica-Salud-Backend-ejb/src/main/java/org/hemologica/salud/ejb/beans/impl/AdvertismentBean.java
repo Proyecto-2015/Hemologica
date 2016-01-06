@@ -14,13 +14,18 @@ import javax.persistence.PersistenceContext;
 import org.hemologica.dao.model.Advertisment;
 import org.hemologica.dao.model.BloodAboTypesCode;
 import org.hemologica.dao.model.BloodDTypesCode;
+import org.hemologica.dao.model.EmailSent;
+import org.hemologica.dao.model.EmailToSend;
 import org.hemologica.dao.model.MessageSendOption;
 import org.hemologica.dao.model.Notification;
 import org.hemologica.datatypes.DataCampaign;
+import org.hemologica.datatypes.DataEmailSent;
+import org.hemologica.datatypes.DataEmailToSend;
 import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.MailData;
 import org.hemologica.factories.FactoryDAO;
 import org.hemologica.salud.ejb.beans.AdvertismentBeanLocal;
+import org.hemologica.salud.ejb.utils.FactoryBeans;
 
 /**
  * Session Bean implementation class AdvertismentBean
@@ -157,6 +162,77 @@ public class AdvertismentBean implements AdvertismentBeanLocal {
 		
 		return dataResponse;
 		
+	}
+
+	@Override
+	public boolean addEmail(DataEmailToSend emailToSend) {
+		
+		EmailToSend email = new EmailToSend();
+		email.setEmailToSendDate(emailToSend.getEmailToSendDate());
+		/**
+		 * Descomentar esto
+		 */
+		
+		//email.setEmailToSendPerson(FactoryDAO.getPeronDAO(em).getPersonsId(emailToSend.getEmailToSendPerson().getId()));
+		email.setEmailToSendSubject(emailToSend.getEmailToSendSubject());
+		email.setEmailToSendText(emailToSend.getEmailToSendText());
+		
+		return FactoryDAO.getAdvertismentDAO(em).createEmailToSend(email);
+		
+		
+	}
+
+	@Override
+	public boolean removeEmail(DataEmailToSend emailToSend) {
+		
+		EmailToSend email = FactoryDAO.getAdvertismentDAO(em).getEmailById(emailToSend.getId());
+		
+		return FactoryDAO.getAdvertismentDAO(em).removeEmailToSend(email);
+		
+	}
+
+	@Override
+	public boolean addEmailSent(DataEmailSent emailToSend) {
+		
+		EmailSent email = new EmailSent();
+		email.setEmailSentTo(emailToSend.getEmailSentTo());
+		
+		email.setEmailEffectiveSentDate(emailToSend.getEmailEffectiveSentDate());
+		email.setEmailSentDate(emailToSend.getEmailSentDate());
+		email.setEmailSentFrom(emailToSend.getEmailSentFrom());
+		
+		/**
+		 * Descomentar esto
+		 */
+		email.setEmailSentPerson(FactoryDAO.getPeronDAO(em).getPersonsId(emailToSend.getEmailToSentPerson().getId()));
+		
+		email.setEmailSentSubject(emailToSend.getEmailSentSubject());
+		email.setEmailSentText(emailToSend.getEmailSentText());
+		
+		return FactoryDAO.getAdvertismentDAO(em).createEmailSent(email);
+		
+	}
+
+	@Override
+	public List<DataEmailToSend> getEmailsToSend(Calendar instance) {
+		
+		List<EmailToSend> emails = FactoryDAO.getAdvertismentDAO(em).getEmailsToSend(instance);
+		List<DataEmailToSend> emailsToSend = new ArrayList<>();
+		
+		for(EmailToSend email : emails){
+			
+			DataEmailToSend dataEmail = new DataEmailToSend();
+			dataEmail.setEmailToSendDate(email.getEmailToSendDate());
+			dataEmail.setEmailToSendPerson(FactoryBeans.getPersonBean().getDataPeron(email.getEmailToSendPerson()));
+			dataEmail.setEmailToSendSubject(email.getEmailToSendSubject());
+			dataEmail.setEmailToSendText(email.getEmailToSendText());
+			dataEmail.setId(email.getEmailToSendId());
+			
+			emailsToSend.add(dataEmail);
+			
+		}
+		
+		return emailsToSend;
 	}
 
 }

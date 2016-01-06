@@ -48,7 +48,7 @@ public class PersonBean implements PersonBeanLocal {
 		return listReturn;
 	}
 
-	private DataPerson getDataPeron(Person p) {
+	public DataPerson getDataPeron(Person p) {
 		
 		DataPerson data = new DataPerson();
 		
@@ -60,6 +60,8 @@ public class PersonBean implements PersonBeanLocal {
 		data.setSecondLastName((p.getPersonSecondLastname() == null) ? "" :p.getPersonSecondLastname());
 		data.setAddress((p.getPersonAddress() == null) ? "" :p.getPersonAddress());
 		data.setEmail((p.getPersonEmail() == null) ? "" :p.getPersonEmail());
+		data.setAllowNotificationAbleToDonate(p.getAllowNotificationAbleToDonate());
+		data.setAllowNotificationNeedDonor(p.getAllowNotificationNeedDonor());
 		
 		if(p.getGenderCode()!= null){
 			

@@ -28,12 +28,15 @@ import org.hemologica.dao.model.PersonsRecord;
 import org.hemologica.dao.model.SearchFilterCode;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataCode;
+import org.hemologica.datatypes.DataDocument;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataDonationEvent;
 import org.hemologica.datatypes.DataDonationFail;
+import org.hemologica.datatypes.DataEmailToSend;
 import org.hemologica.datatypes.DataLaboratoryResult;
 import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataResponse;
+import org.hemologica.datatypes.DataResponsiblePerson;
 import org.hemologica.datatypes.DataSearchFilter;
 import org.hemologica.factories.FactoryDAO;
 import org.hemologica.salud.ejb.beans.DonationBeanLocal;
@@ -108,7 +111,56 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 		/**
 		 * Tipo Donante -- No se como ponerlo.
 		 */
+		String donorType = XMLUtils.executeXPathString(document, "/ClinicalDocument/component/structuredBody/component/section/entry/observation/code/@code");
+		if(donorType != null && !donorType.equals(""))
+			data.setDataDonorType(FactoryBeans.getCodeBeans().getDonorTypeById(donorType));
+		
+		
 //		data.setDataDonorType(dataDonorType);
+		
+		/**
+		 * Responsable
+		 */
+		
+		DataResponsiblePerson dataResponsiblePerson = new DataResponsiblePerson();
+		data.setResponsiblePerson(dataResponsiblePerson);
+		
+		dataResponsiblePerson.setFirstName(XMLUtils.executeXPathString(document, "/ClinicalDocument/author/assignedAuthor/assignedPerson/name/given/text()"));
+		dataResponsiblePerson.setFirstLastName(XMLUtils.executeXPathString(document, "/ClinicalDocument/author/assignedAuthor/assignedPerson/name/family/text()"));
+		
+		
+		String documentResponsiblePerson = XMLUtils.executeXPathString(document, "/ClinicalDocument/author/assignedAuthor/id/@root");
+		
+		DataDocument dataDocument = new DataDocument();
+		dataResponsiblePerson.setDocuments(dataDocument);
+		if(documentResponsiblePerson != null){
+			
+			String documentNumber = documentResponsiblePerson.substring(documentResponsiblePerson.lastIndexOf(".")+1, documentResponsiblePerson.length()-1);
+			dataDocument.setDocumentNumber(documentNumber);
+			
+			documentResponsiblePerson = documentResponsiblePerson.substring(0, documentResponsiblePerson.lastIndexOf("."));
+			String documentTypeS = documentResponsiblePerson.substring(documentResponsiblePerson.lastIndexOf(".")+1, documentResponsiblePerson.length());
+			
+			DocumentsTypesCode documentType = FactoryDAO.getCodesDAO(em).getDocumentsTypeByCode(documentTypeS);
+			if(documentType != null){
+				DataCode documentTypeCode = new DataCode();
+				documentTypeCode.setCode(documentType.getDocumentsTypeCodeValue());
+				documentTypeCode.setDisplayName(documentType.getDocumentsTypeCodeLabel());
+				dataDocument.setDocumentType(documentType.getDocumentsTypeCodeLabel());
+			}
+			
+			documentResponsiblePerson = documentResponsiblePerson.substring(0, documentResponsiblePerson.lastIndexOf("."));
+			String documentCountryS = documentResponsiblePerson.substring(documentResponsiblePerson.lastIndexOf(".")+1, documentResponsiblePerson.length());
+			
+			CountriesCode country = FactoryDAO.getCodesDAO(em).getCountryByCode(documentCountryS);
+			if(country != null){
+				DataCode countryCode = new DataCode();
+				countryCode.setCode(country.getCountryCodeLabel());
+				countryCode.setDisplayName(country.getCountryCodeLabel());
+				dataDocument.setDocumentCountry(country.getCountryCodeLabel());
+			}
+			
+		}
 		
 		/**
 		 * Data Person
@@ -216,6 +268,47 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 			data.setState(state);
 			
 			/**
+			 * Hora de la extraccion
+			 */
+			String startTime = XMLUtils.executeXPathString(document, "/ClinicalDocument/component/structuredBody/component/section/entry/procedure/effectiveTime/low/@value");
+			String endTime = XMLUtils.executeXPathString(document, "/ClinicalDocument/component/structuredBody/component/section/entry/procedure/effectiveTime/high/@value");
+			SimpleDateFormat sdfExtraccion = new SimpleDateFormat("yyyyMMddHHmmss");
+			SimpleDateFormat sdfHour = new SimpleDateFormat("HH:mm");
+			
+			if(startTime != null && !startTime.equals("")){
+				
+				Date startTimeDate;
+				try {
+					
+					startTimeDate = sdfExtraccion.parse(startTime);
+					data.setExtractionTimeBegin(sdfHour.format(startTimeDate));
+					
+				} catch (ParseException e) {
+					
+					logger.log(Level.SEVERE, "Error al parsear la hora de inicio de la extraccion");
+					
+				}
+				
+						
+			}
+			
+			if(endTime != null && !endTime.equals("")){
+				
+				Date endTimeDate;
+				try {
+					
+					endTimeDate = sdfExtraccion.parse(endTime);
+					data.setExtractionTimeEnd(sdfHour.format(endTimeDate));
+					
+				} catch (ParseException e) {
+					
+					logger.log(Level.SEVERE, "Error al parsear la hora de inicio de la extraccion");
+				}
+				
+						
+			}
+			
+			/**
 			 * Tipos de sangre
 			 */
 			String bloodType = XMLUtils.executeXPathString(document, "//ClinicalDocument//component//structuredBody//component//section//entry//procedure//entryRelationship[descendant-or-self::node()/@typeCode = \"COMP\"]//observation//code/@code");
@@ -305,7 +398,7 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 				}	
 			}
 			data.setLabResults(laboratoriesResults);
-			data.setApproved(approved);
+			data.setApprovedDonation(approved);
 			
 		}else if(completed != null && completed.equals(Constants.CANCELED)){
 			
@@ -321,7 +414,7 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 			/**
 			 * No se realizo la donacion
 			 */
-			data.setApproved(false);
+			data.setApprovedDonation(false);
 			
 			DataDonationFail dataDonationFail = new DataDonationFail();
 			dataDonationFail.setCause(FactoryBeans.getCodeBeans().getRejectionCauseBySnomedCode(XMLUtils.executeXPathString(document, "/ClinicalDocument/component/structuredBody/component/section/entry/procedure/entryRelationship/observation/code/@code")));
@@ -441,7 +534,83 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 				
 			}	
 		}
+		
+		/**
+		 * Cambiarlo de lugar
+		 */
+		
+		sendEmail(dataDonacion);
+		
 		return dataResponse;
+		
+	}
+
+	private void sendEmail(DataDonation dataDonacion) {
+		
+		DataEmailToSend email = new DataEmailToSend();
+		if(dataDonacion.getDate() == null || dataDonacion.getDate().equals(""))
+			return;
+		
+		boolean labApproved = true;
+		if(dataDonacion.getLabResults() != null){
+			
+			for(DataLaboratoryResult lab : dataDonacion.getLabResults()){
+				
+				if(lab.getResult().getCode().equals(Constants.ANALYSIS_RESULT_POSITIVE)){
+					labApproved = false;
+					
+				}
+			}
+		}
+		
+		
+		
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			
+			Date emailDate = sdf.parse(dataDonacion.getDate());
+			Calendar emailDateCalendar = Calendar.getInstance();
+			emailDateCalendar.setTime(emailDate);
+			
+			boolean sendEmail=false;
+			if(dataDonacion.isApproved() && labApproved){
+				sendEmail = true;
+				if(dataDonacion.getPerson() != null && dataDonacion.getPerson().getGender() != null &&
+						dataDonacion.getPerson().getGender().getCode().equals(Constants.DONOR_MALE)){
+					
+					emailDateCalendar.add(Calendar.MONTH, Constants.MONTHS_MALE);
+					
+				}else{
+					
+					emailDateCalendar.add(Calendar.MONTH, Constants.MONTHS_FEMALE);
+					
+				}
+				
+			}else if(!dataDonacion.isApproved() || !labApproved && dataDonacion.getFail() != null &&
+					dataDonacion.getFail().getDate()!= null && !dataDonacion.getFail().getDate().equals("")){
+				
+				sendEmail = true;
+				Date rejectionDate = sdf.parse(dataDonacion.getFail().getDate());
+				emailDateCalendar.setTime(rejectionDate);
+				
+			}
+			if(sendEmail){
+			
+				email.setEmailToSendDate(emailDateCalendar);
+				email.setEmailToSendPerson(dataDonacion.getPerson());
+				email.setEmailToSendSubject("YoDono - Estas apto para donar sangre");
+				email.setEmailToSendText("Estas nuevamente apto para donar sangre. <br> Busca en www.yodono.com.uy el banco de sangre"
+						+ " que te quede mejor y ayuda a salvar vidas. <br><br> Muchas gracias");
+				
+				FactoryBeans.getAdvertismentBean().addEmail(email);
+			}
+				
+		} catch (ParseException e) {
+			
+			logger.log(Level.SEVERE, "Error al parsear la fecha de la donacion", e);
+		}
+			
+		
 		
 	}
 

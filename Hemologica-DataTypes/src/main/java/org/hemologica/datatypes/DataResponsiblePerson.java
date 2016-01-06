@@ -49,7 +49,17 @@ public class DataResponsiblePerson {
 	}
 	public String getFullName(){
 		
-		return firstName + " " + secondName + " " + firstLastName+ " " + secondLastName;
+		String name ="";
+		if(firstName != null)
+			name+= firstName + " ";
+		if(secondName != null)
+			name+= secondName + " ";
+		if(firstLastName != null)
+			name+= firstLastName + " ";
+		if(secondLastName != null)
+			name+= secondLastName;
+		
+		return name;
 	}
 	
 }

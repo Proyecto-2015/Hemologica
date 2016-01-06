@@ -544,4 +544,13 @@ public class CodesDAOImpl implements ICodesDAO{
 		return (!list.isEmpty()) ? (CountriesCode) list.get(0) : null;
 	}
 
+	public DonationDonorTypesCode getDonorTypeById(String donorType) {
+		
+		Query query = em.createNamedQuery("DonationDonorTypesCode.findByCode");
+		query.setParameter("code", donorType);
+		
+		List<?> list = query.getResultList();
+		return (!list.isEmpty()) ? (DonationDonorTypesCode) list.get(0) : null;
+	}
+
 }
