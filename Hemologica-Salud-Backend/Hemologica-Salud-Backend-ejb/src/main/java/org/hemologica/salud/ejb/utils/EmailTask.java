@@ -59,28 +59,32 @@ public class EmailTask extends Task{
 				
 				Message message = new MimeMessage(session);
 				try {
-					message.setFrom(new InternetAddress(username));
-					InternetAddress[] ret = new InternetAddress[1];
-
-					ret[0] = new InternetAddress(dataEmail.getEmailToSendPerson().getEmail());
+					if(dataEmail.getEmailToSendPerson().isAllowNotificationAbleToDonate()){
 					
-					message.setRecipients(RecipientType.TO, ret);
-					message.setSubject(dataEmail.getEmailToSendSubject());
-					
-					message.setContent(dataEmail.getEmailToSendText(), "text/html");
-
-					Transport.send(message);
-
-					DataEmailSent sentEmail = new DataEmailSent();
-					sentEmail.setEmailEffectiveSentDate(Calendar.getInstance());
-					sentEmail.setEmailSentDate(dataEmail.getEmailToSendDate());
-					sentEmail.setEmailSentFrom(username);
-					sentEmail.setEmailSentSubject(dataEmail.getEmailToSendSubject());
-					sentEmail.setEmailSentText(dataEmail.getEmailToSendText());
-					sentEmail.setEmailSentTo(dataEmail.getEmailToSendPerson().getEmail());
-					sentEmail.setEmailToSentPerson(dataEmail.getEmailToSendPerson());
-
-					FactoryBeans.getAdvertismentBean().addEmailSent(sentEmail);
+						message.setFrom(new InternetAddress(username));
+						InternetAddress[] ret = new InternetAddress[1];
+	
+						ret[0] = new InternetAddress(dataEmail.getEmailToSendPerson().getEmail());
+						
+						message.setRecipients(RecipientType.TO, ret);
+						message.setSubject(dataEmail.getEmailToSendSubject());
+						
+						message.setContent(dataEmail.getEmailToSendText(), "text/html");
+	
+						Transport.send(message);
+	
+						DataEmailSent sentEmail = new DataEmailSent();
+						sentEmail.setEmailEffectiveSentDate(Calendar.getInstance());
+						sentEmail.setEmailSentDate(dataEmail.getEmailToSendDate());
+						sentEmail.setEmailSentFrom(username);
+						sentEmail.setEmailSentSubject(dataEmail.getEmailToSendSubject());
+						sentEmail.setEmailSentText(dataEmail.getEmailToSendText());
+						sentEmail.setEmailSentTo(dataEmail.getEmailToSendPerson().getEmail());
+						sentEmail.setEmailToSentPerson(dataEmail.getEmailToSendPerson());
+	
+						FactoryBeans.getAdvertismentBean().addEmailSent(sentEmail);
+						
+					}
 					
 					FactoryBeans.getAdvertismentBean().removeEmail(dataEmail);
 					
