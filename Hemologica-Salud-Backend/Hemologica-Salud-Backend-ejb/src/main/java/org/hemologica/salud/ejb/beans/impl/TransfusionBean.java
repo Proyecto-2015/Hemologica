@@ -106,6 +106,17 @@ public class TransfusionBean implements TransfusionBeanLocal, Serializable {
 		data.setId(XMLUtils.executeXPathString(document, "/ClinicalDocument/component/structuredBody/component/section/entry/procedure/id/@root"));
 		
 		/**
+		 * Id donacion asociada 
+		 */
+		data.setAssociatedDonation(XMLUtils.executeXPathString(document, "//ClinicalDocument//component//structuredBody//component//section//entry//procedure//specimen[descendant-or-self::node()//@code=\"122563008\"]//id//@extension"));
+		
+		/**
+		 * Id bolsa 
+		 */
+		data.setProductCode(XMLUtils.executeXPathString(document, "//ClinicalDocument//component//structuredBody//component//section//entry//procedure//specimen[descendant-or-self::node()//@code=\"122564002\"]//id//@extension"));
+		
+		
+		/**
 		 * Responsable
 		 */
 		
