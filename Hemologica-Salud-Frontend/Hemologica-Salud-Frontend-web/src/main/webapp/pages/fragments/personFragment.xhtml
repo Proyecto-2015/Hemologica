@@ -107,7 +107,7 @@
 							<label class="col-md-5 control-label" for="name"><h:outputText
 									value="#{messages.label_gender}" /></label>
 							<div class="col-md-9 col-lg-5">
-								<h:selectOneMenu class="form-control" value="#{personBB.dataPerson.state}"
+								<h:selectOneMenu class="form-control" value="#{personBB.dataPerson.gender}"
 									style="height: 34px;" converter="#{dataGenderConverter}">
 									
 									<f:selectItem itemLabel="" itemValue="#{null}"/>
@@ -132,7 +132,7 @@
 							<label class="col-md-5 control-label" for="name"><h:outputText
 									value="#{messages.person_state}" /></label>
 							<div class="col-md-9 col-lg-5">
-								<h:selectOneMenu class="form-control" value="#{personBB.dataPerson.gender}"
+								<h:selectOneMenu class="form-control" value="#{personBB.dataPerson.state}"
 									style="height: 34px;" converter="#{dataStateConverter}">
 									
 									<f:selectItem itemLabel="" itemValue="#{null}"/>

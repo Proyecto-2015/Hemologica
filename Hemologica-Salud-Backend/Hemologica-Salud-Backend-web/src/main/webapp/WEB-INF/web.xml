@@ -4,7 +4,10 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	id="yodono" version="2.5">
 	<display-name>salud</display-name>
-
+	
+	<listener>
+		<listener-class>org.hemologica.salud.web.initialized.InitializedListener</listener-class>
+	</listener>
 
 	<context-param>
 		<param-name>resteasy.resources</param-name>

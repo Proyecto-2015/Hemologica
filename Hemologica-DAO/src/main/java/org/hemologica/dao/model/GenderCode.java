@@ -1,5 +1,7 @@
 package org.hemologica.dao.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,8 +18,10 @@ import javax.persistence.Table;
 @NamedQuery(name="GenderCode.findByHl7Code", query="SELECT d FROM GenderCode d WHERE d.hl7Code = :code"),
 @NamedQuery(name="GenderCode.findById", query="SELECT d FROM GenderCode d WHERE d.genderCodeValue = :code")
 })
-public class GenderCode {
+public class GenderCode implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="gender_code_id")

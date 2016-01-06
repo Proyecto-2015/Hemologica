@@ -48,7 +48,7 @@ public class PersonBean implements PersonBeanLocal {
 		return listReturn;
 	}
 
-	private DataPerson getDataPeron(Person p) {
+	public DataPerson getDataPeron(Person p) {
 		
 		DataPerson data = new DataPerson();
 		

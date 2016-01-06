@@ -32,6 +32,7 @@ import org.hemologica.datatypes.DataDocument;
 import org.hemologica.datatypes.DataDonation;
 import org.hemologica.datatypes.DataDonationEvent;
 import org.hemologica.datatypes.DataDonationFail;
+import org.hemologica.datatypes.DataEmailToSend;
 import org.hemologica.datatypes.DataLaboratoryResult;
 import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataResponse;
@@ -533,7 +534,83 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 				
 			}	
 		}
+		
+		/**
+		 * Cambiarlo de lugar
+		 */
+		
+		sendEmail(dataDonacion);
+		
 		return dataResponse;
+		
+	}
+
+	private void sendEmail(DataDonation dataDonacion) {
+		
+		DataEmailToSend email = new DataEmailToSend();
+		if(dataDonacion.getDate() == null || dataDonacion.getDate().equals(""))
+			return;
+		
+		boolean labApproved = true;
+		if(dataDonacion.getLabResults() != null){
+			
+			for(DataLaboratoryResult lab : dataDonacion.getLabResults()){
+				
+				if(lab.getResult().getCode().equals(Constants.ANALYSIS_RESULT_POSITIVE)){
+					labApproved = false;
+					
+				}
+			}
+		}
+		
+		
+		
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+			
+			Date emailDate = sdf.parse(dataDonacion.getDate());
+			Calendar emailDateCalendar = Calendar.getInstance();
+			emailDateCalendar.setTime(emailDate);
+			
+			boolean sendEmail=false;
+			if(dataDonacion.isApproved() && labApproved){
+				sendEmail = true;
+				if(dataDonacion.getPerson() != null && dataDonacion.getPerson().getGender() != null &&
+						dataDonacion.getPerson().getGender().getCode().equals(Constants.DONOR_MALE)){
+					
+					emailDateCalendar.add(Calendar.MONTH, Constants.MONTHS_MALE);
+					
+				}else{
+					
+					emailDateCalendar.add(Calendar.MONTH, Constants.MONTHS_FEMALE);
+					
+				}
+				
+			}else if(!dataDonacion.isApproved() || !labApproved && dataDonacion.getFail() != null &&
+					dataDonacion.getFail().getDate()!= null && !dataDonacion.getFail().getDate().equals("")){
+				
+				sendEmail = true;
+				Date rejectionDate = sdf.parse(dataDonacion.getFail().getDate());
+				emailDateCalendar.setTime(rejectionDate);
+				
+			}
+			if(sendEmail){
+			
+				email.setEmailToSendDate(emailDateCalendar);
+				email.setEmailToSendPerson(dataDonacion.getPerson());
+				email.setEmailToSendSubject("YoDono - Estas apto para donar sangre");
+				email.setEmailToSendText("Estas nuevamente apto para donar sangre. <br> Busca en www.yodono.com.uy el banco de sangre"
+						+ " que te quede mejor y ayuda a salvar vidas. <br><br> Muchas gracias");
+				
+				FactoryBeans.getAdvertismentBean().addEmail(email);
+			}
+				
+		} catch (ParseException e) {
+			
+			logger.log(Level.SEVERE, "Error al parsear la fecha de la donacion", e);
+		}
+			
+		
 		
 	}
 

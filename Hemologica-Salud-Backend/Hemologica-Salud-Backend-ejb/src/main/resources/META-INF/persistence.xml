@@ -68,6 +68,8 @@
 		<class>org.hemologica.dao.model.TransfusionFilterCode</class>
 		<class>org.hemologica.dao.model.Sequencer</class>
 		<class>org.hemologica.dao.model.SearchFilterCode</class>
+		<class>org.hemologica.dao.model.EmailToSend</class>
+		<class>org.hemologica.dao.model.EmailSent</class>
 		<properties>
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.show_sql" value="true" />
