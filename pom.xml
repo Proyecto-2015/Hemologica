@@ -9,14 +9,14 @@
 
 	<modules>
 		<module>Hemologica-DataTypes</module>
-		<module>Hemologica-XMLDataBase-Connection</module>
+		<!-- <module>Hemologica-XMLDataBase-Connection</module> -->
 		<module>Hemologica-DAO</module>
 		<module>Hemologica-Salud-Backend</module>
 		<module>Hemologica-Salud-Frontend</module>
 		<module>Hemologica-Yodono-Backend</module>
 		<module>Hemologica-Yodono-Frontend</module>
-		<module>Hemologica-Service</module>
 		<module>Hemologica-Service-EMPI-Adapter</module>
+		<module>Hemologica-Service</module>
 		<module>Hemologica-XDS-Repository-Adapter</module>
 	</modules>
 
@@ -50,11 +50,11 @@
 				<artifactId>Hemologica-DAO</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
 			</dependency>
-			<dependency>
+			<!-- <dependency>
 				<groupId>org.hemologica</groupId>
 				<artifactId>Hemologica-XMLDataBase-Connection</artifactId>
 				<version>0.0.1-SNAPSHOT</version>
-			</dependency>
+			</dependency> -->
 			<dependency>
 				<groupId>org.hemologica</groupId>
 				<artifactId>Hemologica-DataTypes</artifactId>
@@ -86,14 +86,14 @@
 			</dependency>
 			<dependency>
 				<groupId>org.hemologica</groupId>
-				<artifactId>Hemologica-Service</artifactId>
-				<version>1.0.0.BUILD-SNAPSHOT</version>
+				<artifactId>Hemologica-Service-EMPI-Adapter</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
 				<type>pom</type>
 			</dependency>
 			<dependency>
 				<groupId>org.hemologica</groupId>
-				<artifactId>Hemologica-Service-EMPI-Adapter</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<artifactId>Hemologica-Service</artifactId>
+				<version>1.0.0.BUILD-SNAPSHOT</version>
 				<type>pom</type>
 			</dependency>
 			<dependency>
