@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+	<context:property-placeholder location="classpath:/hemologica.properties"  />
+
+	<bean id="connectionFactory" class="${jms.connection.factory}">
+		<property name="brokerURL" value="${jms.connection.factory.broker.url}" />
+	</bean>
+
+	<bean id="receiveQueue" class="${jms.queue}">
+		<constructor-arg index="0">
+			<value>${jms.queue.cda.receive}</value>
+		</constructor-arg>
+	</bean>
+
+
+<!-- 	<bean id="sendQueue" class="${jms.queue}"> -->
+<!-- 		<constructor-arg index="0"> -->
+<!-- 			<value>${jms.queue.cda.send}</value> -->
+<!-- 		</constructor-arg> -->
+<!-- 	</bean> -->
+
+	<bean id="discardQueue" class="${jms.queue}">
+		<constructor-arg index="0">
+			<value>${jms.queue.cda.discard}</value>
+		</constructor-arg>
+	</bean>
+	
+	
+<!-- 	<bean id="cdaToXDSQueue" class="${jms.queue}"> -->
+<!-- 		<constructor-arg index="0"> -->
+<!-- 			<value>CDA_TO_XDS_QUEUE</value> -->
+<!-- 		</constructor-arg> -->
+<!-- 	</bean> -->
+<!-- 	<bean id="cdaToXDSandUserQueue" class="${jms.queue}"> -->
+<!-- 		<constructor-arg index="0"> -->
+<!-- 			<value>CDA_TO_XDS_AND_USER_QUEUE</value> -->
+<!-- 		</constructor-arg> -->
+<!-- 	</bean> -->
+	
+<!-- 	<bean id="cdaToBaseXQueue" class="${jms.queue}"> -->
+<!-- 		<constructor-arg index="0"> -->
+<!-- 			<value>CDA_TO_BASEX_QUEUE</value> -->
+<!-- 		</constructor-arg> -->
+<!-- 	</bean> -->
+	
+	<bean id="userCreateQueue" class="${jms.queue}">
+		<constructor-arg index="0">
+			<value>USER_CREATE_QUEUE</value>
+		</constructor-arg>
+	</bean>
+	
+<!-- 	<bean id="userMailQueue" class="${jms.queue}"> -->
+<!-- 		<constructor-arg index="0"> -->
+<!-- 			<value>USER_MAIL_QUEUE</value> -->
+<!-- 		</constructor-arg> -->
+<!-- 	</bean> -->
+	
+	
+	<bean id="createUserListener" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destination" ref="userCreateQueue" />
+		<property name="sessionTransacted" value="true" />
+		<property name="maxConcurrentConsumers" value="10" />
+		<property name="concurrentConsumers" value="10" />
+		<property name="receiveTimeout" value="5000" />
+		<property name="recoveryInterval" value="60000" />
+		<property name="autoStartup" value="true" />
+	</bean>
+	
+	<bean id="receiveListener" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+		<property name="connectionFactory" ref="connectionFactory" />
+		<property name="destination" ref="receiveQueue" />
+		<property name="sessionTransacted" value="true" />
+		<property name="maxConcurrentConsumers" value="10" />
+		<property name="concurrentConsumers" value="10" />
+		<property name="receiveTimeout" value="5000" />
+		<property name="recoveryInterval" value="60000" />
+		<property name="autoStartup" value="true" />
+	</bean>
+	
+	<!-- Activators -->
+
+
+	<bean id="cdaProcessActivator" class="org.hemologica.service.activator.CDAProcessActivator">
+		<property name="personBean" ref="personBean" />
+		<property name="userBean" ref="userBean" />
+	</bean>
+	
+	<bean id="cdaXDSProcessActivator" class="org.hemologica.service.activator.CDAtoXDSProcessActivator" >
+		<property name="xdsRepositoryAdapter" ref="xdsRepositoryAdapter" />
+	</bean>
+
+
+<!-- 	<bean id="cdaDatabaseActivator" class="org.hemologica.service.activator.CDAtoDatabaseActivator" > -->
+<!-- 		<property name="personBean" ref="personBean" /> -->
+<!-- 	</bean> -->
+
+	<!-- EMPI -->
+	<bean id="pixConnection" class="org.hemologica.empi.adapter.connection.MLLPConnection">
+		<constructor-arg name="host" value="${empi.pix.connection.host}" />
+		<constructor-arg name="port" value="${empi.pix.connection.port}" />
+	</bean>
+
+	<bean id="pdqConnection" class="org.hemologica.empi.adapter.connection.MLLPConnection">
+		<constructor-arg name="host" value="${empi.pdq.connection.host}" />
+		<constructor-arg name="port" value="${empi.pdq.connection.port}" />
+	</bean>
+
+	<bean id="hl7Parser" class="${hl7.parser}" />
+
+	<bean id="empiAdapter" class="${empi.adapter}">
+		<constructor-arg name="pdqConnection" ref="pdqConnection" />
+		<constructor-arg name="pixConnection" ref="pixConnection" />
+		<constructor-arg name="parser" ref="hl7Parser" />
+		<constructor-arg name="context">
+			<map>
+				<entry key="sendingApplication" value="${empi.context.sending.application}" />
+				<entry key="sendingFacility" value="${empi.context.sending.facility}" />
+				<entry key="receivingApplication" value="${empi.context.receiving.application}" />
+				<entry key="receivingFacility" value="${empi.context.receiving.facility}" />
+				<entry key="aa_namespace" value="${empi.context.namespace}" />
+				<entry key="aa_universal_id" value="${empi.context.universal.id}" />
+				<entry key="aa_universal_id_type" value="${empi.context.universal.type}" />
+			</map>
+		</constructor-arg>
+	</bean>
+
+	<!-- XDS Repository Adapter -->
+	<bean id="xdsRepositoryAdapter" class="org.hemologica.xds.repository.adapter.client.RepositoryXDSImpl">
+		<property name="SOAP_ACTION" value="${xds.repository.service.soapaction}" />
+		<property name="SOAP_URL">
+			<bean class="java.net.URL">
+				<constructor-arg index="0" value="${xds.repository.service.url}" />
+			</bean>
+		</property>
+		<property name="SOAP_QName">
+			<bean class="javax.xml.namespace.QName">
+				<constructor-arg name="namespaceURI" value="${xds.repository.service.qname.namespaceuri}"/>
+				<constructor-arg name="localPart" value="${xds.repository.service.qname.localpart}"/>
+			</bean>
+		</property>
+	</bean>
+	
+	
+	<!-- Base X -->
+	<bean id="baseXConnectionDonation" class="org.hemologica.xmldatabase.connection.impl.BaseXConnection" >
+		<property name="dataBase" 	value="${basex.dbnameDonations}"/>
+		<property name="host" 		value="${basex.host}"/>
+		<property name="port" 		value="${basex.port}"/>
+		<property name="user" 		value="${basex.user}"/>
+		<property name="password" 	value="${basex.password}"/>
+	</bean>
+	
+	<bean id="baseXConnectionTransfusion" class="org.hemologica.xmldatabase.connection.impl.BaseXConnection" >
+		<property name="dataBase" 	value="${basex.dbnameTransfusions}"/>
+		<property name="host" 		value="${basex.host}"/>
+		<property name="port" 		value="${basex.port}"/>
+		<property name="user" 		value="${basex.user}"/>
+		<property name="password" 	value="${basex.password}"/>
+	</bean>
+	
+	<bean id="baseXConnectionLaboratory" class="org.hemologica.xmldatabase.connection.impl.BaseXConnection" >
+		<property name="dataBase" 	value="${basex.dbnameLaboratory}"/>
+		<property name="host" 		value="${basex.host}"/>
+		<property name="port" 		value="${basex.port}"/>
+		<property name="user" 		value="${basex.user}"/>
+		<property name="password" 	value="${basex.password}"/>
+		</bean>
+
+	
+<!-- 	<bean id="baseXAdapterDonation" class="org.hemologica.service.adapter.BaseXAdapter"> -->
+<!-- 		<property name="connection" ref="baseXConnectionDonation"/> -->
+<!-- 	</bean> -->
+	
+<!-- 	<bean id="baseXAdapterTransfusion" class="org.hemologica.service.adapter.BaseXAdapter"> -->
+<!-- 		<property name="connection" ref="baseXConnectionTransfusion"/> -->
+<!-- 	</bean> -->
+	
+<!-- 	<bean id="baseXAdapterLaboratory" class="org.hemologica.service.adapter.BaseXAdapter"> -->
+<!-- 		<property name="connection" ref="baseXConnectionLaboratory"/> -->
+<!-- 	</bean> -->
+
+
+
+	<!-- Business -->
+
+	<bean id="personBean" class="org.hemologica.service.business.impl.PersonBean">
+		<property name="xdsRepository" ref="xdsRepositoryAdapter" />
+		<property name="empi" ref="empiAdapter" />
+		<property name="baseXConnectionDonations" ref="baseXConnectionDonation" />
+		<property name="baseXConnectionTransfusion" ref="baseXConnectionTransfusion" />
+		<property name="baseXConnectionLaboratory" ref="baseXConnectionLaboratory" />
+		<property name="cdaDonationCode" value="${cda.code.donation}" />
+		<property name="cdaTransfusionCode" value="${cda.code.transfusion}" />
+		<property name="cdaLaboratoryCode" value="${cda.code.laboratory}" />
+	</bean>
+
+
+	<bean id="userBean" class="org.hemologica.service.business.impl.UserBean" />
+	
+	<bean id="movementBean" class="org.hemologica.service.business.impl.MovementBean" />
+
+	<context:annotation-config />
+
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+<!-- 		<property name="url" value="jdbc:mysql://localhost:3306/hemologica" /> -->
+<!-- 		<property name="username" value="root" /> -->
+<!-- 		<property name="password" value=".lh2324" /> -->
+	</bean>
+
+	<bean id="emf"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="jpaVendorAdapter" ref="jpaVendorAdapter" />
+		<property name="persistenceUnitName" value="Hemologica-Service-PU" />
+		<property name="packagesToScan" value="org.hemologica.dao.model" />
+	</bean>
+	
+	
+	<bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+		<property name="database" value="${jdbc.database}" />
+		<property name="showSql" value="true" />
+		<property name="generateDdl" value="true" />
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="emf" />
+	</bean>
+
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<!-- <bean id="persistenceContextAnnotation" -->
+	<!-- class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"> -->
+	<!-- <property name="defaultPersistenceUnitName" value="Hemologica-Service-PU" 
+		/> -->
+	<!-- </bean> -->
+	
+	
+	
+	<bean id="cdaToUserProcessActivator" class="org.hemologica.service.activator.CDAtoUserProcessActivator">
+		<property name="userBean" ref="userBean" />
+	</bean>
+	
+	<bean id="mailAdapter" class="org.hemologica.service.adapter.MailAdapter" >
+		<property name="properties">
+			<props>
+				<prop key="mail.smtp.auth">${mail.smtp.auth}</prop>
+				<prop key="mail.smtp.starttls.enable">${mail.smtp.starttls.enable}</prop>
+				<prop key="mail.smtp.host">${mail.host}</prop>
+				<prop key="mail.smtp.port">${mail.port}</prop>
+				<prop key="username">${mail.username}</prop>
+				<prop key="password">${mail.password}</prop>
+				<prop key="debug">${mail.debug}</prop>
+			</props>
+		</property>
+	</bean>
+	
+
+</beans>
