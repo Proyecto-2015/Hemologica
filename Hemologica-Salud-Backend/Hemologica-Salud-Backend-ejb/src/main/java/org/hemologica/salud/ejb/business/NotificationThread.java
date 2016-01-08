@@ -1,7 +1,6 @@
 package org.hemologica.salud.ejb.business;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -10,7 +9,6 @@ import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
 import javax.mail.Message;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
@@ -21,12 +19,9 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.persistence.EntityManager;
-
 import org.hemologica.constants.Constants;
 import org.hemologica.dao.constants.ConstantsCDA;
 import org.hemologica.dao.enums.SentOptions;
-import org.hemologica.dao.model.BloodAboTypesCode;
-import org.hemologica.dao.model.BloodDTypesCode;
 import org.hemologica.dao.model.BloodTypes;
 import org.hemologica.dao.model.MessageSendOption;
 import org.hemologica.dao.model.Notification;
@@ -35,23 +30,25 @@ import org.hemologica.dao.model.Person;
 import org.hemologica.dao.model.PersonsRecord;
 import org.hemologica.datatypes.MailData;
 import org.hemologica.factories.FactoryDAO;
-import org.hemologica.salud.ejb.beans.impl.StatisticsBean;
-import org.hemologica.salud.ejb.utils.XMLUtils;
 import org.hemologica.xmldatabase.connection.impl.BaseXConnection;
 import org.hemologica.xmldatabase.exceptions.XMLDataBaseException;
 import org.hemologica.xmldatabase.factories.XMLDataBaseFactory;
 
-public class NotificationThread extends Thread{
+public class NotificationThread implements Runnable{
 	
 	private Logger logger = Logger.getLogger(NotificationThread.class.getName());
 	
 	private MailData mailData;
 	private EntityManager em;
+	private Thread t;
 	
 	public NotificationThread(MailData mailData, EntityManager em) {
 		
 		this.mailData = mailData;
 		this.em = em;
+		
+		t = new Thread(this, "Emails Thread");
+	    t.start();
 		
 	}
 	
@@ -66,10 +63,10 @@ public class NotificationThread extends Thread{
 			List<String> andClauses = new ArrayList<>();
 			List<String> orClauses = new ArrayList<>();
 			
-			if(mailData.getMessageOption() != null){
+			if(mailData.getMessageOption() != null && mailData.getMessageOption().getCode().equals(Constants.MESSAGE_OPTION_ENABLED)){
 				
 				MessageSendOption messageSendOption = new MessageSendOption();
-				messageSendOption.setId(mailData.getMessageOption().getCode());
+				messageSendOption.setId(Long.decode(mailData.getMessageOption().getCode()));
 				messageSendOption.setLabel(mailData.getMessageOption().getDisplayName());
 				notification.setMessageSendOption(messageSendOption);
 				
@@ -84,19 +81,19 @@ public class NotificationThread extends Thread{
 				/**
 				 * Filtro para ver si tiene alguna donacion muy reciente
 				 */
-				if(mailData.getMessageOption().getCode().equals(Constants.MESSAGE_OPTION_ENABLED)){
+				
 					
-					String dateMale = ConstantsCDA.GENDER + "='" + Constants.DONOR_MALE + "' and "
-							+ ConstantsCDA.DONATION_DATE + ">'" + sdfCDA.format(dateFromMale.getTime()) + "'";
+				String dateMale = ConstantsCDA.GENDER + "='" + Constants.DONOR_MALE + "' and "
+						+ ConstantsCDA.DONATION_DATE + ">'" + sdfCDA.format(dateFromMale.getTime()) + "'";
+				
+				orClauses.add(dateMale);
+				
+				String dateFemale = ConstantsCDA.GENDER + "='" + Constants.DONOR_FEMALE + "' and "
+						+ ConstantsCDA.DONATION_DATE + ">'" + sdfCDA.format(dateFromFemale.getTime()) + "'";
+				
+				orClauses.add(dateFemale);
 					
-					orClauses.add(dateMale);
-					
-					String dateFemale = ConstantsCDA.GENDER + "='" + Constants.DONOR_FEMALE + "' and "
-							+ ConstantsCDA.DONATION_DATE + ">'" + sdfCDA.format(dateFromFemale.getTime()) + "'";
-					
-					orClauses.add(dateFemale);
-					
-				};
+				
 				
 				/**
 				 * Filtro rechazo permanente.
@@ -134,24 +131,9 @@ public class NotificationThread extends Thread{
 //				orClauses.add(rejectTemporal);
 			}
 			
-			
-			if(mailData.getBloodTypeABO() != null){
-			
-				BloodAboTypesCode blood = FactoryDAO.getbloodDAO(em).findBloodAboTypesCodeByCode(mailData.getBloodTypeABO().getCode());
-				notification.setBloodTypeABO(blood);
-				
-			}
-			
-			if(mailData.getBloodTypeRH() != null){
-				
-				BloodDTypesCode blood = FactoryDAO.getbloodDAO(em).findBloodDTypesCodeByCode(mailData.getBloodTypeRH().getCode());
-				notification.setBloodTypeRH(blood);
-				
-			}
-			
 			if(mailData.getBloodType() != null){
 				
-				BloodTypes blood = FactoryDAO.getbloodDAO(em).getBloodTypeCodeByCode(mailData.getBloodTypeRH().getCode());
+				BloodTypes blood = FactoryDAO.getbloodDAO(em).getBloodTypeCodeByCode(mailData.getBloodType().getCode());
 				notification.setBloodType(blood);
 				
 				if(blood != null){
@@ -215,9 +197,9 @@ public class NotificationThread extends Thread{
 					try {
 						
 						if((andClauses.size() == 0 && orClauses.size() ==0) ||
-								(andClauses.size() != 0 && XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClauses,null,orClausesCDAsIds,null) > 0
-								&& XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(null,or,orClausesCDAsIds,null) == 0) || 
-								(andClauses.size() == 0 && XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(null,or,orClausesCDAsIds,null) == 0)){
+								(andClauses.size() != 0 && orClausesCDAsIds.size()!=0 && XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClauses,null,orClausesCDAsIds,null) > 0
+								&& ( orClauses.size() == 0||(orClauses.size() != 0 && XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(null,or,orClausesCDAsIds,null) == 0))) || 
+								(andClauses.size() == 0 && (orClausesCDAsIds.size() ==0 || XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(null,or,orClausesCDAsIds,null) == 0))){
 							
 							NotificationsPerson notificationPerson = new NotificationsPerson();
 							notificationPerson.setPerson(p);

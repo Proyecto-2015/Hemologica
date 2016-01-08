@@ -60,7 +60,7 @@ public class CodesBean implements CodesBeanLocal {
 		for(MessageSendOption m : list){
 			
 			DataMessageOption data = new DataMessageOption();
-			data.setCode(m.getId());
+			data.setCode(m.getId().toString());
 			data.setDisplayName(m.getLabel());
 			listReturn.add(data);
 		}

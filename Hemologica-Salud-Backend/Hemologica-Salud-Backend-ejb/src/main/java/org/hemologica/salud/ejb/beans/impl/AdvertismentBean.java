@@ -155,7 +155,7 @@ public class AdvertismentBean implements AdvertismentBeanLocal {
 //		FactoryDAO.getNotificationDAO(em).create(notification);
 		
 		NotificationThread thread = new NotificationThread(mailData, em);
-		thread.run();
+		//thread.start();
 		
 		DataResponse dataResponse = new DataResponse();
 		dataResponse.setCode(0);

@@ -47,7 +47,7 @@ public class DonationsBB implements Serializable{
 					  
 					@Override public int compare( DataDonation d1, DataDonation d2) {
 						
-					    return d2.getDate().compareTo(d1.getDate());
+					    return d1.getDate().compareTo(d2.getDate());
 					    
 					  }
 				});
