@@ -264,6 +264,27 @@
 		</managed-property>
 	</managed-bean>
 	
+		<converter>
+		<display-name>dataBloodTypeConverter</display-name>
+		<converter-id>dataBloodTypeConverter</converter-id>
+		<converter-class>org.hemologica.salud.web.converters.DataBloodTypeConverter</converter-class>
+	</converter>
+	<managed-bean>
+		<managed-bean-name>dataBloodTypeConverter</managed-bean-name>
+		<managed-bean-class>org.hemologica.salud.web.converters.DataBloodTypeConverter</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>applicationBB</property-name>
+			<property-class>org.hemologica.salud.web.beans.ApplicationBB</property-class>
+			<value>#{applicationBB}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>sessionBB</property-name>
+			<property-class>org.hemologica.salud.web.beans.SessionBB</property-class>
+			<value>#{sessionBB}</value>
+		</managed-property>
+	</managed-bean>
+	
 	<converter>
 		<display-name>dataBloodTypeConverterRH</display-name>
 		<converter-id>dataBloodTypeConverterRH</converter-id>

@@ -17,6 +17,8 @@
 # Maven
 log/
 /target
+*/target/**
+*/target/*
 bin/
 Hemologica-Yodono-Backend/Hemologica-Yodono-Backend-web/target/*
 Hemologica-Stock/Hemologica-Stock-ejb/bin/target/*
@@ -396,3 +398,4 @@ Hemologica-Stock/Hemologica-Stock-web/target/classes/META-INF/maven/org.hemologi
 Hemologica-Yodono-Backend/Hemologica-Yodono-Backend-ear/target/m2e-wtp/ear-resources/META-INF/MANIFEST.MF
 Hemologica-Yodono-Backend/Hemologica-Yodono-Backend-ear/target/m2e-wtp/ear-resources/META-INF/application.xml
 Hemologica-Yodono-Backend/Hemologica-Yodono-Backend-ear/target/m2e-wtp/ear-resources/META-INF/maven/org.hemologica/Hemologica-Yodono-Backend-ear/pom.properties
+

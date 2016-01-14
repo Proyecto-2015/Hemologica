@@ -1,4 +1,4 @@
-package org.hemologica.salud.ejb.beans.impl;
+package org.hemologica.salud.ejb.business;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;

@@ -19,8 +19,6 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.Tuple;
-
 import org.hemologica.constants.Constants;
 import org.hemologica.dao.model.Center;
 import org.hemologica.dao.model.DonationFilterCode;
@@ -40,11 +38,8 @@ import org.hemologica.datatypes.TransfusionFilterData;
 import org.hemologica.factories.FactoryDAO;
 import org.hemologica.salud.ejb.beans.StatisticsBeanLocal;
 import org.hemologica.salud.web.oms.OmsStatistics;
-import org.hemologica.xmldatabase.connection.impl.BaseXConnection;
 import org.hemologica.xmldatabase.exceptions.XMLDataBaseException;
 import org.hemologica.xmldatabase.factories.XMLDataBaseFactory;
-
-import com.itextpdf.text.TabStop.Alignment;
 import com.itextpdf.text.pdf.ColumnText;
 import com.itextpdf.text.pdf.PdfPageEventHelper;
 import com.itextpdf.text.pdf.PdfWriter;

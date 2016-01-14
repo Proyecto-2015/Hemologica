@@ -9,13 +9,13 @@ public class DataMessageOption implements Serializable {
 	 */
 	private static final long serialVersionUID = 9176360583037903695L;
 	
-	private Long code;
+	private String code;
 	private String displayName;
 	
-	public Long getCode() {
+	public String getCode() {
 		return code;
 	}
-	public void setCode(Long code) {
+	public void setCode(String code) {
 		this.code = code;
 	}
 	public String getDisplayName() {

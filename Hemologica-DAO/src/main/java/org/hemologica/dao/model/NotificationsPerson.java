@@ -3,6 +3,8 @@ package org.hemologica.dao.model;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import org.hemologica.dao.enums.SentOptions;
+
 
 /**
  * The persistent class for the notifications_persons database table.
@@ -27,6 +29,9 @@ public class NotificationsPerson implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="persons_id")
 	private Person person;
+	
+	@Column(name="notification_person_sended")
+	private SentOptions sentOption;
 
 	public NotificationsPerson() {
 	}
@@ -55,4 +60,12 @@ public class NotificationsPerson implements Serializable {
 		this.person = person;
 	}
 
+	public SentOptions getSentOption() {
+		return sentOption;
+	}
+
+	public void setSentOption(SentOptions sentOption) {
+		this.sentOption = sentOption;
+	}
+	
 }

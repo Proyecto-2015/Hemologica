@@ -9,7 +9,6 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.hemologica.dao.model.Person;
-import org.hemologica.datatypes.DataBloodType;
 import org.hemologica.datatypes.DataCode;
 import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataResponse;
@@ -74,7 +73,7 @@ public class PersonBean implements PersonBeanLocal {
 			
 			//TODO cambiar esto
 			data.setAbleToDonate(true);
-			DataBloodType dbt = new DataBloodType();
+			DataCode dbt = new DataCode();
 			dbt.setCode("AB+");
 			dbt.setDisplayName("AB+");
 			data.setBloodType(dbt);

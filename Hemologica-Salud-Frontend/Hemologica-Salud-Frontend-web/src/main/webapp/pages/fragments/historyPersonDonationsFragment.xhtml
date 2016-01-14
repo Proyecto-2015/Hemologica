@@ -63,6 +63,7 @@
 				<th><h:outputText value="#{messages.label_rejection_reason}" /></th>
 				<th><h:outputText value="#{messages.label_rejection_type}" /></th>
 				<th><h:outputText value="#{messages.label_rechazo_date_to}" /></th>
+				<th><h:outputText value="#{messages.stock_blood_type_filter}" /></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -98,7 +99,8 @@
 
        				<td data-title="#{messages.label_rejection_reason}"><h:outputText rendered="#{donationItem.fail != null}" value="#{messages[donationItem.fail.cause.displayName]}"/></td>
        				<td data-title="#{messages.label_rejection_type}"><h:outputText rendered="#{donationItem.fail != null}" value="#{messages[donationItem.fail.rejectionType.displayName]}"/></td>
-       				<td data-title="#{messages.label_rechazo_date_to}"><h:outputText rendered="#{donationItem.fail != null}" value="#{donationItem.fail.date}"/></td>	
+       				<td data-title="#{messages.label_rechazo_date_to}"><h:outputText rendered="#{donationItem.fail != null}" value="#{donationItem.fail.date}"/></td>
+       				<td data-title="#{messages.stock_blood_type_filter}"><h:outputText rendered="#{donationItem.fail != null}" value="#{messages[donationItem.bloodType.displayName]}"/></td>	
 				</tr>
 			</c:forEach>
 

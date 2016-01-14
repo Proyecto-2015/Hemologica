@@ -12,12 +12,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.hemologica.dao.model.Advertisment;
-import org.hemologica.dao.model.BloodAboTypesCode;
-import org.hemologica.dao.model.BloodDTypesCode;
 import org.hemologica.dao.model.EmailSent;
 import org.hemologica.dao.model.EmailToSend;
-import org.hemologica.dao.model.MessageSendOption;
-import org.hemologica.dao.model.Notification;
 import org.hemologica.datatypes.DataCampaign;
 import org.hemologica.datatypes.DataEmailSent;
 import org.hemologica.datatypes.DataEmailToSend;
@@ -25,6 +21,7 @@ import org.hemologica.datatypes.DataResponse;
 import org.hemologica.datatypes.MailData;
 import org.hemologica.factories.FactoryDAO;
 import org.hemologica.salud.ejb.beans.AdvertismentBeanLocal;
+import org.hemologica.salud.ejb.business.NotificationThread;
 import org.hemologica.salud.ejb.utils.FactoryBeans;
 
 /**
@@ -126,36 +123,39 @@ public class AdvertismentBean implements AdvertismentBeanLocal {
 	@Override
 	public DataResponse sendMessage(MailData mailData) {
 		
-		Notification notification = new Notification();
+//		Notification notification = new Notification();
+//		
+//		if(mailData.getMessageOption() != null){
+//			MessageSendOption messageSendOption = new MessageSendOption();
+//			messageSendOption.setId(mailData.getMessageOption().getCode());
+//			messageSendOption.setLabel(mailData.getMessageOption().getDisplayName());
+//			notification.setMessageSendOption(messageSendOption);
+//			
+//		}
+//		
+//		if(mailData.getBloodTypeABO() != null){
+//		
+//			BloodAboTypesCode blood = FactoryDAO.getbloodDAO(em).findBloodAboTypesCodeByCode(mailData.getBloodTypeABO().getCode());
+//			notification.setBloodTypeABO(blood);
+//			
+//		}
+//		
+//		if(mailData.getBloodTypeRH() != null){
+//			
+//			BloodDTypesCode blood = FactoryDAO.getbloodDAO(em).findBloodDTypesCodeByCode(mailData.getBloodTypeRH().getCode());
+//			notification.setBloodTypeRH(blood);
+//			
+//		}
+//		
+//		notification.setText(mailData.getText());
+//		notification.setSubject(mailData.getSubject());
+//		
+//		//TODO Agregar las personas y mandar mails.
+//		
+//		FactoryDAO.getNotificationDAO(em).create(notification);
 		
-		if(mailData.getMessageOption() != null){
-			MessageSendOption messageSendOption = new MessageSendOption();
-			messageSendOption.setId(mailData.getMessageOption().getCode());
-			messageSendOption.setLabel(mailData.getMessageOption().getDisplayName());
-			notification.setMessageSendOption(messageSendOption);
-			
-		}
-		
-		if(mailData.getBloodTypeABO() != null){
-		
-			BloodAboTypesCode blood = FactoryDAO.getbloodDAO(em).findBloodAboTypesCodeByCode(mailData.getBloodTypeABO().getCode());
-			notification.setBloodTypeABO(blood);
-			
-		}
-		
-		if(mailData.getBloodTypeRH() != null){
-			
-			BloodDTypesCode blood = FactoryDAO.getbloodDAO(em).findBloodDTypesCodeByCode(mailData.getBloodTypeRH().getCode());
-			notification.setBloodTypeRH(blood);
-			
-		}
-		
-		notification.setText(mailData.getText());
-		notification.setSubject(mailData.getSubject());
-		
-		//TODO Agregar las personas y mandar mails.
-		
-		FactoryDAO.getNotificationDAO(em).create(notification);
+		NotificationThread thread = new NotificationThread(mailData, em);
+		//thread.start();
 		
 		DataResponse dataResponse = new DataResponse();
 		dataResponse.setCode(0);

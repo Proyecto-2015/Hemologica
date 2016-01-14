@@ -30,7 +30,7 @@
 		<repository>
 			<id>repo.springsource.org.milestone</id>
 			<name>Spring Framework Maven Milestone Repository</name>
-			<url>https://repo.springsource.org/milestone</url>
+			<url>http://repo.springsource.org/milestone</url>
 		</repository>
 	</repositories>
 

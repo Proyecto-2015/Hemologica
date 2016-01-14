@@ -34,25 +34,16 @@
 		
 				<label class="col-md-2 control-label" for="name"><h:outputText
 						value="#{messages.donation_blood_type}" /></label>
-						
-				<div class="col-md-9 col-lg-2">
-					<h:selectOneMenu class="form-control" value="#{messageBB.mailData.bloodTypeABO}"
-						id="ABO" style="height: 34px;" converter="#{dataBloodTypeConverterABO}">
-						<f:selectItem itemLabel="#{messages.label_all}" itemValue="#{null}"/>
-						<f:selectItems value="#{applicationBB.donationABOTypes}" var="bloodTypeABO"
-						itemValue="#{bloodTypeABO}" itemLabel="#{bloodTypeABO.displayName}" />
-					</h:selectOneMenu>
-				</div>		
 				
 				<div class="col-md-9 col-lg-2">
-					<h:selectOneMenu class="form-control" value="#{messageBB.mailData.bloodTypeRH}"
-						id="RH" style="height: 34px;" converter="#{dataBloodTypeConverterRH}">
+					<h:selectOneMenu class="form-control" value="#{messageBB.mailData.bloodType}"
+						id="bloodType" style="height: 34px;" converter="#{dataBloodTypeConverter}">
 						<f:selectItem itemLabel="#{messages.label_all}" itemValue="#{null}"/>
-						<f:selectItems value="#{applicationBB.donationDTypes}" var="bloodTypeRH"
-							itemValue="#{bloodTypeRH}" itemLabel="#{bloodTypeRH.displayName}" />
-
+						<f:selectItems value="#{applicationBB.bloodTypes}" var="bloodTypeABO"
+						itemValue="#{bloodTypeABO}" itemLabel="#{messages[bloodTypeABO.displayName]}" />
 					</h:selectOneMenu>
 				</div>
+	
 			</div>
 		</fieldset>	
 
