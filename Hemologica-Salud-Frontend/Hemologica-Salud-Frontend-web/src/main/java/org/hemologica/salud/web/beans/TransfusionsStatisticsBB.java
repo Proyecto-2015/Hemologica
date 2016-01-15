@@ -23,6 +23,7 @@ import org.hemologica.datatypes.DataTransfusionsStatistics;
 import org.hemologica.datatypes.DataTransfusionsStatisticsResults;
 import org.hemologica.datatypes.TransfusionFilterData;
 import org.hemologica.salud.factories.RestFactory;
+import org.hemologica.salud.web.rest.reports.FooterAndHeader;
 import org.primefaces.event.ItemSelectEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -31,6 +32,7 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.Rectangle;
 import com.itextpdf.text.pdf.PdfWriter;
@@ -166,15 +168,16 @@ public StreamedContent download(){
 			Application app = context.getApplication();
 			bundle = app.getResourceBundle(context, languageVarName);
 					
-			Document document = new Document();
+			Document document = new Document(PageSize.A4, 36, 36, 54, 54);
 			ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();	
 	        	
-	    	PdfWriter p = PdfWriter.getInstance(document, new FileOutputStream("Phrase.pdf"));
-	
-	        PdfWriter.getInstance(document, byteArrayOutputStream);
+	    	PdfWriter p = PdfWriter.getInstance(document, byteArrayOutputStream);
 	        
 	        Rectangle rect = new Rectangle(30, 30, 550, 800);
 	        p.setBoxSize("art", rect);
+	        
+	        FooterAndHeader event = new FooterAndHeader();
+	        p.setPageEvent(event);
 	        
 	        document.open();
 	        
@@ -186,7 +189,7 @@ public StreamedContent download(){
 	         */
 	        
 	        Paragraph title = new Paragraph(bundle.getString("label_indicators"), catFont);
-	        title.setAlignment(Element.ALIGN_MIDDLE);
+	        title.setAlignment(Element.ALIGN_CENTER);
 	        document.add(title);
 	        document.add(Chunk.NEWLINE);
 	        
@@ -303,10 +306,6 @@ public StreamedContent download(){
 		}catch (DocumentException e) {
 			
 			logger.log(Level.SEVERE, "Error al generar el documento DocumentException", e);
-			
-		} catch (FileNotFoundException e) {
-			
-			logger.log(Level.SEVERE, "Error al generar el documento FileNotFoundException", e);
 			
 		}	
 		return file;    

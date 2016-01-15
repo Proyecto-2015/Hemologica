@@ -1,0 +1,386 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="qualified">
+  <xs:element name="ClinicalDocument" type="ClinicalDocumentType"/>
+  <xs:complexType name="typeIdType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="root"/>
+        <xs:attribute type="xs:string" name="extension"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="templateIdType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="root"/>
+        <xs:attribute type="xs:string" name="extension"/>
+        <xs:attribute type="xs:string" name="assigningAuthorityName"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="idType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="root" use="optional"/>
+        <xs:attribute type="xs:string" name="extension" use="optional"/>
+        <xs:attribute type="xs:string" name="assigningAuthorityName" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="codeType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="codeSystem" use="optional"/>
+        <xs:attribute type="xs:string" name="codeSystemName" use="optional"/>
+        <xs:attribute type="xs:long" name="code" use="optional"/>
+        <xs:attribute type="xs:string" name="displayName" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="effectiveTimeType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:long" name="value1" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="confidentialityCodeType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="codeSystemName"/>
+        <xs:attribute type="xs:string" name="code"/>
+        <xs:attribute type="xs:string" name="codeSystem"/>
+        <xs:attribute type="xs:string" name="displayName"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="languageCodeType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="code"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="telecomType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="value2" use="optional"/>
+        <xs:attribute type="xs:string" name="use" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="nameType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="prefix" minOccurs="0"/>
+      <xs:element type="xs:string" name="given" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element type="xs:string" name="family" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="administrativeGenderCodeType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:byte" name="code"/>
+        <xs:attribute type="xs:string" name="displayName"/>
+        <xs:attribute type="xs:string" name="codeSystem"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="birthTimeType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:int" name="value3"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="patientType">
+    <xs:sequence>
+      <xs:element type="idType" name="id">
+        <xs:annotation>
+          <xs:documentation> Identificador del paciente  El root 2.16.858.1.858.68909.12345678 - C&#xF3;digo CI = 68909 - CI = 12345678   asocia el identificador de persona definido por la UNAOID, no es necesario incorporar la extensi&#xF3;n.  </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="nameType" name="name">
+        <xs:annotation>
+          <xs:documentation> Nombres y Apellidos </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="administrativeGenderCodeType" name="administrativeGenderCode"/>
+      <xs:element type="birthTimeType" name="birthTime"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="classCode"/>
+    <xs:attribute type="xs:string" name="determinerCode"/>
+  </xs:complexType>
+  <xs:complexType name="patientRoleType">
+    <xs:sequence>
+      <xs:element type="idType" name="id">
+        <xs:annotation>
+          <xs:documentation> OID HEMOLOGICA-HCE = 2.16.858.0.0.1.10.2.3.1.1.2  N&#xFA;mero de historia del paciente en Hemologica - </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="telecomType" name="telecom" maxOccurs="unbounded" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation> Telefono y MAil  HP: Primary home WP: Work Place </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="patientType" name="patient"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="classCode"/>
+  </xs:complexType>
+  <xs:complexType name="recordTargetType">
+    <xs:sequence>
+      <xs:element type="patientRoleType" name="patientRole"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="typeCode"/>
+    <xs:attribute type="xs:string" name="contextControlCode"/>
+  </xs:complexType>
+  <xs:complexType name="timeType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:long" name="value4"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="assignedPersonType">
+    <xs:sequence>
+      <xs:element type="nameType" name="name"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="representedOrganizationType">
+    <xs:sequence>
+      <xs:element type="idType" name="id"/>
+      <xs:element type="xs:string" name="name"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="assignedAuthorType">
+    <xs:sequence>
+      <xs:element type="idType" name="id">
+        <xs:annotation>
+          <xs:documentation> Identificador del profesional de la salud.  El root 2.16.858.2.10000675.69586 identifica al registro de Profesionales (provisto por SNIS), en extensi&#xF3;n se encuentra el n&#xFA;mero de habilitaci&#xF3;n del profesional  En caso de no aplicar deber&#xE1; utilizarse el identificador de persona definido por la UNAOID, sin extensi&#xF3;n. &lt;id root="2.16.858.1.858.68909.12345678"/&gt;  </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="assignedPersonType" name="assignedPerson"/>
+      <xs:element type="representedOrganizationType" name="representedOrganization"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="classCode"/>
+  </xs:complexType>
+  <xs:complexType name="authorType">
+    <xs:sequence>
+      <xs:element type="timeType" name="time"/>
+      <xs:element type="assignedAuthorType" name="assignedAuthor"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="typeCode"/>
+    <xs:attribute type="xs:string" name="contextControlCode"/>
+  </xs:complexType>
+  <xs:complexType name="representedCustodianOrganizationType">
+    <xs:sequence>
+      <xs:element type="idType" name="id">
+        <xs:annotation>
+          <xs:documentation> OID de Hemologica  </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="xs:string" name="name"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="assignedCustodianType">
+    <xs:sequence>
+      <xs:element type="representedCustodianOrganizationType" name="representedCustodianOrganization"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="custodianType">
+    <xs:sequence>
+      <xs:element type="assignedCustodianType" name="assignedCustodian"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="trType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="th" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element type="xs:string" name="td" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="theadType">
+    <xs:sequence>
+      <xs:element type="trType" name="tr"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="tbodyType">
+    <xs:sequence>
+      <xs:element type="trType" name="tr" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="tableType">
+    <xs:sequence>
+      <xs:element type="theadType" name="thead"/>
+      <xs:element type="tbodyType" name="tbody"/>
+    </xs:sequence>
+    <xs:attribute type="xs:byte" name="border"/>
+  </xs:complexType>
+  <xs:complexType name="textType">
+    <xs:sequence>
+      <xs:element type="tableType" name="table"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="statusCodeType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="code" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="specimenRoleType">
+    <xs:sequence>
+      <xs:element type="idType" name="id"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="classCode"/>
+  </xs:complexType>
+  <xs:complexType name="specimenType">
+    <xs:sequence>
+      <xs:element type="specimenRoleType" name="specimenRole"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="typeCode"/>
+  </xs:complexType>
+  <xs:complexType name="valueType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:int" name="code" use="optional"/>
+        <xs:attribute type="xs:string" name="displayName" use="optional"/>
+        <xs:attribute type="xs:string" name="codeSystem" use="optional"/>
+        <xs:attribute type="xs:string" name="codeSystemName" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="observationType">
+    <xs:sequence>
+      <xs:element type="idType" name="id">
+        <xs:annotation>
+          <xs:documentation> C&#xF3;digo de identificacion unica de la prueba.  C&#xF3;digo de identificacion unica de la prueba. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="codeType" name="code">
+        <xs:annotation>
+          <xs:documentation> C&#xF3;digo Snomed Ct de la prueba del laboratorio.  C&#xF3;digo Snomed Ct de la prueba del laboratorio. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="statusCodeType" name="statusCode"/>
+      <xs:element type="effectiveTimeType" name="effectiveTime"/>
+      <xs:element type="valueType" name="value">
+        <xs:annotation>
+          <xs:documentation> Resultado  Resultado </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="classCode" use="optional"/>
+    <xs:attribute type="xs:string" name="moodCode" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="componentType">
+    <xs:sequence>
+      <xs:element type="observationType" name="observation" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation> Sifilis     &lt;interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/&gt;  Hepatitis C     &lt;interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/&gt; </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="sectionType" name="section" minOccurs="0"/>
+      <xs:element type="structuredBodyType" name="structuredBody" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="organizerType">
+    <xs:sequence>
+      <xs:element type="idType" name="id">
+        <xs:annotation>
+          <xs:documentation> C&#xF3;digo de identificacion de las pruebas realizadas. </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="statusCodeType" name="statusCode"/>
+      <xs:element type="effectiveTimeType" name="effectiveTime"/>
+      <xs:element type="specimenType" name="specimen">
+        <xs:annotation>
+          <xs:documentation> OID HEMOLOGICA-Muestra-Donaciones = 2.16.858.0.0.1.10.2.3.1.1.4  id Muestra </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="componentType" name="component" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="classCode"/>
+    <xs:attribute type="xs:string" name="moodCode"/>
+  </xs:complexType>
+  <xs:complexType name="entryType">
+    <xs:sequence>
+      <xs:element type="organizerType" name="organizer"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="sectionType">
+    <xs:sequence>
+      <xs:element type="textType" name="text">
+        <xs:annotation>
+          <xs:documentation>  ********************************************************    Representacion Grafica  ********************************************************  </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="entryType" name="entry">
+        <xs:annotation>
+          <xs:documentation>  ********************************************************    Resultados  ********************************************************  </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="structuredBodyType">
+    <xs:sequence>
+      <xs:element type="componentType" name="component"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ClinicalDocumentType">
+    <xs:sequence>
+      <xs:element type="typeIdType" name="typeId">
+        <xs:annotation>
+          <xs:documentation> OID HEMOLOGICA = 2.16.858.0.0.1.10.2.3.1.1  OID HEMOLOGICA-CDA = 2.16.858.0.0.1.10.2.3.1.1.1  OID HEMOLOGICA-HCE = 2.16.858.0.0.1.10.2.3.1.1.2   ********************************************************    CDA Header  ********************************************************   Estructura fija que referencia al esquema del CDA normativo del HL7 contra el que se valida el xml: </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="templateIdType" name="templateId">
+        <xs:annotation>
+          <xs:documentation> Puede no ir creo </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="idType" name="id">
+        <xs:annotation>
+          <xs:documentation> C&#xF3;digo que identifica de forma unica el documento - OID es HEMOLOGICA-CDA y extension un numero generado por hemologica </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="codeType" name="code">
+        <xs:annotation>
+          <xs:documentation> Identificaci&#xF3;n del tipo de documento  El c&#xF3;digo que se encuentra en esta etiqueta, corresponde a un procedimiento. Hay que ver si es correcto utilizarlo </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="xs:string" name="title"/>
+      <xs:element type="effectiveTimeType" name="effectiveTime">
+        <xs:annotation>
+          <xs:documentation> Fecha en que se genero el documento </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="confidentialityCodeType" name="confidentialityCode">
+        <xs:annotation>
+          <xs:documentation> confidencialidad - N(normal) - R (restringido) - V (muy restringido)  </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="languageCodeType" name="languageCode"/>
+      <xs:element type="recordTargetType" name="recordTarget">
+        <xs:annotation>
+          <xs:documentation> &lt;languageCode code="UY" codeSystem="2.16.840.1.113883.6.121"/&gt; </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="authorType" name="author"/>
+      <xs:element type="custodianType" name="custodian">
+        <xs:annotation>
+          <xs:documentation> Organizaci&#xF3;n  que  est&#xE1;  a  cargo  de  la conservaci&#xF3;n del  documento</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element type="componentType" name="component">
+        <xs:annotation>
+          <xs:documentation>  ********************************************************    CDA Body  ********************************************************   &lt;nonXMLBody&gt;
+            &lt;text&gt;
+                &lt;reference value="http://img.docstoccdn.com/thumb/orig/50463157.png"/&gt;
+            &lt;/text&gt;
+        &lt;/nonXMLBody&gt; </xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+    <xs:attribute type="xs:string" name="classCode"/>
+    <xs:attribute type="xs:string" name="moodCode"/>
+  </xs:complexType>
+</xs:schema>
