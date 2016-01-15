@@ -72,16 +72,16 @@ public class FooterAndHeader extends PdfPageEventHelper{
 		Rectangle rect = writer.getBoxSize("art");
 		
 		PdfPTable table = new PdfPTable(3);
-		table.setTotalWidth(160);
+		table.setTotalWidth(120);
         
 		Image imgFing, imgUdelar, imgNib;
  		try {
 
- 			table.setWidths(new float[]{2, 1, 1});
+ 			table.setWidths(new float[]{1, 1, 1});
  			
  			URL UrlUdelar = FooterAndHeader.class.getResource("/img/udelar-logo.jpg");
  			URL UrlFing = FooterAndHeader.class.getResource("/img/fing-logo.jpg");
- 			URL UrlNib = FooterAndHeader.class.getResource("/img/nib-logo.jpg");
+ 			URL UrlNib = FooterAndHeader.class.getResource("/img/fmed-logo.png");
 
  			if(UrlNib != null){
  				

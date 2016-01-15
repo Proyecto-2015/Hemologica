@@ -60,7 +60,7 @@ public class StockBean implements StockBeanLocal,Serializable {
 
 	@Override
 	public DataStock getStockAndBanks(String bankCode, String institution, String productTypeCode,
-			String bloodTypeCodeABO, String bloodTypeCodeRH, Integer count) {
+			String bloodTypeCodeABO, String bloodTypeCodeRH) {
 		
 		DataStock dataStock = new DataStock();
 		

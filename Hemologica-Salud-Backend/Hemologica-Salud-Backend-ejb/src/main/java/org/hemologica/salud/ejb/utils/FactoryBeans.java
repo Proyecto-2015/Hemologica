@@ -153,7 +153,8 @@ public class FactoryBeans {
 		
 		try {
 			
-			return InitialContext.doLookup("java:global/Hemologica-Salud-Backend-ear/Hemologica-Salud-Backend-ejb/StockBean!org.hemologica.salud.ejb.beans.impl.StockBean");
+			//return InitialContext.doLookup("java:global/Hemologica-Salud-Backend-ear/Hemologica-Salud-Backend-ejb/StockBean!org.hemologica.salud.ejb.beans.impl.StockBean");
+			return InitialContext.doLookup("java:global/Hemologica-Salud-Backend-ear/Hemologica-Salud-Backend-ejb/StockBean!org.hemologica.salud.ejb.business.StockBean");
 			
 		} catch (NamingException e) {
 			

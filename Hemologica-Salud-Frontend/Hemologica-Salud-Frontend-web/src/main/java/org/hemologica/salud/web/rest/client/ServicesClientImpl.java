@@ -557,7 +557,7 @@ public class ServicesClientImpl implements IServicesClient {
 		hash.put(ConstansJson.JSON_PRODUCT_TYPE, productCode);
 		hash.put(ConstansJson.JSON_BLOOD_TYPE_ABO, bloodTypeCodeRH);
 		hash.put(ConstansJson.JSON_BLOOD_TYPE_RH, bloodTypeCodeABO);
-		if(count != null){ hash.put(ConstansJson.JSON_COUNT, count.toString());};
+		
 		String banksString = "";
 		try {
 			banksString = RestFactory.getRestServicesUtils().get(urlBanks, hash);

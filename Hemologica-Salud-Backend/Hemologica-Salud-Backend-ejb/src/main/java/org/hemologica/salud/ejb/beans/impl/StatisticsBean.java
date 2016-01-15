@@ -1175,16 +1175,16 @@ public class StatisticsBean implements StatisticsBeanLocal {
              */
 
     		PdfPTable tableFooter = new PdfPTable(3);
-    		tableFooter.setTotalWidth(160);
+    		tableFooter.setTotalWidth(120);
             
     		Image imgFing, imgUdelar, imgNib;
      		try {
 
-     			tableFooter.setWidths(new float[]{2, 1, 1});
+     			tableFooter.setWidths(new float[]{1, 1, 1});
      			
      			URL UrlUdelar = FooterAndHeader.class.getResource("/img/udelar-logo.jpg");
      			URL UrlFing = FooterAndHeader.class.getResource("/img/fing-logo.jpg");
-     			URL UrlNib = FooterAndHeader.class.getResource("/img/nib-logo.jpg");
+     			URL UrlNib = FooterAndHeader.class.getResource("/img/fmed-logo.png");
 
      			if(UrlNib != null){
      				

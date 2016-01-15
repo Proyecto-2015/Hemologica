@@ -227,7 +227,7 @@ public class RestServicesImpl implements IRestServices{
 
 	public DataStock getBankStock(String code) {
 
-		return FactoryBeans.getStockBeanLocal().getStockAndBanks(code, null, null, null, null, 0);
+		return FactoryBeans.getStockBeanLocal().getStockAndBanks(code, null, null, null, null);
 
 	}
 
@@ -298,9 +298,9 @@ public class RestServicesImpl implements IRestServices{
 		
 	}
 	
-	public DataStock getBanks(String bankCode, String institution, String productTypeCode, String bloodTypeCodeABO,  String bloodTypeCodeRH, Integer count) {
+	public DataStock getBanks(String bankCode, String institution, String productTypeCode, String bloodTypeCodeABO,  String bloodTypeCodeRH) {
 		
-		return FactoryBeans.getStockBeanLocal().getStockAndBanks(bankCode, institution, productTypeCode, bloodTypeCodeABO, bloodTypeCodeRH, count);
+		return FactoryBeans.getStockBeanLocal().getStockAndBanks(bankCode, institution, productTypeCode, bloodTypeCodeABO, bloodTypeCodeRH);
 
 	}
 
