@@ -66,6 +66,26 @@ h6 .h6 {
 	margin-right: 0px;
 }
 
+.footer-line{
+	
+	border-top: 1px solid #e3e3e3;
+    width: 100%;
+	float: right;
+	font-size: x-small;
+
+}
+
+#footer {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+/*   background-color: #efefef; */
+  text-align: center;
+  
+}
+
 .container {
 	margin-left: auto;
 	margin-right: auto;
@@ -181,7 +201,7 @@ h6 .h6 {
 .logos-fing{
 	
     height: 40px;
-    width: 70px;
+    width: 59px;
 /*     padding-right: 50px; */
 
 }
@@ -189,15 +209,14 @@ h6 .h6 {
 .logos-nib{
 	
     height: 40px;
-    width: 200px;
+    width: 166px;
 
 }
 
 .logos-udelar{
 	
     height: 40px;
-    width: 150px;
-    padding-right: 50px;
+    width: 80px;
 
 }
 
