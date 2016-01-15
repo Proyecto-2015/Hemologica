@@ -7,6 +7,7 @@ public interface IPersonRecordDAO extends IGenericDAO<PersonsRecord>{
 
 	List<PersonsRecord> getCDAsUserId(Long userId);
 	List<PersonsRecord> getCDAsIdentificationId(Long userId);
+	PersonsRecord getCDAsRootExtension(String root, String extension);
 
 }
 

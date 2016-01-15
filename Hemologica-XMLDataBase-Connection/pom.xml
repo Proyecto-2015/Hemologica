@@ -29,12 +29,12 @@
 		<dependency>
 		  <groupId>org.basex</groupId>
 		  <artifactId>basex</artifactId>
-		  <version>8.3-SNAPSHOT</version>
+		  <version>8.4-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 		  <groupId>org.basex</groupId>
 		  <artifactId>basex-api</artifactId>
-		  <version>8.3-SNAPSHOT</version>
+		  <version>8.4-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 		  <groupId>com.xqj2</groupId>

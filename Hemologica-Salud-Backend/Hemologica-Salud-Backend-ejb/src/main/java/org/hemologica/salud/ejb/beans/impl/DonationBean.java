@@ -21,9 +21,12 @@ import javax.xml.bind.Marshaller;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 import org.hemologica.constants.Constants;
+import org.hemologica.dao.converter.CryptoConverter;
 import org.hemologica.dao.enums.DataDonationStateEnum;
 import org.hemologica.dao.model.CountriesCode;
 import org.hemologica.dao.model.DocumentsTypesCode;
+import org.hemologica.dao.model.Identification;
+import org.hemologica.dao.model.Person;
 import org.hemologica.dao.model.PersonsRecord;
 import org.hemologica.dao.model.SearchFilterCode;
 import org.hemologica.datatypes.DataBank;
@@ -173,8 +176,12 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 		DataCode gender = FactoryBeans.getCodeBeans().getGenderCodeById(genderCode);
 		dataPerson.setGender(gender);
 		
-		dataPerson.setFirstName(XMLUtils.executeXPathString(document, "/ClinicalDocument/recordTarget/patientRole/patient/name/given/text()"));
-		dataPerson.setFirstLastName(XMLUtils.executeXPathString(document, "/ClinicalDocument/recordTarget/patientRole/patient/name/family/text()"));
+		/**
+		 * bruno 14-01-2016
+		 * se saca para anonimizar los CDAs
+		 */
+//		dataPerson.setFirstName(XMLUtils.executeXPathString(document, "/ClinicalDocument/recordTarget/patientRole/patient/name/given/text()"));
+//		dataPerson.setFirstLastName(XMLUtils.executeXPathString(document, "/ClinicalDocument/recordTarget/patientRole/patient/name/family/text()"));
 		
 		String birthday = XMLUtils.executeXPathString(document, "/ClinicalDocument/recordTarget/patientRole/patient/birthTime/@value");
 		SimpleDateFormat sdfAge = new SimpleDateFormat("yyyyMMdd");
@@ -195,35 +202,39 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 			
 		}
 		
-		String documentPerson = XMLUtils.executeXPathString(document, "/ClinicalDocument/recordTarget/patientRole/patient/id/@root");
-		if(documentPerson != null){
-			
-			String documentNumber = documentPerson.substring(documentPerson.lastIndexOf(".")+1, documentPerson.length()-1);
-			dataPerson.setDocumentNumber(documentNumber);
-			
-			documentPerson = documentPerson.substring(0, documentPerson.lastIndexOf("."));
-			String documentTypeS = documentPerson.substring(documentPerson.lastIndexOf(".")+1, documentPerson.length());
-			
-			DocumentsTypesCode documentType = FactoryDAO.getCodesDAO(em).getDocumentsTypeByCode(documentTypeS);
-			if(documentType != null){
-				DataCode documentTypeCode = new DataCode();
-				documentTypeCode.setCode(documentType.getDocumentsTypeCodeValue());
-				documentTypeCode.setDisplayName(documentType.getDocumentsTypeCodeLabel());
-				dataPerson.setDocumentType(documentTypeCode);
-			}
-			
-			documentPerson = documentPerson.substring(0, documentPerson.lastIndexOf("."));
-			String documentCountryS = documentPerson.substring(documentPerson.lastIndexOf(".")+1, documentPerson.length());
-			
-			CountriesCode country = FactoryDAO.getCodesDAO(em).getCountryByCode(documentCountryS);
-			if(country != null){
-				DataCode countryCode = new DataCode();
-				countryCode.setCode(country.getCountryCodeLabel());
-				countryCode.setDisplayName(country.getCountryCodeLabel());
-				dataPerson.setDocumentType(countryCode);
-			}
-			
-		}
+		/**
+		 * bruno 14-01-2016
+		 * se saca para anonimizar los CDAs
+		 */
+//		String documentPerson = XMLUtils.executeXPathString(document, "/ClinicalDocument/recordTarget/patientRole/patient/id/@root");
+//		if(documentPerson != null){
+//			
+//			String documentNumber = documentPerson.substring(documentPerson.lastIndexOf(".")+1, documentPerson.length()-1);
+//			dataPerson.setDocumentNumber(documentNumber);
+//			
+//			documentPerson = documentPerson.substring(0, documentPerson.lastIndexOf("."));
+//			String documentTypeS = documentPerson.substring(documentPerson.lastIndexOf(".")+1, documentPerson.length());
+//			
+//			DocumentsTypesCode documentType = FactoryDAO.getCodesDAO(em).getDocumentsTypeByCode(documentTypeS);
+//			if(documentType != null){
+//				DataCode documentTypeCode = new DataCode();
+//				documentTypeCode.setCode(documentType.getDocumentsTypeCodeValue());
+//				documentTypeCode.setDisplayName(documentType.getDocumentsTypeCodeLabel());
+//				dataPerson.setDocumentType(documentTypeCode);
+//			}
+//			
+//			documentPerson = documentPerson.substring(0, documentPerson.lastIndexOf("."));
+//			String documentCountryS = documentPerson.substring(documentPerson.lastIndexOf(".")+1, documentPerson.length());
+//			
+//			CountriesCode country = FactoryDAO.getCodesDAO(em).getCountryByCode(documentCountryS);
+//			if(country != null){
+//				DataCode countryCode = new DataCode();
+//				countryCode.setCode(country.getCountryCodeLabel());
+//				countryCode.setDisplayName(country.getCountryCodeLabel());
+//				dataPerson.setDocumentType(countryCode);
+//			}
+//			
+//		}
 		
 		/**
 		 * Tipo Donacion 
@@ -662,6 +673,58 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 				
 					Document document= XMLUtils.stringToDocument(cda);
 					DataDonation dataDonacion = getDataDonation(document);
+					
+					/**
+					 * BEGIN
+					 * bruno 14-01-2016 -> obtener los datos personales desencriptado la columna de personrecord 
+					 */
+					String root = XMLUtils.executeXPathString(document, "//ClinicalDocument//author//assignedAuthor//representedOrganization//id//@root");
+					String extension = XMLUtils.executeXPathString(document, "//ClinicalDocument//author//assignedAuthor//representedOrganization//id//@root");
+					PersonsRecord pr = FactoryDAO.getPeronRecordDAO(em).getCDAsRootExtension(root, extension);
+					
+					//ACA desencripto
+					Identification perId = FactoryDAO.getIIdentificationDAO(em).getIdentificationById(Long.parseLong(CryptoConverter.decrypt(pr.getIdentificationRef())));
+					
+					
+					Person p = perId.getPerson();
+					DataPerson dp = dataDonacion.getPerson(); 
+					dp.setFirstName(p.getPersonFirstName());
+					dp.setFirstLastName(p.getPersonFirstLastname());
+					
+					String documentPerson = perId.getIdentificacionCode();
+					if(documentPerson != null){
+						
+						String documentNumber = documentPerson.substring(documentPerson.lastIndexOf(".")+1, documentPerson.length()-1);
+						dp.setDocumentNumber(documentNumber);
+						
+						documentPerson = documentPerson.substring(0, documentPerson.lastIndexOf("."));
+						String documentTypeS = documentPerson.substring(documentPerson.lastIndexOf(".")+1, documentPerson.length());
+						
+						DocumentsTypesCode documentType = FactoryDAO.getCodesDAO(em).getDocumentsTypeByCode(documentTypeS);
+						if(documentType != null){
+							DataCode documentTypeCode = new DataCode();
+							documentTypeCode.setCode(documentType.getDocumentsTypeCodeValue());
+							documentTypeCode.setDisplayName(documentType.getDocumentsTypeCodeLabel());
+							dp.setDocumentType(documentTypeCode);
+						}
+						
+						documentPerson = documentPerson.substring(0, documentPerson.lastIndexOf("."));
+						String documentCountryS = documentPerson.substring(documentPerson.lastIndexOf(".")+1, documentPerson.length());
+						
+						CountriesCode country = FactoryDAO.getCodesDAO(em).getCountryByCode(documentCountryS);
+						if(country != null){
+							DataCode countryCode = new DataCode();
+							countryCode.setCode(country.getCountryCodeLabel());
+							countryCode.setDisplayName(country.getCountryCodeLabel());
+							dp.setDocumentType(countryCode);
+						}
+						
+					}
+					
+					/**
+					 * END
+					 */
+					
 					listReturn.add(dataDonacion);
 				}
 			}

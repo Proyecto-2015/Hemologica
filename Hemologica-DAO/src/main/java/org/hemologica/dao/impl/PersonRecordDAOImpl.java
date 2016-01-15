@@ -43,6 +43,17 @@ public class PersonRecordDAOImpl extends GenericDAOImpl<PersonsRecord> implement
 		return (List<PersonsRecord>) query.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public PersonsRecord getCDAsRootExtension(String root, String extension) {
+		
+		Query query = em.createNamedQuery("PersonsRecord.findByRootExtension");
+		query.setParameter("root", root);
+		query.setParameter("extension", extension);
+		List<PersonsRecord> prs = query.getResultList();
+		return prs != null && prs.size() > 0 ? prs.get(0) : null;
+	}
+
 	
 	
 	
