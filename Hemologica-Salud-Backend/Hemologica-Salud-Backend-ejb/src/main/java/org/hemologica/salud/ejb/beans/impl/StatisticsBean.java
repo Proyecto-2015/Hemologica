@@ -2,9 +2,9 @@ package org.hemologica.salud.ejb.beans.impl;
 
 
 import java.io.ByteArrayOutputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -37,10 +37,13 @@ import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.datatypes.TransfusionFilterData;
 import org.hemologica.factories.FactoryDAO;
 import org.hemologica.salud.ejb.beans.StatisticsBeanLocal;
+import org.hemologica.salud.web.oms.FooterAndHeader;
 import org.hemologica.salud.web.oms.OmsStatistics;
 import org.hemologica.xmldatabase.exceptions.XMLDataBaseException;
 import org.hemologica.xmldatabase.factories.XMLDataBaseFactory;
 import com.itextpdf.text.pdf.ColumnText;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfPageEventHelper;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.bradmcevoy.http.values.Pair;
@@ -910,20 +913,67 @@ public class StatisticsBean implements StatisticsBeanLocal {
 		
         try {
         	
-        	PdfWriter p = PdfWriter.getInstance(document,
-                   new FileOutputStream("Phrase.pdf"));
+        	PdfWriter p = PdfWriter.getInstance(document, byteArrayOutputStream);
+	        
+	        Rectangle rect = new Rectangle(30, 30, 550, 900);
+	        p.setBoxSize("art", rect);
+	        
+	        p.setPageSize(rect);
+	        
+	        document.open();
+	        
+//	        FooterAndHeader event = new FooterAndHeader();
+//	        p.setPageEvent(event);
+            
+	        /**
+	         * Logo de Hemologica
+	         */
+	        
+	        PdfPTable table = new PdfPTable(2);
+			table.setTotalWidth(110); 
+			 
+	    	Image img;
+	 		try {
 
-            PdfWriter.getInstance(document, byteArrayOutputStream);
-            
-            Rectangle rect = new Rectangle(30, 30, 550, 800);
-            p.setBoxSize("art", rect);
-            
-            HeaderFooterPageEvent event = new HeaderFooterPageEvent();
-            p.setPageEvent(event);
-            
-            document.open();
-            
-            
+	 			table.setWidths(new float[]{1,3});
+	 			
+	 			URL imagePath = FooterAndHeader.class.getResource("/img/hemologica-logo-6.png");
+	 			
+	 			img = Image.getInstance(imagePath.getPath());
+	 			img.scaleToFit(20,20);
+	 			
+	 			PdfPCell cell = new PdfPCell();
+	 			cell.setBorder(Rectangle.NO_BORDER);
+	 			cell.addElement(new Chunk(img, 0, 0));
+	 			cell.setFixedHeight(35f);
+	 			table.addCell(cell);
+	 			
+	 			PdfPCell cellText = new PdfPCell();
+	 			cellText.setBorder(Rectangle.NO_BORDER);
+	 			cellText.addElement(new Chunk("Hemologica"));
+	 			cellText.setFixedHeight(45f);
+	 			table.addCell(cellText);
+	 			
+	 			table.writeSelectedRows(0, -1, 36, 830, p.getDirectContent());
+	 			
+	 			
+	 			document.add(Chunk.NEWLINE);
+	 			
+	 	         
+	 		} catch (BadElementException e) {
+	 			// TODO Auto-generated catch block
+	 			e.printStackTrace();
+	 		} catch (MalformedURLException e) {
+	 			// TODO Auto-generated catch block
+	 			e.printStackTrace();
+	 		} catch (IOException e) {
+	 			// TODO Auto-generated catch block
+	 			e.printStackTrace();
+	 		} catch (DocumentException e) {
+	 			// TODO Auto-generated catch block
+	 			e.printStackTrace();
+	 		}
+
             Font catFont = new Font(Font.FontFamily.TIMES_ROMAN, 18,
             	      Font.BOLD);
             Font smallBold = new Font(Font.FontFamily.TIMES_ROMAN, 12,
@@ -933,7 +983,7 @@ public class StatisticsBean implements StatisticsBeanLocal {
              * Titulo
              */
             Paragraph title = new Paragraph("Indicadores", catFont);
-            title.setAlignment(Element.ALIGN_MIDDLE);
+            title.setAlignment(Element.ALIGN_CENTER);
             document.add(title);
             
             document.add(Chunk.NEWLINE);
@@ -1115,11 +1165,80 @@ public class StatisticsBean implements StatisticsBeanLocal {
             	preface.add(orderedList);
             	
 	            document.add(preface);
-	            document.add( Chunk.NEWLINE );
 	            document.add(new Phrase("Sin datos: " + dataQuestion.getNodata()));
 	            document.add( Chunk.NEWLINE );
 	            document.add( Chunk.NEWLINE );
             }
+            
+            /**
+             * Logos Universidad
+             */
+
+    		PdfPTable tableFooter = new PdfPTable(3);
+    		tableFooter.setTotalWidth(120);
+            
+    		Image imgFing, imgUdelar, imgNib;
+     		try {
+
+     			tableFooter.setWidths(new float[]{1, 1, 1});
+     			
+     			URL UrlUdelar = FooterAndHeader.class.getResource("/img/udelar-logo.jpg");
+     			URL UrlFing = FooterAndHeader.class.getResource("/img/fing-logo.jpg");
+     			URL UrlNib = FooterAndHeader.class.getResource("/img/fmed-logo.png");
+
+     			if(UrlNib != null){
+     				
+    	 			imgNib = Image.getInstance(UrlNib.getPath());
+    	 					 		
+    	 			PdfPCell cell = new PdfPCell();
+    	 			cell.setBorder(Rectangle.NO_BORDER);
+    	 			cell.addElement(new Chunk(imgNib, 0, rect.getBottom() - 18));
+    	 			cell.setFixedHeight(30f);
+    	 			tableFooter.addCell(cell);
+    	 			
+     			}
+     			
+     			if(UrlFing != null){
+     				
+    	 			imgFing = Image.getInstance(UrlFing.getPath());
+    	 			imgFing.scaleToFit(140,140);
+    	 			
+    	 			PdfPCell cell = new PdfPCell();
+    	 			cell.setBorder(Rectangle.NO_BORDER);
+    	 			cell.addElement(new Chunk(imgFing, 0, rect.getBottom() - 18));
+    	 			cell.setFixedHeight(45f);
+    	 			tableFooter.addCell(cell);
+    	 			
+     			}
+
+     			if(UrlUdelar != null){
+     				
+    	 			imgUdelar = Image.getInstance(UrlUdelar.getPath());
+    	 			imgUdelar.scaleToFit(145,145);
+    	 			
+    	 			PdfPCell cell = new PdfPCell();
+    	 			cell.setBorder(Rectangle.NO_BORDER);
+    	 			cell.addElement(new Chunk(imgUdelar, 0, rect.getBottom() - 18));
+    	 			cell.setFixedHeight(45f);
+    	 			tableFooter.addCell(cell);
+     			}	
+     			
+     			
+     			tableFooter.writeSelectedRows(0, -1, 36, 20, p.getDirectContent());	 			
+     	         
+     		} catch (BadElementException e) {
+     			// TODO Auto-generated catch block
+     			e.printStackTrace();
+     		} catch (MalformedURLException e) {
+     			// TODO Auto-generated catch block
+     			e.printStackTrace();
+     		} catch (IOException e) {
+     			// TODO Auto-generated catch block
+     			e.printStackTrace();
+     		} catch (DocumentException e) {
+     			// TODO Auto-generated catch block
+     			e.printStackTrace();
+     		}
             
             document.close();
 
@@ -1127,9 +1246,6 @@ public class StatisticsBean implements StatisticsBeanLocal {
         	
             logger.log(Level.SEVERE, "Error al crear el documento DocumentException", e);
             
-        } catch (FileNotFoundException e) {
-        	
-        	logger.log(Level.SEVERE, "Error al crear el documento FileNotFoundException", e);
         } 
 
 		return byteArrayOutputStream;

@@ -76,8 +76,7 @@ public interface IRestServices {
 			@QueryParam(ConstansJson.JSON_INSTITUTION) String institution,
 			@QueryParam(ConstansJson.JSON_PRODUCT_TYPE) String productTypeCode, 
 			@QueryParam(ConstansJson.JSON_BLOOD_TYPE_ABO) String bloodTypeCodeABO, 
-			@QueryParam(ConstansJson.JSON_BLOOD_TYPE_RH) String bloodTypeCodeRH,
-			@QueryParam(ConstansJson.JSON_COUNT) Integer count);
+			@QueryParam(ConstansJson.JSON_BLOOD_TYPE_RH) String bloodTypeCodeRH);
 	
 	@GET
 	@Path("/" + ConstantsRest.PATH_BANKS_STOCK)

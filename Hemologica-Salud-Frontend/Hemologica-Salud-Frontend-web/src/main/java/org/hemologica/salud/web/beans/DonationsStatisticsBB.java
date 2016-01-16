@@ -2,8 +2,10 @@ package org.hemologica.salud.web.beans;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -19,20 +21,29 @@ import javax.faces.application.Application;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletContext;
+
 import org.hemologica.datatypes.DonationFilterData;
 import org.hemologica.datatypes.DataDonationsStatistics;
 import org.hemologica.datatypes.DataDonationsStatisticsResults;
 import org.hemologica.salud.factories.RestFactory;
+import org.hemologica.salud.web.rest.reports.FooterAndHeader;
 import org.primefaces.event.ItemSelectEvent;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
+
+import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Font;
+import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
 import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 
 public class DonationsStatisticsBB implements Serializable{
@@ -121,15 +132,16 @@ public class DonationsStatisticsBB implements Serializable{
 			Application app = context.getApplication();
 			bundle = app.getResourceBundle(context, languageVarName);
 					
-			Document document = new Document();
+			Document document = new Document(PageSize.A4, 36, 36, 54, 54);
 			ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();	
-	        	
-	    	PdfWriter p = PdfWriter.getInstance(document, new FileOutputStream("Phrase.pdf"));
 	
-	        PdfWriter.getInstance(document, byteArrayOutputStream);
+			PdfWriter p = PdfWriter.getInstance(document, byteArrayOutputStream);
 	        
 	        Rectangle rect = new Rectangle(30, 30, 550, 800);
 	        p.setBoxSize("art", rect);
+	        
+	        FooterAndHeader event = new FooterAndHeader();
+	        p.setPageEvent(event);
 	        
 	        document.open();
 	        
@@ -141,7 +153,7 @@ public class DonationsStatisticsBB implements Serializable{
 	         */
 	        
 	        Paragraph title = new Paragraph(bundle.getString("label_indicators"), catFont);
-	        title.setAlignment(Element.ALIGN_MIDDLE);
+	        title.setAlignment(Element.ALIGN_CENTER);
 	        document.add(title);
 	        document.add(Chunk.NEWLINE);
 	        
@@ -240,20 +252,18 @@ public class DonationsStatisticsBB implements Serializable{
             		bundle.getString("label_denominator") + " " + statisticsResults.getDonationsCount().getCountDenominator() + "   " + 
             		statisticsResults.getDonationsCount().getPercentage() + "%"));
 	        
-	        document.close();
-	        
+	        document.close();   
+			        
 	        InputStream stream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
-		
+	        
 			if(stream != null)
-				file = new DefaultStreamedContent(stream, "application/pdf", "indicadores.pdf");
+					file = new DefaultStreamedContent(stream, "application/pdf", "indicadores.pdf");
+					
+		
 			
 		}catch (DocumentException e) {
 			
 			logger.log(Level.SEVERE, "Error al generar el documento DocumentException", e);
-			
-		} catch (FileNotFoundException e) {
-			
-			logger.log(Level.SEVERE, "Error al generar el documento FileNotFoundException", e);
 			
 		}	
 		return file;    

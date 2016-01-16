@@ -18,17 +18,23 @@
 
 				<h:form>
 		     		<div>
-		     			<div class="footer-line">
+		     			<div class="footer-line container-fluid">
 		     			
-				     	<h:graphicImage class="img-responsive pull-right  logos-udelar" library="img"
-				     		name="udelar-logo.jpg" id="imageMy3"/>
-				     	
-				     	<h:graphicImage class="img-responsive pull-right  logos-fing" library="img"
-				     		name="fing-logo.jpg" id="imageMy2"/>
-				     			
-				     	<h:graphicImage class="img-responsive pull-right  logos-nib" library="img"
-				     		name="nib-logo.jpg" id="imageMy"/>
-				     	
+		     			<div class="container " style="
+					    padding: 0px;
+					    background-color: transparent;">
+		     			
+						 	<h:outputText class="pull-left" value="#{messages.label_hemologica}" style="margin-top: 15px;"/>
+	
+					     	<h:graphicImage class="img-responsive pull-right  logos-udelar" library="img"
+					     		name="udelar-logo.jpg" id="imageMy3"/>
+					     	
+					     	<h:graphicImage class="img-responsive pull-right  logos-fing" library="img"
+					     		name="fing-logo.jpg" id="imageMy2"/>
+					     			
+					     	<h:graphicImage class="img-responsive pull-right  logo-fmed" library="img"
+					     		name="fmed-logo.png" id="imageMy"/>
+				     	</div>
 						</div>
 					</div>
 				</h:form>
