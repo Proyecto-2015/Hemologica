@@ -16,7 +16,7 @@ import javax.persistence.*;
 //	@NamedQuery(name="PersonsRecord.findByPersonId", query="SELECT p FROM PersonsRecord p WHERE p.identification.person.id = :id"),
 	@NamedQuery(name="PersonsRecord.findByIdentificationRefCode", query="SELECT p FROM PersonsRecord p WHERE p.identificationRef = :id"),
 	@NamedQuery(name="PersonsRecord.findByIdentificationRefCodes", query="SELECT p FROM PersonsRecord p WHERE p.identificationRef in (:ids)"),
-	@NamedQuery(name="PersonsRecord.findByRootExtension", query="SELECT p FROM PersonsRecord p WHERE p.personRecordCdaRoot = :root AND p.personRecordCdaExtension = :extension")
+	@NamedQuery(name="PersonsRecord.findByRootExtension", query="SELECT p FROM PersonsRecord p WHERE p.personsRecordCdaRoot = :root AND p.personsRecordCdaExtension = :extension")
 })
 public class PersonsRecord implements Serializable {
 	
