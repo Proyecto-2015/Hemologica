@@ -1,3 +1,6 @@
+DROP DATABASE `hemologica`;
+CREATE DATABASE  IF NOT EXISTS `hemologica` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `hemologica`;
 -- MySQL dump 10.13  Distrib 5.6.27, for debian-linux-gnu (x86_64)
 --
 -- Host: 127.0.0.1    Database: hemologica
