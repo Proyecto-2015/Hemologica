@@ -1,11 +1,11 @@
 DROP DATABASE `hemologica`;
 CREATE DATABASE  IF NOT EXISTS `hemologica` /*!40100 DEFAULT CHARACTER SET utf8 */;
 USE `hemologica`;
--- MySQL dump 10.13  Distrib 5.6.13, for osx10.6 (i386)
+-- MySQL dump 10.13  Distrib 5.6.27, for debian-linux-gnu (x86_64)
 --
--- Host: localhost    Database: hemologica
+-- Host: 127.0.0.1    Database: hemologica
 -- ------------------------------------------------------
--- Server version	5.6.25
+-- Server version	5.6.27-0ubuntu0.14.04.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -308,7 +308,7 @@ DROP TABLE IF EXISTS `documents`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `documents` (
-  `document_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `document_id` bigint(20) NOT NULL,
   `document_country` int(11) NOT NULL,
   `document_type` int(11) NOT NULL,
   `document_number` varchar(45) NOT NULL,
@@ -889,7 +889,7 @@ CREATE TABLE `movements` (
   CONSTRAINT `FK_58f01wdt4bs6i35gb2epbtsk` FOREIGN KEY (`movement_id`) REFERENCES `centers` (`id`),
   CONSTRAINT `fk_movements_movements_types1` FOREIGN KEY (`movements_types_id`) REFERENCES `movements_types` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_movements_units1` FOREIGN KEY (`units_id`) REFERENCES `units` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -898,7 +898,6 @@ CREATE TABLE `movements` (
 
 LOCK TABLES `movements` WRITE;
 /*!40000 ALTER TABLE `movements` DISABLE KEYS */;
-INSERT INTO `movements` VALUES (1,1,1,1,'2014-03-15 00:00:00',1);
 /*!40000 ALTER TABLE `movements` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1034,8 +1033,8 @@ CREATE TABLE `persons` (
   `person_address` varchar(100) DEFAULT NULL,
   `person_telephone` varchar(45) DEFAULT NULL,
   `person_city` bigint(20) DEFAULT NULL,
-  `person_allow_notification_able` bit(1) DEFAULT 1,
-  `person_allow_notification_need_donor` bit(1) DEFAULT 1,
+  `person_allow_notification_able` bit(1) DEFAULT NULL,
+  `person_allow_notification_need_donor` bit(1) DEFAULT NULL,
   `person_state` int(11) DEFAULT NULL,
   `person_email` varchar(255) DEFAULT NULL,
   `person_zip_code` varchar(255) DEFAULT NULL,
@@ -1069,22 +1068,24 @@ DROP TABLE IF EXISTS `persons_records`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `persons_records` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `identifications_id` int(11) NOT NULL,
   `persons_record_cda_extension` varchar(255) DEFAULT NULL,
   `persons_record_cda_root` varchar(255) DEFAULT NULL,
   `person_record_identification_id` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+  PRIMARY KEY (`id`),
+  KEY `fk_persons_records_identifications1_idx` (`identifications_id`),
+  CONSTRAINT `fk_persons_records_identifications1` FOREIGN KEY (`identifications_id`) REFERENCES `identifications` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `persons_records`
 --
 
--- LOCK TABLES `persons_records` WRITE;
--- /*!40000 ALTER TABLE `persons_records` DISABLE KEYS */;
--- INSERT INTO `persons_records` VALUES (1,1,'1','2.16.858.0.0.1.10.2.3.1.1.1','1'),(2,1,'7','2.16.858.0.0.1.10.2.3.1.1.1','1'),(3,1,'11','2.16.858.0.0.1.10.2.3.1.1.1','1'),(4,1,'10','2.16.858.0.0.1.10.2.3.1.1.1','1');
--- /*!40000 ALTER TABLE `persons_records` ENABLE KEYS */;
--- UNLOCK TABLES;
+LOCK TABLES `persons_records` WRITE;
+/*!40000 ALTER TABLE `persons_records` DISABLE KEYS */;
+/*!40000 ALTER TABLE `persons_records` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `responsible_transfusion_person`
@@ -1419,7 +1420,6 @@ CREATE TABLE `units` (
 
 LOCK TABLES `units` WRITE;
 /*!40000 ALTER TABLE `units` DISABLE KEYS */;
-INSERT INTO `units` VALUES (1,'1',1,1,1,'1',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `units` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1514,6 +1514,14 @@ LOCK TABLES `users_role_services` WRITE;
 INSERT INTO `users_role_services` VALUES (1,1,1,1);
 /*!40000 ALTER TABLE `users_role_services` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping events for database 'hemologica'
+--
+
+--
+-- Dumping routines for database 'hemologica'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -1524,4 +1532,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-01-18 19:09:29
+-- Dump completed on 2016-01-20 20:03:28

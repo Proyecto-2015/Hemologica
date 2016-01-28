@@ -141,54 +141,56 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 		String documentResponsiblePerson = XMLUtils.executeXPathString(document,
 				"/ClinicalDocument/author/assignedAuthor/id/@root");
 
-		DataDocument dataDocument = new DataDocument();
-		dataResponsiblePerson.setDocuments(dataDocument);
-		if (documentResponsiblePerson != null) {
+//		DataDocument dataDocument = new DataDocument();
+//		dataResponsiblePerson.setDocuments(dataDocument);
+//		if (documentResponsiblePerson != null) {
+//
+//			String documentNumber = documentResponsiblePerson.substring(documentResponsiblePerson.lastIndexOf(".") + 1,
+//					documentResponsiblePerson.length() - 1);
+//			dataDocument.setDocumentNumber(documentNumber);
+//
+//			documentResponsiblePerson = documentResponsiblePerson.substring(0,
+//					documentResponsiblePerson.lastIndexOf("."));
+//			String documentTypeS = documentResponsiblePerson.substring(documentResponsiblePerson.lastIndexOf(".") + 1,
+//					documentResponsiblePerson.length());
+//
+//			DocumentsTypesCode documentType = FactoryDAO.getCodesDAO(em).getDocumentsTypeByCode(documentTypeS);
+//			if (documentType != null) {
+//				DataCode documentTypeCode = new DataCode();
+//				documentTypeCode.setCode(documentType.getDocumentsTypeCodeValue());
+//				documentTypeCode.setDisplayName(documentType.getDocumentsTypeCodeLabel());
+//				dataDocument.setDocumentType(documentType.getDocumentsTypeCodeLabel());
+//			}
+//
+//			documentResponsiblePerson = documentResponsiblePerson.substring(0,
+//					documentResponsiblePerson.lastIndexOf("."));
+//			String documentCountryS = documentResponsiblePerson
+//					.substring(documentResponsiblePerson.lastIndexOf(".") + 1, documentResponsiblePerson.length());
+//
+//			CountriesCode country = FactoryDAO.getCodesDAO(em).getCountryByCode(documentCountryS);
+//			if (country != null) {
+//				DataCode countryCode = new DataCode();
+//				countryCode.setCode(country.getCountryCodeLabel());
+//				countryCode.setDisplayName(country.getCountryCodeLabel());
+//				dataDocument.setDocumentCountry(country.getCountryCodeLabel());
+//			}
+//
+//		}
+//
+//		/**
+//		 * Data Person
+//		 */
+//		DataPerson dataPerson = new DataPerson();
+//		data.setPerson(dataPerson);
+//
+//		String genderCode = XMLUtils.executeXPathString(document,
+//				"/ClinicalDocument/recordTarget/patientRole/patient/administrativeGenderCode/@code");
+//
+//		DataCode gender = FactoryBeans.getCodeBeans().getGenderCodeById(genderCode);
+//		dataPerson.setGender(gender);
 
-			String documentNumber = documentResponsiblePerson.substring(documentResponsiblePerson.lastIndexOf(".") + 1,
-					documentResponsiblePerson.length() - 1);
-			dataDocument.setDocumentNumber(documentNumber);
-
-			documentResponsiblePerson = documentResponsiblePerson.substring(0,
-					documentResponsiblePerson.lastIndexOf("."));
-			String documentTypeS = documentResponsiblePerson.substring(documentResponsiblePerson.lastIndexOf(".") + 1,
-					documentResponsiblePerson.length());
-
-			DocumentsTypesCode documentType = FactoryDAO.getCodesDAO(em).getDocumentsTypeByCode(documentTypeS);
-			if (documentType != null) {
-				DataCode documentTypeCode = new DataCode();
-				documentTypeCode.setCode(documentType.getDocumentsTypeCodeValue());
-				documentTypeCode.setDisplayName(documentType.getDocumentsTypeCodeLabel());
-				dataDocument.setDocumentType(documentType.getDocumentsTypeCodeLabel());
-			}
-
-			documentResponsiblePerson = documentResponsiblePerson.substring(0,
-					documentResponsiblePerson.lastIndexOf("."));
-			String documentCountryS = documentResponsiblePerson
-					.substring(documentResponsiblePerson.lastIndexOf(".") + 1, documentResponsiblePerson.length());
-
-			CountriesCode country = FactoryDAO.getCodesDAO(em).getCountryByCode(documentCountryS);
-			if (country != null) {
-				DataCode countryCode = new DataCode();
-				countryCode.setCode(country.getCountryCodeLabel());
-				countryCode.setDisplayName(country.getCountryCodeLabel());
-				dataDocument.setDocumentCountry(country.getCountryCodeLabel());
-			}
-
-		}
-
-		/**
-		 * Data Person
-		 */
-		DataPerson dataPerson = new DataPerson();
-		data.setPerson(dataPerson);
-
-		String genderCode = XMLUtils.executeXPathString(document,
-				"/ClinicalDocument/recordTarget/patientRole/patient/administrativeGenderCode/@code");
-
-		DataCode gender = FactoryBeans.getCodeBeans().getGenderCodeById(genderCode);
-		dataPerson.setGender(gender);
-
+		DataPerson dataPerson = this.getDataPersonFromDocument(document);
+		
 		/**
 		 * bruno 14-01-2016 se saca para anonimizar los CDAs
 		 */
@@ -205,7 +207,7 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 			Date dateBir = sdfAge.parse(birthday);
 			Calendar date = Calendar.getInstance();
 			date.setTime(dateBir);
-			LocalDate birthdate = new LocalDate(date.get(Calendar.YEAR), date.get(Calendar.MONDAY),
+			LocalDate birthdate = new LocalDate(date.get(Calendar.YEAR), date.get(Calendar.MONTH) +1,
 					date.get(Calendar.DAY_OF_MONTH));
 			LocalDate now = new LocalDate();
 			Years age = Years.yearsBetween(birthdate, now);
@@ -757,13 +759,17 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 	 */
 	private DataPerson getDataPersonFromDocument(Document document) throws XPathExpressionException {
 
-		String root = XMLUtils.executeXPathString(document, "//ClinicalDocument//author//assignedAuthor//representedOrganization//id//@root");
-		String extension = XMLUtils.executeXPathString(document, "//ClinicalDocument//author//assignedAuthor//representedOrganization//id//@root");
+//		String root = XMLUtils.executeXPathString(document, "//ClinicalDocument//author//assignedAuthor//representedOrganization//id//@root");
+//		String extension = XMLUtils.executeXPathString(document, "//ClinicalDocument//author//assignedAuthor//representedOrganization//id//@root");
+		
+		String root = XMLUtils.executeXPathString(document, "/ClinicalDocument/id/@root");
+		String extension = XMLUtils.executeXPathString(document, "/ClinicalDocument/id/@extension");
+		
 		PersonsRecord pr = FactoryDAO.getPeronRecordDAO(em).getCDAsRootExtension(root, extension);
 
 		// ACA desencripto
 		Identification perId = FactoryDAO.getIIdentificationDAO(em)
-				.getIdentificationById(Long.parseLong(CryptoConverter.decrypt(pr.getIdentificationRef())));
+				.getIdentificationByCode(CryptoConverter.decrypt(pr.getIdentificationRef()));
 
 		Person p = perId.getPerson();
 		DataPerson dp = new DataPerson();
@@ -798,7 +804,7 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 				DataCode countryCode = new DataCode();
 				countryCode.setCode(country.getCountryCodeLabel());
 				countryCode.setDisplayName(country.getCountryCodeLabel());
-				dp.setDocumentType(countryCode);
+				dp.setDocumentCountry(countryCode);
 			}
 
 		}

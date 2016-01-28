@@ -138,6 +138,8 @@ public interface ICodesDAO {
 	public SearchFilterCode getSearchFilterByCode(String code);
 
 	public GenderCode getGenderCodeById(String genderCode);
+	
+	public GenderCode getGenderCodeByCode(String genderCode);
 
 	public DocumentsTypesCode getDocumentsTypeByCode(String documentTypeS);
 

@@ -21,8 +21,11 @@ import javax.xml.bind.Marshaller;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.xpath.XPathExpressionException;
 import org.hemologica.constants.Constants;
+import org.hemologica.dao.converter.CryptoConverter;
 import org.hemologica.dao.model.CountriesCode;
 import org.hemologica.dao.model.DocumentsTypesCode;
+import org.hemologica.dao.model.Identification;
+import org.hemologica.dao.model.Person;
 import org.hemologica.dao.model.PersonsRecord;
 import org.hemologica.dao.model.SearchFilterCode;
 import org.hemologica.datatypes.DataBank;
@@ -163,65 +166,67 @@ public class TransfusionBean implements TransfusionBeanLocal, Serializable {
 		/**
 		 * Data Person
 		 */
-		DataPerson dataPerson = new DataPerson();
+		DataPerson dataPerson = this.getDataPersonFromDocument(document);
 		data.setPerson(dataPerson);
-		
-		String genderCode = XMLUtils.executeXPathString(document, "/ClinicalDocument/recordTarget/patientRole/patient/administrativeGenderCode/@code");
-		
-		DataCode gender = FactoryBeans.getCodeBeans().getGenderCodeById(genderCode);
-		dataPerson.setGender(gender);
-		
-		dataPerson.setFirstName(XMLUtils.executeXPathString(document, "/ClinicalDocument/recordTarget/patientRole/patient/name/given/text()"));
-		dataPerson.setFirstLastName(XMLUtils.executeXPathString(document, "/ClinicalDocument/recordTarget/patientRole/patient/name/family/text()"));
-		
-		String birthday = XMLUtils.executeXPathString(document, "/ClinicalDocument/recordTarget/patientRole/patient/birthTime/@value");
-		SimpleDateFormat sdfAge = new SimpleDateFormat("yyyyMMdd");
-		try {
-			
-			Date dateBir = sdfAge.parse(birthday);
-			Calendar date = Calendar.getInstance();
-			date.setTime(dateBir);
-			LocalDate birthdate = new LocalDate(date.get(Calendar.YEAR), date.get(Calendar.MONDAY), date.get(Calendar.DAY_OF_MONTH));
-			LocalDate now = new LocalDate();
-			Years age = Years.yearsBetween(birthdate, now);
-			
-			dataPerson.setAge(String.valueOf(age.getYears()));
-			
-		} catch (ParseException e) {
-			
-			logger.log(Level.SEVERE, "Error al parsear la fecha de nacimiento", e);
-			
-		}
-		
-		String documentPerson = XMLUtils.executeXPathString(document, "/ClinicalDocument/recordTarget/patientRole/patient/id/@root");
-		if(documentPerson != null){
-			
-			String documentNumber = documentPerson.substring(documentPerson.lastIndexOf(".")+1, documentPerson.length()-1);
-			dataPerson.setDocumentNumber(documentNumber);
-			
-			documentPerson = documentPerson.substring(0, documentPerson.lastIndexOf("."));
-			String documentTypeS = documentPerson.substring(documentPerson.lastIndexOf(".")+1, documentPerson.length());
-			
-			DocumentsTypesCode documentType = FactoryDAO.getCodesDAO(em).getDocumentsTypeByCode(documentTypeS);
-			if(documentType != null){
-				DataCode documentTypeCode = new DataCode();
-				documentTypeCode.setCode(documentType.getDocumentsTypeCodeValue());
-				documentTypeCode.setDisplayName(documentType.getDocumentsTypeCodeLabel());
-				dataPerson.setDocumentType(documentTypeCode);
-			}
-			
-			documentPerson = documentPerson.substring(0, documentPerson.lastIndexOf("."));
-			String documentCountryS = documentPerson.substring(documentPerson.lastIndexOf(".")+1, documentPerson.length());
-			
-			CountriesCode country = FactoryDAO.getCodesDAO(em).getCountryByCode(documentCountryS);
-			if(country != null){
-				DataCode countryCode = new DataCode();
-				countryCode.setCode(country.getCountryCodeLabel());
-				countryCode.setDisplayName(country.getCountryCodeLabel());
-				dataPerson.setDocumentType(countryCode);
-			}
-			
-		}
+//		DataPerson dataPerson = new DataPerson();
+//		data.setPerson(dataPerson);
+//		
+//		String genderCode = XMLUtils.executeXPathString(document, "/ClinicalDocument/recordTarget/patientRole/patient/administrativeGenderCode/@code");
+//		
+//		DataCode gender = FactoryBeans.getCodeBeans().getGenderCodeById(genderCode);
+//		dataPerson.setGender(gender);
+//		
+//		dataPerson.setFirstName(XMLUtils.executeXPathString(document, "/ClinicalDocument/recordTarget/patientRole/patient/name/given/text()"));
+//		dataPerson.setFirstLastName(XMLUtils.executeXPathString(document, "/ClinicalDocument/recordTarget/patientRole/patient/name/family/text()"));
+//		
+//		String birthday = XMLUtils.executeXPathString(document, "/ClinicalDocument/recordTarget/patientRole/patient/birthTime/@value");
+//		SimpleDateFormat sdfAge = new SimpleDateFormat("yyyyMMdd");
+//		try {
+//			
+//			Date dateBir = sdfAge.parse(birthday);
+//			Calendar date = Calendar.getInstance();
+//			date.setTime(dateBir);
+////			LocalDate birthdate = new LocalDate(date.get(Calendar.YEAR), date.get(Calendar.MONDAY), date.get(Calendar.DAY_OF_MONTH));
+//			LocalDate birthdate = new LocalDate(date.get(Calendar.YEAR), date.get(Calendar.MONTH) +1 , date.get(Calendar.DAY_OF_MONTH));
+//			LocalDate now = new LocalDate();
+//			Years age = Years.yearsBetween(birthdate, now);
+//			
+//			dataPerson.setAge(String.valueOf(age.getYears()));
+//			
+//		} catch (ParseException e) {
+//			
+//			logger.log(Level.SEVERE, "Error al parsear la fecha de nacimiento", e);
+//			
+//		}
+//		String documentPerson = XMLUtils.executeXPathString(document, "/ClinicalDocument/recordTarget/patientRole/patient/id/@root");
+//		if(documentPerson != null){
+//			
+//			String documentNumber = documentPerson.substring(documentPerson.lastIndexOf(".")+1, documentPerson.length()-1);
+//			dataPerson.setDocumentNumber(documentNumber);
+//			
+//			documentPerson = documentPerson.substring(0, documentPerson.lastIndexOf("."));
+//			String documentTypeS = documentPerson.substring(documentPerson.lastIndexOf(".")+1, documentPerson.length());
+//			
+//			DocumentsTypesCode documentType = FactoryDAO.getCodesDAO(em).getDocumentsTypeByCode(documentTypeS);
+//			if(documentType != null){
+//				DataCode documentTypeCode = new DataCode();
+//				documentTypeCode.setCode(documentType.getDocumentsTypeCodeValue());
+//				documentTypeCode.setDisplayName(documentType.getDocumentsTypeCodeLabel());
+//				dataPerson.setDocumentType(documentTypeCode);
+//			}
+//			
+//			documentPerson = documentPerson.substring(0, documentPerson.lastIndexOf("."));
+//			String documentCountryS = documentPerson.substring(documentPerson.lastIndexOf(".")+1, documentPerson.length());
+//			
+//			CountriesCode country = FactoryDAO.getCodesDAO(em).getCountryByCode(documentCountryS);
+//			if(country != null){
+//				DataCode countryCode = new DataCode();
+//				countryCode.setCode(country.getCountryCodeLabel());
+//				countryCode.setDisplayName(country.getCountryCodeLabel());
+//				dataPerson.setDocumentType(countryCode);
+//			}
+//			
+//		}
 
 		/**
 		 * Fecha 
@@ -423,4 +428,68 @@ public class TransfusionBean implements TransfusionBeanLocal, Serializable {
 
 		return listReturn;
 	}
+	
+	
+	
+	/**
+	 * Obtener datos personales del donante 
+	 * @param documet CDA 
+	 * @return person data
+	 * @throws XPathExpressionException 
+	 */
+	private DataPerson getDataPersonFromDocument(Document document) throws XPathExpressionException {
+
+//		String root = XMLUtils.executeXPathString(document, "//ClinicalDocument//author//assignedAuthor//representedOrganization//id//@root");
+//		String extension = XMLUtils.executeXPathString(document, "//ClinicalDocument//author//assignedAuthor//representedOrganization//id//@root");
+		
+		String root = XMLUtils.executeXPathString(document, "/ClinicalDocument/id/@root");
+		String extension = XMLUtils.executeXPathString(document, "/ClinicalDocument/id/@extension");
+		PersonsRecord pr = FactoryDAO.getPeronRecordDAO(em).getCDAsRootExtension(root, extension);
+
+		// ACA desencripto
+		Identification perId = FactoryDAO.getIIdentificationDAO(em)
+				.getIdentificationByCode(CryptoConverter.decrypt(pr.getIdentificationRef()));
+
+		Person p = perId.getPerson();
+		DataPerson dp = new DataPerson();
+		dp.setFirstName(p.getPersonFirstName());
+		dp.setFirstLastName(p.getPersonFirstLastname());
+
+		String documentPerson = perId.getIdentificacionCode();
+		if (documentPerson != null) {
+
+			String documentNumber = documentPerson.substring(documentPerson.lastIndexOf(".") + 1,
+					documentPerson.length() - 1);
+			dp.setDocumentNumber(documentNumber);
+
+			documentPerson = documentPerson.substring(0, documentPerson.lastIndexOf("."));
+			String documentTypeS = documentPerson.substring(documentPerson.lastIndexOf(".") + 1,
+					documentPerson.length());
+
+			DocumentsTypesCode documentType = FactoryDAO.getCodesDAO(em).getDocumentsTypeByCode(documentTypeS);
+			if (documentType != null) {
+				DataCode documentTypeCode = new DataCode();
+				documentTypeCode.setCode(documentType.getDocumentsTypeCodeValue());
+				documentTypeCode.setDisplayName(documentType.getDocumentsTypeCodeLabel());
+				dp.setDocumentType(documentTypeCode);
+			}
+
+			documentPerson = documentPerson.substring(0, documentPerson.lastIndexOf("."));
+			String documentCountryS = documentPerson.substring(documentPerson.lastIndexOf(".") + 1,
+					documentPerson.length());
+
+			CountriesCode country = FactoryDAO.getCodesDAO(em).getCountryByCode(documentCountryS);
+			if (country != null) {
+				DataCode countryCode = new DataCode();
+				countryCode.setCode(country.getCountryCodeLabel());
+				countryCode.setDisplayName(country.getCountryCodeLabel());
+				dp.setDocumentCountry(countryCode);
+			}
+
+		}
+
+		return dp;
+
+	}
+	
 }

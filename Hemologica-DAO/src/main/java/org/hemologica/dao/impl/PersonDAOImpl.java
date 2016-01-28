@@ -25,16 +25,17 @@ public class PersonDAOImpl extends GenericDAOImpl<Person> implements IPersonDAO{
 		if(whereFilters!= null && whereFilters.size()!=0){
 			queryString += " WHERE ";
 			
-			boolean first=false;
+			boolean first=true;
 			for(String key :whereFilters.keySet()){
-				if(first)
+				if(first){
 					queryString+="p." + key + "=%" + whereFilters.get(key)+"%";
-				else
+					first = true;
+				}else
 					queryString+="and p." + key + "=%" + whereFilters.get(key)+"%";
 				
 			}
 		}
-		
+		System.out.println(">>>>> QUERY: "+ queryString);
 		Query query = em.createQuery(queryString,Person.class);
 		return (List<Person>) query.getResultList();
 

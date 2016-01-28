@@ -18,7 +18,7 @@
             <configuration>
               <transformers>
                 <transformer>
-                  <mainClass>org.hemologica.services.client.stub.CDASenderToActiveMQ</mainClass>
+                  <mainClass>org.hemologica.services.client.stub.CDASenderToWS</mainClass>
                 </transformer>
               </transformers>
             </configuration>

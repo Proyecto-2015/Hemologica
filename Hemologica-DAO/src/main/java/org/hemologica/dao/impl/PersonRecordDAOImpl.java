@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+
+import org.hemologica.dao.IIdentificationDAO;
 import org.hemologica.dao.IPersonRecordDAO;
 import org.hemologica.dao.converter.CryptoConverter;
 import org.hemologica.dao.model.Identification;
 import org.hemologica.dao.model.Person;
 import org.hemologica.dao.model.PersonsRecord;
+import org.hemologica.factories.FactoryDAO;
 
 public class PersonRecordDAOImpl extends GenericDAOImpl<PersonsRecord> implements IPersonRecordDAO{
 
@@ -27,7 +30,7 @@ public class PersonRecordDAOImpl extends GenericDAOImpl<PersonsRecord> implement
 		Person person = em.find(Person.class, userId);
 		List<String> ids = new ArrayList<String>();
 		for(Identification i : person.getIdentifications()){
-			ids.add(CryptoConverter.encrypt(i.getId().toString()));
+			ids.add(CryptoConverter.encrypt(i.getIdentificacionCode()));
 		}
 		query.setParameter("ids", ids);
 		return (List<PersonsRecord>) query.getResultList();
@@ -39,7 +42,9 @@ public class PersonRecordDAOImpl extends GenericDAOImpl<PersonsRecord> implement
 	public List<PersonsRecord> getCDAsIdentificationId(Long identificationId) {
 		
 		Query query = em.createNamedQuery("PersonsRecord.findByIdentificationRefCode");
-		query.setParameter("ids", CryptoConverter.encrypt(identificationId.toString()));
+		IIdentificationDAO idDAO = FactoryDAO.getIIdentificationDAO(em);
+		Identification id = idDAO.getIdentificationById(identificationId);
+		query.setParameter("ids", CryptoConverter.encrypt(id.getIdentificacionCode()));
 		return (List<PersonsRecord>) query.getResultList();
 	}
 

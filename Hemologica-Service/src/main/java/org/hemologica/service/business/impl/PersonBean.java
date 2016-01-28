@@ -10,16 +10,23 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
+import org.hemologica.dao.IDocumentDAO;
 import org.hemologica.dao.IIdentificationDAO;
 import org.hemologica.dao.IPersonDAO;
 import org.hemologica.dao.IPersonRecordDAO;
 import org.hemologica.dao.converter.CryptoConverter;
+import org.hemologica.dao.impl.DocumentDAOImpl;
 import org.hemologica.dao.impl.IdentificationDAOImpl;
 import org.hemologica.dao.impl.PersonDAOImpl;
 import org.hemologica.dao.impl.PersonRecordDAOImpl;
+import org.hemologica.dao.model.CountriesCode;
+import org.hemologica.dao.model.Document;
+import org.hemologica.dao.model.DocumentsTypesCode;
 import org.hemologica.dao.model.Identification;
 import org.hemologica.dao.model.Person;
 import org.hemologica.dao.model.PersonsRecord;
+import org.hemologica.datatypes.DataCode;
 import org.hemologica.empi.adapter.IEMPIAdapter;
 import org.hemologica.empi.adapter.pixpdq.message.CreatePatientRequest;
 import org.hemologica.empi.adapter.pixpdq.message.CreatePatientResponse;
@@ -129,12 +136,15 @@ public class PersonBean implements IPersonBean, Serializable {
 			}
 
 			cda = XMLUtils.removeCDANamespaces(cda);
+			
 			if (cdaType.equals(cdaDonationCode)) {
-				baseXConnectionTransfusion.addElement(cdaRoot + "." + cdaExtension, cda);
-			} else if (cdaType.equals(cdaTransfusionCode)) {
-				baseXConnectionLaboratory.addElement(cdaRoot + "." + cdaExtension, cda);
-			} else if (cdaType.equals(cdaLaboratoryCode)) {
 				baseXConnectionDonations.addElement(cdaRoot + "." + cdaExtension, cda);
+				
+			} else if (cdaType.equals(cdaTransfusionCode)) {
+				baseXConnectionTransfusion.addElement(cdaRoot + "." + cdaExtension, cda);
+				
+			} else if (cdaType.equals(cdaLaboratoryCode)) {
+				baseXConnectionLaboratory.addElement(cdaRoot + "." + cdaExtension, cda);
 			}
 			deleteCDA = true;
 
@@ -151,12 +161,15 @@ public class PersonBean implements IPersonBean, Serializable {
 			if (deleteCDA) {
 				// delete CDA from basex
 				if (cdaType.equals(cdaDonationCode)) {
-					baseXConnectionTransfusion.removeElement(cdaRoot + "." + cdaExtension);
-				} else if (cdaType.equals(cdaTransfusionCode)) {
-					baseXConnectionLaboratory.removeElement(cdaRoot + "." + cdaExtension);
-				} else if (cdaType.equals(cdaLaboratoryCode)) {
 					baseXConnectionDonations.removeElement(cdaRoot + "." + cdaExtension);
+					
+				} else if (cdaType.equals(cdaTransfusionCode)) {
+					baseXConnectionTransfusion.removeElement(cdaRoot + "." + cdaExtension);
+					
+				} else if (cdaType.equals(cdaLaboratoryCode)) {
+					baseXConnectionLaboratory.removeElement(cdaRoot + "." + cdaExtension);
 				}
+				
 			}
 			// rollback basex
 			throw ex;
@@ -170,13 +183,45 @@ public class PersonBean implements IPersonBean, Serializable {
 		PersonsRecord personsRecord = new PersonsRecord();
 		// personsRecord.setIdentification(identification); 12-12-2015 change
 		// bruno
-		personsRecord.setIdentificationRef(CryptoConverter.encrypt(identification.getId().toString()));
+		personsRecord.setIdentificationRef(CryptoConverter.encrypt(identification.getIdentificacionCode()));
 		personsRecord.setPersonsRecordCdaExtension(cdaExtension);
 		personsRecord.setPersonsRecordCdaRoot(cdaRoot);
 		IPersonRecordDAO personRecordDAO = new PersonRecordDAOImpl(em);
+		IDocumentDAO documentDAO = new DocumentDAOImpl(em);
 		personRecordDAO.create(personsRecord);
+		Document doc = this.getDocumentFromIdentification(identification);
+		doc.setPerson(identification.getPerson());
+		documentDAO.create(doc);
 		return identification;
 
+	}
+	
+	
+	private Document getDocumentFromIdentification(Identification id){
+		
+		
+		Document dp = new Document();
+		String documentPerson = id.getIdentificacionCode();
+		if (documentPerson != null) {
+
+			String documentNumber = documentPerson.substring(documentPerson.lastIndexOf(".") + 1,
+					documentPerson.length() - 1);
+			dp.setDocumentNumber(documentNumber);
+			documentPerson = documentPerson.substring(0, documentPerson.lastIndexOf("."));
+			String documentTypeS = documentPerson.substring(documentPerson.lastIndexOf(".") + 1,
+					documentPerson.length());
+
+			DocumentsTypesCode documentType = FactoryDAO.getCodesDAO(em).getDocumentsTypeByCode(documentTypeS);
+			dp.setDocumentsTypesCode(documentType);
+
+			documentPerson = documentPerson.substring(0, documentPerson.lastIndexOf("."));
+			String documentCountryS = documentPerson.substring(documentPerson.lastIndexOf(".") + 1, documentPerson.length());
+
+			CountriesCode country = FactoryDAO.getCodesDAO(em).getCountryByCode(documentCountryS);
+			dp.setCountriesCode(country);
+		}
+		
+		return dp;
 	}
 
 	private Identification getPersonByEMPIIdentifier(Identifier iden) {
@@ -191,7 +236,7 @@ public class PersonBean implements IPersonBean, Serializable {
 		PersonsRecord personsRecord = new PersonsRecord();
 		// personsRecord.setIdentification(identification); 12-12-2015 change
 		// bruno
-		personsRecord.setIdentificationRef(CryptoConverter.encrypt(identification.getId().toString()));
+		personsRecord.setIdentificationRef(CryptoConverter.encrypt(identification.getIdentificacionCode()));
 		personsRecord.setPersonsRecordCdaExtension(cdaExtension);
 		personsRecord.setPersonsRecordCdaRoot(cdaRoot);
 		IPersonRecordDAO personRecordDAO = new PersonRecordDAOImpl(em);
@@ -223,8 +268,9 @@ public class PersonBean implements IPersonBean, Serializable {
 		}
 		person.setPersonEmail(data.get("email"));
 		person.setPersonTelephone(data.get("phone"));
-		person.setPersonAddress("addresStreet");
-		person.setZipCode(data.get("addresZipPostalCode"));
+		person.setPersonAddress(data.get("addresStreet"));
+		person.setZipCode(data.get(data.get("addresZipPostalCode")));
+		person.setGenderCode(FactoryDAO.getCodesDAO(em).getGenderCodeByCode(data.get("sex")));		
 
 		identification = new Identification();
 		identification.setIdentificacionCode(data.get("patientIdentifier"));

@@ -773,7 +773,7 @@ DROP TABLE IF EXISTS `identifications`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `identifications` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `persons_id` bigint(20) NOT NULL,
   `identificacion_code` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
@@ -1068,7 +1068,6 @@ DROP TABLE IF EXISTS `persons_records`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `persons_records` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `identifications_id` int(11) NOT NULL,
   `persons_record_cda_extension` varchar(255) DEFAULT NULL,
   `persons_record_cda_root` varchar(255) DEFAULT NULL,
   `person_record_identification_id` varchar(255) DEFAULT NULL,
@@ -1533,3 +1532,29 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2016-01-20 20:03:28
+
+
+
+DROP TABLE IF EXISTS `states_codes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `states_codes` (
+  `state_id` int(11) NOT NULL,
+  `state_country` int(11) NOT NULL,
+  `state_code` varchar(45) NOT NULL,
+  `state_display_name` varchar(45) NOT NULL,
+  PRIMARY KEY (`state_id`),
+  KEY `fk_states_codes_1_idx` (`state_country`),
+  CONSTRAINT `fk_states_codes_1` FOREIGN KEY (`state_country`) REFERENCES `countries_codes` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `states_codes`
+--
+
+LOCK TABLES `states_codes` WRITE;
+/*!40000 ALTER TABLE `states_codes` DISABLE KEYS */;
+INSERT INTO `states_codes` VALUES (1,1,'1','label_montevideo'),(2,1,'3','label_canelones'),(3,1,'3','label_maldonado'),(4,1,'4','label_rocha');
+/*!40000 ALTER TABLE `states_codes` ENABLE KEYS */;
+UNLOCK TABLES;

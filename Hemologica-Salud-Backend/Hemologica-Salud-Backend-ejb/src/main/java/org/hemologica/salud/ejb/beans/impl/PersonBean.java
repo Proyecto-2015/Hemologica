@@ -60,8 +60,8 @@ public class PersonBean implements PersonBeanLocal {
 		data.setSecondLastName((p.getPersonSecondLastname() == null) ? "" :p.getPersonSecondLastname());
 		data.setAddress((p.getPersonAddress() == null) ? "" :p.getPersonAddress());
 		data.setEmail((p.getPersonEmail() == null) ? "" :p.getPersonEmail());
-		data.setAllowNotificationAbleToDonate(p.getAllowNotificationAbleToDonate());
-		data.setAllowNotificationNeedDonor(p.getAllowNotificationNeedDonor());
+		data.setAllowNotificationAbleToDonate(p.getAllowNotificationAbleToDonate() == null ? false : p.getAllowNotificationAbleToDonate());
+		data.setAllowNotificationNeedDonor(p.getAllowNotificationNeedDonor() == null ? false : p.getAllowNotificationNeedDonor());
 		
 		if(p.getGenderCode()!= null){
 			
@@ -76,7 +76,8 @@ public class PersonBean implements PersonBeanLocal {
 			Calendar date = Calendar.getInstance();
 			date.setTime(p.getPersonBirthday());
 			
-			LocalDate birthdate = new LocalDate(date.get(Calendar.YEAR),date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH));
+//			LocalDate birthdate = new LocalDate(date.get(Calendar.YEAR),date.get(Calendar.MONTH), date.get(Calendar.DAY_OF_MONTH));
+			LocalDate birthdate = new LocalDate(date.get(Calendar.YEAR),date.get(Calendar.MONTH) + 1, date.get(Calendar.DAY_OF_MONTH));
 			LocalDate now = new LocalDate();
 			Years age = Years.yearsBetween(birthdate, now);
 			data.setAge(String.valueOf(age.getYears()));

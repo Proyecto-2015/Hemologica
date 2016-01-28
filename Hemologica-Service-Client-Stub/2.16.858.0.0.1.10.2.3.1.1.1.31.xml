@@ -59,9 +59,7 @@
         <structuredBody>
             <component>
                 <section>
-
                     <code code="12719002" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" displayName="transfusión de plaquetas"/>
-
                     <entry>
                         <procedure moodCode="EVN" classCode="PROC">
                             <id root="id"/>

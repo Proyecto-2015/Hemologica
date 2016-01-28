@@ -122,8 +122,21 @@ public class PersonRecordBloodBB implements Serializable{
 				Collections.sort(transfusions, new Comparator<DataTransfusion>() {
 					  
 					@Override public int compare( DataTransfusion t1, DataTransfusion t2) {
-						
-					    return t2.getDate().compareTo(t1.getDate());
+						if(t2 != null && t1 != null){
+							if(t2.getDate() != null && t1.getDate() != null){
+								return t2.getDate().compareTo(t1.getDate());
+							}else if(t1.getDate() == null && t2.getDate() != null){
+								return -1;
+							}else if (t1.getDate() != null && t2.getDate() == null){
+								return 1;
+							}
+							return 0;
+						}else if(t1 == null && t2 != null){
+							return -1;
+						}else if (t1 != null && t2 == null){
+							return 1;
+						}
+						return 0;
 					    
 					  }
 				});
