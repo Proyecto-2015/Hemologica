@@ -16,6 +16,7 @@ import org.hemologica.dao.IIdentificationDAO;
 import org.hemologica.dao.IPersonDAO;
 import org.hemologica.dao.IPersonRecordDAO;
 import org.hemologica.dao.converter.CryptoConverter;
+import org.hemologica.dao.exceptions.DAOException;
 import org.hemologica.dao.impl.DocumentDAOImpl;
 import org.hemologica.dao.impl.IdentificationDAOImpl;
 import org.hemologica.dao.impl.PersonDAOImpl;
@@ -177,7 +178,7 @@ public class PersonBean implements IPersonBean, Serializable {
 
 	}
 
-	private Identification createPersonAndRecord(Map<String, String> data, String cdaRoot, String cdaExtension) {
+	private Identification createPersonAndRecord(Map<String, String> data, String cdaRoot, String cdaExtension) throws Exception {
 
 		Identification identification = this.createPerson(data);
 		PersonsRecord personsRecord = new PersonsRecord();
@@ -190,8 +191,15 @@ public class PersonBean implements IPersonBean, Serializable {
 		IDocumentDAO documentDAO = new DocumentDAOImpl(em);
 		personRecordDAO.create(personsRecord);
 		Document doc = this.getDocumentFromIdentification(identification);
-		doc.setPerson(identification.getPerson());
-		documentDAO.create(doc);
+		
+		try {
+			if(!documentDAO.existDocument(doc)){
+				doc.setPerson(identification.getPerson());
+				documentDAO.create(doc);
+			}
+		} catch (DAOException e) {
+			throw new Exception(e);
+		}
 		return identification;
 
 	}
@@ -270,13 +278,15 @@ public class PersonBean implements IPersonBean, Serializable {
 		person.setPersonTelephone(data.get("phone"));
 		person.setPersonAddress(data.get("addresStreet"));
 		person.setZipCode(data.get(data.get("addresZipPostalCode")));
-		person.setGenderCode(FactoryDAO.getCodesDAO(em).getGenderCodeByCode(data.get("sex")));		
+		person.setGenderCode(FactoryDAO.getCodesDAO(em).getGenderCodeById(data.get("sex")));		
 
 		identification = new Identification();
 		identification.setIdentificacionCode(data.get("patientIdentifier"));
 
 		IPersonDAO personDAO = new PersonDAOImpl(em);
 		
+		person.setAllowNotificationAbleToDonate(false);
+		person.setAllowNotificationNeedDonor(false);
 
 		person = personDAO.create(person);
 		identification.setPerson(person);

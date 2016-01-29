@@ -12,6 +12,7 @@ import javax.persistence.*;
 @Table(name="documents")
 @NamedQueries({
 @NamedQuery(name="Document.findAll", query="SELECT d FROM Document d"),
+@NamedQuery(name="Document.findDoc", query="SELECT d FROM Document d WHERE documentNumber = :doc AND countriesCode = :country AND documentsTypesCode = :type"),
 @NamedQuery(name="Document.findPersonsFilters", query="SELECT p.person FROM Document p where "
 		+ " p.documentNumber like :filterDocumentNumber "
 		+ "and concat(p.person.personFirstName,' ',p.person.personSecondName, ' ',p.person.personFirstLastname, ' ',"

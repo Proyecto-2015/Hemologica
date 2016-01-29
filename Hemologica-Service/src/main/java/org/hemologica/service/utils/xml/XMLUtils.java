@@ -123,6 +123,7 @@ public class XMLUtils {
 	      throw io;
 	    }
 	    catch (SAXException se){
+	      se.printStackTrace();
 	      return false;
 	  }
 	}

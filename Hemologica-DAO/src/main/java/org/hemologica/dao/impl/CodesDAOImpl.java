@@ -534,8 +534,7 @@ public class CodesDAOImpl implements ICodesDAO{
 		List<?> list = query.getResultList();
 		return (!list.isEmpty()) ? (GenderCode) list.get(0) : null;
 	}
-
-
+	
 	public DocumentsTypesCode getDocumentsTypeByCode(String documentTypeS) {
 		
 		Query query = em.createNamedQuery("DocumentsTypesCode.findByCode");

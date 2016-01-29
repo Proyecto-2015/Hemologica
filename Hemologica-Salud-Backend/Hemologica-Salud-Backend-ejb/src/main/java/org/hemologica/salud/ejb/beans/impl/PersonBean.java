@@ -39,10 +39,8 @@ public class PersonBean implements PersonBeanLocal {
 		List<Person> list = FactoryDAO.getPeronDAO(em).getPersonsFilters(whereFilters);
 		
 		for(Person p : list){
-			
 			DataPerson data = getDataPeron(p);
 			listReturn.add(data);
-			
 		}
 		
 		return listReturn;

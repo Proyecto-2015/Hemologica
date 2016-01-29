@@ -44,11 +44,12 @@ public class ServiceImpl implements Service {
 				docElement.setAttribute("xmlns", "urn:hl7-org:v3");
 				docElement.setAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
 				cda = XMLUtils.documentToString(document);
-				if( ! XMLUtils.validateWithExtXSDUsingSAX(cda, xsd) ){
-					throw ServiceException.create(ServiceException.CDA_VALIDATION_SCHEMA_ERROR_CODE, ServiceException.CDA_VALIDATION_SCHEMA_ERROR_DETAILS);
-				}
+//				if( ! XMLUtils.validateWithExtXSDUsingSAX(cda, xsd) ){
+//					throw ServiceException.create(ServiceException.CDA_VALIDATION_SCHEMA_ERROR_CODE, ServiceException.CDA_VALIDATION_SCHEMA_ERROR_DETAILS);
+//				}
 			} catch (Exception ex) {
 				logger.log(Level.SEVERE, ex.getMessage(), ex);
+				ex.printStackTrace();
 				throw ServiceException.create(ServiceException.CDA_VALIDATION_SCHEMA_ERROR_CODE, ServiceException.CDA_VALIDATION_SCHEMA_ERROR_DETAILS);
 			}
 			

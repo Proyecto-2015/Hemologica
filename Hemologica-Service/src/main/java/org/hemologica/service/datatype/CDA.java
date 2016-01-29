@@ -68,10 +68,19 @@ public class CDA {
 			
 			n = list.item(i);
 			if( n.getNodeName().equals("name") ||
-				n.getNodeName().equals("telecom") ||
 				n.getNodeName().equals("id")
 					){
 				patient.removeChild(n);
+			}
+			
+		}
+		list = patient.getParentNode().getChildNodes();
+		n = null;
+		for(int i = 0; i < list.getLength(); ++i){
+			
+			n = list.item(i);
+			if( n.getNodeName().equals("telecom")){
+				patient.getParentNode().removeChild(n);
 			}
 			
 		}
@@ -143,7 +152,7 @@ public class CDA {
 			}
 
 			// obtener datos de contacto
-			nodes = patientElem.getElementsByTagName("telecom");
+			nodes = ((Element)patientElem.getParentNode()).getElementsByTagName("telecom");
 			Element elem;
 			for (int i = 0; i < nodes.getLength(); ++i) {
 				elem = (Element) nodes.item(i);
@@ -165,6 +174,8 @@ public class CDA {
 
 	}
 
+	
+	
 	public void loadXDSData() throws TransformerException, XPathExpressionException {
 
 		// author
