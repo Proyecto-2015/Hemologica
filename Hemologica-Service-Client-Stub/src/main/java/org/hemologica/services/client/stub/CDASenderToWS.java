@@ -4,8 +4,8 @@ import java.io.File;
 import java.net.URL;
 
 import org.apache.commons.io.FileUtils;
-import org.hemologica.service.ws.client.impl.Service;
-import org.hemologica.service.ws.client.impl.ServiceImplService;
+import org.hemologica.service.ws.impl.Service;
+import org.hemologica.service.ws.impl.ServiceImplService;
 
 public class CDASenderToWS {
 	

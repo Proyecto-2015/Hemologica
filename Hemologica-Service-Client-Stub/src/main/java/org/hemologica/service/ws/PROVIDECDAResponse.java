@@ -1,5 +1,5 @@
 
-package org.hemologica.service.ws.client;
+package org.hemologica.service.ws;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -24,9 +24,8 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * 
  */
-@SuppressWarnings("restriction")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PROVIDE_CDAResponse", namespace="http://impl.ws.service.hemologica.org/")
+@XmlType(name = "PROVIDE_CDAResponse")
 public class PROVIDECDAResponse {
 
 

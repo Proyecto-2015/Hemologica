@@ -1,246 +1,119 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ClinicalDocument xmlns="urn:hl7-org:v3"  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="urn:hl7-org:v3 ftp://ftp.ihe.net/TF_Implementation_Material/PCC/schemas/cda/infrastructure/cda/CDA.xsd"
-    classCode="DOCCLIN" 
-    moodCode="EVN"
-    >
-    
-    <!-- OID HEMOLOGICA = 2.16.858.0.0.1.10.2.3.1.1 -->
-    <!-- OID HEMOLOGICA-CDA = 2.16.858.0.0.1.10.2.3.1.1.1 -->
-    <!-- OID HEMOLOGICA-HCE = 2.16.858.0.0.1.10.2.3.1.1.2 -->
-    <!-- OID HEMOLOGICA-PRODUCTOS = 2.16.858.0.0.1.10.2.3.1.1.3 -->
-    <!-- OID HEMOLOGICA-Muestra-Donaciones = 2.16.858.0.0.1.10.2.3.1.1.4 -->
-    
-    <!--  ********************************************************    CDA Header  ********************************************************  -->
-    
-    <!-- Estructura fija que referencia al esquema del CDA normativo del HL7 contra el que se valida el xml: -->
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ClinicalDocument xmlns="urn:hl7-org:v3">
     <typeId root="2.16.840.1.113883.1.3" extension="POCD_HD000040"/>
-    
-    <!-- Puede no ir creo -->
-    <templateId root="2.16.840.1.113883.19.57.7.1.3.1" 
-        extension="CCD_RM201201CO01"
-        assigningAuthorityName="HL7CO"/>
-        
-        
-    <!-- Código que identifica de forma unica el documento - OID es HEMOLOGICA-CDA y extension un numero generado por hemologica -->
-    <id root="2.16.858.0.0.1.10.2.3.1.1.1" extension="2"/>
-        
-    <!-- Identificación del tipo de documento -->
-    <!-- El código que se encuentra en esta etiqueta, corresponde a un procedimiento. Hay que ver si es correcto utilizarlo --> 
-    <code codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" code="4321000179101" displayName="Informe de Hematologia"/>
-        
-    <title>Donación de Sangre</title>
-   
-   <!-- Fecha en que se genero el documento -->
-    <effectiveTime value="20150715195500"/>
-  
- 
-    <!-- confidencialidad - N(normal) - R (restringido) - V (muy restringido)  -->
+    <templateId root="2.16.840.1.113883.19.57.7.1.3.1" extension="CCD_RM201201CO01"/>
+    <id root="2.16.858.0.0.1.10.2.3.1.1.1" extension="81"/>
+    <code code="4321000179102"/>
+    <title>Transfusion de sangre</title>
+    <effectiveTime value="20160128214515"/>
     <confidentialityCode codeSystemName="Confidentiality" code="N" codeSystem="2.16.840.1.113883.5.25" displayName="normal"/>
-  
     <languageCode code="es-UY"/>
-    <!-- <languageCode code="UY" codeSystem="2.16.840.1.113883.6.121"/> -->
-    
-    
     <recordTarget typeCode="RCT" contextControlCode="OP">
         <patientRole classCode="PAT">
-            
-            <!-- OID HEMOLOGICA-HCE = 2.16.858.0.0.1.10.2.3.1.1.2 -->
-            <!-- Número de historia del paciente en Hemologica - -->
-            <id  root="2.16.858.0.0.1.10.2.3.1.1.2" extension="49354236"/>
-
-
-             <telecom value="tel:+1(301)111-1111" use="HP"/>
-                <telecom value="mailto:brunostrasser18@gmail.com" use="HP"/>
-            
+            <id root="2.16.858.0.0.1.10.2.3.1.1.2" extension="53"/>
+            <telecom value="mailto:brunostrasser18@gmail.com" use="HP"/>
             <patient classCode="PSN" determinerCode="INSTANCE">
-                
-                <!-- Identificador del paciente  El root 2.16.858.1.858.68909.12345678 - Código CI = 68909 - CI = 12345678  -->
-                <!-- asocia el identificador de persona definido por la UNAOID, no es necesario incorporar la extensión.  -->  
-                <id  root="2.16.858.68909.48719360" extension="49354237"/>
-           
-                <!-- Telefono y MAil -->
-                <!-- HP: Primary home WP: Work Place -->
-               
-           
-                <!-- Nombres y Apellidos -->
+                <id root="2.16.858.1.858.68909.21356789"/>
                 <name>
-                    <given>Gonzalo</given>
-                    <given>Pablo</given>
-                    <family>Sanchez</family>
+                    <given>Carlos</given>
+                    <given></given>
                     <family>Perez</family>
+                    <family></family>
                 </name>
-                    
-                <administrativeGenderCode code="1" displayName="Masculino" codeSystem="2.16.858.2.10000675.69600" />    
-                
-                <birthTime  value="19930223"/>
-                
+                <administrativeGenderCode code="1" codeSystem="2.16.858.2.10000675.69600"/>
+                <birthTime value="19900128"/>
             </patient>
         </patientRole>
     </recordTarget>
-    
     <author typeCode="AUT" contextControlCode="OP">
-        <time value="20150715202500"/>
+        <time value="20160128214515"/>
         <assignedAuthor classCode="ASSIGNED">
-            
-            <!-- Identificador del profesional de la salud. -->
-            <!-- El root 2.16.858.2.10000675.69586 identifica al registro de Profesionales (provisto por SNIS), en extensión se encuentra el número de habilitación del profesional --> 
-            <!-- En caso de no aplicar deberá utilizarse el identificador de persona definido por la UNAOID, sin extensión. <id root="2.16.858.1.858.68909.12345678"/>  -->
-            <id root="2.16.858.2.10000675.69586" extension="3456"/>
-            
+            <id root="2.16.858.1.858.68909.35679873"/>
             <assignedPerson>
                 <name>
-                    <prefix>Dra.</prefix>
-                    <given>Paula</given>
-                    <family>Roche</family>                    
+                    <given>Carlos</given>
+                    <given></given>
+                    <family>Perez</family>
+                    <family></family>
                 </name>
             </assignedPerson>
-            
-            <representedOrganization>  
-                <id root="2.16.858.0.0.1.10.2.3.6" />
-                <name>Hospital de Clinicas</name>  
-            </representedOrganization> 
-            
+            <representedOrganization>
+                <id root="2.16.858.0.0.1.10.2.3.6"/>
+                <name>Banco de Sangre 1</name>
+            </representedOrganization>
         </assignedAuthor>
     </author>
-    
-    <!-- Organización  que  está  a  cargo  de  la conservación del  documento-->
     <custodian>
         <assignedCustodian>
             <representedCustodianOrganization>
-                <!-- OID de Hemologica  -->
                 <id root="2.16.858.0.0.1.10.2.3.1.1"/>
                 <name>HEMOLOGICA</name>
             </representedCustodianOrganization>
         </assignedCustodian>
     </custodian>
-    
-    <!--  ********************************************************    CDA Body  ********************************************************  -->  
-     <component>       
+    <component>
         <structuredBody>
-            <component>          
-                <section>         
-                    <!-- Codigo del Procedimiento.
-                        54790000 - transfusión de un componente sanguíneo -->
-                     
-	                <code code="12719002" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" displayName="transfusión de plaquetas"/>
-                    <!--  ********************************************************    Representacion Grafica  ********************************************************  -->
-                    <title>Transfusión de Sangre</title>
-                	<text>
-                		<table>
-                			<thead>
-                				<tr>
-                					<th>Description</th>
-                					<th>Date and Time (Range)</th>
-                					<th>Status</th>
-                				</tr>
-                			</thead>
-                			<tbody>
-                				<tr ID="Procedure1">
-                					<td ID="ProcedureDesc1">Laparoscopic appendectomy</td>
-                					<td>(03 Feb 2014 09:22am- 03 Feb 2014 11:15am)</td>
-                					<td>Completed</td>
-                				</tr>
-                			</tbody>
-                		</table>
-                	</text>
-                    
-                    <!--  ********************************************************    Resultados  ********************************************************  -->  
+            <component>
+                <section>
                     <entry>
-                		<!-- Procedures should be used for care that directly changes the patient's physical state.-->
-                		<procedure moodCode="EVN" classCode="PROC">
-                			<templateId root="2.16.840.1.113883.10.20.22.4.14" />
-                		
-                			<!-- identificador de la transfusion realizada -->
-                			<id root="64af26d5-88ef-4169-ba16-c6ef16a1824f"/>
-                			
-                			<!-- código de SNOMED-CT del procedimient de la transfusión -->
-                			<code code="12719002" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" displayName="transfusión de plaquetas"/>
-
-                            <!-- “cancelled“ - The Act has been abandoned before activation. (No Efectuada)
-                                 “completed” - An Act that has terminated normally after all of its constituents have been performed. (Efectuada) 
-                                 Fuente - http://www.cdapro.com/know/25035 -->
-                			<statusCode code="completed" />
-                			
-                			<!-- Hora de la Transfusión -->
-                			<effectiveTime >
-                				<low value="20140203092205" />
-                				<high value="20140203111514" />
-                			</effectiveTime>
-                			
-                			
-                			<!-- OID HEMOLOGICA-PRODUCTOS = 2.16.858.0.0.1.10.2.3.1.1.3 -->
-                            <!-- OID HEMOLOGICA-Muestra-Donaciones = 2.16.858.0.0.1.10.2.3.1.1.4 -->
-                			<!-- id producto a transfundir -->
-                			<specimen typeCode="SPC">
-                            	<specimenRole classCode="SPEC">
-                            	<id xmlns="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                            	assigningAuthorityName="NIST HL7 Test Laboratory" 
-                            	extension="cefcdec2-4432-435e-a07f-00023d96b621" root="2.16.858.0.0.1.10.2.3.1.1.3"/>
-                            	</specimenRole>
-                            </specimen>
-                            
-                            <!-- id Donacion -->
+                        <procedure moodCode="EVN" classCode="PROC">
+                            <id root="id"/>
+                            <code codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" code="54790000" displayName="transfusión de un componente sanguíneo (procedimiento)"/>
+                            <statusCode code="completed"/>
+                            <effectiveTime/>
                             <specimen typeCode="SPC">
-                            	<specimenRole classCode="SPEC">
-                            	<id xmlns="urn:hl7-org:v3" xmlns:mif="urn:hl7-org:v3/mif" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                            	   assigningAuthorityName="NIST HL7 Test Laboratory" 
-                            	   extension="cefcdec2-4432-435e-a07f-00023d96b621" root="2.16.858.0.0.1.10.2.3.1.1.4"/>
-                            	</specimenRole>
+<specimenRole classCode="SPEC">
+    <id root="123467"/>
+    <specimenPlayingEntity>
+        <code codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" code="122564002" displayName="espécimen de hemoderivado obtenido de una bolsa de sangre (espécimen)"/>
+    </specimenPlayingEntity>
+</specimenRole>
                             </specimen>
-                			
-                			<!--
-                			    entryRelationShip (http://www.cdapro.com/know/25043)
-                			    typeCode:
-                                    -CAUS: the source caused the target
-                                    -COMP: the target is a component of the source
-                                    -GEVL: the source observation evaluates the target goal
-                                    -MFST: the source is a manifestation of the target
-                                    -REFR: the source and target have an undefined realtionship
-                                    -RSON: the target is the reason/rationale of the source
-                                    -SAS: the source starts after the target
-                                    -SPRT: the target provides supporting evidence for the source
-                                    -SUBJ: the target is the subject of the source
-                                    -XCRPT: the source is excerpted from the target
-                			
-                			-->
-                			<!-- Volumen transfundido - VER SI ESTA BIEN PONERLO ASI -->
-                			<entryRelationship typeCode="SPRT" >
-                          		<observation classCode="OBS" moodCode="EVN">
-                          		    <code code="118565006" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" displayName="volumen (propiedad) (calificador)"></code>
-                          		    <value value="90" unit="ml"/>
-                    		    </observation>
-                			</entryRelationship>
-                			
-                			<!-- Analisis PreTransfusionales -->
-                		    <entryRelationship typeCode="CAUS" >
-                		           <observation classCode="OBS" moodCode="EVN">
-                		            <!-- 252314007 - prueba de transfusión sanguínea-->
-                    			    <code code="77020008" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" displayName="prueba de Coombs directa (procedimiento)" />
-                    			   </observation>
-                    		</entryRelationship>
-                			
-                			<!-- EVENTOS ADVERSOS SI CORRESPONDE -->
-                		    <entryRelationship typeCode="CAUS" >
-                		           <observation classCode="OBS" moodCode="EVN">
-                    			    <code code="341009" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" displayName="reacción de incompatibilidad ABO" />
-                    			   </observation>
-                    		</entryRelationship>
-                			
-                		</procedure>
-                		
-                		
-            	    </entry>
-                                
+                            <specimen typeCode="SPC">
+<specimenRole classCode="SPEC">
+    <id root="6d430b55-2eef-4d5c-8244-d67f29ba593e"/>
+    <specimenPlayingEntity>
+        <code codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" code="122563008" displayName="espécimen obtenido de una bolsa de sangre de un paciente (espécimen)"/>
+    </specimenPlayingEntity>
+</specimenRole>
+                            </specimen>
+                            <entryRelationship typeCode="COMP">
+<observation classCode="OBS" moodCode="EVN">
+    <code codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" code="256395009"/>
+</observation>
+                            </entryRelationship>
+                            <entryRelationship typeCode="SPRT">
+<observation classCode="OBS" moodCode="EVN">
+    <code codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" code="118565006" displayName="SNOMED-CT"/>
+</observation>
+                            </entryRelationship>
+                        </procedure>
+                    </entry>
                 </section>
-            </component>       
-        </structuredBody>  
-        
-         <!-- <nonXMLBody>
-            <text>
-                <reference value="http://img.docstoccdn.com/thumb/orig/50463157.png"/>
-            </text>
-        </nonXMLBody> -->
-    </component> 
-    
+            </component>
+            <component>
+                <section>
+                    <entry>
+                        <organizer classCode="BATTERY" moodCode="EVN">
+                            <statusCode code="completed"/>
+                            <component>
+<observation classCode="OBS" moodCode="EVN">
+    <code codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" code="16742006"/>
+    <statusCode code="completed"/>
+    <value code="260385009" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT"/>
+</observation>
+                            </component>
+                            <component>
+<observation classCode="OBS" moodCode="EVN">
+    <code codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" code="77020008"/>
+    <statusCode code="completed"/>
+    <value code="260385009" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT"/>
+</observation>
+                            </component>
+                        </organizer>
+                    </entry>
+                </section>
+            </component>
+        </structuredBody>
+    </component>
 </ClinicalDocument>

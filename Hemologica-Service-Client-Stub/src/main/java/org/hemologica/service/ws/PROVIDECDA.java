@@ -1,5 +1,5 @@
 
-package org.hemologica.service.ws.client;
+package org.hemologica.service.ws;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -25,9 +25,8 @@ import javax.xml.bind.annotation.XmlType;
  * 
  * 
  */
-@SuppressWarnings("restriction")
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PROVIDE_CDA", namespace="http://impl.ws.service.hemologica.org/", propOrder = {
+@XmlType(name = "PROVIDE_CDA", propOrder = {
     "arg0"
 })
 public class PROVIDECDA {

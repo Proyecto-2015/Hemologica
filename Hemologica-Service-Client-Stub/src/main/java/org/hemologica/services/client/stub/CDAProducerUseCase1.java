@@ -5,9 +5,13 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -18,12 +22,19 @@ import javax.xml.transform.TransformerException;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.apache.commons.io.FileUtils;
+
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+import org.hemologica.service.ws.MovementData;
+import org.hemologica.service.ws.impl.ParseException;
+import org.hemologica.service.ws.impl.Service;
+import org.hemologica.service.ws.impl.ServiceImplService;
 
 public class CDAProducerUseCase1 {
 
+	private static String url = "http://localhost:8082/Hemologica-Service/Service?wsdl";
+	
 	private static String CDA_DONATION_TYPE = "2.16.840.1.113883.1.3";
 	private static String CDA_LABORATORY_TYPE = "2.16.840.1.113883.1.3";
 	private static String CDA_TRANSFUSION_TYPE = "2.16.840.1.113883.1.3";
@@ -62,12 +73,12 @@ public class CDAProducerUseCase1 {
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 
-		String outputPath = "/home/bruno/Escritorio/cda_generados";
+		String outputPath = "/home/bruno/Escritorio/cda_generados/input";
 		Integer offsetDonation = 0;
 		Integer offsetLaboratory = 0;
 		Integer offsetTransfusion = 0;
 		
-		for(int i = 0; i < 1; ++i){
+		for(int i = 0; i < 10; ++i){
 			
 		
 		
@@ -134,7 +145,16 @@ public class CDAProducerUseCase1 {
 			}
 			
 			
+			
+			
 			// ################################ LABORATORY ##########################################
+			
+			try {
+				Thread.sleep(10000);
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+				return;
+			}
 			
 			// /ClinicalDocument/id/@root
 			root = "2.16.858.0.0.1.10.2.3.1.1.2";
@@ -177,6 +197,75 @@ public class CDAProducerUseCase1 {
 			}
 			
 			
+			String unit = UUID.randomUUID().toString();
+			ServiceImplService service;
+			SimpleDateFormat sdfM = new SimpleDateFormat("yyyyMMdd");
+			try {
+			
+//				'1', 'label_plaquetas', '1', '7', '7', '256395009'
+//				'2', 'label_crioprecipitado', '2', '8', '8', '256401009'
+//				'3', 'label_plasma', '3', '9', '9', '256400005'
+//				'4', 'label_eritrocitos', '4', '10', '10', '126242007'
+//				'5', 'label_hematies', '5', '54', '54', '119351004'
+
+				
+				service = new ServiceImplService(new URL(url));
+				Service port = service.getServiceImplPort();
+				MovementData m = null;
+				List<MovementData> lms = new ArrayList<MovementData>();
+				
+				m = new MovementData();
+				m.setCenter("345");
+				m.setDate(sdfM.format(new Date()));
+				m.setType("1");
+//				m.setUnit(UUID.randomUUID().toString());
+				m.setUnit(specimenDonationExtension + ".256395009");
+				m.setUnitBloodType("278151004"); 	//ab+
+				m.setUnitType("256395009"); 		//plaquetas
+				lms.add(m);
+			
+				m = new MovementData();
+				m.setCenter("345");
+				m.setDate(sdfM.format(new Date()));
+				m.setType("1");
+//				m.setUnit(UUID.randomUUID().toString());
+				m.setUnit(specimenDonationExtension + ".256401009");
+				m.setUnitBloodType("278151004"); 	//ab+
+				m.setUnitType("256401009"); 		//crioprecipitado
+				lms.add(m);
+				
+				m = new MovementData();
+				m.setCenter("345");
+				m.setDate(sdfM.format(new Date()));
+				m.setType("1");
+//				m.setUnit(UUID.randomUUID().toString());
+				m.setUnit(specimenDonationExtension + ".256400005");
+				m.setUnitBloodType("278151004"); 	//ab+
+				m.setUnitType("256400005"); 		//plasma
+				lms.add(m);
+				
+				m = new MovementData();
+				m.setCenter("345");
+				m.setDate(sdfM.format(new Date()));
+				m.setType("1");
+//				m.setUnit(UUID.randomUUID().toString());
+				m.setUnit(specimenDonationExtension + ".119351004");
+				m.setUnitBloodType("278151004"); 	//ab+
+				m.setUnitType("119351004"); 		//hematies
+				lms.add(m);
+				
+				service.getServiceImplPort().importMOVEMENTS(lms);
+				
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+				return;
+			} catch (ParseException e) {
+				e.printStackTrace();
+				return;
+			}
+			
+			
+			
 			// ################################ TRANSFUSION ##########################################
 			// /ClinicalDocument/recordTarget/patientRole/author/assignedAuthor/id/@root
 			doctorIdRoot = randomDocument();
@@ -203,31 +292,39 @@ public class CDAProducerUseCase1 {
 			
 			efectiveTime = sdf.format(new Date());
 						
+//			try {
+//				writeFile(outputPath +"/transfusion_"+ extension +".xml", 
+//						getCDATransfusion(
+//								root,
+//								extension.toString(),
+//								efectiveTime,
+//								patientIdRoot,
+//								patientGivenName,
+//								patientFamily,
+//								doctorIdRoot,
+//								doctorGivenName,
+//								doctorFamily,
+//								specimenTransfusionUnitRoot,
+//								specimenTransfusionUnitExtension,
+//								specimenTransfusionDonationRoot,
+//								specimenTransfusionDonationExtension  ));
+//				
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//				return;
+//			}
+			
+
 			try {
-				writeFile(outputPath +"/transfusion_"+ extension +".xml", 
-						getCDATransfusion(
-								root,
-								extension.toString(),
-								efectiveTime,
-								patientIdRoot,
-								patientGivenName,
-								patientFamily,
-								doctorIdRoot,
-								doctorGivenName,
-								doctorFamily,
-								specimenTransfusionUnitRoot,
-								specimenTransfusionUnitExtension,
-								specimenTransfusionDonationRoot,
-								specimenTransfusionDonationExtension  ));
-				
-			} catch (IOException e) {
-				e.printStackTrace();
+				Thread.sleep(10000);
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
 				return;
 			}
 			
-
 		
 		}
+		
 		
 		
 		

@@ -1,271 +1,106 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<ClinicalDocument
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="urn:hl7-org:v3 ftp://ftp.ihe.net/TF_Implementation_Material/PCC/schemas/cda/infrastructure/cda/CDA.xsd"
-    classCode="DOCCLIN" 
-    moodCode="EVN"
-    >
-    
-    <!-- OID HEMOLOGICA = 2.16.858.0.0.1.10.2.3.1.1 -->
-    <!-- OID HEMOLOGICA-CDA = 2.16.858.0.0.1.10.2.3.1.1.1 -->
-    <!-- OID HEMOLOGICA-HCE = 2.16.858.0.0.1.10.2.3.1.1.2 -->
-    
-    <!--  ********************************************************    CDA Header  ********************************************************  -->
-    
-    <!-- Estructura fija que referencia al esquema del CDA normativo del HL7 contra el que se valida el xml: -->
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ClinicalDocument xmlns="urn:hl7-org:v3">
     <typeId root="2.16.840.1.113883.1.3" extension="POCD_HD000040"/>
-    
-    <!-- Puede no ir creo -->
-    <templateId root="2.16.840.1.113883.19.57.7.1.3.1" 
-        extension="CCD_RM201201CO01"
-        assigningAuthorityName="HL7CO"/>
-    
-    
-    <!-- Código que identifica de forma unica el documento - OID es HEMOLOGICA-CDA y extension un numero generado por hemologica -->
-    <id root="2.16.858.0.0.1.10.2.3.1.1.1" extension="1"/>
-    
-    <!-- Identificación del tipo de documento -->
-    <!-- El código que se encuentra en esta etiqueta, corresponde a un procedimiento. Hay que ver si es correcto utilizarlo --> 
-    <code codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" code="4321000179101" displayName="Informe de Hematologia"/>
-    
-    <title>Donación de Sangre</title>
-    
-    <!-- Fecha en que se genero el documento -->
-    <effectiveTime value="20150715195500"/>
-    
-    
-    <!-- confidencialidad - N(normal) - R (restringido) - V (muy restringido)  -->
+    <templateId root="2.16.840.1.113883.19.57.7.1.3.1" extension="CCD_RM201201CO01"/>
+    <id root="2.16.858.0.0.1.10.2.3.1.1.1" extension="80"/>
+    <code code="4321000179103"/>
+    <title>Analisis de laboratorio</title>
+    <effectiveTime value="20160128214136"/>
     <confidentialityCode codeSystemName="Confidentiality" code="N" codeSystem="2.16.840.1.113883.5.25" displayName="normal"/>
-    
     <languageCode code="es-UY"/>
-    <!-- <languageCode code="UY" codeSystem="2.16.840.1.113883.6.121"/> -->
-    
-    
     <recordTarget typeCode="RCT" contextControlCode="OP">
         <patientRole classCode="PAT">
-            
-            <!-- OID HEMOLOGICA-HCE = 2.16.858.0.0.1.10.2.3.1.1.2 -->
-            <!-- Número de historia del paciente en Hemologica - -->
-            <id  root="2.16.858.0.0.1.10.2.3.1.1.2" extension="49354237"/>
-
-            <!-- Telefono y MAil -->
-            <!-- HP: Primary home WP: Work Place -->
-            <telecom value="tel:+1(301)111-1111" use="HP"/>
+            <id root="2.16.858.0.0.1.10.2.3.1.1.2" extension="52"/>
             <telecom value="mailto:brunostrasser18@gmail.com" use="HP"/>
-         
             <patient classCode="PSN" determinerCode="INSTANCE">
-                
-                <!-- Identificador del paciente  El root 2.16.858.1.858.68909.12345678 - Código CI = 68909 - CI = 12345678  -->
-                <!-- asocia el identificador de persona definido por la UNAOID, no es necesario incorporar la extensión.  -->  
-                <id  root="2.16.858.1.858.68909.12345678"/>
-                
-                <!-- Nombres y Apellidos -->
+                <id root="2.16.858.1.858.68909.35679873"/>
                 <name>
-                    <given>Bruno</given>
-                    <given>Guillermo</given>
-                    <family>Strasser</family>
-                    <family>Mazza</family>
+                    <given>Carlos</given>
+                    <given></given>
+                    <family>Perez</family>
+                    <family></family>
                 </name>
-                
-                <administrativeGenderCode code="1" displayName="Masculino" codeSystem="2.16.858.2.10000675.69600" />    
-                
-                <birthTime  value="19910223"/>
-                
+                <administrativeGenderCode code="1" codeSystem="2.16.858.2.10000675.69600"/>
+                <birthTime value="19910106"/>
             </patient>
         </patientRole>
     </recordTarget>
-    
     <author typeCode="AUT" contextControlCode="OP">
-        <time value="20150715202500"/>
+        <time value="20160128214135"/>
         <assignedAuthor classCode="ASSIGNED">
-            
-            <!-- Identificador del profesional de la salud. -->
-            <!-- El root 2.16.858.2.10000675.69586 identifica al registro de Profesionales (provisto por SNIS), en extensión se encuentra el número de habilitación del profesional --> 
-            <!-- En caso de no aplicar deberá utilizarse el identificador de persona definido por la UNAOID, sin extensión. <id root="2.16.858.1.858.68909.12345678"/>  -->
-            <id root="2.16.858.2.10000675.69586.12345678"/>
-            
+            <id root="2.16.858.1.858.68909.35679873"/>
             <assignedPerson>
                 <name>
-                    <prefix>Dra.</prefix>
-                    <given>Paula</given>
-                    <family>Roche</family>                    
+                    <given>Carlos</given>
+                    <given></given>
+                    <family>Perez</family>
+                    <family></family>
                 </name>
             </assignedPerson>
-            
-            <representedOrganization>  
-                <id root="2.16.858.0.0.1.10.2.3.6" />
-                <name>Hospital de Clinicas</name>  
-            </representedOrganization> 
-            
+            <representedOrganization>
+                <id root="2.16.858.0.0.1.10.2.3.6"/>
+                <name>Banco de Sangre 1</name>
+            </representedOrganization>
         </assignedAuthor>
     </author>
-    
-    <!-- Organización  que  está  a  cargo  de  la conservación del  documento-->
     <custodian>
         <assignedCustodian>
             <representedCustodianOrganization>
-                <!-- OID de Hemologica  -->
                 <id root="2.16.858.0.0.1.10.2.3.1.1"/>
                 <name>HEMOLOGICA</name>
             </representedCustodianOrganization>
         </assignedCustodian>
     </custodian>
-    
-    <!--  ********************************************************    CDA Body  ********************************************************  -->  
-    <component>       
+    <component>
         <structuredBody>
-            <component>          
-                <section>         
-                    
-                    <!--  ********************************************************    Representacion Grafica  ********************************************************  -->  
-                    <text>  
-                        <table border="1" xmlns:cda="urn:hl7-org:v3" xmlns:lab="urn:oid:1.3.6.1.4.1.19376.1.3.2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Fecha</th>
-                                    <th>Resultado</th>
-                                    <th>Laboratorio</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Sifilis</td>
-                                    <td>23/08/2015</td>
-                                    <td>Negativo</td>
-                                    <td>lab 1</td>
-                                </tr>
-                                <tr>
-                                    <td>HIV</td>
-                                    <td>23/08/2015</td>
-                                    <td>Negativo</td>
-                                    <td>lab 1</td>
-                                </tr>
-                                <tr>
-                                    <td>HTLV</td>
-                                    <td>23/08/2015</td>
-                                    <td>Negativo</td>
-                                    <td>lab 1</td>
-                                </tr>
-                                <tr>
-                                    <td>Hiepatits C</td>
-                                    <td>23/08/2015</td>
-                                    <td>Negativo</td>
-                                    <td>lab 1</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        
-                    </text>  
-                    
-                    
-                    
-                    
-                    <!--  ********************************************************    Resultados  ********************************************************  -->  
+            <component>
+                <section>
                     <entry>
                         <organizer classCode="BATTERY" moodCode="EVN">
-                            
-                            <!-- Código de identificacion de las pruebas realizadas. -->
-                            <id root="7d5a02b0-67a4-11db-bd13-0800200c9a66"/>
+                            <id root="id"/>
                             <statusCode code="completed"/>
-                            <effectiveTime value="201508125"/>
-                            
-                            <!-- OID HEMOLOGICA-Muestra-Donaciones = 2.16.858.0.0.1.10.2.3.1.1.4 -->
-                            <!-- id Muestra -->
+                            <effectiveTime value="20160128214135"/>
                             <specimen typeCode="SPC">
-                                <specimenRole classCode="SPEC">
-                                    <id root="2.16.858.0.0.1.10.2.3.1.1.4" extension ="2"/>
-                                </specimenRole>
+<specimenRole classCode="SPEC">
+    <id root="6d430b55-2eef-4d5c-8244-d67f29ba593e"/>
+</specimenRole>
                             </specimen>
-                            
                             <component>
-                                <!-- Sifilis -->
-                                <observation classCode="OBS" moodCode="EVN">
-                                    <!-- Código de identificacion unica de la prueba. -->
-                                    <id root="7d5a02b0-67a4-11db-bd13-0800200c9a66"/>
-                                    <!-- Código Snomed Ct de la prueba del laboratorio. -->
-                                    <code code="40675008" displayName="Prueba serológica para la detección de sífilis" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT"/>
-                                    <statusCode code="completed"/>
-                                    <effectiveTime value="201508125"/>
-                                    <!-- Resultado -->
-                                    <value xsi:type="CO" code="260385009" displayName="Negative"  codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" />
-                                    <!--    <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/> -->
-                                </observation>
-                            </component>    
-                            
-                            <component>
-                                <!-- HIV -->
-                                <observation classCode="OBS" moodCode="EVN">
-                                    <!-- Código de identificacion unica de la prueba. -->
-                                    <id root="a38a9e20-74e5-4b75-83a3-f58180d39fe7"/>
-                                    <!-- Código Snomed Ct de la prueba del laboratorio. -->
-                                    <code code="31676001" displayName="prueba para antígeno del virus de la inmunodeficiencia humana" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT"/>
-                                    <statusCode code="completed"/>
-                                    <effectiveTime value="201508125"/>
-                                    <!-- Resultado -->
-                                    <value xsi:type="CO" code="260385009" displayName="Negative"  codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" />
-                                    <!--    <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/> -->
-                                </observation>
+<observation classCode="OBS" moodCode="EVN">
+    <id root="idprueba"/>
+    <code codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" code="171122006"/>
+    <statusCode code="completed"/>
+    <value code="260385009" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT"/>
+</observation>
                             </component>
-                            
                             <component>
-                                <!-- HTLV -->
-                                <observation classCode="OBS" moodCode="EVN">
-                                    <!-- Código de identificacion unica de la prueba. -->
-                                    <id root="96b8d7c3-d695-499c-9370-b85002e3c4e0"/>
-                                    <!-- Código Snomed Ct de la prueba del laboratorio. -->
-                                    <code code="117754000" displayName="medición de anticuerpos anti-virus linfotrópico de células T humano tipos 1 y 2" 
-                                        codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT"/>
-                                    <statusCode code="completed"/>
-                                    <effectiveTime value="201508125"/>
-                                    <!-- Resultado -->
-                                    <value xsi:type="CO" code="260385009" displayName="Negative"  codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" />
-                                    <!--    <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/> -->
-                                </observation>
+<observation classCode="OBS" moodCode="EVN">
+    <id root="idprueba"/>
+    <code codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" code="31676001"/>
+    <statusCode code="completed"/>
+    <value code="260385009" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT"/>
+</observation>
                             </component>
-                            
                             <component>
-                                <!-- Hepatitis C -->
-                                <observation classCode="OBS" moodCode="EVN">
-                                    <!-- Código de identificacion unica de la prueba. -->
-                                    <id root="1b4deda4-1810-476c-9f29-4d9528132768"/>
-                                    <!-- Código Snomed Ct de la prueba del laboratorio. -->
-                                    <code code="413107006" displayName="cribado para la detección de hepatitis C" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT"/>
-                                    <statusCode code="completed"/>
-                                    <effectiveTime value="201508125"/>
-                                    <!-- Resultado -->
-                                    <value xsi:type="CO" code="260385009" displayName="Negative"  codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" />
-                                    <!--    <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/> -->
-                                </observation>
+<observation classCode="OBS" moodCode="EVN">
+    <id root="idprueba"/>
+    <code codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" code="413107006"/>
+    <statusCode code="completed"/>
+    <value code="260385009" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT"/>
+</observation>
                             </component>
-                            
                             <component>
-                                <!-- Chagas -->
-                                <observation classCode="OBS" moodCode="EVN">
-                                    <!-- Código de identificacion unica de la prueba. -->
-                                    <id root="ec15cd9a-2025-4300-a085-d8b608c34445"/>
-                                    <!-- Código Snomed Ct de la prueba del laboratorio. -->
-                                    <code code="122138000" displayName=" medición de anticuerpos anti-especie de Trypanosoma" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT"/>
-                                    e
-                                    <effectiveTime value="201508125"/>
-                                    <!-- Resultado -->
-                                    <value xsi:type="CO" code="260385009" displayName="Negative"  codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" />
-                                    <!--    <interpretationCode code="N" codeSystem="2.16.840.1.113883.5.83"/> -->
-                                </observation>
+<observation classCode="OBS" moodCode="EVN">
+    <id root="idprueba"/>
+    <code codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" code="40675008"/>
+    <statusCode code="completed"/>
+    <value code="260385009" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT"/>
+</observation>
                             </component>
                         </organizer>
-                    
                     </entry>
-                    
                 </section>
-            </component>       
-        </structuredBody>  
-        
-        <!-- <nonXMLBody>
-            <text>
-                <reference value="http://img.docstoccdn.com/thumb/orig/50463157.png"/>
-            </text>
-        </nonXMLBody> -->
-    </component> 
-    
+            </component>
+        </structuredBody>
+    </component>
 </ClinicalDocument>

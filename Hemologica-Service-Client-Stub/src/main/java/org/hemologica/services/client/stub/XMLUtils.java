@@ -254,8 +254,6 @@ public class XMLUtils {
 	public static void replaceXPathString(Element doc, String xpath, String newValue) throws XPathExpressionException {
 		XPathFactory factory = XPathFactory.newInstance();
 		NodeList myNodeList = (NodeList) factory.newXPath().compile(xpath).evaluate(doc, XPathConstants.NODESET);
-		System.out.println("xpath: "+ xpath +" | oldValue: "+ myNodeList.item(0).getNodeValue() + " | newValue: "+ newValue);
-		System.out.println("xpath: "+ xpath +" | oldTextContent: "+ myNodeList.item(0).getTextContent() + " | newTextContent: "+ newValue);
 		myNodeList.item(0).setNodeValue(newValue);
 		myNodeList.item(0).setTextContent(newValue);
 	}

@@ -1,5 +1,4 @@
-
-package org.hemologica.service.ws.client.impl;
+package org.hemologica.service.ws.impl;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -16,7 +15,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "ServiceImplService", targetNamespace = "http://impl.ws.service.hemologica.org/", wsdlLocation = "http://localhost:8080/Hemologica-Service/Service?wsdl")
+@WebServiceClient(name = "ServiceImplService", targetNamespace = "http://impl.ws.service.hemologica.org/", wsdlLocation = "http://localhost:8082/Hemologica-Service/Service?wsdl")
 public class ServiceImplService
     extends javax.xml.ws.Service
 {
@@ -29,7 +28,7 @@ public class ServiceImplService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://localhost:8080/Hemologica-Service/Service?wsdl");
+            url = new URL("http://localhost:8082/Hemologica-Service/Service?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
@@ -67,7 +66,7 @@ public class ServiceImplService
      *     returns Service
      */
     @WebEndpoint(name = "ServiceImplPort")
-    public org.hemologica.service.ws.client.impl.Service getServiceImplPort() {
+    public org.hemologica.service.ws.impl.Service getServiceImplPort() {
         return super.getPort(new QName("http://impl.ws.service.hemologica.org/", "ServiceImplPort"), Service.class);
     }
 
@@ -79,7 +78,7 @@ public class ServiceImplService
      *     returns Service
      */
     @WebEndpoint(name = "ServiceImplPort")
-    public org.hemologica.service.ws.client.impl.Service getServiceImplPort(WebServiceFeature... features) {
+    public Service getServiceImplPort(WebServiceFeature... features) {
         return super.getPort(new QName("http://impl.ws.service.hemologica.org/", "ServiceImplPort"), Service.class, features);
     }
 

@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Semaphore;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
@@ -52,6 +53,9 @@ public class PersonBean implements IPersonBean, Serializable {
 
 	private static final Logger logger = Logger.getLogger(PersonBean.class.getName());
 	private static final Object mutex = new Object();
+	private static final Object mutexDocumet = new Object();
+	private static final Object mutexIdentification = new Object();
+	private static final Semaphore mutex2 = new Semaphore(1);
 
 	private BaseXConnection baseXConnectionDonations;
 	private BaseXConnection baseXConnectionTransfusion;
@@ -86,7 +90,8 @@ public class PersonBean implements IPersonBean, Serializable {
 			Person person = null;
 
 			synchronized (mutex) {
-
+				mutex2.acquire();
+				
 				PDQQueryPatientRequest pdqQueryPatientRequest = new PDQQueryPatientRequest(data);
 				PDQQueryPatientResponse pdqQueryPatientResponse = empi.query(pdqQueryPatientRequest);
 				List<Identifier> identifiers = pdqQueryPatientResponse.getIdetifiers(empi.getMyDomain());
@@ -131,9 +136,9 @@ public class PersonBean implements IPersonBean, Serializable {
 						this.createRecord(identification, cdaRoot, cdaExtension);
 						person = identification.getPerson();
 					}
-
 				}
 
+				mutex2.release();
 			}
 
 			cda = XMLUtils.removeCDANamespaces(cda);
@@ -193,9 +198,11 @@ public class PersonBean implements IPersonBean, Serializable {
 		Document doc = this.getDocumentFromIdentification(identification);
 		
 		try {
-			if(!documentDAO.existDocument(doc)){
-				doc.setPerson(identification.getPerson());
-				documentDAO.create(doc);
+			synchronized (mutexDocumet) {
+				if(!documentDAO.existDocument(doc)){
+					doc.setPerson(identification.getPerson());
+					documentDAO.create(doc);
+				}
 			}
 		} catch (DAOException e) {
 			throw new Exception(e);
@@ -207,9 +214,10 @@ public class PersonBean implements IPersonBean, Serializable {
 	
 	private Document getDocumentFromIdentification(Identification id){
 		
-		
 		Document dp = new Document();
 		String documentPerson = id.getIdentificacionCode();
+		
+		
 		if (documentPerson != null) {
 
 			String documentNumber = documentPerson.substring(documentPerson.lastIndexOf(".") + 1,
@@ -230,6 +238,8 @@ public class PersonBean implements IPersonBean, Serializable {
 		}
 		
 		return dp;
+		
+		
 	}
 
 	private Identification getPersonByEMPIIdentifier(Identifier iden) {

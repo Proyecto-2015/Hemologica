@@ -898,7 +898,7 @@ CREATE TABLE `movements` (
 
 LOCK TABLES `movements` WRITE;
 /*!40000 ALTER TABLE `movements` DISABLE KEYS */;
-INSERT INTO `movements` VALUES (1,1,1,1,'2014-03-15 00:00:00',1);
+-- INSERT INTO `movements` VALUES (1,1,1,1,'2014-03-15 00:00:00',1)
 /*!40000 ALTER TABLE `movements` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1027,9 +1027,9 @@ DROP TABLE IF EXISTS `persons`;
 CREATE TABLE `persons` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `person_first_name` varchar(100) NOT NULL,
-  `person_second_name` varchar(100) DEFAULT NULL,
+  `person_second_name` varchar(100) DEFAULT '',
   `person_first_lastname` varchar(100) NOT NULL,
-  `person_second_lastname` varchar(45) DEFAULT NULL,
+  `person_second_lastname` varchar(45) DEFAULT '',
   `person_birthday` date DEFAULT NULL,
   `person_address` varchar(100) DEFAULT NULL,
   `person_telephone` varchar(45) DEFAULT NULL,
@@ -1392,7 +1392,7 @@ DROP TABLE IF EXISTS `units`;
 CREATE TABLE `units` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `unit_uuid` varchar(45) NOT NULL,
-  `unit_institution_id` int(11) NOT NULL,
+  -- `unit_institution_id` int(11) NOT NULL,
   `unit_institution_center_id` int(11) DEFAULT NULL,
   `unit_type` int(11) NOT NULL,
   `unit_institution_code` varchar(100) NOT NULL,
@@ -1401,13 +1401,13 @@ CREATE TABLE `units` (
   `blood_rh_type` bigint(20) DEFAULT NULL,
   `unit_parent` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `fk_units_1_idx` (`unit_institution_id`),
+  -- KEY `fk_units_1_idx` (`unit_institution_id`),
   KEY `fk_units_2_idx` (`unit_institution_center_id`),
   KEY `fk_units_3_idx` (`unit_type`),
   KEY `FK_aafagm6sbysbeivuxb75whi60` (`unit_parent`),
   CONSTRAINT `FK_aafagm6sbysbeivuxb75whi60` FOREIGN KEY (`unit_parent`) REFERENCES `units` (`id`),
   CONSTRAINT `FK_nfjfl73elb2iogfec5m27w89q` FOREIGN KEY (`unit_institution_center_id`) REFERENCES `institutions` (`id`),
-  CONSTRAINT `fk_units_1` FOREIGN KEY (`unit_institution_id`) REFERENCES `institutions` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  -- CONSTRAINT `fk_units_1` FOREIGN KEY (`unit_institution_id`) REFERENCES `institutions` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_units_2` FOREIGN KEY (`unit_institution_center_id`) REFERENCES `centers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_units_3` FOREIGN KEY (`unit_type`) REFERENCES `units_types` (`unit_type_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
@@ -1419,7 +1419,7 @@ CREATE TABLE `units` (
 
 LOCK TABLES `units` WRITE;
 /*!40000 ALTER TABLE `units` DISABLE KEYS */;
-INSERT INTO `units` VALUES (1,'1',1,1,1,'1',NULL,NULL,NULL,NULL);
+-- INSERT INTO `units` VALUES (1,'1',1,1,1,'1',NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `units` ENABLE KEYS */;
 UNLOCK TABLES;
 
