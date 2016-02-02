@@ -9,6 +9,8 @@
 
 	<context:property-placeholder location="classpath:/hemologica.properties"  />
 
+	<bean id="errorHandler" class="org.hemologica.service.handler.HemologicaErrorHandler" />
+
 	<bean id="connectionFactory" class="${jms.connection.factory}">
 		<property name="brokerURL" value="${jms.connection.factory.broker.url}" />
 	</bean>
@@ -71,7 +73,8 @@
 		<property name="concurrentConsumers" value="10" />
 		<property name="receiveTimeout" value="5000" />
 		<property name="recoveryInterval" value="60000" />
-		<property name="autoStartup" value="true" />
+		<property name="autoStartup" value="false" />
+		<property name="errorHandler" ref="errorHandler"/>
 	</bean>
 	
 	<bean id="receiveListener" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
@@ -82,7 +85,8 @@
 		<property name="concurrentConsumers" value="10" />
 		<property name="receiveTimeout" value="5000" />
 		<property name="recoveryInterval" value="60000" />
-		<property name="autoStartup" value="true" />
+		<property name="autoStartup" value="false" />
+		<property name="errorHandler" ref="errorHandler"/>
 	</bean>
 	
 	<!-- Activators -->

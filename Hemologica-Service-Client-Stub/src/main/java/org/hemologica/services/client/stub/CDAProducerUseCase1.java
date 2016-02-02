@@ -78,7 +78,7 @@ public class CDAProducerUseCase1 {
 		Integer offsetLaboratory = 0;
 		Integer offsetTransfusion = 0;
 		
-		for(int i = 0; i < 10; ++i){
+		for(int i = 0; i < 100; ++i){
 			
 		
 		
@@ -149,12 +149,12 @@ public class CDAProducerUseCase1 {
 			
 			// ################################ LABORATORY ##########################################
 			
-			try {
-				Thread.sleep(10000);
-			} catch (InterruptedException e1) {
-				e1.printStackTrace();
-				return;
-			}
+//			try {
+//				Thread.sleep(100);
+//			} catch (InterruptedException e1) {
+//				e1.printStackTrace();
+//				return;
+//			}
 			
 			// /ClinicalDocument/id/@root
 			root = "2.16.858.0.0.1.10.2.3.1.1.2";
@@ -315,18 +315,15 @@ public class CDAProducerUseCase1 {
 //			}
 			
 
-			try {
-				Thread.sleep(10000);
-			} catch (InterruptedException e1) {
-				e1.printStackTrace();
-				return;
-			}
+//			try {
+//				Thread.sleep(100);
+//			} catch (InterruptedException e1) {
+//				e1.printStackTrace();
+//				return;
+//			}
 			
 		
 		}
-		
-		
-		
 		
 	}
 	
