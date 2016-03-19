@@ -169,7 +169,7 @@ DROP TABLE IF EXISTS `centers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `centers` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `center_institution_id` int(11) NOT NULL,
   `center_code` varchar(45) NOT NULL,
   `center_display_name` varchar(100) NOT NULL,
@@ -879,7 +879,7 @@ CREATE TABLE `movements` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `units_id` bigint(20) NOT NULL,
   `movements_types_id` int(11) NOT NULL,
-  `movement_id` int(11) DEFAULT NULL,
+  `movement_id` bigint(20) DEFAULT NULL,
   `movement_date` datetime NOT NULL,
   `movement_center` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -1393,7 +1393,7 @@ CREATE TABLE `units` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `unit_uuid` varchar(45) NOT NULL,
   -- `unit_institution_id` int(11) NOT NULL,
-  `unit_institution_center_id` int(11) DEFAULT NULL,
+  `unit_institution_center_id` bigint(20) DEFAULT NULL,
   `unit_type` int(11) NOT NULL,
   `unit_institution_code` varchar(100) NOT NULL,
   `unit_state` bit(1) DEFAULT NULL,
@@ -1406,7 +1406,7 @@ CREATE TABLE `units` (
   KEY `fk_units_3_idx` (`unit_type`),
   KEY `FK_aafagm6sbysbeivuxb75whi60` (`unit_parent`),
   CONSTRAINT `FK_aafagm6sbysbeivuxb75whi60` FOREIGN KEY (`unit_parent`) REFERENCES `units` (`id`),
-  CONSTRAINT `FK_nfjfl73elb2iogfec5m27w89q` FOREIGN KEY (`unit_institution_center_id`) REFERENCES `institutions` (`id`),
+  CONSTRAINT `FK_nfjfl73elb2iogfec5m27w89q` FOREIGN KEY (`unit_institution_center_id`) REFERENCES `centers` (`id`),
   -- CONSTRAINT `fk_units_1` FOREIGN KEY (`unit_institution_id`) REFERENCES `institutions` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_units_2` FOREIGN KEY (`unit_institution_center_id`) REFERENCES `centers` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_units_3` FOREIGN KEY (`unit_type`) REFERENCES `units_types` (`unit_type_id`) ON DELETE NO ACTION ON UPDATE NO ACTION

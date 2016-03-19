@@ -52,4 +52,12 @@ private static final Logger logger = Logger.getLogger(TransfusionBean.class.getN
 		userDAO.update(user);
 	}
 
+	@Override
+	public Long getPersonIdFromUsername(String username) {
+
+		IUserDAO userDAO = new UserDAOImpl(em);
+		User u = userDAO.findByUsername(username);
+		return u != null && u.getPerson() != null ? u.getPerson().getId() : null;
+	}
+
 }

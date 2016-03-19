@@ -40,6 +40,7 @@ public interface IServicesClient {
 	 */
 	public List<DataTransfusion> getMyTransfusions(String user) throws IOException;
 	
+	
 	/**
 	 * Devuelve la informacion personal del usuario pasado por parametro 
 	 * @param string

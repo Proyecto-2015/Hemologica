@@ -16,6 +16,7 @@ import java.util.List;
 		@NamedQuery(name = "User.findById", query = "SELECT u FROM User u WHERE u.id = :id"),
 		@NamedQuery(name = "User.findByAccountToken", query = "SELECT u FROM User u WHERE u.activeAccountToken = :token"),
 		@NamedQuery(name = "User.findByPersonId", query = "SELECT u FROM User u WHERE u.person.id = :personId"),
+		@NamedQuery(name = "User.findByUsername", query = "SELECT u FROM User u WHERE u.code = :username OR u.person.personEmail = :username")
 })
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;

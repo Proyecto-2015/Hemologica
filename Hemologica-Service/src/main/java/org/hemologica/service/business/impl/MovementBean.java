@@ -25,6 +25,7 @@ import org.hemologica.dao.model.Movement;
 import org.hemologica.dao.model.MovementsType;
 import org.hemologica.dao.model.Unit;
 import org.hemologica.dao.model.UnitsType;
+import org.hemologica.factories.FactoryDAO;
 import org.hemologica.service.business.IMovementBean;
 import org.hemologica.service.datatype.MovementData;
 import org.springframework.stereotype.Component;
@@ -69,6 +70,7 @@ public class MovementBean implements IMovementBean{
 			//si no existe la unidad, la creo
 			if(unit == null){
 				unit = new Unit();
+				unit.setCenter(center);
 				unit.setUnitParent(unitParent);
 				unit.setUnitInstitutionCode(m.getUnit());
 				unit.setUnitUuid(UUID.randomUUID().toString());

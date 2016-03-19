@@ -78,7 +78,7 @@ public class CDAProducerUseCase1 {
 		Integer offsetLaboratory = 0;
 		Integer offsetTransfusion = 0;
 		
-		for(int i = 0; i < 100; ++i){
+		for(int i = 0; i < 20; ++i){
 			
 		
 		
@@ -215,7 +215,7 @@ public class CDAProducerUseCase1 {
 				List<MovementData> lms = new ArrayList<MovementData>();
 				
 				m = new MovementData();
-				m.setCenter("345");
+				m.setCenter("347");
 				m.setDate(sdfM.format(new Date()));
 				m.setType("1");
 //				m.setUnit(UUID.randomUUID().toString());
@@ -225,7 +225,7 @@ public class CDAProducerUseCase1 {
 				lms.add(m);
 			
 				m = new MovementData();
-				m.setCenter("345");
+				m.setCenter("347");
 				m.setDate(sdfM.format(new Date()));
 				m.setType("1");
 //				m.setUnit(UUID.randomUUID().toString());
@@ -235,7 +235,7 @@ public class CDAProducerUseCase1 {
 				lms.add(m);
 				
 				m = new MovementData();
-				m.setCenter("345");
+				m.setCenter("347");
 				m.setDate(sdfM.format(new Date()));
 				m.setType("1");
 //				m.setUnit(UUID.randomUUID().toString());
@@ -245,7 +245,7 @@ public class CDAProducerUseCase1 {
 				lms.add(m);
 				
 				m = new MovementData();
-				m.setCenter("345");
+				m.setCenter("347");
 				m.setDate(sdfM.format(new Date()));
 				m.setType("1");
 //				m.setUnit(UUID.randomUUID().toString());
