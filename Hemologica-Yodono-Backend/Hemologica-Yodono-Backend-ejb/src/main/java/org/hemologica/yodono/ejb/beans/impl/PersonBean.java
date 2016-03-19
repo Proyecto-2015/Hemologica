@@ -53,14 +53,14 @@ public class PersonBean implements PersonBeanLocal {
 			
 			if(p.getDocuments() != null && p.getDocuments().size() != 0){
 				
-				if(p.getDocuments().get(0).getCountriesCode() == null){
+				if(p.getDocuments().get(0).getCountriesCode() != null){
 					DataCode documentCountry = new DataCode();
 					documentCountry.setCode(p.getDocuments().get(0).getCountriesCode().getCountryCodeValue());
 					documentCountry.setDisplayName(p.getDocuments().get(0).getCountriesCode().getCountryCodeLabel());
 					data.setDocumentCountry(documentCountry);
 				}
 				
-				if(p.getDocuments().get(0).getDocumentsTypesCode() == null){
+				if(p.getDocuments().get(0).getDocumentsTypesCode() != null){
 					DataCode documentType = new DataCode();
 					documentType.setCode(p.getDocuments().get(0).getDocumentsTypesCode().getDocumentsTypeCodeValue());
 					documentType.setDisplayName(p.getDocuments().get(0).getDocumentsTypesCode().getDocumentsTypeCodeLabel());
