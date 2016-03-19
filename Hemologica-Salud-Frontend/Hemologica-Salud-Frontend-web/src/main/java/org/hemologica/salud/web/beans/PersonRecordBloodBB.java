@@ -46,7 +46,7 @@ public class PersonRecordBloodBB implements Serializable{
 					  
 					@Override public int compare( DataDonation d1, DataDonation d2) {
 						
-					    return d2.getDate().compareTo(d1.getDate());
+					    return d1.getDate().compareTo(d2.getDate());
 					    
 					  }
 				});
@@ -61,7 +61,7 @@ public class PersonRecordBloodBB implements Serializable{
 						dataBlood.setDisplayName(d.getBloodType().getDisplayName());
 						person.setBloodType(dataBlood);
 					}
-					if(d.isApproved()){
+					if(d.isApprovedDonation()){
 						
 						if(d.getDate() != null && !d.getDate().equals("")){
 							
@@ -70,11 +70,11 @@ public class PersonRecordBloodBB implements Serializable{
 							try {
 								
 								dateDonation.setTime(sdf2.parse(d.getDate()));
-								if(person.getGender().equals("label_male")){
+								if(person.getGender().getDisplayName().equals("label_male")){
 									
 									dateDonation.add(Calendar.MONTH, Constants.MONTHS_MALE);
 									
-								}else if(person.getGender().equals("label_male")){
+								}else if(person.getGender().getDisplayName().equals("label_female")){
 									
 									dateDonation.add(Calendar.MONTH, Constants.MONTHS_FEMALE);
 									

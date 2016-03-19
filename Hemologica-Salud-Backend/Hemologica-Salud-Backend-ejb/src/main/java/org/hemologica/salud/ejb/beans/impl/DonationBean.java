@@ -767,7 +767,7 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 		// ACA desencripto
 		Identification perId = FactoryDAO.getIIdentificationDAO(em)
 				.getIdentificationByCode(CryptoConverter.decrypt(pr.getIdentificationRef()));
-
+		
 		Person p = perId.getPerson();
 		DataPerson dp = new DataPerson();
 		dp.setFirstName(p.getPersonFirstName());
