@@ -65,7 +65,7 @@
 						     		</p:menuitem>
 						     		<p:menuitem rendered="#{sessionBB.login}">
 						     			<div class="bottom text-center">
-											<p:commandLink value="#{messages.label_sign_out}" action="#{sessionBB.logout()}" update="@all"/>	
+											<p:commandLink value="#{messages.label_sign_out}" action="#{sessionBB.logout()}" update="@all" process="@this"/>	
 										</div>
 						     		</p:menuitem>                
 								</p:contextMenu>			
