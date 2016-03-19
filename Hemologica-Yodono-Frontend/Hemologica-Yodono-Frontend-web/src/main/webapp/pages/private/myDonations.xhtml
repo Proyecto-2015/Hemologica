@@ -43,10 +43,10 @@
 			    	</c:choose>
     				
     				<li class="#{inverted}">						
-    					<c:if test="#{donationItem.isApproved()}">
+    					<c:if test="#{donationItem.isApprovedDonation()}">
 						   <div class="timeline-badge success rojo"/>
 						</c:if>
-						<c:if test="#{!donationItem.isApproved()}">
+						<c:if test="#{!donationItem.isApprovedDonation()}">
 						   <div class="timeline-badge warning gris"/>
 						</c:if>
 						

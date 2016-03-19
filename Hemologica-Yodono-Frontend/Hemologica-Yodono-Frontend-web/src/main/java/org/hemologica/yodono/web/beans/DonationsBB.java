@@ -42,6 +42,7 @@ public class DonationsBB implements Serializable{
 		try {
 			
 			myDonations = RestFactory.getServicesClient().getMyDonations("1");
+			
 			if(myDonations != null){
 				Collections.sort(myDonations, new Comparator<DataDonation>() {
 					  
