@@ -214,9 +214,10 @@ public class CodesBean implements CodesBeanLocal {
 		DonationFailTypeCode failCauses = FactoryDAO.getCodesDAO(em).getRejectionTypesBySnomedCode(rejectionType);
 		
 		DataCode eventCode = new DataCode();
-		eventCode.setCode(failCauses.getDonationFailCodeValue());
-		eventCode.setDisplayName(failCauses.getDonationFailCodeLabel());
-
+		if(failCauses != null){
+			eventCode.setCode(failCauses.getDonationFailCodeValue());
+			eventCode.setDisplayName(failCauses.getDonationFailCodeLabel());
+		}
 		return eventCode;
 	}
 
@@ -242,9 +243,11 @@ public class CodesBean implements CodesBeanLocal {
 		TransfusionEventsCode donationEventsCode = FactoryDAO.getCodesDAO(em).getTransfusionEventBySnomedCode(event);
 		
 		DataCode eventCode = new DataCode();
-		eventCode.setCode(donationEventsCode.getTransfusionEventCodeValue());
-		eventCode.setDisplayName(donationEventsCode.getTransfusionEventCodeLabel());
-
+		
+		if(donationEventsCode != null){
+			eventCode.setCode(donationEventsCode.getTransfusionEventCodeValue());
+			eventCode.setDisplayName(donationEventsCode.getTransfusionEventCodeLabel());
+		}
 		return eventCode;
 	}
 
@@ -254,8 +257,11 @@ public class CodesBean implements CodesBeanLocal {
 		TransfusionLaboratoryCode donationEventsCode = FactoryDAO.getCodesDAO(em).getTransfusionAnalysisBySnomedCode(executeXPathString);
 		
 		DataCode eventCode = new DataCode();
-		eventCode.setCode(donationEventsCode.getTransfusionLaboratoryCodeValue());
-		eventCode.setDisplayName(donationEventsCode.getTransfusionLaboratoryCodeLabel());
+		
+		if(donationEventsCode != null){
+			eventCode.setCode(donationEventsCode.getTransfusionLaboratoryCodeValue());
+			eventCode.setDisplayName(donationEventsCode.getTransfusionLaboratoryCodeLabel());
+		}
 
 		return eventCode;
 	}
@@ -266,9 +272,10 @@ public class CodesBean implements CodesBeanLocal {
 		ResultsCode result = FactoryDAO.getCodesDAO(em).getResultBySnomedCode(executeXPathString);
 
 		DataCode data = new DataCode();
-		data.setCode(result.getResultsCodeValue());
-		data.setDisplayName(result.getResultsCodeLabel());
-		
+		if(result != null){
+			data.setCode(result.getResultsCodeValue());
+			data.setDisplayName(result.getResultsCodeLabel());
+		}
 		return data;
 
 	}
