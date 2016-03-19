@@ -31,7 +31,7 @@ public class AdvertismentDAOImpl extends GenericDAOImpl<Advertisment> implements
 	public Advertisment getCampaign(String campaignId) {
 		
 		Query query = em.createNamedQuery("Advertisment.findById");
-		query.setParameter("id", Integer.parseInt(campaignId));
+		query.setParameter("id", Long.parseLong(campaignId));
 		
 		List<?> list = query.getResultList();
 		return (!list.isEmpty()) ? (Advertisment) list.get(0) : null;

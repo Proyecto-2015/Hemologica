@@ -179,23 +179,24 @@
 							</div>
 						<fieldset>
 							<legend><h:outputText value="#{messages.label_notification}"/></legend>
-							
-							<div class="checkbox center">
-								<label> <h:selectBooleanCheckbox
-										id="allowNotificationNeedDonor"
-										widgetVar="allowNotificationNeedDonor"
-										value="#{userBB.dataUser.allowNotificationNeedDonor}" /> <h:outputText
-										value="#{messages.form_user_allow_notification_need_donor}" />
-								</label>
-							</div>
-							<div class="checkbox center">
-								<label> <h:selectBooleanCheckbox
-										id="allowNotificationAbleToDonate"
-										widgetVar="allowNotificationAbleToDonate"
-										value="#{userBB.dataUser.allowNotificationAbleToDonate}" />
-									<h:outputText
-										value="#{messages.form_user_allow_notification_able_to_donate}" />
-								</label>
+							<div class="center">
+								<div class="checkbox form-group">
+									<label> <h:selectBooleanCheckbox
+											id="allowNotificationNeedDonor"
+											widgetVar="allowNotificationNeedDonor"
+											value="#{userBB.dataUser.allowNotificationNeedDonor}" /> <h:outputText
+											value="#{messages.form_user_allow_notification_need_donor}" />
+									</label>
+								</div>
+								<div class="checkbox form-group">
+									<label> <h:selectBooleanCheckbox
+											id="allowNotificationAbleToDonate"
+											widgetVar="allowNotificationAbleToDonate"
+											value="#{userBB.dataUser.allowNotificationAbleToDonate}" />
+										<h:outputText
+											value="#{messages.form_user_allow_notification_able_to_donate}" />
+									</label>
+								</div>
 							</div>
 						</fieldset>
 
