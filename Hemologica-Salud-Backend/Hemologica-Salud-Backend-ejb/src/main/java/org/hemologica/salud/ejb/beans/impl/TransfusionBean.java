@@ -455,37 +455,25 @@ public class TransfusionBean implements TransfusionBeanLocal, Serializable {
 		dp.setFirstName(p.getPersonFirstName());
 		dp.setFirstLastName(p.getPersonFirstLastname());
 
-		String documentPerson = perId.getIdentificacionCode();
-		if (documentPerson != null) {
-
-			String documentNumber = documentPerson.substring(documentPerson.lastIndexOf(".") + 1,
-					documentPerson.length() - 1);
-			dp.setDocumentNumber(documentNumber);
-
-			documentPerson = documentPerson.substring(0, documentPerson.lastIndexOf("."));
-			String documentTypeS = documentPerson.substring(documentPerson.lastIndexOf(".") + 1,
-					documentPerson.length());
-
-			DocumentsTypesCode documentType = FactoryDAO.getCodesDAO(em).getDocumentsTypeByCode(documentTypeS);
-			if (documentType != null) {
-				DataCode documentTypeCode = new DataCode();
-				documentTypeCode.setCode(documentType.getDocumentsTypeCodeValue());
-				documentTypeCode.setDisplayName(documentType.getDocumentsTypeCodeLabel());
-				dp.setDocumentType(documentTypeCode);
+			
+		if(p.getDocuments() != null && p.getDocuments().size() != 0){
+				
+			if(p.getDocuments().get(0).getCountriesCode() != null){
+				DataCode documentCountry = new DataCode();
+				documentCountry.setCode(p.getDocuments().get(0).getCountriesCode().getCountryCodeValue());
+				documentCountry.setDisplayName(p.getDocuments().get(0).getCountriesCode().getCountryCodeLabel());
+				dp.setDocumentCountry(documentCountry);
 			}
-
-			documentPerson = documentPerson.substring(0, documentPerson.lastIndexOf("."));
-			String documentCountryS = documentPerson.substring(documentPerson.lastIndexOf(".") + 1,
-					documentPerson.length());
-
-			CountriesCode country = FactoryDAO.getCodesDAO(em).getCountryByCode(documentCountryS);
-			if (country != null) {
-				DataCode countryCode = new DataCode();
-				countryCode.setCode(country.getCountryCodeLabel());
-				countryCode.setDisplayName(country.getCountryCodeLabel());
-				dp.setDocumentCountry(countryCode);
+			
+			if(p.getDocuments().get(0).getDocumentsTypesCode() != null){
+				DataCode documentType = new DataCode();
+				documentType.setCode(p.getDocuments().get(0).getDocumentsTypesCode().getDocumentsTypeCodeValue());
+				documentType.setDisplayName(p.getDocuments().get(0).getDocumentsTypesCode().getDocumentsTypeCodeLabel());
+				dp.setDocumentType(documentType);
 			}
-
+			
+			dp.setDocumentNumber((p.getDocuments().get(0).getDocumentNumber() == null) ? "" :p.getDocuments().get(0).getDocumentNumber());
+				
 		}
 
 		return dp;

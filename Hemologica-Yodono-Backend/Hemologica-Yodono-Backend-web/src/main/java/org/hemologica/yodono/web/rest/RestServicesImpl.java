@@ -101,50 +101,6 @@ public class RestServicesImpl implements IRestServices {
 
 		return new ArrayList<DataTransfusion>();
 
-		// List<DataTransfusion> transfusions = new
-		// ArrayList<DataTransfusion>();
-		//
-		// DataTransfusion t1 = new DataTransfusion();
-		// DataBank db = new DataBank();
-		// db.setName("Banco X");
-		//
-		//
-		// t1.setBank(db);
-		//
-		// DataInstitution d2 = new DataInstitution();
-		// d2.setName("Hospital de clinicas");
-		//
-		// t1.setInstitution(d2);
-		//
-		// t1.setName("Pedro");
-		// t1.setDate("10/02/2015");
-		//
-		// DataProductType dp1 = new DataProductType();
-		// dp1.setCode("0");
-		// dp1.setDisplay("Plaquetas");
-		// t1.setDataProduct(dp1);
-		// transfusions.add(t1);
-		//
-		// DataTransfusion t2 = new DataTransfusion();
-		// DataBank db2 = new DataBank();
-		// db2.setName("Banco X");
-		//
-		//
-		// t1.setBank(db2);
-		//
-		// DataInstitution di = new DataInstitution();
-		// di.setName("Hospital de clinicas");
-		//
-		// t2.setInstitution(di);
-		// t2.setName("Pedro");
-		// t2.setDate("10/02/2015");
-		// DataProductType dp2 = new DataProductType();
-		// dp2.setCode("0");
-		// dp2.setDisplay("Plasma");
-		// t1.setDataProduct(dp2);
-		// transfusions.add(t2);
-		//
-		// return transfusions;
 	}
 
 	@Override
