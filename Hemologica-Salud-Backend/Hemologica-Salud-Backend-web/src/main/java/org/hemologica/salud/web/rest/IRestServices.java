@@ -49,9 +49,9 @@ public interface IRestServices {
 	public List<DataTransfusion> getTransfusions(@QueryParam(ConstansJson.JSON_USER) Long user);
 	
 	@GET
-	@Path("/users")
+	@Path("/"+ ConstantsRest.PATH_USERS)
 	@Produces("application/json")
-	public DataPerson getPerson(@QueryParam(ConstansJson.JSON_USER) Long user);
+	public DataPerson getPerson(@QueryParam(ConstansJson.JSON_USER) String user);
 	
 	@GET
 	@Path("/" + ConstantsRest.PATH_USERS + "/" + ConstantsRest.PATH_BANKS)

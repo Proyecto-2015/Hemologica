@@ -72,7 +72,7 @@
 		<class>org.hemologica.dao.model.EmailSent</class>
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />	
-			<property name="hibernate.hbm2ddl.auto" value="none" />
+			<property name="hibernate.hbm2ddl.auto" value="" />
 			<property name="hibernate.show_sql" value="false" />
 		</properties>
 	</persistence-unit>

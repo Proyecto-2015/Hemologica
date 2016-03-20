@@ -50,7 +50,7 @@ public interface IRestServices {
 	@GET
 	@Path("/"+ConstantsRest.PATH_USERS)
 	@Produces("application/json")
-	public DataPerson getUser(@QueryParam(ConstansJson.JSON_USER) Long user);
+	public DataPerson getUser(@QueryParam(ConstansJson.JSON_USER) String user);
 	
 	@PUT
 	@Path("/"+ ConstantsRest.PATH_USERS)

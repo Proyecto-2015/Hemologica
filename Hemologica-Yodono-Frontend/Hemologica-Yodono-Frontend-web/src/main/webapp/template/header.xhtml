@@ -54,7 +54,7 @@
 						     		name="user-icon.png" id="imageMy"/>
 						     	
 						     	<p:contextMenu for="imageMy" id="context" event="click">   
-						     		<p:menuitem>	
+						     		<p:menuitem rendered="#{sessionBB.login}">	
 						     			<div class="col-md-12">
 											<div class="bottom text-center">
 												<h:commandLink action="#{sessionBB.redirectTo('myProfile')}" value="#{messages.label_my_profile}"/>
@@ -63,16 +63,22 @@
 										</div>
 										
 						     		</p:menuitem>
-						     		<p:menuitem>
+						     		<p:menuitem rendered="#{sessionBB.login}">
 						     			<div class="bottom text-center">
-						     				<h:commandLink  value="#{messages.label_sign_out}"/>
-											
+											<p:commandLink value="#{messages.label_sign_out}" action="#{sessionBB.logout()}" update="@all" process="@this"/>	
 										</div>
 						     		</p:menuitem>                
-								</p:contextMenu>				     		
-						       <span class="text-login  center-block" style="vertical-align: middle">
-						       		<h:outputText value="#{messages.label_sign_in}"/>
+								</p:contextMenu>			
+									<span class="text-login  center-block" style="vertical-align: middle">
+									<c:if test="#{sessionBB.login}">
+						       			<h:outputText value="#{sessionBB.dataUser.email}"/>
+						       		</c:if>
+						       		<c:if test="#{!sessionBB.login}">
+						       			<p:commandLink value="#{messages.label_sign_in}" action="#{sessionBB.redirectTo('myDonations')}" update="@all"/>
+						       		</c:if>	     			     		
 						       	</span>
+								
+						       
 						     </h:form>
 					    </div>
 					 </div>
@@ -104,8 +110,8 @@
 						<li><h:commandLink action="#{sessionBB.redirectTo('requirements')}" value="#{messages.menu_item_puedo_donar}"/></li>
 						<li><h:commandLink action="#{sessionBB.redirectTo('bloodBanks')}" value="#{messages.menu_item_donde_donar}"/></li>
 						<li><h:commandLink action="#{sessionBB.redirectTo('preparation')}" value="#{messages.menu_item_preparacion}"/></li>
-						<li><h:commandLink action="#{sessionBB.redirectTo('myDonations')}" value="#{messages.menu_item_mis_donaciones}"/></li>
-						<li><h:commandLink action="#{sessionBB.redirectTo('myTransfusions')}" value="#{messages.menu_item_mis_transfusiones}"/></li>
+						<li><h:commandLink action="#{sessionBB.redirectTo('myDonations')}" value="#{messages.menu_item_mis_donaciones}" rendered="#{sessionBB.login}"/></li>
+						<li><h:commandLink action="#{sessionBB.redirectTo('myTransfusions')}" value="#{messages.menu_item_mis_transfusiones}" rendered="#{sessionBB.login}"/></li>
 					</ul>
 				</div>
 			</h:form>

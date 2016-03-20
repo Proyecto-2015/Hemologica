@@ -7,12 +7,15 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
+
 import org.apache.http.client.ClientProtocolException;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.DataPerson;
 import org.hemologica.datatypes.DataResponsiblePerson;
 import org.hemologica.salud.factories.RestFactory;
+import org.hemologica.salud.web.utils.JSFUtils;
 
 public class SessionBB implements Serializable {
 
@@ -36,20 +39,29 @@ public class SessionBB implements Serializable {
 	public void init(){
 		
 		try {
+			
+			/**
+			 * Obtener nombre de usuario
+			 */
+			String username = (String)JSFUtils.getSessionMap().get("edu.yale.its.tp.cas.client.filter.user");
+			System.out.println("USUARIO: "+ username);
+			
 			DataBank bank = new DataBank();
 			bank.setCode("348");
 			this.responsibleTransfusionPersons = RestFactory.getServicesClient().getResponsibleTransfusionPersons(bank);
 			
-			person = new DataPerson();
-			person.setId(new Long(1));
-			this.userInstitutions = RestFactory.getServicesClient().getInstitution(person.getId().toString());
-			this.userBanks = RestFactory.getServicesClient().getBanks(person.getId().toString());
-			if(userBanks!= null && userBanks.size()!=0){
-				this.bank = userBanks.get(0);
-			}
+			if (username != null) {
+				person = RestFactory.getServicesClient().getDataUser(username);
+				this.userInstitutions = RestFactory.getServicesClient().getInstitution(person.getId().toString());
+				this.userBanks = RestFactory.getServicesClient().getBanks(person.getId().toString());
+				if(userBanks!= null && userBanks.size()!=0){
+					this.bank = userBanks.get(0);
+				}
+				
+				this.arrangementBanks = RestFactory.getServicesClient().getArrangementBanks(person.getId().toString());
+				this.arrangementInstitutions = RestFactory.getServicesClient().getArrangementInstitutions(person.getId().toString());
 			
-			this.arrangementBanks = RestFactory.getServicesClient().getArrangementBanks(person.getId().toString());
-			this.arrangementInstitutions = RestFactory.getServicesClient().getArrangementInstitutions(person.getId().toString());
+			}
 			
 		} catch (ClientProtocolException e) {
 			

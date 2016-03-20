@@ -43,7 +43,7 @@
 	<!-- method="process" /> -->
 	
 	<int:recipient-list-router auto-startup="true" input-channel="outbound-channel-1">
-<!-- 		<int:recipient channel="cda_to_xds_inbound-channel-1" /> -->
+		<int:recipient channel="cda_to_xds_inbound-channel-1" />
 		<int:recipient channel="outbound-channel-cda-process" />
 	</int:recipient-list-router>
 	

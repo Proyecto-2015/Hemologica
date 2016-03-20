@@ -2,12 +2,11 @@ package org.hemologica.yodono.web.beans;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.annotation.PostConstruct;
-import javax.faces.context.ExternalContext;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 
 import org.apache.http.client.ClientProtocolException;
@@ -21,6 +20,9 @@ public class CampaignsItemBB implements Serializable{
 	private static final Logger logger = Logger.getLogger(CampaignsItemBB.class.getName());
 	
 	private DataCampaign dataCampaign;
+	
+	@ManagedProperty(value="#{sessionBB}")
+	private SessionBB sessionBB;
 	
 	@PostConstruct
 	public void init(){
@@ -49,6 +51,14 @@ public class CampaignsItemBB implements Serializable{
 
 	public void setDataCampaign(DataCampaign dataCampaign) {
 		this.dataCampaign = dataCampaign;
+	}
+
+	public SessionBB getSessionBB() {
+		return sessionBB;
+	}
+
+	public void setSessionBB(SessionBB sessionBB) {
+		this.sessionBB = sessionBB;
 	}
 	
 

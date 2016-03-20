@@ -109,9 +109,8 @@ public class RestServicesImpl implements IRestServices{
 	}
 
 	@Override
-	public DataPerson getPerson(Long id) {
-				
-		return FactoryBeans.getPersonBean().getPersonId(id);
+	public DataPerson getPerson(String user) {
+		return FactoryBeans.getPersonBean().getPersonId(FactoryBeans.getUserBeanLocal().getPersonIdFromUsername(user));
 
 	}
 
