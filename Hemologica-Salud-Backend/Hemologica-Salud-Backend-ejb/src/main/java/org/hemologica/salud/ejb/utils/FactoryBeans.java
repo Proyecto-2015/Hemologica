@@ -15,6 +15,7 @@ import org.hemologica.salud.ejb.beans.PersonBeanLocal;
 import org.hemologica.salud.ejb.beans.StatisticsBeanLocal;
 import org.hemologica.salud.ejb.beans.StockBeanLocal;
 import org.hemologica.salud.ejb.beans.TransfusionBeanLocal;
+import org.hemologica.salud.ejb.beans.UserBeanLocal;
 
 public class FactoryBeans {
 	
@@ -153,8 +154,21 @@ public class FactoryBeans {
 		
 		try {
 			
-			//return InitialContext.doLookup("java:global/Hemologica-Salud-Backend-ear/Hemologica-Salud-Backend-ejb/StockBean!org.hemologica.salud.ejb.beans.impl.StockBean");
 			return InitialContext.doLookup("java:global/Hemologica-Salud-Backend-ear/Hemologica-Salud-Backend-ejb/StockBean!org.hemologica.salud.ejb.business.StockBean");
+			
+		} catch (NamingException e) {
+			
+			logger.log(Level.SEVERE,  "Error al obtener el Bean AdvertismentBeanLocal", e);
+			
+		}
+		return null;
+	}
+	
+	public static UserBeanLocal getUserBeanLocal() {
+		
+		try {
+			
+			return InitialContext.doLookup("java:global/Hemologica-Salud-Backend-ear/Hemologica-Salud-Backend-ejb/UserBean!org.hemologica.salud.ejb.beans.UserBeanLocal");
 			
 		} catch (NamingException e) {
 			
