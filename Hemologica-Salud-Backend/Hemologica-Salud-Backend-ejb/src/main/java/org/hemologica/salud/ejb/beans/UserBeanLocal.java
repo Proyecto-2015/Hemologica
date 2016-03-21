@@ -1,4 +1,4 @@
-package org.hemologica.yodono.ejb.beans;
+package org.hemologica.salud.ejb.beans;
 
 import javax.ejb.Local;
 

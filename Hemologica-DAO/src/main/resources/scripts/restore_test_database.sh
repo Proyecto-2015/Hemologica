@@ -8,4 +8,4 @@ cd $BASEXCORE
 ./basexclient -U admin -P admin -c "create database Hemologica-Transfusions"
 ./basexclient -U admin -P admin -c "create database Hemologica-Laboratory"
 cd "$AUX"
-mysql -u root -p.lh2324 < dump-20-01-2016-Paula.sql
+mysql -u root -p.lh2324 < ~/dumps/Dump20160320_hemologica.sql

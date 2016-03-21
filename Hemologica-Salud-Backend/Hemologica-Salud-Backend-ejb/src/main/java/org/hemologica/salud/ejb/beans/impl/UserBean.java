@@ -1,4 +1,4 @@
-package org.hemologica.yodono.ejb.beans.impl;
+package org.hemologica.salud.ejb.beans.impl;
 
 import java.util.logging.Logger;
 
@@ -11,7 +11,7 @@ import org.hemologica.dao.IUserDAO;
 import org.hemologica.dao.impl.UserDAOImpl;
 import org.hemologica.dao.model.User;
 import org.hemologica.datatypes.DataUser;
-import org.hemologica.yodono.ejb.beans.UserBeanLocal;
+import org.hemologica.salud.ejb.beans.UserBeanLocal;
 
 /**
  * Session Bean implementation class UserBean
@@ -22,7 +22,7 @@ public class UserBean implements UserBeanLocal {
 
 private static final Logger logger = Logger.getLogger(TransfusionBean.class.getName());
 	
-	@PersistenceContext(unitName = "Hemologica-YodonoDS-PU")
+	@PersistenceContext(unitName = "Hemologica-Salud-PU")
 	private EntityManager em;
 
 	@Override

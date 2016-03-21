@@ -342,7 +342,9 @@ public class CdaUtils {
 		procedureType.setMoodCode(Constants.EVN);
 		
 		IdType idDonation = new IdType();
-//		idDonation.setRoot(dataDonacion.geti);
+
+		idDonation.setRoot(dataDonacion.getBloodCode());
+
 		procedureType.setId(idDonation);
 		
 		CodeType codeType = new CodeType();
@@ -374,6 +376,7 @@ public class CdaUtils {
 		procedureType.setEffectiveTime(effectiveTime);
 
 		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy/MM/ddHH:mm:ss");
+
 		
 		if(dataDonacion.getExtractionTimeBegin()!= null){
 			
@@ -433,7 +436,8 @@ public class CdaUtils {
 			specimenRoleType.setClassCode(Constants.SPEC);
 			
 			IdType idBlood = new IdType();
-			idBlood.setRoot(dataDonacion.getBloodCode());
+			idBlood.setRoot(dataDonacion.getBank().getCode());
+			idBlood.setExtension(dataDonacion.getBloodCode());
 			specimenRoleType.setId(idBlood);
 			
 			specimenType.setSpecimenRole(specimenRoleType);
@@ -602,7 +606,7 @@ public class CdaUtils {
 						int days = Days.daysBetween(new DateTime(sdf.parse(dataDonacion.getDate())), new DateTime(sdf.parse(dataDonacion.getFail().getDate()))).getDays();
 						ValueType valueDays = new ValueType();
 						valueDays.setUnit(Constants.DAYS);
-						valueDays.setValueTypeValue(new Byte(String.valueOf(days)));
+						valueDays.setValueTypeValue(String.valueOf(days));
 						
 						observationTypeEvent.getValue().add(valueDays);
 						
@@ -661,7 +665,7 @@ public class CdaUtils {
 		entryType.setOrganizer(organizerType);
 		
 		IdType idPrueba = new IdType();
-		idPrueba.setRoot("id");
+		idPrueba.setRoot(dataDonacion.getBloodCode());
 		organizerType.setId(idPrueba);
 		
 
@@ -679,7 +683,8 @@ public class CdaUtils {
 		specimenRoleType.setClassCode(Constants.SPEC);
 		
 		IdType idBlood = new IdType();
-		idBlood.setRoot(dataDonacion.getBloodCode());
+		idBlood.setRoot(dataDonacion.getBank().getCode());
+		idBlood.setExtension(dataDonacion.getBloodCode());
 		specimenRoleType.setId(idBlood);
 		
 		specimenType.setSpecimenRole(specimenRoleType);
@@ -776,7 +781,7 @@ public class CdaUtils {
 		entryType.setProcedure(procedureType);
 		
 		IdType idDonation = new IdType();
-		idDonation.setRoot("id");
+		idDonation.setRoot(dataTransfusion.getProductCode());
 		procedureType.setId(idDonation);
 		
 		CodeType codeType = new CodeType();
@@ -801,26 +806,24 @@ public class CdaUtils {
 		 */
 		EffectiveTimeType effectiveTime = new EffectiveTimeType();
 		procedureType.setEffectiveTime(effectiveTime);
-
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/ddHH:mm:ss");
 		
-//		if(dataDonacion.getExtractionTimeBegin()!= null){
-//			
-//			LowType lowType = new LowType();
-//			lowType.setValue5(Long.valueOf(dataDonacion.getExtractionTimeBegin()));
-//			effectiveTime.getContent().add((Serializable) lowType);
-//		}		
-//		
-//		
-//		if(dataDonacion.getExtractionTimeEnd()!= null){
-//			
-//			HighType highType = new HighType();
-//			highType.setValue6(Long.valueOf(dataDonacion.getExtractionTimeEnd()));
-//			effectiveTime.getContent().add((Serializable) highType);
-//			
-//		}
-		
-		procedureType.setEffectiveTime(effectiveTime);
+		if(dataTransfusion.getDate() != null){
+			
+			SimpleDateFormat sdf1 = new SimpleDateFormat("dd/MM/yyyy");
+			SimpleDateFormat sdf2 = new SimpleDateFormat("yyyyMMddhhmmss");
+			String time = null;
+			try {
+				 time = sdf2.format(sdf1.parse(dataTransfusion.getDate()));
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+			LowType lowType = new LowType();
+			lowType.setLowTypeValue(time);
+			effectiveTime.getContent().add(lowType);
+			HighType highType = new HighType();
+			highType.setHighTypeValue(time);
+			effectiveTime.getContent().add( highType);
+		}
 		
 		/**
 		 * Specimen Donacion
@@ -834,7 +837,8 @@ public class CdaUtils {
 		specimenRoleProduct.setClassCode(Constants.SPEC);
 		
 		IdType idProduct = new IdType();
-		idProduct.setRoot(dataTransfusion.getProductCode());
+		idProduct.setRoot(dataTransfusion.getBank().getCode());
+		idProduct.setExtension(dataTransfusion.getProductCode());
 		specimenRoleProduct.setId(idProduct);
 		
 		SpecimenPlayingEntityType specimenPlayingEntityTypeProduct = new SpecimenPlayingEntityType();
@@ -861,7 +865,8 @@ public class CdaUtils {
 		specimenRoleDonacion.setClassCode(Constants.SPEC);
 		
 		IdType idBlood = new IdType();
-		idBlood.setRoot(dataTransfusion.getAssociatedDonation());
+		idProduct.setRoot(dataTransfusion.getBank().getCode()); //Fix interfaz para que ingrese banco
+		idBlood.setExtension(dataTransfusion.getAssociatedDonation());
 		specimenRoleDonacion.setId(idBlood);
 		
 		SpecimenPlayingEntityType specimenPlayingEntityType = new SpecimenPlayingEntityType();
@@ -885,6 +890,7 @@ public class CdaUtils {
 		procedureType.getEntryRelationship().add(entryRelationshipType);
 		
 		ObservationType observationType = new ObservationType();
+		
 		entryRelationshipType.setObservation(observationType);
 		observationType.setClassCode(Constants.OBS);
 		observationType.setMoodCode(Constants.EVN);
@@ -893,6 +899,8 @@ public class CdaUtils {
 		codeTypeUnit.setCodeSystem(Constants.SNOMED_CODE);
 		codeTypeUnit.setCodeSystemName(Constants.SNOMED_NAME);
 		 
+		observationType.setCode(codeTypeUnit);	
+		
 		UnitsType productType = null;
 		if(dataTransfusion.getDataProduct() != null)
 			productType = FactoryDAO.getCodesDAO(em).getProductById(dataTransfusion.getDataProduct().getCode());
@@ -930,9 +938,10 @@ public class CdaUtils {
 		ValueType valueType = new ValueType();
 		valueType.setUnit(Constants.ML);
 		if(dataTransfusion.getVolume()!= null && !dataTransfusion.getVolume().equals(""))
-			valueType.setValueTypeValue(new Byte(dataTransfusion.getVolume()));
-			 
-		observationType.setCode(codeTypeUnit);	
+			valueType.setValueTypeValue(dataTransfusion.getVolume());
+		
+		observationTypeVolume.getValue().add(valueType);
+		
 		
 		/**
 		 * Eventos adeversos si corresponden

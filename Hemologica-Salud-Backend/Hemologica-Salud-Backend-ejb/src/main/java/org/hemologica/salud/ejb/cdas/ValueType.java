@@ -8,9 +8,12 @@
 
 package org.hemologica.salud.ejb.cdas;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 
@@ -37,13 +40,16 @@ import javax.xml.bind.annotation.XmlValue;
  * 
  * 
  */
+@XmlRootElement(name = "value")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "valueType", propOrder = {
     "value"
 })
-public class ValueType {
+public class ValueType implements Serializable{
 
-    @XmlValue
+
+	private static final long serialVersionUID = 1L;
+	@XmlValue
     protected String value;
     @XmlAttribute(name = "code")
     protected Integer code;
@@ -54,7 +60,7 @@ public class ValueType {
     @XmlAttribute(name = "codeSystemName")
     protected String codeSystemName;
     @XmlAttribute(name = "value")
-    protected Byte valueTypeValue;
+    protected String valueTypeValue;
     @XmlAttribute(name = "unit")
     protected String unit;
 
@@ -186,7 +192,7 @@ public class ValueType {
      *     {@link Byte }
      *     
      */
-    public Byte getValueTypeValue() {
+    public String getValueTypeValue() {
         return valueTypeValue;
     }
 
@@ -198,7 +204,7 @@ public class ValueType {
      *     {@link Byte }
      *     
      */
-    public void setValueTypeValue(Byte value) {
+    public void setValueTypeValue(String value) {
         this.valueTypeValue = value;
     }
 

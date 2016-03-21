@@ -69,8 +69,8 @@
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="destination" ref="userCreateQueue" />
 		<property name="sessionTransacted" value="true" />
-		<property name="maxConcurrentConsumers" value="10" />
-		<property name="concurrentConsumers" value="10" />
+		<property name="maxConcurrentConsumers" value="1" />
+		<property name="concurrentConsumers" value="1" />
 		<property name="receiveTimeout" value="5000" />
 		<property name="recoveryInterval" value="60000" />
 		<property name="autoStartup" value="false" />
@@ -81,8 +81,8 @@
 		<property name="connectionFactory" ref="connectionFactory" />
 		<property name="destination" ref="receiveQueue" />
 		<property name="sessionTransacted" value="true" />
-		<property name="maxConcurrentConsumers" value="10" />
-		<property name="concurrentConsumers" value="10" />
+		<property name="maxConcurrentConsumers" value="1" />
+		<property name="concurrentConsumers" value="1" />
 		<property name="receiveTimeout" value="5000" />
 		<property name="recoveryInterval" value="60000" />
 		<property name="autoStartup" value="false" />

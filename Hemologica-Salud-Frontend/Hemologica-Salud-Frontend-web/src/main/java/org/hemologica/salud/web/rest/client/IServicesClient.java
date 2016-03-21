@@ -58,7 +58,10 @@ public interface IServicesClient {
 	 * @param string
 	 * @return
 	 */
-	public DataUser getDataUser(Long string) throws IOException;
+	public DataPerson getDataUser(String user) throws IOException;
+	
+	
+	
 
 	/**
 	 * Devuelve la informacion todos los bancos de sangre. 

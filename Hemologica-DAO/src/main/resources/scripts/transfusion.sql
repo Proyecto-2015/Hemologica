@@ -1,7 +1,7 @@
 -- Analisis
 
-INSERT INTO `hemologica`.`transfusion_laboratory_codes` (`transfusion_laboratory_code_id`, `transfusion_laboratory_code_value`, `transfusion_laboratory_code_label`, `transfusion_laboratory_code_snomed`) VALUES ('1', '1', 'label_direct_coombs ', '23');
-INSERT INTO `hemologica`.`transfusion_laboratory_codes` (`transfusion_laboratory_code_id`, `transfusion_laboratory_code_value`, `transfusion_laboratory_code_label`, `transfusion_laboratory_code_snomed`) VALUES ('2', '2', 'label_indirect_coombs ', '24');
+INSERT INTO `hemologica`.`transfusion_laboratory_codes` (`transfusion_laboratory_code_id`, `transfusion_laboratory_code_value`, `transfusion_laboratory_code_label`, `transfusion_laboratory_code_snomed`) VALUES ('1', '1', 'label_direct_coombs', '23');
+INSERT INTO `hemologica`.`transfusion_laboratory_codes` (`transfusion_laboratory_code_id`, `transfusion_laboratory_code_value`, `transfusion_laboratory_code_label`, `transfusion_laboratory_code_snomed`) VALUES ('2', '2', 'label_indirect_coombs', '24');
 
 -- Evento adversos
 

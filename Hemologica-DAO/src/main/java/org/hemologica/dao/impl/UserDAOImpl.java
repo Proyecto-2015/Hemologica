@@ -43,5 +43,15 @@ public class UserDAOImpl extends GenericDAOImpl<User> implements IUserDAO {
 		query.setParameter("personId", personId);
 		return query.getResultList();
 	}
+
+	@Override
+	@SuppressWarnings("unchecked")
+	public User findByUsername(String username) {
+		
+		Query query = em.createNamedQuery("User.findByUsername");
+		query.setParameter("username", username);
+		List<User> res = query.getResultList();
+		return res != null && !res.isEmpty()? res.get(0) : null;
+	}
 	
 }

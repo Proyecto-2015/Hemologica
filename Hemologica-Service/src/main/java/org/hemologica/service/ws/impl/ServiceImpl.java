@@ -14,12 +14,13 @@ import javax.jms.JMSException;
 import javax.jms.MessageProducer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
+import javax.jws.WebMethod;
 import javax.jws.WebService;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.hemologica.service.business.IMovementBean;
 import org.hemologica.service.datatype.MovementData;
 import org.hemologica.service.utils.xml.XMLUtils;
-import org.hemologica.service.ws.Service;
+//import org.hemologica.service.ws.Service;
 import org.hemologica.service.ws.exception.ServiceException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -27,11 +28,12 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 
-@WebService(endpointInterface = "org.hemologica.service.ws.Service")
-public class ServiceImpl implements Service {
+@WebService
+public class ServiceImpl {
 
 	private static final Logger logger = Logger.getLogger(ServiceImpl.class.getName());
 
+	@WebMethod(operationName="PROVIDE_CDA")
 	public void provideCDA(String cda) throws Exception {
 
 		try {
@@ -95,7 +97,7 @@ public class ServiceImpl implements Service {
 
 	}
 
-	@Override
+	@WebMethod(operationName="IMPORT_MOVEMENTS")
 	public void importMovements(List<MovementData> movements) throws ParseException {
 		ApplicationContext context = new ClassPathXmlApplicationContext("META-INF/spring/beans.xml");
 		IMovementBean movementBean = (IMovementBean) context.getBean("movementBean");

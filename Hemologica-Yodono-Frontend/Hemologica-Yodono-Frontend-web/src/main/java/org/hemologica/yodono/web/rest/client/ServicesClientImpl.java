@@ -95,7 +95,7 @@ public class ServicesClientImpl implements IServicesClient {
 
 		return transfusions;
 	}
-
+	
 	@Override
 	public DataPerson getDataUser(String userId) throws IOException {
 

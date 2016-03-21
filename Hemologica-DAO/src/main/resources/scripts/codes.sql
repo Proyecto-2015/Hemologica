@@ -81,7 +81,14 @@ INSERT INTO `hemologica`.`donation_fail_causes_codes` (`donation_fail_cause_code
 
 INSERT INTO `hemologica`.`donation_fail_causes_codes` (`donation_fail_cause_code_id`, `donation_fail_cause_code_value`, `donation_fail_cause_code_label`, `donation_fail_cause_code_snomed`) VALUES ('7', '7', 'label_behavior', '53');
 
+
+-- Productos --
+INSERT INTO `hemologica`.`units_types` (`unit_type_id`, `unit_type_code_label`, `unit_type_code_value`, `unit_type_code_snomed`) VALUES ('1', 'label_plaquetas', '1', '7');
+INSERT INTO `hemologica`.`units_types` (`unit_type_id`, `unit_type_code_label`, `unit_type_code_value`, `unit_type_code_snomed`) VALUES ('2', 'label_crioprecipitado', '2', '8');
+INSERT INTO `hemologica`.`units_types` (`unit_type_id`, `unit_type_code_label`, `unit_type_code_value`, `unit_type_code_snomed`) VALUES ('3', 'label_plasma', '3', '9');
+INSERT INTO `hemologica`.`units_types` (`unit_type_id`, `unit_type_code_label`, `unit_type_code_value`, `unit_type_code_snomed`) VALUES ('4', 'label_eritrocitos', '4', '10');
 INSERT INTO `hemologica`.`units_types` (`unit_type_id`, `unit_type_code_label`, `unit_type_code_value`, `unit_type_code_snomed`) VALUES ('5', 'label_hematies', '5', '54');
+
 
 INSERT INTO `hemologica`.`donation_laboratoy_codes` (`donation_laboratoy_code_id`, `donation_laboratoy_code_value`, `donation_laboratoy_code_label`, `donation_laboratoy_code_snomed`) VALUES ('4', '4', 'label_analysis_hepatitis_b', '55');
 

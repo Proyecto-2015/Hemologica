@@ -93,12 +93,12 @@ public class ServicesClientImpl implements IServicesClient {
 	}
 
 	@Override
-	public DataUser getDataUser(Long user) throws IOException {
+	public DataPerson getDataUser(String user) throws IOException {
 
 		String urlUsers = url + ConstantsRest.PATH_USERS;
 
 		HashMap<String, String> hash = new HashMap<String, String>();
-		hash.put(ConstansJson.JSON_USER, "hola");
+		hash.put(ConstansJson.JSON_USER, user);
 
 		String userString = "";
 		try {
@@ -107,7 +107,7 @@ public class ServicesClientImpl implements IServicesClient {
 			logger.log(Level.SEVERE, "Error al llamar al servicio", e);
 		}
 
-		DataUser dataUser = new Gson().fromJson(userString, DataUser.class);
+		DataPerson dataUser = new Gson().fromJson(userString, DataPerson.class);
 
 		return dataUser;
 	}

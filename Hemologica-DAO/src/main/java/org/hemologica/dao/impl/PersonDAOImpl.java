@@ -45,7 +45,9 @@ public class PersonDAOImpl extends GenericDAOImpl<Person> implements IPersonDAO{
 		
 		Query query = em.createNamedQuery("Person.findById");
 		query.setParameter("id", id);
-		return (Person) query.getSingleResult();
+		@SuppressWarnings("unchecked")
+		List<Person> ret = (List<Person>) query.getResultList();
+		return (Person) (ret != null && !ret.isEmpty() ? ret.get(0) : null);
 		
 	}
 
