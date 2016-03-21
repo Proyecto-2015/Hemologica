@@ -8,9 +8,12 @@
 
 package org.hemologica.salud.ejb.cdas;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 
@@ -32,16 +35,21 @@ import javax.xml.bind.annotation.XmlValue;
  * 
  * 
  */
+@XmlRootElement(name="low")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "lowType", propOrder = {
     "value"
 })
-public class LowType {
+public class LowType implements Serializable{
 
-    @XmlValue
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@XmlValue
     protected String value;
     @XmlAttribute(name = "value")
-    protected Long lowTypeValue;
+    protected String lowTypeValue;
 
     /**
      * Gets the value of the value property.
@@ -75,7 +83,7 @@ public class LowType {
      *     {@link Long }
      *     
      */
-    public Long getLowTypeValue() {
+    public String getLowTypeValue() {
         return lowTypeValue;
     }
 
@@ -87,7 +95,7 @@ public class LowType {
      *     {@link Long }
      *     
      */
-    public void setLowTypeValue(Long value) {
+    public void setLowTypeValue(String value) {
         this.lowTypeValue = value;
     }
 

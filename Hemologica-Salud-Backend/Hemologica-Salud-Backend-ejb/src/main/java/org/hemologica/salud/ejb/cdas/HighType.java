@@ -8,9 +8,12 @@
 
 package org.hemologica.salud.ejb.cdas;
 
+import java.io.Serializable;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.XmlValue;
 
@@ -32,16 +35,21 @@ import javax.xml.bind.annotation.XmlValue;
  * 
  * 
  */
+@XmlRootElement(name="high")
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "highType", propOrder = {
     "value"
 })
-public class HighType {
+public class HighType implements Serializable{
 
-    @XmlValue
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@XmlValue
     protected String value;
     @XmlAttribute(name = "value")
-    protected Long highTypeValue;
+    protected String highTypeValue;
 
     /**
      * Gets the value of the value property.
@@ -75,7 +83,7 @@ public class HighType {
      *     {@link Long }
      *     
      */
-    public Long getHighTypeValue() {
+    public String getHighTypeValue() {
         return highTypeValue;
     }
 
@@ -87,7 +95,7 @@ public class HighType {
      *     {@link Long }
      *     
      */
-    public void setHighTypeValue(Long value) {
+    public void setHighTypeValue(String value) {
         this.highTypeValue = value;
     }
 

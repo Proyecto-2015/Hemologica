@@ -24,7 +24,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Service</servlet-name>
-        <url-pattern>/Service</url-pattern>
+        <url-pattern>/ServiceImpl</url-pattern>
     </servlet-mapping>
 	
 	

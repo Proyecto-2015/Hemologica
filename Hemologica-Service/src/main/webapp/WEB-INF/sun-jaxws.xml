@@ -3,5 +3,5 @@
   <endpoint
       name="Service"
       implementation="org.hemologica.service.ws.impl.ServiceImpl"
-      url-pattern="/Service"/>
+      url-pattern="/ServiceImpl"/>
 </endpoints>

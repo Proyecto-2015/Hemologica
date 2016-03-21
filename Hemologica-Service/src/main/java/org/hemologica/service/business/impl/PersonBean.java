@@ -55,7 +55,7 @@ public class PersonBean implements IPersonBean, Serializable {
 	private static final Object mutex = new Object();
 	private static final Object mutexDocumet = new Object();
 	private static final Object mutexIdentification = new Object();
-	private static final Semaphore mutex2 = new Semaphore(1);
+	public static final Semaphore mutex2 = new Semaphore(1);
 
 	private BaseXConnection baseXConnectionDonations;
 	private BaseXConnection baseXConnectionTransfusion;
@@ -138,7 +138,6 @@ public class PersonBean implements IPersonBean, Serializable {
 					}
 				}
 
-				mutex2.release();
 			}
 
 			cda = XMLUtils.removeCDANamespaces(cda);
@@ -177,8 +176,13 @@ public class PersonBean implements IPersonBean, Serializable {
 				}
 				
 			}
+			
 			// rollback basex
+			mutex2.release();
 			throw ex;
+			
+		} finally {
+			mutex2.release();
 		}
 
 	}
@@ -280,7 +284,9 @@ public class PersonBean implements IPersonBean, Serializable {
 		person.setPersonFirstLastname(data.get("surname"));
 		person.setPersonSecondLastname(data.get("secondSurname"));
 		try {
-			person.setPersonBirthday(sdf.parse(data.get("birthday")));
+			if(data.containsKey("birthday") && !("".equals(data.get("birthday")))){
+				person.setPersonBirthday(sdf.parse(data.get("birthday")));
+			}
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

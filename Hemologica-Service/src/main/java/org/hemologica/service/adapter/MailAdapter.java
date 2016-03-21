@@ -25,8 +25,8 @@ public class MailAdapter {
 	public void process(String mailDataJson) {
 
 		MailData data = new Gson().fromJson(mailDataJson, MailData.class);
-		String username = properties.getProperty("username");
-		String password = properties.getProperty("password");
+		final String username = properties.getProperty("username");
+		final String password = properties.getProperty("password");
 
 		Session session = Session.getInstance(properties, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
