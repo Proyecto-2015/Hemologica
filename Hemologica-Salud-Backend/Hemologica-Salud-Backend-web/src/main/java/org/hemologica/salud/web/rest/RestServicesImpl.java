@@ -525,15 +525,7 @@ public class RestServicesImpl implements IRestServices{
 			
 			return FactoryBeans.getDonationBean().getDonationsFilters(resultDonations);
 			
-		}catch (SAXException e) {
-			
-			logger.log(Level.SEVERE, "Error al obtener los cdas SAXException", e);
-			
-		} catch (IOException e) {
-			
-			logger.log(Level.SEVERE, "Error al obtener los cdas IOException", e);
-			
-		} catch (ParserConfigurationException e) {
+		}catch (ParserConfigurationException e) {
 			
 			logger.log(Level.SEVERE, "Error al obtener los cdas ParserConfigurationException", e);
 			

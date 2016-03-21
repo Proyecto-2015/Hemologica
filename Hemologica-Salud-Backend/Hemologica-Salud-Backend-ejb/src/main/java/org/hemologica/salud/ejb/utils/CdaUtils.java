@@ -1,5 +1,6 @@
 package org.hemologica.salud.ejb.utils;
 
+import java.io.Serializable;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -41,9 +42,11 @@ import org.hemologica.salud.ejb.cdas.CustodianType;
 import org.hemologica.salud.ejb.cdas.EffectiveTimeType;
 import org.hemologica.salud.ejb.cdas.EntryRelationshipType;
 import org.hemologica.salud.ejb.cdas.EntryType;
+import org.hemologica.salud.ejb.cdas.HighType;
 import org.hemologica.salud.ejb.cdas.IdType;
 import org.hemologica.salud.ejb.cdas.InterpretationCodeType;
 import org.hemologica.salud.ejb.cdas.LanguageCodeType;
+import org.hemologica.salud.ejb.cdas.LowType;
 import org.hemologica.salud.ejb.cdas.NameType;
 import org.hemologica.salud.ejb.cdas.ObservationType;
 import org.hemologica.salud.ejb.cdas.OrganizerType;
@@ -339,7 +342,7 @@ public class CdaUtils {
 		procedureType.setMoodCode(Constants.EVN);
 		
 		IdType idDonation = new IdType();
-		idDonation.setRoot("id");
+//		idDonation.setRoot(dataDonacion.geti);
 		procedureType.setId(idDonation);
 		
 		CodeType codeType = new CodeType();
@@ -370,23 +373,25 @@ public class CdaUtils {
 		EffectiveTimeType effectiveTime = new EffectiveTimeType();
 		procedureType.setEffectiveTime(effectiveTime);
 
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/ddHH:mm:ss");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy/MM/ddHH:mm:ss");
 		
-//		if(dataDonacion.getExtractionTimeBegin()!= null){
-//			
-//			LowType lowType = new LowType();
-//			lowType.setValue5(Long.valueOf(dataDonacion.getExtractionTimeBegin()));
-//			effectiveTime.getContent().add((Serializable) lowType);
-//		}		
-//		
-//		
-//		if(dataDonacion.getExtractionTimeEnd()!= null){
-//			
-//			HighType highType = new HighType();
-//			highType.setValue6(Long.valueOf(dataDonacion.getExtractionTimeEnd()));
-//			effectiveTime.getContent().add((Serializable) highType);
-//			
-//		}
+		if(dataDonacion.getExtractionTimeBegin()!= null){
+			
+			LowType lowType = new LowType();
+			lowType.setValue(dataDonacion.getExtractionTimeBegin());
+			//lowType.setValue5(Long.valueOf(dataDonacion.getExtractionTimeBegin()));
+			effectiveTime.getContent().add((Serializable) lowType);
+		}		
+		
+		
+		if(dataDonacion.getExtractionTimeEnd()!= null){
+			
+			HighType highType = new HighType();
+			highType.setValue(dataDonacion.getExtractionTimeEnd());
+			//highType.setValue6(Long.valueOf(dataDonacion.getExtractionTimeEnd()));
+			effectiveTime.getContent().add((Serializable) highType);
+			
+		}
 		
 		/**
 		 * Tipo de Donante

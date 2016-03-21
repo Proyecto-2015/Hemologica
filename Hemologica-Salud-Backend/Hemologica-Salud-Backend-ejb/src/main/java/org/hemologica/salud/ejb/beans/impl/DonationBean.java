@@ -698,7 +698,7 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 
 	@Override
 	public List<DataDonation> getDonationsFilters(List<DataSearchFilter> resultDonations)
-			throws XPathExpressionException, SAXException, IOException, ParserConfigurationException {
+			throws XPathExpressionException, ParserConfigurationException {
 
 		List<String> queries = new ArrayList<>();
 
@@ -723,21 +723,32 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 			if (cdas != null && cdas.size() != 0) {
 				for (String cda : cdas) {
 
-					Document document = XMLUtils.stringToDocument(cda);
-					DataDonation dataDonacion = getDataDonation(document);
+					Document document;
+					try {
+						
+						document = XMLUtils.stringToDocument(cda);
+						DataDonation dataDonacion = getDataDonation(document);
 
-					/**
-					 * BEGIN bruno 14-01-2016 -> obtener los datos personales
-					 * desencriptado la columna de personrecord
-					 */
-					dataDonacion.setPerson(this.getDataPersonFromDocument(document));
-					/**
-					 * END
-					 */
+						/**
+						 * BEGIN bruno 14-01-2016 -> obtener los datos personales
+						 * desencriptado la columna de personrecord
+						 */
+						dataDonacion.setPerson(this.getDataPersonFromDocument(document));
+						/**
+						 * END
+						 */
 
-					
-
-					listReturn.add(dataDonacion);
+						listReturn.add(dataDonacion);
+						
+					} catch (IOException e) {
+						
+						logger.log(Level.SEVERE, "Error al procesar un documento");
+						
+					} catch (SAXException e) {
+						
+						logger.log(Level.SEVERE, "Error al procesar un documento");
+						
+					}
 				}
 			}
 		} catch (XMLDataBaseException e) {
@@ -763,34 +774,40 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 		String extension = XMLUtils.executeXPathString(document, "/ClinicalDocument/id/@extension");
 		
 		PersonsRecord pr = FactoryDAO.getPeronRecordDAO(em).getCDAsRootExtension(root, extension);
-
-		// ACA desencripto
-		Identification perId = FactoryDAO.getIIdentificationDAO(em)
-				.getIdentificationByCode(CryptoConverter.decrypt(pr.getIdentificationRef()));
-		
-		Person p = perId.getPerson();
 		DataPerson dp = new DataPerson();
-		dp.setFirstName(p.getPersonFirstName());
-		dp.setFirstLastName(p.getPersonFirstLastname());
-
-		if(p.getDocuments() != null && p.getDocuments().size() != 0){
+		
+		if(pr != null){
+		// ACA desencripto
+			Identification perId = FactoryDAO.getIIdentificationDAO(em)
+					.getIdentificationByCode(CryptoConverter.decrypt(pr.getIdentificationRef()));
 			
-			if(p.getDocuments().get(0).getCountriesCode() != null){
-				DataCode documentCountry = new DataCode();
-				documentCountry.setCode(p.getDocuments().get(0).getCountriesCode().getCountryCodeValue());
-				documentCountry.setDisplayName(p.getDocuments().get(0).getCountriesCode().getCountryCodeLabel());
-				dp.setDocumentCountry(documentCountry);
-			}
+			if(perId != null){
 			
-			if(p.getDocuments().get(0).getDocumentsTypesCode() != null){
-				DataCode documentType = new DataCode();
-				documentType.setCode(p.getDocuments().get(0).getDocumentsTypesCode().getDocumentsTypeCodeValue());
-				documentType.setDisplayName(p.getDocuments().get(0).getDocumentsTypesCode().getDocumentsTypeCodeLabel());
-				dp.setDocumentType(documentType);
-			}
-			
-			dp.setDocumentNumber((p.getDocuments().get(0).getDocumentNumber() == null) ? "" :p.getDocuments().get(0).getDocumentNumber());
+				Person p = perId.getPerson();
 				
+				dp.setFirstName(p.getPersonFirstName());
+				dp.setFirstLastName(p.getPersonFirstLastname());
+		
+				if(p.getDocuments() != null && p.getDocuments().size() != 0){
+					
+					if(p.getDocuments().get(0).getCountriesCode() != null){
+						DataCode documentCountry = new DataCode();
+						documentCountry.setCode(p.getDocuments().get(0).getCountriesCode().getCountryCodeValue());
+						documentCountry.setDisplayName(p.getDocuments().get(0).getCountriesCode().getCountryCodeLabel());
+						dp.setDocumentCountry(documentCountry);
+					}
+					
+					if(p.getDocuments().get(0).getDocumentsTypesCode() != null){
+						DataCode documentType = new DataCode();
+						documentType.setCode(p.getDocuments().get(0).getDocumentsTypesCode().getDocumentsTypeCodeValue());
+						documentType.setDisplayName(p.getDocuments().get(0).getDocumentsTypesCode().getDocumentsTypeCodeLabel());
+						dp.setDocumentType(documentType);
+					}
+					
+					dp.setDocumentNumber((p.getDocuments().get(0).getDocumentNumber() == null) ? "" :p.getDocuments().get(0).getDocumentNumber());
+						
+				}
+			}
 		}
 
 		return dp;
