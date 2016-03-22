@@ -181,84 +181,6 @@ public class TransfusionBean implements TransfusionBeanLocal, Serializable {
 		 */
 		DataPerson dataPerson = this.getDataPersonFromDocument(document);
 		data.setPerson(dataPerson);
-		// DataPerson dataPerson = new DataPerson();
-		// data.setPerson(dataPerson);
-		//
-		// String genderCode = XMLUtils.executeXPathString(document,
-		// "/ClinicalDocument/recordTarget/patientRole/patient/administrativeGenderCode/@code");
-		//
-		// DataCode gender =
-		// FactoryBeans.getCodeBeans().getGenderCodeById(genderCode);
-		// dataPerson.setGender(gender);
-		//
-		// dataPerson.setFirstName(XMLUtils.executeXPathString(document,
-		// "/ClinicalDocument/recordTarget/patientRole/patient/name/given/text()"));
-		// dataPerson.setFirstLastName(XMLUtils.executeXPathString(document,
-		// "/ClinicalDocument/recordTarget/patientRole/patient/name/family/text()"));
-		//
-		// String birthday = XMLUtils.executeXPathString(document,
-		// "/ClinicalDocument/recordTarget/patientRole/patient/birthTime/@value");
-		// SimpleDateFormat sdfAge = new SimpleDateFormat("yyyyMMdd");
-		// try {
-		//
-		// Date dateBir = sdfAge.parse(birthday);
-		// Calendar date = Calendar.getInstance();
-		// date.setTime(dateBir);
-		//// LocalDate birthdate = new LocalDate(date.get(Calendar.YEAR),
-		// date.get(Calendar.MONDAY), date.get(Calendar.DAY_OF_MONTH));
-		// LocalDate birthdate = new LocalDate(date.get(Calendar.YEAR),
-		// date.get(Calendar.MONTH) +1 , date.get(Calendar.DAY_OF_MONTH));
-		// LocalDate now = new LocalDate();
-		// Years age = Years.yearsBetween(birthdate, now);
-		//
-		// dataPerson.setAge(String.valueOf(age.getYears()));
-		//
-		// } catch (ParseException e) {
-		//
-		// logger.log(Level.SEVERE, "Error al parsear la fecha de nacimiento",
-		// e);
-		//
-		// }
-		// String documentPerson = XMLUtils.executeXPathString(document,
-		// "/ClinicalDocument/recordTarget/patientRole/patient/id/@root");
-		// if(documentPerson != null){
-		//
-		// String documentNumber =
-		// documentPerson.substring(documentPerson.lastIndexOf(".")+1,
-		// documentPerson.length()-1);
-		// dataPerson.setDocumentNumber(documentNumber);
-		//
-		// documentPerson = documentPerson.substring(0,
-		// documentPerson.lastIndexOf("."));
-		// String documentTypeS =
-		// documentPerson.substring(documentPerson.lastIndexOf(".")+1,
-		// documentPerson.length());
-		//
-		// DocumentsTypesCode documentType =
-		// FactoryDAO.getCodesDAO(em).getDocumentsTypeByCode(documentTypeS);
-		// if(documentType != null){
-		// DataCode documentTypeCode = new DataCode();
-		// documentTypeCode.setCode(documentType.getDocumentsTypeCodeValue());
-		// documentTypeCode.setDisplayName(documentType.getDocumentsTypeCodeLabel());
-		// dataPerson.setDocumentType(documentTypeCode);
-		// }
-		//
-		// documentPerson = documentPerson.substring(0,
-		// documentPerson.lastIndexOf("."));
-		// String documentCountryS =
-		// documentPerson.substring(documentPerson.lastIndexOf(".")+1,
-		// documentPerson.length());
-		//
-		// CountriesCode country =
-		// FactoryDAO.getCodesDAO(em).getCountryByCode(documentCountryS);
-		// if(country != null){
-		// DataCode countryCode = new DataCode();
-		// countryCode.setCode(country.getCountryCodeLabel());
-		// countryCode.setDisplayName(country.getCountryCodeLabel());
-		// dataPerson.setDocumentType(countryCode);
-		// }
-		//
-		// }
 
 		/**
 		 * Fecha
@@ -521,50 +443,36 @@ public class TransfusionBean implements TransfusionBeanLocal, Serializable {
 						.setDisplayName(p.getDocuments().get(0).getDocumentsTypesCode().getDocumentsTypeCodeLabel());
 				dp.setDocumentType(documentType);
 			}
+			
+			dp.setDocumentNumber((p.getDocuments().get(0).getDocumentNumber() == null) ? "" :p.getDocuments().get(0).getDocumentNumber());
+				
+		}		
 
-			dp.setDocumentNumber((p.getDocuments().get(0).getDocumentNumber() == null) ? ""
-					: p.getDocuments().get(0).getDocumentNumber());
-
-		}
-
-		String genderCode = XMLUtils.executeXPathString(document,
-				"/ClinicalDocument/recordTarget/patientRole/patient/administrativeGenderCode/@code");
-
+		String genderCode = XMLUtils.executeXPathString(document, "/ClinicalDocument/recordTarget/patientRole/patient/administrativeGenderCode/@code");
+		
 		DataCode gender = FactoryBeans.getCodeBeans().getGenderCodeById(genderCode);
-
 		dp.setGender(gender);
 
-		String birthday = XMLUtils.executeXPathString(document,
-				"/ClinicalDocument/recordTarget/patientRole/patient/birthTime/@value");
-
+		String birthday = XMLUtils.executeXPathString(document, "/ClinicalDocument/recordTarget/patientRole/patient/birthTime/@value");
 		SimpleDateFormat sdfAge = new SimpleDateFormat("yyyyMMdd");
-
 		try {
-
+			
 			Date dateBir = sdfAge.parse(birthday);
-
 			Calendar date = Calendar.getInstance();
-
 			date.setTime(dateBir);
-
-			// LocalDate birthdate = new LocalDate(date.get(Calendar.YEAR),
-			// date.get(Calendar.MONDAY), date.get(Calendar.DAY_OF_MONTH));
-
-			LocalDate birthdate = new LocalDate(date.get(Calendar.YEAR), date.get(Calendar.MONTH) + 1,
-					date.get(Calendar.DAY_OF_MONTH));
-
+//			LocalDate birthdate = new LocalDate(date.get(Calendar.YEAR), date.get(Calendar.MONDAY), date.get(Calendar.DAY_OF_MONTH));
+			LocalDate birthdate = new LocalDate(date.get(Calendar.YEAR), date.get(Calendar.MONTH) +1 , date.get(Calendar.DAY_OF_MONTH));
 			LocalDate now = new LocalDate();
-
 			Years age = Years.yearsBetween(birthdate, now);
-
+			
 			dp.setAge(String.valueOf(age.getYears()));
-
+			
 		} catch (ParseException e) {
-
+			
 			logger.log(Level.SEVERE, "Error al parsear la fecha de nacimiento", e);
-
+			
 		}
-
+		
 		return dp;
 
 	}

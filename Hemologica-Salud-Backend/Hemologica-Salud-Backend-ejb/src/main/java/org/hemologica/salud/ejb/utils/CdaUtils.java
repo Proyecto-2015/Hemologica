@@ -342,7 +342,9 @@ public class CdaUtils {
 		procedureType.setMoodCode(Constants.EVN);
 		
 		IdType idDonation = new IdType();
+
 		idDonation.setRoot(dataDonacion.getBloodCode());
+
 		procedureType.setId(idDonation);
 		
 		CodeType codeType = new CodeType();
@@ -373,41 +375,24 @@ public class CdaUtils {
 		EffectiveTimeType effectiveTime = new EffectiveTimeType();
 		procedureType.setEffectiveTime(effectiveTime);
 
-		SimpleDateFormat sdf1Time = new SimpleDateFormat("dd/MM/yyyy");
-		SimpleDateFormat sdf2Time = new SimpleDateFormat("yyyyMMddhhmmss");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy/MM/ddHH:mm:ss");
+
 		
 		if(dataDonacion.getExtractionTimeBegin()!= null){
 			
 			LowType lowType = new LowType();
-			lowType.setLowTypeValue(dataDonacion.getExtractionTimeBegin());
+			lowType.setValue(dataDonacion.getExtractionTimeBegin());
 			//lowType.setValue5(Long.valueOf(dataDonacion.getExtractionTimeBegin()));
-			effectiveTime.getContent().add(lowType);
-			
-		}else if(dataDonacion.getDate() != null && !("".equals(dataDonacion.getDate()))){
-			
-
-			String time = null;
-			try {
-				 time = sdf2Time.format(sdf1Time.parse(dataDonacion.getDate()));
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
-			LowType lowType = new LowType();
-			lowType.setLowTypeValue(time);
-			effectiveTime.getContent().add(lowType);
-			HighType highType = new HighType();
-			highType.setHighTypeValue(time);
-			effectiveTime.getContent().add( highType);
-
-		}	
+			effectiveTime.getContent().add((Serializable) lowType);
+		}		
 		
 		
 		if(dataDonacion.getExtractionTimeEnd()!= null){
 			
 			HighType highType = new HighType();
-			highType.setHighTypeValue(dataDonacion.getExtractionTimeEnd());
+			highType.setValue(dataDonacion.getExtractionTimeEnd());
 			//highType.setValue6(Long.valueOf(dataDonacion.getExtractionTimeEnd()));
-			effectiveTime.getContent().add(highType);
+			effectiveTime.getContent().add((Serializable) highType);
 			
 		}
 		

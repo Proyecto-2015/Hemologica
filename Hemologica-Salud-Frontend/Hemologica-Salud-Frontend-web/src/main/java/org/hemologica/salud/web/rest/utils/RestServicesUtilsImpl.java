@@ -15,6 +15,8 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.protocol.HTTP;
+
 import com.google.gson.Gson;
 
 public class RestServicesUtilsImpl implements IRestServicesUtils {
@@ -30,7 +32,7 @@ public class RestServicesUtilsImpl implements IRestServicesUtils {
 		/**
 		 * Se pasa siempre un objto en formato JSON en el contenido del mensaje
 		 */
-		StringEntity entity = new StringEntity(gson.toJson(o), "UTF-8");
+		StringEntity entity = new StringEntity(gson.toJson(o),"UTF-8");
 		entity.setContentType("application/json");
 		post.setEntity(entity);
 		

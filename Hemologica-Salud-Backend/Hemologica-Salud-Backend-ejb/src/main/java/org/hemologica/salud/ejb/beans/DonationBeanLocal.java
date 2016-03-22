@@ -18,6 +18,6 @@ public interface DonationBeanLocal {
 
 	DataDonation getDataDonationSpecimenId(String code, String institutionCode) throws XPathExpressionException, SAXException, IOException, ParserConfigurationException;
 
-	List<DataDonation> getDonationsFilters(List<DataSearchFilter> resultDonations) throws XPathExpressionException, SAXException, IOException, ParserConfigurationException;
+	List<DataDonation> getDonationsFilters(List<DataSearchFilter> resultDonations) throws XPathExpressionException, ParserConfigurationException;
 
 }

@@ -36,7 +36,7 @@ public class Constants {
 	
 	// OID HEMOLOGICA
 	public static final String HEMOLOGICA_NAME = "HEMOLOGICA";
-	public static final String OID_HEMOLOGICA = "2.16.858.0.0.1.10.2.3.1.1";
+	public static final String OID_HEMOLOGICA = "2.16.858.0.0.1.10.2.3.1.1.2.1";
 	public static final String OID_HEMOLOGICA_CDA = "2.16.858.0.0.1.10.2.3.1.1.1";
 	public static final String OID_HCE_HEMOLOGICA_CDA = "2.16.858.0.0.1.10.2.3.1.1.2";
 	
@@ -46,7 +46,8 @@ public class Constants {
 	public static final String SNOMED_CODE ="2.16.840.1.113883.6.96";
 	public static final String SNOMED_NAME = "SNOMED-CT";
 	
-	public static final String CDA_PATH = "/home/bruno/Escritorio/proyecto/Mirth/Integracion/import";
+//	public static final String CDA_PATH = "/home/bruno/Escritorio/proyecto/Mirth/Integracion/import";
+	public static final String CDA_PATH = "/Users/paularoche/Documents/Proyecto/CDAs-Repo/";
 	
 	public static final String ID_OID_PATH = "2.16.858.1";
 	
