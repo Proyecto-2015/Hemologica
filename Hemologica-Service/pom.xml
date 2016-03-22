@@ -307,5 +307,14 @@
 			<artifactId>Hemologica-XmlDataBase-Connection</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+
+
+		<dependency>
+			<groupId>xerces</groupId>
+			<artifactId>xercesImpl</artifactId>
+			<version>2.11.0</version>
+		</dependency>
+
+
 	</dependencies>
 </project>
