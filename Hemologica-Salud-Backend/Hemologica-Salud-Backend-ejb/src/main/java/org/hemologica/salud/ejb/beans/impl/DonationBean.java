@@ -825,6 +825,32 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 				}
 			}
 		}
+		
+		String genderCode = XMLUtils.executeXPathString(document, "/ClinicalDocument/recordTarget/patientRole/patient/administrativeGenderCode/@code");
+		
+		DataCode gender = FactoryBeans.getCodeBeans().getGenderCodeById(genderCode);
+		dp.setGender(gender);
+
+		String birthday = XMLUtils.executeXPathString(document, "/ClinicalDocument/recordTarget/patientRole/patient/birthTime/@value");
+		SimpleDateFormat sdfAge = new SimpleDateFormat("yyyyMMdd");
+		try {
+			
+			Date dateBir = sdfAge.parse(birthday);
+			Calendar date = Calendar.getInstance();
+			date.setTime(dateBir);
+//			LocalDate birthdate = new LocalDate(date.get(Calendar.YEAR), date.get(Calendar.MONDAY), date.get(Calendar.DAY_OF_MONTH));
+			LocalDate birthdate = new LocalDate(date.get(Calendar.YEAR), date.get(Calendar.MONTH) +1 , date.get(Calendar.DAY_OF_MONTH));
+			LocalDate now = new LocalDate();
+			Years age = Years.yearsBetween(birthdate, now);
+			
+			dp.setAge(String.valueOf(age.getYears()));
+			
+		} catch (ParseException e) {
+			
+			logger.log(Level.SEVERE, "Error al parsear la fecha de nacimiento", e);
+			
+		}
+		
 
 		return dp;
 
