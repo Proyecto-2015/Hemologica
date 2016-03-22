@@ -826,10 +826,7 @@ public class CdaUtils {
 		}
 		
 		/**
-		 * Specimen Donacion
-		 */
-		/**
-		 * Specimen
+		 * Specimen Transfusion
 		 */
 		SpecimenType specimenProduct = new SpecimenType();
 		specimenProduct.setTypeCode(Constants.SPC);
@@ -837,7 +834,16 @@ public class CdaUtils {
 		specimenRoleProduct.setClassCode(Constants.SPEC);
 		
 		IdType idProduct = new IdType();
-		idProduct.setRoot(dataTransfusion.getBank().getCode());
+		
+		if(dataTransfusion.getInstitution() != null){
+			
+			idProduct.setRoot(dataTransfusion.getInstitution().getCode());
+		
+		}else if(dataTransfusion.getBank() != null && dataTransfusion.getBank().getInstitution() != null){
+			
+			idProduct.setRoot(dataTransfusion.getBank().getInstitution().getCode());
+			
+		}
 		idProduct.setExtension(dataTransfusion.getProductCode());
 		specimenRoleProduct.setId(idProduct);
 		
@@ -865,7 +871,13 @@ public class CdaUtils {
 		specimenRoleDonacion.setClassCode(Constants.SPEC);
 		
 		IdType idBlood = new IdType();
-		idProduct.setRoot(dataTransfusion.getBank().getCode()); //Fix interfaz para que ingrese banco
+		
+		if(dataTransfusion.getDonationinstitution() != null){
+			
+			idBlood.setRoot(dataTransfusion.getDonationinstitution().getCode());
+		
+		}
+		
 		idBlood.setExtension(dataTransfusion.getAssociatedDonation());
 		specimenRoleDonacion.setId(idBlood);
 		
