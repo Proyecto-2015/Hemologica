@@ -23,25 +23,29 @@
 	    	<div class="container">
 	      		<div class="row row-offcanvas row-offcanvas-right">
 	        		<div class="col-xs-12 col-sm-12">
-						<div class="jumbotron">
+						<div class="jumbotron ">
 						  <h1><h:outputText  style="color: #912B2B" value="#{messages.message_campaigns_title}"/></h1>
 						  <p><h:outputText value="#{messages.message_campaigns_text}"/></p>
 						</div>
-						<div class="row">
-							<c:forEach items="#{campaignsBB.campaigns}" var="campaignItem" varStatus="counter">				
-							   <div class="col-xs-6 col-lg-4">
-							     <h2><h:outputText value="#{campaignItem.title}"/></h2>
-							     <p><h:outputText value="#{campaignItem.summary}"/></p>
-							     <p><h:link class="btn btn-default"  outcome="campaignItem" role="button" >
-							     		<h:outputText value="#{messages.details}"/> &raquo;
-							     		
-	        							<f:param name="campaignId" value="#{campaignItem.id}" /> 
-							     	</h:link>
-							    </p>
-							   </div>
-							</c:forEach>
-	            		</div>
-	      				<hr/>
+						
+							<div class="row">
+								<c:forEach items="#{campaignsBB.campaigns}" var="campaignItem" varStatus="counter">	
+								
+								   <div class="col-xs-12 col-sm-6 col-lg-4 " id ="item-campañas">
+      												
+								     <h2><h:outputText value="#{campaignItem.title}"/></h2>
+								     <p><h:outputText value="#{campaignItem.summary}"/></p>
+								     <p><h:link class="btn btn-default"  outcome="campaignItem" role="button" >
+								     		<h:outputText value="#{messages.details}"/> &raquo;
+								     		
+		        							<f:param name="campaignId" value="#{campaignItem.id}" /> 
+								     	</h:link>
+								    </p>
+								   </div>
+								</c:forEach>
+			            	</div>
+	            		
+<!-- 	      				<hr/> -->
 	    			</div>	
 				</div>
 			</div>

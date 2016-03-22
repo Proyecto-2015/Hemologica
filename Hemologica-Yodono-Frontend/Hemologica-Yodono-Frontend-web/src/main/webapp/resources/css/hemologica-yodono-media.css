@@ -6,8 +6,23 @@
     font-size: 20pt;
   }
   
+  h2 {
+    font-size: 15pt;
+  }
+  
+  .container .jumbotron, .container-fluid .jumbotron {
+    border-radius: 6px;
+    padding: 8px;
+  }
+  
   img{
   	height: 60px;
+  }
+  
+  
+  .padding-nulo{
+  	padding-right: 5px !important;
+    padding-left: 5px !important;
   }
   
   .userImage{
@@ -61,6 +76,19 @@
 	
 }
 
+/* #item-campañas{ */
+	
+/* 	height: 37em; */
+	
+/* } */
+
 }
 
-
+/* @media(min-width: 480px, max-width: 745px ) { */
+	
+/* 	#item-campañas{ */
+	
+/* 		height: 23em; */
+	
+/* 	} */
+/* } */
