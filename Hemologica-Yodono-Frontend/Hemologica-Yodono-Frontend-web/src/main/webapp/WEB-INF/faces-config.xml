@@ -73,6 +73,11 @@
      	<managed-bean-class>org.hemologica.yodono.web.beans.DonationsBB</managed-bean-class>
      	<managed-bean-scope>view</managed-bean-scope>
      	<managed-property>
+			<property-name>sessionBB</property-name>
+			<property-class>org.hemologica.yodono.web.beans.SessionBB</property-class>
+			<value>#{sessionBB}</value>
+		</managed-property>
+     	<managed-property>
 			<property-name>languageBB</property-name>
 			<property-class>org.hemologica.yodono.web.beans.LanguageBB</property-class>
 			<value>#{language}</value>
@@ -82,6 +87,11 @@
      	<managed-bean-name>transfusionBB</managed-bean-name>
      	<managed-bean-class>org.hemologica.yodono.web.beans.TransfusionBB</managed-bean-class>
      	<managed-bean-scope>view</managed-bean-scope>
+     	<managed-property>
+			<property-name>sessionBB</property-name>
+			<property-class>org.hemologica.yodono.web.beans.SessionBB</property-class>
+			<value>#{sessionBB}</value>
+		</managed-property>
      </managed-bean>
      <managed-bean>
      	<managed-bean-name>userBB</managed-bean-name>

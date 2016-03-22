@@ -119,7 +119,7 @@ private DataTransfusion getDataTransfusion(Document document) throws XPathExpres
 		
 		DataDocument dataDocument = new DataDocument();
 		dataResponsiblePerson.setDocuments(dataDocument);
-		if(documentResponsiblePerson != null){
+		if(documentResponsiblePerson != null && (!"".equals(documentResponsiblePerson))){
 			
 			String documentNumber = documentResponsiblePerson.substring(documentResponsiblePerson.lastIndexOf(".")+1, documentResponsiblePerson.length()-1);
 			dataDocument.setDocumentNumber(documentNumber);

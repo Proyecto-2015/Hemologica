@@ -29,6 +29,17 @@ public class DonationsBB implements Serializable{
 	private static final Logger logger = Logger.getLogger(DonationsBB.class.getName()); 
 	private List<DataDonation> myDonations;
 	
+	@ManagedProperty(value="#{sessionBB}")
+	private SessionBB sessionBB;
+	
+	public SessionBB getSessionBB() {
+		return sessionBB;
+	}
+
+	public void setSessionBB(SessionBB sessionBB) {
+		this.sessionBB = sessionBB;
+	}
+
 	@ManagedProperty(value="#{language}")
 	private LanguageBB languageBB;
 	
@@ -41,7 +52,7 @@ public class DonationsBB implements Serializable{
 		
 		try {
 			
-			myDonations = RestFactory.getServicesClient().getMyDonations("1");
+			myDonations = RestFactory.getServicesClient().getMyDonations(""+ sessionBB.getDataUser().getId());
 			
 			if(myDonations != null){
 				Collections.sort(myDonations, new Comparator<DataDonation>() {

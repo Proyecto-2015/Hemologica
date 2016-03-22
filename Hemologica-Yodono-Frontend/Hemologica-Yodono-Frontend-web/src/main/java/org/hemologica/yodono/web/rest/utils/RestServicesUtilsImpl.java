@@ -31,7 +31,7 @@ public class RestServicesUtilsImpl implements IRestServicesUtils {
 		 * Se pasa siempre un objto en formato JSON en el contenido del mensaje
 		 */
 		StringEntity entity = new StringEntity(gson.toJson(o), "UTF-8");
-		entity.setContentType("application/json");
+		entity.setContentType("application/json;charset=utf-8");
 		post.setEntity(entity);
 		
 		HttpResponse r = client.execute(post);
@@ -75,7 +75,6 @@ public class RestServicesUtilsImpl implements IRestServicesUtils {
 		
 		URI uri = builder.build();
 		HttpGet httpget = new HttpGet(uri);
-		
 		HttpResponse r = client.execute(httpget);
 		
 		/**
@@ -110,7 +109,7 @@ public class RestServicesUtilsImpl implements IRestServicesUtils {
 		 * Se pasa siempre un objto en formato JSON en el contenido del mensaje
 		 */
 		StringEntity entity = new StringEntity(gson.toJson(o), "UTF-8");
-		entity.setContentType("application/json");
+		entity.setContentType("application/json;charset=utf-8");
 		post.setEntity(entity);
 		
 		HttpResponse r = client.execute(post);

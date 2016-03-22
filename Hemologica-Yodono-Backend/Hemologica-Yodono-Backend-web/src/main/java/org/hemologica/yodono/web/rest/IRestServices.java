@@ -28,74 +28,74 @@ public interface IRestServices {
 	
 	@POST
 	@Path("/"+ConstantsRest.PATH_LOGIN)
-	@Consumes("application/json")
+	@Consumes("application/json;charset=utf-8")
 	public Response login(LoginData datos);
 	
 	
 	@GET
 	@Path("/"+ConstantsRest.PATH_LOGIN)
-	@Produces("application/json")
+	@Produces("application/json;charset=utf-8")
 	public void getProductInJSON();
 	
 	@GET
 	@Path("/"+ConstantsRest.PATH_DONATIONS)
-	@Produces("application/json")
+	@Produces("application/json;charset=utf-8")
 	public List<DataDonation> getDonations(@QueryParam(ConstansJson.JSON_USER) Long user);
 	
 	@GET
 	@Path("/"+ConstantsRest.PATH_TRANSFUTIONS)
-	@Produces("application/json")
+	@Produces("application/json;charset=utf-8")
 	public List<DataTransfusion> getTransfusions(@QueryParam(ConstansJson.JSON_USER) Long user);
 	
 	@GET
 	@Path("/"+ConstantsRest.PATH_USERS)
-	@Produces("application/json")
+	@Produces("application/json;charset=utf-8")
 	public DataPerson getUser(@QueryParam(ConstansJson.JSON_USER) String user);
 	
 	@PUT
 	@Path("/"+ ConstantsRest.PATH_USERS)
-	@Produces("application/json")
+	@Produces("application/json;charset=utf-8")
 	public DataResponse updateUser(DataPerson dataUser);
 	
 	@GET
 	@Path("/"+ConstantsRest.PATH_BANKS)
-	@Produces("application/json")
+	@Produces("application/json;charset=utf-8")
 	public List<DataBank> getBanks();
 	
 	@GET
 	@Path("/"+ConstantsRest.PATH_CODES +"/"+ ConstantsRest.PATH_STATES)
-	@Produces("application/json")
+	@Produces("application/json;charset=utf-8")
 	public List<DataCode> getStates();
 	
 	@GET
 	@Path("/"+ ConstantsRest.PATH_CODES +"/"+ConstantsRest.PATH_CITIES)
-	@Produces("application/json")
+	@Produces("application/json;charset=utf-8")
 	public List<DataCode> getCities();
 	
 	@GET
 	@Path("/"+ConstantsRest.PATH_CITIES_STATE)
-	@Produces("application/json")
+	@Produces("application/json;charset=utf-8")
 	public List<DataCode> getCities(@QueryParam(ConstansJson.JSON_STATE) String stateCode);
 	
 	@GET
 	@Path("/"+ConstantsRest.PATH_CAMPAIGNS)
-	@Produces("application/json")
+	@Produces("application/json;charset=utf-8")
 	public List<DataCampaign> getCampaigns(@QueryParam(ConstansJson.JSON_CANT) String cant);
 	
 	@GET
 	@Path("/"+ConstantsRest.PATH_CAMPAIGN)
-	@Produces("application/json")
+	@Produces("application/json;charset=utf-8")
 	public DataCampaign getCampaign(@QueryParam(ConstansJson.JSON_CAMPAIGN_ID) String campaignId);
 	
 	@GET
 	@Path("/"+ConstantsRest.PATH_ACCOUNT_ENABLE)
-	@Produces("application/json")
+	@Produces("application/json;charset=utf-8")
 	public DataUser getUserFirstAccess(@QueryParam(ConstansJson.JSON_ACCOUNT_TOKEN) String token);
 	
 	@POST
 	@Path("/"+ConstantsRest.PATH_ACCOUNT_ENABLE)
-	@Produces("application/json")
-	@Consumes("application/json")
+	@Produces("application/json;charset=utf-8")
+	@Consumes("application/json;charset=utf-8")
 	public DataResponse updateUserFirstAccess(DataUser data);
 	
 }
