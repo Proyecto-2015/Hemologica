@@ -18,6 +18,7 @@ public class DataTransfusion implements Serializable {
 	private DataInstitution institution;
 	private String volume;
 	private DataPerson person;
+	private DataInstitution donationinstitution;
 	private String associatedDonation;
 	private String productCode;
 	private DataProductType dataProduct;
@@ -111,5 +112,13 @@ public class DataTransfusion implements Serializable {
 	public void setId(String id) {
 		this.id = id;
 	}
+	public DataInstitution getDonationinstitution() {
+		return donationinstitution;
+	}
+	public void setDonationinstitution(DataInstitution donationinstitution) {
+		this.donationinstitution = donationinstitution;
+	}
+	
+	
 	
 }
