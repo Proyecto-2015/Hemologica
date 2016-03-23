@@ -375,24 +375,23 @@ public class CdaUtils {
 		EffectiveTimeType effectiveTime = new EffectiveTimeType();
 		procedureType.setEffectiveTime(effectiveTime);
 
-		SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy/MM/ddHH:mm:ss");
-
+//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/ddHH:mm:ss");
 		
 		if(dataDonacion.getExtractionTimeBegin()!= null){
 			
 			LowType lowType = new LowType();
-			lowType.setValue(dataDonacion.getExtractionTimeBegin());
+			lowType.setLowTypeValue(dataDonacion.getExtractionTimeBegin());
 			//lowType.setValue5(Long.valueOf(dataDonacion.getExtractionTimeBegin()));
-			effectiveTime.getContent().add((Serializable) lowType);
+			effectiveTime.getContent().add(lowType);
 		}		
 		
 		
 		if(dataDonacion.getExtractionTimeEnd()!= null){
 			
 			HighType highType = new HighType();
-			highType.setValue(dataDonacion.getExtractionTimeEnd());
+			highType.setHighTypeValue(dataDonacion.getExtractionTimeEnd());
 			//highType.setValue6(Long.valueOf(dataDonacion.getExtractionTimeEnd()));
-			effectiveTime.getContent().add((Serializable) highType);
+			effectiveTime.getContent().add(highType);
 			
 		}
 		
@@ -436,7 +435,11 @@ public class CdaUtils {
 			specimenRoleType.setClassCode(Constants.SPEC);
 			
 			IdType idBlood = new IdType();
-			idBlood.setRoot(dataDonacion.getBank().getCode());
+			if(dataDonacion.getBank() != null && dataDonacion.getBank().getInstitution() != null){
+			
+				idBlood.setRoot(dataDonacion.getBank().getInstitution().getCode());
+				
+			}
 			idBlood.setExtension(dataDonacion.getBloodCode());
 			specimenRoleType.setId(idBlood);
 			

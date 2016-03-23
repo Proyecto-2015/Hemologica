@@ -5,6 +5,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
 import org.hemologica.dao.IInstitutionDAO;
+import org.hemologica.dao.model.CitiesCode;
 import org.hemologica.dao.model.Institution;
 
 public class InstitutionDAOImpl extends GenericDAOImpl<Institution> implements IInstitutionDAO {
@@ -30,7 +31,9 @@ public class InstitutionDAOImpl extends GenericDAOImpl<Institution> implements I
 		
 		Query query = em.createNamedQuery("Institution.getInstitutionCode");
 		query.setParameter("code", code);
-		return (Institution) query.getSingleResult();
+		
+		List<?> list = query.getResultList();
+		return (!list.isEmpty()) ? (Institution) list.get(0) : null;
 		
 	}
 

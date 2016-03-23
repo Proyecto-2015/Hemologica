@@ -116,9 +116,10 @@ public class TransfusionBean implements TransfusionBeanLocal, Serializable {
 		/**
 		 * Id donacion asociada
 		 */
-		data.setAssociatedDonation(XMLUtils.executeXPathString(document,
-				"//ClinicalDocument//component//structuredBody//component//section//entry//procedure//specimen[descendant-or-self::node()//@code=\"122563008\"]//id//@extension"));
-
+		data.setAssociatedDonation(XMLUtils.executeXPathString(document, "//ClinicalDocument//component//structuredBody//component//section//entry//procedure//specimen[descendant-or-self::node()//@code=\"122563008\"]//id//@extension"));
+		String institution = XMLUtils.executeXPathString(document, "//ClinicalDocument//component//structuredBody//component//section//entry//procedure//specimen[descendant-or-self::node()//@code=\"122563008\"]//id//@root");
+		data.setDonationinstitution(FactoryBeans.getInstitutionBean().getInstitutionById(institution));
+		
 		/**
 		 * Id bolsa
 		 */
@@ -345,6 +346,8 @@ public class TransfusionBean implements TransfusionBeanLocal, Serializable {
 
 			String cda = XMLDataBaseFactory.getIXMLDataBaseTransfusions().getTransfusionCDABySpecimenId(institutionCode,
 					code);
+			
+			
 			if (cda != null && !cda.equals("")) {
 				Document document = XMLUtils.stringToDocument(cda);
 				return getDataTransfusion(document);

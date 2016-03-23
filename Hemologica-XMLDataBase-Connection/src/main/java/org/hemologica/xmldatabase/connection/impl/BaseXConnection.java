@@ -760,13 +760,16 @@ public class BaseXConnection implements IXMLDataBase {
 		return 0;
 	}
 
+	
+	
+	
 	public String getTransfusionCDABySpecimenId(String root, String extension) throws XMLDataBaseException {
 		
 		ArrayList<String> cdasList = new ArrayList<String>();
 
 		String input = "for $doc in collection('" + dataBase + "') "
-				+ "where  $doc//ClinicalDocument//component//structuredBody//component//section//entry//procedure//specimen[descendant-or-self::node()/@code = \"122563008\"]//id[descendant-or-self::node()/@root]/@root='"
-				+ root + "' and $doc//ClinicalDocument//component//structuredBody//component//section//entry//procedure//specimen[descendant-or-self::node()/@code = \"122563008\"]//id/@extension='"
+				+ "where  $doc//ClinicalDocument//component//structuredBody//component//section//entry//procedure//specimen[descendant-or-self::node()/@code = \"122564002\"]//id[descendant-or-self::node()/@root]/@root='"
+				+ root + "' and $doc//ClinicalDocument//component//structuredBody//component//section//entry//procedure//specimen[descendant-or-self::node()/@code = \"122564002\"]//id/@extension='"
 				+ extension + "' return $doc";
 		BaseXClient.Query query;
 		BaseXClient session = null;

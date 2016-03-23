@@ -71,30 +71,34 @@ public class InstitutionBean implements IInstitutionBeanLocal {
 		
 		Institution institution = FactoryDAO.getInstitutionDAO(em).findInstitutionByCode(code);
 		
-		DataInstitution dataInstitution = new DataInstitution();
-		dataInstitution.setCode(institution.getInstitutionCode());
-		
-		List<DataBank> banks = new LinkedList<DataBank>();
-		for(Center c : institution.getCenters()){
+		if(institution != null){
+			DataInstitution dataInstitution = new DataInstitution();
+			dataInstitution.setCode(institution.getInstitutionCode());
 			
-			if(c.getCenterType().equals(CenterType.BANK)){
+			List<DataBank> banks = new LinkedList<DataBank>();
+			for(Center c : institution.getCenters()){
 				
-				DataBank dataBank = new DataBank();
-				dataBank.setAddress(c.getCenterAddress());
-				dataBank.setCode(c.getCenterCode());
-				dataBank.setEmail(c.getCenterEmail());
-				dataBank.setHour(c.getCenterHour());
-				dataBank.setInformation(c.getCenterInformation());
-				dataBank.setLatitude(c.getGeoLocation().getGeoLocationsX());
-				dataBank.setLongitude(c.getGeoLocation().getGeoLocationsY());
-				dataBank.setName(c.getCenterDisplayName());
-				dataBank.setTelephone(c.getCenterTelephone());
-				banks.add(dataBank);
+				if(c.getCenterType().equals(CenterType.BANK)){
+					
+					DataBank dataBank = new DataBank();
+					dataBank.setAddress(c.getCenterAddress());
+					dataBank.setCode(c.getCenterCode());
+					dataBank.setEmail(c.getCenterEmail());
+					dataBank.setHour(c.getCenterHour());
+					dataBank.setInformation(c.getCenterInformation());
+					dataBank.setLatitude(c.getGeoLocation().getGeoLocationsX());
+					dataBank.setLongitude(c.getGeoLocation().getGeoLocationsY());
+					dataBank.setName(c.getCenterDisplayName());
+					dataBank.setTelephone(c.getCenterTelephone());
+					banks.add(dataBank);
+				}
+				
 			}
-			
+			dataInstitution.setBanks(banks);
+			return dataInstitution;
 		}
-		dataInstitution.setBanks(banks);
-			
-		return dataInstitution;
+		
+		return null;
+		
 	}
 }

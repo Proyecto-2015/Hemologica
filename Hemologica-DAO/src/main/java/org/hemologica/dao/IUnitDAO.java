@@ -13,7 +13,10 @@ public interface IUnitDAO extends IGenericDAO<Unit>{
 	
 	public UnitsType findUnitTypeByCode(String code);
 	
+	public Unit findUnitByCodes(String code, String institution);
+	
 	public int getCountUnit(String productTypeCode, String bloodTypeCodeABO, String bloodTypeCodeRH, String code);
 	
 	public int getCountUnitBanks(String productTypeCode, String bloodTypeCodeABO, String bloodTypeCodeRH, List<DataBank> banks);
+	
 }

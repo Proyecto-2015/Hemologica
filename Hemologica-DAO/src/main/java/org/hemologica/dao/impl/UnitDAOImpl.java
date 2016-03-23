@@ -110,4 +110,15 @@ public class UnitDAOImpl extends GenericDAOImpl<Unit> implements IUnitDAO {
 		return ret.intValue();
 	}
 
+	@Override
+	public Unit findUnitByCodes(String code, String institution) {
+		
+		Query query = em.createNamedQuery("Unit.findByCodes");
+		query.setParameter("code", code);
+		query.setParameter("institution", institution);
+		@SuppressWarnings("unchecked")
+		List<Unit> ret = query.getResultList();
+		return ret != null && ret.size() > 0 ? ret.get(0) : null;
+	}
+
 }
