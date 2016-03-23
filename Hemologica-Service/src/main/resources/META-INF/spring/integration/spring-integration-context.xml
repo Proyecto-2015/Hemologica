@@ -28,6 +28,12 @@
 	<!-- flow -->
 
 	<int-jms:message-driven-channel-adapter id="cda_get" channel="outbound-channel-1" container="receiveListener" />
+	
+<!-- 	<int-jms:inbound-channel-adapter id="cda_get" channel="outbound-channel-1"  -->
+<!-- 									 connection-factory="connectionFactory"  -->
+<!-- 									 destination="${jms.queue.cda.receive}"> -->
+<!-- 		<int:poller fixed-rate="1000"/> -->
+<!-- 	</int-jms:inbound-channel-adapter> -->
 
 <!-- 	<int:channel id="inbound-channel-1" /> -->
 
@@ -147,5 +153,5 @@
 <!-- 		ref="baseXAdapterLaboratory" method="persist" channel="inBasexLaboratoryOut" /> -->
 
 		<stream:stderr-channel-adapter channel="errorChannel" append-newline="true" />
-
+		
 </beans>
