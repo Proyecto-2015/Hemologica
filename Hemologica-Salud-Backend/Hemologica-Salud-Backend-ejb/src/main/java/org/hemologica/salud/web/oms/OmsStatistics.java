@@ -1372,9 +1372,12 @@ public class OmsStatistics {
 			 * Sin datos
 			 */
 			
+			int nodata = 0;
+			if(orClausesNoDataDenominator != null && orClausesNoDataDenominator.size()!=0){
 		
-			int nodata = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(orClausesNoDataDenominator,null);
-			
+				nodata = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(orClausesNoDataDenominator,null);
+				
+			}
 			q.setNodata(nodata);
 			
 			/****************************************************/
