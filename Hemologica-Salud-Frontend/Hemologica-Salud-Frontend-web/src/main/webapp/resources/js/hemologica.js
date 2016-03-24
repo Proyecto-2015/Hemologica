@@ -23,6 +23,7 @@ $(document).ready(function() {
          "searching":			false,
          "bLengthChange" : false,
          "pageLength": 50,
+         "retrieve": true,
          
          "language": {
         	    "paginate": {
@@ -59,6 +60,7 @@ $(document).ready(function() {
          "searching":			false,
          "bLengthChange" : false,
          "pageLength": 50,
+         "retrieve": true,
          
          "language": {
         	    "paginate": {
@@ -92,6 +94,7 @@ $(document).ready(function() {
          "searching":			false,
          "bLengthChange" : false,
          "pageLength": 50,
+         "retrieve": true,
          
          "language": {
         	    "paginate": {
