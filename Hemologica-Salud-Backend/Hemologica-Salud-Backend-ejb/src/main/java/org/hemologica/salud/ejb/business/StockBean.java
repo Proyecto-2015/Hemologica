@@ -11,6 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.hemologica.dao.model.BloodTypes;
 import org.hemologica.dao.model.Movement;
+import org.hemologica.dao.model.Unit;
 import org.hemologica.datatypes.DataBank;
 import org.hemologica.datatypes.DataInstitution;
 import org.hemologica.datatypes.DataMovement;
@@ -50,7 +51,9 @@ public class StockBean implements StockBeanLocal,Serializable {
 				dataMovement.setDate(sdf.format(m.getDate()));
 				if(m.getCenter() != null)
 					dataMovement.setCenterName(m.getCenter().getCenterDisplayName());
-				
+				if(m.getMovementsType() != null){
+					dataMovement.setMovementsType(m.getMovementsType().getTypeLabel());
+				}
 				dataMovements.add(dataMovement);
 				
 			}
@@ -139,6 +142,16 @@ public class StockBean implements StockBeanLocal,Serializable {
 		int count = FactoryDAO.getUnitDAO(em).getCountUnit(productTypeCode,bloodTypeCodeABO,bloodTypeCodeRH,bank.getCode());
 		
 		return count > 0;
+	}
+
+	@Override
+	public List<DataMovement> getMovementsByUnitCodes(String unitInstitutionCode, String institutionCode) {
+
+		Unit u = FactoryDAO.getUnitDAO(em).findUnitByCodes(unitInstitutionCode, institutionCode);
+		if(u != null && u.getId() != null){
+			return this.getMovementsUnitId(u.getId().toString());
+		}
+		return new ArrayList<>();
 	}
 
 
