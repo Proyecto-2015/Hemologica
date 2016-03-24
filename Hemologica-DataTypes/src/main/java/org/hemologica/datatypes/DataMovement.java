@@ -11,6 +11,7 @@ public class DataMovement implements Serializable{
 	
 	private String movementsType;
 	private String centerName;
+	private String institutionName;
 	private String date;
 	
 	public String getMovementsType() {
@@ -30,6 +31,12 @@ public class DataMovement implements Serializable{
 	}
 	public void setDate(String date) {
 		this.date = date;
+	}
+	public String getInstitutionName() {
+		return institutionName;
+	}
+	public void setInstitutionName(String institutionName) {
+		this.institutionName = institutionName;
 	}
 	
 }

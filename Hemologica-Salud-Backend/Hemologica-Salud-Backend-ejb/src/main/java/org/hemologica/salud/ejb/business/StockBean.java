@@ -51,9 +51,16 @@ public class StockBean implements StockBeanLocal,Serializable {
 				dataMovement.setDate(sdf.format(m.getDate()));
 				if(m.getCenter() != null)
 					dataMovement.setCenterName(m.getCenter().getCenterDisplayName());
+				if(m.getCenter() != null & m.getCenter().getInstitution() != null){
+					
+					dataMovement.setInstitutionName(m.getCenter().getInstitution().getInstitutionDisplayName());
+					
+				}
+				
 				if(m.getMovementsType() != null){
 					dataMovement.setMovementsType(m.getMovementsType().getTypeLabel());
 				}
+				
 				dataMovements.add(dataMovement);
 				
 			}

@@ -130,6 +130,7 @@
 					        				<th><h:outputText value="#{messages.donation_date}"/></th>
 					        				<th><h:outputText value="#{messages.label_movement}"/></th>
 					        				<th><h:outputText value="#{messages.label_center}"/></th>
+					        				<th><h:outputText value="#{messages.label_insitution}"/></th>
 					        				        				
 					        			</tr>
 					        		</thead>
@@ -139,7 +140,7 @@
 						        				<td data-title="#{messages.donation_date}"><h:outputText value="#{movement.date}"/></td>
 						        				<td data-title="#{messages.label_movement}"><h:outputText value="#{messages[movement.movementsType]}"/></td>
 						        				<td data-title="#{messages.label_center}"><h:outputText value="#{movement.centerName}"/></td>
-						        				
+						        				<td data-title="#{messages.label_institution}"><h:outputText value="#{movement.institutionName}"/></td>
 						        			</tr>
 						        		</c:forEach>
 					        		

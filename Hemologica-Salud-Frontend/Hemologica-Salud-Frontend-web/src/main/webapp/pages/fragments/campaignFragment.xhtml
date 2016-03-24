@@ -28,8 +28,8 @@
 					</p:commandLink>	
 			</legend>
 					
-			<div class="col-xs-12 col-md-12 col-lg-9 bank-info ">
-				<div class="row form-horizontal " id="userForm">
+			<div class="col-xs-12 col-md-12 col-lg-12 ">
+				<div class="row form-horizontal" id="userForm">
 			
 					<div class="form-group " >
 						<label class="col-md-2 control-label" for="name"><h:outputText
@@ -45,7 +45,7 @@
 						<div class="col-md-8">
 						
 						<p:inputTextarea class="col-xs-12 col-md-12 col-lg-12" rows="3" autoResize="false" 
-						value="#{campaignsBB.campaign.summary}"  />
+						value="#{campaignsBB.campaign.summary}" maxlength="275" />
 
 						</div>
 					</div>
@@ -61,14 +61,14 @@
 				</div>
 				
 			</div>
-			<div class=" col-xs-12 col-md-12 col-lg-2">
-					<h:graphicImage class="image-user center" />  
-<!-- 					value="campaignsBB.campaign" -->
+<!-- 			<div class=" col-xs-12 col-md-12 col-lg-2"> -->
+<!-- 					<h:graphicImage class="image-user center" />   -->
+<!--					value="campaignsBB.campaign" -->
 
-					<p:fileUpload class="center" mode="simple" style="padding-top: 5px;" skinSimple="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/"
-						value="#{userBB.uploadedPicture}" />
+<!-- 					<p:fileUpload class="center" mode="simple" style="padding-top: 5px;" skinSimple="true" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" -->
+<!-- 						value="#{userBB.uploadedPicture}" /> -->
 
-			</div>
+<!-- 			</div> -->
 			
 			<div class=" col-xs-12 col-md-12 col-lg-12">
 					<label class="col-md-1 control-label"  for="name"><h:outputText
