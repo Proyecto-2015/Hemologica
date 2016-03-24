@@ -1,6 +1,7 @@
 package org.hemologica.dao.model;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.*;
@@ -28,7 +29,7 @@ public class Movement implements Serializable {
 	
 	@NotNull
 	@Column(name="movement_date", nullable=false)
-	private Date date;
+	private Timestamp date;
 
 
 	//bi-directional many-to-one association to MovementsType
@@ -83,11 +84,11 @@ public class Movement implements Serializable {
 	}
 	
 	
-	public Date getDate() {
+	public Timestamp getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(Timestamp date) {
 		this.date = date;
 	}
 
