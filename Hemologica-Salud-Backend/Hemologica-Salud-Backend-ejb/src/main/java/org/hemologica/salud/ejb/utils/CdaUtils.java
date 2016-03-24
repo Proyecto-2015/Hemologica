@@ -343,8 +343,12 @@ public class CdaUtils {
 		
 		IdType idDonation = new IdType();
 
-		idDonation.setRoot(dataDonacion.getBloodCode());
-
+		if(dataDonacion.getBank() != null && dataDonacion.getBank().getInstitution() != null){
+			
+			idDonation.setRoot(dataDonacion.getBank().getInstitution().getCode());
+			
+		}
+		idDonation.setExtension(dataDonacion.getBloodCode());
 		procedureType.setId(idDonation);
 		
 		CodeType codeType = new CodeType();
@@ -786,7 +790,17 @@ public class CdaUtils {
 		entryType.setProcedure(procedureType);
 		
 		IdType idDonation = new IdType();
-		idDonation.setRoot(dataTransfusion.getProductCode());
+		
+		if(dataTransfusion.getBank() != null && dataTransfusion.getBank().getInstitution() != null){
+			
+			idDonation.setRoot(dataTransfusion.getBank().getInstitution().getCode());
+			
+		}
+		idDonation.setExtension(dataTransfusion.getProductCode());
+		
+		
+		
+		
 		procedureType.setId(idDonation);
 		
 		CodeType codeType = new CodeType();

@@ -111,7 +111,7 @@ public class TransfusionBean implements TransfusionBeanLocal, Serializable {
 		 * id Transfusion
 		 */
 		data.setId(XMLUtils.executeXPathString(document,
-				"/ClinicalDocument/component/structuredBody/component/section/entry/procedure/id/@root"));
+				"/ClinicalDocument/component/structuredBody/component/section/entry/procedure/id/@extension"));
 
 		/**
 		 * Id donacion asociada

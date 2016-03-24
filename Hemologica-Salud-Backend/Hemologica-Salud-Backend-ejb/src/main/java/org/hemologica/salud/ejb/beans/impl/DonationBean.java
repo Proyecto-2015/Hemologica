@@ -103,7 +103,7 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 		 * id Donacion
 		 */
 		data.setId(XMLUtils.executeXPathString(document,
-				"/ClinicalDocument/component/structuredBody/component/section/entry/procedure/id/@root"));
+				"/ClinicalDocument/component/structuredBody/component/section/entry/procedure/id/@extension"));
 
 		/**
 		 * Banco de Sangre e Institucion
