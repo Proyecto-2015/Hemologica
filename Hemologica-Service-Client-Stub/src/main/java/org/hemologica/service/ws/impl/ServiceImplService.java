@@ -15,7 +15,7 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "ServiceImplService", targetNamespace = "http://impl.ws.service.hemologica.org/", wsdlLocation = "http://localhost:8082/Hemologica-Service/Service?wsdl")
+@WebServiceClient(name = "ServiceImplService", targetNamespace = "http://impl.ws.service.hemologica.org/", wsdlLocation = "http://localhost:8180/Hemologica-Service2/ServiceImpl?wsdl")
 public class ServiceImplService
     extends javax.xml.ws.Service
 {
@@ -28,7 +28,7 @@ public class ServiceImplService
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://localhost:8082/Hemologica-Service/Service?wsdl");
+            url = new URL("http://localhost:8180/Hemologica-Service2/ServiceImpl?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }

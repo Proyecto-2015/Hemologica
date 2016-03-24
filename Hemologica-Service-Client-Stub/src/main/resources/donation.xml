@@ -60,16 +60,19 @@
                             <id root="id" extension=""/>
                             <code codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" code="233555005"/>
                             <statusCode code="completed"/>
-                            <effectiveTime/>
+                            <effectiveTime>
+                            	<low value="20160320080000"/>
+								<high value="20160320100000"/>
+                            </effectiveTime>
                             <specimen typeCode="SPC">
-<specimenRole classCode="SPEC">
-    <id root="6d430b55-2eef-4d5c-8244-d67f29ba593e" extension=""/>
-</specimenRole>
+								<specimenRole classCode="SPEC">
+								    <id root="347" extension="6d430b55-2eef-4d5c-8244-d67f29ba593e"/>
+								</specimenRole>
                             </specimen>
                             <entryRelationship typeCode="COMP">
-<observation classCode="OBS" moodCode="EVN">
-    <code codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" code="278151004"/>
-</observation>
+								<observation classCode="OBS" moodCode="EVN">
+								    <code codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" code="278151004"/>
+								</observation>
                             </entryRelationship>
                         </procedure>
                     </entry>

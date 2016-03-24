@@ -1,5 +1,6 @@
 package org.hemologica.service.business.impl;
 
+import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -40,7 +41,8 @@ public class MovementBean implements IMovementBean{
 	@Override
 	public void save(List<MovementData> movements) throws ParseException {
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmssSSS");
+		SimpleDateFormat sdfSQL = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
 		
 		IMovementDAO movementDAO = new MovementDAOImpl(em);
 		IUnitDAO unitDAO = new UnitDAOImpl(em);
@@ -86,7 +88,7 @@ public class MovementBean implements IMovementBean{
 			movement.setCenter(center);
 			movement.setMovementsType(movementType);
 			movement.setUnit(unit);
-			movement.setDate(sdf.parse(m.getDate()));
+			movement.setDate(Timestamp.valueOf(sdfSQL.format(sdf.parse(m.getDate()))));
 			movement = movementDAO.create(movement);
 			
 			
@@ -103,10 +105,6 @@ public class MovementBean implements IMovementBean{
 		}
 		
 	}
-	
-	
-	
-
 	
 	
 }

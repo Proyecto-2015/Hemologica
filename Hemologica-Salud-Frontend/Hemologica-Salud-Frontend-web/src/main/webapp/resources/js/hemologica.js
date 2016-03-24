@@ -27,13 +27,13 @@ function persontableDonation() {
 	          { sWidth: "15%", bSearchable: false, bSortable: false },
 	          { sWidth: "15%", bSearchable: false, bSortable: false }
 	    ],
-	    "scrollY":        "200px",
+	    "scrollY":        "500px",
 	    "scrollCollapse": false,
 	    "info":           false,
 	    "paging":         true,
 	    "searching":			false,
 	    "bLengthChange" : false,
-	    "pageLength": 50,
+	    "pageLength": 10,
 	    "retrieve": true,
 	    
 	    "language": {
@@ -63,13 +63,13 @@ function  persontableTransfusion(){
                { sWidth: "15%", bSearchable: false, bSortable: false }
                
          ],
-         "scrollY":        "200px",
+         "scrollY":        "500px",
          "scrollCollapse": false,
          "info":           false,
          "paging":         true,
          "searching":			false,
          "bLengthChange" : false,
-         "pageLength": 50,
+         "pageLength": 10,
          "retrieve": true,
          
          "language": {
@@ -97,13 +97,13 @@ function persontable(){
                { sWidth: "15%", bSearchable: false, bSortable: false }
                
          ],
-         "scrollY":        "200px",
+         "scrollY":        "500px",
          "scrollCollapse": false,
          "info":           false,
          "paging":         true,
          "searching":			false,
          "bLengthChange" : false,
-         "pageLength": 50,
+         "pageLength": 10,
          "retrieve": true,
          
          "language": {
