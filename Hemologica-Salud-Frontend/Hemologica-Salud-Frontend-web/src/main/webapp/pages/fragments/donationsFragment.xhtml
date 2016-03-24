@@ -63,10 +63,8 @@
 				<p:commandButton icon="ui-icon-search"
 					styleClass="form-control search-btn col-xs-2 col-sm-3 col-md-3 col-lg-1"
 					action="#{searchDonationBB.search()}" process="@form"
-					update="@form" />
+					update="@form" oncomplete="persontableDonation();"/>
 			</div>
-
-
 
 			<table
 				class="col-md-12  table-striped table-condensed cf"
