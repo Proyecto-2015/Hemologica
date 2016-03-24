@@ -1,8 +1,8 @@
 -- Estos datos no son correctos - 21/11/2015
 
 -- INSTITUCIONES --
-INSERT INTO `institutions` (`id`,`institution_code`,`institution_display_name`,`institution_oid`) VALUES (1,'2.16.858.0.0.1.10.2.3.6','Hospital de Clinicas','2.16.858.0.0.1.10.2.3.6');
-INSERT INTO `institutions` (`id`,`institution_code`,`institution_display_name`,`institution_oid`) VALUES (2,'2.16.858.0.2.16.86.1.0.0.212567060019','Asociacion Española','2.16.858.0.2.16.86.1.0.0.212567060019');
+INSERT INTO `institutions` (`id`,`institution_code`,`institution_display_name`,`institution_oid`) VALUES (1,'2.16.858.0.0.1.10.2.3.6','Hospital de Clínicas','2.16.858.0.0.1.10.2.3.6');
+INSERT INTO `institutions` (`id`,`institution_code`,`institution_display_name`,`institution_oid`) VALUES (2,'2.16.858.0.2.16.86.1.0.0.212567060019','Asociación Española','2.16.858.0.2.16.86.1.0.0.212567060019');
 INSERT INTO `institutions` (`id`,`institution_code`,`institution_display_name`,`institution_oid`) VALUES (2,'2.16.858.0.2.16.86.1.0.0.212701040013','Médica Uruguaya','2.16.858.0.2.16.86.1.0.0.212701040013');
 INSERT INTO `institutions` (`id`,`institution_code`,`institution_display_name`,`institution_oid`) VALUES (2,'2.16.858.0.2.16.86.1.0.0.216309010011','Casmu','2.16.858.0.2.16.86.1.0.0.216309010011');
 
