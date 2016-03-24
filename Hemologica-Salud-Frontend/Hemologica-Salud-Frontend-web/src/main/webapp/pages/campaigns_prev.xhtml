@@ -35,7 +35,7 @@
 							<c:forEach items="#{campaignsPrevBB.campaigns}" var="campaignItem" varStatus="counter">				
 							   <div class="col-xs-6 col-lg-4">
 							     <h2><h:outputText value="#{campaignItem.title}"/></h2>
-							     <p><h:outputText value="#{campaignItem.summary}"/></p>
+							     <p class="paragraph-enter"><h:outputText value="#{campaignItem.summary}"/></p>
 							     <p><h:link class="btn btn-default"  outcome="campaignPrevItem" role="button" >
 							     		<h:outputText value="#{messages.details}"/> &raquo;
 							     		

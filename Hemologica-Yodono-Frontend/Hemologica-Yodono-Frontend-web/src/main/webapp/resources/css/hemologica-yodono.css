@@ -404,7 +404,11 @@ h6 .h6 {
 	padding: initial;
 }
 
-
+.paragraph-enter{
+	
+	word-wrap: break-word;
+	
+}
 
 
 

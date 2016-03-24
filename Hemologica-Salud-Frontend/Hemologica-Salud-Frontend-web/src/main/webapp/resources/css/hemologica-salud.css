@@ -437,5 +437,11 @@ table.jqplot-table-legend, table.jqplot-cursor-legend {
     /* font-variant-ligatures: normal; */
     color: #fff !important;;
 }
+.paragraph-enter{
+	
+	word-wrap: break-word;
+	
+}
+
 
 
