@@ -686,7 +686,9 @@ public class CdaUtils {
 		specimenRoleType.setClassCode(Constants.SPEC);
 		
 		IdType idBlood = new IdType();
-		idBlood.setRoot(dataDonacion.getBank().getCode());
+		if(dataDonacion.getBank() != null && dataDonacion.getBank().getInstitution() != null){
+			idBlood.setRoot(dataDonacion.getBank().getInstitution().getCode());
+		}
 		idBlood.setExtension(dataDonacion.getBloodCode());
 		specimenRoleType.setId(idBlood);
 		

@@ -9,6 +9,8 @@ import org.hemologica.datatypes.DataStock;
 public interface StockBeanLocal {
 	
 	List<DataMovement> getMovementsUnitId(String unitId);
+	
+	List<DataMovement> getMovementsByUnitCodes(String unitInstitutionCode, String institutionCode);
 
 	DataStock getStockAndBanks(String bankCode, String institution, String productTypeCode,
 			String bloodTypeCodeABO, String bloodTypeCodeRH);

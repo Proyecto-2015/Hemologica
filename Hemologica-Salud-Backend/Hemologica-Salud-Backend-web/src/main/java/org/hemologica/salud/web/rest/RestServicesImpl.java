@@ -423,7 +423,7 @@ public class RestServicesImpl implements IRestServices {
 
 		dataUnitInfo.setDonation(dataDonation);
 
-		List<DataMovement> movements = FactoryBeans.getStockBeanLocal().getMovementsUnitId(code);
+		List<DataMovement> movements = FactoryBeans.getStockBeanLocal().getMovementsByUnitCodes(code, institutionCode);
 		dataUnitInfo.setMovements(movements);
 
 		return dataUnitInfo;
