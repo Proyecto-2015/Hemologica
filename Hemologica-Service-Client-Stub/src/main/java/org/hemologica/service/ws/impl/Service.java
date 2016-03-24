@@ -20,7 +20,7 @@ import org.hemologica.service.ws.ObjectFactory;
  * Generated source version: 2.2
  * 
  */
-@WebService(name = "Service", targetNamespace = "http://ws.service.hemologica.org/")
+@WebService(name = "Service", targetNamespace = "http://impl.ws.service.hemologica.org/")
 @XmlSeeAlso({
     ObjectFactory.class
 })
@@ -33,10 +33,10 @@ public interface Service {
      * @throws Exception
      */
     @WebMethod(operationName = "PROVIDE_CDA")
-    @RequestWrapper(localName = "PROVIDE_CDA", targetNamespace = "http://ws.service.hemologica.org/", className = "org.hemologica.service.ws.PROVIDECDA")
-    @ResponseWrapper(localName = "PROVIDE_CDAResponse", targetNamespace = "http://ws.service.hemologica.org/", className = "org.hemologica.service.ws.PROVIDECDAResponse")
-    @Action(input = "http://ws.service.hemologica.org/Service/PROVIDE_CDARequest", output = "http://ws.service.hemologica.org/Service/PROVIDE_CDAResponse", fault = {
-        @FaultAction(className = Exception.class, value = "http://ws.service.hemologica.org/Service/PROVIDE_CDA/Fault/Exception")
+    @RequestWrapper(localName = "PROVIDE_CDA", targetNamespace = "http://impl.ws.service.hemologica.org/", className = "org.hemologica.service.ws.PROVIDECDA")
+    @ResponseWrapper(localName = "PROVIDE_CDAResponse", targetNamespace = "http://impl.ws.service.hemologica.org/", className = "org.hemologica.service.ws.PROVIDECDAResponse")
+    @Action(input = "http://impl.ws.service.hemologica.org/Service/PROVIDE_CDARequest", output = "http://impl.ws.service.hemologica.org/Service/PROVIDE_CDAResponse", fault = {
+        @FaultAction(className = Exception.class, value = "http://impl.ws.service.hemologica.org/Service/PROVIDE_CDA/Fault/Exception")
     })
     public void provideCDA(
         @WebParam(name = "arg0", targetNamespace = "")
@@ -50,10 +50,10 @@ public interface Service {
      * @throws ParseException
      */
     @WebMethod(operationName = "IMPORT_MOVEMENTS")
-    @RequestWrapper(localName = "IMPORT_MOVEMENTS", targetNamespace = "http://ws.service.hemologica.org/", className = "org.hemologica.service.ws.IMPORTMOVEMENTS")
-    @ResponseWrapper(localName = "IMPORT_MOVEMENTSResponse", targetNamespace = "http://ws.service.hemologica.org/", className = "org.hemologica.service.ws.IMPORTMOVEMENTSResponse")
-    @Action(input = "http://ws.service.hemologica.org/Service/IMPORT_MOVEMENTSRequest", output = "http://ws.service.hemologica.org/Service/IMPORT_MOVEMENTSResponse", fault = {
-        @FaultAction(className = ParseException.class, value = "http://ws.service.hemologica.org/Service/IMPORT_MOVEMENTS/Fault/ParseException")
+    @RequestWrapper(localName = "IMPORT_MOVEMENTS", targetNamespace = "http://impl.ws.service.hemologica.org/", className = "org.hemologica.service.ws.IMPORTMOVEMENTS")
+    @ResponseWrapper(localName = "IMPORT_MOVEMENTSResponse", targetNamespace = "http://impl.ws.service.hemologica.org/", className = "org.hemologica.service.ws.IMPORTMOVEMENTSResponse")
+    @Action(input = "http://impl.ws.service.hemologica.org/Service/IMPORT_MOVEMENTSRequest", output = "http://impl.ws.service.hemologica.org/Service/IMPORT_MOVEMENTSResponse", fault = {
+        @FaultAction(className = ParseException.class, value = "http://impl.ws.service.hemologica.org/Service/IMPORT_MOVEMENTS/Fault/ParseException")
     })
     public void importMOVEMENTS(
         @WebParam(name = "arg0", targetNamespace = "")

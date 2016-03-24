@@ -1,106 +1,117 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ClinicalDocument xmlns="urn:hl7-org:v3">
-    <typeId root="2.16.840.1.113883.1.3" extension="POCD_HD000040"/>
-    <templateId root="2.16.840.1.113883.19.57.7.1.3.1" extension="CCD_RM201201CO01"/>
-    <id root="2.16.858.0.0.1.10.2.3.1.1.1" extension="80"/>
-    <code code="4321000179103"/>
-    <title>Analisis de laboratorio</title>
-    <effectiveTime value="20160128214136"/>
-    <confidentialityCode codeSystemName="Confidentiality" code="N" codeSystem="2.16.840.1.113883.5.25" displayName="normal"/>
-    <languageCode code="es-UY"/>
-    <recordTarget typeCode="RCT" contextControlCode="OP">
-        <patientRole classCode="PAT">
-            <id root="2.16.858.0.0.1.10.2.3.1.1.2" extension="52"/>
-            <telecom value="mailto:brunostrasser18@gmail.com" use="HP"/>
-            <patient classCode="PSN" determinerCode="INSTANCE">
-                <id root="2.16.858.1.858.68909.35679873"/>
-                <name>
-                    <given>Carlos</given>
-                    <given></given>
-                    <family>Perez</family>
-                    <family></family>
-                </name>
-                <administrativeGenderCode code="1" codeSystem="2.16.858.2.10000675.69600"/>
-                <birthTime value="19910106"/>
-            </patient>
-        </patientRole>
-    </recordTarget>
-    <author typeCode="AUT" contextControlCode="OP">
-        <time value="20160128214135"/>
-        <assignedAuthor classCode="ASSIGNED">
-            <id root="2.16.858.1.858.68909.35679873"/>
-            <assignedPerson>
-                <name>
-                    <given>Carlos</given>
-                    <given></given>
-                    <family>Perez</family>
-                    <family></family>
-                </name>
-            </assignedPerson>
-            <representedOrganization>
-                <id root="2.16.858.0.0.1.10.2.3.6"/>
-                <name>Banco de Sangre 1</name>
-            </representedOrganization>
-        </assignedAuthor>
-    </author>
-    <custodian>
-        <assignedCustodian>
-            <representedCustodianOrganization>
-                <id root="2.16.858.0.0.1.10.2.3.1.1"/>
-                <name>HEMOLOGICA</name>
-            </representedCustodianOrganization>
-        </assignedCustodian>
-    </custodian>
-    <component>
-        <structuredBody>
-            <component>
-                <section>
-                    <entry>
-                        <organizer classCode="BATTERY" moodCode="EVN">
-                            <id root="id"/>
-                            <statusCode code="completed"/>
-                            <effectiveTime value="20160128214135"/>
-                            <specimen typeCode="SPC">
-<specimenRole classCode="SPEC">
-    <id root="6d430b55-2eef-4d5c-8244-d67f29ba593e"/>
-</specimenRole>
-                            </specimen>
-                            <component>
-<observation classCode="OBS" moodCode="EVN">
-    <id root="idprueba"/>
-    <code codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" code="171122006"/>
-    <statusCode code="completed"/>
-    <value code="260385009" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT"/>
-</observation>
-                            </component>
-                            <component>
-<observation classCode="OBS" moodCode="EVN">
-    <id root="idprueba"/>
-    <code codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" code="31676001"/>
-    <statusCode code="completed"/>
-    <value code="260385009" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT"/>
-</observation>
-                            </component>
-                            <component>
-<observation classCode="OBS" moodCode="EVN">
-    <id root="idprueba"/>
-    <code codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" code="413107006"/>
-    <statusCode code="completed"/>
-    <value code="260385009" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT"/>
-</observation>
-                            </component>
-                            <component>
-<observation classCode="OBS" moodCode="EVN">
-    <id root="idprueba"/>
-    <code codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT" code="40675008"/>
-    <statusCode code="completed"/>
-    <value code="260385009" codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT"/>
-</observation>
-                            </component>
-                        </organizer>
-                    </entry>
-                </section>
-            </component>
-        </structuredBody>
-    </component>
+	<typeId root="2.16.840.1.113883.1.3" extension="POCD_HD000040" />
+	<templateId root="2.16.840.1.113883.19.57.7.1.3.1"
+		extension="CCD_RM201201CO01" />
+	<id root="2.16.858.0.0.1.10.2.3.1.1.1" extension="80" />
+	<code code="4321000179103" />
+	<title>Analisis de laboratorio</title>
+	<effectiveTime value="20160128214136" />
+	<confidentialityCode codeSystemName="Confidentiality"
+		code="N" codeSystem="2.16.840.1.113883.5.25" displayName="normal" />
+	<languageCode code="es-UY" />
+	<recordTarget typeCode="RCT" contextControlCode="OP">
+		<patientRole classCode="PAT">
+			<id root="2.16.858.0.0.1.10.2.3.1.1.2" extension="52" />
+			<telecom value="mailto:brunostrasser18@gmail.com" use="HP" />
+			<patient classCode="PSN" determinerCode="INSTANCE">
+				<id root="2.16.858.1.858.68909.35679873" />
+				<name>
+					<given>Carlos</given>
+					<given></given>
+					<family>Perez</family>
+					<family></family>
+				</name>
+				<administrativeGenderCode code="1"
+					codeSystem="2.16.858.2.10000675.69600" />
+				<birthTime value="19910106" />
+			</patient>
+		</patientRole>
+	</recordTarget>
+	<author typeCode="AUT" contextControlCode="OP">
+		<time value="20160128214135" />
+		<assignedAuthor classCode="ASSIGNED">
+			<id root="2.16.858.1.858.68909.35679873" />
+			<assignedPerson>
+				<name>
+					<given>Carlos</given>
+					<given></given>
+					<family>Perez</family>
+					<family></family>
+				</name>
+			</assignedPerson>
+			<representedOrganization>
+				<id root="2.16.858.0.0.1.10.2.3.6" />
+				<name>Banco de Sangre 1</name>
+			</representedOrganization>
+		</assignedAuthor>
+	</author>
+	<custodian>
+		<assignedCustodian>
+			<representedCustodianOrganization>
+				<id root="2.16.858.0.0.1.10.2.3.1.1" />
+				<name>HEMOLOGICA</name>
+			</representedCustodianOrganization>
+		</assignedCustodian>
+	</custodian>
+	<component>
+		<structuredBody>
+			<component>
+				<section>
+					<entry>
+						<organizer classCode="BATTERY" moodCode="EVN">
+							<id root="id" />
+							<statusCode code="completed" />
+							<effectiveTime value="20160128214135" />
+							<specimen typeCode="SPC">
+								<specimenRole classCode="SPEC">
+									<id root="6d430b55-2eef-4d5c-8244-d67f29ba593e" extension=""/>
+								</specimenRole>
+							</specimen>
+							<component>
+								<observation classCode="OBS" moodCode="EVN">
+									<id root="idprueba" />
+									<code codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT"
+										code="171122006" />
+									<statusCode code="completed" />
+									<value code="260385009" codeSystem="2.16.840.1.113883.6.96"
+										codeSystemName="SNOMED-CT" />
+								</observation>
+							</component>
+							<component>
+								<observation classCode="OBS" moodCode="EVN">
+									<id root="idprueba" />
+									<code codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT"
+										code="31676001" />
+									<statusCode code="completed" />
+									<value code="260385009" codeSystem="2.16.840.1.113883.6.96"
+										codeSystemName="SNOMED-CT" />
+								</observation>
+							</component>
+							<component>
+								<observation classCode="OBS" moodCode="EVN">
+									<id root="idprueba" />
+									<code codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT"
+										code="413107006" />
+									<statusCode code="completed" />
+									<value code="260385009" codeSystem="2.16.840.1.113883.6.96"
+										codeSystemName="SNOMED-CT" />
+								</observation>
+							</component>
+							<component>
+								<observation classCode="OBS" moodCode="EVN">
+									<id root="idprueba" />
+									<code codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT"
+										code="40675008" />
+									<statusCode code="completed" />
+									<value code="260385009" codeSystem="2.16.840.1.113883.6.96"
+										codeSystemName="SNOMED-CT" />
+								</observation>
+							</component>
+						</organizer>
+					</entry>
+				</section>
+			</component>
+		</structuredBody>
+	</component>
 </ClinicalDocument>
