@@ -24,6 +24,14 @@
         </license>
     </licenses>
 
+	<properties>
+	
+		<maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+	
+	</properties>
+
+
     <dependencies>
 
         <!-- Declare the APIs we depend on and need for compilation. All of 

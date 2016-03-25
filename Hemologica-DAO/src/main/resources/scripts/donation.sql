@@ -60,3 +60,5 @@ UPDATE `hemologica`.`donation_filter_codes` SET `donation_filter_codes_path`='/C
 
 UPDATE `hemologica`.`donation_filter_codes` SET `donation_filter_codes_id`='12' WHERE `donation_filter_codes_id`='1';
 
+UPDATE `hemologica`.`donation_filter_codes` SET `donation_filter_codes_path`='/ClinicalDocument/component/structuredBody/component/section/entry/procedure/code/@code' WHERE `donation_filter_codes_id`='8';
+

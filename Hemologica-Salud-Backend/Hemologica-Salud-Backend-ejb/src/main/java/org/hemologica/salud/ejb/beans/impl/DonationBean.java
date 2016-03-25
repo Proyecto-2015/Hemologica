@@ -711,6 +711,8 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 			throws XPathExpressionException, ParserConfigurationException {
 
 		List<String> queries = new ArrayList<>();
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 
 		for (DataSearchFilter filter : resultDonations) {
 
@@ -724,14 +726,17 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 				}
 			}
 		}
+		
+		
 
 		List<DataDonation> listReturn = new ArrayList<>();
 		List<String> cdas;
 		try {
 			cdas = XMLDataBaseFactory.getIXMLDataBaseDonations().getElements(queries);
-
+			
 			if (cdas != null && cdas.size() != 0) {
-				for (String cda : cdas) {
+				
+				cdas.parallelStream().forEach(cda-> {
 
 					Document document;
 					try {
@@ -758,15 +763,18 @@ public class DonationBean implements DonationBeanLocal, Serializable {
 						
 						logger.log(Level.SEVERE, "Error al procesar un documento");
 						
+					} catch (Exception e) {
+
+						logger.log(Level.SEVERE, "Error al procesar loss documentos cda ", e);
 					}
 				
-				}
+				});
 			}
 		} catch (XMLDataBaseException e) {
 
 			logger.log(Level.SEVERE, "Error al procesar loss documentos cda ", e);
 		}
-
+		
 		return listReturn;
 	}
 

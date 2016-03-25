@@ -35,7 +35,7 @@ public class PersonDAOImpl extends GenericDAOImpl<Person> implements IPersonDAO{
 				
 			}
 		}
-		System.out.println(">>>>> QUERY: "+ queryString);
+//		System.out.println(">>>>> QUERY: "+ queryString);
 		Query query = em.createQuery(queryString,Person.class);
 		return (List<Person>) query.getResultList();
 

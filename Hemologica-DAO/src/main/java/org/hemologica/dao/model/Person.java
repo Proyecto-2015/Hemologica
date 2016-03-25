@@ -60,7 +60,7 @@ public class Person implements Serializable {
 	private Boolean allowNotificationNeedDonor;
 
 	//bi-directional many-to-one association to Document
-	@OneToMany(mappedBy="person")
+	@OneToMany(mappedBy="person", fetch=FetchType.EAGER)
 	private List<Document> documents;
 
 	//bi-directional many-to-one association to Identification

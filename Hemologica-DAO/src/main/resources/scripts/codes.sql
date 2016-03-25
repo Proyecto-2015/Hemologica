@@ -101,5 +101,6 @@ INSERT INTO `hemologica`.`search_filter_codes` (`search_filter_codes_id`, `searc
 INSERT INTO `hemologica`.`search_filter_codes` (`search_filter_codes_id`, `search_filter_codes_label`, `search_filter_codes_path`, `search_filter_codes_value`) VALUES ('5', 'person_name', '/ClinicalDocument/recordTarget/patientRole/patient/name', '5');
 
 UPDATE `hemologica`.`search_filter_codes` SET `search_filter_codes_path`='/ClinicalDocument/component/structuredBody/component/section/entry/procedure/effectiveTime/low/@value' WHERE `search_filter_codes_id`='3';
+UPDATE `hemologica`.`search_filter_codes` SET `search_filter_codes_path`='/ClinicalDocument/component/structuredBody/component/section/entry/procedure/id/@extension' WHERE `search_filter_codes_id`='1';
 
 
