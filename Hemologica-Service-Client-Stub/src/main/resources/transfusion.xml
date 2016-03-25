@@ -33,12 +33,7 @@
 		<assignedAuthor classCode="ASSIGNED">
 			<id root="2.16.858.1.858.68909.35679873" />
 			<assignedPerson>
-				<name>
-					<given>Carlos</given>
-					<given></given>
-					<family>Perez</family>
-					<family></family>
-				</name>
+				<name/>
 			</assignedPerson>
 			<representedOrganization>
 				<id root="2.16.858.0.0.1.10.2.3.6" />
@@ -60,7 +55,7 @@
 				<section>
 					<entry>
 						<procedure moodCode="EVN" classCode="PROC">
-							<id root="id" />
+							<id root="id" extension=""/>
 							<code codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT"
 								code="54790000" displayName="transfusión de un componente sanguíneo (procedimiento)" />
 							<statusCode code="completed" />
@@ -70,7 +65,7 @@
 							</effectiveTime>
 							<specimen typeCode="SPC">
 								<specimenRole classCode="SPEC">
-									<id root="123467" />
+									<id root="123467" extension="" />
 									<specimenPlayingEntity>
 										<code codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT"
 											code="122564002"
@@ -80,7 +75,7 @@
 							</specimen>
 							<specimen typeCode="SPC">
 								<specimenRole classCode="SPEC">
-									<id root="6d430b55-2eef-4d5c-8244-d67f29ba593e" />
+									<id root="6d430b55-2eef-4d5c-8244-d67f29ba593e" extension=""/>
 									<specimenPlayingEntity>
 										<code codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT"
 											code="122563008"
@@ -98,6 +93,7 @@
 								<observation classCode="OBS" moodCode="EVN">
 									<code codeSystem="2.16.840.1.113883.6.96" codeSystemName="SNOMED-CT"
 										code="118565006" displayName="SNOMED-CT" />
+										<value value="13" unit="ml"/>
 								</observation>
 							</entryRelationship>
 						</procedure>

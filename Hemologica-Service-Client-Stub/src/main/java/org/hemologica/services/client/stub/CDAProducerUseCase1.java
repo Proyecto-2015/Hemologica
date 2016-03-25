@@ -52,10 +52,11 @@ public class CDAProducerUseCase1 {
 	private static final String[][] banks = {
 			{"2.16.858.0.0.1.10.2.3.6", "2.16.858.0.0.1.10.2.3.6"},
 			{"2.16.858.0.2.16.86.1.0.0.212567060019", "2.16.858.0.0.1.10.2.3.7"},
-			{"2.16.858.0.2.16.86.1.0.0.212567060019", "347"},
-			{"2.16.858.0.0.1.10.2.3.6", "348"},
-			{"2.16.858.0.2.16.86.1.0.0.212567060019", "349"}
+			{"2.16.858.0.2.16.86.1.0.0.212567060019", "2.16.858.0.0.1.10.2.3.8"}
 	};	
+	
+//	{"2.16.858.0.0.1.10.2.3.6", "2.16.858.0.0.1.10.2.3.9"},
+//	{"2.16.858.0.2.16.86.1.0.0.212567060019", "2.16.858.0.0.1.10.2.3.10"}
 	
 	
 
@@ -88,16 +89,18 @@ public class CDAProducerUseCase1 {
 	public static void main(String[] args) {
 
 		String outputPath = "/home/bruno/Escritorio/proyecto/Mirth/Integracion/import";
-		Integer offsetDonation = 100;
-		Integer offsetLaboratory = 100;
-		Integer offsetTransfusion = 100;
+		Integer offsetDonation = 100000;
+		Integer offsetLaboratory = 100000;
+		Integer offsetTransfusion = 100000;
 		
-		for(int i = 0; i < 30; ++i){
+		for(int i = 0; i < 5; ++i){
 			
 		
 		
 			// ################################ DONATION  ##########################################
 	
+			String[] center = getRandomCenter();
+			
 			// /ClinicalDocument/id/@root
 			String root = "2.16.858.0.0.1.10.2.3.1.1.1";
 			// /ClinicalDocument/id/@extension use toString();
@@ -125,7 +128,7 @@ public class CDAProducerUseCase1 {
 			String doctorFamily = randomIdentifier();
 	
 			// /ClinicalDocument/component/structuredBody/component/section/entry/procedure/id/@root
-			String donationIdRoot = "2.16.858.0.0.1.10.2.3.6";
+			String donationIdRoot = center[0];
 			// /ClinicalDocument/component/structuredBody/component/section/entry/procedure/id/@extension
 			String donationIdExtension = UUID.randomUUID().toString(); 
 			
@@ -136,6 +139,7 @@ public class CDAProducerUseCase1 {
 	
 			String gender = getRandomGender();
 			String birthday = getRandomBirth();
+			String bloodType = getRandomBloodType();
 			
 			
 			try {
@@ -155,7 +159,8 @@ public class CDAProducerUseCase1 {
 								specimenDonationRoot,
 								specimenDonationExtension,
 								gender,
-								birthday));
+								birthday,
+								bloodType));
 				
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -228,6 +233,7 @@ public class CDAProducerUseCase1 {
 			SimpleDateFormat sdfM = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 			List<MovementData> lms;
 			String[] times = getTimes(6);
+			Service port;
 			try {
 			
 //				'1', 'label_plaquetas', '1', '7', '7', '256395009'
@@ -238,7 +244,7 @@ public class CDAProducerUseCase1 {
 
 				
 				service = new ServiceImplService(new URL(url));
-				Service port = service.getServiceImplPort();
+				port = service.getServiceImplPort();
 				MovementData m = null;
 				lms = new ArrayList<MovementData>();
 				
@@ -247,66 +253,66 @@ public class CDAProducerUseCase1 {
 				m.setDate(times[0]);
 				m.setType("1");
 				m.setUnit(specimenDonationExtension);
-				m.setUnitBloodType("278151004"); 	//ab+
+				m.setUnitBloodType("278151004"); 	
 				m.setUnitType("258580003"); 		//sangre entera -- 258580003
 				lms.add(m);
 				
 				m = new MovementData();
-				m.setCenter("2.16.858.0.0.1.10.2.3.6");
+				m.setCenter(center[1]);
 				m.setDate(times[1]);
 				m.setType("2");
 				m.setUnit(specimenDonationExtension);
-				m.setUnitBloodType("278151004"); 	//ab+
+				m.setUnitBloodType(bloodType); 	
 				m.setUnitType("258580003"); 		//sangre entera
 				lms.add(m);
 				
 				m = new MovementData();
-				m.setCenter("2.16.858.0.0.1.10.2.3.6");
+				m.setCenter(center[1]);
 				m.setDate(times[2]);
 				m.setType("1");
 				m.setUnit(specimenDonationExtension + ".256395009");
-				m.setUnitBloodType("278151004"); 	//ab+
+				m.setUnitBloodType(bloodType); 	
 				m.setUnitType("256395009"); 		//plaquetas
 				m.setUnitParent(specimenDonationExtension);
 				lms.add(m);
 			
 				m = new MovementData();
-				m.setCenter("2.16.858.0.0.1.10.2.3.6");
+				m.setCenter(center[1]);
 				m.setDate(times[3]);
 				m.setType("1");
 				m.setUnit(specimenDonationExtension + ".256401009");
-				m.setUnitBloodType("278151004"); 	//ab+
+				m.setUnitBloodType(bloodType); 	
 				m.setUnitType("256401009"); 		//crioprecipitado
 				m.setUnitParent(specimenDonationExtension);
 				lms.add(m);
 				
 				m = new MovementData();
-				m.setCenter("2.16.858.0.0.1.10.2.3.6");
+				m.setCenter(center[1]);
 				m.setDate(times[4]);
 				m.setType("1");
 				m.setUnit(specimenDonationExtension + ".256400005");
-				m.setUnitBloodType("278151004"); 	//ab+
+				m.setUnitBloodType(bloodType); 	
 				m.setUnitType("256400005"); 		//plasma
 				m.setUnitParent(specimenDonationExtension);
 				lms.add(m);
 				
 				m = new MovementData();
-				m.setCenter("2.16.858.0.0.1.10.2.3.6");
+				m.setCenter(center[1]);
 				m.setDate(times[5]);
 				m.setType("1");
 				m.setUnit(specimenDonationExtension + ".119351004");
-				m.setUnitBloodType("278151004"); 	//ab+
+				m.setUnitBloodType(bloodType); 	
 				m.setUnitType("119351004"); 		//hematies
 				m.setUnitParent(specimenDonationExtension);
 				lms.add(m);
 				
 				m = new MovementData();
-				m.setCenter("2.16.858.0.0.1.10.2.3.6");
+				m.setCenter(center[1]);
 				m.setDate(times[5]);
 				m.setType("1");
 				m.setUnit(specimenDonationExtension + ".126242007");
-				m.setUnitBloodType("278151004"); 	//ab+
-				m.setUnitType("126242007"); 		//hematies
+				m.setUnitBloodType(bloodType); 	//ab+
+				m.setUnitType("126242007"); 		//eritrocitos
 				m.setUnitParent(specimenDonationExtension);
 				lms.add(m);
 				
@@ -325,67 +331,96 @@ public class CDAProducerUseCase1 {
 			
 			// ################################ TRANSFUSION ##########################################
 			
-//			int j = 0;
-//			for (j = 0; j < lms.size(); ++j) {
-//				
-//				// /ClinicalDocument/recordTarget/patientRole/author/assignedAuthor/id/@root
-//				doctorIdRoot = randomDocument();
-//				// /ClinicalDocument/recordTarget/patientRole/author/assignedAuthor/assignedPerson/name/giveName
-//				doctorGivenName = randomIdentifier();
-//				// /ClinicalDocument/recordTarget/patientRole/author/assignedAuthor/assignedPerson/name/family
-//				doctorFamily = randomIdentifier();
-//		
-//				// /ClinicalDocument/component[1]/structuredBody[1]/component[1]/section[1]/entry[1]/procedure[1]/specimen[1]/specimenRole[1]/id[1]/@root
-//				String specimenTransfusionUnitRoot = donationIdRoot;
-//				// /ClinicalDocument/component[1]/structuredBody[1]/component[1]/section[1]/entry[1]/procedure[1]/specimen[1]/specimenRole[1]/id[1]/@extension
-//				String specimenTransfusionUnitExtension = lms.get(j).getUnit();
-//		
-//				// /ClinicalDocument/component[1]/structuredBody[1]/component[1]/section[1]/entry[1]/procedure[1]/specimen[2]/specimenRole[1]/id[1]
-//				String specimenTransfusionDonationRoot = donationIdRoot;
-//				// /ClinicalDocument/component[1]/structuredBody[1]/component[1]/section[1]/entry[1]/procedure[1]/specimen[2]/specimenRole[1]/id[1]/@extension
-//				String specimenTransfusionDonationExtension = donationIdExtension;
-//			
-//				
-//				// /ClinicalDocument/id/@root
-//							root = "2.16.858.0.0.1.10.2.3.1.1.2";
-//							// /ClinicalDocument/id/@extension use toString();
-//							extension = offsetTransfusion + i;
-//				
-//				efectiveTime = sdf.format(new Date());
-//							
-//				try {
-//					writeFile(outputPath +"/transfusion_"+ extension +".xml", 
-//							getCDATransfusion(
-//									root,
-//									extension.toString(),
-//									efectiveTime,
-//									patientIdRoot,
-//									patientGivenName,
-//									patientFamily,
-//									doctorIdRoot,
-//									doctorGivenName,
-//									doctorFamily,
-//									specimenTransfusionUnitRoot,
-//									specimenTransfusionUnitExtension,
-//									specimenTransfusionDonationRoot,
-//									specimenTransfusionDonationExtension  ));
-//					
-//				} catch (IOException e) {
-//					e.printStackTrace();
-//					return;
-//				}
-//				
-//	
+			for(MovementData m : lms){
+					
+				if(m.getUnitType().equals("258580003")) continue;
+				if(RandomUtils.nextInt(0, 6) > 2 ) continue;
+				
+				// /ClinicalDocument/recordTarget/patientRole/author/assignedAuthor/id/@root
+				doctorIdRoot = randomDocument();
+				// /ClinicalDocument/recordTarget/patientRole/author/assignedAuthor/assignedPerson/name/giveName
+				doctorGivenName = randomIdentifier();
+				// /ClinicalDocument/recordTarget/patientRole/author/assignedAuthor/assignedPerson/name/family
+				doctorFamily = randomIdentifier();
+		
+				// /ClinicalDocument/component[1]/structuredBody[1]/component[1]/section[1]/entry[1]/procedure[1]/specimen[1]/specimenRole[1]/id[1]/@root
+				String specimenTransfusionUnitRoot = donationIdRoot;
+				// /ClinicalDocument/component[1]/structuredBody[1]/component[1]/section[1]/entry[1]/procedure[1]/specimen[1]/specimenRole[1]/id[1]/@extension
+				String specimenTransfusionUnitExtension = m.getUnit();
+		
+				// /ClinicalDocument/component[1]/structuredBody[1]/component[1]/section[1]/entry[1]/procedure[1]/specimen[2]/specimenRole[1]/id[1]
+				String specimenTransfusionDonationRoot = donationIdRoot;
+				// /ClinicalDocument/component[1]/structuredBody[1]/component[1]/section[1]/entry[1]/procedure[1]/specimen[2]/specimenRole[1]/id[1]/@extension
+				String specimenTransfusionDonationExtension = donationIdExtension;
+			
+				String gender2 = getRandomGender();
+				String birthday2 = getRandomBirth();
+				
+				// /ClinicalDocument/id/@root
+							root = "2.16.858.0.0.1.10.2.3.1.1.2";
+							// /ClinicalDocument/id/@extension use toString();
+							extension = offsetTransfusion + i;
+				
+				efectiveTime = sdf.format(new Date());
+							
 				try {
-					Thread.sleep(5000);
+					writeFile(outputPath +"/transfusion_"+ extension +".xml", 
+							getCDATransfusion(
+									root,
+									extension.toString(),
+									efectiveTime,
+									patientIdRoot,
+									patientGivenName,
+									patientFamily,
+									doctorIdRoot,
+									doctorGivenName,
+									doctorFamily,
+									specimenTransfusionUnitRoot,
+									specimenTransfusionUnitExtension,
+									specimenTransfusionDonationRoot,
+									specimenTransfusionDonationExtension,
+									gender,
+									birthday,
+									m.getUnitType()
+									));
+					
+					m.setDate(getTimes(1)[0]);
+					m.setType("2");
+					List<MovementData> l = new ArrayList<>();
+					l.add(m);
+					port.importMOVEMENTS(l);
+					
+				} catch (IOException e) {
+					e.printStackTrace();
+					return;
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			
+
+			
+				try {
+					Thread.sleep(1000);
 				} catch (InterruptedException e1) {
 					e1.printStackTrace();
 					return;
 				}
-//			
-//			}
-//		
+				
+				
+				
+			} //for
+			
+			
+			
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+				return;
+			}
+			
 		}
+
 		
 	}
 	
@@ -405,7 +440,8 @@ public class CDAProducerUseCase1 {
 			String specimenDonationRoot,
 			String specimenDonationExtension,
 			String gender,
-			String birthday){
+			String birthday,
+			String bloodType){
 		
 		
 		Document cda = getCDAResource("donation.xml");  		
@@ -417,6 +453,7 @@ public class CDAProducerUseCase1 {
 			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/component/structuredBody/component/section/entry/procedure/id/@extension", donationIdExtension);
 			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/component/structuredBody/component/section/entry/procedure/specimen/specimenRole/id/@root", specimenDonationRoot);
 			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/component/structuredBody/component/section/entry/procedure/specimen/specimenRole/id/@extension", specimenDonationExtension);
+			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/component/structuredBody/component/section/entry/procedure/entryRelationship/observation/code/@code", bloodType);
 			
 			return XMLUtils.documentToString(cda);
 			
@@ -477,18 +514,22 @@ public class CDAProducerUseCase1 {
 			String specimenTransfusionDonationRoot,
 			String specimenTransfusionDonationExtension,
 			String gender,
-			String birthday){
+			String birthday,
+			String product){
 		
 		
 		Document cda = getCDAResource("transfusion.xml");  		
 		try {
 			
-			cda = setCDAHeader( cda, root, effectiveTime, extension, patientIdRoot, patientGivenName, patientFamily, doctorIdRoot, doctorGivenName, doctorFamily,gender, birthday);
+			cda = setCDAHeaderTransfusion( cda, root, effectiveTime, extension, patientIdRoot, patientGivenName, patientFamily, doctorIdRoot, doctorGivenName, doctorFamily, gender, birthday);
 			
+			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/component[1]/structuredBody[1]/component[1]/section[1]/entry[1]/procedure[1]/id[1]/@root", specimenTransfusionUnitRoot);
+			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/component[1]/structuredBody[1]/component[1]/section[1]/entry[1]/procedure[1]/	id[1]/@extension", specimenTransfusionUnitExtension);
 			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/component[1]/structuredBody[1]/component[1]/section[1]/entry[1]/procedure[1]/specimen[1]/specimenRole[1]/id[1]/@root", specimenTransfusionUnitRoot);
 			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/component[1]/structuredBody[1]/component[1]/section[1]/entry[1]/procedure[1]/specimen[1]/specimenRole[1]/id[1]/@extension", specimenTransfusionUnitExtension);
 			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/component[1]/structuredBody[1]/component[1]/section[1]/entry[1]/procedure[1]/specimen[2]/specimenRole[1]/id[1]/@root", specimenTransfusionDonationRoot);
 			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/component[1]/structuredBody[1]/component[1]/section[1]/entry[1]/procedure[1]/specimen[2]/specimenRole[1]/id[1]/@extension", specimenTransfusionDonationExtension);
+			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument//component//structuredBody//component//section//entry//procedure//entryRelationship[descendant-or-self::node()/@typeCode = \"COMP\"]//observation//@code", product);
 			
 			return XMLUtils.documentToString(cda);
 			
@@ -562,6 +603,45 @@ public class CDAProducerUseCase1 {
 		return null;
 	}
 	
+	
+	private static Document setCDAHeaderTransfusion(
+			Document cda,
+			String root,
+			String extension,
+			String effectiveTime,
+			String patientIdRoot,
+			String patientGivenName,
+			String patientFamily,
+			String doctorIdRoot,
+			String doctorGivenName,
+			String doctorFamily,
+			String gender,
+			String birthday
+			){
+		
+		
+		try {
+			
+			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/id/@root" , root);
+			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/id/@extension" , extension);
+			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/effectiveTime" , effectiveTime);
+			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/recordTarget/patientRole/patient/id/@root", patientIdRoot);
+			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/recordTarget/patientRole/patient/name/given", patientGivenName);
+			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/recordTarget/patientRole/patient/name/family", patientFamily);
+			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/recordTarget/patientRole/patient/administrativeGenderCode/@code", gender);
+			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/recordTarget/patientRole/patient/birthTime/@value", birthday);
+//			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/author[1]/assignedAuthor[1]/id[1]/@root", doctorIdRoot);
+//			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/author[1]/assignedAuthor/assignedPerson/name/given", doctorGivenName);
+//			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/author[1]/assignedAuthor[1]/assignedPerson[1]/name[1]/family[1]", doctorFamily);
+			
+			return cda;
+			
+		} catch (XPathExpressionException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	private static void writeFile(String name, String content) throws IOException{
 		
 		FileUtils.writeStringToFile(new File(name), content);
@@ -592,8 +672,8 @@ public class CDAProducerUseCase1 {
 		return new SimpleDateFormat("yyyyMMdd").format(ret);
 	}
 	
-	public static String[] getRandomInstitution(){
-		return null;
+	public static String[] getRandomCenter(){
+		return banks[RandomUtils.nextInt(0, banks.length)];
 	}
 	
 	public static String getRandomBloodType(){
