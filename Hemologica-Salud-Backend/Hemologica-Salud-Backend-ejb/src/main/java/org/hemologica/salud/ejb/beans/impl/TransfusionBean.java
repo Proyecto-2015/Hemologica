@@ -387,12 +387,25 @@ public class TransfusionBean implements TransfusionBeanLocal, Serializable {
 			cdas = XMLDataBaseFactory.getIXMLDataBaseTransfusions().getElements(queries);
 
 			if (cdas != null && cdas.size() != 0) {
-				for (String cda : cdas) {
+				
+				cdas.parallelStream().forEach(cda-> {
+				
+//				for (String cda : cdas) {
 
-					Document document = XMLUtils.stringToDocument(cda);
-					DataTransfusion dataDonacion = getDataTransfusion(document);
-					listReturn.add(dataDonacion);
-				}
+					Document document;
+					try {
+						
+						document = XMLUtils.stringToDocument(cda);
+						DataTransfusion dataDonacion = getDataTransfusion(document);
+						listReturn.add(dataDonacion);
+						
+					} catch (Exception e) {
+						
+						logger.log(Level.SEVERE, "Error al procesar un documentos cda ", e);
+						
+					}
+					
+				});
 			}
 		} catch (XMLDataBaseException e) {
 

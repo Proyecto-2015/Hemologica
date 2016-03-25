@@ -50,8 +50,8 @@ import javax.xml.bind.annotation.XmlType;
 public class EffectiveTimeType {
 
     @XmlElementRefs({
-        @XmlElementRef(name = "high", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false),
-        @XmlElementRef(name = "low", namespace = "urn:hl7-org:v3", type = JAXBElement.class, required = false)
+        @XmlElementRef(name = "high", namespace = "urn:hl7-org:v3", type = JAXBElement.class),
+        @XmlElementRef(name = "low", namespace = "urn:hl7-org:v3", type = JAXBElement.class)
     })
     @XmlMixed
     protected List<Serializable> content;
