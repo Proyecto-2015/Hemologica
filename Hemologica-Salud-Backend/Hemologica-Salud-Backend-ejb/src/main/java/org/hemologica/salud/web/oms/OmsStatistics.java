@@ -443,7 +443,7 @@ public class OmsStatistics {
 			
 		try {
 			
-			q.setQuestion("Cantidad de donaciones que  efectuaron mediante aféresis (excluyendo las donaciones autólogas) para un periodo de tiempo:");
+			q.setQuestion("Cantidad de donaciones que efectuaron mediante aféresis (excluyendo las donaciones autólogas) para un periodo de tiempo:");
 
 			DonationFilterCode donationFilterType = FactoryDAO.getCodesDAO(em).getDonationsFilterById(Constants.DONATION_TYPE);
 			String queryAfer = donationFilterType.getDonationFilterCodesPath() +"='" +Constants.DONATION_APHERESIS + "'";
