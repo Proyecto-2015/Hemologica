@@ -39,6 +39,7 @@ public class UnitDAOImpl extends GenericDAOImpl<Unit> implements IUnitDAO {
 		return ret != null && ret.size() > 0 ? ret.get(0) : null;
 	}
 
+	@SuppressWarnings("unchecked")
 	public int getCountUnit(String productTypeCode, String bloodTypeCodeABO, String bloodTypeCodeRH, String code) {
 		
 		String query = "SELECT count(*) from Unit u where u.center.centerCode ='" + code + "' and " + "u.active = TRUE ";
@@ -62,7 +63,9 @@ public class UnitDAOImpl extends GenericDAOImpl<Unit> implements IUnitDAO {
 		
 		Query querySql = em.createQuery(query);
 		
-		return querySql.getFirstResult();
+		List<Object> result = querySql.getResultList();
+		
+		return ((result != null && result.get(0) != null) ? (int) (long) result.get(0) : 0);
 		
 	}
 
