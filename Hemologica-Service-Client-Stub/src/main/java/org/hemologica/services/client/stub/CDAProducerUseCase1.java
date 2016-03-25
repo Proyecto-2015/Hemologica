@@ -23,7 +23,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.apache.commons.io.FileUtils;
-
+import org.apache.commons.lang3.RandomUtils;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -46,6 +46,19 @@ public class CDAProducerUseCase1 {
 	private static final java.util.Random rand = new java.util.Random();
 
 	private static final Map<String, Boolean> identifiers = new HashMap<String, Boolean>();
+	
+	private static final String[] bloodTypes = { "278148006", "278147001", "278152006", "278149003", "278154007", "278151004", "278153001",	"278150003" };
+	
+	private static final String[][] banks = {
+			{"2.16.858.0.0.1.10.2.3.6", "2.16.858.0.0.1.10.2.3.6"},
+			{"2.16.858.0.2.16.86.1.0.0.212567060019", "2.16.858.0.0.1.10.2.3.7"},
+			{"2.16.858.0.2.16.86.1.0.0.212567060019", "347"},
+			{"2.16.858.0.0.1.10.2.3.6", "348"},
+			{"2.16.858.0.2.16.86.1.0.0.212567060019", "349"}
+	};	
+	
+	
+
 
 	public static String randomIdentifier() {
 		StringBuilder builder = new StringBuilder();
@@ -121,6 +134,8 @@ public class CDAProducerUseCase1 {
 			// /ClinicalDocument/component/structuredBody/component/section/entry/procedure/specimen/specimenRole/id/@extension
 			String specimenDonationExtension = donationIdExtension;
 	
+			String gender = getRandomGender();
+			String birthday = getRandomBirth();
 			
 			
 			try {
@@ -138,7 +153,9 @@ public class CDAProducerUseCase1 {
 								donationIdRoot,
 								donationIdExtension,
 								specimenDonationRoot,
-								specimenDonationExtension));
+								specimenDonationExtension,
+								gender,
+								birthday));
 				
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -197,7 +214,9 @@ public class CDAProducerUseCase1 {
 								doctorGivenName,
 								doctorFamily,
 								specimenLaboratoryUnitRoot,
-								specimenLaboratoryUnitExtension ));
+								specimenLaboratoryUnitExtension,
+								gender,
+								birthday));
 				
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -278,6 +297,16 @@ public class CDAProducerUseCase1 {
 				m.setUnit(specimenDonationExtension + ".119351004");
 				m.setUnitBloodType("278151004"); 	//ab+
 				m.setUnitType("119351004"); 		//hematies
+				m.setUnitParent(specimenDonationExtension);
+				lms.add(m);
+				
+				m = new MovementData();
+				m.setCenter("2.16.858.0.0.1.10.2.3.6");
+				m.setDate(times[5]);
+				m.setType("1");
+				m.setUnit(specimenDonationExtension + ".126242007");
+				m.setUnitBloodType("278151004"); 	//ab+
+				m.setUnitType("126242007"); 		//hematies
 				m.setUnitParent(specimenDonationExtension);
 				lms.add(m);
 				
@@ -374,13 +403,15 @@ public class CDAProducerUseCase1 {
 			String donationIdRoot,
 			String donationIdExtension,
 			String specimenDonationRoot,
-			String specimenDonationExtension ){
+			String specimenDonationExtension,
+			String gender,
+			String birthday){
 		
 		
 		Document cda = getCDAResource("donation.xml");  		
 		try {
 			
-			cda = setCDAHeader( cda, root, effectiveTime, extension, patientIdRoot, patientGivenName, patientFamily, doctorIdRoot, doctorGivenName, doctorFamily );
+			cda = setCDAHeader( cda, root, effectiveTime, extension, patientIdRoot, patientGivenName, patientFamily, doctorIdRoot, doctorGivenName, doctorFamily, gender, birthday);
 			
 			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/component/structuredBody/component/section/entry/procedure/id/@root", donationIdRoot);
 			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/component/structuredBody/component/section/entry/procedure/id/@extension", donationIdExtension);
@@ -408,13 +439,15 @@ public class CDAProducerUseCase1 {
 			String doctorGivenName,
 			String doctorFamily,
 			String specimenLaboratoryUnitRoot,
-			String specimenLaboratoryUnitExtension ){
+			String specimenLaboratoryUnitExtension,
+			String gender,
+			String birthday){
 		
 		
 		Document cda = getCDAResource("laboratory.xml");  		
 		try {
 			
-			cda = setCDAHeader( cda, root, effectiveTime, extension, patientIdRoot, patientGivenName, patientFamily, doctorIdRoot, doctorGivenName, doctorFamily );
+			cda = setCDAHeader( cda, root, effectiveTime, extension, patientIdRoot, patientGivenName, patientFamily, doctorIdRoot, doctorGivenName, doctorFamily, gender, birthday);
 			
 			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/component[1]/structuredBody[1]/component[1]/section[1]/entry[1]/organizer[1]/specimen[1]/specimenRole[1]/id[1]/@root", specimenLaboratoryUnitRoot);
 			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/component[1]/structuredBody[1]/component[1]/section[1]/entry[1]/organizer[1]/specimen[1]/specimenRole[1]/id[1]/@extension", specimenLaboratoryUnitExtension);
@@ -442,13 +475,15 @@ public class CDAProducerUseCase1 {
 			String specimenTransfusionUnitRoot,
 			String specimenTransfusionUnitExtension,
 			String specimenTransfusionDonationRoot,
-			String specimenTransfusionDonationExtension ){
+			String specimenTransfusionDonationExtension,
+			String gender,
+			String birthday){
 		
 		
 		Document cda = getCDAResource("transfusion.xml");  		
 		try {
 			
-			cda = setCDAHeader( cda, root, effectiveTime, extension, patientIdRoot, patientGivenName, patientFamily, doctorIdRoot, doctorGivenName, doctorFamily );
+			cda = setCDAHeader( cda, root, effectiveTime, extension, patientIdRoot, patientGivenName, patientFamily, doctorIdRoot, doctorGivenName, doctorFamily,gender, birthday);
 			
 			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/component[1]/structuredBody[1]/component[1]/section[1]/entry[1]/procedure[1]/specimen[1]/specimenRole[1]/id[1]/@root", specimenTransfusionUnitRoot);
 			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/component[1]/structuredBody[1]/component[1]/section[1]/entry[1]/procedure[1]/specimen[1]/specimenRole[1]/id[1]/@extension", specimenTransfusionUnitExtension);
@@ -499,7 +534,9 @@ public class CDAProducerUseCase1 {
 			String patientFamily,
 			String doctorIdRoot,
 			String doctorGivenName,
-			String doctorFamily
+			String doctorFamily,
+			String gender,
+			String birthday
 			){
 		
 		
@@ -511,6 +548,8 @@ public class CDAProducerUseCase1 {
 			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/recordTarget/patientRole/patient/id/@root", patientIdRoot);
 			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/recordTarget/patientRole/patient/name/given", patientGivenName);
 			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/recordTarget/patientRole/patient/name/family", patientFamily);
+			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/recordTarget/patientRole/patient/administrativeGenderCode/@code", gender);
+			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/recordTarget/patientRole/patient/birthTime/@value", birthday);
 			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/author[1]/assignedAuthor[1]/id[1]/@root", doctorIdRoot);
 			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/author[1]/assignedAuthor/assignedPerson/name/given", doctorGivenName);
 			XMLUtils.replaceXPathString(cda.getDocumentElement(), "/ClinicalDocument/author[1]/assignedAuthor[1]/assignedPerson[1]/name[1]/family[1]", doctorFamily);
@@ -539,6 +578,26 @@ public class CDAProducerUseCase1 {
 			ret[j] = time + j + "000"; 
 		}
 		return ret;
+	}
+	
+	public static String getRandomGender(){
+		return ""+ RandomUtils.nextInt(0,3);
+	}
+	
+	public static String getRandomBirth(){
+		Date ret = new Date();
+		Long time = ret.getTime();
+		time = Math.abs(time - RandomUtils.nextLong(0, time));
+		ret = new Date(time);
+		return new SimpleDateFormat("yyyyMMdd").format(ret);
+	}
+	
+	public static String[] getRandomInstitution(){
+		return null;
+	}
+	
+	public static String getRandomBloodType(){
+		return bloodTypes[RandomUtils.nextInt(0, bloodTypes.length)];
 	}
 	
 }

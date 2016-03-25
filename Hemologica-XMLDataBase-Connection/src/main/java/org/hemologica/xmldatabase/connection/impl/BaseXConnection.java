@@ -632,7 +632,8 @@ public class BaseXConnection implements IXMLDataBase {
 				}
 			}
 
-			input += " return $doc)";
+//			input += " return $doc)";
+			input += " return $doc/ClinicalDocument/id/@root)"; /* bruno: para ver si optimiza algo */
 
 		} else {
 
