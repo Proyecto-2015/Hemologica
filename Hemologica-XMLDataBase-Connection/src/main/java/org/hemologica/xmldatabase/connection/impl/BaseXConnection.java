@@ -3,6 +3,9 @@ package org.hemologica.xmldatabase.connection.impl;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -106,10 +109,17 @@ public class BaseXConnection implements IXMLDataBase {
 
 	public void addElement(String path) throws XMLDataBaseException {
 
-		String input = "db:add('" + dataBase + "','" + path + "')";
+//		String input = "db:add('" + dataBase + "','" + path + "')";
+		
 		BaseXClient session = null;
+		String name = path.replace("/tmp/", "");
+		
 		try {
 
+			String content = BaseXConnection.readFile(path, Charset.defaultCharset());
+			content = content.replace("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>", "");
+			content = content.replace("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>", "");
+			String input = "db:add('" + dataBase + "', " + content + ", '"+ name +"' )";
 			session = this.getClient();
 			BaseXClient.Query query = session.query(input);
 			query.execute();
@@ -409,9 +419,9 @@ public class BaseXConnection implements IXMLDataBase {
 		return cdasList;
 
 	}
-	
-	public int countQuery(List<String> orClauses, List<String> analysisIds) throws XMLDataBaseException{
-		
+
+	public int countQuery(List<String> orClauses, List<String> analysisIds) throws XMLDataBaseException {
+
 		String input = "";
 
 		if ((orClauses != null && orClauses.size() != 0) || (analysisIds != null && analysisIds.size() != 0)) {
@@ -419,7 +429,7 @@ public class BaseXConnection implements IXMLDataBase {
 			input += "count(for $doc in collection('" + dataBase + "') " + "where ";
 
 			boolean first = true;
-			if(orClauses != null){
+			if (orClauses != null) {
 				for (String s : orClauses) {
 					if (first) {
 
@@ -431,11 +441,11 @@ public class BaseXConnection implements IXMLDataBase {
 						input += " or (" + s + ")";
 
 					}
-	
+
 				}
 			}
-			
-			String analysisQuery ="";
+
+			String analysisQuery = "";
 			if (analysisIds != null && analysisIds.size() > 0) {
 
 				analysisQuery = "for $docLab in collection('"
@@ -446,28 +456,28 @@ public class BaseXConnection implements IXMLDataBase {
 						+ "$doc/ClinicalDocument/component/structuredBody/component/section/entry/procedure/specimen/specimenRole/id/@extension";
 
 				if (analysisIds.size() == 1) {
-					
-					String q="";
-					if(analysisIds.get(0).contains("$doc")){
-						
+
+					String q = "";
+					if (analysisIds.get(0).contains("$doc")) {
+
 						q = analysisIds.get(0).replace("$doc/", "$docLab/");
-						
-					}else{
-						
+
+					} else {
+
 						q = "$docLab/" + analysisIds.get(0);
 					}
-					
+
 					analysisQuery += " and ( " + q + ")";
 
 				} else if (analysisIds.size() == 2) {
-					
-					String q="";
-					if(analysisIds.get(1).contains("$doc")){
-						
+
+					String q = "";
+					if (analysisIds.get(1).contains("$doc")) {
+
 						q = analysisIds.get(1).replace("$doc/", "$docLab/");
-						
+
 					}
-					analysisQuery += " and ("+ q + ")";
+					analysisQuery += " and (" + q + ")";
 
 				}
 
@@ -483,15 +493,13 @@ public class BaseXConnection implements IXMLDataBase {
 
 				}
 			}
-			
-			
+
 			input += " return $doc)";
 		} else {
 
 			input = "count(collection('" + dataBase + "'))";
 
 		}
-		
 
 		BaseXClient.Query query;
 		BaseXClient session = null;
@@ -521,9 +529,8 @@ public class BaseXConnection implements IXMLDataBase {
 		}
 
 		return 0;
-		
+
 	}
-	
 
 	public int countQuery(List<String> andClauses, List<List<String>> orClauses, List<String> orClausesCDAsIds,
 			List<String> analysisIds) throws XMLDataBaseException {
@@ -538,21 +545,21 @@ public class BaseXConnection implements IXMLDataBase {
 			input += "count(for $doc in collection('" + dataBase + "') " + "where ";
 
 			boolean first = true;
-			if(andClauses != null){
+			if (andClauses != null) {
 				for (String s : andClauses) {
 					if (first) {
 						input += "$doc" + s;
 						first = false;
 					} else
 						input += " and $doc" + s;
-	
+
 				}
 			}
-			if(orClauses != null){
+			if (orClauses != null) {
 				for (List<String> orClausesList : orClauses) {
 					String or = "";
 					for (String s : orClausesList) {
-	
+
 						if (orClausesList.indexOf(s) == 0)
 							or += "$doc" + s;
 						else
@@ -560,19 +567,19 @@ public class BaseXConnection implements IXMLDataBase {
 					}
 					if (or != "") {
 						if (first) {
-	
+
 							input += "(" + or + ")";
 							first = false;
-	
+
 						} else {
-	
+
 							input += " and (" + or + ")";
-	
+
 						}
 					}
 				}
 			}
-			
+
 			if (orClausesCDAsIds != null) {
 				String or = "";
 				for (String s : orClausesCDAsIds) {
@@ -606,17 +613,16 @@ public class BaseXConnection implements IXMLDataBase {
 						+ "$docLab//ClinicalDocument/component/structuredBody/component/section/entry/organizer/specimen/specimenRole/id//@extension="
 						+ "$doc/ClinicalDocument/component/structuredBody/component/section/entry/procedure/specimen/specimenRole/id/@extension";
 
-				
-				for(String s : analysisIds){
-//				if (analysisIds.size() == 1) {
+				for (String s : analysisIds) {
+					// if (analysisIds.size() == 1) {
 
 					analysisQuery += " and $docLab/" + s;
 
-//				} else if (analysisIds.size() == 2) {
-//
-//					analysisQuery += " and $docLab/" + analysisIds.get(1);
-//
-//				}
+					// } else if (analysisIds.size() == 2) {
+					//
+					// analysisQuery += " and $docLab/" + analysisIds.get(1);
+					//
+					// }
 				}
 
 				analysisQuery += " return $docLab ";
@@ -632,8 +638,12 @@ public class BaseXConnection implements IXMLDataBase {
 				}
 			}
 
-//			input += " return $doc)";
-			input += " return $doc/ClinicalDocument/id/@root)"; /* bruno: para ver si optimiza algo */
+			// input += " return $doc)";
+			input += " return $doc/ClinicalDocument/id/@root)"; /*
+																 * bruno: para
+																 * ver si
+																 * optimiza algo
+																 */
 
 		} else {
 
@@ -761,16 +771,14 @@ public class BaseXConnection implements IXMLDataBase {
 		return 0;
 	}
 
-	
-	
-	
 	public String getTransfusionCDABySpecimenId(String root, String extension) throws XMLDataBaseException {
-		
+
 		ArrayList<String> cdasList = new ArrayList<String>();
 
 		String input = "for $doc in collection('" + dataBase + "') "
 				+ "where  $doc//ClinicalDocument//component//structuredBody//component//section//entry//procedure//specimen[descendant-or-self::node()/@code = \"122564002\"]//id[descendant-or-self::node()/@root]/@root='"
-				+ root + "' and $doc//ClinicalDocument//component//structuredBody//component//section//entry//procedure//specimen[descendant-or-self::node()/@code = \"122564002\"]//id/@extension='"
+				+ root
+				+ "' and $doc//ClinicalDocument//component//structuredBody//component//section//entry//procedure//specimen[descendant-or-self::node()/@code = \"122564002\"]//id/@extension='"
 				+ extension + "' return $doc";
 		BaseXClient.Query query;
 		BaseXClient session = null;
@@ -797,28 +805,28 @@ public class BaseXConnection implements IXMLDataBase {
 			}
 		}
 
-		if(cdasList != null && cdasList.size()==1){
-			
+		if (cdasList != null && cdasList.size() == 1) {
+
 			return cdasList.get(0);
-			
-		}else if(cdasList != null && cdasList.size()==1){
-			
+
+		} else if (cdasList != null && cdasList.size() == 1) {
+
 			logger.log(Level.SEVERE, "Error se recuperaron mas de un documento con el root specimn pasado ");
 			throw new XMLDataBaseException();
 		}
-		
+
 		return "";
 
-		
 	}
 
 	public String getDonationCDABySpecimenId(String root, String extension) throws XMLDataBaseException {
-		
+
 		ArrayList<String> cdasList = new ArrayList<String>();
 
 		String input = "for $doc in collection('" + dataBase + "') "
 				+ "where  $doc/ClinicalDocument/component/structuredBody/component/section/entry/procedure/specimen/specimenRole/id/@root='"
-				+ root + "' and $doc/ClinicalDocument/component/structuredBody/component/section/entry/procedure/specimen/specimenRole/id/@extension='" 
+				+ root
+				+ "' and $doc/ClinicalDocument/component/structuredBody/component/section/entry/procedure/specimen/specimenRole/id/@extension='"
 				+ extension + "' return $doc";
 		BaseXClient.Query query;
 		BaseXClient session = null;
@@ -845,28 +853,28 @@ public class BaseXConnection implements IXMLDataBase {
 			}
 		}
 
-		if(cdasList != null && cdasList.size()==1){
-			
+		if (cdasList != null && cdasList.size() == 1) {
+
 			return cdasList.get(0);
-			
-		}else if(cdasList != null && cdasList.size()==1){
-			
+
+		} else if (cdasList != null && cdasList.size() == 1) {
+
 			logger.log(Level.SEVERE, "Error se recuperaron mas de un documento con el root specimn pasado ");
 			throw new XMLDataBaseException();
 		}
-		
+
 		return "";
 	}
 
 	public List<String> getElements(List<String> queries) throws XMLDataBaseException {
-		
+
 		String input = "for $doc in collection('" + dataBase + "') ";
-		
-		if(queries != null && queries.size() != 0){
-		
+
+		if (queries != null && queries.size() != 0) {
+
 			input += "where ";
 			boolean first = true;
-			
+
 			for (String s : queries) {
 				if (first) {
 					input += "$doc" + s;
@@ -874,10 +882,10 @@ public class BaseXConnection implements IXMLDataBase {
 				} else
 					input += " and $doc" + s;
 
-			}	
+			}
 		}
 		input += " return $doc";
-		
+
 		ArrayList<String> cdasList = new ArrayList<String>();
 		BaseXClient.Query query;
 		BaseXClient session = null;
@@ -894,7 +902,7 @@ public class BaseXConnection implements IXMLDataBase {
 
 			logger.log(Level.SEVERE, "Error al intentar recuperarlos elementos en la base de datos.", e);
 			throw new XMLDataBaseException();
-			
+
 		} finally {
 			if (session != null) {
 				try {
@@ -904,8 +912,13 @@ public class BaseXConnection implements IXMLDataBase {
 				}
 			}
 		}
-		
+
 		return cdasList;
+	}
+
+	private static String readFile(String path, Charset encoding) throws IOException {
+		byte[] encoded = Files.readAllBytes(Paths.get(path));
+		return new String(encoded, encoding);
 	}
 
 }

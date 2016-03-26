@@ -48,6 +48,17 @@ public class User implements Serializable {
 	
 	@Column(name = "password_reset_token_time")
 	private Date passwordResetTokenTime;
+	
+	@Column(name = "user_type")
+	private Integer userType;
+
+	public Integer getUserType() {
+		return userType;
+	}
+
+	public void setUserType(Integer userType) {
+		this.userType = userType;
+	}
 
 	public Boolean getActiveAccount() {
 		return activeAccount;
