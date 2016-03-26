@@ -39,7 +39,7 @@
 		</init-param>
 		<init-param>
 			<param-name>edu.yale.its.tp.cas.client.filter.serverName</param-name>
-			<param-value>localhost:8180</param-value>
+			<param-value>localhost:8080</param-value>
 		</init-param>
 	</filter>
 
@@ -94,20 +94,10 @@
 		<extension>ico</extension>
 		<mime-type>image/x-icon</mime-type>
 	</mime-mapping>
-	
-	
-
 
 	<error-page>
 		<exception-type>javax.faces.application.ViewExpiredException</exception-type>
 		<location>/pages/donations.xhtml</location>
 	</error-page>
-	
-	
-	
-	
-	
-	
-	
 
 </web-app>

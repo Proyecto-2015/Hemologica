@@ -88,8 +88,8 @@ public class CentersBean implements CentersBeanLocal {
 			
 				DataResponsiblePerson data = new DataResponsiblePerson();
 				data.setFirstName(unit.getPerson().getPersonFirstName());
-				data.setSecondName(unit.getPerson().getPersonSecondLastname());
-				data.setFirstLastName(unit.getPerson().getPersonFirstName());
+				data.setSecondName(unit.getPerson().getPersonSecondName());
+				data.setFirstLastName(unit.getPerson().getPersonFirstLastname());
 				data.setSecondLastName(unit.getPerson().getPersonSecondLastname());
 				
 				if(unit.getPerson().getDocuments() != null && unit.getPerson().getDocuments().size() != 0){

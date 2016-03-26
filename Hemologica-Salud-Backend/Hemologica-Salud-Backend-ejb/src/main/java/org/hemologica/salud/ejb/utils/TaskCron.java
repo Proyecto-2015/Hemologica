@@ -1,6 +1,8 @@
 package org.hemologica.salud.ejb.utils;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,11 +24,17 @@ public class TaskCron implements TaskCollector {
 		
 		try {
 			
-			logger.info("Inicio ejecucion del cron");
+			
+			SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+			
+			
 			
 			Properties prop = new Properties();
 			prop.load(BaseXConnection.class.getClassLoader().getResourceAsStream("hemosalud.properties"));
 			String timerCron = prop.getProperty("timerCron");
+			
+			logger.info("Inicio ejecucion del cron " + sdf.format(Calendar.getInstance().getTime()) + " Patron " + timerCron);
+			
 			SchedulingPattern pattern = new SchedulingPattern(timerCron);
 			
 			Task task = new EmailTask();

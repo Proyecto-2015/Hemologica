@@ -632,7 +632,8 @@ public class BaseXConnection implements IXMLDataBase {
 				}
 			}
 
-			input += " return $doc)";
+//			input += " return $doc)";
+			input += " return $doc/ClinicalDocument/id/@root)"; /* bruno: para ver si optimiza algo */
 
 		} else {
 
@@ -668,6 +669,155 @@ public class BaseXConnection implements IXMLDataBase {
 		}
 
 		return 0;
+	}
+	
+	public List<String> docsQuery(List<String> andClauses, List<List<String>> orClauses, List<String> orClausesCDAsIds,
+			List<String> analysisIds) throws XMLDataBaseException {
+
+		String input = "";
+		List<String> returnList = new ArrayList<>();
+
+		if ((andClauses != null && andClauses.size() != 0) || (analysisIds != null && analysisIds.size() != 0)
+				|| (orClausesCDAsIds != null && orClausesCDAsIds.size() != 0)
+				|| ((orClauses != null && orClauses.size() != 0) && orClauses.size() == 1
+						&& orClauses.get(0).size() != 0)) {
+
+			input += "for $doc in collection('" + dataBase + "') " + "where ";
+
+			boolean first = true;
+			if(andClauses != null){
+				for (String s : andClauses) {
+					if (first) {
+						input += "$doc" + s;
+						first = false;
+					} else
+						input += " and $doc" + s;
+	
+				}
+			}
+			if(orClauses != null){
+				for (List<String> orClausesList : orClauses) {
+					String or = "";
+					for (String s : orClausesList) {
+	
+						if (orClausesList.indexOf(s) == 0)
+							or += "$doc" + s;
+						else
+							or += " or $doc" + s;
+					}
+					if (or != "") {
+						if (first) {
+	
+							input += "(" + or + ")";
+							first = false;
+	
+						} else {
+	
+							input += " and (" + or + ")";
+	
+						}
+					}
+				}
+			}
+			
+			if (orClausesCDAsIds != null) {
+				String or = "";
+				for (String s : orClausesCDAsIds) {
+
+					if (orClausesCDAsIds.indexOf(s) == 0)
+						or += " (" + s + " )";
+					else
+						or += " or (" + s + " )";
+				}
+				if (or != "") {
+					if (first) {
+
+						input += "(" + or + ")";
+						first = false;
+
+					} else {
+
+						input += " and (" + or + ")";
+
+					}
+				}
+			}
+
+			String analysisQuery = "";
+			if (analysisIds != null && analysisIds.size() > 0) {
+
+				analysisQuery = "for $docLab in collection('"
+						+ XMLDataBaseFactory.getIXMLDataBaseLaboratory().getDataBaseName() + "') " + "where "
+						+ "$docLab//ClinicalDocument/component/structuredBody/component/section/entry/organizer/specimen/specimenRole/id/@root="
+						+ "$doc/ClinicalDocument/component/structuredBody/component/section/entry/procedure/specimen/specimenRole/id/@root   and "
+						+ "$docLab//ClinicalDocument/component/structuredBody/component/section/entry/organizer/specimen/specimenRole/id//@extension="
+						+ "$doc/ClinicalDocument/component/structuredBody/component/section/entry/procedure/specimen/specimenRole/id/@extension";
+
+				
+				for(String s : analysisIds){
+//				if (analysisIds.size() == 1) {
+
+					analysisQuery += " and $docLab/" + s;
+
+//				} else if (analysisIds.size() == 2) {
+//
+//					analysisQuery += " and $docLab/" + analysisIds.get(1);
+//
+//				}
+				}
+
+				analysisQuery += " return $docLab ";
+
+				if (first) {
+
+					input += "count(" + analysisQuery + ") > 0";
+
+				} else {
+
+					input += " and " + "count(" + analysisQuery + ") > 0";
+
+				}
+			}
+
+//			input += " return $doc)";
+			input += " return $doc/ClinicalDocument/id"; /* bruno: para ver si optimiza algo */
+
+		} else {
+			
+			input = "for $doc in collection('" + dataBase + "') return $doc/ClinicalDocument/id ";
+			//input = "count(collection('" + dataBase + "'))";
+
+		}
+
+		BaseXClient.Query query;
+		BaseXClient session = null;
+		try {
+			session = this.getClient();
+
+			query = session.query(input);
+			query.execute();
+			
+			while (query.more()) {
+				
+				returnList.add(query.next());
+				//return Integer.parseInt(query.next());
+			}
+
+		} catch (IOException e) {
+
+			logger.log(Level.SEVERE, "Error al intentar recuperarlos elementos en la base de datos.", e);
+			throw new XMLDataBaseException();
+		} finally {
+			if (session != null) {
+				try {
+					session.close();
+				} catch (IOException e) {
+					logger.log(Level.SEVERE, e.getMessage(), e);
+				}
+			}
+		}
+
+		return returnList;
 	}
 
 	public int countEvents(List<String> andClauses, List<List<String>> orClauses, List<String> orClausesCDAsIds)

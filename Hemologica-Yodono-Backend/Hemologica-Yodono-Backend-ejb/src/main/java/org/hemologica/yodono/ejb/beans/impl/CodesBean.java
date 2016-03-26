@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.hemologica.dao.model.BloodTypes;
 import org.hemologica.dao.model.CitiesCode;
+import org.hemologica.dao.model.DonationDonorTypesCode;
 import org.hemologica.dao.model.DonationEventsCode;
 import org.hemologica.dao.model.DonationFailCausesCode;
 import org.hemologica.dao.model.DonationFailTypeCode;
@@ -278,6 +279,33 @@ public class CodesBean implements CodesBeanLocal {
 		}
 		return data;
 
+	}
+
+	@Override
+	public DataCode getBloodTypeCodeBySnomedCode(String bloodType) {
+		BloodTypes result = FactoryDAO.getCodesDAO(em).getBloodTypeCodeBySnomedCode(bloodType);
+
+		DataCode data = new DataCode();
+		
+		if(result != null){
+			data.setCode(result.getBloodTypeCodeValue());
+			data.setDisplayName(result.getBloodTypeCodeLabel());
+		}
+		return data;
+	}
+
+	@Override
+	public DataCode getDonorTypeById(String donorType) {
+		DonationDonorTypesCode donorTypeCode = FactoryDAO.getCodesDAO(em).getDonorTypeById(donorType);
+		
+		DataCode data = new DataCode();
+		if(donorTypeCode != null){
+			
+			data.setCode(donorTypeCode.getDonationDonorTypeCodeValue());
+			data.setDisplayName(donorTypeCode.getDonationDonorTypeCodeLabel());
+			
+		}
+		return data;
 	}
 
 }

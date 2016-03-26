@@ -71,7 +71,8 @@
 							<div class="timeline-body">
 								<p><h:outputText value="#{donationItem.institution.name}"/></p>
 								<p><h:outputText value="#{donationItem.bank.name}"/></p>
-								<p><h:outputText value="#{donationItem.dataDonorType.displayName}"/></p>
+								<p><h:outputText value="#{messages[donationItem.dataDonorType.displayName]}"/></p>
+								<p><h:outputText value="#{messages[donationItem.bloodType.displayName]}"/></p>
 							</div>
 						</div>
 					</li>

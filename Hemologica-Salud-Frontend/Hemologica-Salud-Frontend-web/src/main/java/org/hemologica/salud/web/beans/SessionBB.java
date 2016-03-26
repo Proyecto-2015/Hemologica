@@ -44,10 +44,12 @@ public class SessionBB implements Serializable {
 			 * Obtener nombre de usuario
 			 */
 			String username = (String)JSFUtils.getSessionMap().get("edu.yale.its.tp.cas.client.filter.user");
-			System.out.println("USUARIO: "+ username);
+			
+//			String username = "pula14@gmail.com";
+//			System.out.println("USUARIO: "+ username);
 			
 			DataBank bank = new DataBank();
-			bank.setCode("348");
+			bank.setCode("2.16.858.0.0.1.10.2.3.6");
 			this.responsibleTransfusionPersons = RestFactory.getServicesClient().getResponsibleTransfusionPersons(bank);
 			
 			if (username != null) {

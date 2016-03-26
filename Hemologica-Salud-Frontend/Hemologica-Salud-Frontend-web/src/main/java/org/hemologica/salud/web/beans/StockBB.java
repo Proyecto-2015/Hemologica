@@ -93,8 +93,6 @@ public class StockBB implements Serializable {
 
 		try {
 			
-			logger.info("loggerrr");
-			
 			IServicesClient client = RestFactory.getServicesClient();
 			stock = client.getBanks(banksItemsSelected, institutionSelected, productTypeCode != null ? productTypeCode.getCode() : null,
 					bloodTypeABO != null ? bloodTypeABO.getCode() : null, bloodTypeRH != null ? bloodTypeRH.getCode() : null, count);

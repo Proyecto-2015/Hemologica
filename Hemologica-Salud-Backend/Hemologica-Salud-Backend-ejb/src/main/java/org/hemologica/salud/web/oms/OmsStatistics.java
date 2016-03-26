@@ -24,8 +24,10 @@ import org.hemologica.dao.model.UnitsType;
 import org.hemologica.datatypes.DataAnswer;
 import org.hemologica.datatypes.DataQuestion;
 import org.hemologica.factories.FactoryDAO;
+import org.hemologica.salud.ejb.utils.XMLUtils;
 import org.hemologica.xmldatabase.exceptions.XMLDataBaseException;
 import org.hemologica.xmldatabase.factories.XMLDataBaseFactory;
+import org.w3c.dom.Document;
 
 public class OmsStatistics {
 	
@@ -288,31 +290,39 @@ public class OmsStatistics {
 			listAux.add(query2);
 
 			
-			for(Person p : FactoryDAO.getPeronDAO(em).getPersonsFilters(new HashMap<String,Object>())){
-				
-				cantPersons++;
-				
-				List<String> orClausesCDAsIds = new ArrayList<>();
-				for(PersonsRecord personRecord :FactoryDAO.getPersonRecordDAO(em).getCDAsUserId(p.getId())){
-		
-					String queryPersons = "$doc/ClinicalDocument/id/@root='"+ personRecord.getPersonsRecordCdaRoot() + "' and " +
-					"$doc/ClinicalDocument/id/@extension='" + personRecord.getPersonsRecordCdaExtension() +"'";
-					orClausesCDAsIds.add(queryPersons);
-					
-				}
-				
-				if(orClausesCDAsIds.size() != 0 && XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,orClausesCDAsIds,filtersAnalysisDenominator) > 0){
-					
-					countVol++;
-					
-				}
-				
-				if(orClausesCDAsIds.size() != 0 && XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(listAux,orClausesList,orClausesCDAsIds,filtersAnalysisDenominator) > 0){
-					
-					countRepo++;
-					
-				}	
-			}
+//			for(Person p : FactoryDAO.getPeronDAO(em).getPersonsFilters(new HashMap<String,Object>())){
+//				
+//				cantPersons++;
+//				
+//				List<String> orClausesCDAsIds = new ArrayList<>();
+//				for(PersonsRecord personRecord :FactoryDAO.getPersonRecordDAO(em).getCDAsUserId(p.getId())){
+//		
+//					String queryPersons = "$doc/ClinicalDocument/id/@root='"+ personRecord.getPersonsRecordCdaRoot() + "' and " +
+//					"$doc/ClinicalDocument/id/@extension='" + personRecord.getPersonsRecordCdaExtension() +"'";
+//					orClausesCDAsIds.add(queryPersons);
+//					
+//				}
+//				
+//				if(orClausesCDAsIds.size() != 0 && XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,orClausesCDAsIds,filtersAnalysisDenominator) > 0){
+//					
+//					countVol++;
+//					
+//				}
+//				
+//				if(orClausesCDAsIds.size() != 0 && XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(listAux,orClausesList,orClausesCDAsIds,filtersAnalysisDenominator) > 0){
+//					
+//					countRepo++;
+//					
+//				}	
+//			}
+			
+			List<String> lista = XMLDataBaseFactory.getIXMLDataBaseDonations().docsQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
+			countVol = FactoryDAO.getPeronRecordDAO(em).getCountDistinticsXML(lista);
+			
+			lista = XMLDataBaseFactory.getIXMLDataBaseDonations().docsQuery(listAux,orClausesList,null,filtersAnalysisDenominator);
+			countRepo = FactoryDAO.getPeronRecordDAO(em).getCountDistinticsXML(lista);
+			
+			
 			
 			d1.setAnswerResult(String.valueOf(countVol));
 			d2.setAnswerResult(String.valueOf(countRepo));
@@ -597,29 +607,36 @@ public class OmsStatistics {
 			listAux.add(query2);
 
 			
-			for(Person p : FactoryDAO.getPeronDAO(em).getPersonsFilters(new HashMap<String,Object>())){
-				
-				List<String> orClausesCDAsIds = new ArrayList<>();
-				for(PersonsRecord personRecord :FactoryDAO.getPersonRecordDAO(em).getCDAsUserId(p.getId())){
-		
-					String queryPersons = "$doc/ClinicalDocument/id/@root='"+ personRecord.getPersonsRecordCdaRoot() + "' and " +
-					"$doc/ClinicalDocument/id/@extension='" + personRecord.getPersonsRecordCdaExtension() +"'";
-					orClausesCDAsIds.add(queryPersons);
-					
-				}
-				
-				if(orClausesCDAsIds.size() != 0 && XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,orClausesCDAsIds,filtersAnalysisDenominator) > 0){
-					
-					countPerm++;
-					
-				}
-				
-				if(orClausesCDAsIds.size() != 0 && XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(listAux,orClausesList,orClausesCDAsIds,filtersAnalysisDenominator) > 0){
-					
-					countTemp++;
-					
-				}	
-			}
+//			for(Person p : FactoryDAO.getPeronDAO(em).getPersonsFilters(new HashMap<String,Object>())){
+//				
+//				List<String> orClausesCDAsIds = new ArrayList<>();
+//				for(PersonsRecord personRecord :FactoryDAO.getPersonRecordDAO(em).getCDAsUserId(p.getId())){
+//		
+//					String queryPersons = "$doc/ClinicalDocument/id/@root='"+ personRecord.getPersonsRecordCdaRoot() + "' and " +
+//					"$doc/ClinicalDocument/id/@extension='" + personRecord.getPersonsRecordCdaExtension() +"'";
+//					orClausesCDAsIds.add(queryPersons);
+//					
+//				}
+//				
+//				if(orClausesCDAsIds.size() != 0 && XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesNumerator,orClausesList,orClausesCDAsIds,filtersAnalysisDenominator) > 0){
+//					
+//					countPerm++;
+//					
+//				}
+//				
+//				if(orClausesCDAsIds.size() != 0 && XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(listAux,orClausesList,orClausesCDAsIds,filtersAnalysisDenominator) > 0){
+//					
+//					countTemp++;
+//					
+//				}	
+//			}
+			
+			List<String> lista = XMLDataBaseFactory.getIXMLDataBaseDonations().docsQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
+			countPerm = FactoryDAO.getPeronRecordDAO(em).getCountDistinticsXML(lista);
+			
+			lista = XMLDataBaseFactory.getIXMLDataBaseDonations().docsQuery(andClausesNumerator,orClausesList,null,filtersAnalysisDenominator);
+			countTemp = FactoryDAO.getPeronRecordDAO(em).getCountDistinticsXML(lista);
+			
 			
 			d1.setAnswerResult(String.valueOf(countPerm));
 			d2.setAnswerResult(String.valueOf(countTemp));
@@ -1389,25 +1406,29 @@ public class OmsStatistics {
 			q.getAnswers().add(d1);
 			d1.setAnswer("");
 			
-			int cantTransfusions = 0;
-			for(Person p : FactoryDAO.getPeronDAO(em).getPersonsFilters(new HashMap<String,Object>())){
-				
-				List<String> orClausesCDAsIds = new ArrayList<>();
-				for(PersonsRecord personRecord :FactoryDAO.getPersonRecordDAO(em).getCDAsUserId(p.getId())){
-		
-					String query = "$doc/ClinicalDocument/id/@root='"+ personRecord.getPersonsRecordCdaRoot() + "' and " +
-					"$doc/ClinicalDocument/id/@extension='" + personRecord.getPersonsRecordCdaExtension() +"'";
-					orClausesCDAsIds.add(query);
-					
-				}
-				
-				if(orClausesCDAsIds.size() != 0 && XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClausesNumerator,orClausesList,orClausesCDAsIds,null) > 0){
-					
-					cantTransfusions++;
-					
-				}	
-					
-			}
+//			int cantTransfusions = 0;
+//			for(Person p : FactoryDAO.getPeronDAO(em).getPersonsFilters(new HashMap<String,Object>())){
+//				
+//				List<String> orClausesCDAsIds = new ArrayList<>();
+//				for(PersonsRecord personRecord :FactoryDAO.getPersonRecordDAO(em).getCDAsUserId(p.getId())){
+//		
+//					String query = "$doc/ClinicalDocument/id/@root='"+ personRecord.getPersonsRecordCdaRoot() + "' and " +
+//					"$doc/ClinicalDocument/id/@extension='" + personRecord.getPersonsRecordCdaExtension() +"'";
+//					orClausesCDAsIds.add(query);
+//					
+//				}
+//				
+//				if(orClausesCDAsIds.size() != 0 && XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClausesNumerator,orClausesList,orClausesCDAsIds,null) > 0){
+//					
+//					cantTransfusions++;
+//					
+//				}	
+//					
+//			}
+			
+			List<String> lista = XMLDataBaseFactory.getIXMLDataBaseTransfusions().docsQuery(andClausesNumerator,orClausesList,null,null);
+			int cantTransfusions = FactoryDAO.getPeronRecordDAO(em).getCountDistinticsXML(lista);
+			
 			d1.setAnswerResult(String.valueOf(cantTransfusions));
 		
 		} catch (XMLDataBaseException e) {
@@ -1458,7 +1479,11 @@ public class OmsStatistics {
 			
 			String query = getQueryToAge(donationFilterTo.getTransfusionFilterCodesPath(), 4);
 			andClausesNumerator.add(query);
-			int countNumerator = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClausesNumerator,orClausesList,null,null);
+			//int countNumerator = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClausesNumerator,orClausesList,null,null);
+			
+			List<String> lista = XMLDataBaseFactory.getIXMLDataBaseTransfusions().docsQuery(andClausesNumerator,orClausesList,null,null);
+			int countNumerator = FactoryDAO.getPeronRecordDAO(em).getCountDistinticsXML(lista);
+			
 			d1.setAnswerResult(String.valueOf(countNumerator));
 			
 			
@@ -1471,7 +1496,10 @@ public class OmsStatistics {
 			String queryTo = getQueryToAge(donationFilterTo.getTransfusionFilterCodesPath(), 14);
 			andClausesNumerator.add(query);
 			andClausesNumerator.add(queryTo);
-			countNumerator = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClausesNumerator,orClausesList,null,null);
+			
+			lista = XMLDataBaseFactory.getIXMLDataBaseTransfusions().docsQuery(andClausesNumerator,orClausesList,null,null);
+			countNumerator = FactoryDAO.getPeronRecordDAO(em).getCountDistinticsXML(lista);
+			//countNumerator = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClausesNumerator,orClausesList,null,null);
 			
 			d2.setAnswerResult(String.valueOf(countNumerator));
 			
@@ -1485,7 +1513,10 @@ public class OmsStatistics {
 			queryTo = getQueryToAge(donationFilterTo.getTransfusionFilterCodesPath(), 44);
 			andClausesNumerator.add(query);
 			andClausesNumerator.add(queryTo);
-			countNumerator = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClausesNumerator,orClausesList,null,null);
+			
+			lista = XMLDataBaseFactory.getIXMLDataBaseTransfusions().docsQuery(andClausesNumerator,orClausesList,null,null);
+			countNumerator = FactoryDAO.getPeronRecordDAO(em).getCountDistinticsXML(lista);
+			//countNumerator = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClausesNumerator,orClausesList,null,null);
 			
 			d3.setAnswerResult(String.valueOf(countNumerator));
 			
@@ -1500,7 +1531,10 @@ public class OmsStatistics {
 			andClausesNumerator.add(query);
 			andClausesNumerator.add(queryTo);
 			
-			countNumerator = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClausesNumerator,orClausesList,null,null);
+			//countNumerator = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClausesNumerator,orClausesList,null,null);
+			lista = XMLDataBaseFactory.getIXMLDataBaseTransfusions().docsQuery(andClausesNumerator,orClausesList,null,null);
+			countNumerator = FactoryDAO.getPeronRecordDAO(em).getCountDistinticsXML(lista);
+			
 			d4.setAnswerResult(String.valueOf(countNumerator));
 			
 			DataAnswer d5 = new DataAnswer();
@@ -1513,7 +1547,9 @@ public class OmsStatistics {
 			
 			andClausesNumerator.add(query);
 			
-			countNumerator = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClausesNumerator,orClausesList,null,null);
+			//countNumerator = XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClausesNumerator,orClausesList,null,null);
+			lista = XMLDataBaseFactory.getIXMLDataBaseTransfusions().docsQuery(andClausesNumerator,orClausesList,null,null);
+			countNumerator = FactoryDAO.getPeronRecordDAO(em).getCountDistinticsXML(lista);
 			d5.setAnswerResult(String.valueOf(countNumerator));
 			
 		

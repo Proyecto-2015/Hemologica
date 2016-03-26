@@ -18,6 +18,10 @@ import javax.persistence.*;
 	@NamedQuery(name="PersonsRecord.findByIdentificationRefCodes", query="SELECT p FROM PersonsRecord p WHERE p.identificationRef in (:ids)"),
 	@NamedQuery(name="PersonsRecord.findByRootExtension", query="SELECT p FROM PersonsRecord p WHERE p.personsRecordCdaRoot = :root AND p.personsRecordCdaExtension = :extension")
 })
+@NamedNativeQueries(value={
+	@NamedNativeQuery(name="PersonsRecord.getCoutDistintics", query="select count(1) from ( select count(1), person_record_identification_id from persons_records r where (persons_record_cda_extension, persons_record_cda_root) in (:ids) group by person_record_identification_id ) as cdas ")
+		
+})
 public class PersonsRecord implements Serializable {
 	
 	private static final long serialVersionUID = 1L;

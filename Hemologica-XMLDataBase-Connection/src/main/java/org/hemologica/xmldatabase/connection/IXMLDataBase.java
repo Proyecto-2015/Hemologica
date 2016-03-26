@@ -9,6 +9,10 @@ import org.hemologica.xmldatabase.exceptions.XMLDataBaseException;
  */
 public interface IXMLDataBase {
 	
+	
+	public List<String> docsQuery(List<String> andClauses, List<List<String>> orClauses, List<String> orClausesCDAsIds,
+			List<String> analysisIds) throws XMLDataBaseException;
+	
 	/**
 	 * Devuelve el nombre de la base de datos
 	 * @return

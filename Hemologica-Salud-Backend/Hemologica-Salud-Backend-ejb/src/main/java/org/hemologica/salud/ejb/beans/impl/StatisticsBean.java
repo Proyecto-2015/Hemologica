@@ -1454,27 +1454,36 @@ public class StatisticsBean implements StatisticsBeanLocal {
 		Integer cantDonors = 0,  cantTransfussed = 0;
 		try {
 
-			for(Person p : FactoryDAO.getPeronDAO(em).getPersonsFilters(new HashMap<String,Object>())){
-				
-				List<String> orClausesCDAsIds = new ArrayList<>();
-				for(PersonsRecord personRecord :FactoryDAO.getPersonRecordDAO(em).getCDAsUserId(p.getId())){
-		
-					String query = "$doc/ClinicalDocument/id/@root='"+ personRecord.getPersonsRecordCdaRoot() + "' and " +
-					"$doc/ClinicalDocument/id/@extension='" + personRecord.getPersonsRecordCdaExtension() +"'";
-					orClausesCDAsIds.add(query);
-					
-				}
-				if(orClausesCDAsIds.size() != 0 && XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesDonations,orClausesDonations,orClausesCDAsIds,analysis) > 0){
-					
-					cantDonors++;
-					
-				}
-				if(orClausesCDAsIds.size() != 0 && XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClausesTransfusions,orClausesTransfusions,orClausesCDAsIds,null) > 0){
-					
-					cantTransfussed++;
-					
-				}
-			}
+//			for(Person p : FactoryDAO.getPeronDAO(em).getPersonsFilters(new HashMap<String,Object>())){
+//				
+//				List<String> orClausesCDAsIds = new ArrayList<>();
+//				for(PersonsRecord personRecord :FactoryDAO.getPersonRecordDAO(em).getCDAsUserId(p.getId())){
+//		
+//					String query = "$doc/ClinicalDocument/id/@root='"+ personRecord.getPersonsRecordCdaRoot() + "' and " +
+//					"$doc/ClinicalDocument/id/@extension='" + personRecord.getPersonsRecordCdaExtension() +"'";
+//					orClausesCDAsIds.add(query);
+//					
+//				}
+//				if(orClausesCDAsIds.size() != 0 && XMLDataBaseFactory.getIXMLDataBaseDonations().countQuery(andClausesDonations,orClausesDonations,orClausesCDAsIds,analysis) > 0){
+//					
+//					cantDonors++;
+//					
+//				}
+//				if(orClausesCDAsIds.size() != 0 && XMLDataBaseFactory.getIXMLDataBaseTransfusions().countQuery(andClausesTransfusions,orClausesTransfusions,orClausesCDAsIds,null) > 0){
+//					
+//					cantTransfussed++;
+//					
+//				}
+//			}
+			
+			
+			List<String> lista = XMLDataBaseFactory.getIXMLDataBaseDonations().docsQuery(andClausesDonations,orClausesDonations,null,analysis);
+			cantDonors = FactoryDAO.getPeronRecordDAO(em).getCountDistinticsXML(lista);
+			
+			lista = XMLDataBaseFactory.getIXMLDataBaseTransfusions().docsQuery(andClausesTransfusions,orClausesTransfusions,null,null);
+			cantTransfussed = FactoryDAO.getPeronRecordDAO(em).getCountDistinticsXML(lista);
+			
+			
 		}catch (XMLDataBaseException e) {
 			
 			logger.log(Level.SEVERE, "Error al calcular la cantidad de personas", e);

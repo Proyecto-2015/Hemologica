@@ -81,10 +81,15 @@ public class DonationBean implements DonationBeanLocal {
 		data.setBank(dataBank);
 		data.setInstitution(dataBank.getInstitution());
 		
+
 		/**
-		 * Tipo Donante -- No se como ponerlo.
+		 * Tipo Donante 
 		 */
-//		data.setDataDonorType(dataDonorType);
+		String donorType = XMLUtils.executeXPathString(document,
+				"/ClinicalDocument/component/structuredBody/component/section/entry/observation/code/@code");
+		if (donorType != null && !donorType.equals(""))
+			data.setDataDonorType(FactoryBeans.getCodeBeans().getDonorTypeById(donorType));
+
 		
 		/**
 		 * Tipo Donacion 
@@ -122,9 +127,11 @@ public class DonationBean implements DonationBeanLocal {
 			/**
 			 * Tipos de sangre
 			 */
-			String bloodType = XMLUtils.executeXPathString(document, "//ClinicalDocument//component//structuredBody//component//section//entry//procedure//entryRelationship[descendant-or-self::node()/@typeCode = \"COMP\"]//observation//code/@code");
+			String bloodType = XMLUtils.executeXPathString(document,
+					"//ClinicalDocument//component//structuredBody//component//section//entry//procedure//entryRelationship[descendant-or-self::node()/@typeCode = \"COMP\"]//observation//code/@code");
 			data.setBloodABOType(FactoryBeans.getCodeBeans().getABOBloodTypeCodeByBloodSnomedCode(bloodType));
 			data.setBloodDType(FactoryBeans.getCodeBeans().getRHBloodTypeCodeByBloodSnomedCode(bloodType));
+			data.setBloodType(FactoryBeans.getCodeBeans().getBloodTypeCodeBySnomedCode(bloodType));
 		
 			/**
 			 * Eventos Adversos

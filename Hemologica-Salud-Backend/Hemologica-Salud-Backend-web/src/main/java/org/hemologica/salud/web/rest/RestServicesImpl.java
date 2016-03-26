@@ -2,7 +2,9 @@ package org.hemologica.salud.web.rest;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Level;
@@ -523,7 +525,7 @@ public class RestServicesImpl implements IRestServices {
 
 	@Override
 	public Response getOmsStatistics(DataOmsStatistics statictic) {
-
+		
 		ByteArrayOutputStream o = FactoryBeans.getStatisticsBeanLocal().getOmsStatistics(statictic);
 
 		if (o != null)
