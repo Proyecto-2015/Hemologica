@@ -2,6 +2,7 @@ package org.hemologica.service.business.impl;
 
 import java.util.List;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.Date;
@@ -91,7 +92,7 @@ public class UserBean implements IUserBean {
 		prop.load(UserBean.class.getClassLoader().getResourceAsStream("hemologica.properties"));
 		String content = prop.getProperty("user.account.active.content");
 		String url = prop.getProperty("user.account.active.url");
-		url = url.replaceAll(":token", token);
+		url = url.replaceAll(":token", URLEncoder.encode(token, "UTF-8"));
 		content = content.replaceAll(":url", url);
 		return content;
 	}
